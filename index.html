@@ -216,6 +216,10 @@
   }
   .tag-lab{background:var(--ok-tint);color:var(--ok);}
   .tag-holiday{background:var(--accent-tint);color:var(--accent);}
+  .tag-current{background:var(--accent);color:var(--cream);}
+
+  .week-row.is-current{border-top:1px solid var(--accent);}
+  .week-row.is-current .week-date{color:var(--accent);}
 
   .week-content h4{font-size:1.08rem;margin-bottom:.55rem;line-height:1.45;}
   .week-question{font-family:var(--serif);font-size:.95rem;color:var(--ink-3);font-weight:500;margin-bottom:.85rem;line-height:1.6;}
@@ -334,31 +338,102 @@
 
   @media (max-width:860px){.footer-grid{grid-template-columns:1fr;gap:2rem;}}
 
-  /* ---------- Modal ---------- */
-  .modal-backdrop{
-    display:none;position:fixed;inset:0;background:rgba(28,24,21,.55);backdrop-filter:blur(6px);
-    z-index:2000;align-items:center;justify-content:center;padding:1.5rem;
+  /* ---------- Collapsible Course Intro & Faculty ---------- */
+  .course-intro-wrapper {
+    transition: all .35s ease;
   }
-  .modal-backdrop.active{display:flex;}
-  .modal-shell{background:rgba(255,255,255,.6);border-radius:1.7rem;padding:.4rem;width:100%;max-width:440px;box-shadow:var(--shadow-3);}
-  .modal-core{background:var(--paper);border-radius:calc(1.7rem - .4rem);padding:2.3rem;text-align:center;position:relative;}
-  .modal-close{position:absolute;top:1rem;right:1.2rem;font-size:1.3rem;color:var(--ink-3);cursor:pointer;border:none;background:none;line-height:1;}
-  .modal-core h3{font-size:1.3rem;margin-bottom:.5rem;}
-  .modal-core > p{font-size:.88rem;color:var(--ink-3);line-height:1.6;}
-  .code-display{
-    background:var(--cream-2);border:2px dashed var(--line-2);padding:1rem 1.4rem;border-radius:.9rem;
-    font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent);letter-spacing:3px;
-    margin:1.4rem 0;display:flex;align-items:center;justify-content:center;gap:1rem;
+  .course-intro-mini {
+    padding: 1.5rem 0 .5rem;
+    margin-top: 5rem;
   }
-  .btn-copy{background:var(--ink);color:#fff;border:none;padding:.4rem .8rem;border-radius:8px;font-size:.78rem;cursor:pointer;transition:background .2s;}
-  .btn-copy:hover{background:var(--accent);}
-  .copy-note{font-size:.78rem;color:var(--ok);font-weight:600;display:none;margin-bottom:.8rem;}
+  .mini-bar {
+    background: rgba(255,254,251,.95);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: .85rem 1.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-1);
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .mini-info { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
+  .mini-tag { background: var(--accent-tint); color: var(--accent); font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 5px; }
+  .mini-info strong { font-size: .95rem; color: var(--ink); }
+  .mini-meta { font-size: .82rem; color: var(--ink-3); }
+  .mini-actions { display: flex; align-items: center; gap: .6rem; }
+  .mini-btn {
+    display: inline-flex; align-items: center; padding: .4rem .8rem;
+    background: var(--paper); border: 1px solid var(--line-2); border-radius: 6px;
+    font-size: .78rem; font-weight: 600; color: var(--ink)!important; transition: all .2s;
+  }
+  .mini-btn:hover { border-color: var(--accent); color: var(--accent)!important; background: var(--accent-tint); }
+  .mini-btn-expand {
+    display: inline-flex; align-items: center; gap: .3rem; padding: .4rem .9rem;
+    background: var(--accent); color: #fff!important; border: none; border-radius: 6px;
+    font-size: .78rem; font-weight: 600; cursor: pointer; transition: background .2s;
+  }
+  .mini-btn-expand:hover { background: var(--accent-dark); }
 
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto;}
-    *{transition-duration:.001ms!important;animation-duration:.001ms!important;}
-    .reveal{opacity:1;transform:none;}
+  .btn-toggle-intro {
+    display: inline-flex; align-items: center; gap: .35rem;
+    padding: .5rem .95rem; border-radius: 8px; font-size: .8rem; font-weight: 600;
+    cursor: pointer; transition: all .25s var(--ease);
   }
+
+  /* ---------- Week Reading Accordion ---------- */
+  .week-refs-accordion {
+    margin-top: .9rem;
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    overflow: hidden;
+    transition: all .3s var(--ease);
+  }
+  .week-refs-accordion:hover { border-color: #D9CFC4; }
+  .refs-summary {
+    padding: .85rem 1.15rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    background: var(--paper);
+    transition: background .2s;
+  }
+  .refs-summary::-webkit-details-marker { display: none; }
+  .refs-summary:hover { background: var(--cream-2); }
+  .refs-title { font-size: .83rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); display: flex; align-items: center; gap: .4rem; }
+  .refs-toggle-btn {
+    font-size: .74rem; font-weight: 600; padding: .22rem .65rem;
+    background: var(--cream-2); border: 1px solid var(--line-2);
+    border-radius: 6px; color: var(--ink-2); display: inline-flex; align-items: center; gap: .3rem;
+    transition: all .2s;
+  }
+  .refs-summary:hover .refs-toggle-btn { background: var(--paper); border-color: var(--accent); color: var(--accent); }
+  .week-refs-accordion[open] .refs-summary { border-bottom: 1px solid var(--line-2); }
+  .refs-body { padding: 1rem 1.25rem 1.15rem; background: #fff; }
+  .refs-list { list-style: none; font-size: .83rem; color: var(--ink-2); line-height: 1.65; display: flex; flex-direction: column; gap: .75rem; padding: 0; margin: 0; }
+  .ref-item { padding-left: .95rem; position: relative; }
+  .ref-dot { position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+  .ref-btn-row { margin-top: .3rem; display: flex; gap: .45rem; flex-wrap: wrap; }
+  .ref-btn-pdf {
+    display: inline-flex; align-items: center; gap: .25rem; padding: .2rem .58rem;
+    background: #FDF2F4; border: 1px solid #F8D7DA; border-radius: 5px;
+    font-size: .75rem; font-weight: 600; color: #8C1D40!important; text-decoration: none;
+    transition: all .2s;
+  }
+  .ref-btn-pdf:hover { background: #8C1D40; color: #fff!important; border-color: #8C1D40; }
+  .ref-btn-web {
+    display: inline-flex; align-items: center; gap: .25rem; padding: .2rem .58rem;
+    background: var(--cream-2); border: 1px solid var(--line-2); border-radius: 5px;
+    font-size: .75rem; font-weight: 500; color: var(--ink-2)!important; text-decoration: none;
+    transition: all .2s;
+  }
+  .ref-btn-web:hover { background: var(--line-2); color: var(--ink)!important; }
 </style>
 </head>
 <body>
@@ -379,7 +454,7 @@
         <li><a href="#modules">課程模組</a></li>
         <li><a href="#lab">互動實驗室</a></li>
         <li><a href="#assignments">評量作業</a></li>
-        <li><button class="btn-classroom" onclick="openClassroomModal()">Classroom 代碼<span class="icon-chip">→</span></button></li>
+        <li><a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy?cjc=2sx2t5mk" target="_blank" class="btn-classroom">Google Classroom<span class="icon-chip">→</span></a></li>
       </ul>
     </nav>
   </div>
@@ -387,43 +462,64 @@
 
 <main id="main">
 
-  <!-- Hero -->
-  <section class="hero" id="overview">
-    <div class="wrap">
-      <div class="hero-inner">
-        <div>
-          <span class="eyebrow">Fall 2026 碩士在職專班・48 小時</span>
-          <h1 class="hero-title">員工意向調查<br><span class="accent-line">持續傾聽的方法<br>與實作</span></h1>
-          <p class="hero-sub">Survey of Employees' Opinion —<br>Strategy, Psychometrics, AI Agent Analytics &amp; Action</p>
-          <p class="hero-lead">傳統一年一度的年度敬業度問卷之外，現代組織逐漸採用持續傾聽<span class="nowrap">（Continuous Listening）</span>的調查與行動流程。課程內容涵蓋心理計量量表編製、AI Agent 自主資料分析架構與說服性簡報心理學，處理資料到行動<span class="nowrap">落差（Data-to-Action Gap）</span>。</p>
-          <div class="hero-actions">
-            <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="btn btn-primary">檢視 / 下載完整課程大綱（PDF）<span class="icon-chip">↓</span></a>
-            <a class="btn btn-ghost is-pending" aria-disabled="true">取得模擬資料集（學生版）<span class="icon-chip">↓</span></a>
+  <!-- Hero & Faculty (Collapsible Container) -->
+  <div id="courseIntroWrapper" class="course-intro-wrapper">
+    <!-- Hero -->
+    <section class="hero" id="overview">
+      <div class="wrap">
+        <div class="hero-inner">
+          <div>
+            <span class="eyebrow">Fall 2026 碩士在職專班・48 小時</span>
+            <h1 class="hero-title">員工意向調查<br><span class="accent-line">持續傾聽的方法<br>與實作</span></h1>
+            <p class="hero-sub">Survey of Employees' Opinion —<br>Strategy, Psychometrics, AI Agent Analytics &amp; Action</p>
+            <p class="hero-lead">傳統一年一度的年度敬業度問卷之外，現代組織逐漸採用持續傾聽<span class="nowrap">（Continuous Listening）</span>的調查與行動流程。課程內容涵蓋心理計量量表編製、AI Agent 自主資料分析架構與說服性簡報心理學，處理資料到行動<span class="nowrap">落差（Data-to-Action Gap）</span>。</p>
+            <div class="hero-actions">
+              <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="btn btn-primary">檢視 / 下載完整課程大綱（PDF）<span class="icon-chip">↓</span></a>
+              <a class="btn btn-ghost is-pending" aria-disabled="true">取得模擬資料集（學生版）<span class="icon-chip">↓</span></a>
+              <button type="button" onclick="toggleCourseIntro(false)" class="btn btn-ghost btn-toggle-intro" style="color:var(--ink-3);border:1px dashed var(--line-2);font-size:.78rem;" title="收合上方簡介與師資，直接瀏覽每週課程地圖">
+                <span>收合課程導讀與師資</span> <span style="font-size:.7em;">▲</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Faculty -->
+    <div class="wrap" style="padding-top:.5rem;">
+      <div class="faculty-shell reveal">
+        <div class="faculty-core">
+          <div>
+            <h3>王豫萱 博士</h3>
+            <div class="faculty-role">Dr. Yu-Hsuan Wang</div>
+            <ul class="info-list">
+              <li>國立中山大學 人力資源管理研究所</li>
+              <li>yhw@mail.nsysu.edu.tw</li>
+              <li>上課時間：每週五 18:30–21:10</li>
+              <li>上課地點：管院專業教室</li>
+              <li>諮詢時間：請先以 Email 約定時間</li>
+            </ul>
+          </div>
+          <div class="notice-box">
+            <strong>課程簡介</strong>
+            本課程定位為碩士班（含在職專班）之人力資源專業進階課程，員工意見調查的重心已由傳統的年度問卷編製，全面轉向現代組織的持續傾聽（Continuous Listening）策略、回饋後的行動執行方案，以及當代生成式 AI 的應用與資料品質帶來的機會與威脅。課程中將以多樣化的模擬資料為核心，融合量化統計分析實務、新概念量表編製、草率作答與 AI 代答偵測、以及倫理與法遵界線，兼顧方法學深度與管理顧問實務措施，培養學生具備現代組織員工傾聽與提升員工體驗的完整管理與因應能力。
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Faculty -->
-  <div class="wrap" style="padding-top:.5rem;">
-    <div class="faculty-shell reveal">
-      <div class="faculty-core">
-        <div>
-          <h3>王豫萱 博士</h3>
-          <div class="faculty-role">Dr. Yu-Hsuan Wang</div>
-          <ul class="info-list">
-            <li>國立中山大學 人力資源管理研究所</li>
-            <li>yhw@mail.nsysu.edu.tw</li>
-            <li>上課時間：每週五 18:30–21:10</li>
-            <li>上課地點：管院專業教室</li>
-            <li>諮詢時間：請先以 Email 約定時間</li>
-          </ul>
-        </div>
-        <div class="notice-box">
-          <strong>課程簡介</strong>
-          本課程定位為碩士班（含在職專班）之人力資源專業進階課程，員工意見調查的重心已由傳統的年度問卷編製，全面轉向現代組織的持續傾聽（Continuous Listening）策略、回饋後的行動執行方案，以及當代生成式 AI 的應用與資料品質帶來的機會與威脅。課程中將以多樣化的模擬資料為核心，融合量化統計分析實務、新概念量表編製、草率作答與 AI 代答偵測、以及倫理與法遵界線，兼顧方法學深度與管理顧問實務措施，培養學生具備現代組織員工傾聽與提升員工體驗的完整管理與因應能力。
-        </div>
+  <!-- Collapsed Mini-Banner (When Intro is Collapsed) -->
+  <div id="courseIntroMini" class="course-intro-mini wrap" style="display:none;">
+    <div class="mini-bar">
+      <div class="mini-info">
+        <span class="mini-tag">HRM522 員工意向調查</span>
+        <strong>授課教師：王豫萱 博士</strong>
+        <span class="mini-meta">每週五 18:30–21:10 ｜ 管院專業教室</span>
+      </div>
+      <div class="mini-actions">
+        <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="mini-btn">📄 下載大綱 (PDF)</a>
+        <button type="button" onclick="toggleCourseIntro(true)" class="mini-btn-expand">展開課程詳細資訊 ▼</button>
       </div>
     </div>
   </div>
@@ -447,7 +543,7 @@
 
       <div class="weeks" id="weeksContainer">
 
-        <div class="week-row reveal" data-block="b1">
+        <div class="week-row reveal" data-block="b1" data-date="2026-09-11">
           <div class="week-meta"><span class="week-num">Week 01</span><span class="week-date">09/11</span></div>
           <div class="week-content">
             <h4>Topic 01 課程導論與典範轉移</h4>
@@ -457,18 +553,74 @@
               <li>Perceptyx 四階段傾聽成熟度模型與 2026 退步訊號</li>
               <li>課程大綱導讀、小組分組與學習目標對齊</li>
             </ul>
-            <div class="week-refs" style="margin-top:.85rem;padding:.75rem .9rem;background:var(--paper);border:1px solid var(--line-2);border-radius:8px;">
-              <div style="font-size:.78rem;font-weight:700;letter-spacing:.05em;color:var(--accent);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;">
-                <span>📚</span> 本週核心參考文獻（Key References）
+            <details class="week-refs-accordion" id="refs-w01" open>
+              <summary class="refs-summary">
+                <span class="refs-title">
+                  <span>📚</span> 本週指定與核心閱讀文獻（指定課前研讀・可直接下載／線上閱讀）
+                </span>
+                <span class="refs-toggle-btn">
+                  <span class="toggle-text">收合文獻</span>
+                  <span class="toggle-arrow">▲</span>
+                </span>
+              </summary>
+              <div class="refs-body">
+                <ul class="refs-list">
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>Guadagni, Lawrence, Tokas, &amp; Valencia (2026)</strong>. The Case for Performance-First Management. <em>Harvard Business Review</em>.
+                    <div class="ref-btn-row">
+                      <a href="Handout/Topic1_課程導論與典範轉移/Guadagni_2026_Performance_First_Management_HBR.pdf" target="_blank" download class="ref-btn-pdf">📥 下載 HBR 全文 PDF (444 KB)</a>
+                      <a href="https://hbr.org/2026/07/the-case-for-performance-first-management" target="_blank" class="ref-btn-web">🌐 HBR 官方頁面</a>
+                    </div>
+                  </li>
+
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>Perceptyx (2026)</strong>. <em>The State of Employee Listening 2026</em>（四階段傾聽成熟度旗艦研究報告）.
+                    <div class="ref-btn-row">
+                      <a href="Handout/Topic1_課程導論與典範轉移/Perceptyx_2026_State_of_Employee_Listening.pdf" target="_blank" download class="ref-btn-pdf">📥 下載 2026 旗艦報告 PDF (6.7 MB)</a>
+                      <a href="Handout/Topic1_課程導論與典範轉移/Perceptyx_2022_State_of_Employee_Listening.pdf" target="_blank" download class="ref-btn-web">📥 下載 2022 奠基報告 PDF</a>
+                      <a href="https://go.perceptyx.com/state-of-employee-listening-web-report" target="_blank" class="ref-btn-web">🌐 線上互動報告</a>
+                    </div>
+                  </li>
+
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>Qualtrics (2026)</strong>. <em>Employee Experience Trends 2026</em>（全球 24 國員工體驗趨勢報告）.
+                    <div class="ref-btn-row">
+                      <a href="Handout/Topic1_課程導論與典範轉移/Qualtrics_2026_Employee_Experience_Trends.pdf" target="_blank" download class="ref-btn-pdf">📥 下載趨勢報告 PDF (5.4 MB)</a>
+                      <a href="https://www.qualtrics.com/ebooks-guides/employee-experience-trends/" target="_blank" class="ref-btn-web">🌐 Qualtrics 官方專題</a>
+                    </div>
+                  </li>
+
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>Gallup (2026)</strong>. <em>State of the Global Workplace: 2026 Report — The Human Side of the AI Revolution</em>.
+                    <div class="ref-btn-row">
+                      <a href="Handout/Topic1_課程導論與典範轉移/Gallup_2026_State_of_Global_Workplace.pdf" target="_blank" download class="ref-btn-pdf">📥 下載全球報告 PDF (22 MB)</a>
+                      <a href="https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" target="_blank" class="ref-btn-web">🌐 Gallup 官方專頁</a>
+                    </div>
+                  </li>
+
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>Yotzov, Barrero, Bloom, et al. (2026)</strong>. Firm Data on AI. <em>NBER Working Paper No. 34836</em>.
+                    <div class="ref-btn-row">
+                      <a href="https://www.nber.org/system/files/working_papers/w34836/w34836.pdf" target="_blank" class="ref-btn-pdf">📥 下載 NBER 全文 PDF</a>
+                      <a href="https://doi.org/10.3386/w34836" target="_blank" class="ref-btn-web">🌐 NBER 官方專頁 (DOI)</a>
+                    </div>
+                  </li>
+
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002)</strong>. Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. <em>Journal of Applied Psychology</em>, 87(2), 268–279.
+                    <div class="ref-btn-row">
+                      <a href="https://doi.org/10.1037/0021-9010.87.2.268" target="_blank" class="ref-btn-web">🌐 APA PsycNet 官方文獻 (DOI)</a>
+                    </div>
+                  </li>
+                </ul>
               </div>
-              <ul style="list-style:none;font-size:.8rem;color:var(--ink-2);line-height:1.55;display:flex;flex-direction:column;gap:.35rem;padding:0;margin:0;">
-                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002)</strong>. Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. <em>Journal of Applied Psychology</em>, 87(2), 268–279.</li>
-                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Yotzov, I., Barrero, J. M., Bloom, N., et al. (2026)</strong>. Firm data on AI. <em>NBER Working Paper No. 34836</em>.</li>
-                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Perceptyx (2026)</strong>. <em>The State of Employee Listening 2026</em>（四階段傾聽成熟度模型報告）.</li>
-                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Gallup (2026)</strong>. <em>State of the Global Workplace: 2026 Report — The Human Side of the AI Revolution</em>.</li>
-                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Guadagni, T., Lawrence, T., Tokas, K., &amp; Valencia, C. (2026)</strong>. The Case for Performance-First Management. <em>Harvard Business Review</em>.</li>
-              </ul>
-            </div>
+            </details>
           </div>
           <div class="week-actions">
             <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html" target="_blank" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">進入課堂互動教材網站<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
@@ -476,7 +628,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b1">
+        <div class="week-row reveal" data-block="b1" data-date="2026-09-18">
           <div class="week-meta"><span class="week-num">Week 02</span><span class="week-date">09/18</span><span class="tag tag-lab">課內小工具</span></div>
           <div class="week-content">
             <h4>Topic 02 調查目的、態度理論與測量基礎</h4>
@@ -493,7 +645,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal is-holiday" data-block="b1">
+        <div class="week-row reveal is-holiday" data-block="b1" data-date="2026-09-25">
           <div class="week-meta"><span class="week-num">Week 03</span><span class="week-date">09/25</span><span class="tag tag-holiday">國定假日放假</span></div>
           <div class="week-content">
             <h4>【9/25 中秋節放假】自主學習與思考</h4>
@@ -506,7 +658,7 @@
           <div class="week-actions"><div class="status-note">自主學習週</div></div>
         </div>
 
-        <div class="week-row reveal" data-block="b1">
+        <div class="week-row reveal" data-block="b1" data-date="2026-10-02">
           <div class="week-meta"><span class="week-num">Week 04</span><span class="week-date">10/02</span><span class="tag tag-lab">作業啟動</span></div>
           <div class="week-content">
             <h4>Topic 03 題項設計與關鍵事例法（CIT）</h4>
@@ -523,7 +675,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal is-holiday" data-block="b2">
+        <div class="week-row reveal is-holiday" data-block="b2" data-date="2026-10-09">
           <div class="week-meta"><span class="week-num">Week 05</span><span class="week-date">10/09</span><span class="tag tag-holiday">國定假日放假</span></div>
           <div class="week-content">
             <h4>【10/9 國慶紀念日補假放假】小組田野訪談與預試</h4>
@@ -536,7 +688,7 @@
           <div class="week-actions"><div class="status-note">小組實務收案週</div></div>
         </div>
 
-        <div class="week-row reveal" data-block="b2">
+        <div class="week-row reveal" data-block="b2" data-date="2026-10-16">
           <div class="week-meta"><span class="week-num">Week 06</span><span class="week-date">10/16</span><span class="tag tag-lab">實機快篩</span></div>
           <div class="week-content">
             <h4>Topic 04 抽樣策略與調查資料品質防線</h4>
@@ -554,7 +706,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b2">
+        <div class="week-row reveal" data-block="b2" data-date="2026-10-23">
           <div class="week-meta"><span class="week-num">Week 07</span><span class="week-date">10/23</span><span class="tag tag-lab">實機分析</span></div>
           <div class="week-content">
             <h4>Topic 05 量表心理計量檢驗與因素分析實務</h4>
@@ -572,7 +724,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b2">
+        <div class="week-row reveal" data-block="b2" data-date="2026-10-30">
           <div class="week-meta"><span class="week-num">Week 08</span><span class="week-date">10/30</span><span class="tag tag-lab">口頭發表</span></div>
           <div class="week-content">
             <h4>Topic 06 期中發表：新概念量表設計</h4>
@@ -585,7 +737,7 @@
           <div class="week-actions"><div class="pending-pill">教材製作中</div><div class="due-chip ok">期中作業（25%）<br>口頭發表與企劃書</div></div>
         </div>
 
-        <div class="week-row reveal" data-block="b3">
+        <div class="week-row reveal" data-block="b3" data-date="2026-11-06">
           <div class="week-meta"><span class="week-num">Week 09</span><span class="week-date">11/06</span><span class="tag tag-lab">AI Agent 實機</span></div>
           <div class="week-content">
             <h4>Topic 07 AI Agent 資料分析架構與量化實務（一）：清理與比較</h4>
@@ -602,7 +754,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b3">
+        <div class="week-row reveal" data-block="b3" data-date="2026-11-13">
           <div class="week-meta"><span class="week-num">Week 10</span><span class="week-date">11/13</span><span class="tag tag-lab">AI Agent 實機</span></div>
           <div class="week-content">
             <h4>Topic 08 AI Agent 輔助量化實務（二）：驅動因子與迴歸建模</h4>
@@ -618,7 +770,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b3">
+        <div class="week-row reveal" data-block="b3" data-date="2026-11-20">
           <div class="week-meta"><span class="week-num">Week 11</span><span class="week-date">11/20</span><span class="tag tag-lab">實機演練</span></div>
           <div class="week-content">
             <h4>Topic 09 開放題分析方法比較：文字雲與 LLM Agent 主題編碼</h4>
@@ -636,7 +788,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b3">
+        <div class="week-row reveal" data-block="b3" data-date="2026-11-27">
           <div class="week-meta"><span class="week-num">Week 12</span><span class="week-date">11/27</span><span class="tag tag-lab">作業繳交</span></div>
           <div class="week-content">
             <h4>Topic 10 資料視覺化與 AI Agent 決策分析整合</h4>
@@ -653,7 +805,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b4">
+        <div class="week-row reveal" data-block="b4" data-date="2026-12-04">
           <div class="week-meta"><span class="week-num">Week 13</span><span class="week-date">12/04</span><span class="tag tag-lab">溝通個案</span></div>
           <div class="week-content">
             <h4>Topic 11 簡報心理學：數據說服力與利害關係人溝通</h4>
@@ -667,7 +819,7 @@
           <div class="week-actions"><div class="status-note">經典企業溝通個案</div><div class="pending-pill">教材製作中</div></div>
         </div>
 
-        <div class="week-row reveal" data-block="b4">
+        <div class="week-row reveal" data-block="b4" data-date="2026-12-11">
           <div class="week-meta"><span class="week-num">Week 14</span><span class="week-date">12/11</span><span class="tag tag-lab">情境演練</span></div>
           <div class="week-content">
             <h4>Topic 12 資料到行動落差：主管培力與內部溝通</h4>
@@ -684,7 +836,7 @@
           </div>
         </div>
 
-        <div class="week-row reveal" data-block="b4">
+        <div class="week-row reveal" data-block="b4" data-date="2026-12-18">
           <div class="week-meta"><span class="week-num">Week 15</span><span class="week-date">12/18</span><span class="tag tag-lab">期末發表</span></div>
           <div class="week-content">
             <h4>Topic 13 期末專題發表：調查分析與管理改善企劃</h4>
@@ -698,7 +850,7 @@
           <div class="week-actions"><div class="due-chip ok">期末專題初版（30%）<br>口頭發表與報告繳交</div></div>
         </div>
 
-        <div class="week-row reveal is-holiday" data-block="b4">
+        <div class="week-row reveal is-holiday" data-block="b4" data-date="2026-12-25">
           <div class="week-meta"><span class="week-num">Week 16</span><span class="week-date">12/25</span><span class="tag tag-holiday">行憲紀念日放假</span></div>
           <div class="week-content">
             <h4>Topic 14 期末成果定稿與個人學習反思</h4>
@@ -885,28 +1037,13 @@
         <ul>
           <li><a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank">課程大綱下載（PDF）</a></li>
           <li><span class="is-pending" aria-disabled="true">模擬資料集（學生版）</span></li>
-          <li><a href="javascript:void(0)" onclick="openClassroomModal()">Google Classroom 入口</a></li>
+          <li><a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy?cjc=2sx2t5mk" target="_blank">Google Classroom 入口</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">© Fall 2026 Dr. Yu-Hsuan Wang · Institute of Human Resource Management, National Sun Yat-sen University. All rights reserved.</div>
   </div>
 </footer>
-
-<!-- Modal -->
-<div class="modal-backdrop" id="classroomModal" onclick="closeModalOnBackdrop(event)">
-  <div class="modal-shell"><div class="modal-core">
-    <button class="modal-close" onclick="closeClassroomModal()" aria-label="關閉">&times;</button>
-    <h3>Google Classroom 課程代碼</h3>
-    <p>請登入學校 Google 帳號，前往 Classroom 點選「加入課程」並輸入以下代碼：</p>
-    <div class="code-display" id="courseCodeText">
-      2sx2t5mk
-      <button class="btn-copy" onclick="copyCourseCode()">複製代碼</button>
-    </div>
-    <p id="copyAlert" class="copy-note">代碼已成功複製至剪貼簿</p>
-    <a href="https://classroom.google.com/c/884482582902" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">前往 Google Classroom 課程頁面<span class="icon-chip">→</span></a>
-  </div></div>
-</div>
 
 <script>
   function filterWeeks(block, btn) {
@@ -917,17 +1054,99 @@
     if (btn) btn.classList.add('active');
   }
 
-  function openClassroomModal() { document.getElementById('classroomModal').classList.add('active'); }
-  function closeClassroomModal() { document.getElementById('classroomModal').classList.remove('active'); }
-  function closeModalOnBackdrop(e) { if (e.target.id === 'classroomModal') closeClassroomModal(); }
-
-  function copyCourseCode() {
-    navigator.clipboard.writeText('2sx2t5mk').then(function () {
-      var alertEl = document.getElementById('copyAlert');
-      alertEl.style.display = 'block';
-      setTimeout(function () { alertEl.style.display = 'none'; }, 2500);
-    });
+  // 課程導讀與師資資訊：手動展開/收合
+  function toggleCourseIntro(expand) {
+    var wrapper = document.getElementById('courseIntroWrapper');
+    var mini = document.getElementById('courseIntroMini');
+    if (!wrapper || !mini) return;
+    if (expand) {
+      wrapper.style.display = 'block';
+      mini.style.display = 'none';
+      try { localStorage.setItem('hrm522_intro_collapsed', '0'); } catch(e){}
+    } else {
+      wrapper.style.display = 'none';
+      mini.style.display = 'block';
+      try { localStorage.setItem('hrm522_intro_collapsed', '1'); } catch(e){}
+    }
   }
+
+  // 若使用者先前曾手動收合，載入時自動維持收合狀態
+  (function initIntroCollapse() {
+    try {
+      if (localStorage.getItem('hrm522_intro_collapsed') === '1') {
+        toggleCourseIntro(false);
+      }
+    } catch(e){}
+  })();
+
+  // 更新文獻摺疊標籤之文字與箭頭
+  function updateAccordionLabel(acc) {
+    if (!acc) return;
+    var textEl = acc.querySelector('.toggle-text');
+    var arrowEl = acc.querySelector('.toggle-arrow');
+    if (acc.open) {
+      if (textEl) textEl.textContent = '收合文獻';
+      if (arrowEl) arrowEl.textContent = '▲';
+    } else {
+      if (textEl) textEl.textContent = '展開文獻';
+      if (arrowEl) arrowEl.textContent = '▼';
+    }
+  }
+
+  // 監聽文獻手動點擊展開/收合
+  document.querySelectorAll('.week-refs-accordion').forEach(function(acc) {
+    acc.addEventListener('toggle', function() {
+      updateAccordionLabel(acc);
+    });
+  });
+
+  // 自動依日期判定當週、標記「本週」徽章，並自動展開當週文獻、收摺過往週次
+  (function highlightCurrentWeek() {
+    var rows = Array.prototype.slice.call(document.querySelectorAll('.week-row[data-date]'));
+    if (!rows.length) return;
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var current = null;
+    var currentIndex = -1;
+    for (var i = 0; i < rows.length; i++) {
+      var d = new Date(rows[i].getAttribute('data-date') + 'T00:00:00');
+      if (d <= today) { 
+        current = rows[i]; 
+        currentIndex = i;
+      } else { 
+        break; 
+      }
+    }
+
+    // 自動展開當週文獻，過往週次自動收摺
+    rows.forEach(function(row, idx) {
+      var acc = row.querySelector('.week-refs-accordion');
+      if (!acc) return;
+      if (current) {
+        acc.open = (idx === currentIndex);
+      } else {
+        // 開學前（今日早於第一週）預設展開第一週作為預習引導
+        acc.open = (idx === 0);
+      }
+      updateAccordionLabel(acc);
+    });
+
+    if (!current) return;
+    var last = rows[rows.length - 1];
+    if (current === last) {
+      var lastDate = new Date(last.getAttribute('data-date') + 'T00:00:00');
+      var diffDays = (today - lastDate) / 86400000;
+      if (diffDays > 10) return;
+    }
+    current.classList.add('is-current');
+    var meta = current.querySelector('.week-meta');
+    if (meta && !meta.querySelector('.tag-current')) {
+      var tag = document.createElement('span');
+      tag.className = 'tag tag-current';
+      tag.textContent = '本週';
+      meta.appendChild(tag);
+    }
+  })();
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {

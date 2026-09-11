@@ -712,6 +712,13 @@ document.querySelectorAll('#nav a').forEach(function(a){
 });
 function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
 
+/* 支援網址錨點深連結，例如 ...html#u6 開頁時直接切換到單元六 */
+if (location.hash) {
+  var hashUnit = location.hash.slice(1);
+  var hashTarget = document.querySelector('#nav a[data-u="' + hashUnit + '"]');
+  if (hashTarget) hashTarget.click();
+}
+
 /* ---- two-stage two-tier calibration quiz ----
    Tier 1 = answer + confidence; Tier 2 (mechanism reason) unlocks only after a
    correct answer, so reason options never leak the answer. Calibration panel ids:
