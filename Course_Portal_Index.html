@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>員工意向調查 (HRM522) 課程官方入口網 ｜ 國立中山大學</title>
+<meta name="description" content="國立中山大學人力資源管理研究所 HRM522 員工意向調查課程入口網，提供學習地圖、互動試算工具、課程大綱與評量規準。">
+<meta property="og:title" content="員工意向調查（HRM522）課程入口網">
+<meta property="og:description" content="持續傾聽策略、心理計量量表編製、AI Agent 資料分析與簡報說服力，國立中山大學人力資源管理研究所碩士在職專班課程。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237A2033'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' fill='%23FBF8F2' text-anchor='middle'%3ENS%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:#FBF8F2;
+    --cream-2:#F4EEE1;
+    --paper:#FFFEFB;
+    --ink:#1C1815;
+    --ink-2:#44403A;
+    --ink-3:#7A736A;
+    --line:#E6DECE;
+    --line-2:#D9CFB9;
+    --accent:#7A2033;
+    --accent-dark:#5B1424;
+    --accent-tint:#F3E3E4;
+    --accent-tint-2:#EAD3D6;
+    --ok:#4B6B4F;
+    --ok-tint:#E7EEE4;
+    --warn:#8A5A1E;
+    --warn-tint:#F4E7D2;
+    --shadow-1:0 1px 2px rgba(45,30,20,0.06);
+    --shadow-2:0 10px 28px -10px rgba(45,30,20,0.16);
+    --shadow-3:0 24px 48px -18px rgba(45,30,20,0.24);
+    --ease:cubic-bezier(.32,.72,0,1);
+    --serif:'Newsreader',Georgia,'Noto Serif TC',serif;
+    --sans:'Plus Jakarta Sans','PingFang TC','Microsoft JhengHei UI',sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:var(--sans);
+    color:var(--ink-2);
+    background:var(--cream);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:60;
+    opacity:.035;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:var(--accent);text-decoration:none;}
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;background:var(--ink);color:var(--cream);
+    padding:.75rem 1.25rem;border-radius:0 0 8px 0;z-index:3000;font-weight:600;
+  }
+  .skip-link:focus{left:0;}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:1.5rem;}
+
+  h1,h2,h3,h4,h5{font-family:var(--serif);color:var(--ink);font-weight:600;letter-spacing:-0.01em;}
+
+  /* ---------- Nav ---------- */
+  .nav-shell{position:sticky;top:0;z-index:1000;padding:1rem 1.25rem 0;pointer-events:none;}
+  .nav-pill{
+    max-width:1040px;margin:0 auto;pointer-events:auto;
+    background:rgba(255,254,251,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--line);border-radius:9999px;
+    box-shadow:var(--shadow-1);
+    padding:.6rem .6rem .6rem 1.1rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    transition:box-shadow .3s var(--ease);
+  }
+  .brand-group{display:flex;align-items:center;gap:.7rem;min-width:0;}
+  .brand-text{min-width:0;}
+  .brand-text strong{display:block;font-size:.82rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .brand-text span{display:block;font-size:.68rem;color:var(--ink-3);white-space:nowrap;}
+
+  .nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;}
+  .nav-links a{color:var(--ink-2);font-size:.86rem;font-weight:500;transition:color .2s var(--ease);}
+  .nav-links a:hover{color:var(--accent);}
+
+  .btn-classroom{
+    display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--cream)!important;
+    padding:.55rem .5rem .55rem 1.05rem;border-radius:9999px;font-size:.82rem;font-weight:600;border:none;cursor:pointer;
+    transition:transform .3s var(--ease),background .3s var(--ease);
+  }
+  .btn-classroom .icon-chip{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.75rem;}
+  .btn-classroom:hover{background:var(--accent-dark);transform:translateY(-1px);}
+  .btn-classroom:active{transform:scale(.97);}
+
+  @media (max-width:860px){
+    .nav-links li:not(:last-child){display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:5.5rem 0 3rem;position:relative;overflow:hidden;}
+  .hero::after{
+    content:"";position:absolute;top:-10%;right:-6%;width:46%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, var(--accent-tint), transparent 70%);
+    filter:blur(6px);opacity:.9;z-index:0;pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;max-width:680px;}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line-2);
+    padding:.4rem 1rem;border-radius:9999px;font-size:.72rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);background:var(--paper);margin-bottom:1.75rem;
+  }
+
+  .hero-title{font-size:clamp(2.6rem,5.2vw,4.3rem);line-height:1.08;margin-bottom:1.1rem;text-wrap:balance;}
+  .hero-title .accent-line{color:var(--accent);}
+
+  .hero-sub{
+    font-family:var(--serif);font-size:1.2rem;color:var(--ink-3);font-weight:500;margin-bottom:1.6rem;
+    max-width:44em;text-wrap:balance;
+  }
+
+  .hero-lead{max-width:38em;font-size:1.03rem;color:var(--ink-2);line-height:1.8;margin-bottom:2.25rem;text-wrap:pretty;}
+  .nowrap{white-space:nowrap;}
+
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.85rem;margin-bottom:.5rem;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.7rem;border-radius:9999px;font-weight:600;font-size:.92rem;
+    padding:.5rem .5rem .5rem 1.35rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease);
+  }
+  .btn .icon-chip{
+    width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;transition:transform .3s var(--ease);font-size:.85rem;
+  }
+  .btn:hover .icon-chip{transform:translate(2px,-2px);}
+  .btn:active{transform:scale(.98);}
+
+  .btn-primary{background:var(--accent);color:var(--cream)!important;box-shadow:var(--shadow-2);}
+  .btn-primary .icon-chip{background:rgba(255,255,255,.16);color:var(--cream);}
+  .btn-primary:hover{background:var(--accent-dark);}
+
+  .btn-ghost{background:var(--paper);color:var(--ink)!important;border:1px solid var(--line-2);}
+  .btn-ghost .icon-chip{background:var(--cream-2);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  /* ---------- Section shell ---------- */
+  .section{padding:5rem 0;}
+  .section-head{max-width:640px;margin-bottom:2.75rem;}
+  .section-tag{display:block;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;}
+  .section-title{font-size:2rem;margin-bottom:.6rem;}
+  .section-desc{color:var(--ink-3);font-size:.98rem;line-height:1.7;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- Faculty ---------- */
+  .faculty-shell{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:1.6rem;padding:.4rem;margin-bottom:1rem;}
+  .faculty-core{
+    background:var(--paper);border-radius:calc(1.6rem - .4rem);padding:2.3rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7),var(--shadow-1);
+    display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:center;
+  }
+  .faculty-core h3{font-size:1.5rem;margin-bottom:.2rem;}
+  .faculty-role{color:var(--accent);font-weight:600;font-size:.9rem;margin-bottom:1.1rem;}
+  .info-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;font-size:.9rem;color:var(--ink-2);}
+  .info-list li{display:flex;gap:.6rem;align-items:baseline;}
+  .info-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;transform:translateY(-2px);}
+
+  .notice-box{border-left:3px solid var(--accent);padding:1.2rem 1.5rem;background:var(--cream-2);border-radius:0 .8rem .8rem 0;font-size:.9rem;color:var(--ink-2);line-height:1.75;}
+  .notice-box strong{display:block;color:var(--ink);margin-bottom:.4rem;font-size:.95rem;}
+
+  @media (max-width:860px){.faculty-core{grid-template-columns:1fr;}}
+
+  /* ---------- Tabs ---------- */
+  .tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;}
+  .tab-btn{
+    background:var(--paper);border:1px solid var(--line-2);color:var(--ink-2);padding:.55rem 1.15rem;
+    border-radius:9999px;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .3s var(--ease);
+  }
+  .tab-btn:hover{border-color:var(--accent);}
+  .tab-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink);}
+
+  /* ---------- Week rows (editorial timeline) ---------- */
+  .weeks{display:flex;flex-direction:column;}
+  .week-row{
+    display:grid;grid-template-columns:110px 1fr 220px;gap:2rem;padding:1.9rem 0;
+    border-top:1px solid var(--line);align-items:start;transition:background .3s var(--ease);
+  }
+  .weeks .week-row:last-child{border-bottom:1px solid var(--line);}
+  .week-row:hover{background:rgba(255,255,255,.5);}
+  .week-row.is-holiday{background:linear-gradient(90deg,var(--cream-2),transparent 30%);}
+
+  .week-meta{display:flex;flex-direction:column;gap:.35rem;}
+  .week-num{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);}
+  .week-date{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+
+  .tag{
+    display:inline-block;width:fit-content;font-size:.68rem;font-weight:700;letter-spacing:.04em;
+    padding:.22rem .55rem;border-radius:5px;margin-top:.15rem;
+  }
+  .tag-lab{background:var(--ok-tint);color:var(--ok);}
+  .tag-holiday{background:var(--accent-tint);color:var(--accent);}
+
+  .week-content h4{font-size:1.08rem;margin-bottom:.55rem;line-height:1.45;}
+  .week-question{font-family:var(--serif);font-size:.95rem;color:var(--ink-3);font-weight:500;margin-bottom:.85rem;line-height:1.6;}
+  .key-topics{list-style:none;font-size:.87rem;color:var(--ink-2);display:flex;flex-direction:column;gap:.32rem;}
+  .key-topics li{padding-left:1rem;position:relative;}
+  .key-topics li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--line-2);}
+
+  .week-actions{display:flex;flex-direction:column;gap:.55rem;align-items:stretch;}
+  .link-pill{
+    background:var(--paper);border:1px solid var(--line-2);color:var(--ink)!important;padding:.5rem .85rem;
+    border-radius:8px;font-size:.8rem;font-weight:600;text-align:center;transition:all .3s var(--ease);
+  }
+  .link-pill:hover{border-color:var(--accent);color:var(--accent)!important;background:var(--accent-tint);}
+
+  .due-chip{
+    background:var(--warn-tint);border:1px solid #E4CB9E;color:var(--warn);padding:.55rem .75rem;
+    border-radius:8px;font-size:.76rem;font-weight:600;line-height:1.45;text-align:center;
+  }
+  .due-chip.ok{background:var(--ok-tint);border-color:#C4D6C4;color:var(--ok);}
+  .status-note{font-size:.8rem;color:var(--ink-3);font-weight:500;padding:.55rem .2rem;}
+  .pending-pill{background:var(--cream-2);border:1px dashed var(--line-2);color:var(--ink-3);padding:.5rem .85rem;border-radius:8px;font-size:.78rem;font-weight:600;text-align:center;}
+
+  /* 尚未串接：內容或工具已排定但等待確認，先鎖住互動 */
+  .is-pending{
+    pointer-events:none!important;cursor:not-allowed!important;
+    background:var(--cream-2)!important;color:var(--ink-3)!important;
+    border-color:var(--line-2)!important;box-shadow:none!important;
+    filter:grayscale(.5);opacity:.72;
+  }
+  .is-pending .icon-chip{background:var(--line)!important;color:var(--ink-3)!important;}
+  a.is-pending::after,button.is-pending::after{content:"（尚未公告）";margin-left:.5em;font-size:.72em;font-weight:700;letter-spacing:.02em;}
+  span.is-pending{display:inline-block;}
+
+  @media (max-width:860px){
+    .week-row{grid-template-columns:1fr;gap:.9rem;}
+    .week-date{font-size:1.3rem;}
+  }
+
+  /* ---------- Lab bento ---------- */
+  .lab-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1.3rem;}
+  .lab-card{grid-column:span 2;}
+  .lab-card.wide{grid-column:span 3;}
+  .lab-card.feature{grid-column:span 6;}
+
+  .card-shell{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:1.3rem;padding:.35rem;height:100%;}
+  .card-core{
+    background:var(--paper);border-radius:calc(1.3rem - .35rem);padding:1.7rem;height:100%;
+    display:flex;flex-direction:column;justify-content:space-between;gap:1.4rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7);transition:box-shadow .35s var(--ease),transform .35s var(--ease);
+  }
+  .card-shell:hover .card-core{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),var(--shadow-2);transform:translateY(-3px);}
+
+  .num-badge{
+    width:2.75rem;height:2.75rem;border-radius:50%;background:var(--accent-tint);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.05rem;
+  }
+  .lab-tag{font-size:.7rem;color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;display:block;}
+  .card-core h4{font-size:1.05rem;margin-bottom:.5rem;}
+  .card-core p{font-size:.86rem;color:var(--ink-3);line-height:1.65;}
+
+  .btn-launch{
+    align-self:flex-start;display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--cream)!important;
+    padding:.5rem .5rem .5rem 1rem;border-radius:9999px;font-size:.82rem;font-weight:600;transition:all .3s var(--ease);
+  }
+  .btn-launch .icon-chip{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.68rem;}
+  .btn-launch:hover{background:var(--accent);}
+
+  .lab-card.feature .card-core{flex-direction:row;align-items:center;justify-content:space-between;gap:2rem;}
+  .lab-card.feature .card-core > div:first-child{max-width:60%;}
+
+  @media (max-width:960px){
+    .lab-grid{grid-template-columns:1fr 1fr;}
+    .lab-card,.lab-card.wide,.lab-card.feature{grid-column:span 2;}
+    .lab-card.feature .card-core{flex-direction:column;align-items:flex-start;}
+    .lab-card.feature .card-core > div:first-child{max-width:100%;}
+  }
+  @media (max-width:640px){
+    .lab-grid{grid-template-columns:1fr;}
+    .lab-card,.lab-card.wide,.lab-card.feature{grid-column:span 1;}
+  }
+
+  /* ---------- Assignments ---------- */
+  .notice-banner{
+    border:1px solid var(--line-2);background:var(--paper);border-radius:1rem;padding:1.4rem 1.7rem;
+    display:flex;gap:1.3rem;align-items:flex-start;margin-bottom:2.75rem;border-left:3px solid var(--warn);
+  }
+  .notice-banner h5{font-size:1rem;margin-bottom:.35rem;}
+  .notice-banner p{font-size:.88rem;color:var(--ink-2);line-height:1.65;}
+
+  .assign-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;}
+  .assign-card{grid-column:span 1;}
+
+  .assign-core{padding:2rem;}
+  .assign-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.5rem;}
+  .assign-head h4{font-size:1.15rem;line-height:1.4;}
+  .assign-weight{font-family:var(--serif);font-size:1.65rem;font-weight:700;color:var(--accent);flex-shrink:0;}
+  .assign-due{font-size:.8rem;color:var(--warn);font-weight:600;margin-bottom:1rem;}
+  .assign-body{font-size:.9rem;color:var(--ink-2);line-height:1.7;margin-bottom:1.4rem;}
+  .rubric{background:var(--cream-2);border-radius:.8rem;padding:1rem 1.1rem;font-size:.82rem;color:var(--ink-2);line-height:1.85;}
+  .rubric strong{color:var(--ink);}
+
+  @media (max-width:860px){
+    .assign-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:var(--ink);color:#C9C2B7;padding:4.5rem 0 2.25rem;margin-top:2rem;}
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+  .footer-brand h4{color:var(--cream);font-size:1.2rem;margin-bottom:.7rem;}
+  .footer-brand p{font-size:.88rem;line-height:1.75;color:#A69E92;}
+  .footer-col h5{color:var(--cream);font-size:.9rem;margin-bottom:1rem;font-weight:700;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+  .footer-col a{color:#A69E92;font-size:.88rem;transition:color .2s var(--ease);}
+  .footer-col a:hover{color:var(--cream);}
+  .footer-bottom{border-top:1px solid #33302B;padding-top:1.75rem;font-size:.78rem;color:#7D7669;text-align:center;}
+
+  @media (max-width:860px){.footer-grid{grid-template-columns:1fr;gap:2rem;}}
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop{
+    display:none;position:fixed;inset:0;background:rgba(28,24,21,.55);backdrop-filter:blur(6px);
+    z-index:2000;align-items:center;justify-content:center;padding:1.5rem;
+  }
+  .modal-backdrop.active{display:flex;}
+  .modal-shell{background:rgba(255,255,255,.6);border-radius:1.7rem;padding:.4rem;width:100%;max-width:440px;box-shadow:var(--shadow-3);}
+  .modal-core{background:var(--paper);border-radius:calc(1.7rem - .4rem);padding:2.3rem;text-align:center;position:relative;}
+  .modal-close{position:absolute;top:1rem;right:1.2rem;font-size:1.3rem;color:var(--ink-3);cursor:pointer;border:none;background:none;line-height:1;}
+  .modal-core h3{font-size:1.3rem;margin-bottom:.5rem;}
+  .modal-core > p{font-size:.88rem;color:var(--ink-3);line-height:1.6;}
+  .code-display{
+    background:var(--cream-2);border:2px dashed var(--line-2);padding:1rem 1.4rem;border-radius:.9rem;
+    font-family:monospace;font-size:1.6rem;font-weight:700;color:var(--accent);letter-spacing:3px;
+    margin:1.4rem 0;display:flex;align-items:center;justify-content:center;gap:1rem;
+  }
+  .btn-copy{background:var(--ink);color:#fff;border:none;padding:.4rem .8rem;border-radius:8px;font-size:.78rem;cursor:pointer;transition:background .2s;}
+  .btn-copy:hover{background:var(--accent);}
+  .copy-note{font-size:.78rem;color:var(--ok);font-weight:600;display:none;margin-bottom:.8rem;}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{transition-duration:.001ms!important;animation-duration:.001ms!important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">跳至主要內容</a>
+
+<div class="nav-shell">
+  <div class="nav-pill">
+    <div class="brand-group">
+      <div class="brand-text">
+        <strong>人力資源管理研究所</strong>
+        <span>HRM522 員工意向調查</span>
+      </div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#overview">課程簡介</a></li>
+        <li><a href="#modules">課程模組</a></li>
+        <li><a href="#lab">互動實驗室</a></li>
+        <li><a href="#assignments">評量作業</a></li>
+        <li><button class="btn-classroom" onclick="openClassroomModal()">Classroom 代碼<span class="icon-chip">→</span></button></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero" id="overview">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div>
+          <span class="eyebrow">Fall 2026 碩士在職專班・48 小時</span>
+          <h1 class="hero-title">員工意向調查<br><span class="accent-line">持續傾聽的方法<br>與實作</span></h1>
+          <p class="hero-sub">Survey of Employees' Opinion —<br>Strategy, Psychometrics, AI Agent Analytics &amp; Action</p>
+          <p class="hero-lead">傳統一年一度的年度敬業度問卷之外，現代組織逐漸採用持續傾聽<span class="nowrap">（Continuous Listening）</span>的調查與行動流程。課程內容涵蓋心理計量量表編製、AI Agent 自主資料分析架構與說服性簡報心理學，處理資料到行動<span class="nowrap">落差（Data-to-Action Gap）</span>。</p>
+          <div class="hero-actions">
+            <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="btn btn-primary">檢視 / 下載完整課程大綱（PDF）<span class="icon-chip">↓</span></a>
+            <a class="btn btn-ghost is-pending" aria-disabled="true">取得模擬資料集（學生版）<span class="icon-chip">↓</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faculty -->
+  <div class="wrap" style="padding-top:.5rem;">
+    <div class="faculty-shell reveal">
+      <div class="faculty-core">
+        <div>
+          <h3>王豫萱 博士</h3>
+          <div class="faculty-role">Dr. Yu-Hsuan Wang</div>
+          <ul class="info-list">
+            <li>國立中山大學 人力資源管理研究所</li>
+            <li>yhw@mail.nsysu.edu.tw</li>
+            <li>上課時間：每週五 18:30–21:10</li>
+            <li>上課地點：管院專業教室</li>
+            <li>諮詢時間：請先以 Email 約定時間</li>
+          </ul>
+        </div>
+        <div class="notice-box">
+          <strong>課程簡介</strong>
+          本課程定位為碩士班（含在職專班）之人力資源專業進階課程，員工意見調查的重心已由傳統的年度問卷編製，全面轉向現代組織的持續傾聽（Continuous Listening）策略、回饋後的行動執行方案，以及當代生成式 AI 的應用與資料品質帶來的機會與威脅。課程中將以多樣化的模擬資料為核心，融合量化統計分析實務、新概念量表編製、草率作答與 AI 代答偵測、以及倫理與法遵界線，兼顧方法學深度與管理顧問實務措施，培養學生具備現代組織員工傾聽與提升員工體驗的完整管理與因應能力。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weekly Modules -->
+  <section class="section" id="modules">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">Curriculum Map</span>
+        <h2 class="section-title">學習歷程地圖</h2>
+        <p class="section-desc">涵蓋傾聽典範、測量設計、AI Agent 量化與質化分析、簡報說服與管理行動。</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="filterWeeks('all',this)">全學期總覽</button>
+        <button class="tab-btn" onclick="filterWeeks('b1',this)">區塊一・傾聽典範（W01–W04）</button>
+        <button class="tab-btn" onclick="filterWeeks('b2',this)">區塊二・心理計量（W06–W08）</button>
+        <button class="tab-btn" onclick="filterWeeks('b3',this)">區塊三・AI Agent 分析（W09–W12）</button>
+        <button class="tab-btn" onclick="filterWeeks('b4',this)">區塊四・說服與落地（W13–W16）</button>
+      </div>
+
+      <div class="weeks" id="weeksContainer">
+
+        <div class="week-row reveal" data-block="b1">
+          <div class="week-meta"><span class="week-num">Week 01</span><span class="week-date">09/11</span></div>
+          <div class="week-content">
+            <h4>Topic 01 課程導論與典範轉移</h4>
+            <p class="week-question">年度敬業度普查與持續傾聽的差異，組織傾聽成熟度如何演進，以及如何縮小資料到行動的落差。</p>
+            <ul class="key-topics">
+              <li>傳統年度調查與持續傾聽（Continuous Listening）比較</li>
+              <li>Perceptyx 四階段傾聽成熟度模型與 2026 退步訊號</li>
+              <li>課程大綱導讀、小組分組與學習目標對齊</li>
+            </ul>
+            <div class="week-refs" style="margin-top:.85rem;padding:.75rem .9rem;background:var(--paper);border:1px solid var(--line-2);border-radius:8px;">
+              <div style="font-size:.78rem;font-weight:700;letter-spacing:.05em;color:var(--accent);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;">
+                <span>📚</span> 本週核心參考文獻（Key References）
+              </div>
+              <ul style="list-style:none;font-size:.8rem;color:var(--ink-2);line-height:1.55;display:flex;flex-direction:column;gap:.35rem;padding:0;margin:0;">
+                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002)</strong>. Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. <em>Journal of Applied Psychology</em>, 87(2), 268–279.</li>
+                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Yotzov, I., Barrero, J. M., Bloom, N., et al. (2026)</strong>. Firm data on AI. <em>NBER Working Paper No. 34836</em>.</li>
+                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Perceptyx (2026)</strong>. <em>The State of Employee Listening 2026</em>（四階段傾聽成熟度模型報告）.</li>
+                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Gallup (2026)</strong>. <em>State of the Global Workplace: 2026 Report — The Human Side of the AI Revolution</em>.</li>
+                <li style="padding-left:.8rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">•</span> <strong>Guadagni, T., Lawrence, T., Tokas, K., &amp; Valencia, C. (2026)</strong>. The Case for Performance-First Management. <em>Harvard Business Review</em>.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="week-actions">
+            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html" target="_blank" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">進入課堂互動教材網站<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
+            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html#u6" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">文獻與名詞對照表<span class="icon-chip" style="margin-left:.4rem;">📖</span></a>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b1">
+          <div class="week-meta"><span class="week-num">Week 02</span><span class="week-date">09/18</span><span class="tag tag-lab">課內小工具</span></div>
+          <div class="week-content">
+            <h4>Topic 02 調查目的、態度理論與測量基礎</h4>
+            <p class="week-question">工作滿意、敬業與承諾有何本質區別，離職率如何換算為底線財務損失以說服高階管理層。</p>
+            <ul class="key-topics">
+              <li>員工態度三大支柱（滿意、敬業、承諾）實證關聯</li>
+              <li>離職成本財務試算演練（招募重置、生產力損失）</li>
+              <li>測量基礎與心理計量原則（構念、信度與效度概念）</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <a class="link-pill is-pending" aria-disabled="true">離職成本試算小工具</a>
+          </div>
+        </div>
+
+        <div class="week-row reveal is-holiday" data-block="b1">
+          <div class="week-meta"><span class="week-num">Week 03</span><span class="week-date">09/25</span><span class="tag tag-holiday">國定假日放假</span></div>
+          <div class="week-content">
+            <h4>【9/25 中秋節放假】自主學習與思考</h4>
+            <p class="week-question">當日無實體授課，請小組檢視各自企業目前所處的傾聽成熟度階段，並完成 Topic 02 課後思考題。</p>
+            <ul class="key-topics">
+              <li>自主研讀：Gallup 2026 與 Perceptyx 2026 旗艦報告</li>
+              <li>預備 Topic 03 關鍵事例法（CIT）小組選題構想</li>
+            </ul>
+          </div>
+          <div class="week-actions"><div class="status-note">自主學習週</div></div>
+        </div>
+
+        <div class="week-row reveal" data-block="b1">
+          <div class="week-meta"><span class="week-num">Week 04</span><span class="week-date">10/02</span><span class="tag tag-lab">作業啟動</span></div>
+          <div class="week-content">
+            <h4>Topic 03 題項設計與關鍵事例法（CIT）</h4>
+            <p class="week-question">量表編製如何避免雙重問題與反向題陷阱，如何以關鍵事例法為職場新興構念開展質化編碼。</p>
+            <ul class="key-topics">
+              <li>李克特量表設計、反向題用途與作答疲勞取捨</li>
+              <li>關鍵事例法（CIT）操作：事例收集、編碼分類、向度命名</li>
+              <li>專家分類同意度檢驗（Cohen's κ 一致性計算）</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <div class="due-chip">期中團體作業啟動<br>（新概念量表設計）</div>
+          </div>
+        </div>
+
+        <div class="week-row reveal is-holiday" data-block="b2">
+          <div class="week-meta"><span class="week-num">Week 05</span><span class="week-date">10/09</span><span class="tag tag-holiday">國定假日放假</span></div>
+          <div class="week-content">
+            <h4>【10/9 國慶紀念日補假放假】小組田野訪談與預試</h4>
+            <p class="week-question">當日無實體授課。各組利用連假完成關鍵事例收集訪談，並由 2 位以上組員獨立分類，檢驗 Cohen's κ。</p>
+            <ul class="key-topics">
+              <li>各小組進行關鍵事例收集與半結構訪談</li>
+              <li>向度命名、預試題目初稿編撰</li>
+            </ul>
+          </div>
+          <div class="week-actions"><div class="status-note">小組實務收案週</div></div>
+        </div>
+
+        <div class="week-row reveal" data-block="b2">
+          <div class="week-meta"><span class="week-num">Week 06</span><span class="week-date">10/16</span><span class="tag tag-lab">實機快篩</span></div>
+          <div class="week-content">
+            <h4>Topic 04 抽樣策略與調查資料品質防線</h4>
+            <p class="week-question">普查還是抽樣，如何保障匿名門檻規範，如何以演算法排查直線作答與生成式 AI 代答。</p>
+            <ul class="key-topics">
+              <li>抽樣誤差、填答率提升與極小群組（N&lt;5）隱私保護</li>
+              <li>草率作答（Careless Responding）偵測：直線與隨機填答</li>
+              <li>生成式 AI 代答開放題之文字特徵快篩演算法</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <a class="link-pill is-pending" aria-disabled="true">樣本數計算小工具</a>
+            <a class="link-pill is-pending" aria-disabled="true">草率作答快篩教材</a>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b2">
+          <div class="week-meta"><span class="week-num">Week 07</span><span class="week-date">10/23</span><span class="tag tag-lab">實機分析</span></div>
+          <div class="week-content">
+            <h4>Topic 05 量表心理計量檢驗與因素分析實務</h4>
+            <p class="week-question">題目如何科學淘汰，如何透過探索性因素分析（EFA）確立構念向度與構念效度，信度指標如何嚴謹解讀。</p>
+            <ul class="key-topics">
+              <li>項目分析（Item Analysis）：CR 決斷值與題總相關檢驗</li>
+              <li>探索性因素分析（EFA）：KMO、Bartlett、轉軸與負荷量門檻</li>
+              <li>量表信度檢定：Cronbach's α、McDonald's ω 與刪題診斷</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <a class="link-pill is-pending" aria-disabled="true">量表信度試算小工具</a>
+            <div class="due-chip">期中作業截止<br>10/29 23:59</div>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b2">
+          <div class="week-meta"><span class="week-num">Week 08</span><span class="week-date">10/30</span><span class="tag tag-lab">口頭發表</span></div>
+          <div class="week-content">
+            <h4>Topic 06 期中發表：新概念量表設計</h4>
+            <p class="week-question">各組發表新興構念量表，呈現關鍵事例、專家一致性 κ、項目分析、EFA 因素結構與信度檢定成果。</p>
+            <ul class="key-topics">
+              <li>各組 15 分鐘口頭簡報發表與 5 分鐘答辯</li>
+              <li>評委與同儕即時回饋與線上互評</li>
+            </ul>
+          </div>
+          <div class="week-actions"><div class="pending-pill">教材製作中</div><div class="due-chip ok">期中作業（25%）<br>口頭發表與企劃書</div></div>
+        </div>
+
+        <div class="week-row reveal" data-block="b3">
+          <div class="week-meta"><span class="week-num">Week 09</span><span class="week-date">11/06</span><span class="tag tag-lab">AI Agent 實機</span></div>
+          <div class="week-content">
+            <h4>Topic 07 AI Agent 資料分析架構與量化實務（一）：清理與比較</h4>
+            <p class="week-question">如何調用 AI Agent 自主編寫程式清理資料、轉換反向題、執行 t 檢定與 ANOVA，並建立雙重查核守門。</p>
+            <ul class="key-topics">
+              <li>AI Agent 資料分析架構：Planning、Tool Use 與自主程式執行</li>
+              <li>反向題轉換、遺漏值處理與常態性檢驗</li>
+              <li>獨立樣本 t 檢定、單因子 ANOVA 與效果量（Cohen's d、η²）</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <a class="link-pill is-pending" aria-disabled="true">效果量計算小工具</a>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b3">
+          <div class="week-meta"><span class="week-num">Week 10</span><span class="week-date">11/13</span><span class="tag tag-lab">AI Agent 實機</span></div>
+          <div class="week-content">
+            <h4>Topic 08 AI Agent 輔助量化實務（二）：驅動因子與迴歸建模</h4>
+            <p class="week-question">如何破解滿意度最低的熱門抱怨與真正主導留任的關鍵驅動力之落差，如何查核迴歸假定。</p>
+            <ul class="key-topics">
+              <li>構面分數運算與多重共線性（VIF）診斷</li>
+              <li>關鍵驅動因子分析（KDA）：多元線性迴歸模型與 Beta 排序</li>
+              <li>殘差假設查核與防範 AI 統計幻覺之查核清單</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b3">
+          <div class="week-meta"><span class="week-num">Week 11</span><span class="week-date">11/20</span><span class="tag tag-lab">實機演練</span></div>
+          <div class="week-content">
+            <h4>Topic 09 開放題分析方法比較：文字雲與 LLM Agent 主題編碼</h4>
+            <p class="week-question">詞頻文字雲為何常誤導管理決策，如何運用 LLM Agent 進行主題提取與情感分析，並計算人機一致性 κ。</p>
+            <ul class="key-topics">
+              <li>開放題質化編碼簿建立與傳統文字雲盲點解構</li>
+              <li>LLM Agent 輔助主題編碼、情緒極性分析與摘要生成</li>
+              <li>人工編碼與 LLM 編碼一致性檢驗（Cohen's κ）</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <a class="link-pill is-pending" aria-disabled="true">編碼一致性小工具</a>
+            <div class="due-chip">個人作業截止<br>11/26 23:59</div>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b3">
+          <div class="week-meta"><span class="week-num">Week 12</span><span class="week-date">11/27</span><span class="tag tag-lab">作業繳交</span></div>
+          <div class="week-content">
+            <h4>Topic 10 資料視覺化與 AI Agent 決策分析整合</h4>
+            <p class="week-question">如何繪製決策導向的行動優先矩陣圖（Driver Matrix），如何防範圖表誤導並確保分析可重現。</p>
+            <ul class="key-topics">
+              <li>決策導向圖表設計原則（Storytelling with Data）</li>
+              <li>關鍵驅動因子矩陣圖（滿意度表現 × 驅動影響力）</li>
+              <li>繳交個人分析作業：AI Agent 輔助模擬資料清理與分析報告</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <div class="due-chip ok">個人分析作業（25%）<br>線上截止繳交</div>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b4">
+          <div class="week-meta"><span class="week-num">Week 13</span><span class="week-date">12/04</span><span class="tag tag-lab">溝通個案</span></div>
+          <div class="week-content">
+            <h4>Topic 11 簡報心理學：數據說服力與利害關係人溝通</h4>
+            <p class="week-question">面對主管的卸責與質疑調查方法，如何運用金字塔原理（BLUF）與 SCQA 框架，將統計語言翻譯為營運語言。</p>
+            <ul class="key-topics">
+              <li>認知負荷理論與決策者心智模型（高管與一線主管）</li>
+              <li>主管防衛心理應對策略：拒絕、推諉與攻擊方法的化解</li>
+              <li>說服性敘事：結論先行（BLUF）與 SCQA 溝通攻防演練</li>
+            </ul>
+          </div>
+          <div class="week-actions"><div class="status-note">經典企業溝通個案</div><div class="pending-pill">教材製作中</div></div>
+        </div>
+
+        <div class="week-row reveal" data-block="b4">
+          <div class="week-meta"><span class="week-num">Week 14</span><span class="week-date">12/11</span><span class="tag tag-lab">情境演練</span></div>
+          <div class="week-content">
+            <h4>Topic 12 資料到行動落差：主管培力與內部溝通</h4>
+            <p class="week-question">為什麼多數調查缺乏後續行動，如何設計主管回饋會議，向 CEO 提出可落地的完整溝通計畫。</p>
+            <ul class="key-topics">
+              <li>主管領導培力（Manager Empowerment）與主管工具包設計</li>
+              <li>部門回饋會議（Feedback Meeting）流程規劃與引導技巧</li>
+              <li>對 CEO 的行動企劃案與向全體員工透明公開之完整溝通</li>
+            </ul>
+          </div>
+          <div class="week-actions">
+            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
+            <div class="due-chip">期末專題截止<br>12/17 23:59</div>
+          </div>
+        </div>
+
+        <div class="week-row reveal" data-block="b4">
+          <div class="week-meta"><span class="week-num">Week 15</span><span class="week-date">12/18</span><span class="tag tag-lab">期末發表</span></div>
+          <div class="week-content">
+            <h4>Topic 13 期末專題發表：調查分析與管理改善企劃</h4>
+            <p class="week-question">各組化身為管理顧問團隊，針對企業真實調查數據進行深度診斷，發表具商業高度的管理改善企劃。</p>
+            <ul class="key-topics">
+              <li>各組口頭發表（20–25 分鐘簡報＋5–10 分鐘答辯）</li>
+              <li>初版口頭簡報與專題報告書評審</li>
+              <li>填寫全體同儕互評問卷</li>
+            </ul>
+          </div>
+          <div class="week-actions"><div class="due-chip ok">期末專題初版（30%）<br>口頭發表與報告繳交</div></div>
+        </div>
+
+        <div class="week-row reveal is-holiday" data-block="b4">
+          <div class="week-meta"><span class="week-num">Week 16</span><span class="week-date">12/25</span><span class="tag tag-holiday">行憲紀念日放假</span></div>
+          <div class="week-content">
+            <h4>Topic 14 期末成果定稿與個人學習反思</h4>
+            <p class="week-question">全學期線上自主學習與總結。請同學於放假前夕（12/24 23:59 前）線上繳交期末個人心得報告與專題修訂定稿。</p>
+            <ul class="key-topics">
+              <li>個人學習心得反思：觀念轉化、AI 工具收穫、團隊協作與留才洞察</li>
+              <li>期末團體專題報告最終修訂版定稿（由組長代表繳交 PDF 檔附修訂對照表）</li>
+            </ul>
+          </div>
+          <div class="week-actions"><div class="due-chip">12/24 23:59 截止<br>心得報告（20%）與定稿</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab -->
+  <section class="section" id="lab" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">Interactive Lab</span>
+        <h2 class="section-title">互動試算實驗室</h2>
+        <p class="section-desc">免安裝、開檔即用的互動教材，支援即時情境模擬、演算法驗證與兩階測驗反思。</p>
+      </div>
+
+      <div class="lab-grid">
+
+        <div class="lab-card wide reveal">
+          <div class="card-shell"><div class="card-core">
+            <div>
+              <div class="num-badge" style="margin-bottom:1rem;">01</div>
+              <span class="lab-tag">Topic 02 · 態度理論與成本</span>
+              <h4>離職成本財務換算模擬器</h4>
+              <p>帶入真實 HR 數據（離職率、職位平均年薪、招募重置天數、培訓與生產力空窗損失），推估人才流失對組織底線盈餘的真實衝擊。</p>
+            </div>
+            <a class="btn-launch is-pending" aria-disabled="true">啟動試算器<span class="icon-chip">↗</span></a>
+          </div></div>
+        </div>
+
+        <div class="lab-card wide reveal">
+          <div class="card-shell"><div class="card-core">
+            <div>
+              <div class="num-badge" style="margin-bottom:1rem;">02</div>
+              <span class="lab-tag">Topic 04 · 抽樣策略與品質</span>
+              <h4>母體、抽樣誤差與樣本數估算器</h4>
+              <p>動態調整母體總人數、信心水準（95% / 99%）與容忍抽樣誤差範圍（±3% / ±5%），即時試算問卷發放之最適回收樣本規模。</p>
+            </div>
+            <a class="btn-launch is-pending" aria-disabled="true">啟動試算器<span class="icon-chip">↗</span></a>
+          </div></div>
+        </div>
+
+        <div class="lab-card reveal">
+          <div class="card-shell"><div class="card-core">
+            <div>
+              <div class="num-badge" style="margin-bottom:1rem;">03</div>
+              <span class="lab-tag">Topic 05</span>
+              <h4>量表信度與刪題診斷</h4>
+              <p>試算內部一致性 Cronbach's α 與 McDonald's ω，並提供刪題敏感度診斷。</p>
+            </div>
+            <a class="btn-launch is-pending" aria-disabled="true">啟動<span class="icon-chip">↗</span></a>
+          </div></div>
+        </div>
+
+        <div class="lab-card reveal">
+          <div class="card-shell"><div class="card-core">
+            <div>
+              <div class="num-badge" style="margin-bottom:1rem;">04</div>
+              <span class="lab-tag">Topic 07</span>
+              <h4>效果量 Cohen's d / η²</h4>
+              <p>突破大樣本顯著性迷思，精確換算實質管理顯著性之效果量大小。</p>
+            </div>
+            <a class="btn-launch is-pending" aria-disabled="true">啟動<span class="icon-chip">↗</span></a>
+          </div></div>
+        </div>
+
+        <div class="lab-card reveal">
+          <div class="card-shell"><div class="card-core">
+            <div>
+              <div class="num-badge" style="margin-bottom:1rem;">05</div>
+              <span class="lab-tag">Topic 03 / 09</span>
+              <h4>專家分類一致性 Cohen's κ</h4>
+              <p>用於關鍵事例法質化分類驗證，以及人工與 LLM Agent 編碼之一致性檢驗。</p>
+            </div>
+            <a class="btn-launch is-pending" aria-disabled="true">啟動<span class="icon-chip">↗</span></a>
+          </div></div>
+        </div>
+
+        <div class="lab-card feature reveal">
+          <div class="card-shell" style="background:var(--accent-tint-2);border-color:var(--accent-tint-2);">
+            <div class="card-core" style="background:var(--paper);">
+              <div>
+                <span class="lab-tag">Core Dataset</span>
+                <h4>員工調查模擬資料集（學生版）</h4>
+                <p>含三廠區 1,000 筆李克特 6 點量表與開放題文字回饋，內建反向題、隱藏問題單位、草率作答與 AI 代答樣本，貫穿全學期分析。</p>
+              </div>
+              <a class="btn-launch is-pending" aria-disabled="true">下載資料集（.xlsx）<span class="icon-chip">↓</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Assignments -->
+  <section class="section" id="assignments">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">Evaluation &amp; Rubrics</span>
+        <h2 class="section-title">四大核心評量與評分規準</h2>
+        <p class="section-desc">結合個人平時演練、期中量表編製、個人 AI Agent 分析實戰與期末諮詢企劃，兼顧實作力與商業策略高度。</p>
+      </div>
+
+      <div class="notice-banner reveal">
+        <div>
+          <h5>學期統一繳交截止時間規範</h5>
+          <p>為確保課堂發表與討論節奏流暢，本課程所有線上作業繳交截止時間，統一嚴格設定為當週上課日期的前一天晚上 23:59 前。請同學務必提早上傳至 Google Classroom 作業區，逾期系統將自動標示遲交。</p>
+        </div>
+      </div>
+
+      <div class="assign-grid">
+
+        <div class="assign-card reveal">
+          <div class="card-shell"><div class="card-core assign-core">
+            <div class="assign-head"><h4>期中團體作業｜新概念量表設計企劃書</h4><span class="assign-weight">25%</span></div>
+            <div class="assign-due">截止時間：2026/10/29 23:59 前</div>
+            <p class="assign-body">各組以關鍵事例法（CIT）為一個職場新興構念（如：遠距孤立感、AI 協作焦慮、心理安全感）發展量表初稿，透過預試資料進行項目分析與探索性因素分析（EFA）檢測其心理計量水準。於第 8 週進行口頭發表並繳交企劃書全文。</p>
+            <div class="rubric"><strong>評分向度（100 分制）</strong><br>事例收集品質與分類檢驗 20%・項目分析與題目篩選 20%・探索性因素分析與構念效度 25%・量表題項品質與設計 20%・現場發表與答辯表現 15%</div>
+          </div></div>
+        </div>
+
+        <div class="assign-card reveal">
+          <div class="card-shell"><div class="card-core assign-core">
+            <div class="assign-head"><h4>個人分析作業｜AI Agent 模擬資料分析報告</h4><span class="assign-weight">25%</span></div>
+            <div class="assign-due">截止時間：2026/11/26 23:59 前</div>
+            <p class="assign-body">由同學個人獨立完成。針對員工調查模擬資料（學生版），運用 AI Agent 資料分析架構（可調用 Claude Code、Google Antigravity、OpenAI Code Interpreter、Excel 或 Python），完成一份具可重現性之量化與質化分析診斷報告（須附 Prompt、Code 與雙重查核附錄）。</p>
+            <div class="rubric"><strong>五大分析核心任務（各佔 20%）</strong><br>資料清理與草率／代答快篩・群組差異比較與問題單位揪出（t / ANOVA）・關鍵驅動因子多元迴歸（KDA）・開放題質化分析與人機編碼比對・人機雙重查核守門紀錄</div>
+          </div></div>
+        </div>
+
+        <div class="assign-card reveal">
+          <div class="card-shell"><div class="card-core assign-core">
+            <div class="assign-head"><h4>期末團體專題｜調查分析與管理改善企劃</h4><span class="assign-weight">30%</span></div>
+            <div class="assign-due">初版截止：12/17 23:59・定稿截止：12/24 23:59</div>
+            <p class="assign-body">各組取得一份公司的真實／情境調查數據，深入進行統計交叉診斷，剖析問題單位與員工痛點，提出具商業策略高度的短中長期管理改善建議（主管領導培力、溝通機制、激勵留才）與向全體公開的完整溝通計畫。</p>
+            <div class="rubric"><strong>評分向度（100 分制）</strong><br>數據分析深度與診斷正確性 25%・核心問題洞察與痛點詮釋 25%・管理改善建議之可行性與策略價值 30%・簡報結構與現場答辯表現 20%</div>
+          </div></div>
+        </div>
+
+        <div class="assign-card reveal">
+          <div class="card-shell"><div class="card-core assign-core">
+            <div class="assign-head"><h4>平時成績｜課堂實作演練與期末個人心得</h4><span class="assign-weight">20%</span></div>
+            <div class="assign-due">心得截止：2026/12/24 23:59 前</div>
+            <p class="assign-body">包含課堂討論發言、課內互動小工具操作品質、團隊互評考核，以及於學期末放假前夕線上繳交之全學期學習心得報告（1,500–2,500 字，反思思維觀念轉化、AI Agent 工具收穫、協作挑戰與留才洞察）。</p>
+            <div class="rubric"><strong>平時考核組成</strong><br>課堂討論與提問互動積極度・課內小工具實機操作與 AI 挑錯品質・期末個人心得報告之反思深度與理論連結・團隊合作互評分數</div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>國立中山大學 人力資源管理研究所</h4>
+        <p>員工意向調查（HRM522 高雄班）課程入口網。旨在培養具備嚴謹心理計量素養、現代 AI Agent 分析能力與商業說服影響力的 HR 專業人才。</p>
+      </div>
+      <div class="footer-col">
+        <h5>快捷連結</h5>
+        <ul>
+          <li><a href="#overview">課程導讀</a></li>
+          <li><a href="#modules">課程模組地圖</a></li>
+          <li><a href="#lab">互動實驗室小工具</a></li>
+          <li><a href="#assignments">評量標準與規準</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>學期資源</h5>
+        <ul>
+          <li><a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank">課程大綱下載（PDF）</a></li>
+          <li><span class="is-pending" aria-disabled="true">模擬資料集（學生版）</span></li>
+          <li><a href="javascript:void(0)" onclick="openClassroomModal()">Google Classroom 入口</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© Fall 2026 Dr. Yu-Hsuan Wang · Institute of Human Resource Management, National Sun Yat-sen University. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal-backdrop" id="classroomModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-shell"><div class="modal-core">
+    <button class="modal-close" onclick="closeClassroomModal()" aria-label="關閉">&times;</button>
+    <h3>Google Classroom 課程代碼</h3>
+    <p>請登入學校 Google 帳號，前往 Classroom 點選「加入課程」並輸入以下代碼：</p>
+    <div class="code-display" id="courseCodeText">
+      2sx2t5mk
+      <button class="btn-copy" onclick="copyCourseCode()">複製代碼</button>
+    </div>
+    <p id="copyAlert" class="copy-note">代碼已成功複製至剪貼簿</p>
+    <a href="https://classroom.google.com/c/884482582902" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">前往 Google Classroom 課程頁面<span class="icon-chip">→</span></a>
+  </div></div>
+</div>
+
+<script>
+  function filterWeeks(block, btn) {
+    document.querySelectorAll('.week-row').forEach(function (row) {
+      row.style.display = (block === 'all' || row.getAttribute('data-block') === block) ? 'grid' : 'none';
+    });
+    document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+  }
+
+  function openClassroomModal() { document.getElementById('classroomModal').classList.add('active'); }
+  function closeClassroomModal() { document.getElementById('classroomModal').classList.remove('active'); }
+  function closeModalOnBackdrop(e) { if (e.target.id === 'classroomModal') closeClassroomModal(); }
+
+  function copyCourseCode() {
+    navigator.clipboard.writeText('2sx2t5mk').then(function () {
+      var alertEl = document.getElementById('copyAlert');
+      alertEl.style.display = 'block';
+      setTimeout(function () { alertEl.style.display = 'none'; }, 2500);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>

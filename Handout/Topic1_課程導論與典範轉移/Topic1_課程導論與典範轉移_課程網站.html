@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>Topic 1：課程導論與典範轉移｜員工意向調查</title>
+<style>
+
+  :root{
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-topic">Topic 1：課程導論與典範轉移</div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 1：課程導論與典範轉移</div>
+    <div class="t2">Topic 1: Introduction &amp; the Listening Paradigm Shift<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">問題意識</div>
+    <a data-u="u1">單元一：為什麼此刻重談員工意見調查</a>
+    <a data-u="u2">單元二：典範轉移</a>
+    <div class="grp">兩個核心框架</div>
+    <a data-u="u3">單元三：傾聽成熟度模型</a>
+    <a data-u="u4">單元四：資料到行動落差</a>
+    <div class="grp">定位與文獻</div>
+    <a data-u="u5">單元五：本學期地圖與定位</a>
+    <a data-u="u6">單元六：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>Topic 1　課程導論與典範轉移</h1>
+  <div class="subtitle">員工意向調查課程．Topic 1（3 小時）．適用對象：碩士班</div>
+  <p>員工意見調查已從一年一次的敬業度普查，轉向持續、多管道的員工傾聽（employee listening）。但近年業界研究一致指出：組織最大的失敗點不在蒐集資料，而在資料到行動的落差（data-to-action gap）。本主題先用當前的全球數據建立問題意識，再帶入兩個貫穿全學期的框架——傾聽成熟度與資料到行動落差，最後說明本課如何把設計、分析視為手段，把行動落地視為目的。</p>
+  <h2>本主題單元</h2>
+  <table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td>一、為什麼此刻重談員工意見調查</td><td>以 Gallup 2026 全球數據理解敬業度下滑與 AI 時代的傾聽需求</td></tr>
+    <tr><td>二、典範轉移</td><td>區分年度敬業度調查與持續傾聽、主動與被動傾聽</td></tr>
+    <tr><td>三、傾聽成熟度模型</td><td>掌握四階段成熟度模型，並能定位一個組織的所在階段</td></tr>
+    <tr><td>四、資料到行動落差</td><td>理解為何蒐集不是瓶頸，行動才是；建立本課的核心問題意識</td></tr>
+    <tr><td>五、本學期地圖與定位</td><td>認識 16 週架構、貫穿的模擬資料集，以及本課的整體邏輯</td></tr>
+    <tr><td>六、參考文獻</td><td>本主題引用來源與專有名詞對照表</td></tr>
+  </table>
+  <h2>本主題學習目標</h2>
+  <div class="card">
+    <p>修畢本主題後，學生應能：其一，說明員工意見調查從年度敬業度普查走向持續傾聽的演進與動因；其二，用傾聽成熟度模型定位一個組織所處的階段；其三，指出資料到行動落差的成因，並解釋為何它是當代員工傾聽的主要瓶頸；其四，說出本課如何把設計與分析連向行動落地。</p>
+  </div>
+  <div class="note"><span class="lb">使用說明</span>導覽列可切換單元。各單元末附兩階段自我檢測題：先作答並標注信心，答對後才展開第二層機制確認；校準面板僅記錄每題第一次作答。本網站為單一檔案、離線可用；重新整理會清空作答紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>只計每題第一次作答；高信心且答錯屬過度自信區，建議回到該單元重讀；低信心且答對表示理解比自己以為的更穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 為什麼此刻 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：為什麼此刻重談員工意見調查</h1>
+  <div class="subtitle">主要依據：Gallup (2026) State of the Global Workplace</div>
+
+  <h2>1.1 全球敬業度的下滑</h2>
+  <p>依 Gallup 2026 年《State of the Global Workplace》報告，2025 年全球員工敬業度（employee engagement）連續第二年下滑，降到自 2020 年以來的最低點：全球僅約 20% 的員工屬於敬業，較 2022 年的高點 23% 下滑。這是全球敬業度首次連續兩年下降，且過去一年沒有任何區域上升，跌幅最大的是南亞（−5 個百分點）。</p>
+  <div class="pred">
+    <div class="plabel">請猜猜看（先完成預測，再往下閱讀）</div>
+    <p>Gallup 估計，低敬業度每年造成全球生產力損失約多少？（以佔全球 GDP 的比例表示）</p>
+    <div class="prow">
+      <input type="range" min="0" max="20" value="5" oninput="document.getElementById('pv1').textContent=this.value+'%'">
+      <span class="pval" id="pv1">5%</span>
+      <button onclick="predReveal(this,'pv1',9,'約 9%','Gallup 估計低敬業度每年造成約 10 兆美元的生產力損失，相當於全球 GDP 的約 9%。這個量級說明敬業度不是軟性議題，而是與組織績效、獲利直接相關的經營指標。')">揭示真值</button>
+    </div>
+    <div class="preveal"></div>
+  </div>
+
+  <h2>1.2 主管敬業度優勢的消退</h2>
+  <p>下滑並非均勻分布，主管這一層特別值得注意。過去主管的敬業度明顯高於一般員工，形成一種主管紅利；但 Gallup 指出，2024 到 2025 年間主管敬業度下滑 5 個百分點，從 27% 掉到 22%，這個紅利正在消失——主管逐漸只和自己所帶領的人一樣敬業。跌幅最大的是南亞（主要是印度），主管敬業度一年內下降 8 個百分點，為各區域之最。這件事之所以關鍵，是因為主管是把傾聽資料轉為行動的樞紐：調查結果最終要靠各層主管去理解、回應與落實。主管本身倦怠、與工作脫節，整條從傾聽到行動的鏈條就會斷在中間，資料到行動落差也隨之擴大。</p>
+
+  <h2>1.3 AI 時代的生產力落差</h2>
+  <p>Gallup 2026《State of the Global Workplace》報告以 AI 革命的人性面（The Human Side of the AI Revolution）為主題。數據呈現一個落差：在已導入 AI 的美國組織中，65% 的員工說 AI 對個人生產力有正面影響，但只有 12% 強烈同意 AI 已改變公司的工作方式；一項涵蓋美、英、德、澳、近 6,000 位企業高階主管的 NBER 調查（Yotzov et al., 2026）更顯示，89% 的領導者認為 AI 對公司的勞動生產力沒有影響。個人層次的效益明顯，組織層次的效益卻難以浮現。</p>
+  <h2>1.4 敬業度為何與經營績效相關</h2>
+  <p>敬業度不是軟性感受。Gallup 把敬業度定義為員工對工作、團隊與雇主的心理連結（psychological attachment）；而管理領域的經典統合分析（meta-analysis；Harter et al., 2002）也顯示，敬業度與業務單位的生產力、獲利與銷售之間有穩定的正向關係。正因為它與這些可衡量的經營績效相關，敬業度也常被詮釋為組織面對 AI 等重大擾動的準備度指標——敬業的團隊較能把個人層次的 AI 效益轉化為組織層次的成果。需留意這是一種詮釋，並非 Gallup 的正式定義，其證據基礎是敬業度與績效、留任的相關，而非直接的因果宣稱。</p>
+  <div class="key"><span class="lb">本單元要點</span>敬業度常被詮釋為組織面對變革的準備度（readiness for change）：在 AI 這種重大擾動下，敬業的員工較能順利度過。這個詮釋的證據基礎是敬業度與績效、留任的相關，而非因果。敬業度連兩年下滑、主管紅利縮水、AI 效益卡在個人層次，正是此刻必須把員工傾聽做得更好的理由。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 1-1</div>
+    <div class="qbody">
+      <p>有一種常見的詮釋，把敬業度視為組織面對變革（如 AI）的準備度指標。下列哪一種解讀最貼近這個觀點？</p>
+      <label><input type="radio" name="q11" value="a"> 敬業度就是員工對薪資福利的滿意程度</label>
+      <label><input type="radio" name="q11" value="b"> 敬業度反映員工對工作、團隊與雇主的心理連結，與組織績效相關，故可視為面對擾動的韌性指標</label>
+      <label><input type="radio" name="q11" value="c"> 敬業度只是主觀感受，與生產力沒有實證關聯</label>
+      <label><input type="radio" name="q11" value="d"> 敬業度高低完全由整體經濟景氣決定</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q11r" value="a"> 因為統合分析（如 Harter et al., 2002）顯示敬業度與業務單位生產力、獲利相關，故可作為面對 AI 等擾動的準備度指標</label>
+      <label><input type="radio" name="q11r" value="b"> 因為敬業度與滿意度是同義詞</label>
+      <label><input type="radio" name="q11r" value="c"> 因為敬業度只在景氣好時才有意義</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q11c" value="低"> 低</label>
+        <label><input type="radio" name="q11c" value="中"> 中</label>
+        <label><input type="radio" name="q11c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q11','b','a','正確。敬業度是心理連結、與績效相關（Harter et al., 2002），故可當韌性指標。','關鍵在實證關聯：統合分析顯示敬業度與生產力、獲利相關，才使它成為變革準備度的代理。','再想想：為何能把敬業度當準備度指標？靠的是什麼證據？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2 典範轉移 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：典範轉移——從年度調查到持續傾聽</h1>
+  <div class="subtitle">主要依據：Perceptyx (2026)、Qualtrics (2026)</div>
+
+  <h2>2.1 兩種取向的對照</h2>
+  <p>傳統做法是一年一次的敬業度普查：由人資主導、集中在單一時點、題目固定、報告完再等明年。持續傾聽（continuous listening）則把傾聽視為一套貫穿員工生命週期的活動：多管道、常態化、由各層級主管一起對回饋負責。兩者不是對錯，而是頻率、擁有者與行動責任的不同。</p>
+  <table>
+    <tr><th style="width:22%">面向</th><th>年度敬業度調查</th><th>持續傾聽（continuous listening）</th></tr>
+    <tr><td>頻率</td><td>一年一次的單一時點普查</td><td>常態、貫穿生命週期的多次觸點</td></tr>
+    <tr><td>管道</td><td>單一問卷</td><td>主動與被動並用的多管道</td></tr>
+    <tr><td>擁有者</td><td>人資部門</td><td>高階團隊主導、各層級主管共同負責</td></tr>
+    <tr><td>行動</td><td>報告後行動常斷點</td><td>各層級對回饋採取行動並追蹤</td></tr>
+    <tr><td>目的</td><td>量測現況分數</td><td>驅動改變與個人化發展</td></tr>
+  </table>
+
+  <h2>2.2 主動傾聽與被動傾聽</h2>
+  <p>主動傾聽（active listening）指主動向員工提問，例如問卷、脈動調查（pulse survey）、焦點團體。被動傾聽（passive listening）指從既有的行為或文字訊號中理解員工，例如離職資料、內部溝通平台、服務工單。被動傾聽能補主動傾聽的盲點，但也帶來更高的隱私保護、法遵門檻與員工信任界線問題。</p>
+  <div class="note"><span class="lb">課前對讀與課堂討論</span>閱讀兩篇哈佛商業評論短文：Fuller 的 A Primer on Measuring Employee Engagement 主張以行為資料（會議、郵件等被動訊號）衡量敬業度；Judd 等人的 Employee Surveys Are Still One of the Best Ways to Measure Engagement 則為問卷辯護。討論三個問題：Fuller 提出哪些指標？這些指標與問卷式調查有何不同？兩篇的論點是否矛盾——或者其實分別對應本節的被動與主動傾聽？並提出一個讀後的自己的問題。</div>
+
+  <h2>2.3 需求面：員工對傾聽的期待</h2>
+  <p>推動持續傾聽的力量不只來自組織，也來自員工本身。Qualtrics 2026 年員工體驗趨勢報告（涵蓋 24 國）顯示，72% 的員工正經歷重大變革，處於變動最快的一段時期。在這樣的壓力下，42% 的員工希望公司更頻繁地傾聽，不到 10% 希望減少，且 68% 表示樂於提供回饋。換言之，員工並不排斥被詢問，反而期待更常被聽見。年度普查的低頻節奏，已跟不上員工對即時、雙向溝通的期待——需求面本身就在把組織推向持續傾聽。</p>
+  <h2>2.4 延伸視角：從人先到績效先</h2>
+  <p>與傾聽的典範轉移平行，管理本身也在轉向。Gartner 團隊在哈佛商業評論（Guadagni et al., 2026）指出，疫情後主導的以人為先管理（people-first，聚焦敬業與留任）正讓位給以績效為先（performance-first）：在經濟不確定、AI 快速導入與地緣政治動盪下，績效與生產力已取代敬業與留任躍上 CEO 議程。他們一份 2025 年 12 月、涵蓋 2,947 位員工與主管的調查顯示，三分之二的主管把管理人視為首要角色、45% 承認會做出偏向員工卻犧牲業務的決策，平均每位主管花約九小時——相當於逾兩成工時——傾聽並處理員工的個人與情緒張力。文章主張的不是放棄同理，而是把彈性與關懷重新定位為服務成果的工具，並稱轉向績效優先的主管達成預期業績的機率高出 21%，且其員工回報的體驗滿意度更高。</p>
+  <div class="note"><span class="lb">討論與來源性質</span>這對本課是一個有張力的視角：若組織把重心從敬業與留任移向績效，員工意見調查要問的、要追蹤的指標是否也該調整？值得注意的是，文章說績效優先的主管其員工體驗滿意度反而更高，因此它主張的是重新框定、而非否定敬業。此文為 Gartner 顧問研究加 HBR 觀點，數據為 Gartner 專有、非同儕審查，宜當延伸討論而非核心證據；可與單元一的敬業度證據、Topic 2 的態度與績效關係對照閱讀。</div>
+  <div class="key"><span class="lb">本單元要點</span>典範轉移的核心不是換一套工具，而是把傾聽從一年一次的量測，變成常態、多管道、各層級都要行動的組織能力。判斷一個組織走到哪，正是下一單元的成熟度模型要做的事。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 2-1</div>
+    <div class="qbody">
+      <p>某公司把原本一年一次的敬業度調查改成每季一次，題目與流程不變，報告仍由人資彙整、主管不被要求採取行動。這比較接近下列何者？</p>
+      <label><input type="radio" name="q21" value="a"> 已完成向持續傾聽的典範轉移</label>
+      <label><input type="radio" name="q21" value="b"> 只是提高了頻率，尚未具備持續傾聽的多管道與各層級行動</label>
+      <label><input type="radio" name="q21" value="c"> 屬於被動傾聽</label>
+      <label><input type="radio" name="q21" value="d"> 與原本完全相同，毫無差異</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q21r" value="a"> 因為持續傾聽的關鍵在多管道與各層級對回饋負責，單純加密頻率並不等於轉型</label>
+      <label><input type="radio" name="q21r" value="b"> 因為只要頻率提高就算完成轉型</label>
+      <label><input type="radio" name="q21r" value="c"> 因為問卷一定屬於被動傾聽</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q21c" value="低"> 低</label>
+        <label><input type="radio" name="q21c" value="中"> 中</label>
+        <label><input type="radio" name="q21c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q21','b','a','正確。加密頻率不等於轉型，關鍵在管道與行動責任。','重點：持續傾聽要多管道＋各層級行動，只提高頻率仍是舊典範。','再想想：轉型少了哪兩個要素？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 傾聽成熟度 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：傾聽成熟度模型</h1>
+  <div class="subtitle">主要依據：Perceptyx (2026) The State of Employee Listening</div>
+
+  <h2>3.1 四階段模型</h2>
+  <p>Perceptyx 自 2022 年起檢視 65 種以上的常見傾聽做法，從中萃取出 13 種具區辨力的做法，建立一個四階段的傾聽成熟度（listening maturity）模型。這 13 種做法未被逐條公開，而是被歸納為四個可各自成熟的區辨因子（見下表）。階段越高，代表這四個因子整體越成熟，也越接近多管道、高層主導、各層級對回饋負責的持續傾聽。點選下方階段查看說明。</p>
+
+  <h3>區辨成熟度的四個因子</h3>
+  <table>
+    <tr><th style="width:26%">區辨因子</th><th>說明（成熟度越高，越往右發展）</th></tr>
+    <tr><td>傾聽管道數量</td><td>從單一問卷，走向主動與被動並用的多元管道</td></tr>
+    <tr><td>速度</td><td>員工多快能感受到來自回饋的改變，也就是結果到行動的速度</td></tr>
+    <tr><td>敏捷度</td><td>能多快調整傾聽策略，以回應新的業務問題</td></tr>
+    <tr><td>與其他業務資料的整合</td><td>把各次傾聽的回饋，與關鍵業務與人才優先事項整合起來</td></tr>
+  </table>
+  <p style="font-size:13px;color:#697180;">四個因子取自 Perceptyx 對區辨做法的公開歸納；2022 原始報告以傾聽管道、頻率、行動速度、內部團隊技能描述能力面向，2023 起整理為上述四項。資料來源：Perceptyx (2022, 2023)。</p>
+
+  <div class="calc">
+    <div class="pg-ctrl" id="lmBtns">
+      <button class="pg-btn" onclick="lmShow(1)">階段一 Episodic</button>
+      <button class="pg-btn ghost" onclick="lmShow(2)">階段二 Topical</button>
+      <button class="pg-btn ghost" onclick="lmShow(3)">階段三 Strategic</button>
+      <button class="pg-btn ghost" onclick="lmShow(4)">階段四 Continuous</button>
+    </div>
+    <div id="lmBar" style="margin:10px 0;"></div>
+    <div class="pg-panel" id="lmDesc" style="font-size:14.5px;"></div>
+  </div>
+
+  <h2>3.2 四階段對照</h2>
+  <p>四個階段可視為一條由低到高的連續帶（spectrum）。真正推動階段上升的不是題目變多或工具變新，而是幾個面向同時往上走：傾聽從一次性事件變成常態節奏、方法從單一調查擴充到多種管道與方法、主導權從人資獨扛轉為高層共同承擔、行動責任從無到落到每一層主管、傾聽從與業務脫節到深度整合進策略。下表把各階段沿這些面向並列比較。</p>
+  <table>
+    <tr><th>面向</th><th>階段一 Episodic</th><th>階段二 Topical</th><th>階段三 Strategic</th><th>階段四 Continuous</th></tr>
+    <tr><td>傾聽節奏</td><td>單一調查事件、按表操課</td><td>圍繞議題的一次性專案</td><td>常態、以普查診斷再輔以後續傾聽</td><td>持續，依問題快速部署</td></tr>
+    <tr><td>方法與管道</td><td>各自分立的單一調查</td><td>大型事件＋主題式深掘</td><td>多種方法與管道、不限傳統調查</td><td>多管道並用、大規模而有彈性</td></tr>
+    <tr><td>主導者</td><td>人資獨扛</td><td>人資帶領、其他部門開始求援</td><td>人資與業務共同規劃</td><td>全員共同參與，人人有責</td></tr>
+    <tr><td>主管的行動責任</td><td>幾乎沒有，視為人資職責</td><td>偏重合規（是否交出行動計畫）</td><td>部分問責、各層級能行動</td><td>各層級都要理解並對回饋行動</td></tr>
+    <tr><td>與業務策略的連結</td><td>脫節</td><td>各專案連著業務優先事項，但收尾證明成效常失敗</td><td>與業務優先事項清楚連結</td><td>深度整合進業務策略</td></tr>
+    <tr><td>2026 占比（2024／2025）</td><td>22%（11／10）最高</td><td>30%（17／37）自高點回落</td><td>27%（36／39）明顯收縮</td><td>20%（36／15）小幅回升</td></tr>
+  </table>
+  <div class="note"><span class="lb">如何使用這張表</span>定位一個組織時，逐列打勾比只看做幾次調查更準：一家一年做四次脈動調查、但主管只求交出行動計畫、資料也不接業務策略的公司，仍停在階段一到二之間，而不是階段四。決定階段的是治理與行動責任的分布，不是頻率或工具。</div>
+
+  <h2>3.3 成熟度與組織成果的關聯</h2>
+  <p>成熟度不是管理時尚，而是與經營成果強相關。Perceptyx 2026 依五項成果比較四個階段：從階段一到階段四，達到高水準的組織比例呈數倍拉開，其中員工敬業與留任的差距最大——階段四有 77%、階段一僅 7%，相差 11 倍。</p>
+  <table>
+    <tr><th>成果</th><th>階段一</th><th>階段二</th><th>階段三</th><th>階段四</th><th>倍數</th></tr>
+    <tr><td>高員工敬業與留任</td><td>7%</td><td>8%</td><td>36%</td><td>77%</td><td>11×</td></tr>
+    <tr><td>良好適應變革</td><td>12%</td><td>12%</td><td>50%</td><td>81%</td><td>7×</td></tr>
+    <tr><td>有效創新</td><td>13%</td><td>18%</td><td>42%</td><td>82%</td><td>6×</td></tr>
+    <tr><td>達成或超越財務目標</td><td>11%</td><td>9%</td><td>32%</td><td>70%</td><td>6×</td></tr>
+    <tr><td>高顧客滿意與留存</td><td>15%</td><td>17%</td><td>41%</td><td>77%</td><td>5×</td></tr>
+  </table>
+  <p style="font-size:13px;color:#697180;">階段二財務目標（9%）略低於階段一（11%）並非退步：階段二組織多集中在成長期與已建立期，正投資系統而暫時壓縮利潤，進入階段三後財務成果會躍升到 32%。資料來源：Perceptyx (2026)。</p>
+  <div class="warn"><span class="lb">解讀提醒</span>成熟度模型是供應商（Perceptyx）提出的實務框架，不是經同儕審查的驗證構念；上表的階段—成果關係是橫斷面、相關性的供應商資料，不能作因果解讀。成熟度高的組織往往同時資源較充足、經營較上軌道，這些第三因子可能同時推高傾聽成熟度與經營成果（干擾），也存在選擇效應與反向因果的可能。因此適合用來排序與定位、看下一步要補什麼，不宜當作「提高成熟度就會帶來 11 倍成果」的因果證據。</div>
+
+  <h2>3.4 2026 年的退步訊號</h2>
+  <p>2026 年的成熟度分布不進反退。以研究自 2022 年起的軌跡看：階段一（Episodic）從 2024 年的 11%、2025 年的 10% 跳升到 22%，是研究以來最高；階段二（Topical）在 2025 年因組織變革帶動的事件式傾聽衝到 37%，2026 年回落到 30%；階段三（Strategic）從 2025 年的 39% 明顯收縮到 27%；階段四（Continuous）在 2025 年一度掉到 15%，2026 年小幅回升到 20%，但仍低於 2024 年的 36%。報告把這波退步歸因於預算與人資工作量的資源緊縮：資源受限下，組織簡化傾聽方案、放慢行動節奏，回到事件式做法。</p>
+  <div class="key"><span class="lb">本單元要點</span>成熟度模型提供一把共同的尺，讓不同組織能被定位、被比較，也指出下一步要補什麼。但成熟度會退步：在預算與工作量壓力下，就連曾建立完整方案的組織也會後退。真正的差異不在做幾次調查，而在治理與行動責任的分布，以及傾聽是否連向業務策略與員工看得見的改變。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 3-1</div>
+    <div class="qbody">
+      <p>依 Perceptyx 的四階段模型，最能區辨「階段四（Continuous）」與其他階段的關鍵是什麼？</p>
+      <label><input type="radio" name="q31" value="a"> 只要問卷題目數量夠多就是階段四</label>
+      <label><input type="radio" name="q31" value="b"> 傾聽深度整合進業務策略，且員工體驗不再只是人資或高層的責任——組織裡每個人都參與其中，共同對回饋負責</label>
+      <label><input type="radio" name="q31" value="c"> 只要一年做超過一次調查就是階段四</label>
+      <label><input type="radio" name="q31" value="d"> 只要導入 AI 分析工具就是階段四</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q31r" value="a"> 因為階段的區辨在治理與行動責任的分布，而非單一工具或題數</label>
+      <label><input type="radio" name="q31r" value="b"> 因為題目越多代表越成熟</label>
+      <label><input type="radio" name="q31r" value="c"> 因為導入任何 AI 工具就等於最高成熟度</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q31c" value="低"> 低</label>
+        <label><input type="radio" name="q31c" value="中"> 中</label>
+        <label><input type="radio" name="q31c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q31','b','a','正確。階段四的關鍵是整合進業務策略、全員共同參與並對回饋負責。','關鍵：成熟度看治理與行動責任的分布，不是題數或單一工具。','再想想：區辨階段的是工具，還是誰對回饋負責、傾聽有沒有連向業務策略？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 資料到行動落差 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：資料到行動落差</h1>
+  <div class="subtitle">主要依據：Perceptyx (2026)、Qualtrics (2026)</div>
+
+  <h2>4.1 瓶頸所在：從蒐集轉向行動</h2>
+  <p>當代員工傾聽最一致的發現是：蒐集資料已經不是難題，把資料轉成員工看得見的改變才是。Perceptyx 2026 的數據很直接——71% 的組織會分享調查結果，但只有 51% 的員工實際看到來自自己回饋的改善。中間流失的三成，就是資料到行動落差（data-to-action gap）。</p>
+  <div class="calc">
+    <div id="gapPlot"></div>
+    <p class="interp">從蒐集到員工有感，一路漏損：多數組織能蒐集、也多半會分享（71%），但只有約半數員工看到實質改善（51%）。落差發生在分享之後的行動環節。示意重繪自 Perceptyx 2026。</p>
+  </div>
+
+  <h2>4.2 跨來源的一致證據</h2>
+  <p>這個落差不是單一供應商的量測偶然。Qualtrics 2026 年員工體驗趨勢報告（涵蓋 24 國）獨立觀察到同樣的斷點，並揭示它有明顯的層級差異：85% 的高階主管認為回饋已帶來正向改變，但只有 48% 的基層員工同意，而且這個差距正隨時間擴大。高層看到的改變，基層往往感受不到。Perceptyx 進一步指出後果不只是效率問題：當員工在一次傾聽後看不到任何改變，他們對高層言行一致的信任度會低 2.5 倍。速度也是關鍵之一——77% 的組織能在一個月內把結果交到主管手上，但真正的落差發生在交付之後的行動環節。兩家獨立資料同時指向同一件事：瓶頸在行動，尤其在讓基層真正感受到改變。</p>
+
+  <h2>4.3 落差為何存在</h2>
+  <p>障礙會隨成熟度改變。階段一最大的阻力是文化與領導層買單：文化與成果不一致占 30%、領導層支持不足占 26%。到了階段四，領導層支持已降到 8%，但資料到行動落差反而升到 31%，超越其他所有障礙成為首要瓶頸；文化與成果不一致（26%）、變革疲乏（change fatigue，20%）、投資報酬不明（unclear ROI，15%）次之。換言之，高成熟度組織已解決了買單問題，卡關的是把洞察變成員工有感的執行。這說明落差不是單一技術問題，而是治理、文化與能量的綜合結果。</p>
+  <div class="key"><span class="lb">本課的核心問題意識</span>本課因此把問卷設計與資料分析視為手段，把行動落地與倫理法遵視為同等重要的學習成果。後續每一週的技能——題目設計、抽樣、資料品質、統計分析、開放題分析——最終都要回答同一個問題：這些發現如何變成員工看得見的改變？</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 4-1</div>
+    <div class="qbody">
+      <p>一家公司每季調查、報告精美、分享率高，但員工敬業度持續下滑、且多數員工說「填了也沒用」。依本單元，最可能的診斷是什麼？</p>
+      <label><input type="radio" name="q41" value="a"> 蒐集的資料量不夠，應再加開更多調查</label>
+      <label><input type="radio" name="q41" value="b"> 卡在資料到行動落差：有蒐集、有分享，但員工看不到來自回饋的實質改變</label>
+      <label><input type="radio" name="q41" value="c"> 問卷題目一定有信度問題</label>
+      <label><input type="radio" name="q41" value="d"> 只要換一個更貴的傾聽平台就能解決</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q41r" value="a"> 因為症狀是「分享了卻沒有可見改變」，瓶頸在行動而非蒐集或工具</label>
+      <label><input type="radio" name="q41r" value="b"> 因為調查越多越好，蒐集量永遠是主因</label>
+      <label><input type="radio" name="q41r" value="c"> 因為換更貴的平台一定能提升敬業度</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q41c" value="低"> 低</label>
+        <label><input type="radio" name="q41c" value="中"> 中</label>
+        <label><input type="radio" name="q41c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q41','b','a','正確。症狀指向行動環節，屬資料到行動落差。','關鍵：有蒐集有分享卻無可見改變，瓶頸在行動不在蒐集或工具。','再想想：加更多調查或換平台，能補上哪一段流失？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 學期地圖 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：本學期地圖與定位</h1>
+  <div class="subtitle">16 週的整體架構、核心主題與評量定位</div>
+
+  <h2>5.1 四個區塊與 14 個核心模組主題</h2>
+  <p>全學期 16 週包含 13 次實體授課與 3 次國定假日自主學習／線上任務，分為四大區塊，從傾聽典範、測量設計、AI Agent 量化質化分析，一路走到高階簡報說服與管理行動落地：</p>
+  <table>
+    <tr><th style="width:20%">區塊</th><th style="width:24%">週次與 Topic</th><th>教學與實作核心重點</th></tr>
+    <tr>
+      <td><b>一、傾聽典範與測量基礎</b></td>
+      <td>W01–W04<br><b>Topic 01–03</b></td>
+      <td>• Topic 01：課程導論與典範轉移（持續傾聽、傾聽成熟度、數據到行動落差）<br>
+• Topic 02：調查目的、態度理論與測量基礎（離職成本財務試算、心理計量構念與信效度）<br>
+• <i>【W03 中秋節放假】</i><br>
+• Topic 03：題項設計與關鍵事例法 CIT（量表編製、反向題陷阱、CIT 實作、✍️ <b>期中作業啟動</b>）<br>
+• <i>【W05 國慶紀念日補假放假】</i></td>
+    </tr>
+    <tr>
+      <td><b>二、品質防線、因素分析與期中發表</b></td>
+      <td>W06–W08<br><b>Topic 04–06</b></td>
+      <td>• Topic 04：抽樣策略與調查資料品質防線（抽樣誤差、極小群組、草率作答與 AI 代答快篩）<br>
+• Topic 05：量表心理計量檢驗與因素分析實務（項目分析 CR 決斷值、探索性因素分析 EFA、信度檢定、💻 <b>實機演練</b>）<br>
+• Topic 06：期中發表：新概念量表設計（各組 15 分鐘口頭發表、量表企劃書與同儕互評，✍️ <b>期中作業 25%</b>）</td>
+    </tr>
+    <tr>
+      <td><b>三、AI Agent 資料分析架構與實務</b></td>
+      <td>W09–W12<br><b>Topic 07–10</b></td>
+      <td>• Topic 07：AI Agent 資料分析架構與量化實務（一）（任務規劃、工具自主調用、t 檢定、ANOVA、效果量、人機雙重查核守門、💻 <b>實機演練</b>）<br>
+• Topic 08：AI Agent 輔助量化實務（二）（關鍵驅動因子 KDA、多元迴歸、共線性 VIF、殘差查核、💻 <b>實機演練</b>）<br>
+• Topic 09：開放題分析演進：從文字雲到 LLM Agent 主題編碼（質化編碼簿、LLM 主題與情緒分析、Cohen's κ 一致性、AI 代答偵測、💻 <b>實機演練</b>）<br>
+• Topic 10：資料視覺化與 AI Agent 決策分析整合（決策導向圖表、優先改善矩陣圖、✍️ <b>個人分析作業 25% 繳交</b>）</td>
+    </tr>
+    <tr>
+      <td><b>四、簡報心理學、行動落地與期末專題</b></td>
+      <td>W13–W16<br><b>Topic 11–14</b></td>
+      <td>• Topic 11：簡報心理學：數據說服力與利害關係人溝通（認知負荷、主管防衛心理、金字塔原理與 SCQA 攻防）<br>
+• Topic 12：從數據到行動：主管培力與內部溝通（數據到行動落差解法、主管領導培力與工具包、回饋會議流程設計、CEO 行動企劃）<br>
+• Topic 13：期末專題發表：調查分析與管理改善企劃（企業真實數據深度分析口頭發表 20–25 分鐘、初版報告書繳交、✍️ <b>期末專題 30%</b>）<br>
+• Topic 14：期末成果定稿與個人學習反思（<i>【W16 行憲紀念日放假】</i>線上繳交個人心得報告計入平時 20%、專題最終定稿修訂版）</td>
+    </tr>
+  </table>
+
+  <h2>5.2 一份貫穿全學期的模擬資料集</h2>
+  <p>全學期使用同一份製造業員工意見調查模擬資料集（三廠區、約 1,000 人、李克特 6 點、29 題 Likert 加 2 題開放題）。採用模擬資料的理由有三：可刻意埋入要教的現象、避免真實員工資料的法遵與倫理風險、而「為何不能直接用他人真實資料」本身就是匿名與保密模組的教材。資料中已埋入信度崩壞、群組差異、草率作答、疑似 AI 代答、反向題、遺漏值、小群組等現象，各自對應特定 Topic。</p>
+
+  <h2>5.3 學期評量機制與統一截止時間規範</h2>
+  <p>本課程重視實務技能養成與學術論證嚴謹性，評量包含四大面向，並設有嚴格的線上繳交時間規範：</p>
+  <table>
+    <tr><th style="width:30%">評量項目</th><th style="width:12%">佔比</th><th style="width:38%">繳交／發表時程</th><th>統一截止規範</th></tr>
+    <tr><td><b>個人平時成績與課堂實作</b></td><td>20%</td><td>第 16 週放假前夕（12/24 週四）線上繳交期末個人心得報告，平時參與單檔 HTML 工具實作與課堂討論</td><td>當週前一天 23:59</td></tr>
+    <tr><td><b>期中團體作業：新概念量表設計</b></td><td>25%</td><td>第 4 週啟動、第 7 週完成 EFA 檢驗、第 8 週課堂口頭發表（企劃書全文與簡報檔繳交）</td><td><b>10/29 (四) 23:59</b></td></tr>
+    <tr><td><b>個人分析作業：AI Agent 輔助資料分析</b></td><td>25%</td><td>第 12 週課堂前繳交（獨立完成模擬資料清理、t/ANOVA 檢定、迴歸驅動因子、人機雙重查核附錄）</td><td><b>11/26 (四) 23:59</b></td></tr>
+    <tr><td><b>期末團體專題：調查分析與管理改善企劃</b></td><td>30%</td><td>第 15 週口頭發表 20–25 分鐘並繳交初版報告；第 16 週依回饋修正後繳交最終定稿版</td><td>初版 <b>12/17 (四) 23:59</b><br>定稿 <b>12/24 (四) 23:59</b></td></tr>
+  </table>
+  <div class="note"><span class="lb">⏰ 統一繳交截止時間</span>為確保課堂發表與討論順暢，本課程各項線上作業之繳交截止時間<b>一律設定為「當週上課日期的前一天晚上 23:59」（即每週四 23:59）</b>，請同學提早於 Google Classroom 作業區完成上傳。</div>
+
+  <div class="key"><span class="lb">本單元要點</span>本課依循一貫的邏輯：先建立為什麼做、怎麼設計、如何分析的能力，最後導向如何把發現轉為員工看得見的行動。這也是為什麼 Topic 1 要先把資料到行動落差講清楚——它是全學期最終要解決的問題。</div>
+</section>
+<!-- ==================== U6 參考文獻 ==================== -->
+<section class="unit" id="u6">
+  <h1>單元六：參考文獻</h1>
+
+  <h2>學術文獻</h2>
+  <div class="refline">Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002). Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. Journal of Applied Psychology, 87(2), 268&#8211;279. <a href="https://doi.org/10.1037/0021-9010.87.2.268" target="_blank" rel="noopener">https://doi.org/10.1037/0021-9010.87.2.268</a></div>
+  <div class="refline">Yotzov, I., Barrero, J. M., Bloom, N., Bunn, P., Davis, S. J., Foster, K. M., Jalca, A., Meyer, B. H., Mizen, P., Navarrete, M. A., Smietanka, P., Thwaites, G., &amp; Wang, B. Z. (2026). Firm data on AI (NBER Working Paper No. 34836). National Bureau of Economic Research. <a href="https://doi.org/10.3386/w34836" target="_blank" rel="noopener">https://doi.org/10.3386/w34836</a></div>
+  <h2>業界資料來源</h2>
+  <div class="refline">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc. <a href="https://go.perceptyx.com/state-of-employee-listening-web-report" target="_blank" rel="noopener">go.perceptyx.com</a></div>
+  <div class="refline">Perceptyx. (2022). The state of employee listening 2022. Perceptyx, Inc. <a href="https://2759869.fs1.hubspotusercontent-na1.net/hubfs/2759869/Offers/The%20State%20of%20Employee%20Listening%202022.pdf" target="_blank" rel="noopener">perceptyx.com（PDF）</a></div>
+  <div class="refline">Gallup. (2026). State of the global workplace: 2026 report — The human side of the AI revolution. Gallup, Inc. <a href="https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" target="_blank" rel="noopener">gallup.com</a></div>
+  <div class="refline">Qualtrics. (2026). Employee experience trends 2026. Qualtrics. <a href="https://www.qualtrics.com/ebooks-guides/employee-experience-trends/" target="_blank" rel="noopener">qualtrics.com</a></div>
+  <div class="refline">Guadagni, T., Lawrence, T., Tokas, K., &amp; Valencia, C. (2026, July 1). The case for performance-first management. Harvard Business Review. <a href="https://hbr.org/2026/07/the-case-for-performance-first-management" target="_blank" rel="noopener">hbr.org</a></div>
+  <div class="note"><span class="lb">資料來源機構簡介</span>Gallup 是 1935 年成立的美國民意調查與職場研究公司，以跨越百餘國的大規模員工敬業度調查著稱，State of the Global Workplace 為其年度旗艦研究。Perceptyx 是美國員工體驗（employee experience）調查與分析軟體公司，客戶涵蓋約三分之一的財星百大企業，State of Employee Listening 年度研究聚焦傾聽與行動的成熟度。Qualtrics 是體驗管理（experience management）軟體公司，提供員工與顧客體驗的調查平台，年度 Employee Experience Trends 報告涵蓋多國資料（2026 年版涵蓋 24 國）。三者都是商業機構，年度報告兼具行銷目的，宜視為貼近實務的產業證據，而非中立的學術結論。</div>
+  <div class="note"><span class="lb">DOI 與來源性質</span>概念性主張（如敬業度與績效的關係）以有 DOI 的同儕審查文獻佐證：Harter et al.（2002）。AI 生產力落差的 89% 數據引自 Yotzov et al.（2026），為 NBER 工作論文，有 DOI 但屬預印本、尚未經同儕審查，引用時宜註明。上列供應商年度報告本身無 DOI（此類機構報告不適用 DOI），資料規模大、貼近實務但具行銷立場；有公開連結者附連結，其餘僅列報告與出版者，正式引用前宜再查證版本與頁碼，且部分數據宜標示為供應商研究、避免當作中立學術結論。</div>
+
+  <h2>專有名詞對照表</h2>
+  <table>
+    <tr><th style="width:26%">中文名詞</th><th style="width:28%">英文</th><th>說明</th></tr>
+    <tr><td>員工傾聽</td><td>employee listening</td><td>以多種管道持續理解員工感受與需求的整體活動</td></tr>
+    <tr><td>持續傾聽</td><td>continuous listening</td><td>常態、多管道、各層級對回饋負責的傾聽取向</td></tr>
+    <tr><td>員工敬業度</td><td>employee engagement</td><td>員工對工作、團隊與雇主的心理連結，與組織績效相關</td></tr>
+    <tr><td>傾聽成熟度</td><td>listening maturity</td><td>組織傾聽做法的發展階段，Perceptyx 分為四階段</td></tr>
+    <tr><td>資料到行動落差</td><td>data-to-action gap</td><td>已蒐集甚至分享資料，卻未轉為員工可見改變的落差</td></tr>
+    <tr><td>主動／被動傾聽</td><td>active / passive listening</td><td>主動提問（問卷等）與從既有訊號理解（離職、文字等）</td></tr>
+    <tr><td>脈動調查</td><td>pulse survey</td><td>短、頻繁、聚焦的小型調查</td></tr>
+    <tr><td>發展型 360</td><td>developmental 360</td><td>蒐集上司、同儕、部屬等多來源回饋，用於個人發展而非考核</td></tr>
+  </table>
+  <footer>本教學網站為單一 HTML 檔案，離線可用。Topic 1：課程導論與典範轉移。數據引自 Gallup、Perceptyx、Qualtrics 2026 年報告之公開摘要，供教學使用。</footer>
+</section>
+
+</main>
+</div>
+
+<script>
+window.QUIZ_TOTAL = 4;
+
+
+// ---- Interactive: listening maturity stages (u3) ----
+function lmRow(l,t){ return '<b style="color:#33568e">'+l+'：</b>'+t+'<br>'; }
+var lmData={
+  1:['階段一　Episodic（事件式）',
+     lmRow('定義','傳統而直接的傾聽策略，多聚焦單一調查事件或少數按既定排程進行的孤立調查。')
+    +lmRow('行動歸屬','行動策略以人資為中心，對回饋的後續處理多被視為人資的職責。')
+    +lmRow('事件關係','離職調查、員工體驗調查、發展型 360（developmental 360，蒐集上司、同儕、部屬等多來源回饋，用於個人發展而非考核）等各自分立，彼此少有連結。')
+    +lmRow('與策略連動','策略年復一年幾乎不變，調查結果通常與整體業務策略脫節。')
+    +lmRow('運作方式','由上而下，結果與行動以計畫性、受控的方式分發。')
+    +lmRow('占比趨勢','2026 年占 22%（2024：11%、2025：10%），是 2022 年研究開始以來最高——退步訊號。')
+    +lmRow('成果訊號','僅 7% 達到高員工敬業與留任，與階段四的 77% 相差 11 倍。')],
+  2:['階段二　Topical（議題式）',
+     lmRow('定義','開始把員工回饋用於大型傾聽事件，以及深入的主題式事件。')
+    +lmRow('主題事件','併購、上市、高層異動等深入探討；為特定目標（如多元共融）設計的專案；離職調查、360 等生命週期時點。')
+    +lmRow('歸屬','各專案仍分立、以人資為中心，但其他部門開始主動尋求協助。')
+    +lmRow('弱點','專案雖多半連著某個業務優先事項，收尾以證明成效卻常不成功。')
+    +lmRow('行動特徵','仍由上而下；焦點偏向合規（主管有沒有交出行動計畫），而非成效（員工體驗有沒有改善）。')
+    +lmRow('占比趨勢','2026 年占 30%（2024：17%、2025 曾衝到 37%），回落反映前一年因組織變革而起的事件式傾聽退潮。')],
+  3:['階段三　Strategic（策略式）',
+     lmRow('定義','在傾聽策略與業務優先事項之間建立清楚連結。')
+    +lmRow('方法','用多種方法與傾聽管道處理業務問題，不限於傳統調查；不再倚重單一大型事件，而以普查診斷優劣、再輔以後續傾聽與行動。')
+    +lmRow('發展連動','主管發展有時會用員工體驗或 360 回饋資料做個人化。')
+    +lmRow('行動責任','各層級領導者都能自在解讀並就回饋採取行動，且已有部分行動問責。')
+    +lmRow('決策','高層不會在未徵詢員工意見、未理解對員工觀感影響的情況下做重大決策。')
+    +lmRow('占比趨勢','2026 年占 27%（2024：36%、2025：39%），較 2025 明顯收縮。')],
+  4:['階段四　Continuous（持續式）',
+     lmRow('定義','最成熟的組織有一套穩健而有彈性、深度整合進整體業務策略的傾聽方案，能以速度與規模推動勞動力轉型。')
+    +lmRow('運作','仍以規劃好的普查追蹤議題，但也能界定要解決的問題、快速部署合適的傾聽方式。')
+    +lmRow('主管發展','主管與領導者的發展計畫納入 360 或行為式傾聽捕捉的領導行為；主管經常獲得發展性回饋，有工具與支持與團隊快速做出實質改變。')
+    +lmRow('關鍵特徵','員工體驗不再是人資或高層的責任，而是組織裡每個人都參與其中、一起促成改變。')
+    +lmRow('占比趨勢','2026 年占 20%（2024：36%、2025：15%），小幅回升但仍低於 2024。')
+    +lmRow('成果訊號','77% 達到高敬業與留任、70% 達成或超越財務目標。')]
+};
+function lmShow(n){
+  var btns=document.getElementById('lmBtns').getElementsByTagName('button');
+  for(var i=0;i<btns.length;i++){ btns[i].className = (i===n-1)?'pg-btn':'pg-btn ghost'; }
+  var seg=['#e3eaf4','#e3eaf4','#e3eaf4','#e3eaf4'];
+  var cols=['#88a8d8','#6b93cd','#4f7ec2','#274b80'];
+  var bar='<div style="display:flex; gap:4px;">';
+  for(var k=0;k<4;k++){ bar+='<div style="flex:1; text-align:center; padding:8px 4px; border-radius:6px; font-size:12.5px; font-weight:700; color:'+(k===n-1?'#fff':'#697180')+'; background:'+(k===n-1?cols[k]:'#eef2f8')+';">'+['一','二','三','四'][k]+'</div>'; }
+  bar+='</div>';
+  document.getElementById('lmBar').innerHTML=bar;
+  document.getElementById('lmDesc').innerHTML='<strong>'+lmData[n][0]+'</strong><br>'+lmData[n][1];
+}
+
+// ---- Anim: data-to-action funnel (u4) ----
+function gapBar(){
+  var rows=[['蒐集資料',100,'#337052'],['分享結果',71,'#33568e'],['員工看到實質改善',51,'#c0564f']];
+  var html='';
+  for(var i=0;i<rows.length;i++){
+    html+='<div style="display:flex; align-items:center; gap:10px; margin:6px 0;"><span style="width:130px; font-size:13.5px; color:var(--muted);">'+rows[i][0]+'</span>'+
+      '<div style="flex:1;"><div style="height:20px; border-radius:6px; background:'+rows[i][2]+'; width:'+rows[i][1]+'%; transition:width .4s; display:flex; align-items:center; justify-content:flex-end; color:#fff; font-size:12px; padding-right:6px; box-sizing:border-box;">'+rows[i][1]+'%</div></div></div>';
+  }
+  document.getElementById('gapPlot').innerHTML=html;
+}
+
+/* ===== Course-website interactive framework (content-agnostic) =====
+   Reuse these EXACT function/class names; the CSS and quiz markup depend on them.
+   Content-specific data (decision cases, simulators, SVG animations) is added
+   per-site below the framework, then init calls at the very end. */
+
+/* ---- unit navigation ---- */
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+
+/* ---- two-stage two-tier calibration quiz ----
+   Tier 1 = answer + confidence; Tier 2 (mechanism reason) unlocks only after a
+   correct answer, so reason options never leak the answer. Calibration panel ids:
+   cal-{h,m,l}-{0,1,2}, calNote. window.QUIZ_TOTAL = number of quizzes. */
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+    var btn1=box.querySelector('button'); if(btn1) btn1.textContent='檢查答案';
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標注信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，屬過度自信區，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板僅記第一次作答，<a href="javascript:void(0)" onclick="goUnit(\'u0\')">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方完成第二層機制確認。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，代表結論記得而機制未通，重讀機制段落的效益最大。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='此理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板僅記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+(window.QUIZ_TOTAL||n)+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未完成機制確認'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，建議優先回到對應單元複習。'; }
+  else if(n>0){ msg+='目前沒有過度自信的題目。'; }
+  noteEl.textContent=msg;
+}
+
+/* ---- prediction "guess then reveal" ---- */
+function predReveal(btn,valId,trueVal,trueTxt,expl){
+  var rv=btn.closest('.pred').querySelector('.preveal');
+  rv.style.display='block';
+  rv.innerHTML='<strong>預測值：'+document.getElementById(valId).textContent+'；真值：'+trueTxt+'。</strong>'+expl;
+}
+
+/* ---- decision-forcing case (generic) ----
+   Set window.DC_DATA={d1:{a:{cls:'good|mid|bad',txt:'..'},...},...},
+   window.DC_BEST={d1:'b',...}, window.DC_POINTS=['d1',...],
+   optional window.DC_SUMMARY=function(good,total){return '...'}. */
+var dcState={};
+function dcChoose(btn,dp,opt){
+  if(dcState[dp]) return; dcState[dp]=opt;
+  btn.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){b.disabled=true;});
+  btn.classList.add('chosen');
+  var d=(window.DC_DATA||{})[dp][opt], rv=document.getElementById(dp+'r');
+  rv.className='dcreveal '+d.cls; rv.textContent=d.txt;
+}
+function dcSummary(){
+  var need=window.DC_POINTS||[], best=window.DC_BEST||{};
+  var missing=need.filter(function(k){return !dcState[k];});
+  var rv=document.getElementById('dcsum');
+  if(missing.length){ rv.className='dcreveal mid'; rv.textContent='尚有 '+missing.length+' 個決策點未完成，請先逐一選定。'; return; }
+  var good=0; need.forEach(function(k){ if(dcState[k]===best[k]) good++; });
+  var msg=(window.DC_SUMMARY? window.DC_SUMMARY(good,need.length): '完成 '+good+' / '+need.length+' 個決策對應文獻最佳選項。');
+  rv.className='dcreveal '+(good===need.length?'good':(good>=Math.ceil(need.length*0.6)?'mid':'bad'));
+  rv.textContent=msg;
+}
+function dcReset(){
+  dcState={};
+  (window.DC_POINTS||[]).forEach(function(k){
+    var rv=document.getElementById(k+'r'); rv.className='dcreveal'; rv.textContent='';
+    rv.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){ b.disabled=false; b.classList.remove('chosen'); });
+  });
+  var s=document.getElementById('dcsum'); s.className='dcreveal'; s.textContent='';
+}
+
+/* ---- copy code block ---- */
+function copyCode(btn){
+  var pre=btn.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(function(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); });
+}
+
+/* ===== per-site content data + init calls go BELOW this line =====
+   e.g. window.QUIZ_TOTAL = 10;  window.DC_DATA={...}; ... then:
+   initQuizzes();  (and any custom widget init) */
+initQuizzes();
+
+// ---- interactive init ----
+lmShow(1);
+gapBar();
+</script>
+</body>
+</html>
