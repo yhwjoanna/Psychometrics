@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>Topic 1 文獻與專有名詞對照表｜HRM522 員工意向調查</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Noto+Sans+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #192024;
+    --ink-2: #3a454d;
+    --ink-3: #6b7782;
+    --paper: #f8f6f0;
+    --paper-card: #ffffff;
+    --accent: #1e5a44;
+    --accent-dark: #143e2f;
+    --accent-tint: #edf5f0;
+    --navy: #1c2f52;
+    --blue: #33568e;
+    --lightblue: #e3eaf4;
+    --line: #e3dec3;
+    --line-2: #c8c2a7;
+    --gold: #b38628;
+    --gold-tint: #fbf7ee;
+    --shadow-sm: 0 2px 8px rgba(25,32,36,.06);
+    --shadow-md: 0 8px 24px rgba(25,32,36,.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 5rem;
+  }
+
+  /* Header */
+  .top-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: .85rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  }
+  .top-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .brand-badge {
+    background: var(--accent-tint);
+    color: var(--accent);
+    font-size: .75rem;
+    font-weight: 700;
+    padding: .2rem .6rem;
+    border-radius: 6px;
+    letter-spacing: .03em;
+  }
+  .brand-title {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem .9rem;
+    border-radius: 7px;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .nav-btn-outline {
+    background: #fff;
+    border: 1px solid var(--line-2);
+    color: var(--ink-2);
+  }
+  .nav-btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-tint);
+  }
+  .nav-btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .nav-btn-primary:hover {
+    background: var(--accent-dark);
+  }
+
+  /* Main Container */
+  .container {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero Section */
+  .hero-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), #2b7a5a, var(--gold));
+  }
+  .eyebrow {
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .5rem;
+    display: inline-block;
+  }
+  .page-title {
+    font-family: 'Newsreader', 'Noto Sans TC', serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: .75rem;
+  }
+  .page-sub {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+  .page-lead {
+    font-size: .95rem;
+    color: var(--ink-3);
+    line-height: 1.8;
+  }
+
+  /* Section Styles */
+  .section-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2.2rem clamp(1.2rem, 3.5vw, 2.5rem);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 2.5rem;
+  }
+  .section-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-box-title {
+    font-family: 'Newsreader', 'Noto Sans TC', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .section-box-desc {
+    font-size: .88rem;
+    color: var(--ink-3);
+  }
+
+  /* Literature Cards */
+  .ref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .ref-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all .2s ease;
+  }
+  .ref-card:hover {
+    border-color: var(--line-2);
+    box-shadow: var(--shadow-sm);
+    background: #fff;
+  }
+  .ref-citation {
+    font-size: .95rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: .85rem;
+  }
+  .ref-citation strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .ref-citation em {
+    font-style: italic;
+  }
+  .ref-badge {
+    display: inline-block;
+    padding: .15rem .55rem;
+    border-radius: 4px;
+    font-size: .72rem;
+    font-weight: 700;
+    margin-right: .5rem;
+  }
+  .badge-academic { background: var(--lightblue); color: var(--navy); }
+  .badge-industry { background: var(--gold-tint); color: var(--gold); border: 1px solid #ebd9b2; }
+  .badge-working { background: #f0eaf7; color: #6b3ba6; }
+
+  .ref-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
+  }
+  .btn-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .4rem .9rem;
+    background: var(--accent-tint);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent)!important;
+    font-size: .82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-pdf:hover {
+    background: var(--accent);
+    color: #fff!important;
+  }
+  .btn-web {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .4rem .85rem;
+    background: #fff;
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    color: var(--ink-2)!important;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-web:hover {
+    border-color: var(--blue);
+    color: var(--blue)!important;
+  }
+
+  /* Note Boxes */
+  .info-callout {
+    background: var(--lightblue);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 1.1rem 1.35rem;
+    margin-top: 1.5rem;
+    font-size: .88rem;
+    line-height: 1.75;
+    color: var(--navy);
+  }
+  .info-callout strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: .3rem;
+  }
+
+  /* Glossary Table & Search */
+  .search-wrapper {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: .75rem 1.25rem .75rem 2.75rem;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-size: .92rem;
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    transition: all .2s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(30,90,68,.12);
+  }
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-3);
+    font-size: 1.05rem;
+    pointer-events: none;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  table.glossary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+    text-align: left;
+    background: #fff;
+  }
+  table.glossary-table th {
+    background: #faf8f5;
+    padding: .9rem 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.glossary-table td {
+    padding: .95rem 1.1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  table.glossary-table tr:last-child td {
+    border-bottom: none;
+  }
+  table.glossary-table tr:hover td {
+    background: rgba(237,245,240,.4);
+  }
+  .term-zh {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: .95rem;
+  }
+  .term-en {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .83rem;
+    color: var(--blue);
+    font-weight: 600;
+    display: inline-block;
+    margin-top: .15rem;
+  }
+  .term-context {
+    font-size: .82rem;
+    color: var(--accent);
+    font-weight: 600;
+    background: var(--accent-tint);
+    padding: .15rem .45rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: .3rem;
+  }
+
+  /* Bottom Actions */
+  .bottom-banner {
+    background: linear-gradient(135deg, #1c2f52 0%, #143e2f 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
+  .bottom-info h3 {
+    font-family: 'Newsreader', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: .4rem;
+  }
+  .bottom-info p {
+    font-size: .9rem;
+    color: #cfd9ea;
+  }
+  .bottom-btns {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+  }
+  .btn-white {
+    background: #fff;
+    color: var(--navy)!important;
+    font-weight: 700;
+    padding: .65rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: .88rem;
+    transition: transform .15s;
+  }
+  .btn-white:hover {
+    transform: translateY(-2px);
+  }
+  .btn-trans {
+    background: rgba(255,255,255,.15);
+    color: #fff!important;
+    border: 1px solid rgba(255,255,255,.3);
+    font-weight: 600;
+    padding: .65rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: .88rem;
+    transition: all .2s;
+  }
+  .btn-trans:hover {
+    background: rgba(255,255,255,.25);
+  }
+
+  footer {
+    text-align: center;
+    font-size: .82rem;
+    color: var(--ink-3);
+    margin-top: 3.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <div class="brand-group">
+      <span class="brand-badge">Topic 01 專屬資源</span>
+      <span class="brand-title">員工意向調查・文獻與名詞對照表</span>
+    </div>
+    <div class="nav-actions">
+      <a href="../../index.html" class="nav-btn nav-btn-outline">⌂ 返回課程首頁</a>
+      <a href="Topic1_課程導論與典範轉移_課程網站.html" class="nav-btn nav-btn-primary">進入課堂互動教材網站 ↗</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero-card">
+    <span class="eyebrow">Topic 01 專屬閱讀資源與詞彙庫</span>
+    <h1 class="page-title">文獻與專有名詞對照表</h1>
+    <p class="page-sub">References, Industry Flagship Reports &amp; Terminology Glossary</p>
+    <p class="page-lead">本頁彙整 Topic 01「課程導論與典範轉移」所引用的頂尖學術期刊、2026 最新業界旗艦研究報告全文，以及全單元核心專有名詞之中英定義對照，供修課同學課前研讀、課後複習與撰寫報告引用。</p>
+  </div>
+
+  <!-- Literature Section -->
+  <section class="section-box" id="literature">
+    <div class="section-box-header">
+      <div>
+        <h2 class="section-box-title">📚 指定與核心閱讀文獻</h2>
+        <p class="section-box-desc">包含學術同儕審查文獻、預印本及全球四大調查機構之 2026 旗艦報告，點擊按鈕即可直接下載全文 PDF 或造訪官方頁面。</p>
+      </div>
+    </div>
+
+    <div class="ref-list">
+      <!-- Item 1: HBR -->
+      <div class="ref-card">
+        <p class="ref-citation">
+          <span class="ref-badge badge-industry">HBR 管理實務</span>
+          <strong>Guadagni, T., Lawrence, T., Tokas, K., &amp; Valencia, C. (2026, July 1)</strong>. The Case for Performance-First Management. <em>Harvard Business Review</em>.
+        </p>
+        <div class="ref-actions">
+          <a href="Guadagni_2026_Performance_First_Management_HBR.pdf" download target="_blank" class="btn-pdf">📥 下載 HBR 全文 PDF (444 KB)</a>
+          <a href="https://hbr.org/2026/07/the-case-for-performance-first-management" target="_blank" rel="noopener" class="btn-web">🌐 HBR 官方文章</a>
+        </div>
+      </div>
+
+      <!-- Item 2: Perceptyx 2026 & 2022 -->
+      <div class="ref-card">
+        <p class="ref-citation">
+          <span class="ref-badge badge-industry">業界旗艦研究</span>
+          <strong>Perceptyx. (2026)</strong>. <em>The State of Employee Listening 2026</em>（四階段傾聽成熟度旗艦研究報告）. Perceptyx, Inc.
+        </p>
+        <div class="ref-actions">
+          <a href="Perceptyx_2026_State_of_Employee_Listening.pdf" download target="_blank" class="btn-pdf">📥 下載 2026 旗艦報告 PDF (6.7 MB)</a>
+          <a href="Perceptyx_2022_State_of_Employee_Listening.pdf" download target="_blank" class="btn-pdf" style="background:#f4f6f9;color:var(--navy)!important;border-color:var(--line-2);">📥 下載 2022 奠基報告 PDF (495 KB)</a>
+          <a href="https://go.perceptyx.com/state-of-employee-listening-web-report" target="_blank" rel="noopener" class="btn-web">🌐 線上互動報告</a>
+        </div>
+      </div>
+
+      <!-- Item 3: Qualtrics 2026 -->
+      <div class="ref-card">
+        <p class="ref-citation">
+          <span class="ref-badge badge-industry">業界跨國趨勢</span>
+          <strong>Qualtrics. (2026)</strong>. <em>Employee Experience Trends 2026</em>（全球 24 國員工體驗趨勢報告）. Qualtrics.
+        </p>
+        <div class="ref-actions">
+          <a href="Qualtrics_2026_Employee_Experience_Trends.pdf" download target="_blank" class="btn-pdf">📥 下載趨勢報告 PDF (5.4 MB)</a>
+          <a href="https://www.qualtrics.com/ebooks-guides/employee-experience-trends/" target="_blank" rel="noopener" class="btn-web">🌐 Qualtrics 官方專頁</a>
+        </div>
+      </div>
+
+      <!-- Item 4: Gallup 2026 -->
+      <div class="ref-card">
+        <p class="ref-citation">
+          <span class="ref-badge badge-industry">全球勞動力報告</span>
+          <strong>Gallup. (2026)</strong>. <em>State of the Global Workplace: 2026 Report — The Human Side of the AI Revolution</em>. Gallup, Inc.
+        </p>
+        <div class="ref-actions">
+          <a href="Gallup_2026_State_of_Global_Workplace.pdf" download target="_blank" class="btn-pdf">📥 下載全球報告 PDF (22 MB)</a>
+          <a href="https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx" target="_blank" rel="noopener" class="btn-web">🌐 Gallup 官方專頁</a>
+        </div>
+      </div>
+
+      <!-- Item 5: NBER Working Paper -->
+      <div class="ref-card">
+        <p class="ref-citation">
+          <span class="ref-badge badge-working">NBER 實證預印本</span>
+          <strong>Yotzov, I., Barrero, J. M., Bloom, N., Bunn, P., Davis, S. J., Foster, K. M., Jalca, A., Meyer, B. H., Mizen, P., Navarrete, M. A., Smietanka, P., Thwaites, G., &amp; Wang, B. Z. (2026)</strong>. Firm Data on AI. <em>NBER Working Paper No. 34836</em>.
+        </p>
+        <div class="ref-actions">
+          <a href="https://www.nber.org/system/files/working_papers/w34836/w34836.pdf" target="_blank" rel="noopener" class="btn-pdf">📥 下載 NBER 全文 PDF (官方)</a>
+          <a href="https://doi.org/10.3386/w34836" target="_blank" rel="noopener" class="btn-web">🌐 DOI 官方頁面</a>
+        </div>
+      </div>
+
+      <!-- Item 6: Harter et al. 2002 -->
+      <div class="ref-card">
+        <p class="ref-citation">
+          <span class="ref-badge badge-academic">頂級期刊 Meta-Analysis</span>
+          <strong>Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002)</strong>. Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. <em>Journal of Applied Psychology</em>, 87(2), 268–279.
+        </p>
+        <div class="ref-actions">
+          <a href="https://doi.org/10.1037/0021-9010.87.2.268" target="_blank" rel="noopener" class="btn-web">🌐 APA PsycNet 官方文獻 (DOI)</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Methodology Notes -->
+    <div class="info-callout">
+      <strong>💡 資料來源機構簡介與文獻性質判讀指引</strong>
+      • <strong>Gallup（蓋洛普）</strong>：自 1935 年成立，以跨越百餘國之大規模員工敬業度調查著稱，其《State of the Global Workplace》為全球最具代表性之勞動力年度研究。<br>
+      • <strong>Perceptyx</strong>：聚焦於 Fortune 100 企業之員工傾聽與分析技術，其《State of Employee Listening》為傾聽成熟度模型的代表架構。<br>
+      • <strong>Qualtrics</strong>：全球領先之體驗管理（XM）平台，年度報告涵蓋 24 國跨產業第一手樣本。<br>
+      • <strong>學術引用原則</strong>：概念性假說以具 DOI 之同儕審查學術期刊為準（如 Harter et al., 2002）；產業報告規模宏大且貼近實務，但兼具機構視角，宜客觀視為產業實務證據。
+    </div>
+  </section>
+
+  <!-- Terminology Glossary Section -->
+  <section class="section-box" id="glossary">
+    <div class="section-box-header">
+      <div>
+        <h2 class="section-box-title">📖 專有名詞中英對照表</h2>
+        <p class="section-box-desc">收錄 Topic 01 關鍵專有名詞之繁體中文標準翻譯、英文對應、核心定義與課程實務應用場景。</p>
+      </div>
+    </div>
+
+    <!-- Search input -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="glossarySearch" class="search-input" placeholder="輸入關鍵字即時篩選（如：傾聽、成熟度、engagement、360...）" onkeyup="filterGlossary()">
+    </div>
+
+    <div class="table-responsive">
+      <table class="glossary-table" id="glossaryTable">
+        <thead>
+          <tr>
+            <th style="width:24%;">中文名詞 / 英文對照</th>
+            <th style="width:52%;">核心定義與本質說明</th>
+            <th style="width:24%;">課堂實務應用場景</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="term-zh">員工傾聽</div>
+              <span class="term-en">Employee Listening</span>
+            </td>
+            <td>組織透過多種管道（問卷、訪談、非結構化文字、行為訊號）持續理解員工感受、觀點與需求的整體系統化活動，而非單一次性的資料收集。</td>
+            <td><span class="term-context">現代 HR 核心策略</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">持續傾聽</div>
+              <span class="term-en">Continuous Listening</span>
+            </td>
+            <td>跳脫傳統「一年一度普查」思維，結合定期普查、脈動調查（Pulse）、生命週期觸點（入職、離職）與各級主管常態對回饋負責的整合傾聽機制。</td>
+            <td><span class="term-context">調查典範轉移核心</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">員工敬業度</div>
+              <span class="term-en">Employee Engagement</span>
+            </td>
+            <td>員工對其工作、團隊及雇主所投入的心理認同、情感承諾與自由裁量努力（Discretionary Effort），與組織績效、客戶滿意度及留任率具顯著正向關聯。</td>
+            <td><span class="term-context">構念定義與指標計算</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">傾聽成熟度模型</div>
+              <span class="term-en">Listening Maturity Model</span>
+            </td>
+            <td>Perceptyx 提出的組織傾聽發展階梯，分為四階段：階段一 Episodic（事件式）、階段二 Topical（議題式）、階段三 Strategic（策略式）、階段四 Continuous（持續式）。</td>
+            <td><span class="term-context">企業診斷與成熟度評估</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">資料到行動落差</div>
+              <span class="term-en">Data-to-Action Gap</span>
+            </td>
+            <td>組織雖然完成資料蒐集（100%）、甚至向管理層分享結果（71%），卻未能將洞察轉化為員工可感知的具體管理改變（僅 51%），導致調查疲勞與犬儒主義。</td>
+            <td><span class="term-context">全學期核心解決課題</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">主動傾聽 vs. 被動傾聽</div>
+              <span class="term-en">Active vs. Passive Listening</span>
+            </td>
+            <td><strong>主動傾聽</strong>係由組織主動發起提問（如結構化問卷、焦點團體）；<strong>被動傾聽</strong>則是從既有的組織數位訊號（離職訪談開放文字、內部社群論壇、工單文字）提取洞察。</td>
+            <td><span class="term-context">多元傾聽管道佈建</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">脈動調查</div>
+              <span class="term-en">Pulse Survey</span>
+            </td>
+            <td>題數少（通常 3–10 題）、頻率高（每月或每季）、聚焦特定新興議題或變革追蹤的小型調查，具備輕量化、即時回饋與快速迭代特質。</td>
+            <td><span class="term-context">敏捷變革追蹤</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">發展型 360 回饋</div>
+              <span class="term-en">Developmental 360 Feedback</span>
+            </td>
+            <td>蒐集上司、同儕、部屬及跨部門利害關係人之多元回饋，其核心目的為「個人領導力修煉與職涯發展」，絕非用於績效打考績或核薪懲處。</td>
+            <td><span class="term-context">主管領導行為診斷</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">績效優先管理</div>
+              <span class="term-en">Performance-First Management</span>
+            </td>
+            <td>HBR 2026 研究主張之管理哲學：回歸以實質績效成果為導向，並將傾聽與敬業度深度嵌合至業務指標中，避免流於形式上的「員工幸福感口號」。</td>
+            <td><span class="term-context">高階管理溝通與說服</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">調查疲勞</div>
+              <span class="term-en">Survey Fatigue</span>
+            </td>
+            <td>因組織調查頻率過高、問卷題數過長，或更關鍵的「調查後毫無實質改變」，導致員工產生的麻木、敷衍作答或拒絕參與現象。</td>
+            <td><span class="term-context">問卷設計與答題率管理</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="term-zh">心理計量原則</div>
+              <span class="term-en">Psychometric Principles</span>
+            </td>
+            <td>量表編製之科學準則，包含潛在構念操作型定義、題項內部一致性信度（Cronbach's α）、結構效度（CFA/EFA）及測量不變性檢驗。</td>
+            <td><span class="term-context">區塊二量表編製基礎</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <div class="bottom-banner">
+    <div class="bottom-info">
+      <h3>準備好進入課堂互動教材了嗎？</h3>
+      <p>探索 Topic 01 互動式傾聽成熟度階梯模擬、資料到行動漏斗與實作思考題。</p>
+    </div>
+    <div class="bottom-btns">
+      <a href="Topic1_課程導論與典範轉移_課程網站.html" class="btn-white">進入課堂互動教材 ↗</a>
+      <a href="../../index.html" class="btn-trans">⌂ 返回課程地圖首頁</a>
+    </div>
+  </div>
+
+  <footer>
+    HRM522 員工意向調查：持續傾聽的方法與實作 · Fall 2026 碩士在職專班<br>
+    授課教師：王豫萱 博士 · 國立中山大學 人力資源管理研究所
+  </footer>
+
+</main>
+
+<script>
+  function filterGlossary() {
+    var query = document.getElementById('glossarySearch').value.toLowerCase().trim();
+    var rows = document.querySelectorAll('#glossaryTable tbody tr');
+    rows.forEach(function(row) {
+      var text = row.textContent.toLowerCase();
+      row.style.display = (query === '' || text.indexOf(query) !== -1) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
