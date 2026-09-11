@@ -16,9 +16,9 @@
     --ink-3: #6b7782;
     --paper: #f8f6f0;
     --paper-card: #ffffff;
-    --accent: #1e5a44;
-    --accent-dark: #143e2f;
-    --accent-tint: #edf5f0;
+    --accent: #7a2033;
+    --accent-dark: #5b1424;
+    --accent-tint: #f3e3e4;
     --navy: #1c2f52;
     --blue: #33568e;
     --lightblue: #e3eaf4;
@@ -87,16 +87,17 @@
     display: inline-flex;
     align-items: center;
     gap: .4rem;
-    padding: .45rem .9rem;
-    border-radius: 7px;
+    padding: .45rem .95rem;
+    border-radius: 20px;
     font-size: .82rem;
     font-weight: 600;
     text-decoration: none;
     transition: all .2s;
+    white-space: nowrap;
   }
   .nav-btn-outline {
     background: #fff;
-    border: 1px solid var(--line-2);
+    border: 1px solid #d0d7de;
     color: var(--ink-2);
   }
   .nav-btn-outline:hover {
@@ -105,12 +106,13 @@
     background: var(--accent-tint);
   }
   .nav-btn-primary {
-    background: var(--accent);
-    color: #fff;
-    border: 1px solid var(--accent);
+    background: var(--lightblue);
+    color: var(--navy);
+    border: 1px solid #c5d7ed;
   }
   .nav-btn-primary:hover {
-    background: var(--accent-dark);
+    background: #d5e3f5;
+    border-color: var(--blue);
   }
 
   /* Main Container */
@@ -431,11 +433,11 @@
 <header class="top-bar">
   <div class="top-bar-inner">
     <div class="brand-group">
-      <span class="brand-badge">Topic 01 專屬詞彙庫</span>
-      <span class="brand-title">員工意向調查・專有名詞對照表</span>
+      <span class="brand-badge">HRM522</span>
+      <span class="brand-title">員工意向調查・Topic 1 專有名詞對照表</span>
     </div>
     <div class="nav-actions">
-      <a href="../../index.html" class="nav-btn nav-btn-outline">⌂ 返回課程首頁（下載文獻 PDF）</a>
+      <a href="../../index.html" class="nav-btn nav-btn-outline">⌂ 返回課程首頁</a>
       <a href="Topic1_課程導論與典範轉移_課程網站.html" class="nav-btn nav-btn-primary">進入課堂互動教材 ↗</a>
     </div>
   </div>
@@ -628,7 +630,7 @@
     </div>
     <div class="bottom-btns">
       <a href="Topic1_課程導論與典範轉移_課程網站.html" class="btn-white">進入課堂互動教材 ↗</a>
-      <a href="../../index.html" class="btn-trans">⌂ 返回課程首頁（下載 PDF 文獻）</a>
+      <a href="../../index.html" class="btn-trans">⌂ 返回課程首頁</a>
     </div>
   </div>
 
