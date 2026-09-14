@@ -325,121 +325,98 @@
     .assign-grid{grid-template-columns:1fr;}
   }
 
-  /* ---------- Project Groups ---------- */
-  .group-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  /* ---------- Project Groups (Ultra-compact) ---------- */
+  .roster-header {
+    margin-bottom: 1rem;
   }
-  .group-card {
+  .roster-table-card {
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 1.6rem;
+    border-radius: 10px;
     box-shadow: var(--shadow-1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
+    overflow: hidden;
   }
-  .group-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-2);
-    border-color: #c0b299;
+  .roster-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
-  .group-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.1rem;
-    padding-bottom: .8rem;
-    border-bottom: 1px solid var(--line-2);
+  .roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .86rem;
+    text-align: left;
+    white-space: nowrap;
   }
-  .group-badge {
-    font-family: var(--serif);
-    font-size: 1.18rem;
+  .roster-table th {
+    background: var(--cream-2);
+    color: var(--ink-3);
+    font-size: .72rem;
     font-weight: 700;
+    letter-spacing: .06em;
+    padding: .55rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .roster-table td {
+    padding: .62rem 1rem;
+    border-bottom: 1px solid var(--line-2);
+    vertical-align: middle;
+  }
+  .roster-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .roster-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.65);
+  }
+  .r-badge {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: .95rem;
     color: var(--ink);
   }
-  .group-count {
-    font-size: .75rem;
+  .r-count {
+    font-size: .68rem;
     font-weight: 600;
     color: var(--accent);
     background: var(--cream-2);
-    padding: .2rem .55rem;
+    padding: .1rem .4rem;
     border-radius: 999px;
     border: 1px solid var(--line-2);
+    margin-left: .35rem;
   }
-  .group-leader-box {
-    margin-bottom: 1.1rem;
-    display: flex;
+  .r-leader {
+    display: inline-flex;
     align-items: center;
-    gap: .6rem;
-  }
-  .leader-tag {
-    font-size: .72rem;
-    font-weight: 700;
-    color: #fff;
-    background: var(--accent);
-    padding: .15rem .5rem;
-    border-radius: 4px;
-    letter-spacing: .02em;
-  }
-  .leader-name {
-    font-size: 1.05rem;
+    gap: .4rem;
     font-weight: 700;
     color: var(--ink);
   }
-  .group-members-box {
-    margin-bottom: 1.3rem;
+  .r-tag {
+    font-size: .65rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    padding: .08rem .35rem;
+    border-radius: 3px;
+    line-height: 1.3;
   }
-  .members-label {
-    font-size: .76rem;
-    color: var(--ink-3);
-    margin-bottom: .5rem;
-    display: block;
-    font-weight: 500;
-  }
-  .member-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .42rem;
-  }
-  .member-chip {
-    display: inline-block;
-    font-size: .84rem;
+  .r-members {
     color: var(--ink-2);
-    background: var(--cream-2);
-    padding: .25rem .55rem;
-    border-radius: 5px;
-    border: 1px solid var(--line-2);
-    line-height: 1.4;
+    font-size: .84rem;
+    white-space: normal;
+    line-height: 1.5;
   }
-  .group-footer-status {
-    padding-top: .85rem;
-    border-top: 1px dashed var(--line-2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: .78rem;
-    color: var(--ink-3);
-  }
-  .status-tag-pending {
-    display: inline-flex;
-    align-items: center;
-    gap: .3rem;
+  .r-status {
+    display: inline-block;
     background: rgba(184, 134, 11, 0.08);
     color: #926300;
-    padding: .2rem .55rem;
+    padding: .15rem .5rem;
     border-radius: 4px;
     font-weight: 500;
-    font-size: .75rem;
+    font-size: .72rem;
+    white-space: nowrap;
   }
-  @media (max-width: 960px) {
-    .group-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 640px) {
-    .group-grid { grid-template-columns: 1fr; }
+  @media (max-width: 768px) {
+    .roster-table { min-width: 580px; }
   }
 
   /* ---------- Footer ---------- */
@@ -517,18 +494,47 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: .75rem;
     user-select: none;
     background: var(--paper);
     transition: background .2s;
   }
   .refs-summary::-webkit-details-marker { display: none; }
   .refs-summary:hover { background: var(--cream-2); }
-  .refs-title { font-size: .83rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); display: flex; align-items: center; gap: .4rem; }
+  .refs-title {
+    font-size: .83rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.45;
+  }
   .refs-toggle-btn {
-    font-size: .74rem; font-weight: 600; padding: .22rem .65rem;
-    background: var(--cream-2); border: 1px solid var(--line-2);
-    border-radius: 6px; color: var(--ink-2); display: inline-flex; align-items: center; gap: .3rem;
+    font-size: .74rem;
+    font-weight: 600;
+    padding: .24rem .65rem;
+    background: var(--cream-2);
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    white-space: nowrap !important;
+    flex-shrink: 0;
+    word-break: keep-all;
     transition: all .2s;
+  }
+  .refs-toggle-btn .toggle-text {
+    white-space: nowrap !important;
+    word-break: keep-all;
+  }
+  .refs-toggle-btn .toggle-arrow {
+    flex-shrink: 0;
   }
   .refs-summary:hover .refs-toggle-btn { background: var(--paper); border-color: var(--accent); color: var(--accent); }
   .week-refs-accordion[open] .refs-summary { border-bottom: 1px solid var(--line-2); }
@@ -1131,187 +1137,66 @@
     </div>
   </section>
 
-  <!-- Section: Grouping Roster -->
-  <section class="section" id="groups" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <!-- Section: Grouping Roster (Compact) -->
+  <section class="section" id="groups" style="padding: 2.2rem 0 2.8rem; background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="section-tag">Team Collaboration</span>
-        <h2 class="section-title">學期研討與專案分組名單</h2>
-        <p class="section-desc">本名單適用於「期中新概念量表設計企劃」與「期末企業調查專題分析」，全班共 6 組（共 38 位學員）。</p>
+      <div class="roster-header reveal">
+        <span class="eyebrow" style="font-size: .72rem; color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Team Roster</span>
+        <h3 style="font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--ink); margin: .2rem 0 .25rem;">學期研討與專案分組名單</h3>
+        <p style="font-size: .84rem; color: var(--ink-3); margin: 0;">全班共 6 組（共 38 位學員），適用於期中新概念量表企劃與期末專題分析。</p>
       </div>
 
-      <div class="group-grid">
-
-        <!-- Group 1 -->
-        <div class="group-card reveal">
-          <div>
-            <div class="group-header">
-              <span class="group-badge">第一組</span>
-              <span class="group-count">7 位成員</span>
-            </div>
-            <div class="group-leader-box">
-              <span class="leader-tag">組長</span>
-              <span class="leader-name">林幸慧</span>
-            </div>
-            <div class="group-members-box">
-              <span class="members-label">組員名單</span>
-              <div class="member-chips">
-                <span class="member-chip">吳詠如</span>
-                <span class="member-chip">章穎華</span>
-                <span class="member-chip">陳家儀</span>
-                <span class="member-chip">莊涵瑜</span>
-                <span class="member-chip">邱靖惠</span>
-                <span class="member-chip">謝佳君</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-footer-status">
-            <span>研究構念</span>
-            <span class="status-tag-pending">課堂抽籤公布</span>
-          </div>
+      <div class="roster-table-card reveal">
+        <div class="roster-table-scroll">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th style="width: 14%;">組別</th>
+                <th style="width: 16%;">組長</th>
+                <th style="width: 55%;">組員名單</th>
+                <th style="width: 15%; text-align: center;">研究構念</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="r-badge">第一組</span><span class="r-count">7人</span></td>
+                <td><span class="r-leader"><span class="r-tag">組長</span>林幸慧</span></td>
+                <td class="r-members">吳詠如、章穎華、陳家儀、莊涵瑜、邱靖惠、謝佳君</td>
+                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+              </tr>
+              <tr>
+                <td><span class="r-badge">第二組</span><span class="r-count">7人</span></td>
+                <td><span class="r-leader"><span class="r-tag">組長</span>黃鈺雯</span></td>
+                <td class="r-members">賴怡臻、宮啟翔、梁若涵、盧瀷文、王仁易、廖宸葳</td>
+                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+              </tr>
+              <tr>
+                <td><span class="r-badge">第三組</span><span class="r-count">6人</span></td>
+                <td><span class="r-leader"><span class="r-tag">組長</span>陳怡鳳</span></td>
+                <td class="r-members">沈芳宇、陳德家、陳雪齡、林竣強、吳婕湄</td>
+                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+              </tr>
+              <tr>
+                <td><span class="r-badge">第四組</span><span class="r-count">6人</span></td>
+                <td><span class="r-leader"><span class="r-tag">組長</span>張伯瑜</span></td>
+                <td class="r-members">張嘉耘、黃愉惠、曾儀庭、楊筑媛、蘇怡瑄</td>
+                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+              </tr>
+              <tr>
+                <td><span class="r-badge">第五組</span><span class="r-count">7人</span></td>
+                <td><span class="r-leader"><span class="r-tag">組長</span>楊惠茹</span></td>
+                <td class="r-members">鄭喻庭、任茹憶、鄭博伊、潘筱暄、李昕庭、鄭佩韋</td>
+                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+              </tr>
+              <tr>
+                <td><span class="r-badge">第六組</span><span class="r-count">5人</span></td>
+                <td><span class="r-leader"><span class="r-tag">組長</span>林欣怡</span></td>
+                <td class="r-members">高健中、陳佳𩓧、林婷妤、陳映竹</td>
+                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <!-- Group 2 -->
-        <div class="group-card reveal">
-          <div>
-            <div class="group-header">
-              <span class="group-badge">第二組</span>
-              <span class="group-count">7 位成員</span>
-            </div>
-            <div class="group-leader-box">
-              <span class="leader-tag">組長</span>
-              <span class="leader-name">黃鈺雯</span>
-            </div>
-            <div class="group-members-box">
-              <span class="members-label">組員名單</span>
-              <div class="member-chips">
-                <span class="member-chip">賴怡臻</span>
-                <span class="member-chip">宮啟翔</span>
-                <span class="member-chip">梁若涵</span>
-                <span class="member-chip">盧瀷文</span>
-                <span class="member-chip">王仁易</span>
-                <span class="member-chip">廖宸葳</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-footer-status">
-            <span>研究構念</span>
-            <span class="status-tag-pending">課堂抽籤公布</span>
-          </div>
-        </div>
-
-        <!-- Group 3 -->
-        <div class="group-card reveal">
-          <div>
-            <div class="group-header">
-              <span class="group-badge">第三組</span>
-              <span class="group-count">6 位成員</span>
-            </div>
-            <div class="group-leader-box">
-              <span class="leader-tag">組長</span>
-              <span class="leader-name">陳怡鳳</span>
-            </div>
-            <div class="group-members-box">
-              <span class="members-label">組員名單</span>
-              <div class="member-chips">
-                <span class="member-chip">沈芳宇</span>
-                <span class="member-chip">陳德家</span>
-                <span class="member-chip">陳雪齡</span>
-                <span class="member-chip">林竣強</span>
-                <span class="member-chip">吳婕湄</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-footer-status">
-            <span>研究構念</span>
-            <span class="status-tag-pending">課堂抽籤公布</span>
-          </div>
-        </div>
-
-        <!-- Group 4 -->
-        <div class="group-card reveal">
-          <div>
-            <div class="group-header">
-              <span class="group-badge">第四組</span>
-              <span class="group-count">6 位成員</span>
-            </div>
-            <div class="group-leader-box">
-              <span class="leader-tag">組長</span>
-              <span class="leader-name">張伯瑜</span>
-            </div>
-            <div class="group-members-box">
-              <span class="members-label">組員名單</span>
-              <div class="member-chips">
-                <span class="member-chip">張嘉耘</span>
-                <span class="member-chip">黃愉惠</span>
-                <span class="member-chip">曾儀庭</span>
-                <span class="member-chip">楊筑媛</span>
-                <span class="member-chip">蘇怡瑄</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-footer-status">
-            <span>研究構念</span>
-            <span class="status-tag-pending">課堂抽籤公布</span>
-          </div>
-        </div>
-
-        <!-- Group 5 -->
-        <div class="group-card reveal">
-          <div>
-            <div class="group-header">
-              <span class="group-badge">第五組</span>
-              <span class="group-count">7 位成員</span>
-            </div>
-            <div class="group-leader-box">
-              <span class="leader-tag">組長</span>
-              <span class="leader-name">楊惠茹</span>
-            </div>
-            <div class="group-members-box">
-              <span class="members-label">組員名單</span>
-              <div class="member-chips">
-                <span class="member-chip">鄭喻庭</span>
-                <span class="member-chip">任茹憶</span>
-                <span class="member-chip">鄭博伊</span>
-                <span class="member-chip">潘筱暄</span>
-                <span class="member-chip">李昕庭</span>
-                <span class="member-chip">鄭佩韋</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-footer-status">
-            <span>研究構念</span>
-            <span class="status-tag-pending">課堂抽籤公布</span>
-          </div>
-        </div>
-
-        <!-- Group 6 -->
-        <div class="group-card reveal">
-          <div>
-            <div class="group-header">
-              <span class="group-badge">第六組</span>
-              <span class="group-count">5 位成員</span>
-            </div>
-            <div class="group-leader-box">
-              <span class="leader-tag">組長</span>
-              <span class="leader-name">林欣怡</span>
-            </div>
-            <div class="group-members-box">
-              <span class="members-label">組員名單</span>
-              <div class="member-chips">
-                <span class="member-chip">高健中</span>
-                <span class="member-chip">陳佳𩓧</span>
-                <span class="member-chip">林婷妤</span>
-                <span class="member-chip">陳映竹</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-footer-status">
-            <span>研究構念</span>
-            <span class="status-tag-pending">課堂抽籤公布</span>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
