@@ -1,39 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#821C34"/>
-      <stop offset="100%" stop-color="#440A16"/>
+      <stop offset="0%" stop-color="#841E34"/>
+      <stop offset="100%" stop-color="#480A17"/>
     </linearGradient>
-    <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="32" y1="10" x2="32" y2="54">
-      <stop offset="0%" stop-color="#FFFDF8"/>
-      <stop offset="35%" stop-color="#F5D692"/>
-      <stop offset="100%" stop-color="#BE923D"/>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF7"/>
+      <stop offset="45%" stop-color="#F5D792"/>
+      <stop offset="100%" stop-color="#C59B46"/>
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="1.5" stdDeviation="1" flood-color="#000000" flood-opacity="0.45"/>
-    </filter>
   </defs>
-
-  <!-- Background Squircle -->
+  <!-- Squircle Base -->
   <rect width="64" height="64" rx="16" fill="url(#bg)"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#ECCB85" stroke-opacity="0.35" stroke-width="1.2"/>
-
-  <!-- Psychometrics Emblem: Ψ (Psi) -->
-  <g filter="url(#shadow)">
-    <!-- Base Pedestal (Solid Rect) -->
-    <rect x="21" y="49" width="22" height="4.5" rx="2.25" fill="url(#gold)"/>
-
-    <!-- Central Vertical Pillar (Solid Rect) -->
-    <rect x="29.5" y="11" width="5" height="40" rx="2.5" fill="url(#gold)"/>
-
-    <!-- Harmonic Curved Bowl (Path with thickness) -->
-    <path d="M15.5 22.5 C15.5 40, 48.5 40, 48.5 22.5" fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
-
-    <!-- Wing finials -->
-    <circle cx="15.5" cy="22.5" r="2.8" fill="url(#gold)"/>
-    <circle cx="48.5" cy="22.5" r="2.8" fill="url(#gold)"/>
-
-    <!-- Top Insight Node -->
-    <circle cx="32" cy="11.5" r="3.2" fill="#FFFFFF"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#F5D792" stroke-opacity="0.35" stroke-width="1.2"/>
+  
+  <!-- Continuous Listening Harmonic Voice Spectrum (4 Pillars of Survey Analytics) -->
+  <g fill="url(#gold)">
+    <rect x="14" y="24" width="6" height="16" rx="3"/>
+    <rect x="24" y="18" width="6" height="28" rx="3"/>
+    <rect x="34" y="13" width="6" height="38" rx="3"/>
+    <rect x="44" y="21" width="6" height="22" rx="3"/>
   </g>
 </svg>
