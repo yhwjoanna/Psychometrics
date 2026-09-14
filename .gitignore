@@ -1,0 +1,35 @@
+# Administrative and course planning documents (keep private)
+01_課程大綱與行政規劃/
+02_課程模擬資料集/
+03_Google_Classroom_工具/
+04_歷史與封存備份/
+01_本次待上傳/
+Handout/原本教材/
+
+# Future topics (enabled rolling week-by-week per teaching schedule)
+Handout/Topic2_*
+Handout/Topic3_*
+Handout/Topic4_*
+Handout/Topic5_*
+Handout/Topic6_*
+Handout/Topic7_*
+Handout/Topic8_*
+Handout/Topic9_*
+Handout/Topic10_*
+Handout/Topic11_*
+Handout/Topic12_*
+Handout/Topic13_*
+Handout/Topic14_*
+Handout/Topic15_*
+Handout/Topic16_*
+
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Office temporary lock files
+~$*
+*.tmp
