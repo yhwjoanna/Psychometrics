@@ -219,8 +219,15 @@
   .tag-holiday{background:var(--accent-tint);color:var(--accent);}
   .tag-current{background:var(--accent);color:var(--cream);}
 
-  .week-row.is-current{border-top:1px solid var(--accent);}
+  .week-row.is-current{
+    background:var(--paper);border:1px solid var(--accent-tint-2);border-radius:1.1rem;
+    padding:1.9rem 1.6rem;margin:.75rem 0;
+    box-shadow:inset 4px 0 0 var(--accent),var(--shadow-2);
+  }
+  .week-row.is-current:hover{background:var(--paper);}
+  .week-row.is-current + .week-row{border-top-color:transparent;}
   .week-row.is-current .week-date{color:var(--accent);}
+  @media (max-width:860px){.week-row.is-current{padding:1.4rem 1.1rem;}}
 
   .week-content h4{font-size:1.08rem;margin-bottom:.55rem;line-height:1.45;}
   .week-question{font-family:var(--serif);font-size:.95rem;color:var(--ink-3);font-weight:500;margin-bottom:.85rem;line-height:1.6;}
@@ -751,23 +758,25 @@
           <div class="week-actions">
             <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html" target="_blank" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">進入課堂互動教材網站<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
             <a href="Handout/Topic1_課程導論與典範轉移/Topic1_文獻與名詞對照表.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">專有名詞對照表<span class="icon-chip" style="margin-left:.4rem;">📖</span></a>
+            <a href="Slides/Topic01-02_課堂投影片.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">課堂投影片 Topic 01–02<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
           </div>
         </div>
 
         <div class="week-row reveal" data-block="b1" data-date="2026-09-18">
           <div class="week-meta"><span class="week-num">Week 02</span><span class="week-date">09/18</span><span class="tag tag-lab">課內小工具</span></div>
           <div class="week-content">
-            <h4>Topic 02 調查目的、態度理論與測量基礎</h4>
+            <h4>Topic 02 調查目的與態度理論</h4>
             <p class="week-question">工作滿意、敬業與承諾有何本質區別，離職率如何換算為底線財務損失以說服高階管理層。</p>
             <ul class="key-topics">
+              <li>員工意見調查的功能與規劃前的必問問題</li>
               <li>員工態度三大支柱（滿意、敬業、承諾）實證關聯</li>
               <li>離職成本財務試算演練（招募重置、生產力損失）</li>
-              <li>測量基礎與心理計量原則（構念、信度與效度概念）</li>
             </ul>
           </div>
           <div class="week-actions">
-            <a class="link-pill is-pending" aria-disabled="true">課堂互動教材網站</a>
-            <a class="link-pill is-pending" aria-disabled="true">離職成本試算小工具</a>
+            <a href="Handout/Topic2_為什麼要做員工意見調查/Topic2_為什麼要做員工意見調查_課程網站.html" target="_blank" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">進入課堂互動教材網站<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
+            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">離職成本試算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
+            <a href="Slides/Topic01-02_課堂投影片.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">課堂投影片 Topic 01–02<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
           </div>
         </div>
 
@@ -787,9 +796,10 @@
         <div class="week-row reveal" data-block="b1" data-date="2026-10-02">
           <div class="week-meta"><span class="week-num">Week 04</span><span class="week-date">10/02</span><span class="tag tag-lab">作業啟動</span></div>
           <div class="week-content">
-            <h4>Topic 03 題項設計與關鍵事例法（CIT）</h4>
+            <h4>Topic 03 測量基礎、題項設計與關鍵事例法（CIT）</h4>
             <p class="week-question">量表編製如何避免雙重問題與反向題陷阱，如何以關鍵事例法為職場新興構念開展質化編碼。</p>
             <ul class="key-topics">
+              <li>測量基礎與心理計量原則（構念、信度與效度概念）</li>
               <li>李克特量表設計、反向題用途與作答疲勞取捨</li>
               <li>關鍵事例法（CIT）操作：事例收集、編碼分類、向度命名</li>
               <li>專家分類同意度檢驗（Cohen's κ 一致性計算）</li>
@@ -1009,10 +1019,10 @@
             <div>
               <div class="num-badge" style="margin-bottom:1rem;">01</div>
               <span class="lab-tag">Topic 02 · 態度理論與成本</span>
-              <h4>離職成本財務換算模擬器</h4>
-              <p>帶入真實 HR 數據（離職率、職位平均年薪、招募重置天數、培訓與生產力空窗損失），推估人才流失對組織底線盈餘的真實衝擊。</p>
+              <h4>離職成本試算小工具</h4>
+              <p>簡版以員工人數、年離職率、平均年薪與成本倍數估算年度離職成本，配合 Topic 2 課堂使用。完整版依職群逐項拆解離職處理、招募甄選、訓練、產能損失與外溢成本，推算傾聽方案的利潤影響與淨效益並輸出假設清單，於 Topic 13 期末專題的業務論證使用。</p>
             </div>
-            <a class="btn-launch is-pending" aria-disabled="true">啟動試算器<span class="icon-chip">↗</span></a>
+            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="btn-launch">啟動試算器<span class="icon-chip">↗</span></a>
           </div></div>
         </div>
 
