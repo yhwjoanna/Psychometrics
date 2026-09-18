@@ -583,13 +583,13 @@
 
 <div class="nav-shell">
   <div class="nav-pill">
-    <div class="brand-group">
+    <a class="brand-group" href="#overview" style="text-decoration:none;color:inherit;">
       <img src="favicon.svg?v=3" alt="HRM922" style="width:28px;height:28px;border-radius:7px;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,.15);" width="28" height="28">
       <div class="brand-text">
         <strong>人力資源管理研究所</strong>
         <span>HRM922 員工意向調查</span>
       </div>
-    </div>
+    </a>
     <nav>
       <ul class="nav-links">
         <li><a href="#overview">課程簡介</a></li>
@@ -606,9 +606,10 @@
 <main id="main">
 
   <!-- Hero & Faculty (Collapsible Container) -->
+  <div id="overview" class="overview-anchor"></div>
   <div id="courseIntroWrapper" class="course-intro-wrapper">
     <!-- Hero -->
-    <section class="hero" id="overview">
+    <section class="hero">
       <div class="wrap">
         <div class="hero-inner">
           <div>
@@ -1354,6 +1355,15 @@
   }
 
   // 課程導讀與師資資訊：手動展開/收合
+  document.querySelectorAll('a[href="#overview"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var wrapper = document.getElementById('courseIntroWrapper');
+      if (wrapper && wrapper.style.display === 'none') toggleCourseIntro(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, '', '#overview');
+    });
+  });
   function toggleCourseIntro(expand) {
     var wrapper = document.getElementById('courseIntroWrapper');
     var mini = document.getElementById('courseIntroMini');
