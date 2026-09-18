@@ -245,6 +245,8 @@
   .key-topics li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--line-2);}
 
   .week-actions{display:flex;flex-direction:column;gap:.55rem;align-items:stretch;}
+  .inline-link{color:var(--accent)!important;font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+  .inline-link:hover{color:var(--accent-dark)!important;}
   .link-pill{
     background:var(--paper);border:1px solid var(--line-2);color:var(--ink)!important;padding:.5rem .85rem;
     border-radius:8px;font-size:.875rem;font-weight:600;text-align:center;transition:all .3s var(--ease);
@@ -453,39 +455,37 @@
   .course-intro-wrapper {
     transition: all .35s ease;
   }
-  .course-intro-mini {
-    padding: 1.5rem 0 .5rem;
-    margin-top: 5rem;
-  }
+  .course-intro-mini { padding: 1.5rem 0 .5rem; margin-top: 5rem; }
   .mini-bar {
-    background: rgba(255,254,251,.95);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: .85rem 1.35rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: var(--shadow-1);
-    gap: 1rem;
-    flex-wrap: wrap;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+    padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: space-between;
+    box-shadow: var(--shadow-1); gap: 1rem 1.5rem; flex-wrap: wrap;
   }
-  .mini-info { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
-  .mini-tag { background: var(--accent-tint); color: var(--accent); font-size: .875rem; font-weight: 700; padding: .2rem .55rem; border-radius: 5px; }
-  .mini-info strong { font-size: 1rem; color: var(--ink); }
+  .mini-info { display: flex; align-items: center; gap: .9rem 1.1rem; flex-wrap: wrap; }
+  .mini-tag {
+    display: inline-flex; align-items: center; border: 1px solid var(--line-2); background: var(--cream);
+    color: var(--accent); font-size: .875rem; font-weight: 600; letter-spacing: .12em;
+    padding: .35rem .9rem; border-radius: 9999px; white-space: nowrap;
+  }
+  .mini-info strong { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
   .mini-meta { font-size: .9375rem; color: var(--ink-3); }
-  .mini-actions { display: flex; align-items: center; gap: .6rem; }
-  .mini-btn {
-    display: inline-flex; align-items: center; padding: .4rem .8rem;
-    background: var(--paper); border: 1px solid var(--line-2); border-radius: 6px;
-    font-size: .875rem; font-weight: 600; color: var(--ink)!important; transition: all .2s;
+  .mini-actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  .mini-btn, .mini-btn-expand {
+    display: inline-flex; align-items: center; gap: .6rem; border-radius: 9999px;
+    font-size: .9375rem; font-weight: 600; padding: .45rem .5rem .45rem 1.1rem; cursor: pointer;
+    font-family: var(--sans); line-height: 1.4;
   }
+  .mini-btn { background: var(--paper); border: 1px solid var(--line-2); color: var(--ink)!important; }
   .mini-btn:hover { border-color: var(--accent); color: var(--accent)!important; background: var(--accent-tint); }
-  .mini-btn-expand {
-    display: inline-flex; align-items: center; gap: .3rem; padding: .4rem .9rem;
-    background: var(--accent); color: #fff!important; border: none; border-radius: 6px;
-    font-size: .875rem; font-weight: 600; cursor: pointer; transition: background .2s;
+  .mini-btn-expand { background: var(--accent); color: var(--cream)!important; border: 1px solid var(--accent); box-shadow: var(--shadow-2); }
+  .mini-btn-expand:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .mini-btn .icon-chip, .mini-btn-expand .icon-chip {
+    width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-size: .875rem; flex-shrink: 0; margin: 0;
   }
-  .mini-btn-expand:hover { background: var(--accent-dark); }
+  .mini-btn .icon-chip { background: var(--cream-2); color: var(--ink-2); }
+  .mini-btn-expand .icon-chip { background: rgba(255,255,255,.16); color: var(--cream); }
+  @media (max-width:640px){ .mini-bar{padding:1rem 1.1rem;} .mini-info strong{font-size:1.05rem;} }
 
   .btn-toggle-intro {
     display: inline-flex; align-items: center; gap: .35rem;
@@ -656,13 +656,13 @@
   <div id="courseIntroMini" class="course-intro-mini wrap" style="display:none;">
     <div class="mini-bar">
       <div class="mini-info">
-        <span class="mini-tag">HRM922 員工意向調查</span>
+        <span class="mini-tag">HRM922　員工意向調查</span>
         <strong>授課教師：王豫萱 博士</strong>
         <span class="mini-meta">每週五 18:30–21:10 ｜ 管院 CM 3051</span>
       </div>
       <div class="mini-actions">
-        <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="mini-btn">📄 下載大綱 (PDF)</a>
-        <button type="button" onclick="toggleCourseIntro(true)" class="mini-btn-expand">展開課程詳細資訊 ▼</button>
+        <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="mini-btn">下載課程大綱（PDF）<span class="icon-chip">↓</span></a>
+        <button type="button" onclick="toggleCourseIntro(true)" class="mini-btn-expand">展開課程導讀與師資<span class="icon-chip">▼</span></button>
       </div>
     </div>
   </div>
@@ -853,8 +853,8 @@
             <ul class="key-topics">
               <li>課後閱讀一：Guadagni et al. (2026) 績效優先管理 HBR 短文，原文 PDF 見下方文獻區</li>
               <li>課後閱讀二：課堂互動教材網站 Topic 2 全部單元，含兩階信心測驗</li>
-              <li>課後思考：用 Topic 1 單元三的四階段對照表替自己的公司定位，寫下最弱的那一列與一個可觀察的證據，10/2 上課口頭分享</li>
-              <li>課內工具：以離職成本試算小工具簡版代入自己單位的人數、離職率與平均年薪，記下年度離職成本</li>
+              <li>課後思考：用 Topic 1 單元三的<a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html#u3" target="_blank" class="inline-link">四階段對照表</a>替自己的公司定位，寫下最弱的那一列與一個可觀察的證據，10/2 上課口頭分享</li>
+              <li>課內工具：以<a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="inline-link">離職成本試算小工具</a>簡版代入自己單位的人數、離職率與平均年薪，記下年度離職成本</li>
               <li>預備 Topic 03：各組先想一個職場新興構念作為關鍵事例法（CIT）的選題構想</li>
             </ul>
             <details class="week-refs-accordion" id="refs-w03" open>
@@ -888,11 +888,7 @@
               </div>
             </details>
           </div>
-          <div class="week-actions">
-            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html#u3" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">四階段對照表<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
-            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">離職成本試算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
-            <div class="status-note">自主學習週</div>
-          </div>
+                    <div class="week-actions"><div class="status-note">自主學習週</div></div>
         </div>
 
         <div class="week-row reveal" data-block="b1" data-date="2026-10-02">
