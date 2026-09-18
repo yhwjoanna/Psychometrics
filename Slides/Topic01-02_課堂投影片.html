@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>員工意向調查｜Topic 1 與 2 課堂投影片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --a1:#EAD3D6;--a2:#C98F98;--a3:#A25462;--a4:#7A2033;--ok:#4B6B4F;--warn:#8A5A1E;
+  --serif:'Newsreader','Noto Serif TC','Songti TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei UI',sans-serif;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0F0D0B;font-family:var(--sans);color:var(--ink-2);-webkit-font-smoothing:antialiased}
+button{font:inherit}
+
+/* ---------- 外殼：固定畫布縮放 ---------- */
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{width:1920px;height:1080px;position:absolute;left:0;top:0;transform-origin:0 0;
+  transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--s,1))}
+.slide{position:absolute;inset:0;background:var(--cream);padding:110px 140px 130px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
+.slide.dark{background:var(--ink);color:#D9D2C6}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--cream)}
+
+/* 控制列 */
+#bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);z-index:20}
+#bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .32s var(--ease)}
+#nav{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;z-index:20;transition:opacity .32s var(--ease)}
+#nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(28,24,21,.72);
+  color:#EDE6D8;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:transform .1s ease-out,background .2s var(--ease);backdrop-filter:blur(10px)}
+#nav button:active{transform:scale(.94)}
+#nav button:hover{background:rgba(122,32,51,.85)}
+#pg{position:fixed;left:20px;bottom:16px;font-size:13px;color:rgba(237,230,216,.6);z-index:20;font-variant-numeric:tabular-nums;transition:opacity .32s var(--ease)}
+body.fs.idle #nav,body.fs.idle #pg{opacity:0;pointer-events:none}
+body.fs.idle{cursor:none}
+
+/* ---------- 字級階梯（1920 畫布）---------- */
+h1,h2,h3{font-family:var(--serif);color:var(--ink);font-weight:600;letter-spacing:-.015em}
+h1{font-size:96px;line-height:1.08}
+h2{font-size:58px;line-height:1.3}
+h3{font-size:36px;line-height:1.35}
+p,li,td,th{font-size:30px;line-height:1.6}
+.kicker{position:absolute;top:100px;left:140px;display:flex;align-items:center;gap:18px;font-size:26px;font-weight:700;letter-spacing:.16em;color:var(--ink);margin:0}
+.slide{padding-top:170px}
+.dark .kicker{color:var(--a2)}
+.kicker .sup{letter-spacing:.04em;font-weight:600;font-size:18px;color:var(--cream);background:var(--accent);padding:5px 12px;border-radius:6px}
+.dark .kicker .sup{background:var(--a2);color:var(--ink)}
+.foot{position:absolute;left:140px;right:140px;bottom:52px;display:flex;justify-content:space-between;gap:40px;
+  font-size:20px;line-height:1.45;color:var(--ink-2);border-top:1px solid var(--line-2);padding-top:16px}
+.dark .foot{color:#8F877B;border-top-color:#33302B}
+.foot .lim{max-width:900px}
+.foot .mid{white-space:nowrap}
+.foot .multi{font-size:13px;line-height:1.35;max-width:1050px}
+.foot>span:last-child{min-width:40px;text-align:right}
+.foot-fig{left:60px;right:60px;bottom:14px;padding-top:10px;align-items:flex-end}
+.foot-fig .ref{font-size:12px!important;line-height:1.35;max-width:1300px}
+.lead{font-size:34px;line-height:1.65;color:var(--ink-2);max-width:32em}
+.dark .lead{color:#D9D2C6}
+.muted{color:var(--ink-2)}
+.acc{color:var(--accent)}
+.def{color:var(--accent);font-weight:600}
+.num{font-family:var(--serif);font-weight:600;letter-spacing:-.04em;color:var(--accent);line-height:.9}
+.dark .num{color:#E3B7BE}
+
+/* 分段揭露 */
+.frag{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.frag.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .slide,.frag{transition:opacity .2s ease}
+  .frag{transform:none}
+}
+
+/* ---------- 版型 ---------- */
+/* 封面 */
+.cover{display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.cover .sub{font-family:var(--serif);font-size:40px;color:var(--ink-2);margin-top:28px;line-height:1.45}
+.cover .meta{margin-top:56px;font-size:24px;color:var(--ink-2);display:flex;gap:40px}
+
+/* 情境頁 */
+.scene{display:flex;flex-direction:column;justify-content:center;height:100%}
+.scene .who{font-size:24px;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:34px}
+.scene p{font-family:var(--serif);font-size:52px;line-height:1.5;max-width:26em;color:var(--ink)}
+.scene .q{margin-top:44px;font-family:var(--sans);font-size:34px;color:var(--accent);font-weight:600}
+
+/* 大字頁 */
+.big{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:60px;height:100%}
+.big .num{font-size:360px}
+.big .num small{font-size:140px;letter-spacing:0}
+.big h2{margin-bottom:26px}
+.big p{max-width:22em}
+
+/* 三數並列 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.trio .cell{border-top:3px solid var(--line-2);padding-top:26px}
+.trio .cell.hi{border-top-color:var(--accent)}
+.trio .num{font-size:150px;margin-bottom:14px}
+.trio p{font-size:27px;line-height:1.5;color:var(--ink)}
+
+/* 表格 */
+table{border-collapse:collapse;width:100%}
+th{font-family:var(--serif);font-weight:600;font-size:32px;text-align:left;padding:18px 24px;color:var(--ink);border-bottom:2px solid var(--ink)}
+td{padding:20px 24px;border-top:1px solid var(--line-2);vertical-align:top;font-size:27px;line-height:1.5}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.hi-col{background:var(--paper)}
+th.hi-col{color:var(--accent)}
+table.tight td,table.tight th{padding:13px 20px;font-size:24px}
+table.tight th{font-size:26px;line-height:1.3}
+
+/* 圖文兩欄 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;height:100%}
+.split h2{margin-bottom:26px}
+
+/* 卡片列 */
+.cards{display:grid;gap:26px;margin-top:20px;align-items:start}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.cards.c5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:30px 34px}
+.card .n{font-family:var(--serif);font-size:44px;color:var(--accent);font-weight:600;line-height:1;margin-bottom:16px}
+.card h3{font-size:30px;margin-bottom:12px}
+.card p{font-size:24px;line-height:1.55;color:var(--ink)}
+.card.dark{background:var(--ink);border-color:var(--ink);color:#D9D2C6}
+.card.dark h3{color:var(--cream)}
+.card.dark p{color:#C9C2B7}
+.card.dark .n{color:#E3B7BE}
+
+/* 橫向卡片列 */
+.rows{display:flex;flex-direction:column;gap:18px}
+.rows .row{display:grid;grid-template-columns:110px 300px 1fr;align-items:center;gap:30px;background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 40px}
+.rows .n{font-family:var(--serif);font-size:48px;color:var(--accent);font-weight:600;line-height:1}
+.rows .tt{font-family:var(--serif);font-size:34px;color:var(--ink);font-weight:600}
+.rows .dd{font-size:25px;line-height:1.55;color:var(--ink)}
+.rd{display:flex;gap:14px;align-items:flex-start}
+.rd+.rd{margin-top:10px}
+.rd-no{flex:0 0 34px;width:34px;height:34px;line-height:34px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700;margin-top:3px}
+.lnk{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:6px}
+.cards.eq{align-items:stretch}
+.cards.eq>.card{height:100%}
+.pdf-link{position:absolute;top:100px;right:140px;font-size:20px;color:var(--ink-2);border:1px solid var(--line-2);padding:8px 18px;border-radius:999px;background:var(--paper);text-decoration:none;transition:transform .1s ease-out,border-color .2s var(--ease)}
+.pdf-link:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-link:active{transform:scale(.97)}
+
+/* 光譜 */
+.spec .bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.spec .st{padding:40px 34px;border-radius:8px;min-height:330px;color:var(--cream)}
+.spec .st b{display:block;font-family:var(--serif);font-size:42px;font-weight:600;margin-bottom:16px}
+.spec .st span{font-size:26px;line-height:1.55;display:block}
+.s1{background:var(--a1);color:var(--ink)!important}.s2{background:var(--a2);color:var(--ink)!important}.s3{background:var(--a3)}.s4{background:var(--a4)}
+.spec .pct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;font-size:24px;color:var(--ink-2)}
+.spec .pct b{color:var(--ink);font-family:var(--serif);font-size:34px;margin-right:8px;font-weight:600}
+
+/* 互動提示頁 */
+.ask{display:flex;flex-direction:column;justify-content:center;height:100%}
+.ask h2{max-width:28em;margin-bottom:56px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1500px;align-items:start}
+.opt{border:1px solid var(--line-2);background:var(--paper);border-radius:14px;padding:16px 30px;font-size:32px;line-height:1.4;display:flex;align-items:center;gap:22px}
+.opt b{font-weight:600;font-family:var(--serif);color:var(--accent);font-size:34px;font-weight:600}
+
+/* 算式 */
+.calc{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+.calc .row{display:grid;grid-template-columns:1fr 360px;align-items:baseline;gap:40px;border-top:1px solid var(--line-2);padding-top:22px}
+.calc .row .lbl{font-size:30px;color:var(--ink-2)}
+.calc .row .val{font-family:var(--serif);font-size:56px;color:var(--ink);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.calc .row.total .val{color:var(--accent);font-size:72px}
+.calc .row.total .lbl{font-weight:700;color:var(--ink)}
+
+/* 提醒帶 */
+.warnline{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:20px 26px;border-left:4px solid var(--warn);background:var(--cream-2);border-radius:0 12px 12px 0;font-size:24px;line-height:1.55;color:var(--ink-2)}
+
+/* 補充頁角標 */
+.plus{position:absolute;top:110px;right:140px;font-size:19px;letter-spacing:.14em;color:var(--ink);border:1px solid var(--line-2);padding:8px 16px;border-radius:999px;background:var(--paper)}
+.dark .plus{color:#B9AFA2;border-color:#3A3631;background:transparent}
+
+/* 章節幕 */
+.act{display:flex;flex-direction:column;justify-content:center;height:100%}
+.act .no{font-family:var(--serif);font-size:200px;color:var(--a1);line-height:1;letter-spacing:-.04em}
+.act h1{margin-top:10px}
+.act .refs{margin-top:34px;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:1500px}
+.act .refs li{font-size:21px;line-height:1.5;color:var(--ink-2);padding-left:2em;text-indent:-2em}
+.act .lead-in{margin-top:30px;font-size:30px;color:var(--ink-2);max-width:28em;line-height:1.6}
+.slide.act-page,.slide.light-scene{background:var(--accent);color:var(--cream)}
+.slide.act-page h1,.slide.act-page h2,.slide.light-scene h1,.slide.light-scene h2,.slide.light-scene p,.slide.light-scene .scene p{color:var(--cream)}
+.slide.act-page .kicker,.slide.light-scene .kicker,.slide.act-page .foot,.slide.light-scene .foot,.slide.act-page .foot span,.slide.light-scene .foot span{color:var(--cream)}
+.slide.act-page .foot,.slide.light-scene .foot{border-top-color:rgba(251,248,242,.35)}
+.slide.act-page .act .no{color:rgba(251,248,242,.28)}
+.act-en{font-size:52px;color:rgba(251,248,242,.8);font-weight:500}
+.slide.act-page .act .refs li,.slide.act-page .act .lead-in{color:rgba(251,248,242,.85)}
+.slide.light-scene .scene .who{color:rgba(251,248,242,.75)}
+.slide.light-scene .scene .q{color:#F6D9DC}
+.slide.light-scene .cover .sub,.slide.light-scene .cover .meta{color:rgba(251,248,242,.85)}
+.slide.light-scene .pdf-link{color:var(--cream);border-color:rgba(251,248,242,.5);background:transparent}
+.slide.light-scene .pdf-link:hover{background:rgba(251,248,242,.12)}
+
+/* ---------- 手機：長頁文件 ---------- */
+@media (max-width:900px){
+  html,body{height:auto;overflow:auto;background:var(--cream)}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:auto;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;transform-origin:0 0;opacity:1;visibility:visible;margin:0 0 var(--mgap,12px);transition:none}
+  .frag{opacity:1;transform:none}
+  #nav,#bar,#pg{display:none}
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:var(--cream);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;opacity:1!important;visibility:visible!important;transition:none;page-break-after:always;break-after:page}
+  .frag{opacity:1!important;transform:none!important}
+  #nav,#bar,#pg,.pdf-link{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="deck">
+
+<!-- ============ 封面 ============ -->
+<section class="slide light-scene" data-layout="cover" data-density="1">
+  <div class="cover">
+    <div class="kicker">員工意向調查　HRM522　碩士在職專班</div>
+  <a class="pdf-link" href="#" onclick="event.preventDefault();window.print();" title="開啟瀏覽器列印，目的地選擇另存為 PDF">另存 PDF</a>
+    <h1>課程導論與調查目的</h1>
+    <div class="sub">Topic 1　課程導論與典範轉移<br>Topic 2　為什麼要做員工意見調查</div>
+    <div class="meta"><span>國立中山大學 人力資源管理研究所</span><span>王豫萱</span><span>2026 Fall</span></div>
+  </div>
+</section>
+
+<!-- ============ 第一幕 兩個人的問題 ============ -->
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">開場　員工</div>
+  <div class="scene">
+    <div class="who">員工</div>
+    <p>3 月收到年度問卷，花了二十分鐘認真作答<br>9 月，部門一切如舊</p>
+    <p class="q frag">這份問卷去了哪裡？</p>
+  </div>
+  <div class="foot"><span>Topic 1 與 2</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>01</span></div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">開場　財務長</div>
+  <div class="scene">
+    <div class="who">財務長</div>
+    <p>年度預算會議，員工意見調查的提案排在第七項<br>附上一頁報價</p>
+    <p class="q frag">這筆錢花下去，公司拿到什麼？</p>
+  </div>
+  <div class="foot"><span>Topic 1 與 2</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
+</section>
+
+<section class="slide" data-layout="map" data-density="3">
+  <div class="kicker">課程地圖</div>
+  <h2>課程地圖</h2>
+  <div class="rows" style="margin-top:44px">
+    <div class="row frag"><div class="n">一</div><div class="tt">為什麼是現在</div><div class="dd">敬業度連兩年下滑、主管紅利消失、AI 效益停在個人層次，落差出現的背景</div></div>
+    <div class="row frag"><div class="n">二</div><div class="tt">從普查到傾聽</div><div class="dd">年度普查與持續傾聽的差別，四階段成熟度，以及資料到行動落差在哪一個環節流失</div></div>
+    <div class="row frag"><div class="n">三</div><div class="tt">調查能做什麼</div><div class="dd">調查的功能、規劃前的必問問題與核心構念</div></div>
+    <div class="row frag"><div class="n">四</div><div class="tt">值多少錢</div><div class="dd">態度預測離職、離職可以換算成金額、傾聽方案的效益如何以財務語言呈現</div></div>
+  </div>
+  <div class="foot"><span>Topic 1 與 2</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>03</span></div>
+</section>
+
+<!-- ============ 第二幕 為什麼是現在 ============ -->
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">01</div><h1>敬業度的現況</h1><ul class="refs"><li>Gallup. (2026). State of the global workplace: 2026 report. Gallup, Inc.</li><li>Yotzov, I., Barrero, J. M., Bloom, N., Bunn, P., Davis, S. J., Foster, K. M., Jalca, A., Meyer, B. H., Mizen, P., Navarrete, M. A., Smietanka, P., Thwaites, G., &amp; Wang, B. Z. (2026). Firm data on AI (NBER Working Paper No. 34836). National Bureau of Economic Research.</li></ul></div>
+  <div class="foot"><span>第一部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>04</span></div>
+</section>
+
+<section class="slide" data-layout="big" data-density="2">
+  <div class="kicker">全球敬業度</div>
+  <div class="big">
+    <div class="num">20<small>%</small></div>
+    <div>
+      <h2>全球敬業員工的比例<br>2020 年以來最低</h2>
+      <p class="lead">連續第二年下滑，較 2022 年高點 23% 回落，過去一年沒有任何區域上升</p>
+      <p class="lead" style="margin-top:26px">南亞跌幅最大，減少 5%</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Gallup. (2026). State of the global workplace: 2026 report. Gallup, Inc.<br>業界報告參考，每 1% 約相當於 2,100 萬名受僱者</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
+</section>
+
+<section class="slide" data-layout="ask" data-density="2">
+  <div class="kicker">猜猜看</div>
+  <div class="ask">
+    <h2>Gallup 估計<br>低敬業度每年造成的全球生產力損失<br>約佔全球 GDP 的多少？</h2>
+    <div class="opts">
+      <div class="opt"><b>A</b>約 1%</div>
+      <div class="opt"><b>B</b>約 5%</div>
+      <div class="opt"><b>C</b>約 9%</div>
+    </div>
+  </div>
+  <div class="foot"><span>口頭作答，下一頁揭曉</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>06</span></div>
+</section>
+
+<section class="slide" data-layout="big" data-density="2">
+  <div class="kicker">揭曉</div>
+  <div class="big">
+    <div class="num">9<small>%</small></div>
+    <div>
+      <h2>約 10 兆美元的<br>年度生產力損失</h2>
+      <p class="lead">相當於全球 GDP 的 9%</p>
+      <p class="lead" style="margin-top:26px">Gallup 對敬業度的定義：<br><span class="def">員工對工作、團隊與雇主的心理連結</span><br>其歷年統合分析顯示，敬業度與業務單位的生產力、獲利及銷售有穩定正向關係</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Gallup. (2026). State of the global workplace: 2026 report. Gallup, Inc.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">主管紅利消失</div>
+  <div class="split">
+    <div>
+      <h2>主管敬業度優勢的消退</h2>
+      <p class="lead">2024 到 2025 年，全球主管敬業度從 27% 降到 22%，一年減少 5%；自 2022 年起累計減少 9%</p>
+      <p class="lead" style="margin-top:26px">主管是<span class="def">傾聽資料轉成行動的樞紐</span>，主管敬業度下滑會直接削弱回饋到行動的傳遞</p>
+    </div>
+    <svg viewBox="0 0 760 480" width="760" height="480" font-family="Plus Jakarta Sans, Noto Sans TC">
+      <line x1="80" y1="400" x2="720" y2="400" stroke="#D9CFB9" stroke-width="2"/>
+      <g font-size="22" fill="#7A736A" text-anchor="middle">
+        <text x="160" y="440">2022</text><text x="320" y="440">2023</text><text x="480" y="440">2024</text><text x="640" y="440">2025</text>
+      </g>
+      <polyline points="160,120 320,140 480,160 640,240" fill="none" stroke="#7A2033" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+      <polyline points="160,270 320,285 480,300 640,300" fill="none" stroke="#1C1815" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+      <g font-size="26" font-weight="700">
+        <text x="160" y="95" fill="#7A2033" text-anchor="middle">31%</text>
+        <text x="480" y="135" fill="#7A2033" text-anchor="middle">27%</text>
+        <text x="640" y="215" fill="#7A2033" text-anchor="middle">22%</text>
+        <text x="640" y="345" fill="#1C1815" text-anchor="middle">19%</text>
+      </g>
+      <g font-size="24" font-weight="700">
+        <text x="30" y="128" fill="#7A2033">主管</text>
+        <text x="30" y="278" fill="#1C1815">非主管</text>
+      </g>
+    </svg>
+  </div>
+  <div class="foot"><span class="lim multi">Gallup. (2026). State of the global workplace: 2026 report. Gallup, Inc.<br>業界報告參考，折線依報告數據重繪</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>08</span></div>
+</section>
+
+<section class="slide" data-layout="trio" data-density="3">
+  <div class="kicker">AI 時代的生產力落差</div>
+  <h2>AI 效益停在個人層次</h2>
+  <div class="trio">
+    <div class="cell frag"><div class="num">65<small style="font-size:70px">%</small></div><p>已導入 AI 的美國組織中，員工認為 AI 對個人生產力有正面影響</p></div>
+    <div class="cell frag"><div class="num">12<small style="font-size:70px">%</small></div><p>強烈同意 AI 已改變公司的工作方式</p></div>
+    <div class="cell hi frag"><div class="num">89<small style="font-size:70px">%</small></div><p>美英德澳近 6,000 位高階主管中，認為 AI 對公司勞動生產力沒有影響</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Gallup. (2026). State of the global workplace: 2026 report. Gallup, Inc.<br>Yotzov, I., Barrero, J. M., Bloom, N., Bunn, P., Davis, S. J., Foster, K. M., Jalca, A., Meyer, B. H., Mizen, P., Navarrete, M. A., Smietanka, P., Thwaites, G., &amp; Wang, B. Z. (2026). Firm data on AI (NBER Working Paper No. 34836). National Bureau of Economic Research.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker"><span class="sup">補充</span>落差所在的層級</div>
+  <div class="split">
+    <div>
+      <h2>主管對 AI 採用的影響</h2>
+      <p class="lead">MIT 的調查指出，企業投入約 400 億美元後，95% 的組織在獲利上看不到可衡量的影響</p>
+      <p class="lead" style="margin-top:26px">Gallup 在已投資 AI 的美國組織中發現，<span class="def">員工的直屬主管是否積極推動</span>，是採用率最強的預測因子之一</p>
+    </div>
+    <div>
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card frag"><div class="n">8.7 倍</div><p>主管積極支持團隊使用 AI 的員工，強烈同意 AI 已改變組織工作方式的可能性</p></div>
+        <div class="card frag"><div class="n">不到三分之一</div><p>已導入 AI 的美國組織中，強烈同意主管積極支持團隊使用 AI 的員工比例；德國為 21%</p></div>
+        <div class="card frag"><div class="n">約 30%</div><p>公司之間生產力的差距，約三成來自管理做法的好壞，而非技術或設備的差異（Bloom, Sadun &amp; Van Reenen, 2016）</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Gallup. (2026). State of the global workplace: 2026 report. Gallup, Inc.<br>Challapally, A., Pease, C., Raskar, R., &amp; Chari, P. (2025). The GenAI divide: State of AI in business 2025. MIT Project NANDA.<br>Bloom, N., Sadun, R., &amp; Van Reenen, J. (2016). Management as a technology? (NBER Working Paper No. 22327). National Bureau of Economic Research.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
+</section>
+
+<section class="slide" data-layout="trio" data-density="3">
+  <div class="kicker"><span class="sup">補充</span>台灣所在的區域</div>
+  <h2>東亞：敬業度低於全球<br>日常壓力全球最高</h2>
+  <div class="trio">
+    <div class="cell frag"><div class="num">18<small style="font-size:70px">%</small></div><p>東亞員工敬業比例，全球平均 20%，主管 24%、非主管 13%，兩者差距比全球更大</p></div>
+    <div class="cell hi frag"><div class="num">46<small style="font-size:70px">%</small></div><p>前一天經歷大量壓力的員工比例，為全球各區域最高</p></div>
+    <div class="cell frag"><div class="num">32<small style="font-size:70px">%</small></div><p>生活評價達到蓬勃（thriving）的比例，全球平均 34%</p></div>
+  </div>
+  <div class="warnline"><div><span class="def">蓬勃（thriving）</span>：Gallup 生活評價指標的最高一級，受訪者以 0 到 10 的階梯評分，目前生活 7 分以上且五年後預期 8 分以上；其餘為掙扎（struggling）與受苦（suffering）。量表源自 Cantril（1965）的自我定錨階梯，主觀幸福感的近期回顧見 Diener, Oishi &amp; Tay（2018）<br>東亞涵蓋中國、香港、日本、蒙古、南韓與台灣，區域數字不等於台灣數字，台灣分國趨勢線見報告附錄第 224 頁</div></div>
+  <div class="foot"><span class="lim multi">Gallup (2026), pp. 61–62, 248<br>Cantril, H. (1965). The pattern of human concerns. Rutgers University Press<br>Diener, E., Oishi, S., &amp; Tay, L. (2018). Advances in subjective well-being research. Nature Human Behaviour, 2(4), 253–260</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">敬業度為什麼算數</div>
+  <div class="split" style="grid-template-columns:1fr">
+    <div>
+      <h2>敬業度與績效：統合分析證據與解讀界線</h2>
+      <p class="lead">Harter、Schmidt 與 Hayes（2002）在業務單位層次的統合分析顯示，敬業度與生產力、獲利、顧客滿意及留任有穩定的正向關係</p>
+      <p class="lead" style="margin-top:26px">敬業度因此常被詮釋為組織面對 AI 這類擾動的準備度指標</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002). Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. Journal of Applied Psychology, 87(2), 268–279.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
+</section>
+
+<!-- ============ 第三幕 從普查到傾聽 ============ -->
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">02</div><h1>從普查到持續傾聽<br><span class="act-en">continuous listening</span></h1><ul class="refs"><li>Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.</li><li>Qualtrics. (2026). Employee experience trends 2026. Qualtrics.</li></ul></div>
+  <div class="foot"><span>第二部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">年度普查與持續傾聽</div>
+  <h2 style="margin-bottom:34px">差別在頻率、擁有者與行動責任</h2>
+  <table>
+    <tr><th style="width:200px"></th><th>年度敬業度調查</th><th class="hi-col">持續傾聽（continuous listening）</th></tr>
+    <tr class="frag"><td>頻率</td><td>一年一次的單一時點普查</td><td class="hi-col">常態、貫穿員工生命週期的多次觸點</td></tr>
+    <tr class="frag"><td>管道</td><td>單一問卷</td><td class="hi-col">主動與被動並用的多管道</td></tr>
+    <tr class="frag"><td>擁有者</td><td>人資部門</td><td class="hi-col">高階主導、各層級主管共同負責</td></tr>
+    <tr class="frag"><td>行動</td><td>報告後常不了了之</td><td class="hi-col">各層級對回饋採取行動並追蹤</td></tr>
+    <tr class="frag"><td>目的</td><td>量測現況分數</td><td class="hi-col">驅動改變與個人化發展</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>Qualtrics. (2026). Employee experience trends 2026. Qualtrics.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
+</section>
+
+<section class="slide" data-layout="duo" data-density="3">
+  <div class="kicker">主動與被動傾聽</div>
+  <div style="display:grid;grid-template-columns:1fr 300px 1fr;gap:40px;align-items:stretch;max-width:1560px;margin:0 auto">
+    <div>
+      <div style="font-size:30px;font-weight:700;color:var(--accent);margin-bottom:18px;text-align:center">主動傾聽（active listening）：向員工提問</div>
+      <div class="card" style="text-align:center;padding:40px 34px;min-height:420px;display:flex;flex-direction:column;justify-content:center;gap:22px">
+        <div style="font-size:30px;color:var(--ink)">年度問卷（annual survey）</div>
+        <div style="font-size:30px;color:var(--ink)">脈動調查（pulse survey）</div>
+        <div style="font-size:30px;color:var(--ink)">焦點團體（focus group）</div>
+        <div style="font-size:30px;color:var(--ink)">新進與離職訪談（onboarding / exit interview）</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding-top:66px">
+      <div style="width:3px;flex:1;background:var(--warn);opacity:.7"></div>
+      <div style="text-align:center;font-size:22px;line-height:1.5;color:var(--warn);font-weight:700">跨越這條界線<br>隱私保護<br>法遵門檻<br>員工信任</div>
+      <div style="width:3px;flex:1;background:var(--warn);opacity:.7"></div>
+    </div>
+    <div>
+      <div style="font-size:30px;font-weight:700;color:var(--accent);margin-bottom:18px;text-align:center">被動傾聽（passive listening）：從既有訊號理解員工</div>
+      <div class="card" style="background:var(--accent-tint);border-color:var(--a2);text-align:center;padding:40px 34px;min-height:420px;display:flex;flex-direction:column;justify-content:center;gap:22px">
+        <div style="font-size:30px;color:var(--ink)">離職與出缺勤資料</div>
+        <div style="font-size:30px;color:var(--ink)">內部溝通平台</div>
+        <div style="font-size:30px;color:var(--ink)">服務工單與系統紀錄</div>
+        <div style="font-size:30px;color:var(--ink)">360 回饋與行為訊號（behavioral signals）</div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:34px;font-size:26px;color:var(--ink-2)">被動傾聽補主動傾聽的盲點，界線問題留到 Topic 15 處理</p>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+</section>
+
+<section class="slide" data-layout="trio" data-density="3">
+  <div class="kicker">需求面</div>
+  <h2>員工對傾聽頻率的期待</h2>
+  <div class="trio">
+    <div class="cell frag"><div class="num">72<small style="font-size:70px">%</small></div><p>正經歷重大變革的員工比例，24 國、33,831 位受訪者</p></div>
+    <div class="cell hi frag"><div class="num">42<small style="font-size:70px">%</small></div><p>希望公司更頻繁傾聽；希望減少的不到 10%</p></div>
+    <div class="cell frag"><div class="num">68<small style="font-size:70px">%</small></div><p>表示樂於提供回饋；不喜歡的只有 12%</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Qualtrics. (2026). Employee experience trends 2026. Qualtrics.<br>業界報告參考，24 國 33,831 位受訪者</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker"><span class="sup">補充</span>傾聽頻率與行動</div>
+  <div class="split">
+    <div>
+      <h2>傾聽頻率與後續行動的關係</h2>
+      <p class="lead">2026 年有 25% 的員工表示公司增加了傾聽頻率，12% 表示減少</p>
+      <p class="lead" style="margin-top:26px">傾聽增加的組織，員工回報的敬業度、留任意願、福祉與歸屬感都較高，回報公司針對回饋採取的後續行動也較多</p>
+    </div>
+    <div>
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card frag"><h3>變革來源決定反應</h3><p>科技、流程與策略方向的改變帶來較高的敬業與承諾；裁員、領導更迭與組織重整則明顯壓低敬業度</p><p style="margin-top:14px">經歷重大變革的員工，整體上比幾乎沒有變革的員工更敬業</p></div>
+        <div class="card frag"><h3>資深員工更不安</h3><p>年資五年以上、握有制度知識的員工，對未來的擔憂高於近期換工作的人，這一群在調查中回應最少，需要特別納入</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Qualtrics. (2026). Employee experience trends 2026. Qualtrics.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+</section>
+
+<section class="slide" data-layout="spec" data-density="4">
+  <div class="kicker">傾聽成熟度模型　listening maturity</div>
+  <h2 style="margin-bottom:40px">區辨階段的依據：治理與行動責任的分布</h2>
+  <div class="spec">
+    <div class="bar">
+      <div class="st s1 frag"><b>一　事件式<br><span style="font-size:24px;font-weight:500">Episodic</span></b><span>單一調查事件，人資獨扛，行動被視為人資職責，結果與業務策略脫節</span></div>
+      <div class="st s2 frag"><b>二　議題式<br><span style="font-size:24px;font-weight:500">Topical</span></b><span>圍繞議題的一次性專案，其他部門開始求援，行動偏重合規交件而非成果</span></div>
+      <div class="st s3 frag"><b>三　策略式<br><span style="font-size:24px;font-weight:500">Strategic</span></b><span>普查用來診斷，再以多種方法追蹤；人資與業務共同規劃，各層級開始能行動</span></div>
+      <div class="st s4 frag"><b>四　持續式<br><span style="font-size:24px;font-weight:500">Continuous</span></b><span>持續、多管道、依問題快速部署；員工體驗不再只是人資或高層的責任</span></div>
+    </div>
+    <div class="pct">
+      <div><b>22%</b>2026 占比，研究以來最高</div><div><b>30%</b>自 2025 年 37% 回落</div><div><b>27%</b>自 39% 明顯收縮</div><div><b>20%</b>小幅回升，仍低於 2024 年的 36%</div>
+    </div>
+  </div>
+  <div class="warnline">2026 年的分布不進反退，報告歸因於預算與人資工作量的資源緊縮：組織簡化傾聽方案、放慢行動節奏，回到事件式做法</div>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考，750 位以上千人企業人資主管</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">成熟度與成果</div>
+  <h2 style="margin-bottom:30px">不同階段的成果差距</h2>
+  <table class="tight">
+    <tr><th>達到高水準的組織比例</th><th><b>階段一 事件式</b><br><span style="font-size:20px;font-weight:500;color:var(--ink-2)">Episodic</span></th><th><b>階段二 議題式</b><br><span style="font-size:20px;font-weight:500;color:var(--ink-2)">Topical</span></th><th><b>階段三 策略式</b><br><span style="font-size:20px;font-weight:500;color:var(--ink-2)">Strategic</span></th><th class="hi-col"><b>階段四 持續式</b><br><span style="font-size:20px;font-weight:500">Continuous</span></th><th>倍數</th></tr>
+    <tr class="frag"><td>高員工敬業與留任</td><td>7%</td><td>8%</td><td>36%</td><td class="hi-col">77%</td><td class="acc"><b>11×</b></td></tr>
+    <tr class="frag"><td>良好適應變革</td><td>12%</td><td>12%</td><td>50%</td><td class="hi-col">81%</td><td>7×</td></tr>
+    <tr class="frag"><td>有效創新</td><td>13%</td><td>18%</td><td>42%</td><td class="hi-col">82%</td><td>6×</td></tr>
+    <tr class="frag"><td>達成或超越財務目標</td><td>11%</td><td>9%</td><td>32%</td><td class="hi-col">70%</td><td>6×</td></tr>
+    <tr class="frag"><td>高顧客滿意與留存</td><td>15%</td><td>17%</td><td>41%</td><td class="hi-col">77%</td><td>5×</td></tr>
+  </table>
+  <div class="warnline">業界報告參考，適合用來定位與排序，不作因果推論</div>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+</section>
+
+<section class="slide" data-layout="big" data-density="2">
+  <div class="kicker"><span class="sup">補充</span>誰講得清楚敬業與績效的關係</div>
+  <div class="big">
+    <div class="num" style="font-size:360px;display:flex;align-items:baseline;gap:20px"><span style="font-size:150px;color:var(--ink-3)">7%</span><span style="font-size:110px;color:var(--ink-3)">→</span><span>69<small style="font-size:140px">%</small></span></div>
+    <div>
+      <h2>能向高層說明敬業度如何連到經營績效的人資主管</h2>
+      <p class="lead">階段一（事件式，Episodic）的組織只有 7% 強烈同意自己說得清楚，47% 保持中立；階段四（持續式，Continuous）有 69%</p>
+      <p class="lead" style="margin-top:26px">預算已成為第二大障礙，說不清楚的組織會在最需要爭取預算時缺少論證</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+</section>
+
+<section class="slide" data-layout="ask" data-density="2">
+  <div class="kicker">現場練習</div>
+  <div class="ask">
+    <h2>用前兩頁的表格替自己的公司定位<br>並指出目前最弱的那一列</h2>
+    <div class="opts" style="grid-template-columns:1fr;max-width:1300px">
+      <div class="opt"><b>A</b>傾聽節奏與管道：一年一次、只有問卷</div>
+      <div class="opt"><b>B</b>主導者與行動責任：人資獨扛、主管只交計畫</div>
+      <div class="opt"><b>C</b>與業務策略的連結：結果與經營決策各走各的</div>
+    </div>
+  </div>
+  <div class="foot"><span>兩人一組，三分鐘，各說一個具體的例子</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
+</section>
+
+<!-- ============ 第四幕 落差在哪裡 ============ -->
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">03</div><h1>資料到行動落差<br><span class="act-en">data-to-action gap</span></h1><p class="lead-in">從蒐集、分享到員工看見改變，每一段的流失</p><ul class="refs"><li>Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.</li><li>Qualtrics. (2026). Employee experience trends 2026. Qualtrics.</li></ul></div>
+  <div class="foot"><span>第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">資料到行動落差</div>
+  <div class="split">
+    <div>
+      <h2>計畫與改變之間的流失</h2>
+      <p class="lead">71% 的組織分享調查結果，59% 建立了行動計畫，但只有 51% 的員工看到來自回饋的實質改善</p>
+      <p class="lead" style="margin-top:26px">從分享到計畫減少 12%，從計畫到改變再減少 8%</p>
+      <p class="lead" style="margin-top:26px">未執行的行動計畫，效果與沒有計畫相同</p>
+      <p class="lead" style="margin-top:26px"><span class="def">有效組織的共同做法</span>：每位主管聚焦一個優先，找出兩項具體行動，排定後續追蹤對話</p>
+    </div>
+    <svg viewBox="0 0 760 520" width="760" height="520" font-family="Plus Jakarta Sans, Noto Sans TC">
+      <rect x="40" y="40" width="680" height="90" fill="#1C1815"/>
+      <text x="64" y="97" fill="#FBF8F2" font-size="28" font-weight="600">分享調查結果</text>
+      <text x="696" y="97" fill="#FBF8F2" font-size="34" text-anchor="end" font-family="Newsreader">71%</text>
+      <rect x="98" y="170" width="564" height="90" fill="#44403A"/>
+      <text x="122" y="227" fill="#FBF8F2" font-size="28" font-weight="600">建立行動計畫</text>
+      <text x="638" y="227" fill="#FBF8F2" font-size="34" text-anchor="end" font-family="Newsreader">59%</text>
+      <rect x="136" y="300" width="488" height="90" fill="#7A2033"/>
+      <text x="160" y="357" fill="#FBF8F2" font-size="28" font-weight="600">員工看見實質改善</text>
+      <text x="600" y="357" fill="#FBF8F2" font-size="34" text-anchor="end" font-family="Newsreader">51%</text>
+      <line x1="700" y1="150" x2="700" y2="410" stroke="#7A2033" stroke-width="2" stroke-dasharray="8 8"/>
+      <text x="712" y="270" fill="#7A2033" font-size="24" font-weight="700">−20%</text>
+      <text x="40" y="470" fill="#7A736A" font-size="22">Perceptyx 員工基準資料，示意重繪</text>
+    </svg>
+  </div>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考，59% 為教材網站未收錄的中間環節</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
+</section>
+
+<section class="slide" data-layout="trio" data-density="3">
+  <div class="kicker">層級落差</div>
+  <h2>高層與基層對改變的感受差距</h2>
+  <div class="trio">
+    <div class="cell frag"><div class="num">85<small style="font-size:70px">%</small></div><p>高階主管認為回饋已帶來正向改變</p></div>
+    <div class="cell hi frag"><div class="num">48<small style="font-size:70px">%</small></div><p>基層員工同意，且差距逐年擴大</p></div>
+    <div class="cell frag"><div class="num">2.5<small style="font-size:70px">倍</small></div><p>傾聽後看不到改變的員工，更可能認為高層言行不一</p></div>
+  </div>
+  <div class="warnline">速度不是主要問題：77% 的組織能在調查結束一個月內把結果交到主管手上，落差發生在交付之後的行動環節</div>
+  <div class="foot"><span class="lim multi">Qualtrics. (2026). Employee experience trends 2026. Qualtrics.<br>Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker"><span class="sup">補充</span>2026 年的主要障礙</div>
+  <h2 style="margin-bottom:30px">主要障礙：人資工作量、預算與主管能力</h2>
+  <table class="tight">
+    <tr><th>傾聽方案的主要障礙</th><th>2024</th><th>2025</th><th class="hi-col">2026</th><th>變化</th></tr>
+    <tr class="frag"><td>人資工作負荷</td><td>6%</td><td>30%</td><td class="hi-col">27%</td><td>第一大障礙，下降 3%</td></tr>
+    <tr class="frag"><td>預算</td><td>20%</td><td>16%</td><td class="hi-col">26%</td><td class="acc"><b>上升 10%，一年增加 65%</b></td></tr>
+    <tr class="frag"><td>行動規劃與後續執行</td><td>41%</td><td>22%</td><td class="hi-col">22%</td><td>持平，五年來每年都在前五名</td></tr>
+    <tr class="frag"><td>主管人才與技能</td><td>31%</td><td>24%</td><td class="hi-col">22%</td><td>下降 2%</td></tr>
+    <tr class="frag"><td>與業務成果的對齊</td><td>8%</td><td>24%</td><td class="hi-col">16%</td><td>下降 8%</td></tr>
+    <tr class="frag"><td>內部人才分析能力</td><td>27%</td><td>27%</td><td class="hi-col">11%</td><td>下降 16%</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.<br>業界報告參考</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+</section>
+
+<!-- ============ 第五幕 調查能做什麼 ============ -->
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">04</div><h1>調查能做什麼</h1><ul class="refs"><li>Smith, F. J. (2003). Organizational surveys: The diagnosis and betterment of organizations through their members. Lawrence Erlbaum Associates.</li><li>Johnson, S. R. (2018). Engaging the workplace: Using surveys to spark change. Society for Human Resource Management.</li></ul></div>
+  <div class="foot"><span>第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">調查的功能</div>
+  <h2 style="margin-bottom:30px">員工意見調查的功能</h2>
+  <div class="cards c5 eq">
+    <div class="card frag"><div class="n">1</div><h3>診斷現況</h3><p>呈現組織現況</p></div>
+    <div class="card frag"><div class="n">2</div><h3>向上回饋</h3><p>員工的聲音往上傳</p></div>
+    <div class="card frag"><div class="n">3</div><h3>預測變項</h3><p>連到離職與績效</p></div>
+    <div class="card frag"><div class="n">4</div><h3>優勢劣勢</h3><p>指出強項與缺口</p></div>
+    <div class="card frag"><div class="n">5</div><h3>追蹤變革</h3><p>追蹤變革期間的態度</p></div>
+    <div class="card frag"><div class="n">6</div><h3>強化決策</h3><p>決策前取得員工觀點</p></div>
+    <div class="card frag"><div class="n">7</div><h3>訓練架構</h3><p>發展需求的依據</p></div>
+    <div class="card frag"><div class="n">8</div><h3>研究平台</h3><p>組織內的研究基礎</p></div>
+    <div class="card frag"><div class="n">9</div><h3>具體化價值</h3><p>比對自評與他評</p></div>
+    <div class="card frag"><div class="n">10</div><h3>組織記憶</h3><p>跨年可比較的資料庫</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Smith, F. J. (2003). Organizational surveys: The diagnosis and betterment of organizations through their members. Lawrence Erlbaum Associates.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">規劃前的必問問題</div>
+  <h2 style="margin-bottom:30px">規劃完成度的檢核</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">一</div><h3>為什麼要做這個調查</h3><p>目的與正當性，與策略的關聯，問卷名稱向員工傳達組織此刻關心的事</p></div>
+    <div class="card frag"><div class="n">二</div><h3>想從結果知道什麼</h3><p>要回答的具體問題，決定構面與題目</p></div>
+    <div class="card frag"><div class="n">三</div><h3>結果要怎麼用、用在哪</h3><p>後續行動的路徑與負責單位</p></div>
+    <div class="card frag"><div class="n">四</div><h3>如何支持組織策略</h3><p>與策略目標的對應，爭取高層支持</p></div>
+    <div class="card frag"><div class="n">五</div><h3>多久做一次</h3><p>頻率是承諾，頻率要與組織消化結果、採取行動的能量相稱</p></div>
+    <div class="card frag"><div class="n">六</div><h3>用什麼方式</h3><p>脈動或年度、抽樣或普查</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Johnson, S. R. (2018). Engaging the workplace: Using surveys to spark change. Society for Human Resource Management.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
+</section>
+
+<section class="slide" data-layout="timeline" data-density="4">
+  <div class="kicker">專案時間軸</div>
+  <h2 style="margin-bottom:36px">從規劃到追蹤的時程與時限</h2>
+  <svg viewBox="0 0 1640 470" width="1640" height="470" font-family="Plus Jakarta Sans, Noto Sans TC">
+    <g class="frag"><line x1="90" y1="52" x2="1350" y2="52" stroke="#7A2033" stroke-width="3"/><line x1="90" y1="40" x2="90" y2="64" stroke="#7A2033" stroke-width="3"/><line x1="1350" y1="40" x2="1350" y2="64" stroke="#7A2033" stroke-width="3"/><text x="720" y="30" text-anchor="middle" font-size="26" font-weight="700" fill="#7A2033">前置規劃到行動規劃與公告：約 15 到 20 週，4 至 5 個月</text></g>
+    <line x1="40" y1="120" x2="1600" y2="120" stroke="#D9CFB9" stroke-width="3"/>
+    <g font-size="23" fill="#44403A">
+      <g class="frag"><circle cx="90" cy="120" r="12" fill="#1C1815"/><text x="90" y="175" text-anchor="middle" font-weight="700" fill="#1C1815">前置規劃</text><text x="90" y="208" text-anchor="middle" fill="#7A736A">2–3 週</text></g>
+      <g class="frag"><circle cx="300" cy="120" r="12" fill="#1C1815"/><text x="300" y="175" text-anchor="middle" font-weight="700" fill="#1C1815">問卷設計與預試</text><text x="300" y="208" text-anchor="middle" fill="#7A736A">2–3 週</text></g>
+      <g class="frag"><circle cx="510" cy="120" r="12" fill="#1C1815"/><text x="510" y="175" text-anchor="middle" font-weight="700" fill="#1C1815">高層公告與內部溝通</text><text x="510" y="208" text-anchor="middle" fill="#7A736A">1–2 週</text></g>
+      <g class="frag"><circle cx="720" cy="120" r="12" fill="#1C1815"/><text x="720" y="175" text-anchor="middle" font-weight="700" fill="#1C1815">施測與提醒</text><text x="720" y="208" text-anchor="middle" fill="#7A736A">2 週</text></g>
+      <g class="frag"><circle cx="930" cy="120" r="12" fill="#1C1815"/><text x="930" y="175" text-anchor="middle" font-weight="700" fill="#1C1815">清理與分析</text><text x="930" y="208" text-anchor="middle" fill="#7A736A">2–3 週</text></g>
+      <g class="frag"><circle cx="1140" cy="120" r="12" fill="#7A2033"/><text x="1140" y="175" text-anchor="middle" font-weight="700" fill="#7A2033">匯報與單位回饋</text><text x="1140" y="208" text-anchor="middle" fill="#7A736A">2–3 週</text></g>
+      <g class="frag"><circle cx="1350" cy="120" r="12" fill="#7A2033"/><text x="1350" y="175" text-anchor="middle" font-weight="700" fill="#7A2033">行動規劃與公告</text><text x="1350" y="208" text-anchor="middle" fill="#7A736A">結果後 1 個月內</text></g>
+      <g class="frag"><circle cx="1560" cy="120" r="12" fill="#1C1815"/><text x="1560" y="175" text-anchor="middle" font-weight="700" fill="#1C1815">行動追蹤</text><text x="1560" y="208" text-anchor="middle" fill="#7A736A">每季檢核</text></g>
+    </g>
+    <g class="frag">
+      <rect x="720" y="280" width="420" height="4" fill="#8A5A1E"/>
+      <text x="930" y="330" text-anchor="middle" font-size="24" fill="#8A5A1E" font-weight="700">時限一：施測結束到員工看見結果（含清理與分析），一到兩個月內</text>
+      <rect x="1140" y="380" width="210" height="4" fill="#7A2033"/>
+      <text x="1245" y="430" text-anchor="middle" font-size="24" fill="#7A2033" font-weight="700">時限二：結果公布後一個月內看得到行動</text>
+    </g>
+  </svg>
+  <div class="foot"><span class="lim multi">時程為實務慣例，依組織規模與工具調整<br>Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc. 32% 的組織在一到兩週內把結果交到主管手上，77% 在一個月內</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+</section>
+
+<!-- ============ 第六幕 在測什麼 ============ -->
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">05</div><h1>在測什麼</h1><ul class="refs"><li>Locke, E. A. (1976). The nature and causes of job satisfaction. In M. D. Dunnette (Ed.), Handbook of industrial and organizational psychology (pp. 1297–1349). Rand McNally.</li><li>Kahn, W. A. (1990). Psychological conditions of personal engagement and disengagement at work. Academy of Management Journal, 33(4), 692–724.</li><li>Meyer, J. P., &amp; Allen, N. J. (1991). A three-component conceptualization of organizational commitment. Human Resource Management Review, 1(1), 61–89.</li></ul></div>
+  <div class="foot"><span>第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="3">
+  <div class="kicker">核心構念</div>
+  <h2 style="margin-bottom:30px">相關但不相同的構念</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><h3>工作滿意<br><span style="font-size:22px;font-weight:500;color:var(--ink-2)">job satisfaction</span></h3><p class="muted" style="margin-bottom:14px">Locke (1976)</p><p>對工作整體或各面向的評價性態度，偏向此刻的喜好與感受</p><p style="margin-top:18px;color:var(--accent);font-weight:600">整體而言，我對這份工作感到滿意</p></div>
+    <div class="card frag"><h3>員工敬業度<br><span style="font-size:22px;font-weight:500;color:var(--ink-2)">employee engagement</span></h3><p class="muted" style="margin-bottom:14px">Kahn (1990)</p><p>對工作、團隊與雇主的心理連結與投入，偏向能量與投入的動機狀態</p><p style="margin-top:18px;color:var(--accent);font-weight:600">我願意為工作付出額外的努力</p></div>
+    <div class="card frag"><h3>組織承諾<br><span style="font-size:22px;font-weight:500;color:var(--ink-2)">organizational commitment</span></h3><p class="muted" style="margin-bottom:14px">Meyer & Allen (1991)</p><p>員工與組織之間的心理連結，偏向留下來的意願與理由</p><p style="margin-top:18px;color:var(--accent);font-weight:600">我願意留在這個組織</p></div>
+  </div>
+  <div class="foot"><span>釐清構念是設計題目與解讀結果的前提，Topic 3 測量基礎接續</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="3">
+  <div class="kicker">組織承諾的成分</div>
+  <h2 style="margin-bottom:30px">留任動機與管理意涵</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">想留</div><h3>情感承諾<br><span style="font-size:22px;font-weight:500;color:var(--ink-2)">affective commitment</span></h3><p>出於認同與情感，通常較投入、較願意付出</p></div>
+    <div class="card frag"><div class="n">需要留</div><h3>持續承諾<br><span style="font-size:22px;font-weight:500;color:var(--ink-2)">continuance commitment</span></h3><p>離開的成本太高而留下，未必投入</p></div>
+    <div class="card frag"><div class="n">應該留</div><h3>規範承諾<br><span style="font-size:22px;font-weight:500;color:var(--ink-2)">normative commitment</span></h3><p>出於責任或義務感</p></div>
+  </div>
+  <div class="warnline">留任率高，還要看是靠哪一種承諾撐起來的，兩家留任率相同的公司，承諾組成不同，一年後的績效與士氣可能完全不同</div>
+  <div class="foot"><span class="lim multi">Meyer, J. P., &amp; Allen, N. J. (1991). A three-component conceptualization of organizational commitment. Human Resource Management Review, 1(1), 61–89.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
+</section>
+
+<section class="slide" data-layout="ask" data-density="2">
+  <div class="kicker">情境判斷　一</div>
+  <div class="ask">
+    <h2>一位員工說：對這份工作沒什麼熱情<br>但現在換工作要放棄年資與股票，成本太高，所以留下來<br>這最貼近哪一種承諾？</h2>
+    <div class="opts">
+      <div class="opt"><b>A</b>情感承諾</div>
+      <div class="opt"><b>B</b>持續承諾</div>
+      <div class="opt"><b>C</b>規範承諾</div>
+    </div>
+  </div>
+  <div class="foot"><span>口頭作答</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">揭曉　一</div>
+  <div class="split">
+    <div>
+      <h2>持續承諾<br><span style="font-size:36px;color:var(--ink-2);font-weight:500">continuance commitment</span></h2>
+      <p class="lead">留下的理由是離開的成本太高，年資與股票是沉沒成本與轉換成本，不是對組織的認同或義務</p>
+      <p class="lead" style="margin-top:26px">這類員工留任率高，投入未必高，管理上要看的是承諾的組成，不只是留任率</p>
+    </div>
+    <div class="card"><h3>判斷依據</h3><p>動機來源：<span class="def">成本考量</span></p><p style="margin-top:12px">情感承諾的動機是認同與情感，規範承諾的動機是責任或義務感</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Meyer, J. P., &amp; Allen, N. J. (1991). A three-component conceptualization of organizational commitment. Human Resource Management Review, 1(1), 61–89.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>34</span></div>
+</section>
+
+<section class="slide" data-layout="ask" data-density="2">
+  <div class="kicker">情境判斷　二</div>
+  <div class="ask">
+    <h2>一位員工說：這幾年公司在家裡出事時給了很多支持<br>現在有更好的機會，但這時候走會覺得對不起主管，所以留下來<br>這最貼近哪一種承諾？</h2>
+    <div class="opts">
+      <div class="opt"><b>A</b>情感承諾</div>
+      <div class="opt"><b>B</b>持續承諾</div>
+      <div class="opt"><b>C</b>規範承諾</div>
+    </div>
+  </div>
+  <div class="foot"><span>口頭作答</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>35</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">揭曉　二</div>
+  <div class="split">
+    <div>
+      <h2>規範承諾<br><span style="font-size:36px;color:var(--ink-2);font-weight:500">normative commitment</span></h2>
+      <p class="lead">留下的理由是責任與義務感，來自組織過去的投入與互惠<br>動機不同於離開的成本，也不同於情感認同</p>
+      <p class="lead" style="margin-top:26px">兩題的員工都留下，動機不同，調查要能分辨這些差異，題目才有管理意涵</p>
+    </div>
+    <div class="card"><h3>判斷依據</h3><p>動機來源：<span class="def">互惠與義務</span></p><p style="margin-top:12px">若員工說的是「這裡的人和理念是我認同的」，就落在情感承諾</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Meyer, J. P., &amp; Allen, N. J. (1991). A three-component conceptualization of organizational commitment. Human Resource Management Review, 1(1), 61–89.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>36</span></div>
+</section>
+
+<!-- ============ 第七幕 值多少錢 ============ -->
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">06</div><h1>值多少錢</h1><ul class="refs"><li>Rubenstein, A. L., Eberly, M. B., Lee, T. W., &amp; Mitchell, T. R. (2018). Surveying the forest: A meta-analysis, moderator investigation, and future-oriented discussion of the antecedents of voluntary employee turnover. Personnel Psychology, 71(1), 23–65.</li><li>Judge, T. A., Thoresen, C. J., Bono, J. E., &amp; Patton, G. K. (2001). The job satisfaction–job performance relationship: A qualitative and quantitative review. Psychological Bulletin, 127(3), 376–407.</li><li>Allen, D. G., Bryant, P. C., &amp; Vardaman, J. M. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48–64.</li></ul></div>
+  <div class="foot"><span>第六部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>37</span></div>
+</section>
+
+<section class="slide" data-layout="ask" data-density="2">
+  <div class="kicker">猜猜看</div>
+  <div class="ask">
+    <h2>遞補一名離職員工<br>包含招募、甄選與訓練接替者<br>成本大約佔其年薪的多少？</h2>
+    <div class="opts">
+      <div class="opt"><b>A</b>約 30%</div>
+      <div class="opt"><b>B</b>約 80%</div>
+      <div class="opt"><b>C</b>200% 以上</div>
+    </div>
+  </div>
+  <div class="foot"><span>口頭作答，下一頁揭曉</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
+</section>
+
+<section class="slide" data-layout="big" data-density="2">
+  <div class="kicker">揭曉</div>
+  <div class="big">
+    <div class="num">200<small>%</small></div>
+    <div>
+      <h2>專業與主管職可達年薪兩倍<br>基層約兩成，倍數依職級而異</h2>
+      <p class="lead">隱性成本包括流失的內隱知識（implicit knowledge）與社會資本、顧客滿意下降、離職在團隊間傳染</p>
+      <p class="lead" style="margin-top:26px">200% 是專業與管理職的估計，Allen 等人（2010）整理的九成到兩倍也來自這類職位；基層與時薪職的實證估計約為年薪的兩成，倍數要依職級分開算，不宜套用單一數字</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Rubenstein, A. L., Eberly, M. B., Lee, T. W., &amp; Mitchell, T. R. (2018). Surveying the forest: A meta-analysis, moderator investigation, and future-oriented discussion of the antecedents of voluntary employee turnover. Personnel Psychology, 71(1), 23–65.<br>Allen, D. G., Bryant, P. C., &amp; Vardaman, J. M. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48–64.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>39</span></div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">先猜再看</div>
+  <div class="scene">
+    <div class="who">常見的說法</div>
+    <p>離職是錢沒到位、心委屈了，是真的嗎？</p>
+    <p class="q frag">下一頁比較統合分析中薪資與各項態度和離職的相關係數</p>
+  </div>
+  <div class="foot"><span>口頭作答：薪資與工作滿意，何者與離職的關係較強</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>40</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4" style="padding:44px 60px 44px;justify-content:flex-start">
+    <svg viewBox="0 0 1800 940" width="1800" height="940" font-family="Plus Jakarta Sans, Noto Sans TC">
+<line x1="96" y1="50" x2="96" y2="870" stroke="#7A736A" stroke-width="1.5"/><line x1="96" y1="870" x2="1770" y2="870" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="88" y1="733.3" x2="96" y2="733.3" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="88" y1="596.7" x2="96" y2="596.7" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="88" y1="460.0" x2="96" y2="460.0" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="88" y1="323.3" x2="96" y2="323.3" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="88" y1="186.7" x2="96" y2="186.7" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="88" y1="50.0" x2="96" y2="50.0" stroke="#7A736A" stroke-width="1.5"/>
+<text x="84" y="877.0" font-size="20" text-anchor="end" fill="#7A736A">0</text>
+<text x="84" y="740.3" font-size="20" text-anchor="end" fill="#7A736A">.10</text>
+<text x="84" y="603.7" font-size="20" text-anchor="end" fill="#7A736A">.20</text>
+<text x="84" y="467.0" font-size="20" text-anchor="end" fill="#7A736A">.30</text>
+<text x="84" y="330.3" font-size="20" text-anchor="end" fill="#7A736A">.40</text>
+<text x="84" y="193.7" font-size="20" text-anchor="end" fill="#7A736A">.50</text>
+<text x="84" y="57.0" font-size="20" text-anchor="end" fill="#7A736A">.60</text>
+<line x1="375.0" y1="870" x2="375.0" y2="878" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="654.0" y1="870" x2="654.0" y2="878" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="933.0" y1="870" x2="933.0" y2="878" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="1212.0" y1="870" x2="1212.0" y2="878" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="1491.0" y1="870" x2="1491.0" y2="878" stroke="#7A736A" stroke-width="1.5"/>
+<line x1="1770.0" y1="870" x2="1770.0" y2="878" stroke="#7A736A" stroke-width="1.5"/>
+<text x="96.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">0</text>
+<text x="375.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">.02</text>
+<text x="654.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">.04</text>
+<text x="933.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">.06</text>
+<text x="1212.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">.08</text>
+<text x="1491.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">.10</text>
+<text x="1770.0" y="900" font-size="20" text-anchor="middle" fill="#7A736A">.12</text>
+<text x="933" y="926" font-size="21" text-anchor="middle" fill="#44403A">標準誤（效果量的跨情境變異）</text>
+<text x="30" y="460" font-size="20" text-anchor="middle" fill="#44403A" style="writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.08em">校正後統合相關的絕對值</text>
+<line x1="514.5" y1="610.3" x2="629.5" y2="530.3" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="654.0" y1="610.3" x2="667.0" y2="690.3" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="654.0" y1="610.3" x2="823.0" y2="610.3" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="514.5" y1="624.0" x2="345.5" y2="704.0" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="654.0" y1="651.3" x2="641.0" y2="711.3" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="514.5" y1="665.0" x2="681.5" y2="725.0" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="654.0" y1="665.0" x2="643.0" y2="745.0" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="375.0" y1="678.7" x2="364.0" y2="798.7" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="514.5" y1="678.7" x2="501.5" y2="778.7" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="375.0" y1="733.3" x2="542.0" y2="793.3" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="235.5" y1="760.7" x2="562.5" y2="820.7" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="654.0" y1="760.7" x2="715.0" y2="780.7" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="514.5" y1="788.0" x2="681.5" y2="848.0" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="514.5" y1="829.0" x2="733.5" y2="809.0" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<line x1="654.0" y1="856.3" x2="873.0" y2="856.3" stroke="#D9CFB9" stroke-width="1" opacity=".8"/>
+<circle cx="375.0" cy="104.7" r="11" fill="#7A2033" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="793.5" cy="282.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="323.3" r="9" fill="#7A2033" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="1351.5" cy="337.0" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="793.5" cy="405.3" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="473.7" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="933.0" cy="473.7" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="487.3" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="487.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="514.7" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="542.0" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="933.0" cy="542.0" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="555.7" r="11" fill="#7A2033" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="555.7" r="11" fill="#7A2033" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="555.7" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="583.0" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="583.0" r="11" fill="#7A2033" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="596.7" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="596.7" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="596.7" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="1630.5" cy="596.7" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="610.3" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="610.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="610.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="793.5" cy="610.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="624.0" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="624.0" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="637.7" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="637.7" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="651.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="793.5" cy="651.3" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="665.0" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="665.0" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="678.7" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="678.7" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="678.7" r="5" fill="#7A2033" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="933.0" cy="678.7" r="5" fill="#7A2033" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="692.3" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="706.0" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="1072.5" cy="706.0" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="719.7" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="733.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="733.3" r="9" fill="#1C1815" opacity="0.98" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="733.3" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="733.3" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="747.0" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="760.7" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="760.7" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="788.0" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="1072.5" cy="788.0" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="1072.5" cy="788.0" r="5" fill="#1C1815" opacity="0.66" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="815.3" r="11" fill="#7A2033" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="514.5" cy="829.0" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="842.7" r="11" fill="#7A2033" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="375.0" cy="842.7" r="7" fill="#7A2033" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="654.0" cy="856.3" r="7" fill="#1C1815" opacity="0.82" stroke="#FFFEFB" stroke-width="1.5"/>
+<circle cx="235.5" cy="870.0" r="11" fill="#1C1815" opacity="1.14" stroke="#FFFEFB" stroke-width="1.5"/>
+<text x="394.0" y="111.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">退縮認知（+）</text>
+<text x="810.5" y="289.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">其他滿意（−）</text>
+<text x="531.5" y="330.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">求職行為（+）</text>
+<text x="1366.5" y="344.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">因應（−）</text>
+<text x="808.5" y="412.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">其他承諾（−）</text>
+<text x="254.5" y="480.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">組織承諾（−）</text>
+<text x="950.0" y="480.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">適配（−）</text>
+<text x="254.5" y="454.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作滿意（−）</text>
+<text x="531.5" y="494.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">獎酬與成長（−）</text>
+<text x="394.0" y="521.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作鑲嵌（−）</text>
+<text x="533.5" y="549.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">領導（−）</text>
+<text x="948.0" y="549.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">組織氣候（−）</text>
+<text x="356.0" y="562.7" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">外部機會（+）</text>
+<text x="495.5" y="562.7" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">缺勤（+）</text>
+<text x="667.0" y="562.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作保障（−）</text>
+<text x="254.5" y="590.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">年齡（−）</text>
+<text x="533.5" y="590.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">壓力與耗竭（+）</text>
+<text x="216.5" y="603.7" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">年資（−）</text>
+<text x="392.0" y="603.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">子女（−）</text>
+<text x="527.5" y="623.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">敬業度（−）</text>
+<text x="1643.5" y="603.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">獎酬連結（−）</text>
+<text x="633.5" y="537.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作生活衝突（+）</text>
+<text x="671.0" y="697.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作投入（−）</text>
+<text x="827.0" y="617.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">組織支持（−）</text>
+<text x="810.5" y="577.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">情緒穩定（−）</text>
+<text x="360.0" y="671.0" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">心理契約違反（+）</text>
+<text x="341.5" y="711.0" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">工作特性（−）</text>
+<text x="254.5" y="644.7" font-size="16" text-anchor="start" fill="#7A2033" font-weight="700">薪資（−）</text>
+<rect x="216.5" y="618.7" width="128.0" height="38.0" rx="8" fill="none" stroke="#7A2033" stroke-width="3"/>
+<text x="394.0" y="644.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">公平（−）</text>
+<text x="637.0" y="718.3" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">內在動機（−）</text>
+<text x="808.5" y="658.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">責任感（−）</text>
+<text x="685.5" y="732.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">角色衝突（+）</text>
+<text x="639.0" y="752.0" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">角色模糊（+）</text>
+<text x="360.0" y="805.7" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">工具性溝通（−）</text>
+<text x="497.5" y="785.7" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">同儕關係（−）</text>
+<text x="641.0" y="685.7" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">遲到（+）</text>
+<text x="946.0" y="685.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">開放性（+）</text>
+<text x="501.5" y="699.3" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">參與（−）</text>
+<text x="667.0" y="673.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">例行化（−）</text>
+<text x="1087.5" y="713.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">期望符合（−）</text>
+<text x="388.0" y="726.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">甄選表現（−）</text>
+<text x="358.0" y="740.3" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">婚姻狀態（−）</text>
+<text x="392.0" y="760.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作負荷（−）</text>
+<text x="546.0" y="800.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">公民行為（−）</text>
+<text x="669.0" y="760.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">控制信念（+）</text>
+<text x="360.0" y="774.0" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">影響力（−）</text>
+<text x="566.5" y="827.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">工作績效（−）</text>
+<text x="719.0" y="787.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">親和性（−）</text>
+<text x="685.5" y="855.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">能力與技能（−）</text>
+<text x="1085.5" y="795.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">集權化（−）</text>
+<text x="1059.5" y="795.0" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">組織聲望（−）</text>
+<text x="394.0" y="862.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">教育程度（+）</text>
+<text x="737.5" y="816.0" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">組織規模（+）</text>
+<text x="254.5" y="849.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">族裔（+）</text>
+<text x="390.0" y="829.7" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">外向性（+）</text>
+<text x="877.0" y="863.3" font-size="16" text-anchor="start" fill="#44403A" font-weight="500">任務複雜度（−）</text>
+<text x="216.5" y="857.0" font-size="16" text-anchor="end" fill="#44403A" font-weight="500">性別（−）</text>
+<rect x="1470" y="56" width="300" height="120" rx="8" fill="#FFFEFB" stroke="#E6DECE"/>
+<text x="1486" y="82" font-size="17" fill="#1C1815" font-weight="700">點的大小＝研究數 k 的四分位</text>
+<circle cx="1498" cy="102" r="3.8" fill="#1C1815" opacity="0.66"/><text x="1520" y="108" font-size="16" fill="#44403A">第 1 四分位（最少）</text>
+<circle cx="1498" cy="123" r="5.2" fill="#1C1815" opacity="0.82"/><text x="1520" y="129" font-size="16" fill="#44403A">第 2 四分位</text>
+<circle cx="1498" cy="144" r="6.8" fill="#1C1815" opacity="0.98"/><text x="1520" y="150" font-size="16" fill="#44403A">第 3 四分位</text>
+<circle cx="1498" cy="165" r="8.2" fill="#1C1815" opacity="1.14"/><text x="1520" y="171" font-size="16" fill="#44403A">第 4 四分位（最多）</text>
+<text x="1470" y="202" font-size="16" fill="#7A736A">酒紅：與離職同向（+）　墨色：反向（−）</text>
+</svg>
+  <div class="foot foot-fig"><span class="lim ref">Rubenstein, A. L., Eberly, M. B., Lee, T. W., &amp; Mitchell, T. R. (2018). Surveying the forest: A meta-analysis, moderator investigation, and future-oriented discussion of the antecedents of voluntary employee turnover. Personnel Psychology, 71(1), 23–65. Figure 1 依 Table 2 重繪</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>41</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4" style="padding:60px 60px 44px;justify-content:center">
+    <svg style="transform:scale(.88);transform-origin:50% 0" viewBox="0 0 1800 940" width="1800" height="940" font-family="Plus Jakarta Sans, Noto Sans TC" role="img">
+    <line x1="670.0" y1="72" x2="670.0" y2="860" stroke="#E6DECE" stroke-width="1.5"/>
+    <text x="670.0" y="894" font-size="22" text-anchor="middle" fill="#7A736A">−.60</text>
+    <line x1="912.5" y1="72" x2="912.5" y2="860" stroke="#E6DECE" stroke-width="1.5"/>
+    <text x="912.5" y="894" font-size="22" text-anchor="middle" fill="#7A736A">−.30</text>
+    <line x1="1155.0" y1="72" x2="1155.0" y2="860" stroke="#7A736A" stroke-width="2"/>
+    <text x="1155.0" y="894" font-size="22" text-anchor="middle" fill="#7A736A">0</text>
+    <line x1="1397.5" y1="72" x2="1397.5" y2="860" stroke="#E6DECE" stroke-width="1.5"/>
+    <text x="1397.5" y="894" font-size="22" text-anchor="middle" fill="#7A736A">+.30</text>
+    <line x1="1640.0" y1="72" x2="1640.0" y2="860" stroke="#E6DECE" stroke-width="1.5"/>
+    <text x="1640.0" y="894" font-size="22" text-anchor="middle" fill="#7A736A">+.60</text>
+    <text x="1155.0" y="928" font-size="21" text-anchor="middle" fill="#44403A">與自願離職的校正後統合相關係數 ρ</text>
+    <text x="1155.0" y="52" font-size="21" text-anchor="middle" fill="#7A736A">與離職反向（保護因子）　←　0　→　與離職同向（風險訊號）</text>
+    <rect x="1155.0" y="96.0" width="452.7" height="28" fill="#7A2033"/>
+    <text x="654.0" y="119.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="700">退縮認知</text>
+    <text x="532.0" y="119.0" font-size="17" text-anchor="end" fill="#7A736A">withdrawal cognitions</text>
+    <text x="1621.7" y="120.0" font-size="27" text-anchor="start" fill="#7A2033" font-weight="700" font-family="Newsreader">+.56</text>
+    <rect x="1155.0" y="156.0" width="323.3" height="28" fill="#7A2033"/>
+    <text x="654.0" y="179.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">求職行為</text>
+    <text x="532.0" y="179.0" font-size="17" text-anchor="end" fill="#7A736A">job search</text>
+    <text x="1492.3" y="180.0" font-size="27" text-anchor="start" fill="#7A2033" font-weight="700" font-family="Newsreader">+.40</text>
+    <rect x="1155.0" y="216.0" width="185.9" height="28" fill="#7A2033"/>
+    <text x="654.0" y="239.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">外部工作機會</text>
+    <text x="478.0" y="239.0" font-size="17" text-anchor="end" fill="#7A736A">job alternatives</text>
+    <text x="1354.9" y="240.0" font-size="27" text-anchor="start" fill="#7A2033" font-weight="700" font-family="Newsreader">+.23</text>
+    <rect x="1155.0" y="276.0" width="169.8" height="28" fill="#7A2033"/>
+    <text x="654.0" y="299.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">壓力與耗竭</text>
+    <text x="505.0" y="299.0" font-size="17" text-anchor="end" fill="#7A736A">stress / exhaustion</text>
+    <text x="1338.8" y="300.0" font-size="27" text-anchor="start" fill="#7A2033" font-weight="700" font-family="Newsreader">+.21</text>
+    <rect x="920.6" y="336.0" width="234.4" height="28" fill="#1C1815"/>
+    <text x="654.0" y="359.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="700">組織承諾</text>
+    <text x="532.0" y="359.0" font-size="17" text-anchor="end" fill="#7A736A">organizational commitment</text>
+    <text x="906.6" y="360.0" font-size="27" text-anchor="end" fill="#1C1815" font-weight="700" font-family="Newsreader">−.29</text>
+    <rect x="920.6" y="396.0" width="234.4" height="28" fill="#1C1815"/>
+    <text x="654.0" y="419.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">個人與組織適配</text>
+    <text x="451.0" y="419.0" font-size="17" text-anchor="end" fill="#7A736A">person–organization fit, P–O fit</text>
+    <text x="906.6" y="420.0" font-size="27" text-anchor="end" fill="#1C1815" font-weight="700" font-family="Newsreader">−.29</text>
+    <rect x="928.7" y="456.0" width="226.3" height="28" fill="#1C1815"/>
+    <text x="654.0" y="479.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="700">工作滿意</text>
+    <text x="532.0" y="479.0" font-size="17" text-anchor="end" fill="#7A736A">job satisfaction</text>
+    <text x="914.7" y="480.0" font-size="27" text-anchor="end" fill="#1C1815" font-weight="700" font-family="Newsreader">−.28</text>
+    <rect x="928.7" y="516.0" width="226.3" height="28" fill="#1C1815"/>
+    <text x="654.0" y="539.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">獎酬與成長機會</text>
+    <text x="451.0" y="539.0" font-size="17" text-anchor="end" fill="#7A736A">rewards offered</text>
+    <text x="914.7" y="540.0" font-size="27" text-anchor="end" fill="#1C1815" font-weight="700" font-family="Newsreader">−.28</text>
+    <rect x="944.8" y="576.0" width="210.2" height="28" fill="#1C1815"/>
+    <text x="654.0" y="599.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="700">工作鑲嵌</text>
+    <text x="532.0" y="599.0" font-size="17" text-anchor="end" fill="#7A736A">job embeddedness</text>
+    <text x="930.8" y="600.0" font-size="27" text-anchor="end" fill="#1C1815" font-weight="700" font-family="Newsreader">−.26</text>
+    <rect x="961.0" y="636.0" width="194.0" height="28" fill="#1C1815"/>
+    <text x="654.0" y="659.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">領導品質</text>
+    <text x="532.0" y="659.0" font-size="17" text-anchor="end" fill="#7A736A">leadership</text>
+    <text x="947.0" y="660.0" font-size="27" text-anchor="end" fill="#1C1815" font-weight="700" font-family="Newsreader">−.24</text>
+    <rect x="1001.4" y="696.0" width="153.6" height="28" fill="#7A736A"/>
+    <text x="654.0" y="719.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">組織支持感</text>
+    <text x="505.0" y="719.0" font-size="17" text-anchor="end" fill="#7A736A">organizational support</text>
+    <text x="987.4" y="720.0" font-size="27" text-anchor="end" fill="#7A736A" font-weight="700" font-family="Newsreader">−.19</text>
+    <rect x="1017.6" y="756.0" width="137.4" height="28" fill="#7A736A"/>
+    <text x="654.0" y="779.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="700">薪資</text>
+    <text x="586.0" y="779.0" font-size="17" text-anchor="end" fill="#7A736A">pay</text>
+    <text x="1003.6" y="780.0" font-size="27" text-anchor="end" fill="#7A736A" font-weight="700" font-family="Newsreader">−.17</text>
+    <rect x="8" y="743.0" width="1165.0" height="54" rx="8" fill="none" stroke="#7A2033" stroke-width="3"/>
+    <rect x="1025.7" y="816.0" width="129.3" height="28" fill="#7A736A"/>
+    <text x="654.0" y="839.0" font-size="26" text-anchor="end" fill="#1C1815" font-weight="500">責任感</text>
+    <text x="559.0" y="839.0" font-size="17" text-anchor="end" fill="#7A736A">conscientiousness</text>
+    <text x="1011.7" y="840.0" font-size="27" text-anchor="end" fill="#7A736A" font-weight="700" font-family="Newsreader">−.16</text>
+    </svg>
+  <div class="foot foot-fig"><span class="lim multi ref">Rubenstein, A. L., Eberly, M. B., Lee, T. W., &amp; Mitchell, T. R. (2018). Surveying the forest: A meta-analysis, moderator investigation, and future-oriented discussion of the antecedents of voluntary employee turnover. Personnel Psychology, 71(1), 23–65. Table 2 校正後 ρ<br>粗體為教材網站原圖的五列，其餘為補充</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>42</span></div>
+</section>
+
+<section class="slide" data-layout="diagram" data-density="3">
+  <div class="kicker">態度與績效</div>
+  <h2 style="margin-bottom:24px">中等、穩定的正向關係，<br>因果方向仍有爭論</h2>
+  <div style="display:grid;grid-template-columns:1fr 760px;gap:60px;align-items:center">
+    <div>
+      <p class="lead">Judge 等人（2001）的統合分析估計工作滿意與工作績效的母體相關約為 .30；Harter 等人（2002）在業務單位層次也顯示敬業度與生產力、獲利、顧客滿意及留任正向相關</p>
+      <p class="lead" style="margin-top:22px">測量這些態度，等於測量與績效、留任相關的領先指標</p>
+      <p class="lead" style="margin-top:22px;font-size:26px;color:var(--ink-2)">解讀時的限制：相關為 .30 屬中等；樣本多來自北美與歐洲，對台灣情境的代表性有限；把態度當領先指標是合理的實務用法，不等於提高滿意就會提高績效</p>
+    </div>
+    <svg viewBox="0 0 760 520" width="760" height="520" font-family="Plus Jakarta Sans, Noto Sans TC">
+      <defs><marker id="ah" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#7A2033"/></marker><marker id="ah2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#7A736A"/></marker></defs>
+      <rect x="20" y="200" width="260" height="120" rx="16" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/>
+      <text x="150" y="252" text-anchor="middle" font-size="32" font-weight="700" fill="#1C1815">工作滿意</text>
+      <text x="150" y="288" text-anchor="middle" font-size="19" fill="#7A736A">job satisfaction</text>
+      <rect x="480" y="200" width="260" height="120" rx="16" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/>
+      <text x="610" y="252" text-anchor="middle" font-size="32" font-weight="700" fill="#1C1815">工作績效</text>
+      <text x="610" y="288" text-anchor="middle" font-size="19" fill="#7A736A">job performance</text>
+      <line x1="290" y1="236" x2="470" y2="236" stroke="#7A2033" stroke-width="3" marker-end="url(#ah)"/>
+      <text x="380" y="205" text-anchor="middle" font-size="21" fill="#7A2033" font-weight="700">滿意提升績效</text>
+      <line x1="470" y1="284" x2="290" y2="284" stroke="#7A2033" stroke-width="3" marker-end="url(#ah)"/>
+      <text x="380" y="330" text-anchor="middle" font-size="21" fill="#7A2033" font-weight="700">績效帶來滿意</text>
+      <text x="380" y="385" text-anchor="middle" font-size="30" font-weight="700" fill="#1C1815" font-family="Newsreader">ρ = .30</text>
+      <rect x="250" y="30" width="260" height="90" rx="45" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/>
+      <text x="380" y="68" text-anchor="middle" font-size="26" font-weight="700" fill="#44403A">第三因子</text>
+      <text x="380" y="98" text-anchor="middle" font-size="18" fill="#7A736A">例如主管品質、資源、能力</text>
+      <line x1="300" y1="122" x2="170" y2="192" stroke="#7A736A" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#ah2)"/>
+      <line x1="460" y1="122" x2="590" y2="192" stroke="#7A736A" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#ah2)"/>
+      <text x="380" y="470" text-anchor="middle" font-size="22" fill="#44403A">這些可能同時成立，統合分析只能確認相關，無法判定方向</text>
+    </svg>
+  </div>
+  <div class="foot"><span class="lim multi">Judge, T. A., Thoresen, C. J., Bono, J. E., &amp; Patton, G. K. (2001). The job satisfaction–job performance relationship: A qualitative and quantitative review. Psychological Bulletin, 127(3), 376–407.<br>Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002). Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. Journal of Applied Psychology, 87(2), 268–279.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>43</span></div>
+</section>
+
+<section class="slide" data-layout="calc" data-density="3">
+  <div class="kicker">把離職翻成錢</div>
+  <h2>三百人的事業單位<br>一年的離職成本</h2>
+  <div class="calc">
+    <div class="row frag"><div class="lbl">年離職率 15%，年離職人數</div><div class="val">45 人</div></div>
+    <div class="row frag"><div class="lbl">平均年薪 80 萬元，成本倍數採 1.0（混合職級的示意值）</div><div class="val">× 80 萬</div></div>
+    <div class="row total frag"><div class="lbl">一年的離職成本</div><div class="val">3,600 萬</div></div>
+    <div class="row frag"><div class="lbl">若傾聽方案與後續行動把離職率降低 2%，一年省下</div><div class="val" style="color:var(--ok)">480 萬</div></div>
+  </div>
+  <div class="foot"><span class="lim multi">Allen, D. G., Bryant, P. C., &amp; Vardaman, J. M. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48–64.<br>成本倍數依職級而異，課內以離職成本試算器代入各組自己的參數；成本拆解與利潤影響的進階版本在 Topic 13 期末專題處理</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>44</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">業務論證</div>
+  <h2 style="margin-bottom:30px">以金額呈現的業務論證</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">一</div><h3>態度預測離職</h3><p>Rubenstein 等人（2018）的統合分析顯示，組織承諾、工作滿意與工作鑲嵌是離職的中等負相關前因，這些態度都能用調查測量，等於為離職風險提供領先指標</p></div>
+    <div class="card frag"><div class="n">二</div><h3>離職有可量化的成本</h3><p>遞補成本依職級差異很大，基層約年薪的兩成，專業與主管職可達 0.9 到 2 倍（Allen et al., 2010），再加上內隱知識流失、顧客關係中斷與離職在團隊間傳染等隱性成本</p></div>
+    <div class="card frag"><div class="n">三</div><h3>效益以金額呈現</h3><p>年離職人數 × 平均年薪 × 成本倍數，得到目前的年度離職成本；再乘上傾聽方案可望降低的離職率，就是提案裡該出現的效益金額</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:36px">
+    <p class="lead" style="font-size:26px"><span class="sup" style="background:var(--accent);color:var(--cream);padding:4px 10px;border-radius:6px;font-size:18px;letter-spacing:.04em;white-space:nowrap;margin-right:10px">補充</span>Perceptyx 2026 的建議與此一致：預算成為第二大障礙後，人資主管必須把傾聽投資連到留任、生產力與顧客滿意等營運指標，並用高階主管的語言向經營團隊說明</p>
+    <p class="lead" style="font-size:26px">同一份報告指出，有明確業務成果定義的傾聽方案，回報在業務與人才優先事項上有進展的可能性接近 3 倍；階段四組織達成財務目標的比例是階段一的 6 倍</p>
+  </div>
+  <div class="foot"><span class="lim multi">Allen, D. G., Bryant, P. C., &amp; Vardaman, J. M. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48–64.<br>Perceptyx. (2026). The state of employee listening 2026. Perceptyx, Inc.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>45</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">施測前的溝通</div>
+  <h2 style="margin-bottom:30px">施測前的常見疑問與對應的信任環節</h2>
+  <table class="tight">
+    <tr><th style="width:420px">員工的疑問</th><th>哈佛全校敬業度調查 FAQ 的回答</th><th style="width:360px">溝通上的作用</th></tr>
+    <tr class="frag"><td>為什麼要做這個調查</td><td>了解全校的敬業情形，並改善職場</td><td>交代目的與正當性</td></tr>
+    <tr class="frag"><td>我的回答匿名嗎</td><td>匿名，委由第三方機構 BlessingWhite 執行；任何群組少於 6 人不出報表</td><td>以制度背書，不只口頭承諾</td></tr>
+    <tr class="frag"><td>主管會看到我的個別答案嗎</td><td>不會，主管只收到 6 人以上的彙整報告</td><td>消除最直接的報復疑慮</td></tr>
+    <tr class="frag"><td>結果會被怎麼使用</td><td>由第三方向領導者與主管提出洞察與建議，據以擬定行動計畫</td><td>預告後續行動</td></tr>
+  </table>
+  <div class="warnline"><span class="sup" style="background:var(--accent);color:var(--cream);padding:4px 10px;border-radius:6px;font-size:18px;letter-spacing:.04em;white-space:nowrap">補充</span>同一份 FAQ 還交代了施測細節：作答 10 到 15 分鐘、開放兩週、不延期、可中途存檔、核心題目沿用 BlessingWhite 的基準題以利跨組織比較，另由全校委員會加入少量自訂題，6 人的最小報表門檻，會在 Topic 4 談極小群組時再回來</div>
+  <div class="foot"><span class="lim multi">Harvard University. (2015). University-wide employee engagement survey: Frequently asked questions. Harvard University.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>46</span></div>
+</section>
+
+<!-- ============ 收束 ============ -->
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">回到第一個人</div>
+  <div class="scene">
+    <div class="who">員工</div>
+    <p>3 月填的問卷，去了哪裡</p>
+    <p class="q frag">答案在 71%、59%、51% 之間<br>結果被分享了，計畫被建立了，改變沒有發生<br>落差在行動環節，責任在每一層主管</p>
+  </div>
+  <div class="foot"><span>Topic 1</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>47</span></div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">回到第二個人</div>
+  <div class="scene">
+    <div class="who">財務長</div>
+    <p>這筆錢花下去，公司拿到什麼</p>
+    <p class="q frag">能預告離職的領先指標，可換算成金額的風險估計<br>前提是結果要在一個月內變成員工看得見的行動<br>否則支出只換到一份報告</p>
+  </div>
+  <div class="foot"><span>Topic 2</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>48</span></div>
+</section>
+
+<section class="slide" data-layout="next" data-density="3">
+  <div class="kicker">下一步</div>
+  <h2>Topic 3　題項設計與關鍵事例法</h2>
+  <p class="lead" style="margin-top:14px">10 月 2 日，期中團體作業同日啟動，教材將於課程入口網公告</p>
+  <div class="rows" style="margin-top:32px">
+    <div class="row" style="grid-template-columns:200px 1fr">
+      <div class="tt">課後閱讀</div>
+      <div class="dd"><div class="rd"><span class="rd-no">1</span><span>Guadagni, T., Lawrence, T., Tokas, K., &amp; Valencia, C. (2026). The case for performance-first management. Harvard Business Review　<a href="../Handout/Topic1_課程導論與典範轉移/Guadagni_2026_Performance_First_Management_HBR.pdf" target="_blank" class="lnk">原文 PDF</a></span></div><div class="rd"><span class="rd-no">2</span><span>Topic 2 為什麼要做員工意見調查，全部單元　<a href="../Handout/Topic2_為什麼要做員工意見調查/Topic2_為什麼要做員工意見調查_課程網站.html" target="_blank" class="lnk">課堂互動教材網站 Topic 2</a></span></div></div>
+    </div>
+    <div class="row" style="grid-template-columns:200px 1fr">
+      <div class="tt">課後思考</div>
+      <div class="dd">用四階段對照表替自己的公司定位，寫下最弱的那一列與一個可觀察的證據，下次上課口頭分享<br><a href="../Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html#u3" target="_blank" class="lnk">課堂互動教材網站 Topic 1 單元三 3.2 四階段對照</a></div>
+    </div>
+    <div class="row" style="grid-template-columns:200px 1fr">
+      <div class="tt">課內工具</div>
+      <div class="dd">代入自己單位的人數、離職率與平均年薪，把算出的年度離職成本帶來上課<br><a href="../Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="lnk">離職成本試算小工具</a></div>
+    </div>
+  </div>
+  <div class="foot"><span>連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>49</span></div>
+</section>
+
+</div></div>
+
+<div id="bar"><i></i></div>
+<div id="pg">1 / 50</div>
+<div id="nav">
+  <button id="prev" aria-label="上一頁">←</button>
+  <button id="next" aria-label="下一頁">→</button>
+  <button id="fs" aria-label="全螢幕">⛶</button>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var mobile=function(){return innerWidth<=900;};
+
+  function fit(){
+    if(mobile()){
+      var s=innerWidth/1920;
+      slides.forEach(function(sl){sl.style.transform='scale('+s+')';sl.style.marginBottom=(-1080*(1-s)+12)+'px';});
+      return;
+    }
+    slides.forEach(function(sl){sl.style.transform='';sl.style.marginBottom='';});
+    var s=Math.min(innerWidth/1920, innerHeight/1080);
+    deck.style.setProperty('--s',s);
+    deck.style.setProperty('--tx',((innerWidth-1920*s)/2)+'px');
+    deck.style.setProperty('--ty',((innerHeight-1080*s)/2)+'px');
+  }
+  function frags(i){return Array.prototype.slice.call(slides[i].querySelectorAll('.frag'));}
+  function show(i,revealAll){
+    i=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+    frags(i).forEach(function(f){f.classList.toggle('in',!!revealAll);});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+N;
+    document.querySelector('#bar i').style.width=((i+1)/N*100)+'%';
+    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){
+    var f=frags(cur).filter(function(x){return !x.classList.contains('in');});
+    if(f.length){f[0].classList.add('in');return;}
+    if(cur<N-1) show(cur+1,false);
+  }
+  function prev(){
+    var f=frags(cur).filter(function(x){return x.classList.contains('in');});
+    if(f.length){f[f.length-1].classList.remove('in');return;}
+    if(cur>0) show(cur-1,true);
+  }
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(mobile()) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0,false);}
+    else if(e.key==='End'){show(N-1,true);}
+    else if(e.key==='f'||e.key==='F'){toggleFS();}
+  });
+  var wheelT=0;
+  addEventListener('wheel',function(e){
+    if(mobile()) return;
+    var t=Date.now(); if(t-wheelT<420) return; wheelT=t;
+    if(e.deltaY>10) next(); else if(e.deltaY<-10) prev();
+  },{passive:true});
+  var tx=null;
+  addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){
+    if(mobile()||tx===null) return;
+    var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(dx<-40) next(); else if(dx>40) prev();
+  },{passive:true});
+
+  function toggleFS(){
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else{var el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);}
+  }
+  document.getElementById('fs').addEventListener('click',toggleFS);
+  document.addEventListener('fullscreenchange',function(){
+    document.body.classList.toggle('fs',!!document.fullscreenElement);
+    setTimeout(fit,60);
+  });
+  var idleT=null;
+  function wake(){
+    if(!document.body.classList.contains('fs')) return;
+    document.body.classList.remove('idle'); clearTimeout(idleT);
+    idleT=setTimeout(function(){document.body.classList.add('idle');},2200);
+  }
+  ['mousemove','mousedown','touchstart','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true});});
+
+  addEventListener('resize',fit);
+  fit();
+  var h=parseInt((location.hash||'#1').slice(1),10);
+  show(isNaN(h)?0:h-1,false);
+  if(mobile()){slides.forEach(function(s){s.classList.add('on');});}
+})();
+</script>
+</body>
+</html>
