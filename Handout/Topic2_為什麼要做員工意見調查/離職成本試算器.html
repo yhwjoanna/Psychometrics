@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>離職成本試算小工具｜員工意向調查</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Noto+Sans+TC:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+  --accent:#7a2033; --accent-dark:#5b1424; --accent-tint:#f3e3e4;
+  --ink:#1c1815; --ink-2:#44403a; --muted:#697180; --line:#dde1e8;
+  --green:#337052; --palegreen:#edf5f0; --amber:#8a6420; --paleamber:#faf3e3;
+  --bg:#fbfbfa; --paper:#fff;
+  --serif:'Newsreader',Georgia,'Noto Serif TC',serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+em,i{font-style:normal}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased}
+.topbar{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px clamp(16px,3vw,36px);flex-wrap:wrap;box-shadow:0 1px 4px rgba(28,47,82,.04)}
+.tb-left{display:flex;align-items:center;gap:12px;min-width:0}
+.tb-badge{background:var(--accent-tint);color:var(--accent);font-size:12px;font-weight:800;padding:4px 8px;border-radius:6px;letter-spacing:.5px;white-space:nowrap}
+.tb-course{font-weight:700;font-size:16px;color:var(--navy)}
+.tb-en{font-weight:400;font-size:12.5px;color:var(--muted);margin-left:8px}
+.tb-inst{font-size:12px;color:var(--muted)}
+.tb-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tb-topic{background:var(--lightblue);color:var(--navy);border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700;white-space:nowrap}
+.top-nav-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s ease;white-space:nowrap;background:#fff;border:1px solid #d0d7de;color:var(--ink-2)}
+.top-nav-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint)}
+
+main{max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,36px)}
+h1{font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);color:var(--navy);font-weight:600;line-height:1.3}
+.subtitle{color:var(--muted);font-size:14px;margin:6px 0 22px}
+h2{font-family:var(--serif);font-size:22px;color:var(--navy);font-weight:600;margin:0 0 6px}
+h3{font-size:16px;color:var(--navy);font-weight:700;margin:18px 0 8px}
+p{margin:0 0 10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(16px,2.2vw,26px);margin-bottom:20px}
+.layer{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.layer .no{font-family:var(--serif);font-size:34px;color:var(--accent);font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.layer .desc{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+label.fld{display:flex;flex-direction:column;font-size:13.5px;color:var(--muted);font-weight:700}
+label.fld input,label.fld select{margin-top:auto}
+label.fld small{margin-bottom:4px}
+details summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:16px;margin:18px 0 8px}
+.ledger td:nth-child(-n+3),.ledger td:last-child,.ledger th:nth-child(-n+3),.ledger th:last-child{text-align:left}
+label.fld small{display:block;font-weight:400;font-size:12px;color:var(--muted);line-height:1.4;margin-top:2px}
+input[type=number],select{width:100%;padding:9px 10px;margin-top:4px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:var(--sans);background:#fff;color:var(--ink)}
+input[type=number]:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+input[type=range]{width:100%;margin-top:8px;accent-color:var(--accent)}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:16px}
+.rbox{background:var(--paleblue);border-radius:10px;padding:14px;text-align:center}
+.rbox .n{font-family:var(--serif);font-size:clamp(24px,3vw,32px);font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.rbox .l{font-size:13px;color:var(--muted)}
+.rbox.acc{background:var(--accent-tint)} .rbox.acc .n{color:var(--accent)}
+.rbox.ok{background:var(--palegreen)} .rbox.ok .n{color:var(--green)}
+.note{background:var(--palegreen);border-left:4px solid var(--green);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:14.5px}
+.warnb{background:var(--paleamber);border-left:4px solid var(--amber);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:14.5px}
+.warnb.hide{display:none}
+.lb{font-weight:800;color:var(--navy);margin-right:6px}
+.formula{background:var(--paleblue);border-radius:10px;padding:10px 16px;text-align:center;font-size:15px;margin:12px 0;color:var(--navy);font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.tab{padding:6px 14px;border-radius:20px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink-2)}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tab.add{border-style:dashed;color:var(--muted)}
+.sec{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
+.sec h4{font-size:15px;color:var(--navy);margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.sec h4 .ttl{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.sec h4 .sub{font-size:13px;color:var(--muted);font-weight:500}
+.sec h4 .amt{font-family:var(--serif);font-size:18px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.src{font-size:12px;color:var(--muted);margin-top:6px}
+.src b{color:var(--ink-2)}
+.stack{display:flex;height:22px;border-radius:6px;overflow:hidden;margin:10px 0 6px;background:var(--line)}
+.stack div{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.c1{background:#1c2f52}.c2{background:#33568e}.c3{background:#7a9cc6}.c4{background:#7a2033}.c5{background:#c98f98}
+.legend .k1::before{background:#1c2f52}.legend .k2::before{background:#33568e}.legend .k3::before{background:#7a9cc6}.legend .k4::before{background:#7a2033}.legend .k5::before{background:#c98f98}
+.band{position:relative;height:36px;margin:40px 0 4px;background:linear-gradient(90deg,var(--palegreen) 0 20%,var(--paleblue) 20% 60%,var(--accent-tint) 60% 100%);border-radius:8px}
+.band .mk{position:absolute;top:-6px;width:3px;height:48px;background:var(--accent);border-radius:2px}
+.band .mk span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;color:var(--accent);white-space:nowrap}
+.band .t{position:absolute;bottom:4px;font-size:11px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{background:var(--paleblue);color:var(--navy);font-weight:700}
+tr.tot td{font-weight:700;color:var(--navy);border-top:2px solid var(--navy)}
+.tblwrap{width:100%;overflow-x:auto}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{font-family:var(--sans);font-size:14px;font-weight:600;padding:8px 16px;border-radius:20px;border:1px solid var(--line);background:#fff;color:var(--ink-2);cursor:pointer;transition:transform .1s ease-out,background .2s}
+button:active{transform:scale(.97)}
+button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+button.pri:hover{background:var(--accent-dark)}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.pri:hover{color:#fff}
+.pitch{background:var(--paleblue);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.8;margin-top:12px}
+.ref{font-size:13px;color:var(--muted);line-height:1.7;padding-left:2em;text-indent:-2em;margin-bottom:4px}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:18px}
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:10px}
+.scen .box{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.scen .box h4{font-size:15px;color:var(--navy);margin-bottom:6px}
+.scen .box .big{font-family:var(--serif);font-size:28px;color:var(--accent);font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.scen .box .row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink-2);padding:3px 0;border-bottom:1px dashed var(--line)}
+.scen .box .row:last-child{border-bottom:none}
+.chk{display:flex;align-items:flex-start;gap:8px;font-size:14px;margin:8px 0}
+.chk input{margin-top:5px;accent-color:var(--accent)}
+.muted{color:var(--muted)}
+.modebar{display:inline-flex;background:var(--lightblue);border-radius:24px;padding:4px;margin:0 0 18px;gap:4px}
+.modebar .mode{border:none;background:transparent;border-radius:20px;padding:7px 18px;color:var(--navy);font-weight:700}
+.modebar .mode.on{background:var(--navy);color:#fff}
+.modebar .mode:hover{color:var(--navy)} .modebar .mode.on:hover{color:#fff}
+body.simple .full-only{display:none!important}
+body.full .simple-only{display:none!important}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+@media print{.topbar,.btnrow,.tabs,input[type=range]{display:none!important}body{background:#fff}.card{break-inside:avoid;border-color:#ccc}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-badge">HRM922</span>
+    <div>
+      <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+      <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+    </div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">課內工具：離職成本試算小工具</div>
+    <a href="../../index.html" class="top-nav-btn">⌂ 返回課程首頁</a>
+    <a href="Topic2_為什麼要做員工意見調查_課程網站.html" class="top-nav-btn">課堂互動教材網站 Topic 2</a>
+  </div>
+</header>
+<main>
+
+<h1>離職成本試算小工具</h1>
+<p class="subtitle" id="subtitle"></p>
+
+<div class="modebar">
+  <button class="mode on" id="m_simple" onclick="setMode('simple')">簡版　Topic 2 課堂用</button>
+  <button class="mode" id="m_full" onclick="setMode('full')">完整版　Topic 13 業務論證用</button>
+</div>
+
+<div class="btnrow full-only" style="margin:0 0 18px">
+  <button onclick="loadPreset()">載入製造業案例（模擬資料集三廠區）</button>
+  <button onclick="saveLocal()">儲存目前輸入</button>
+  <button onclick="restoreLocal()">載入上次輸入</button>
+  <button onclick="resetAll()">清空</button>
+</div>
+
+<!-- ================= 第一層 ================= -->
+<div class="card" id="L1">
+  <div class="layer"><span class="no">01</span><div><h2>快速估算</h2><div class="desc">用一個成本倍數建立量級直覺，適合課堂示範；倍數依職級差異很大，提案時請用完整版拆解</div></div></div>
+  <div class="grid">
+    <label class="fld"><span>員工人數</span><input type="number" id="q_n" value="300" min="1" oninput="calc()"></label>
+    <label class="fld"><span>年自願離職率 <strong id="q_toV">15</strong>%</span><input type="range" id="q_to" min="1" max="50" value="15" oninput="calc()"></label>
+    <label class="fld"><span>平均年薪（萬元）</span><input type="number" id="q_sal" value="80" min="1" oninput="calc()"></label>
+    <label class="fld"><span>成本倍數 ×<strong id="q_mulV">0.5</strong> 年薪</span><small>基層約 0.2，專業與主管職 0.9 到 2.0</small><input type="range" id="q_mul" min="1" max="25" value="5" oninput="calc()"></label>
+  </div>
+  <div class="res">
+    <div class="rbox"><div class="n" id="q_leavers">–</div><div class="l">年離職人數（估）</div></div>
+    <div class="rbox acc"><div class="n" id="q_cost">–</div><div class="l">年離職成本（萬元）</div></div>
+  </div>
+  <div class="formula">年離職成本 ＝ 員工人數 × 年離職率 × 平均年薪 × 成本倍數</div>
+  <div class="note simple-only"><span class="lb">倍數怎麼選</span>成本倍數是所有離職相關支出除以年薪的比值。個案研究整理顯示基層職位約為年薪的 16% 到 21%，專業與管理職可達 90% 到 200%，差距來自招募難度、上手時間與職缺空窗造成的產出損失。課堂練習先用 0.2 到 0.5 建立量級感，Topic 13 再用完整版把倍數拆成各項成本</div>
+  <div class="src simple-only">簡版把所有自願離職都算成成本。實務上低績效者離開不算損失，完整版可設定可惜離職的比例</div>
+</div>
+
+<!-- ================= 第二層 ================= -->
+<div class="card full-only" id="L2">
+  <div class="layer"><span class="no">02</span><div><h2>成本拆解：倍數由各項成本算出</h2><div class="desc">依職群分別填入，每一項標明該向公司哪個單位取得數字；填不到的先用預設值並在假設清單註明</div></div></div>
+
+  <h3>職群設定</h3>
+  <div class="tblwrap"><table id="grpTable">
+    <thead><tr><th>職群</th><th>人數</th><th>年自願離職率 %</th><th>其中可惜離職 %</th><th>平均年薪（萬）</th><th>每人每年毛利貢獻（萬）</th><th></th></tr></thead>
+    <tbody id="grpBody"></tbody>
+  </table></div>
+  <div class="btnrow"><button onclick="addGroup()">新增職群</button><button onclick="toggleHelper()">毛利貢獻換算輔助</button></div>
+  <div id="helper" class="sec" style="display:none">
+    <h4>毛利貢獻換算<span class="sub">人均營收 × 毛利率，填入上表的毛利貢獻欄</span></h4>
+    <div class="grid">
+      <label class="fld"><span>公司年營收（萬元）</span><input type="number" id="h_rev" value="0" min="0" oninput="helperCalc()"></label>
+      <label class="fld"><span>總員工數</span><input type="number" id="h_n" value="0" min="0" oninput="helperCalc()"></label>
+      <label class="fld"><span>毛利率 %</span><input type="number" id="h_gm" value="25" min="0" max="100" oninput="helperCalc()"></label>
+      <label class="fld"><span>人均年毛利貢獻（萬元）</span><input type="number" id="h_out" readonly></label>
+    </div>
+    <div class="src">向財務部門取得年營收與毛利率。毛利貢獻是全公司平均值，直接生產與間接單位差異大，建議依職群調整</div>
+  </div>
+  <div class="src" style="margin-top:6px"><b>可惜離職</b>：自願離職中組織不希望流失的部分（績效中上、關鍵技能）。低績效者離開不算成本，有時是效益（functional turnover）。不確定時填 100%，屬保守上限</div>
+
+  <h3>各職群的單次離職成本</h3>
+  <div class="tabs" id="grpTabs"></div>
+  <div id="compPanel"></div>
+
+  <h3>拆解結果</h3>
+  <div id="l2out"></div>
+</div>
+
+<!-- ================= 第三層 ================= -->
+<div class="card full-only" id="L3">
+  <div class="layer"><span class="no">03</span><div><h2>情境與利潤影響</h2><div class="desc">用第二層的單次成本推算方案效益。輸出是避免的損失與利潤影響，不是營業額</div></div></div>
+  <div class="grid">
+    <label class="fld"><span>傾聽方案年成本（萬元）</span><small>平台、顧問、人資與主管投入的時間換算</small><input type="number" id="s_cost" value="150" min="0" oninput="calc()"></label>
+    <label class="fld"><span>情境一：離職率降低 <strong id="s1V">1</strong>%</span><input type="range" id="s1" min="0" max="15" value="1" oninput="calc()"></label>
+    <label class="fld"><span>情境二：離職率降低 <strong id="s2V">2</strong>%</span><input type="range" id="s2" min="0" max="15" value="2" oninput="calc()"></label>
+    <label class="fld"><span>情境三：離職率降低 <strong id="s3V">3</strong>%</span><input type="range" id="s3" min="0" max="15" value="3" oninput="calc()"></label>
+  </div>
+  <label class="chk"><input type="checkbox" id="s_cap" checked onchange="calc()"><span>產能受限：職缺空窗與上手期會減少產出。未勾選時，產能損失不計入利潤影響，只計顯性成本與外溢</span></label>
+  <div class="warnb hide" id="w_scen"></div>
+  <div class="scen" id="scenOut"></div>
+  <div class="src" style="margin-top:10px">區間的意義：低估只計顯性成本（離職處理、招募甄選、訓練）；中估加計產能損失；高估再加計外溢成本。三個數字都來自同一組假設，差別在承認哪些隱性成本</div>
+  <h3>提案段落</h3>
+  <div class="pitch" id="pitch"></div>
+  <div class="btnrow">
+    <button class="pri" onclick="copyPitch()">複製提案段落</button>
+    <button onclick="exportCSV()">匯出假設清單（CSV）</button>
+    <button onclick="window.print()">列印或存成 PDF</button>
+  </div>
+  <div id="ledger" style="margin-top:14px"></div>
+</div>
+
+<div class="card full-only">
+  <h2>計算依據與使用提醒</h2>
+  <p>成本項目依 Cascio 與 Boudreau 的人力資本成本架構分為離職處理、招募與甄選、訓練、產能損失與外溢五類；前三類屬顯性成本，後兩類屬隱性成本。Boushey 與 Glynn（2012）整理 30 個個案研究，年薪 7.5 萬美元以下職位的離職成本中位數約為年薪的 21%，3 萬美元以下約 16%，高階與專業職位可達 213%；只有少數個案計入隱性成本，因此這些數字偏向顯性成本。Allen 等人（2010）整理的 90% 到 200% 主要來自專業與管理職</p>
+  <p>本工具把倍數當作拆解的結果而不是輸入。拆解時避免重複計算：空窗期的產能損失與同事補位加班擇一計算，訓練期薪資與上手期折扣分別對應不同時段。離職率與組織績效的關係在跨組織研究中存在但不強，因此第三層的輸出是避免的損失與利潤影響，不宣稱營業額會等比例成長</p>
+  <p>提案時的做法：帶著本工具到人資與財務部門，用公司自己的招募支出、訓練時數、加班費與毛利資料填入，數字來自公司帳目時，不需要說服，只需要說明</p>
+  <div class="ref">Allen, D. G., Bryant, P. C., &amp; Vardaman, J. M. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48–64. https://doi.org/10.5465/amp.24.2.48</div>
+  <div class="ref">Boushey, H., &amp; Glynn, S. J. (2012). There are significant business costs to replacing employees. Center for American Progress.</div>
+  <div class="ref">Cascio, W. F., &amp; Boudreau, J. W. (2011). Investing in people: Financial impact of human resource initiatives (2nd ed.). FT Press.</div>
+  <div class="ref">Rubenstein, A. L., Eberly, M. B., Lee, T. W., &amp; Mitchell, T. R. (2018). Surveying the forest: A meta-analysis, moderator investigation, and future-oriented discussion of the antecedents of voluntary employee turnover. Personnel Psychology, 71(1), 23–65. https://doi.org/10.1111/peps.12226</div>
+</div>
+
+<div class="card simple-only">
+  <h2>簡版的依據</h2>
+  <div class="ref">Allen, D. G., Bryant, P. C., &amp; Vardaman, J. M. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48–64. https://doi.org/10.5465/amp.24.2.48</div>
+  <div class="ref">Boushey, H., &amp; Glynn, S. J. (2012). There are significant business costs to replacing employees. Center for American Progress.</div>
+</div>
+</main>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 2 與 Topic 13 使用。結果為估算，提案時應附上假設清單</footer>
+
+<script>
+/* ---------- 資料模型 ---------- */
+var WORKDAYS=240, WORKHOURS=2000;
+var COMP_DEF=function(){return {
+  sep_h:4, hr_rate:0.06,      // 離職處理時數、人資時薪（萬元/時）
+  sep_fee:0,                  // 資遣或結清（萬）
+  ad_fee:3,                   // 廣告與獵才費（萬）
+  int_n:6, int_h:1,           // 面試人次、每次時數
+  test_fee:0.5,               // 測驗與背景調查（萬）
+  train_fee:2,                // 外部課程費（萬）
+  coach_h:40,                 // 帶教主管時數
+  train_days:10,              // 新人訓練期天數（支薪但無產出）
+  vac_mode:'vac', vac_days:45, ot_h:0, ot_rate:0.06,   // 空窗或補位加班
+  ramp1_m:3, ramp1_p:50, ramp2_m:3, ramp2_p:75,        // 上手期折扣
+  spill:0                     // 外溢（萬）
+};};
+var groups=[
+  {name:'基層作業',n:200,to:18,reg:70,sal:55,gm:120,mgrSal:110,comp:COMP_DEF()},
+  {name:'專業技術',n:70,to:12,reg:90,sal:95,gm:220,mgrSal:140,comp:Object.assign(COMP_DEF(),{ad_fee:8,int_n:8,int_h:1.5,test_fee:1,train_fee:5,coach_h:80,train_days:20,vac_days:75,ramp1_m:3,ramp2_m:6})},
+  {name:'主管',n:30,to:8,reg:100,sal:150,gm:400,mgrSal:220,comp:Object.assign(COMP_DEF(),{ad_fee:25,int_n:10,int_h:2,test_fee:3,train_fee:8,coach_h:100,train_days:15,vac_days:90,ramp1_m:3,ramp2_m:6})}
+];
+var cur=0;
+function fmt(x){return Math.round(x).toLocaleString();}
+function f1(x){return (Math.round(x*10)/10).toLocaleString();}
+
+/* ---------- 第一層 ---------- */
+function calcQuick(){
+  var N=+q_n.value, to=+q_to.value/100, sal=+q_sal.value, mul=+q_mul.value/10;
+  q_toV.textContent=Math.round(to*100); q_mulV.textContent=mul.toFixed(1);
+  var leavers=N*to, cost=leavers*sal*mul;
+  q_leavers.textContent=f1(leavers); q_cost.textContent=fmt(cost);
+}
+
+/* ---------- 第二層：職群表 ---------- */
+function renderGroups(){
+  var tb=document.getElementById('grpBody'); tb.innerHTML='';
+  groups.forEach(function(g,i){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><input type="text" value="'+g.name+'" style="width:110px;padding:6px;border:1px solid var(--line);border-radius:6px;font-size:14px" oninput="groups['+i+'].name=this.value;renderTabs();calc()"></td>'+
+      '<td><input type="number" value="'+g.n+'" min="0" style="width:80px;padding:6px;text-align:right" oninput="groups['+i+'].n=+this.value;calc()"></td>'+
+      '<td><input type="number" value="'+g.to+'" min="0" max="100" style="width:70px;padding:6px;text-align:right" oninput="groups['+i+'].to=+this.value;calc()"></td>'+
+      '<td><input type="number" value="'+g.reg+'" min="0" max="100" style="width:70px;padding:6px;text-align:right" oninput="groups['+i+'].reg=+this.value;calc()"></td>'+
+      '<td><input type="number" value="'+g.sal+'" min="0" style="width:80px;padding:6px;text-align:right" oninput="groups['+i+'].sal=+this.value;calc()"></td>'+
+      '<td><input type="number" value="'+g.gm+'" min="0" style="width:90px;padding:6px;text-align:right" oninput="groups['+i+'].gm=+this.value;calc()"></td>'+
+      '<td><button onclick="removeGroup('+i+')" style="padding:3px 10px;font-size:12px">移除</button></td>';
+    tb.appendChild(tr);
+  });
+  renderTabs();
+}
+function addGroup(){groups.push({name:'職群 '+(groups.length+1),n:50,to:12,reg:100,sal:80,gm:200,mgrSal:150,comp:COMP_DEF()});cur=groups.length-1;renderGroups();renderComp();calc();}
+function removeGroup(i){if(groups.length<=1)return;groups.splice(i,1);cur=Math.min(cur,groups.length-1);renderGroups();renderComp();calc();}
+function renderTabs(){
+  var t=document.getElementById('grpTabs'); t.innerHTML='';
+  groups.forEach(function(g,i){var b=document.createElement('button');b.className='tab'+(i===cur?' on':'');b.textContent=g.name;b.onclick=function(){cur=i;renderTabs();renderComp();};t.appendChild(b);});
+}
+function toggleHelper(){var h=document.getElementById('helper');h.style.display=h.style.display==='none'?'block':'none';}
+function helperCalc(){var r=+h_rev.value,n=+h_n.value,g=+h_gm.value/100;h_out.value=n>0?Math.round(r/n*g):'';}
+
+/* ---------- 第二層：成本項目面板 ---------- */
+function fld(label,key,step,small){
+  var g=groups[cur];
+  return '<label class="fld"><span>'+label+(small?'</span><small>'+small+'</small>':'')+'<input type="number" step="'+(step||1)+'" min="0" value="'+g.comp[key]+'" oninput="groups['+cur+'].comp.'+key+'=+this.value;calc()"></label>';
+}
+function renderComp(){
+  var g=groups[cur], c=g.comp;
+  var mgrRate=g.mgrSal/WORKHOURS;
+  var html='';
+  html+='<div class="grid" style="margin-bottom:8px"><label class="fld"><span>此職群的直屬主管年薪（萬元）</span><small>用來換算面試與帶教的主管時薪，約 '+ (mgrRate*10000).toFixed(0) +' 元／時</small><input type="number" value="'+g.mgrSal+'" min="0" oninput="groups['+cur+'].mgrSal=+this.value;calc()"></label>'+fld('人資時薪（萬元／時）','hr_rate',0.01,'人資年薪 ÷ 2,000 小時')+'</div>';
+  html+='<div class="sec"><h4><span class="ttl">離職處理<span class="sub">顯性成本</span></span><span class="amt" id="a_sep"></span></h4><div class="grid">'+fld('離職面談與行政時數（小時）','sep_h',0.5)+fld('資遣或結清費用（萬元）','sep_fee',0.5,'含未休假結清、資遣費；自願離職多為 0')+'</div><div class="src">向<b>人資</b>取得平均處理時數；資遣費向<b>薪酬</b></div></div>';
+  html+='<div class="sec"><h4><span class="ttl">招募與甄選<span class="sub">顯性成本</span></span><span class="amt" id="a_rec"></span></h4><div class="grid">'+fld('廣告與獵才費（萬元）','ad_fee',0.5,'每次補人的平均支出；獵才通常為年薪 20% 到 30%')+fld('面試人次','int_n',1,'所有面試者合計')+fld('每人次面試時數（小時）','int_h',0.5,'含主管準備與討論時間')+fld('測驗與背景調查費（萬元）','test_fee',0.1)+'</div><div class="src">向<b>招募單位</b>取得廣告與獵才支出、平均面試人次</div></div>';
+  html+='<div class="sec"><h4><span class="ttl">訓練<span class="sub">顯性成本</span></span><span class="amt" id="a_tr"></span></h4><div class="grid">'+fld('外部課程與證照費（萬元）','train_fee',0.5)+fld('帶教主管時數（小時）','coach_h',1,'主管或資深同仁一對一帶教的總時數')+fld('新人訓練期天數','train_days',1,'支薪但尚未投入產出的天數，依此職群日薪計算')+'</div><div class="src">向<b>訓練單位</b>取得課程費，向<b>用人主管</b>估帶教時數</div></div>';
+  html+='<div class="sec"><h4><span class="ttl">產能損失<span class="sub">隱性成本，二選一以免重複計算</span></span><span class="amt" id="a_prod"></span></h4>'+
+    '<div class="grid"><label class="fld"><span>空窗期的處理方式</span><select onchange="groups['+cur+'].comp.vac_mode=this.value;renderComp();calc()"><option value="vac"'+(c.vac_mode==='vac'?' selected':'')+'>職缺空窗，產出減少（依毛利貢獻）</option><option value="ot"'+(c.vac_mode==='ot'?' selected':'')+'>同事補位加班（依加班時薪）</option></select></label>'+
+    (c.vac_mode==='vac'?fld('職缺空窗天數','vac_days',1,'離職日到新人到職日，向招募單位取得'):fld('補位加班總時數（小時）','ot_h',1)+fld('加班時薪（萬元／時）','ot_rate',0.01))+
+    fld('上手期第一段月數','ramp1_m',1)+fld('第一段產出比例 %','ramp1_p',5,'預設 50%')+fld('上手期第二段月數','ramp2_m',1)+fld('第二段產出比例 %','ramp2_p',5,'預設 75%')+'</div>'+
+    '<div class="src">上手期折扣以此職群的<b>每月毛利貢獻</b>計算；若第三層未勾選產能受限，此類不計入利潤影響</div></div>';
+  html+='<div class="sec"><h4><span class="ttl">外溢<span class="sub">隱性成本，預設為零</span></span><span class="amt" id="a_sp"></span></h4><div class="grid">'+fld('顧客流失、品質與錯誤成本（萬元）','spill',0.5,'每次離職平均造成的損失，只在有依據時填寫，並在假設清單標示為假設')+'</div></div>';
+  document.getElementById('compPanel').innerHTML=html;
+}
+
+/* ---------- 成本計算 ---------- */
+function costOf(g){
+  var c=g.comp, mgrRate=g.mgrSal/WORKHOURS, daySal=g.sal/WORKDAYS, dayGm=g.gm/WORKDAYS, monGm=g.gm/12;
+  var sep=c.sep_h*c.hr_rate+c.sep_fee;
+  var rec=c.ad_fee+c.int_n*c.int_h*mgrRate+c.test_fee;
+  var tr=c.train_fee+c.coach_h*mgrRate+c.train_days*daySal;
+  var vac=c.vac_mode==='vac'?c.vac_days*dayGm:c.ot_h*c.ot_rate;
+  var ramp=monGm*(c.ramp1_m*(1-c.ramp1_p/100)+c.ramp2_m*(1-c.ramp2_p/100));
+  var prod=vac+ramp;
+  var sp=c.spill;
+  var direct=sep+rec+tr;
+  return {sep:sep,rec:rec,tr:tr,prod:prod,sp:sp,direct:direct,total:direct+prod+sp,leavers:g.n*g.to/100*g.reg/100,allLeavers:g.n*g.to/100};
+}
+function bandNote(mul,g){
+  if(g.sal<=70) return mul<0.1?'低於基層職位的實證區間（約 0.16 到 0.21），檢查是否漏填招募或訓練項目':(mul>0.6?'高於基層職位常見的實證區間（約 0.16 到 0.21），若此職群技能特殊可接受，否則檢查上手期與空窗假設':'落在基層職位的實證區間附近（約 0.16 到 0.21）');
+  return mul<0.5?'低於專業與管理職的實證區間（0.9 到 2.0），可能漏估隱性成本':(mul>2.5?'高於專業與管理職的實證上限（約 2.0），檢查毛利貢獻與空窗天數':'落在專業與管理職的實證區間（0.9 到 2.0）附近');
+}
+
+function renderL2(){
+  var out='', totalAnnual=0, rows='';
+  var cg=groups[cur], cc=costOf(cg);
+  ['a_sep','a_rec','a_tr','a_prod','a_sp'].forEach(function(id,k){var v=[cc.sep,cc.rec,cc.tr,cc.prod,cc.sp][k];var el=document.getElementById(id);if(el)el.textContent=f1(v)+' 萬';});
+  var parts=[['離職處理',cc.sep,'c1'],['招募與甄選',cc.rec,'c2'],['訓練',cc.tr,'c3'],['產能損失',cc.prod,'c4'],['外溢',cc.sp,'c5']];
+  var mul=cg.sal>0?cc.total/cg.sal:0;
+  out+='<div class="res"><div class="rbox acc"><div class="n">'+fmt(cc.total)+'</div><div class="l">'+cg.name+'：單次離職總成本（萬元）</div></div><div class="rbox"><div class="n">×'+mul.toFixed(2)+'</div><div class="l">換算成年薪倍數</div></div><div class="rbox"><div class="n">'+f1(cc.leavers)+'</div><div class="l">年可惜離職人數（估）</div></div><div class="rbox"><div class="n">'+fmt(cc.total*cc.leavers)+'</div><div class="l">'+cg.name+'年度成本（萬元）</div></div></div>';
+  out+='<div class="stack">'+parts.map(function(p){return '<div class="'+p[2]+'" style="width:'+(cc.total>0?p[1]/cc.total*100:0)+'%" title="'+p[0]+' '+fmt(p[1])+' 萬"></div>';}).join('')+'</div><div class="legend">'+parts.map(function(p,k){return '<span class="k'+(k+1)+'">'+p[0]+' '+fmt(p[1])+' 萬（'+(cc.total>0?Math.round(p[1]/cc.total*100):0)+'%）</span>';}).join('')+'</div>';
+  var pos=Math.min(100,mul/2.5*100);
+  out+='<div class="band"><div class="mk" style="left:'+pos+'%"><span>此職群 ×'+mul.toFixed(2)+'</span></div><span class="t" style="left:2%">0</span><span class="t" style="left:8%">基層實證約 0.16 到 0.21</span><span class="t" style="left:38%">專業與管理職實證 0.9 到 2.0</span><span class="t" style="right:2%">2.5</span></div><div class="src">'+bandNote(mul,cg)+'</div>';
+  // 敏感度
+  var sens=[['廣告與獵才費','ad_fee'],['面試人次','int_n'],['帶教主管時數','coach_h'],['新人訓練期天數','train_days'],['職缺空窗天數','vac_days'],['第一段產出比例','ramp1_p'],['外溢','spill']].map(function(s){
+    var c2=JSON.parse(JSON.stringify(cg)); c2.comp[s[1]]=cg.comp[s[1]]*1.2; var d=costOf(c2).total-cc.total; return [s[0],d];}).sort(function(a,b){return Math.abs(b[1])-Math.abs(a[1]);}).slice(0,3);
+  out+='<div class="src">敏感度（該項增加 20% 時單次成本的變化）：'+sens.map(function(s){return s[0]+' '+(s[1]>=0?'+':'')+f1(s[1])+' 萬';}).join('；')+'。提案時優先確認這幾個參數的來源</div>';
+  // 全公司彙總
+  groups.forEach(function(g){var c=costOf(g);var a=c.total*c.leavers;totalAnnual+=a;rows+='<tr><td>'+g.name+'</td><td>'+g.n+'</td><td>'+f1(c.allLeavers)+'</td><td>'+f1(c.leavers)+'</td><td>'+fmt(c.total)+'</td><td>×'+(g.sal>0?(c.total/g.sal).toFixed(2):'–')+'</td><td>'+fmt(a)+'</td></tr>';});
+  out+='<h3>全公司年度離職成本</h3><div class="tblwrap"><table><thead><tr><th>職群</th><th>人數</th><th>年離職人數</th><th>其中可惜</th><th>單次成本（萬）</th><th>倍數</th><th>年度成本（萬）</th></tr></thead><tbody>'+rows+'<tr class="tot"><td>合計</td><td>'+groups.reduce(function(s,g){return s+g.n;},0)+'</td><td></td><td></td><td></td><td></td><td>'+fmt(totalAnnual)+'</td></tr></tbody></table></div>';
+  document.getElementById('l2out').innerHTML=out;
+  return totalAnnual;
+}
+
+/* ---------- 第三層 ---------- */
+function renderL3(){
+  var cap=document.getElementById('s_cap').checked, pc=+s_cost.value;
+  var sc=[+s1.value,+s2.value,+s3.value]; s1V.textContent=sc[0]; s2V.textContent=sc[1]; s3V.textContent=sc[2];
+  var warn=[]; groups.forEach(function(g){sc.forEach(function(d){if(d>g.to)warn.push(g.name+'的離職率只有 '+g.to+'%，降低 '+d+'% 超過可降空間，該職群以降到 0 計算');});});
+  var w=document.getElementById('w_scen'); if(warn.length){w.className='warnb';w.textContent=warn.filter(function(x,i,a){return a.indexOf(x)===i;}).join('；');}else w.className='warnb hide';
+  var html='', pitchScen=[];
+  sc.forEach(function(d,k){
+    var lo=0,mid=0,hi=0,people=0;
+    groups.forEach(function(g){var c=costOf(g);var dd=Math.min(d,g.to);var saved=g.n*dd/100*g.reg/100;people+=saved;lo+=saved*c.direct;mid+=saved*(c.direct+(cap?c.prod:0));hi+=saved*(c.direct+(cap?c.prod:0)+c.sp);});
+    var net=mid-pc, roi=pc>0?net/pc*100:null;
+    pitchScen.push({d:d,people:people,lo:lo,mid:mid,hi:hi,net:net,roi:roi});
+    html+='<div class="box"><h4>情境'+['一','二','三'][k]+'：離職率降低 '+d+'%</h4><div class="big">'+fmt(mid)+' 萬</div><div class="row"><span>避免的損失，中估</span><span>'+fmt(mid)+' 萬</span></div><div class="row"><span>區間（低估到高估）</span><span>'+fmt(lo)+' 到 '+fmt(hi)+' 萬</span></div><div class="row"><span>相當於留住</span><span>'+f1(people)+' 人／年</span></div><div class="row"><span>扣除方案成本後的淨效益</span><span>'+fmt(net)+' 萬</span></div><div class="row"><span>投資報酬率</span><span>'+(roi===null?'–':Math.round(roi)+'%')+'</span></div></div>';
+  });
+  document.getElementById('scenOut').innerHTML=html;
+  var s=pitchScen[1];
+  var totalN=groups.reduce(function(a,g){return a+g.n;},0);
+  document.getElementById('pitch').innerHTML='<span class="lb">提案段落</span>以 '+totalN.toLocaleString()+' 人、'+groups.length+' 個職群的離職成本拆解計算，目前每年因可惜離職損失約 '+fmt(groups.reduce(function(a,g){var c=costOf(g);return a+c.total*c.leavers;},0))+' 萬元（依公司招募、訓練、'+(cap?'產能':'')+'資料估算，各項假設見附表）。若傾聽方案與後續行動能使離職率降低 '+s.d+' 個百分點，一年可避免的損失約 '+fmt(s.mid)+' 萬元（區間 '+fmt(s.lo)+' 到 '+fmt(s.hi)+' 萬元），扣除方案年成本 '+fmt(pc)+' 萬元後淨效益約 '+fmt(s.net)+' 萬元'+(s.roi===null?'':'，投資報酬率約 '+Math.round(s.roi)+'%')+'。降低幅度為情境假設，將以行動追蹤指標驗證';
+  renderLedger();
+}
+function ledgerRows(){
+  var rows=[['層級','職群','項目','數值','單位','來源或假設']];
+  groups.forEach(function(g){
+    var c=g.comp;
+    rows.push(['職群',g.name,'人數',g.n,'人','人資名單']);rows.push(['職群',g.name,'年自願離職率',g.to,'%','人資離職統計']);rows.push(['職群',g.name,'可惜離職比例',g.reg,'%','用人主管判斷']);rows.push(['職群',g.name,'平均年薪',g.sal,'萬元','薪酬']);rows.push(['職群',g.name,'每人每年毛利貢獻',g.gm,'萬元','財務']);rows.push(['職群',g.name,'直屬主管年薪',g.mgrSal,'萬元','薪酬']);
+    rows.push(['成本',g.name,'離職處理時數',c.sep_h,'小時','人資']);rows.push(['成本',g.name,'人資時薪',c.hr_rate,'萬元/時','薪酬']);rows.push(['成本',g.name,'資遣或結清',c.sep_fee,'萬元','薪酬']);
+    rows.push(['成本',g.name,'廣告與獵才費',c.ad_fee,'萬元','招募']);rows.push(['成本',g.name,'面試人次',c.int_n,'人次','招募']);rows.push(['成本',g.name,'每人次面試時數',c.int_h,'小時','用人主管']);rows.push(['成本',g.name,'測驗與背景調查',c.test_fee,'萬元','招募']);
+    rows.push(['成本',g.name,'外部課程費',c.train_fee,'萬元','訓練']);rows.push(['成本',g.name,'帶教主管時數',c.coach_h,'小時','用人主管']);rows.push(['成本',g.name,'新人訓練期天數',c.train_days,'天','訓練']);
+    rows.push(['成本',g.name,'空窗處理方式',c.vac_mode==='vac'?'職缺空窗':'補位加班','','']);
+    if(c.vac_mode==='vac')rows.push(['成本',g.name,'職缺空窗天數',c.vac_days,'天','招募']);else{rows.push(['成本',g.name,'補位加班時數',c.ot_h,'小時','薪酬']);rows.push(['成本',g.name,'加班時薪',c.ot_rate,'萬元/時','薪酬']);}
+    rows.push(['成本',g.name,'上手期第一段',c.ramp1_m+' 個月，產出 '+c.ramp1_p+'%','','假設']);rows.push(['成本',g.name,'上手期第二段',c.ramp2_m+' 個月，產出 '+c.ramp2_p+'%','','假設']);
+    rows.push(['成本',g.name,'外溢成本',c.spill,'萬元','假設']);
+  });
+  rows.push(['情境','全公司','傾聽方案年成本',+s_cost.value,'萬元','方案預算']);rows.push(['情境','全公司','產能受限',document.getElementById('s_cap').checked?'是':'否','','假設']);
+  [s1,s2,s3].forEach(function(e,i){rows.push(['情境','全公司','情境'+(i+1)+'離職率降低',+e.value,'%','假設']);});
+  return rows;
+}
+function renderLedger(){
+  var rows=ledgerRows();
+  var h='<details><summary>假設清單（'+(rows.length-1)+' 項，點開檢視）</summary><div class="tblwrap ledger"><table><thead><tr>'+rows[0].map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>'+rows.slice(1).map(function(r){return '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div></details>';
+  document.getElementById('ledger').innerHTML=h;
+}
+
+/* ---------- 工具 ---------- */
+function calc(){calcQuick();renderL2();renderL3();}
+function copyPitch(){var t=document.getElementById('pitch').innerText.replace(/^提案段落/,'').trim();navigator.clipboard.writeText(t).then(function(){alert('已複製提案段落');});}
+function exportCSV(){var rows=ledgerRows();var csv='﻿'+rows.map(function(r){return r.map(function(x){return '"'+String(x).replace(/"/g,'""')+'"';}).join(',');}).join('\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='離職成本假設清單.csv';a.click();}
+function state(){return {groups:groups,q:{n:q_n.value,to:q_to.value,sal:q_sal.value,mul:q_mul.value},s:{cost:s_cost.value,s1:s1.value,s2:s2.value,s3:s3.value,cap:document.getElementById('s_cap').checked}};}
+function apply(st){groups=st.groups;cur=0;q_n.value=st.q.n;q_to.value=st.q.to;q_sal.value=st.q.sal;q_mul.value=st.q.mul;s_cost.value=st.s.cost;s1.value=st.s.s1;s2.value=st.s.s2;s3.value=st.s.s3;document.getElementById('s_cap').checked=st.s.cap;renderGroups();renderComp();calc();}
+function saveLocal(){try{localStorage.setItem('turnoverTool',JSON.stringify(state()));alert('已儲存於此瀏覽器');}catch(e){alert('此瀏覽器無法儲存');}}
+function restoreLocal(){try{var s=localStorage.getItem('turnoverTool');if(!s){alert('沒有儲存過的輸入');return;}apply(JSON.parse(s));}catch(e){alert('讀取失敗');}}
+var PRESET=JSON.parse(JSON.stringify({groups:groups,q:{n:300,to:15,sal:80,mul:5},s:{cost:150,s1:1,s2:2,s3:3,cap:true}}));
+function loadPreset(){apply(JSON.parse(JSON.stringify(PRESET)));}
+function resetAll(){groups=[{name:'職群 1',n:0,to:0,reg:100,sal:0,gm:0,mgrSal:0,comp:COMP_DEF()}];cur=0;renderGroups();renderComp();calc();}
+function setMode(m){document.body.classList.remove('simple','full');document.body.classList.add(m);m_simple.classList.toggle('on',m==='simple');m_full.classList.toggle('on',m==='full');document.getElementById('subtitle').textContent=m==='simple'?'配合 Topic 2 使用。用一個成本倍數建立離職成本的量級直覺，金額單位為萬元，結果為估算':'配合 Topic 13 期末專題的業務論證使用。倍數由各項成本拆解算出，輸出利潤影響、淨效益與假設清單，金額單位為萬元';try{history.replaceState(null,'',m==='full'?'#full':location.pathname.split('/').pop());}catch(e){}}
+setMode(location.hash==='#full'?'full':'simple');
+window.addEventListener('hashchange',function(){setMode(location.hash==='#full'?'full':'simple');});
+renderGroups();renderComp();calc();
+</script>
+</body>
+</html>

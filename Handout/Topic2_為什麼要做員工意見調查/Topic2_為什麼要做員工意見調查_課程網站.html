@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 2：為什麼要做員工意見調查｜員工意向調查</title>
+<style>
+
+  :root{
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-topic">Topic 2：為什麼要做員工意見調查</div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 2：為什麼要做員工意見調查</div>
+    <div class="t2">Topic 2: Why Survey Employees?<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">用途與規劃</div>
+    <a data-u="u1">單元一：員工意見調查的十大功能</a>
+    <a data-u="uplan">單元二：調查的規劃決策</a>
+    <div class="grp">構念與價值</div>
+    <a data-u="u2">單元三：員工態度的三個核心構念</a>
+    <a data-u="u3">單元四：態度為何值得測量</a>
+    <div class="grp">定位與文獻</div>
+    <a data-u="u4">單元五：調查在管理決策中的定位</a>
+    <a data-u="u5">單元六：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>Topic 2　為什麼要做員工意見調查</h1>
+  <div class="subtitle">員工意向調查課程．Topic 2（3 小時）．適用對象：人管所碩士班</div>
+  <p>員工意見調查要投入時間、金錢與員工的注意力，值得先問一句為什麼。本主題先看員工意見調查在組織裡實際承擔的十種功能，接著釐清三個常被混用的員工態度構念——工作滿意、員工敬業度與組織承諾，再用離職與績效的統合分析證據說明這些態度為何值得測量，最後把調查放回管理決策的脈絡，說明它如何從一份報告變成決策的依據。</p>
+  <h2>本主題單元</h2>
+  <table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td>一、員工意見調查的十大功能</td><td>認識調查在組織中承擔的十種角色（Smith, 2003）</td></tr>
+    <tr><td>二、調查的規劃決策</td><td>把調查目的連向組織策略，掌握規劃前的六個必問問題</td></tr>
+    <tr><td>三、員工態度的三個核心構念</td><td>區分工作滿意、敬業度、組織承諾，並掌握承諾的三個成分</td></tr>
+    <tr><td>四、態度為何值得測量</td><td>用離職與績效的統合分析理解測量態度的實務價值</td></tr>
+    <tr><td>五、調查在管理決策中的定位</td><td>從一份報告到一項決策依據</td></tr>
+    <tr><td>六、參考文獻</td><td>本主題引用來源與專有名詞對照表</td></tr>
+  </table>
+  <h2>本主題學習目標</h2>
+  <div class="card">
+    <p>修畢本主題後，學生應能：其一，說出員工意見調查的主要功能與適用情境；其二，把調查目的連向組織策略，並用六個必問問題檢核一項調查的規劃；其三，區分工作滿意、員工敬業度與組織承諾，並說明組織承諾的三個成分；其四，用離職與績效的統合分析證據，說明測量員工態度的實務價值；其五，說明調查結果如何轉為管理決策的依據。</p>
+  </div>
+  <div class="note"><span class="lb">使用說明</span>導覽列可切換單元。各單元末附兩階段自我檢測題：先作答並標注信心，答對後才展開第二層機制確認；校準面板僅記錄每題第一次作答。本網站為單一檔案、離線可用；重新整理會清空作答紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>只計每題第一次作答；高信心且答錯屬過度自信區，建議回到該單元重讀；低信心且答對表示理解比自己以為的更穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 十大功能 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：員工意見調查的十大功能</h1>
+  <div class="subtitle">主要依據：Smith (2003)；延伸：Amundsen &amp; Martinsen (2014)、Goffin &amp; Jackson (1988)、Choi (2011)</div>
+
+  <h2>1.1 功能定位與規劃順序</h2>
+  <p>員工意見調查常被當成例行的年度活動，但它在組織裡其實能承擔多種不同的功能。Smith（2003）把員工意見調查的用途整理為十項。規劃調查前先確認主要目的很重要，因為不同目的會導向不同的題目、頻率與對象——為了診斷現況而問，和為了支援一項接班決策而問，設計並不相同。點選下方查看每一項功能。</p>
+  <div class="calc">
+    <div class="pg-ctrl" id="tfBtns">
+      <button class="pg-btn" onclick="tfShow(1)">1 診斷現況</button>
+      <button class="pg-btn ghost" onclick="tfShow(2)">2 向上回饋</button>
+      <button class="pg-btn ghost" onclick="tfShow(3)">3 預測變項</button>
+      <button class="pg-btn ghost" onclick="tfShow(4)">4 優勢劣勢</button>
+      <button class="pg-btn ghost" onclick="tfShow(5)">5 追蹤變革</button>
+      <button class="pg-btn ghost" onclick="tfShow(6)">6 強化決策</button>
+      <button class="pg-btn ghost" onclick="tfShow(7)">7 訓練架構</button>
+      <button class="pg-btn ghost" onclick="tfShow(8)">8 研究平台</button>
+      <button class="pg-btn ghost" onclick="tfShow(9)">9 具體化價值</button>
+      <button class="pg-btn ghost" onclick="tfShow(10)">10 組織記憶</button>
+    </div>
+    <div class="pg-panel" id="tfDesc" style="font-size:14.5px;"></div>
+  </div>
+
+  <h2>1.2 三種功能取向及其規劃意涵</h2>
+  <p>十項功能依其服務的目的，可歸納為三種取向。這個分類的用處不在分類本身，而在於不同取向會對調查設計提出不同要求——確認主要取向，才能決定題目涵蓋範圍、施測頻率與資料保存方式。</p>
+  <table>
+    <tr><th style="width:16%">取向</th><th style="width:26%">涵蓋功能</th><th style="width:26%">核心用途</th><th>對調查設計的要求</th></tr>
+    <tr><td>診斷與回饋</td><td>1 診斷現況、2 向上回饋、4 優勢劣勢</td><td>把組織現況與員工的聲音攤開來看</td><td>題目涵蓋面要廣、需保障匿名與心理安全，才問得到真話</td></tr>
+    <tr><td>預測與決策</td><td>3 預測變項、5 追蹤變革、6 強化決策</td><td>把調查連到組織在意的結果與具體決策</td><td>需能與離職、績效等結果資料串接；施測時點要對齊決策與變革的節奏</td></tr>
+    <tr><td>制度與記憶</td><td>7 訓練架構、8 研究平台、9 具體化價值、10 組織記憶</td><td>讓調查成為長期的制度與組織資產</td><td>題目需跨年保持穩定以利比較；資料與歷次決策要能保存、可回溯</td></tr>
+  </table>
+
+  <h2>1.3 延伸：自我與他人評量一致性（SOA）</h2>
+  <p>功能九提到，調查能攤開認知落差。一個典型的例子是自我與他人評量一致性（Self-Other Agreement, SOA）：讓領導者自評、同時讓部屬或上司評同一項能力，再比較兩者。落差可分三種——高估者（自評高於他評）、低估者（自評低於他評），以及兩者一致。Amundsen 與 Martinsen（2014）發現，高估者容易對自己有不切實際的正面評價、忽略員工給的負面回饋、追求過高且具風險的目標，自負與傲慢的行為也較多；低估者則可能較謙虛、更努力，但也可能只挑不具挑戰性的目標。這說明多來源（自評加他評）的調查，能揭露單一來源看不到的盲點。同一構念由不同來源評分是否一致，也連到 Topic 3 的評分者間信度。</p>
+
+  <div class="key"><span class="lb">本單元要點</span>員工意見調查不是單一用途的工具。規劃前先確認主要目的落在診斷與回饋、預測與決策，還是制度與記憶，才能決定題目、頻率與對象。後面幾週的設計與分析，都建立在先想清楚要它做什麼之上。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 1-1</div>
+    <div class="qbody">
+      <p>某製造公司正在推動大規模組織重整，想在過程中持續掌握員工態度的變化。這最貼近員工意見調查的哪一項功能？</p>
+      <label><input type="radio" name="q11" value="a"> 記錄公司經歷過的事</label>
+      <label><input type="radio" name="q11" value="b"> 監控與追蹤組織變革</label>
+      <label><input type="radio" name="q11" value="c"> 將組織的價值觀具體化</label>
+      <label><input type="radio" name="q11" value="d"> 提供訓練的架構</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q11r" value="a"> 因為這項功能正是在策略或結構改變時，追蹤員工態度隨時間的變化</label>
+      <label><input type="radio" name="q11r" value="b"> 因為只要做調查，就算是在追蹤變革</label>
+      <label><input type="radio" name="q11r" value="c"> 因為組織重整一定要靠調查才能完成</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q11c" value="低"> 低</label>
+        <label><input type="radio" name="q11c" value="中"> 中</label>
+        <label><input type="radio" name="q11c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q11','b','a','正確。監控與追蹤組織變革，指的就是在變動期間追蹤員工態度的變化。','關鍵在於這項功能對應的是變動期間的態度追蹤，而非泛指任何調查。','再想想：題目強調的是重整過程中持續掌握態度變化。')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2new 調查的規劃決策 ==================== -->
+<section class="unit" id="uplan">
+  <h1>單元二：調查的規劃決策</h1>
+  <div class="subtitle">主要依據：Johnson (2018)</div>
+
+  <h2>2.1 目的必須連向組織策略</h2>
+  <p>知道了調查能做什麼，下一個問題是這一次要做什麼。Johnson（2018）的核心主張是：調查的目的必須與組織的策略或目標相連，而不是為了做而做。問卷的名稱與填答說明本身就在對員工傳達訊息——組織現在關心什麼。取名為員工滿意度調查、領導風格與效能調查、組織文化調查，員工讀到的訊號並不相同。</p>
+  <p>同樣的道理，調查主題不應只是跟流行：企業社會責任、雇主品牌、創新文化等主題都有價值，但要先問這是不是此刻組織診斷真正需要的。與策略脫節的調查，即使執行得漂亮，結果也難以轉成行動——這正是 Topic 1 資料到行動落差的常見起點。</p>
+
+  <h2>2.2 規劃前的六個必問問題</h2>
+  <p>若人資或高階主管說不清楚為何要做調查，先回答下列六個問題再動手。答不出來的題目，就是規劃還沒完成的地方。</p>
+  <table>
+    <tr><th style="width:36%">問題</th><th>釐清的事</th></tr>
+    <tr><td>為什麼要做這個調查？</td><td>目的與正當性；與策略的關聯</td></tr>
+    <tr><td>想從結果學到或知道什麼？</td><td>要回答的具體問題，決定構面與題目</td></tr>
+    <tr><td>結果要怎麼運用、用在哪裡？</td><td>後續行動的路徑與負責單位</td></tr>
+    <tr><td>調查如何支持組織策略？</td><td>與策略目標的對應，爭取高層支持</td></tr>
+    <tr><td>希望多久進行一次？</td><td>頻率與資源的承諾，見 2.3</td></tr>
+    <tr><td>用什麼方式調查？</td><td>脈動或年度、抽樣或普查等方法選擇</td></tr>
+  </table>
+  <p>這六問也是對外部顧問的防線：能自己回答，才能主導設計、判斷提案，而不是被顧問牽著走；當然，也不能為了壓低成本而犧牲品質。</p>
+
+  <h2>2.3 調查的類型與頻率</h2>
+  <p>常見的員工意見調查類型包括：員工滿意度調查、領導風格與效能調查、組織文化調查、情緒或訊息站調查（kiosk 或 mood survey，於固定地點快速蒐集即時感受）、新進人員意見調查與離職人員意見調查。類型的選擇取決於 2.2 的答案——想知道什麼，就選能回答它的類型。</p>
+  <p>頻率則是承諾問題。調查不是一次性的活動，而是持續的過程：結果產生的改變建議在數個月內就要發生，否則員工會對調查失去信心；一份設計良好的調查也應能長期沿用，累積可跨年比較的資料庫。頻率的選擇要與組織消化結果、採取行動的能量相稱——做得勤但改得慢，比做得少更傷信任（這也呼應 Topic 1 Perceptyx 的行動落差證據）。</p>
+    <div class="note"><span class="lb">調查疲勞與節奏治理</span>頻率的另一面是調查疲勞（survey fatigue）：員工收到的問卷太多、太密，回應率與作答品質同步下滑。疲勞常不是單一調查造成，而是治理缺位——人資、各事業單位、總部專案各發各的問卷，沒有人看得到全貌。實務對策是建立調查行事曆與總量管制：全組織的調查需求集中登記、由單一窗口排程，員工在一段期間內收到的問卷數有上限，重複主題予以合併。</div>
+  <h2>2.4 專案時間軸：把規劃變成工作計畫</h2>
+  <p>六問回答完，還要能排出時程。年度全面調查的典型節奏如下（實務慣例，依組織規模與工具調整；平台化調查可大幅壓縮分析與報表時程，見 Topic 14）：</p>
+  <table>
+    <tr><th style="width:26%">階段</th><th style="width:16%">典型時長</th><th>關鍵產出與進場角色</th></tr>
+    <tr><td>前置規劃與高階訪談</td><td>2–3 週</td><td>六問的答案、高階支持與策略連結（高階、人資）</td></tr>
+    <tr><td>問卷設計與前測預試</td><td>2–3 週</td><td>定稿問卷（Topic 4 的認知訪談與預試）</td></tr>
+    <tr><td>溝通造勢</td><td>1–2 週</td><td>目的說明、匿名承諾、主管背書（Topic 5）</td></tr>
+    <tr><td>施測與追蹤提醒</td><td>2 週</td><td>回應率監控、一至兩波提醒（Topic 5）</td></tr>
+    <tr><td>清理與分析</td><td>2–3 週</td><td>清理紀錄、信度、群組比較、驅動、開放題（Topic 9–11）</td></tr>
+    <tr><td>高階匯報與單位回饋</td><td>2–3 週</td><td>四層報告、回饋會議（Topic 12–13）</td></tr>
+    <tr><td>行動規劃與公告</td><td>結果後 1 個月內</td><td>一至三項行動、閉環溝通啟動（Topic 13）</td></tr>
+    <tr><td>行動追蹤</td><td>每季檢核</td><td>四項追蹤指標（Topic 13）</td></tr>
+  </table>
+  <p>兩個時程紅線：從施測結束到員工看見結果，不宜超過一到兩個月——拖越久，員工越相信意見進了黑洞；行動要在結果公布後一個月內可見（呼應 2.3 的頻率承諾）。整張時間軸就是期末傾聽方案要求的工作計畫骨架。</p>
+  <div class="key"><span class="lb">本單元要點</span>調查規劃的起點是與策略相連的目的：問卷名稱與說明都在傳達組織關心什麼，主題不應只是跟流行。規劃的終點是一張可執行的時間軸（2.4），並以調查行事曆治理全組織的調查總量。動手前先回答六個必問問題——為何做、想知道什麼、如何運用、與策略的關係、多久一次、用什麼方式；答得出來才能主導設計。類型依目的選擇，頻率依行動能量承諾，寧可少而有後續，不要頻繁而無改變。</div>
+  <div class="note"><span class="lb">課堂討論</span>在設計與執行一份員工意見調查時，可能會遇到哪些困難？先各自列出三項，再全班歸類：哪些屬於設計問題（題目、量表、抽樣）、哪些屬於信任問題（匿名、心理安全）、哪些屬於行動問題（結果無人跟進）。這份清單就是本課後續各週要逐一拆解的地圖。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 2-1</div>
+    <div class="qbody">
+      <p>某公司人資部門看到同業流行雇主品牌調查，也想跟進辦一次。依本單元的觀點，最該先做的是什麼？</p>
+      <label><input type="radio" name="q21" value="a"> 盡快跟進，以免落後同業</label>
+      <label><input type="radio" name="q21" value="b"> 先回答六個必問問題，確認雇主品牌是否為此刻組織策略所需的診斷</label>
+      <label><input type="radio" name="q21" value="c"> 直接委託顧問公司全權設計</label>
+      <label><input type="radio" name="q21" value="d"> 把雇主品牌題目加進既有調查，題目越多越好</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q21r" value="a"> 因為調查目的必須與組織策略相連，與策略脫節的調查難以轉成行動</label>
+      <label><input type="radio" name="q21r" value="b"> 因為同業做的調查一定也適合自己</label>
+      <label><input type="radio" name="q21r" value="c"> 因為顧問一定比內部更了解組織需要什麼</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q21c" value="低"> 低</label>
+        <label><input type="radio" name="q21c" value="中"> 中</label>
+        <label><input type="radio" name="q21c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q21','b','a','正確。先用六問確認目的與策略的連結，再決定做不做、怎麼做。','關鍵：目的連向策略，調查才轉得成行動；跟流行不是理由。','再想想：規劃的起點是流行，還是策略需要？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2 三構念 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元三：員工態度的三個核心構念</h1>
+  <div class="subtitle">主要依據：Meyer &amp; Allen (1991)、Locke (1976)、Kahn (1990)</div>
+
+  <h2>3.1 三個常被混用的構念</h2>
+  <p>員工意見調查最常測量的是員工的態度，其中三個構念最核心，也最容易被混為一談。工作滿意（job satisfaction；Locke, 1976）是員工對工作整體或各面向（薪資、主管、同事、工作本身）的評價性態度，偏向此刻的喜好與感受。員工敬業度（employee engagement；早期概念源自 Kahn, 1990）是員工對工作、團隊與雇主的心理連結與投入，偏向能量與投入的動機狀態（見 Topic 1）。組織承諾（organizational commitment）則是員工與組織之間的心理連結，偏向留下來的意願與理由。三者相關但不相同：一個人可能對工作內容滿意，卻對組織缺乏承諾；也可能敬業投入，卻正在認真考慮離開。</p>
+  <table>
+    <tr><th style="width:24%">構念</th><th>核心</th><th>例題方向</th></tr>
+    <tr><td>工作滿意</td><td>對工作的評價性感受</td><td>整體而言，我對這份工作感到滿意</td></tr>
+    <tr><td>員工敬業度</td><td>投入與心理連結的能量</td><td>我願意為工作付出額外的努力</td></tr>
+    <tr><td>組織承諾</td><td>留下來的意願與理由</td><td>我願意留在這個組織</td></tr>
+  </table>
+
+  <h2>3.2 組織承諾的三個成分</h2>
+  <p>組織承諾常被進一步拆成三個成分（Meyer &amp; Allen, 1991）。情感承諾（affective commitment）是想留下，出於認同與情感。持續承諾（continuance commitment）是需要留下，因為離開的成本太高。規範承諾（normative commitment）是應該留下，出於責任或義務感。三者都讓人留在組織，但動機不同，管理意涵也不同：情感承諾高的員工通常較投入、較願意付出；只靠持續承諾留下的員工，可能只是被成本綁住，未必投入。因此看到留任率高，還要看是靠哪一種承諾撐起來的。</p>
+  <div class="key"><span class="lb">本單元要點</span>工作滿意、敬業度、組織承諾各自捕捉員工態度的不同面向，不能互相取代。尤其組織承諾要分辨三個成分——同樣是留下，情感承諾與持續承諾對投入與績效的意涵並不相同。釐清構念，是設計題目與解讀結果的前提。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 3-1</div>
+    <div class="qbody">
+      <p>一位員工說：我其實對這份工作沒什麼熱情，但現在換工作要放棄年資與股票，成本太高，所以留下來。這最貼近組織承諾的哪一個成分？</p>
+      <label><input type="radio" name="q31" value="a"> 情感承諾（affective）</label>
+      <label><input type="radio" name="q31" value="b"> 持續承諾（continuance）</label>
+      <label><input type="radio" name="q31" value="c"> 規範承諾（normative）</label>
+      <label><input type="radio" name="q31" value="d"> 與組織承諾無關，只是工作滿意低</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q31r" value="a"> 因為持續承諾來自留下來的需要，也就是離開的成本太高</label>
+      <label><input type="radio" name="q31r" value="b"> 因為只要員工願意留下，就是情感承諾</label>
+      <label><input type="radio" name="q31r" value="c"> 因為承諾與離職成本無關</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q31c" value="低"> 低</label>
+        <label><input type="radio" name="q31c" value="中"> 中</label>
+        <label><input type="radio" name="q31c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q31','b','a','正確。持續承諾反映的是需要留下，也就是離開成本高，而非情感或義務。','關鍵在動機來源：持續承諾是成本考量，不是情感認同或義務感。','再想想：留下的理由是成本太高，對應哪一種承諾？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 態度為何值得測量 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元四：態度為何值得測量</h1>
+  <div class="subtitle">主要依據：Rubenstein et al. (2018)、Judge et al. (2001)、Harter et al. (2002)、Allen et al. (2010)</div>
+
+  <h2>4.1 測量態度的理由：態度能預測結果</h2>
+  <p>測量員工態度不只是了解感受，而是因為態度能預測組織在意的結果。兩條最有力的證據線是離職與績效：態度既能預告誰可能離開，也與生產力、獲利等績效相關。這讓調查分數具備了領先指標的價值——在結果惡化之前，先看見訊號。</p>
+
+  <h2>4.2 離職：態度作為離職前因</h2>
+  <p>離職對組織代價高昂。研究指出，遞補一名離職員工的成本——包含招募、甄選與訓練接替者——常達該員工年薪的 200% 以上，還有難以量化的隱性成本，例如流失的默會知識與社會資本、顧客滿意下降，甚至離職會在團隊間傳染（Rubenstein et al., 2018）。Rubenstein 等人（2018）針對自願離職前因所做的統合分析發現，與離職關聯最強的是員工的退縮認知（withdrawal cognitions，例如離職意圖、開始找工作的念頭），校正後相關達 ρ=+.56（正值代表與離職同向）；其次是組織承諾（ρ=−.29）、工作滿意（−.28）、工作鑲嵌（job embeddedness，員工被工作與生活網絡綁住的程度，−.26）等態度，這些為中等的負相關（分數越高、越不會離職）。這些正是調查能測量的東西——因此一份設計良好的調查，等於為離職風險提供了早期預警。</p>
+  <div class="warn"><span class="lb">解讀提醒</span>退縮認知的相關最高（ρ=+.56），部分原因是它在概念上已很接近離職本身——離職意圖是離職行為最近端的前驅，兩者幾乎同義，因此這個高相關有一部分屬準則污染（criterion contamination），不宜當成可直接介入的槓桿。真正能事前著力、也較可改變的，是較遠端的態度：工作滿意、組織承諾、工作鑲嵌。此外，遞補成本達年薪 200% 以上是特定角色（尤其高技能職位）的上緣，實際隨職級與可替代性差異極大，並非普遍值。</div>
+  <div class="pred">
+    <div class="plabel">請猜猜看（先完成預測，再往下閱讀）</div>
+    <p>研究估計，遞補一名離職員工（招募、甄選與訓練接替者）的成本，大約占其年薪的多少？</p>
+    <div class="prow">
+      <input type="range" min="0" max="300" value="80" oninput="document.getElementById('pvT').textContent=this.value+'%'">
+      <span class="pval" id="pvT">80%</span>
+      <button onclick="predReveal(this,'pvT',200,'約 200% 以上','研究指出，遞補一名離職員工的成本常達其年薪的 200% 以上（Rubenstein 等人 2018 引用 Allen et al., 2010）。加上流失的默會知識與顧客關係，離職的真實代價往往被低估。這也是為何及早偵測離職風險的態度訊號如此有價值。')">揭示真值</button>
+    </div>
+    <div class="preveal"></div>
+  </div>
+  <h3>各前因與自願離職的相關係數</h3>
+  <div class="calc">
+    <div id="toBars"></div>
+    <p class="interp">數值為 Rubenstein 等人（2018）的校正後統合相關係數 ρ（與自願離職）。正值代表與離職同向、屬風險訊號：退縮認知的正相關最強（ρ=+.56）。負值代表與離職反向、屬保護因子：組織承諾（−.29）、工作滿意（−.28）、工作鑲嵌（−.26）為中等負相關，穩定人格特質如責任感（−.16）較弱。重點在於：最能預告離職的，正是調查測得到的態度。</p>
+  </div>
+
+  <h2>4.3 績效：工作滿意與敬業度的關聯</h2>
+  <p>態度也與績效相關。Judge 等人（2001）對工作滿意與工作績效關係的統合分析，估計兩者的母體相關約為 ρ = .30，屬中等且穩定的正向關係。Harter 等人（2002）在業務單位層次的統合分析也顯示，員工敬業度與生產力、獲利、顧客滿意與留任之間有穩定的正向關係。換言之，測量這些態度，是在測量與績效、留任相關的領先指標，而不只是蒐集感受。</p>
+  <div class="note"><span class="lb">相關不等於因果</span>上述都是相關證據：ρ=.30 屬中等相關，且工作滿意與績效的因果方向學界仍有爭論——究竟是滿意提升績效，還是績效好帶來滿意，抑或有第三因子同時影響兩者。把態度當領先指標是合理的實務用法，但不等於「提高滿意就會提高績效」的因果保證。這些統合分析也多以歐美樣本為主，外推到不同文化情境時宜保留。</div>
+  <div class="key"><span class="lb">本單元要點</span>調查的價值不在分數本身，而在於這些態度是離職與績效的領先指標：退縮認知、滿意、承諾能預告離職（Rubenstein et al., 2018），滿意與敬業和績效相關（Judge et al., 2001；Harter et al., 2002）。測得到只是第一步，及早測量才能及早行動——這也呼應 Topic 1 的資料到行動落差。</div>
+
+    <h2>4.4 把離職翻成錢：業務論證的最後一步</h2>
+  <p>統合分析證明態度預測離職，但要讓高階為傾聽方案撥預算，還差一步換算。離職成本的實證整理指出，一名員工離職的總成本——招募、甄選、訓練、新人上手前的產能空窗、同事補位的負荷——常達該職位年薪的九成到兩倍，職位越專業越靠上限（Allen et al., 2010）。換算公式很簡單：年離職人數 × 平均年薪 × 成本倍數。以一個三百人、年離職率 15%、平均年薪八十萬元的事業單位為例，用保守的一倍估算，一年的離職成本約三千六百萬元；若傾聽方案與後續行動能把離職率降低兩個百分點，一年省下約四百八十萬元——這就是調查提案該出現的句子。數字是量級示意，各組織應代入自己的參數。</p>
+  <div class="key"><span class="lb">本節要點</span>業務論證三步：態度預測離職（4.2 的證據）、離職有可量化的成本（年薪的約 0.9 至 2 倍；Allen et al., 2010）、傾聽與行動降低離職率的效益以金額呈現。對高階說金額，比說相關係數有效。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 4-1</div>
+    <div class="qbody">
+      <p>為什麼測量員工的工作滿意、組織承諾與退縮認知有實務價值？</p>
+      <label><input type="radio" name="q41" value="a"> 因為調查分數高本身就會直接提高公司獲利</label>
+      <label><input type="radio" name="q41" value="b"> 因為這些態度是離職與績效的領先指標，能提供早期預警</label>
+      <label><input type="radio" name="q41" value="c"> 因為只要調查分數好看，員工就不會離職</label>
+      <label><input type="radio" name="q41" value="d"> 因為態度測量可以取代所有管理決策</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q41r" value="a"> 因為統合分析顯示這些態度與離職、績效相關，可作為領先指標（Rubenstein 2018；Judge 2001；Harter 2002）</label>
+      <label><input type="radio" name="q41r" value="b"> 因為態度分數與結果沒有關聯，只是參考</label>
+      <label><input type="radio" name="q41r" value="c"> 因為高分一定會直接導致高獲利</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q41c" value="低"> 低</label>
+        <label><input type="radio" name="q41c" value="中"> 中</label>
+        <label><input type="radio" name="q41c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q41','b','a','正確。這些態度與離職、績效相關，是可及早行動的領先指標。','關鍵在實證關聯：統合分析顯示態度與離職、績效相關，故為領先指標，而非分數直接造成結果。','再想想：測量態度的價值在於預測與預警，而不是分數本身。')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 管理決策定位 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元五：調查在管理決策中的定位</h1>
+  <div class="subtitle">主要依據：Smith (2003)</div>
+
+  <h2>5.1 調查的終點：從報告到決策</h2>
+  <p>調查的終點不是一份報告，而是決策與行動。要讓調查真正影響決策，通常需要三件事同時到位：把結果連到具體的管理問題、讓對的人看到對的資料、以及把發現轉為可執行的選項。少了任何一環，調查就容易停在報告階段——這正是 Topic 1 談的資料到行動落差。</p>
+
+  <h2>5.2 案例：用調查支援接班決策</h2>
+  <p>一個經典例子：某美商在拉丁美洲的分公司面臨臨時接班問題，管理層並未只憑高層判斷，而是透過組織反應量表（Index of Organizational Reactions, IOR）與深度訪談，了解員工對幾位候選接班人的看法，據以安排接班計畫。這說明調查可以針對特定決策提供員工觀點，讓決策更貼近現場，而不是事後才補問。這對應到單元一的第六項功能：強化管理決策。這是一個較早的經典案例（Smith, 2003）；今日雖有更即時的數位傾聽工具，但用員工觀點支援特定重大決策的原則不變。</p>
+  <p>IOR 本身是一份經驗證的量表（Goffin &amp; Jackson, 1988），涵蓋人際與物質兩大層面下的多個向度，例如工作本身、主管、同事、薪酬、生涯等，並採用行為錨定的選項。舉一個工作本身向度的例題：像我這樣的工作——讓我完全不想全力以赴／傾向不想全力以赴／沒什麼差別／稍微鼓勵我全力以赴／非常鼓勵我全力以赴。可以看到，成熟的量表不是隨手湊題，而是有結構、有驗證的（呼應 Topic 3 的測量基礎）。</p>
+
+  <h2>5.3 調查的對內溝通</h2>
+  <p>調查要取得真實回答，如何對員工說明與調查本身的設計同樣關鍵：員工若不清楚目的、不信任匿名承諾，就會保留真話或乾脆不填。施測前的溝通至少要回答四個員工必然會有的疑問。以哈佛大學全校敬業度調查（Harvard university-wide employee engagement survey）的常見問答為例：</p>
+  <table>
+    <tr><th style="width:30%">員工的疑問</th><th style="width:34%">哈佛 FAQ 的回答方式</th><th>溝通上的作用</th></tr>
+    <tr><td>為什麼要做這個調查？</td><td>了解全校的敬業情形，並改善職場</td><td>交代目的與正當性，連回組織要解決的問題</td></tr>
+    <tr><td>我的回答匿名嗎？</td><td>匿名，並委由第三方機構執行</td><td>以制度安排（第三方）背書，而非只口頭承諾</td></tr>
+    <tr><td>主管會看到我的個別答案嗎？</td><td>不會</td><td>消除最直接的報復疑慮，降低自我審查</td></tr>
+    <tr><td>結果會被怎麼使用？</td><td>用於改善敬業度與職場</td><td>預告後續行動，建立作答與改變的連結</td></tr>
+  </table>
+  <p>四個回答分別對應信任的不同環節：目的建立正當性，第三方執行與主管不可見保障安全，用途說明則預告行動。缺一角，作答率與真實性都會受損。匿名與保密的技術細節與差異，留待 Topic 5 深入。</p>
+  <div class="key"><span class="lb">本單元要點</span>調查在管理決策中的定位，是把員工觀點制度化地帶進決策——前提是結果連得到具體問題、對的人看得到、且轉得成行動。這條從資料到決策的線，會貫穿後面幾週的設計與分析：每一項技能，最終都要服務於讓調查影響決策與行動。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 5-1</div>
+    <div class="qbody">
+      <p>下列哪一項最能讓一份員工意見調查真正影響管理決策？</p>
+      <label><input type="radio" name="q51" value="a"> 題目數量越多越好</label>
+      <label><input type="radio" name="q51" value="b"> 把結果連到具體的管理問題、讓對的人看到、並轉為可執行的選項</label>
+      <label><input type="radio" name="q51" value="c"> 只要調查是匿名的，就會影響決策</label>
+      <label><input type="radio" name="q51" value="d"> 只要把報告寄給所有人，就會影響決策</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q51r" value="a"> 因為調查要影響決策，需要連結問題、送達決策者並轉為行動這三個銜接</label>
+      <label><input type="radio" name="q51r" value="b"> 因為報告只要存在，就會自動被採用</label>
+      <label><input type="radio" name="q51r" value="c"> 因為題目越多，決策就越準確</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q51c" value="低"> 低</label>
+        <label><input type="radio" name="q51c" value="中"> 中</label>
+        <label><input type="radio" name="q51c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q51','b','a','正確。調查影響決策需要連結問題、送到對的人手上、並轉為可執行選項。','關鍵在於從報告到決策需要這三個銜接，而非題數或單純寄送。','再想想：一份報告要變成決策，中間缺了哪些銜接？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 參考文獻 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元六：參考文獻</h1>
+
+  <h2>學術文獻</h2>
+  <div class="refline">Allen, D. G., et al. (2010). Retaining talent: Replacing misconceptions with evidence-based strategies. Academy of Management Perspectives, 24(2), 48&#8211;64. <a href="https://doi.org/10.5465/amp.24.2.48" target="_blank" rel="noopener">https://doi.org/10.5465/amp.24.2.48</a></div>
+  <div class="refline">Amundsen, S., &amp; Martinsen, Ø. L. (2014). Self&#8211;other agreement in empowering leadership: Relationships with leader effectiveness and subordinates&#8217; job satisfaction and turnover intention. The Leadership Quarterly, 25(4), 784&#8211;800. <a href="https://doi.org/10.1016/j.leaqua.2014.04.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.leaqua.2014.04.007</a></div>
+  <div class="refline">Choi, M. (2011). Employees&#8217; attitudes toward organizational change: A literature review. Human Resource Management, 50(4), 479&#8211;500. <a href="https://doi.org/10.1002/hrm.20434" target="_blank" rel="noopener">https://doi.org/10.1002/hrm.20434</a></div>
+  <div class="refline">Goffin, R. D., &amp; Jackson, D. N. (1988). The structural validity of the Index of Organizational Reactions. Multivariate Behavioral Research, 23(3), 327&#8211;347. <a href="https://doi.org/10.1207/s15327906mbr2303_3" target="_blank" rel="noopener">https://doi.org/10.1207/s15327906mbr2303_3</a></div>
+  <div class="refline">Harter, J. K., Schmidt, F. L., &amp; Hayes, T. L. (2002). Business-unit-level relationship between employee satisfaction, employee engagement, and business outcomes: A meta-analysis. Journal of Applied Psychology, 87(2), 268&#8211;279. <a href="https://doi.org/10.1037/0021-9010.87.2.268" target="_blank" rel="noopener">https://doi.org/10.1037/0021-9010.87.2.268</a></div>
+  <div class="refline">Judge, T. A., Thoresen, C. J., Bono, J. E., &amp; Patton, G. K. (2001). The job satisfaction&#8211;job performance relationship: A qualitative and quantitative review. Psychological Bulletin, 127(3), 376&#8211;407. <a href="https://doi.org/10.1037/0033-2909.127.3.376" target="_blank" rel="noopener">https://doi.org/10.1037/0033-2909.127.3.376</a></div>
+  <div class="refline">Kahn, W. A. (1990). Psychological conditions of personal engagement and disengagement at work. Academy of Management Journal, 33(4), 692&#8211;724. <a href="https://doi.org/10.5465/256287" target="_blank" rel="noopener">https://doi.org/10.5465/256287</a></div>
+  <div class="refline">Locke, E. A. (1976). The nature and causes of job satisfaction. In M. D. Dunnette (Ed.), Handbook of industrial and organizational psychology (pp. 1297&#8211;1349). Rand McNally.</div>
+  <div class="refline">Meyer, J. P., &amp; Allen, N. J. (1991). A three-component conceptualization of organizational commitment. Human Resource Management Review, 1(1), 61&#8211;89. <a href="https://doi.org/10.1016/1053-4822(91)90011-Z" target="_blank" rel="noopener">https://doi.org/10.1016/1053-4822(91)90011-Z</a></div>
+  <div class="refline">Rubenstein, A. L., Eberly, M. B., Lee, T. W., &amp; Mitchell, T. R. (2018). Surveying the forest: A meta-analysis, moderator investigation, and future-oriented discussion of the antecedents of voluntary employee turnover. Personnel Psychology, 71(1), 23&#8211;65. <a href="https://doi.org/10.1111/peps.12226" target="_blank" rel="noopener">https://doi.org/10.1111/peps.12226</a></div>
+  <div class="refline">Johnson, S. R. (2018). Engaging the workplace: Using surveys to spark change. Society for Human Resource Management.</div>
+  <div class="refline">Smith, F. J. (2003). Organizational surveys: The diagnosis and betterment of organizations through their members. Lawrence Erlbaum Associates.</div>
+  <div class="note"><span class="lb">來源性質</span>本主題概念與實證主張以有 DOI 的同儕審查期刊文獻為主：組織承諾三成分（Meyer &amp; Allen, 1991）、敬業度早期概念（Kahn, 1990）、離職前因統合分析（Rubenstein et al., 2018）、工作滿意與績效（Judge et al., 2001）、敬業度與業務成果（Harter et al., 2002）。Locke（1976）的工作滿意界定為專書章節、Smith（2003）的十大功能與 Johnson（2018）的調查規劃為專書，皆為本主題的架構來源。延伸案例另引三篇有 DOI 的期刊文獻：自我與他人評量一致性（Amundsen &amp; Martinsen, 2014）、IOR 量表的結構效度（Goffin &amp; Jackson, 1988）、員工對組織變革的態度（Choi, 2011）。單元五的調查溝通以哈佛大學敬業度調查的常見問答作為教學實例，屬機構實務文件、非研究文獻。</div>
+
+  <h2>專有名詞對照表</h2>
+  <table>
+    <tr><th style="width:26%">中文名詞</th><th style="width:30%">英文</th><th>說明</th></tr>
+    <tr><td>工作滿意</td><td>job satisfaction</td><td>員工對工作整體或各面向的評價性態度</td></tr>
+    <tr><td>員工敬業度</td><td>employee engagement</td><td>員工對工作、團隊與雇主的心理連結與投入</td></tr>
+    <tr><td>組織承諾</td><td>organizational commitment</td><td>員工與組織之間的心理連結與留任意願</td></tr>
+    <tr><td>情感／持續／規範承諾</td><td>affective / continuance / normative commitment</td><td>想留下、需要留下、應該留下三種承諾成分</td></tr>
+    <tr><td>退縮認知</td><td>withdrawal cognitions</td><td>離職意圖、找工作念頭等，離職最強的態度前因</td></tr>
+    <tr><td>工作鑲嵌</td><td>job embeddedness</td><td>員工被工作與生活網絡綁住、不易離開的程度</td></tr>
+    <tr><td>統合分析</td><td>meta-analysis</td><td>整合多項研究效果量的量化方法</td></tr>
+    <tr><td>自我與他人評量一致性</td><td>self-other agreement (SOA)</td><td>自評與他評同一能力的落差：高估者、低估者或一致</td></tr>
+  </table>
+  <footer>本教學網站為單一 HTML 檔案，離線可用。Topic 2：為什麼要做員工意見調查。文獻引用以同儕審查期刊為主並附 DOI；十大功能架構引自 Smith (2003) 專書。供教學使用。</footer>
+</section>
+
+</main>
+</div>
+
+<script>
+window.QUIZ_TOTAL = 5;
+
+
+// ---- Interactive: ten functions of surveys (u1) ----
+var tfData={
+  1:['1　診斷組織內部現況','高階管理者未必知道員工在想什麼，調查是重要的診斷工具，用來看見平時不易浮現的問題。'],
+  2:['2　提供員工向上回饋機制','組織內的溝通常裝了過濾器，負面訊息不易往上傳；調查給員工一個向高階管理者表達心聲的管道。'],
+  3:['3　預測組織相關變項','員工態度與反應會影響組織效能，可用來預測離職（turnover）、缺勤（absenteeism）、勞資關係等結果。'],
+  4:['4　呈現組織的優勢與劣勢','長期執行調查，可看出哪些問題持續存在、哪些是穩定的強項。例如某護理學校管理層長期感覺哪裡不對卻找不出問題，透過訪談與問卷才發現組織角色模糊、對未來不安、管理過度控制等劣勢。'],
+  5:['5　監控與追蹤組織變革','當策略或組織結構改變，管理者需要密切追蹤員工態度隨時間的變化（員工對變革的態度可參考 Choi, 2011 的文獻回顧）。'],
+  6:['6　強化管理決策','針對特定決策詢問員工意見，讓決策更貼近員工期待，例如安排接班計畫時參考員工的看法。'],
+  7:['7　提供訓練的架構','調查結果可指出訓練需求與方向。例如某工廠員工反映主管會當眾責難部屬、開歧視玩笑等，據此設計主管訓練課程（含角色扮演與問題討論）。'],
+  8:['8　作為組織研究的平台','作為長期蒐集資料、進行組織研究的基礎建設，支援後續的分析與比較。'],
+  9:['9　將組織的價值觀具體化','問什麼、重視什麼，本身就在傳達與具體化組織的價值。調查也能攤開主管與部屬的認知落差：主管說我們很尊重員工意見，部屬卻覺得每次發言都被打槍（延伸見下方自我與他人評量一致性）。'],
+  10:['10　記錄公司經歷過的事','歷次調查結果構成組織記憶，可作為未來接班或決策的參考依據。例如 2018 年 Google 員工大規模抗議所提出的訴求（終止強制仲裁、揭露性騷擾透明度報告等），也成為組織的一段紀錄。']
+};
+function tfShow(n){
+  var btns=document.getElementById('tfBtns').getElementsByTagName('button');
+  for(var i=0;i<btns.length;i++){ btns[i].className = (i===n-1)?'pg-btn':'pg-btn ghost'; }
+  document.getElementById('tfDesc').innerHTML='<strong>'+tfData[n][0]+'</strong><br>'+tfData[n][1];
+}
+
+// ---- Anim: relative strength of turnover antecedents (u3, schematic) ----
+function turnoverBars(){
+  // 校正後統合相關係數 ρ（與自願離職）；來源：Rubenstein et al. (2018), Table 2
+  var rows=[['退縮認知',0.56],['組織承諾',-0.29],['工作滿意',-0.28],['工作鑲嵌',-0.26],['責任感',-0.16]];
+  var W=520,H=232,labelX=6,plotL=100,plotR=456,pT=30,rowH=32,i;
+  function X(r){ return plotL + (r+0.6)/1.2*(plotR-plotL); }
+  var cx=X(0);
+  function fmt(r){ return (r>=0?'+':'−')+Math.abs(r).toFixed(2).replace(/^0/,''); }
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="各前因與自願離職的校正統合相關係數長條圖，退縮認知為正相關 0.56 最強，工作滿意、組織承諾、工作鑲嵌、責任感為中等至偏弱的負相關" style="width:100%;height:auto;font-family:inherit;"><title>各前因與自願離職的相關係數 ρ（Rubenstein et al., 2018）</title>';
+  // 座標軸格線與刻度
+  var ticks=[-0.6,-0.3,0,0.3,0.6];
+  for(i=0;i<ticks.length;i++){ var tx=X(ticks[i]).toFixed(1);
+    s+='<line x1="'+tx+'" y1="'+(pT-6)+'" x2="'+tx+'" y2="'+(pT+rows.length*rowH)+'" stroke="'+(ticks[i]===0?'#9aa2ad':'#eceef1')+'"'+(ticks[i]===0?' stroke-width="1.3"':'')+'/>';
+    s+='<text x="'+tx+'" y="'+(pT+rows.length*rowH+15)+'" font-size="10" text-anchor="middle" fill="#9aa2ad">'+(ticks[i]===0?'0':fmt(ticks[i]))+'</text>'; }
+  s+='<text x="'+cx.toFixed(1)+'" y="'+(pT-14)+'" font-size="10.5" text-anchor="middle" fill="#697180">與離職反向（保護） ← 0 → 與離職同向（風險）</text>';
+  // 長條與標籤
+  for(i=0;i<rows.length;i++){ var yc=pT+i*rowH+rowH/2, xr=X(rows[i][1]);
+    var x0=Math.min(cx,xr), w=Math.abs(xr-cx), col=(rows[i][1]>=0)?'#c0564f':(rows[i][1]<=-0.2?'#33568e':'#88a8d8');
+    s+='<rect x="'+x0.toFixed(1)+'" y="'+(yc-8).toFixed(1)+'" width="'+w.toFixed(1)+'" height="16" rx="3" fill="'+col+'"/>';
+    s+='<text x="'+labelX+'" y="'+(yc+4).toFixed(1)+'" font-size="12" text-anchor="start" fill="#24292f">'+rows[i][0]+'</text>';
+    var lx=(rows[i][1]>=0)?(xr+5):(xr-5), anc=(rows[i][1]>=0)?'start':'end';
+    s+='<text x="'+lx.toFixed(1)+'" y="'+(yc+4).toFixed(1)+'" font-size="11.5" text-anchor="'+anc+'" fill="#24292f">ρ='+fmt(rows[i][1])+'</text>';
+  }
+  s+='</svg>';
+  document.getElementById('toBars').innerHTML=s;
+}
+
+/* ===== Course-website interactive framework (content-agnostic) =====
+   Reuse these EXACT function/class names; the CSS and quiz markup depend on them.
+   Content-specific data (decision cases, simulators, SVG animations) is added
+   per-site below the framework, then init calls at the very end. */
+
+/* ---- unit navigation ---- */
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+
+/* ---- two-stage two-tier calibration quiz ----
+   Tier 1 = answer + confidence; Tier 2 (mechanism reason) unlocks only after a
+   correct answer, so reason options never leak the answer. Calibration panel ids:
+   cal-{h,m,l}-{0,1,2}, calNote. window.QUIZ_TOTAL = number of quizzes. */
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+    var btn1=box.querySelector('button'); if(btn1) btn1.textContent='檢查答案';
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標注信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，屬過度自信區，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板僅記第一次作答，<a href="javascript:void(0)" onclick="goUnit(\'u0\')">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方完成第二層機制確認。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，代表結論記得而機制未通，重讀機制段落的效益最大。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='此理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板僅記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+(window.QUIZ_TOTAL||n)+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未完成機制確認'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，建議優先回到對應單元複習。'; }
+  else if(n>0){ msg+='目前沒有過度自信的題目。'; }
+  noteEl.textContent=msg;
+}
+
+/* ---- prediction "guess then reveal" ---- */
+function predReveal(btn,valId,trueVal,trueTxt,expl){
+  var rv=btn.closest('.pred').querySelector('.preveal');
+  rv.style.display='block';
+  rv.innerHTML='<strong>預測值：'+document.getElementById(valId).textContent+'；真值：'+trueTxt+'。</strong>'+expl;
+}
+
+/* ---- decision-forcing case (generic) ----
+   Set window.DC_DATA={d1:{a:{cls:'good|mid|bad',txt:'..'},...},...},
+   window.DC_BEST={d1:'b',...}, window.DC_POINTS=['d1',...],
+   optional window.DC_SUMMARY=function(good,total){return '...'}. */
+var dcState={};
+function dcChoose(btn,dp,opt){
+  if(dcState[dp]) return; dcState[dp]=opt;
+  btn.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){b.disabled=true;});
+  btn.classList.add('chosen');
+  var d=(window.DC_DATA||{})[dp][opt], rv=document.getElementById(dp+'r');
+  rv.className='dcreveal '+d.cls; rv.textContent=d.txt;
+}
+function dcSummary(){
+  var need=window.DC_POINTS||[], best=window.DC_BEST||{};
+  var missing=need.filter(function(k){return !dcState[k];});
+  var rv=document.getElementById('dcsum');
+  if(missing.length){ rv.className='dcreveal mid'; rv.textContent='尚有 '+missing.length+' 個決策點未完成，請先逐一選定。'; return; }
+  var good=0; need.forEach(function(k){ if(dcState[k]===best[k]) good++; });
+  var msg=(window.DC_SUMMARY? window.DC_SUMMARY(good,need.length): '完成 '+good+' / '+need.length+' 個決策對應文獻最佳選項。');
+  rv.className='dcreveal '+(good===need.length?'good':(good>=Math.ceil(need.length*0.6)?'mid':'bad'));
+  rv.textContent=msg;
+}
+function dcReset(){
+  dcState={};
+  (window.DC_POINTS||[]).forEach(function(k){
+    var rv=document.getElementById(k+'r'); rv.className='dcreveal'; rv.textContent='';
+    rv.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){ b.disabled=false; b.classList.remove('chosen'); });
+  });
+  var s=document.getElementById('dcsum'); s.className='dcreveal'; s.textContent='';
+}
+
+/* ---- copy code block ---- */
+function copyCode(btn){
+  var pre=btn.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(function(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); });
+}
+
+/* ===== per-site content data + init calls go BELOW this line =====
+   e.g. window.QUIZ_TOTAL = 10;  window.DC_DATA={...}; ... then:
+   initQuizzes();  (and any custom widget init) */
+initQuizzes();
+
+// ---- interactive init ----
+tfShow(1);
+turnoverBars();
+</script>
+</body>
+</html>
