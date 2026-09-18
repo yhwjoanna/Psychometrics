@@ -93,19 +93,19 @@
   }
   .brand-group{display:flex;align-items:center;gap:.75rem;min-width:0;}
   .brand-text{min-width:0;}
-  .brand-text strong{display:block;font-size:.82rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .brand-text span{display:block;font-size:.68rem;color:var(--ink-3);white-space:nowrap;}
+  .brand-text strong{display:block;font-size:.9375rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .brand-text span{display:block;font-size:.875rem;color:var(--ink-3);white-space:nowrap;}
 
   .nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;}
-  .nav-links a{color:var(--ink-2);font-size:.86rem;font-weight:500;transition:color .2s var(--ease);}
+  .nav-links a{color:var(--ink-2);font-size:.9375rem;font-weight:500;transition:color .2s var(--ease);}
   .nav-links a:hover{color:var(--accent);}
 
   .btn-classroom{
     display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--cream)!important;
-    padding:.55rem .5rem .55rem 1.05rem;border-radius:9999px;font-size:.82rem;font-weight:600;border:none;cursor:pointer;
+    padding:.55rem .5rem .55rem 1.05rem;border-radius:9999px;font-size:.9375rem;font-weight:600;border:none;cursor:pointer;
     transition:transform .3s var(--ease),background .3s var(--ease);
   }
-  .btn-classroom .icon-chip{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.75rem;}
+  .btn-classroom .icon-chip{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.875rem;}
   .btn-classroom:hover{background:var(--accent-dark);transform:translateY(-1px);}
   .btn-classroom:active{transform:scale(.97);}
 
@@ -124,7 +124,7 @@
 
   .eyebrow{
     display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line-2);
-    padding:.4rem 1rem;border-radius:9999px;font-size:.72rem;font-weight:600;letter-spacing:.16em;
+    padding:.4rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:600;letter-spacing:.16em;
     text-transform:uppercase;color:var(--accent);background:var(--paper);margin-bottom:1.75rem;
   }
 
@@ -142,12 +142,12 @@
   .hero-actions{display:flex;flex-wrap:wrap;gap:.85rem;margin-bottom:.5rem;}
 
   .btn{
-    display:inline-flex;align-items:center;gap:.7rem;border-radius:9999px;font-weight:600;font-size:.92rem;
+    display:inline-flex;align-items:center;gap:.7rem;border-radius:9999px;font-weight:600;font-size:1rem;
     padding:.5rem .5rem .5rem 1.35rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease);
   }
   .btn .icon-chip{
     width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;transition:transform .3s var(--ease);font-size:.85rem;
+    flex-shrink:0;transition:transform .3s var(--ease);font-size:.9375rem;
   }
   .btn:hover .icon-chip{transform:translate(2px,-2px);}
   .btn:active{transform:scale(.98);}
@@ -163,12 +163,21 @@
   /* ---------- Section shell ---------- */
   .section{padding:5rem 0;scroll-margin-top:6rem;}
   .section-head{max-width:640px;margin-bottom:2.75rem;}
-  .section-tag{display:block;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;}
+  .section-tag{display:block;font-size:.875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;}
   .section-title{font-size:2rem;margin-bottom:.6rem;}
-  .section-desc{color:var(--ink-3);font-size:.98rem;line-height:1.7;}
+  .section-desc{color:var(--ink-3);font-size:1rem;line-height:1.7;}
 
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .45s var(--ease),transform .45s var(--ease);}
   .reveal.in{opacity:1;transform:translateY(0);}
+  /* 按下即回饋：所有可點元件在 pointer-down 時縮放 */
+  .link-pill:active,.btn-launch:active,.tab-btn:active,.ref-btn-pdf:active,.ref-btn-web:active,.mini-btn:active,.mini-btn-expand:active,.refs-toggle-btn:active{transform:scale(.97);transition:transform .1s ease-out;}
+  .link-pill,.btn-launch,.tab-btn,.ref-btn-pdf,.ref-btn-web,.mini-btn,.mini-btn-expand{transition:transform .1s ease-out,background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);}
+  /* 減少動態：改為淡入，不位移 */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transform:none;transition:opacity .2s ease;}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;}
+  }
 
   /* ---------- Faculty ---------- */
   .faculty-shell{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:1.6rem;padding:.4rem;margin-bottom:1rem;}
@@ -178,13 +187,13 @@
     display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:center;
   }
   .faculty-core h3{font-size:1.5rem;margin-bottom:.2rem;}
-  .faculty-role{color:var(--accent);font-weight:600;font-size:.9rem;margin-bottom:1.1rem;}
-  .info-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;font-size:.9rem;color:var(--ink-2);}
+  .faculty-role{color:var(--accent);font-weight:600;font-size:1rem;margin-bottom:1.1rem;}
+  .info-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;font-size:1rem;color:var(--ink-2);}
   .info-list li{display:flex;gap:.6rem;align-items:baseline;}
   .info-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;transform:translateY(-2px);}
 
-  .notice-box{border-left:3px solid var(--accent);padding:1.2rem 1.5rem;background:var(--cream-2);border-radius:0 .8rem .8rem 0;font-size:.9rem;color:var(--ink-2);line-height:1.75;}
-  .notice-box strong{display:block;color:var(--ink);margin-bottom:.4rem;font-size:.95rem;}
+  .notice-box{border-left:3px solid var(--accent);padding:1.2rem 1.5rem;background:var(--cream-2);border-radius:0 .8rem .8rem 0;font-size:1rem;color:var(--ink-2);line-height:1.75;}
+  .notice-box strong{display:block;color:var(--ink);margin-bottom:.4rem;font-size:1rem;}
 
   @media (max-width:860px){.faculty-core{grid-template-columns:1fr;}}
 
@@ -192,7 +201,7 @@
   .tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;}
   .tab-btn{
     background:var(--paper);border:1px solid var(--line-2);color:var(--ink-2);padding:.55rem 1.15rem;
-    border-radius:9999px;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .3s var(--ease);
+    border-radius:9999px;font-size:.9375rem;font-weight:600;cursor:pointer;transition:all .3s var(--ease);
   }
   .tab-btn:hover{border-color:var(--accent);}
   .tab-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink);}
@@ -208,11 +217,11 @@
   .week-row.is-holiday{background:linear-gradient(90deg,var(--cream-2),transparent 30%);}
 
   .week-meta{display:flex;flex-direction:column;gap:.35rem;}
-  .week-num{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);}
+  .week-num{font-size:.875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);}
   .week-date{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
 
   .tag{
-    display:inline-block;width:fit-content;font-size:.68rem;font-weight:700;letter-spacing:.04em;
+    display:inline-block;width:fit-content;font-size:.875rem;font-weight:700;letter-spacing:.04em;
     padding:.22rem .55rem;border-radius:5px;margin-top:.15rem;
   }
   .tag-lab{background:var(--ok-tint);color:var(--ok);}
@@ -230,25 +239,25 @@
   @media (max-width:860px){.week-row.is-current{padding:1.4rem 1.1rem;}}
 
   .week-content h4{font-size:1.08rem;margin-bottom:.55rem;line-height:1.45;}
-  .week-question{font-family:var(--serif);font-size:.95rem;color:var(--ink-3);font-weight:500;margin-bottom:.85rem;line-height:1.6;}
-  .key-topics{list-style:none;font-size:.87rem;color:var(--ink-2);display:flex;flex-direction:column;gap:.32rem;}
+  .week-question{font-family:var(--serif);font-size:1rem;color:var(--ink-3);font-weight:500;margin-bottom:.85rem;line-height:1.6;}
+  .key-topics{list-style:none;font-size:.9375rem;color:var(--ink-2);display:flex;flex-direction:column;gap:.32rem;}
   .key-topics li{padding-left:1rem;position:relative;}
   .key-topics li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--line-2);}
 
   .week-actions{display:flex;flex-direction:column;gap:.55rem;align-items:stretch;}
   .link-pill{
     background:var(--paper);border:1px solid var(--line-2);color:var(--ink)!important;padding:.5rem .85rem;
-    border-radius:8px;font-size:.8rem;font-weight:600;text-align:center;transition:all .3s var(--ease);
+    border-radius:8px;font-size:.875rem;font-weight:600;text-align:center;transition:all .3s var(--ease);
   }
   .link-pill:hover{border-color:var(--accent);color:var(--accent)!important;background:var(--accent-tint);}
 
   .due-chip{
     background:var(--warn-tint);border:1px solid #E4CB9E;color:var(--warn);padding:.55rem .75rem;
-    border-radius:8px;font-size:.76rem;font-weight:600;line-height:1.45;text-align:center;
+    border-radius:8px;font-size:.875rem;font-weight:600;line-height:1.45;text-align:center;
   }
   .due-chip.ok{background:var(--ok-tint);border-color:#C4D6C4;color:var(--ok);}
-  .status-note{font-size:.8rem;color:var(--ink-3);font-weight:500;padding:.55rem .2rem;}
-  .pending-pill{background:var(--cream-2);border:1px dashed var(--line-2);color:var(--ink-3);padding:.5rem .85rem;border-radius:8px;font-size:.78rem;font-weight:600;text-align:center;}
+  .status-note{font-size:.875rem;color:var(--ink-3);font-weight:500;padding:.55rem .2rem;}
+  .pending-pill{background:var(--cream-2);border:1px dashed var(--line-2);color:var(--ink-3);padding:.5rem .85rem;border-radius:8px;font-size:.875rem;font-weight:600;text-align:center;}
 
   /* 尚未串接：內容或工具已排定但等待確認，先鎖住互動 */
   .is-pending{
@@ -258,7 +267,7 @@
     filter:grayscale(.5);opacity:.72;
   }
   .is-pending .icon-chip{background:var(--line)!important;color:var(--ink-3)!important;}
-  a.is-pending::after,button.is-pending::after{content:"（尚未公告）";margin-left:.5em;font-size:.72em;font-weight:700;letter-spacing:.02em;}
+  a.is-pending::after,button.is-pending::after{content:"（尚未公告）";margin-left:.5em;font-size:.875em;font-weight:700;letter-spacing:.02em;}
   span.is-pending{display:inline-block;}
 
   @media (max-width:860px){
@@ -284,15 +293,15 @@
     width:2.75rem;height:2.75rem;border-radius:50%;background:var(--accent-tint);color:var(--accent);
     display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.05rem;
   }
-  .lab-tag{font-size:.7rem;color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;display:block;}
+  .lab-tag{font-size:.875rem;color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;display:block;}
   .card-core h4{font-size:1.05rem;margin-bottom:.5rem;}
-  .card-core p{font-size:.86rem;color:var(--ink-3);line-height:1.65;}
+  .card-core p{font-size:.9375rem;color:var(--ink-3);line-height:1.65;}
 
   .btn-launch{
     align-self:flex-start;display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--cream)!important;
-    padding:.5rem .5rem .5rem 1rem;border-radius:9999px;font-size:.82rem;font-weight:600;transition:all .3s var(--ease);
+    padding:.5rem .5rem .5rem 1rem;border-radius:9999px;font-size:.9375rem;font-weight:600;transition:all .3s var(--ease);
   }
-  .btn-launch .icon-chip{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.68rem;}
+  .btn-launch .icon-chip{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.875rem;}
   .btn-launch:hover{background:var(--accent);}
 
   .lab-card.feature .card-core{flex-direction:row;align-items:center;justify-content:space-between;gap:2rem;}
@@ -315,7 +324,7 @@
     display:flex;gap:1.3rem;align-items:flex-start;margin-bottom:2.75rem;border-left:3px solid var(--warn);
   }
   .notice-banner h5{font-size:1rem;margin-bottom:.35rem;}
-  .notice-banner p{font-size:.88rem;color:var(--ink-2);line-height:1.65;}
+  .notice-banner p{font-size:.9375rem;color:var(--ink-2);line-height:1.65;}
 
   .assign-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;}
   .assign-card{grid-column:span 1;}
@@ -324,9 +333,9 @@
   .assign-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.5rem;}
   .assign-head h4{font-size:1.15rem;line-height:1.4;}
   .assign-weight{font-family:var(--serif);font-size:1.65rem;font-weight:700;color:var(--accent);flex-shrink:0;}
-  .assign-due{font-size:.8rem;color:var(--warn);font-weight:600;margin-bottom:1rem;}
-  .assign-body{font-size:.9rem;color:var(--ink-2);line-height:1.7;margin-bottom:1.4rem;}
-  .rubric{background:var(--cream-2);border-radius:.8rem;padding:1rem 1.1rem;font-size:.82rem;color:var(--ink-2);line-height:1.85;}
+  .assign-due{font-size:.875rem;color:var(--warn);font-weight:600;margin-bottom:1rem;}
+  .assign-body{font-size:1rem;color:var(--ink-2);line-height:1.7;margin-bottom:1.4rem;}
+  .rubric{background:var(--cream-2);border-radius:.8rem;padding:1rem 1.1rem;font-size:.9375rem;color:var(--ink-2);line-height:1.85;}
   .rubric strong{color:var(--ink);}
 
   @media (max-width:860px){
@@ -351,14 +360,14 @@
   .roster-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: .86rem;
+    font-size: .9375rem;
     text-align: left;
     white-space: nowrap;
   }
   .roster-table th {
     background: var(--cream-2);
     color: var(--ink-3);
-    font-size: .72rem;
+    font-size: .875rem;
     font-weight: 700;
     letter-spacing: .06em;
     padding: .55rem 1rem;
@@ -378,11 +387,11 @@
   .r-badge {
     font-family: var(--serif);
     font-weight: 700;
-    font-size: .95rem;
+    font-size: 1rem;
     color: var(--ink);
   }
   .r-count {
-    font-size: .68rem;
+    font-size: .875rem;
     font-weight: 600;
     color: var(--accent);
     background: var(--cream-2);
@@ -399,7 +408,7 @@
     color: var(--ink);
   }
   .r-tag {
-    font-size: .65rem;
+    font-size: .875rem;
     font-weight: 700;
     color: #fff;
     background: var(--accent);
@@ -409,7 +418,7 @@
   }
   .r-members {
     color: var(--ink-2);
-    font-size: .84rem;
+    font-size: .9375rem;
     white-space: normal;
     line-height: 1.5;
   }
@@ -420,7 +429,7 @@
     padding: .15rem .5rem;
     border-radius: 4px;
     font-weight: 500;
-    font-size: .72rem;
+    font-size: .875rem;
     white-space: nowrap;
   }
   @media (max-width: 768px) {
@@ -431,12 +440,12 @@
   .site-footer{background:var(--ink);color:#C9C2B7;padding:4.5rem 0 2.25rem;margin-top:2rem;}
   .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
   .footer-brand h4{color:var(--cream);font-size:1.2rem;margin-bottom:.7rem;}
-  .footer-brand p{font-size:.88rem;line-height:1.75;color:#A69E92;}
-  .footer-col h5{color:var(--cream);font-size:.9rem;margin-bottom:1rem;font-weight:700;}
+  .footer-brand p{font-size:.9375rem;line-height:1.75;color:#A69E92;}
+  .footer-col h5{color:var(--cream);font-size:1rem;margin-bottom:1rem;font-weight:700;}
   .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
-  .footer-col a{color:#A69E92;font-size:.88rem;transition:color .2s var(--ease);}
+  .footer-col a{color:#A69E92;font-size:.9375rem;transition:color .2s var(--ease);}
   .footer-col a:hover{color:var(--cream);}
-  .footer-bottom{border-top:1px solid #33302B;padding-top:1.75rem;font-size:.78rem;color:#7D7669;text-align:center;}
+  .footer-bottom{border-top:1px solid #33302B;padding-top:1.75rem;font-size:.875rem;color:#7D7669;text-align:center;}
 
   @media (max-width:860px){.footer-grid{grid-template-columns:1fr;gap:2rem;}}
 
@@ -461,26 +470,26 @@
     flex-wrap: wrap;
   }
   .mini-info { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
-  .mini-tag { background: var(--accent-tint); color: var(--accent); font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 5px; }
-  .mini-info strong { font-size: .95rem; color: var(--ink); }
-  .mini-meta { font-size: .82rem; color: var(--ink-3); }
+  .mini-tag { background: var(--accent-tint); color: var(--accent); font-size: .875rem; font-weight: 700; padding: .2rem .55rem; border-radius: 5px; }
+  .mini-info strong { font-size: 1rem; color: var(--ink); }
+  .mini-meta { font-size: .9375rem; color: var(--ink-3); }
   .mini-actions { display: flex; align-items: center; gap: .6rem; }
   .mini-btn {
     display: inline-flex; align-items: center; padding: .4rem .8rem;
     background: var(--paper); border: 1px solid var(--line-2); border-radius: 6px;
-    font-size: .78rem; font-weight: 600; color: var(--ink)!important; transition: all .2s;
+    font-size: .875rem; font-weight: 600; color: var(--ink)!important; transition: all .2s;
   }
   .mini-btn:hover { border-color: var(--accent); color: var(--accent)!important; background: var(--accent-tint); }
   .mini-btn-expand {
     display: inline-flex; align-items: center; gap: .3rem; padding: .4rem .9rem;
     background: var(--accent); color: #fff!important; border: none; border-radius: 6px;
-    font-size: .78rem; font-weight: 600; cursor: pointer; transition: background .2s;
+    font-size: .875rem; font-weight: 600; cursor: pointer; transition: background .2s;
   }
   .mini-btn-expand:hover { background: var(--accent-dark); }
 
   .btn-toggle-intro {
     display: inline-flex; align-items: center; gap: .35rem;
-    padding: .5rem .95rem; border-radius: 8px; font-size: .8rem; font-weight: 600;
+    padding: .5rem .95rem; border-radius: 8px; font-size: .875rem; font-weight: 600;
     cursor: pointer; transition: all .25s var(--ease);
   }
 
@@ -510,7 +519,7 @@
   .refs-summary::-webkit-details-marker { display: none; }
   .refs-summary:hover { background: var(--cream-2); }
   .refs-title {
-    font-size: .83rem;
+    font-size: .9375rem;
     font-weight: 700;
     letter-spacing: .04em;
     color: var(--accent);
@@ -522,7 +531,7 @@
     line-height: 1.45;
   }
   .refs-toggle-btn {
-    font-size: .74rem;
+    font-size: .875rem;
     font-weight: 600;
     padding: .24rem .65rem;
     background: var(--cream-2);
@@ -546,22 +555,23 @@
   }
   .refs-summary:hover .refs-toggle-btn { background: var(--paper); border-color: var(--accent); color: var(--accent); }
   .week-refs-accordion[open] .refs-summary { border-bottom: 1px solid var(--line-2); }
+  @media (max-width:640px){ .refs-summary{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;} .refs-summary .refs-toggle-btn{margin-left:0;} }
   .refs-body { padding: 1rem 1.25rem 1.15rem; background: #fff; }
-  .refs-list { list-style: none; font-size: .83rem; color: var(--ink-2); line-height: 1.65; display: flex; flex-direction: column; gap: .75rem; padding: 0; margin: 0; }
+  .refs-list { list-style: none; font-size: .9375rem; color: var(--ink-2); line-height: 1.65; display: flex; flex-direction: column; gap: .75rem; padding: 0; margin: 0; }
   .ref-item { padding-left: .95rem; position: relative; }
   .ref-dot { position: absolute; left: 0; color: var(--accent); font-weight: bold; }
   .ref-btn-row { margin-top: .3rem; display: flex; gap: .45rem; flex-wrap: wrap; }
   .ref-btn-pdf {
     display: inline-flex; align-items: center; gap: .25rem; padding: .2rem .58rem;
     background: #FDF2F4; border: 1px solid #F8D7DA; border-radius: 5px;
-    font-size: .75rem; font-weight: 600; color: #8C1D40!important; text-decoration: none;
+    font-size: .875rem; font-weight: 600; color: #8C1D40!important; text-decoration: none;
     transition: all .2s;
   }
   .ref-btn-pdf:hover { background: #8C1D40; color: #fff!important; border-color: #8C1D40; }
   .ref-btn-web {
     display: inline-flex; align-items: center; gap: .25rem; padding: .2rem .58rem;
     background: var(--cream-2); border: 1px solid var(--line-2); border-radius: 5px;
-    font-size: .75rem; font-weight: 500; color: var(--ink-2)!important; text-decoration: none;
+    font-size: .875rem; font-weight: 500; color: var(--ink-2)!important; text-decoration: none;
     transition: all .2s;
   }
   .ref-btn-web:hover { background: var(--line-2); color: var(--ink)!important; }
@@ -609,8 +619,8 @@
             <div class="hero-actions">
               <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="btn btn-primary">檢視 / 下載完整課程大綱（PDF）<span class="icon-chip">↓</span></a>
               <a class="btn btn-ghost is-pending" aria-disabled="true">取得模擬資料集（學生版）<span class="icon-chip">↓</span></a>
-              <button type="button" onclick="toggleCourseIntro(false)" class="btn btn-ghost btn-toggle-intro" style="color:var(--ink-3);border:1px dashed var(--line-2);font-size:.78rem;" title="收合上方簡介與師資，直接瀏覽每週課程地圖">
-                <span>收合課程導讀與師資</span> <span style="font-size:.7em;">▲</span>
+              <button type="button" onclick="toggleCourseIntro(false)" class="btn btn-ghost btn-toggle-intro" style="color:var(--ink-3);border:1px dashed var(--line-2);font-size:.875rem;" title="收合上方簡介與師資，直接瀏覽每週課程地圖">
+                <span>收合課程導讀與師資</span> <span style="font-size:.875em;">▲</span>
               </button>
             </div>
           </div>
@@ -629,7 +639,7 @@
               <li>國立中山大學 人力資源管理研究所</li>
               <li>yhw@mail.nsysu.edu.tw</li>
               <li>上課時間：每週五 18:30–21:10</li>
-              <li>上課地點：管院專業教室</li>
+              <li>上課地點：管院 CM 3051</li>
               <li>諮詢時間：請先以 Email 約定時間</li>
             </ul>
           </div>
@@ -648,7 +658,7 @@
       <div class="mini-info">
         <span class="mini-tag">HRM922 員工意向調查</span>
         <strong>授課教師：王豫萱 博士</strong>
-        <span class="mini-meta">每週五 18:30–21:10 ｜ 管院專業教室</span>
+        <span class="mini-meta">每週五 18:30–21:10 ｜ 管院 CM 3051</span>
       </div>
       <div class="mini-actions">
         <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="mini-btn">📄 下載大綱 (PDF)</a>
@@ -749,8 +759,8 @@
           </div>
           <div class="week-actions">
             <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html" target="_blank" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">進入課堂互動教材網站<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
-            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_文獻與名詞對照表.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">專有名詞對照表<span class="icon-chip" style="margin-left:.4rem;">📖</span></a>
-            <a href="Slides/Topic01-02_課堂投影片.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">課堂投影片 Topic 01–02<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
+            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_文獻與名詞對照表.html" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">專有名詞對照表<span class="icon-chip" style="margin-left:.4rem;">📖</span></a>
+            <a href="Slides/Topic01-02_課堂投影片.html" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">課堂投影片 Topic 01–02<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
           </div>
         </div>
 
@@ -830,8 +840,8 @@
           </div>
           <div class="week-actions">
             <a href="Handout/Topic2_為什麼要做員工意見調查/Topic2_為什麼要做員工意見調查_課程網站.html" target="_blank" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">進入課堂互動教材網站<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
-            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">離職成本試算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
-            <a href="Slides/Topic01-02_課堂投影片.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">課堂投影片 Topic 01–02<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
+            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">離職成本試算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
+            <a href="Slides/Topic01-02_課堂投影片.html" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">課堂投影片 Topic 01–02<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
           </div>
         </div>
 
@@ -879,8 +889,8 @@
             </details>
           </div>
           <div class="week-actions">
-            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html#u3" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">四階段對照表<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
-            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="link-pill" style="font-size:.76rem;color:var(--ink-2)!important;">離職成本試算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
+            <a href="Handout/Topic1_課程導論與典範轉移/Topic1_課程導論與典範轉移_課程網站.html#u3" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">四階段對照表<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
+            <a href="Handout/Topic2_為什麼要做員工意見調查/離職成本試算器.html" target="_blank" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">離職成本試算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
             <div class="status-note">自主學習週</div>
           </div>
         </div>
@@ -1245,9 +1255,9 @@
   <section class="section" id="groups" style="padding: 2.2rem 0 2.8rem; background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap">
       <div class="roster-header reveal">
-        <span class="eyebrow" style="font-size: .72rem; color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Team Roster</span>
+        <span class="eyebrow" style="font-size: .875rem; color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Team Roster</span>
         <h3 style="font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--ink); margin: .2rem 0 .25rem;">學期研討與專案分組名單</h3>
-        <p style="font-size: .84rem; color: var(--ink-3); margin: 0;">全班共 6 組（共 38 位學員），適用於期中新概念量表企劃與期末專題分析。</p>
+        <p style="font-size: .9375rem; color: var(--ink-3); margin: 0;">全班共 6 組（共 38 位學員），適用於期中新概念量表企劃與期末專題分析。</p>
       </div>
 
       <div class="roster-table-card reveal">
