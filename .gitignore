@@ -33,3 +33,6 @@ Handout/Topic16_*
 # Office temporary lock files
 ~$*
 *.tmp
+
+# Internal maintenance memo (keep local only)
+課程網站維護與交接備忘錄.md
