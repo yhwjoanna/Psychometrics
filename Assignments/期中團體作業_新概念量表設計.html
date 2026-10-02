@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>期中團體作業：新概念量表設計｜員工意向調查 HRM922</title>
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --green:#337052;--palegreen:#EDF5F0;--amber:#8A6420;--paleamber:#FAF3E3;
+  --serif:'Newsreader','Noto Serif TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+em,i{font-style:normal}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink-2);background:var(--cream);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--accent-dark)}
+
+.topbar{position:sticky;top:0;z-index:50;background:rgba(251,248,242,.85);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px clamp(16px,3vw,40px);flex-wrap:wrap}
+.tb-left{display:flex;align-items:center;gap:12px;min-width:0}
+.tb-badge{background:var(--accent-tint);color:var(--accent);font-size:14px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:.06em;white-space:nowrap}
+.tb-course{font-weight:700;font-size:16px;color:var(--ink)}
+.tb-inst{font-size:14px;color:var(--ink-3)}
+.tb-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tb-topic{background:var(--accent);color:var(--cream);border-radius:999px;padding:6px 16px;font-size:14px;font-weight:700;white-space:nowrap}
+.btn-nav{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;text-decoration:none;background:var(--paper);border:1px solid var(--line-2);color:var(--ink-2);transition:transform .1s ease-out,background .2s var(--ease),border-color .2s var(--ease)}
+.btn-nav:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint)}
+.btn-nav:active{transform:scale(.97)}
+
+main{max-width:1040px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,3vw,36px) 80px}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line-2);padding:.4rem 1rem;border-radius:9999px;font-size:14px;font-weight:600;letter-spacing:.14em;color:var(--accent);background:var(--paper)}
+.h1-sub{display:block;font-size:.62em;font-weight:500;color:var(--ink-2);margin-top:.15em}
+h1{font-family:var(--serif);font-size:clamp(34px,4.4vw,52px);color:var(--ink);font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:18px 0 10px}
+.lead{font-size:19px;line-height:1.75;color:var(--ink-2);max-width:44em}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:30px 0 10px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.fact .k{font-size:14px;color:var(--ink-3);letter-spacing:.06em}
+.fact .v{font-family:var(--serif);font-size:26px;color:var(--ink);font-weight:600;line-height:1.3;margin-top:4px}
+.fact .v small{font-family:var(--sans);font-size:15px;color:var(--ink-2);font-weight:500;display:block;margin-top:2px}
+
+section{margin-top:56px}
+h2{font-family:var(--serif);font-size:30px;color:var(--ink);font-weight:600;line-height:1.3;letter-spacing:-.01em;margin-bottom:6px}
+.sec-tag{font-size:14px;letter-spacing:.14em;color:var(--accent);font-weight:700}
+h3{font-family:var(--serif);font-size:21px;color:var(--ink);font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:48em}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2.4vw,28px);margin:16px 0}
+.def{color:var(--accent);font-weight:700}
+.key{background:var(--accent-tint);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0;color:var(--ink)}
+.key strong{color:var(--accent)}
+.note{background:var(--palegreen);border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+.warn{background:var(--paleamber);border-left:4px solid var(--amber);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:18px}
+.topic{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:6px}
+.topic .no{font-family:var(--serif);font-size:15px;color:var(--accent);letter-spacing:.1em;font-weight:600}
+.topic h4{font-family:var(--serif);font-size:24px;color:var(--ink);font-weight:600;line-height:1.25}
+.topic .en{font-size:15px;color:var(--ink-3)}
+.topic p{font-size:15.5px;line-height:1.7;margin:8px 0 0;color:var(--ink-2)}
+.topic .src{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line-2);font-size:14.5px;color:var(--ink-3);line-height:1.6}
+.topic .src a{font-weight:600}
+
+.steps{counter-reset:s;list-style:none;margin-top:16px}
+.steps li{position:relative;padding:18px 20px 18px 74px;background:var(--paper);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:22px;top:16px;font-family:var(--serif);font-size:26px;color:var(--accent);font-weight:600;line-height:1}
+.steps h4{font-size:18px;color:var(--ink);font-weight:700;margin-bottom:4px}
+.steps .when{font-size:14px;color:var(--ink-3);letter-spacing:.04em;margin-bottom:6px}
+.steps p{font-size:15.5px;margin:0;max-width:none}
+.steps .out{margin-top:8px;font-size:15px;color:var(--ink);background:var(--cream-2);border-radius:8px;padding:8px 12px;display:inline-block}
+
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15.5px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.6}
+th{background:var(--cream-2);color:var(--ink);font-weight:700;font-size:15px}
+td.w{white-space:nowrap;font-family:var(--serif);font-size:20px;color:var(--accent);font-weight:600}
+tr:last-child td{border-bottom:none}
+.tblwrap{overflow-x:auto}
+
+.timeline{position:relative;margin:20px 0 0 8px;padding-left:28px;border-left:2px solid var(--line-2)}
+.tl{position:relative;padding:0 0 22px 8px}
+.tl::before{content:"";position:absolute;left:-36px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}
+.tl.soft::before{background:var(--line-2)}
+.tl .d{font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:600}
+.tl .d span{font-family:var(--sans);font-size:14px;color:var(--ink-3);margin-left:10px;font-weight:500;letter-spacing:.04em}
+.tl p{margin:2px 0 0;font-size:15.5px}
+
+details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:0 18px}
+summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--ink);font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:var(--accent);font-weight:400}
+details[open] summary::after{content:"－"}
+details p{padding-bottom:14px;font-size:15.5px}
+
+.refs{font-size:14.5px;color:var(--ink-3);line-height:1.7}
+.refs div{padding-left:2em;text-indent:-2em;margin-bottom:6px}
+footer{text-align:center;color:var(--ink-3);font-size:14px;padding:28px 16px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.topbar{position:static;background:#fff}body{background:#fff}details{break-inside:avoid}}
+.media{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin:10px 0 4px;padding:12px 16px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.media b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
+.media ul{margin:0;padding-left:1.2em;columns:2;column-gap:18px;font-size:14px;line-height:1.75}
+.media li{break-inside:avoid}
+.steps .media ul{list-style:disc;counter-reset:none}
+.steps .media li{all:unset;display:list-item;list-style:disc;font-size:14px;line-height:1.75;break-inside:avoid}
+.steps .media li::before,.steps .media li::after{content:none!important;display:none!important}
+.mnote{font-size:13.5px!important;color:var(--ink-2);margin:4px 0 8px!important}
+@media (max-width:640px){.media{grid-template-columns:1fr}.media ul{columns:1}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-badge">HRM922</span>
+    <div>
+      <div class="tb-course">員工意向調查</div>
+      <div class="tb-inst">國立中山大學人力資源管理研究所　王豫萱</div>
+    </div>
+  </div>
+  <div class="tb-right">
+    <span class="tb-topic">期中團體作業</span>
+    <a href="../index.html#assignments" class="btn-nav" target="_blank" rel="noopener">評量作業總覽</a>
+    <a href="../index.html" class="btn-nav" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+
+<main>
+<span class="eyebrow">MIDTERM GROUP PROJECT　25%</span>
+<h1>新概念量表設計<br><span class="h1-sub">把一句職場流行語，做成可以測量的量表</span></h1>
+<p class="lead">每組認領一個正在網路與媒體流傳的職場現象，先弄清楚大家在講的到底是什麼，再用關鍵事例法從真實事件歸納出題目。寫題目之前，先釐清它和學術上相近的構念差在哪裡；跑完預試與因素分析之後，再比對學術界已經有的量表，看看自己做出來的東西跟前人重疊多少、多出什麼</p>
+
+<div class="facts">
+  <div class="fact"><div class="k">啟動</div><div class="v">10 / 2<small>Week 04　Topic 03 課堂選題</small></div></div>
+  <div class="fact"><div class="k">企劃書與簡報截止</div><div class="v">10 / 29　23:59<small>兩份 PDF 上傳 Google Classroom</small></div></div>
+  <div class="fact"><div class="k">口頭發表</div><div class="v">10 / 30<small>Week 08　每組 15 分鐘＋5 分鐘答辯</small></div></div>
+  <div class="fact"><div class="k">組別</div><div class="v">6 組<small>依<a href="../index.html#groups" target="_blank" rel="noopener">學期分組名單</a>，組間題目不重複</small></div></div>
+</div>
+
+<section id="why">
+  <div class="sec-tag">01　作業用意</div>
+  <h2>為什麼從流行語開始，而不是從文獻開始</h2>
+  <div class="card">
+    <p>量表發展的教科書流程通常是先讀文獻、定義構念、再寫題目。這份作業刻意反過來。職場上真正在發生的事，常常先有一個大家都聽得懂的俗稱，例如桌邊轟炸、咖啡打卡、轉職休克，然後才慢慢有人把它變成學術構念。把網路流行語轉換為學術構念，是心理計量的核心能力</p>
+    <p>作業的另一個目的，是練習判斷一個新名詞是否指向新的構念。新詞和學術上既有的構念比對後，會出現三種結果，每一種都是有價值的發現</p>
+    <ol style="margin:0 0 14px;padding-left:1.6em;max-width:48em;line-height:1.85">
+      <li>名稱相同，內容不同：網路上講的那件事，跟學術上同名的構念指的是不同東西；只看名稱就當成同一件事，稱為同名異義謬誤（jingle fallacy）</li>
+      <li>名稱不同，內容相同：大家用新詞在講的，學術界早就用另一個構念名稱在測量；只因名稱不同就當成新構念，稱為異名同義謬誤（jangle fallacy）</li>
+      <li>有新向度：自己做出來的某個向度，既有量表裡沒有</li>
+    </ol>
+    <p style="color:var(--ink-2);font-size:15px">兩種謬誤的名稱來自 Kelley（1927）</p>
+  </div>
+  <div class="key"><strong>兩條規則</strong><br>一、寫題目之前先查定義，題庫定稿之後才看量表題目。事例分類完成後，查最接近的二到三個學術構念的定義並寫出區辨說明；既有量表的題目，到題庫初稿定稿之後才能查閱。企劃書要附上題庫初稿的定稿日期與既有量表的查閱日期，兩者的先後順序是評分項目<br>二、企劃書必須有一節與既有構念的對照，分兩層：概念層是寫題目之前的定義區辨；實證層是因素分析之後，與最接近的兩到三份學術量表做向度對應，說明自己版本多出來或少掉的向度</div>
+</section>
+
+<section id="topics">
+  <div class="sec-tag">02　候選題目</div>
+  <h2>六個職場流行語，每組認領一個</h2>
+  <p>下列六個題目在 10/2 課堂上以抽籤或認領方式分配，組間不重複。各組只能從這六個題目中選擇，不開放自提題目。題目下方的一句話與延伸閱讀只是起點，各組要自己去找更多大眾論述把它講清楚，不必受限於這一句話</p>
+  <div class="grid">
+    <div class="topic"><div class="no">TOPIC A</div><h4>桌邊轟炸</h4><div class="en">Desk Bombing</div><p>同事沒有預約、沒有訊息，直接走到座位旁邊開口，正在專心的工作當場中斷</p><div class="src">延伸閱讀<br>中文：<a href="https://www.managertoday.com.tw/articles/view/66478" target="_blank" rel="noopener">經理人（2023）只要待在辦公室，就不時發生的桌邊轟炸！你受夠了嗎？</a><br>英文：<a href="https://theweek.com/labor/1017876/desk-bombing-is-not-a-crime" target="_blank" rel="noopener">The Week（2022）Desk-bombing is not a crime</a></div></div>
+    <div class="topic"><div class="no">TOPIC B</div><h4>轉職休克</h4><div class="en">Shift Shock</div><p>面試時聽到的職務、文化與彈性，到職後才發現完全是另一回事，第一個月就想走</p><div class="src">延伸閱讀<br>中文：<a href="https://blog.104.com.tw/workplace-trending-words/#08" target="_blank" rel="noopener">104 職場力（2023）盤點 12 個 2023 職場現象，趨勢 8 轉職衝擊</a><br>英文：<a href="https://www.fastcompany.com/91114964/what-is-shift-shock-and-how-does-it-impact-workers" target="_blank" rel="noopener">Fast Company（2024）What is shift shock? And how does it impact workers?</a></div></div>
+    <div class="topic"><div class="no">TOPIC C</div><h4>廁底放鬆</h4><div class="en">Restroom Lurking</div><p>事情辦完了卻還關著隔間門不想出去，廁所變成辦公室裡唯一沒有人看得到的地方</p><div class="src">延伸閱讀<br>中文：<a href="https://www.businessweekly.com.tw/careers/blog/3022370" target="_blank" rel="noopener">商周（2026）廁底放鬆正悄悄流行！為何 4 成員工只敢崩潰給馬桶看？</a><br>英文：<a href="https://www.forbes.com/sites/bryanrobinson/2026/05/22/restroom-lurking-on-the-rise-as-workers-seek-refuge-from-job-stress/" target="_blank" rel="noopener">Forbes（2026）Restroom lurking on the rise as workers seek refuge from job stress</a></div></div>
+    <div class="topic"><div class="no">TOPIC D</div><h4>憤怒求職</h4><div class="en">Rage Applying</div><p>被主管罵、被加班、被同事推工作之後，當晚一口氣投出十幾封履歷，隔天氣消了也沒去面試</p><div class="src">延伸閱讀<br>中文：<a href="https://blog.104.com.tw/workplace-trending-words/#02" target="_blank" rel="noopener">104 職場力（2023）盤點 12 個 2023 職場現象，趨勢 2 怒找工作</a><br>英文：<a href="https://time.com/6268814/rage-applying-how-to-find-jobs/" target="_blank" rel="noopener">TIME（2023）Hate your job? Stop rage applying and do this instead</a></div></div>
+    <div class="topic"><div class="no">TOPIC E</div><h4>咖啡打卡</h4><div class="en">Coffee Badging</div><p>公司規定要進辦公室，於是早上刷卡露臉、喝杯咖啡、開一場會，中午前就回家繼續工作</p><div class="src">延伸閱讀<br>中文：<a href="https://www.businessweekly.com.tw/international/blog/3013688" target="_blank" rel="noopener">商周（2023）被要求回辦公室的遠距員工開始流行咖啡打卡，這是什麼？</a><br>英文：<a href="https://www.cnbc.com/2024/12/18/how-coffee-badging-became-a-revolt-against-return-to-office-mandates.html" target="_blank" rel="noopener">CNBC（2024）How coffee badging became a revolt against return-to-office mandates</a></div></div>
+    <div class="topic"><div class="no">TOPIC F</div><h4>安靜休假</h4><div class="en">Quiet Vacationing</div><p>沒有請假，人卻在外地，靠排程訊息與偶爾回覆維持在線的樣子</p><div class="src">延伸閱讀<br>中文：<a href="https://www.gvm.com.tw/article/113107" target="_blank" rel="noopener">遠見（2024）近八成美國人不敢休假，乾脆選擇安靜度假？</a><br>英文：<a href="https://www.cnbc.com/2024/07/03/gen-zers-millennials-quiet-vacation-during-fourth-of-july-week.html" target="_blank" rel="noopener">CNBC（2024）Gen Zers and millennials are quiet vacationing instead of taking PTO</a></div></div>
+  </div>
+  <div class="warn">題目名稱是流行語，量表名稱不必是。各組在企劃書裡要替構念取一個中性、可操作的學術名稱，並寫出一句話的定義與排除條件，說明什麼算、什麼不算</div>
+</section>
+
+<section id="steps">
+  <div class="sec-tag">03　作業流程</div>
+  <h2>五個階段，每一階段對應一項評分</h2>
+  <ol class="steps">
+    <li><h4>界定網路流行語，收集關鍵事例</h4><div class="when">10/2 選題後至 10/9 連假</div><p>先站在一般上班族的位置，從各大中英文商業媒體網站盡可能廣泛蒐集這個詞的報導（中文例如商周、天下、Cheers、經理人；英文例如 Forbes、Fast Company、CNBC、Harvard Business Review），社群討論（例如 Dcard、PTT）可作為補充，寫出這個詞在職場上的日常用法。接著用線上問卷或半結構訪談收集關鍵事例：以開放題請填答者描述一次具體發生過的事件，分成當時情境、當事人做了什麼、結果是什麼三個欄位作答，一份問卷可請填答者提供一到三則。填答者不限公司，但要涵蓋不同職級，問卷可搭配少量的短訪談補問細節。每則事例要記錄到能讓沒在場的人看懂，太籠統的回覆要回頭追問或剔除</p><div class="media"><div><b>中文商業媒體</b><ul><li><a href="https://www.businessweekly.com.tw/" target="_blank" rel="noopener">商業周刊</a></li><li><a href="https://www.cw.com.tw/" target="_blank" rel="noopener">天下雜誌</a></li><li><a href="https://www.cheers.com.tw/" target="_blank" rel="noopener">Cheers 快樂工作人</a></li><li><a href="https://www.managertoday.com.tw/" target="_blank" rel="noopener">經理人</a></li><li><a href="https://www.gvm.com.tw/" target="_blank" rel="noopener">遠見雜誌</a></li><li><a href="https://www.businesstoday.com.tw/" target="_blank" rel="noopener">今周刊</a></li><li><a href="https://www.bnext.com.tw/" target="_blank" rel="noopener">數位時代</a></li><li><a href="https://www.hbrtaiwan.com/" target="_blank" rel="noopener">哈佛商業評論 全球繁體中文版</a></li><li><a href="https://money.udn.com/" target="_blank" rel="noopener">經濟日報</a></li><li><a href="https://www.ctee.com.tw/" target="_blank" rel="noopener">工商時報</a></li><li><a href="https://blog.104.com.tw/" target="_blank" rel="noopener">104 職場力</a></li></ul></div><div><b>英文商業媒體</b><ul><li><a href="https://hbr.org/" target="_blank" rel="noopener">Harvard Business Review</a></li><li><a href="https://sloanreview.mit.edu/" target="_blank" rel="noopener">MIT Sloan Management Review</a></li><li><a href="https://www.forbes.com/" target="_blank" rel="noopener">Forbes</a></li><li><a href="https://www.fastcompany.com/" target="_blank" rel="noopener">Fast Company</a></li><li><a href="https://fortune.com/" target="_blank" rel="noopener">Fortune</a></li><li><a href="https://www.cnbc.com/make-it/" target="_blank" rel="noopener">CNBC Make It</a></li><li><a href="https://www.businessinsider.com/" target="_blank" rel="noopener">Business Insider</a></li><li><a href="https://www.bloomberg.com/" target="_blank" rel="noopener">Bloomberg</a></li><li><a href="https://www.wsj.com/" target="_blank" rel="noopener">The Wall Street Journal</a></li><li><a href="https://www.ft.com/" target="_blank" rel="noopener">Financial Times</a></li><li><a href="https://www.economist.com/" target="_blank" rel="noopener">The Economist</a></li><li><a href="https://time.com/" target="_blank" rel="noopener">TIME</a></li><li><a href="https://www.bbc.com/worklife" target="_blank" rel="noopener">BBC Worklife</a></li><li><a href="https://www.shrm.org/" target="_blank" rel="noopener">SHRM</a></li></ul></div></div><p class="mnote">部分網站需要訂閱，可改用學校圖書館的資料庫或網站內的免費文章；社群討論（例如 Dcard、PTT）可作為補充</p><div class="out">產出：網路流行語摘要、事例收集問卷、事例清單</div></li>
+    <li><h4>獨立分類與同意度檢驗</h4><div class="when">10/9 連假期間</div><p>至少兩位組員各自獨立把事例歸類，命名向度，再比對兩人的分類結果並計算 Cohen's κ。不一致的事例要開會討論，記錄最後怎麼決定的。向度命名要來自事例本身，不是來自任何現成理論。向度定好之後，查最接近的二到三個學術構念的定義，寫出自己的構念和它們的差別，並記下查閱日期。這一步只查定義，不看量表題目。定義要在寫題目之前查，是因為構念的區辨屬於界定構念的工作，等到最後才發現跟既有構念重疊，題目已經寫完，很難回頭修正（Podsakoff et al., 2016；Colquitt et al., 2019）</p><div class="out">產出：編碼簿、κ 計算過程、向度定義、定義區辨說明</div><p style="margin-top:8px">工具：<a href="期中作業_事例分類與kappa範本.xlsx" target="_blank" rel="noopener">Excel 範本：事例分類與 κ</a>（自動產生交叉表、κ 與判定結果）、<a href="../Handout/Topic11_開放題分析的演進/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></p></li>
+    <li><h4>撰寫題項與預試</h4><div class="when">10/9 起草題目，10/16 Topic 04 之後預試</div><p>依向度撰寫題目，每個向度至少四到六題，注意 Topic 03 講過的雙重問題、反向題與作答疲勞取捨。預試樣本以在職者為主，人數至少為題數的五倍且不低於一百人；Topic 04 會教抽樣與資料品質檢查，預試資料要先做草率作答篩檢再分析</p><div class="out">產出：題庫初稿（附完成日期）、預試問卷、原始資料</div></li>
+    <li><h4>項目分析、探索性因素分析與信度</h4><div class="when">10/23 Topic 05 之後</div><p>先做項目分析（決斷值、題總相關）淘汰不良題目，再跑 EFA 檢查向度是否如預期浮現，報告 KMO、Bartlett、轉軸方法、負荷量門檻與刪題理由，最後報告各向度的 Cronbach's α 與 McDonald's ω。分析結果與原本從事例歸納出的向度不一致時，要解釋原因，不要強行對應</p><div class="out">產出：分析報表、最終量表版本</div></li>
+    <li><h4>與既有構念對照，準備發表</h4><div class="when">分析完成後至 10/29</div><p>這時才查閱既有量表的題目與向度。量表題目延後到這時才看，是為了讓題目來自事例，避免改寫現成量表。找出最接近的兩到三份量表，做向度對應表，判斷自己屬於名稱相同但內容不同、名稱不同但內容相同，或有新向度，並說明證據。發表要讓沒讀過企劃書的人在 15 分鐘內聽懂：這個詞是什麼、事例長什麼樣、量表怎麼發展出來、跟前人差在哪</p><div class="out">產出：對照章節、企劃書全文、發表簡報</div></li>
+  </ol>
+</section>
+
+<section id="timeline">
+  <div class="sec-tag">04　時程</div>
+  <h2>從選題到發表的四個星期</h2>
+  <div class="timeline">
+    <div class="tl"><div class="d">10 / 2<span>WEEK 04　TOPIC 03</span></div><p>課堂講解關鍵事例法與題項設計，抽籤或認領題目，作業正式啟動</p></div>
+    <div class="tl soft"><div class="d">10 / 9<span>WEEK 05　國慶補假</span></div><p>無實體授課，各組利用連假發放事例收集問卷或進行半結構訪談、完成事例整理，兩位組員獨立分類並計算 κ，查相近構念的定義，起草預試題目</p></div>
+    <div class="tl"><div class="d">10 / 16<span>WEEK 06　TOPIC 04</span></div><p>抽樣策略與資料品質防線，各組在課後依此設計預試與草率作答篩檢</p></div>
+    <div class="tl"><div class="d">10 / 23<span>WEEK 07　TOPIC 05</span></div><p>項目分析、EFA 與信度實機操作，各組帶預試資料到課堂試跑</p></div>
+    <div class="tl"><div class="d">10 / 29　23:59<span>企劃書與簡報截止</span></div><p>企劃書與發表簡報各一份 PDF，上傳 Google Classroom，逾期系統自動標示遲交</p></div>
+    <div class="tl"><div class="d">10 / 30<span>WEEK 08　期中發表</span></div><p>每組 15 分鐘簡報加 5 分鐘答辯，評委與同儕即時回饋，線上互評</p></div>
+  </div>
+</section>
+
+<section id="deliverable">
+  <div class="sec-tag">05　繳交內容</div>
+  <h2>企劃書要包含什麼</h2>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:34%">章節</th><th>內容</th></tr>
+    <tr><td>一、網路流行語界定</td><td>流行語的來源與日常用法，引用的中英文商業媒體報導與社群討論清單，初步的一句話定義與排除條件</td></tr>
+    <tr><td>二、關鍵事例收集</td><td>事例收集問卷與開放題題目、填答者背景摘要（職級、產業，不記姓名）、完整事例清單</td></tr>
+    <tr><td>三、分類與同意度</td><td>編碼簿、兩位編碼者的分類表、Cohen's κ 計算、不一致事例的處理紀錄、向度定義、相近構念的定義區辨說明與查閱日期</td></tr>
+    <tr><td>四、題項與預試</td><td>題庫初稿及定稿日期、預試問卷、樣本描述、草率作答篩檢結果</td></tr>
+    <tr><td>五、心理計量檢驗</td><td>項目分析、EFA 完整報表、刪題理由、信度指標、最終量表</td></tr>
+    <tr><td>六、與既有構念的對照</td><td>概念層：寫題目之前的定義區辨（可引用第三章）；實證層：既有量表的查閱日期、最接近的二到三份量表、向度對應表、屬於哪一種結果與證據</td></tr>
+    <tr><td>七、管理應用</td><td>這份量表在企業裡可以用來診斷什麼、給誰看、看完之後能做什麼</td></tr>
+    <tr><td>附錄</td><td>原始資料檔（去識別化）、分析程式或操作紀錄、組員分工表</td></tr>
+  </table>
+  </div>
+  <p>範本：<a href="期中作業_企劃書範本.docx" target="_blank" rel="noopener">Word 企劃書範本</a>（章節、必填表格與關鍵日期已排好）、<a href="期中作業_事例分類與kappa範本.xlsx" target="_blank" rel="noopener">Excel 範本：事例分類與 κ</a></p>
+  <p>格式：A4 直式 PDF，正文以 20 頁為上限，附錄不計。檔名為「組別_構念名稱_期中企劃書.pdf」。發表簡報另存一份 PDF，檔名為「組別_構念名稱_期中簡報.pdf」。兩份檔案在 10/29 23:59 前由組長上傳 Google Classroom</p>
+</section>
+
+<section id="rubric">
+  <div class="sec-tag">06　評分</div>
+  <h2>評分向度與比重</h2>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:12%">比重</th><th style="width:30%">向度</th><th>看什麼</th></tr>
+    <tr><td class="w">20%</td><td>事例收集品質與分類檢驗</td><td>事例是否具體、涵蓋不同職級與情境、數量足夠，開放題設計能否引出情境、行為與結果；分類是否獨立進行，κ 是否達到可接受水準，不一致的處理是否有紀錄</td></tr>
+    <tr><td class="w">20%</td><td>項目分析與題目篩選</td><td>題目是否來自事例而非現成量表，是否避開雙重問題與模糊語句；決斷值與題總相關的運用是否正確，刪題是否有依據</td></tr>
+    <tr><td class="w">25%</td><td>探索性因素分析與構念效度</td><td>EFA 的前提檢查、轉軸與負荷量判準是否合理；因素結構與事例歸納的向度是否一致，不一致時的解釋是否誠實；與既有構念的對照是否清楚有據</td></tr>
+    <tr><td class="w">20%</td><td>量表題項品質與設計</td><td>最終量表的題目可讀性、量尺選擇、指導語、反向題安排；構念定義與排除條件是否明確</td></tr>
+    <tr><td class="w">15%</td><td>現場發表與答辯表現</td><td>15 分鐘內讓人聽懂整個過程，答辯時能說明每個決定的理由，不迴避資料中不理想的結果</td></tr>
+  </table>
+  </div>
+  <div class="note">兩條規則的落實直接影響評分：既有量表的查閱日期早於題庫定稿日期，項目分析與題目篩選以不及格計算；缺少定義區辨說明或對照章節，探索性因素分析與構念效度以不及格計算</div>
+</section>
+
+<section id="faq">
+  <div class="sec-tag">07　常見問題</div>
+  <h2>開始之前先看這裡</h2>
+  <details><summary>事例一定要用訪談收嗎</summary><p>不用。關鍵事例法從 Flanagan 開始就允許用訪談、團體訪談或書面問卷收集，重點是事例要具體到有情境、行為與結果。線上問卷開放題是本作業的預設做法，效率高、可跨公司發放；缺點是沒辦法當場追問，所以題目要把三個欄位分開問，收回來太籠統的可以再用短訪談補問。填答者任何在職者都可以，避免集中在同一個部門，也避免全部是同學自己</p></details>
+  <details><summary>事例要收多少則才夠</summary><p>沒有固定數字，判準是新收回的問卷已經很難再產生新的事例類型。以經驗來說，每組有效填答者二十位以上、事例四十則以上，分類時才有足夠的材料</p></details>
+  <details><summary>預試人數真的要一百人以上嗎</summary><p>探索性因素分析對樣本數敏感，人數太少會讓因素結構不穩定。六組同時在各自的人脈裡收案，一百人是可達成的目標；若確實有困難，在 10/16 前跟授課教師討論替代方案，不要等到分析時才發現</p></details>
+  <details><summary>寫題目之前查定義，會不會受既有構念影響</summary><p>定義區辨的目的，是確認自己的構念邊界，讓題目只寫自己構念的範圍。查定義時只讀構念的定義與理論說明，不看量表題目；若發現事例歸納出的某個向度和既有構念幾乎一樣，可以保留並在對照章節說明，也可以修改定義與排除條件，兩種做法都要寫下理由</p></details>
+  <details><summary>做到一半發現學術界早就有這個量表怎麼辦</summary><p>這也是作業接受的結果之一。照規則走完流程，在對照章節說清楚重疊在哪裡、自己版本有沒有多出什麼，誠實指出名稱不同但內容相同的報告可以拿高分，一份假裝原創的報告不行</p></details>
+  <details><summary>可以用 AI 工具嗎</summary><p>可以用在逐字稿整理、資料清理與分析程式撰寫，並在附錄註明用途。事例分類與向度命名必須由組員親自完成，這是同意度檢驗的意義所在。用 AI 生成事例或代填預試問卷視同資料造假</p></details>
+</section>
+
+<section id="refs">
+  <div class="sec-tag">08　方法依據</div>
+  <h2>課堂會教到的方法文獻</h2>
+  <p>這些是方法本身的依據，不是各題目的既有量表。相近構念的定義在寫題目之前查閱；各題目的學術量表題目，依規則在題庫定稿之後再檢索</p>
+  <div class="refs">
+    <div>Flanagan, J. C. (1954). The critical incident technique. Psychological Bulletin, 51(4), 327–358. https://doi.org/10.1037/h0061470</div>
+    <div>Farh, J.-L., Zhong, C.-B., &amp; Organ, D. W. (2004). Organizational citizenship behavior in the People's Republic of China. Organization Science, 15(2), 241–253. https://doi.org/10.1287/orsc.1030.0051</div>
+    <div>Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</div>
+    <div>DeVellis, R. F., &amp; Thorpe, C. T. (2022). Scale development: Theory and applications (5th ed.). SAGE.</div>
+    <div>Podsakoff, P. M., MacKenzie, S. B., &amp; Podsakoff, N. P. (2016). Recommendations for creating better concept definitions in the organizational, behavioral, and social sciences. Organizational Research Methods, 19(2), 159–203. https://doi.org/10.1177/1094428115624965</div>
+    <div>Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243–1265. https://doi.org/10.1037/apl0000406</div>
+    <div>Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37–46. https://doi.org/10.1177/001316446002000104</div>
+    <div>Kelley, T. L. (1927). Interpretation of educational measurements. World Book.</div>
+    <div>McHugh, M. L. (2012). Interrater reliability: The kappa statistic. Biochemia Medica, 22(3), 276–282. https://doi.org/10.11613/BM.2012.031</div>
+  </div>
+</section>
+</main>
+<footer>員工意向調查 HRM922　2026 Fall　國立中山大學人力資源管理研究所　王豫萱｜作業說明如有更新，以課程入口網與 Google Classroom 公告為準</footer>
+</body>
+</html>

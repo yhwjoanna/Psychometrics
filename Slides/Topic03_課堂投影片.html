@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>員工意向調查｜Topic 01 與 02 課堂投影片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --a1:#EAD3D6;--a2:#C98F98;--a3:#A25462;--a4:#7A2033;--ok:#4B6B4F;--warn:#8A5A1E;
+  --serif:'Newsreader','Noto Serif TC','Songti TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei UI',sans-serif;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0F0D0B;font-family:var(--sans);color:var(--ink-2);-webkit-font-smoothing:antialiased}
+button{font:inherit}
+
+/* ---------- 外殼：固定畫布縮放 ---------- */
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{width:1920px;height:1080px;position:absolute;left:0;top:0;transform-origin:0 0;
+  transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--s,1))}
+.slide{position:absolute;inset:0;background:var(--cream);padding:110px 140px 130px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
+.slide.dark{background:var(--ink);color:#D9D2C6}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--cream)}
+
+/* 控制列 */
+#bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);z-index:20}
+#bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .32s var(--ease)}
+#nav{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;z-index:20;transition:opacity .32s var(--ease)}
+#nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(28,24,21,.72);
+  color:#EDE6D8;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:transform .1s ease-out,background .2s var(--ease);backdrop-filter:blur(10px)}
+#nav button:active{transform:scale(.94)}
+#nav button:hover{background:rgba(122,32,51,.85)}
+#pg{position:fixed;left:20px;bottom:16px;font-size:13px;color:rgba(237,230,216,.6);z-index:20;font-variant-numeric:tabular-nums;transition:opacity .32s var(--ease)}
+body.fs.idle #nav,body.fs.idle #pg{opacity:0;pointer-events:none}
+body.fs.idle{cursor:none}
+
+/* ---------- 字級階梯（1920 畫布）---------- */
+h1,h2,h3{font-family:var(--serif);color:var(--ink);font-weight:600;letter-spacing:-.015em}
+h1{font-size:96px;line-height:1.08}
+h2{font-size:58px;line-height:1.3}
+h3{font-size:36px;line-height:1.35}
+p,li,td,th{font-size:30px;line-height:1.6}
+.kicker{position:absolute;top:100px;left:140px;display:flex;align-items:center;gap:18px;font-size:26px;font-weight:700;letter-spacing:.16em;color:var(--ink);margin:0}
+.slide{padding-top:170px}
+.dark .kicker{color:var(--a2)}
+.kicker .sup{letter-spacing:.04em;font-weight:600;font-size:18px;color:var(--cream);background:var(--accent);padding:5px 12px;border-radius:6px}
+.dark .kicker .sup{background:var(--a2);color:var(--ink)}
+.foot{position:absolute;left:140px;right:140px;bottom:52px;display:flex;justify-content:space-between;gap:40px;
+  font-size:20px;line-height:1.45;color:var(--ink-2);border-top:1px solid var(--line-2);padding-top:16px}
+.dark .foot{color:#8F877B;border-top-color:#33302B}
+.foot .lim{max-width:900px}
+.foot .mid{white-space:nowrap}
+.foot .multi{font-size:13px;line-height:1.35;max-width:1050px}
+.foot>span:last-child{min-width:40px;text-align:right}
+.foot-fig{left:60px;right:60px;bottom:14px;padding-top:10px;align-items:flex-end}
+.foot-fig .ref{font-size:12px!important;line-height:1.35;max-width:1300px}
+.lead{font-size:34px;line-height:1.65;color:var(--ink-2);max-width:32em}
+.dark .lead{color:#D9D2C6}
+.muted{color:var(--ink-2)}
+.acc{color:var(--accent)}
+.def{color:var(--accent);font-weight:600}
+.num{font-family:var(--serif);font-weight:600;letter-spacing:-.04em;color:var(--accent);line-height:.9}
+.dark .num{color:#E3B7BE}
+
+/* 分段揭露 */
+.frag{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.frag.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .slide,.frag{transition:opacity .2s ease}
+  .frag{transform:none}
+}
+
+/* ---------- 版型 ---------- */
+/* 封面 */
+.cover{display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.cover .sub{font-family:var(--serif);font-size:40px;color:var(--ink-2);margin-top:28px;line-height:1.45}
+.cover .meta{margin-top:56px;font-size:24px;color:var(--ink-2);display:flex;gap:40px}
+
+/* 情境頁 */
+.scene{display:flex;flex-direction:column;justify-content:center;height:100%}
+.scene .who{font-size:24px;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:34px}
+.scene p{font-family:var(--serif);font-size:52px;line-height:1.5;max-width:26em;color:var(--ink)}
+.scene .q{margin-top:44px;font-family:var(--sans);font-size:34px;color:var(--accent);font-weight:600}
+
+/* 大字頁 */
+.big{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:60px;height:100%}
+.big .num{font-size:360px}
+.big .num small{font-size:140px;letter-spacing:0}
+.big h2{margin-bottom:26px}
+.big p{max-width:22em}
+
+/* 三數並列 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.trio .cell{border-top:3px solid var(--line-2);padding-top:26px}
+.trio .cell.hi{border-top-color:var(--accent)}
+.trio .num{font-size:150px;margin-bottom:14px}
+.trio p{font-size:27px;line-height:1.5;color:var(--ink)}
+
+/* 表格 */
+table{border-collapse:collapse;width:100%}
+th{font-family:var(--serif);font-weight:600;font-size:32px;text-align:left;padding:18px 24px;color:var(--ink);border-bottom:2px solid var(--ink)}
+td{padding:20px 24px;border-top:1px solid var(--line-2);vertical-align:top;font-size:27px;line-height:1.5}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.hi-col{background:var(--paper)}
+th.hi-col{color:var(--accent)}
+table.tight td,table.tight th{padding:13px 20px;font-size:24px}
+table.tight th{font-size:26px;line-height:1.3}
+
+/* 圖文兩欄 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;height:100%}
+.split h2{margin-bottom:26px}
+
+/* 卡片列 */
+.cards{display:grid;gap:26px;margin-top:20px;align-items:start}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.cards.c5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:30px 34px}
+.card .n{font-family:var(--serif);font-size:44px;color:var(--accent);font-weight:600;line-height:1;margin-bottom:16px}
+.card h3{font-size:30px;margin-bottom:12px}
+.card p{font-size:24px;line-height:1.55;color:var(--ink)}
+.card.dark{background:var(--ink);border-color:var(--ink);color:#D9D2C6}
+.card.dark h3{color:var(--cream)}
+.card.dark p{color:#C9C2B7}
+.card.dark .n{color:#E3B7BE}
+
+/* 橫向卡片列 */
+.rows{display:flex;flex-direction:column;gap:18px}
+.rows .row{display:grid;grid-template-columns:110px 300px 1fr;align-items:center;gap:30px;background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 40px}
+.rows .n{font-family:var(--serif);font-size:48px;color:var(--accent);font-weight:600;line-height:1}
+.rows .tt{font-family:var(--serif);font-size:34px;color:var(--ink);font-weight:600}
+.rows .dd{font-size:25px;line-height:1.55;color:var(--ink)}
+.rd{display:flex;gap:14px;align-items:flex-start}
+.rd+.rd{margin-top:10px}
+.rd-no{flex:0 0 34px;width:34px;height:34px;line-height:34px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700;margin-top:3px}
+.lnk{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:6px}
+.tp-grid{gap:24px;margin-top:30px}
+.card.tp{padding:28px 32px 24px}
+.tp-no{font-family:var(--serif);font-size:18px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-bottom:6px}
+.card.tp h3{font-size:36px;margin-bottom:14px;line-height:1.2}
+.tp-en{display:block;font-family:var(--sans);font-size:20px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card.tp{display:flex;flex-direction:column}
+.card.tp p{font-size:23px;line-height:1.5}
+.tp-links{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line-2);font-size:19px;color:var(--ink-3)}
+.tp-links .lnk{font-size:19px}
+.cards.eq{align-items:stretch}
+.cards.eq>.card{height:100%}
+.pdf-link{position:absolute;top:100px;right:140px;font-size:20px;color:var(--ink-2);border:1px solid var(--line-2);padding:8px 18px;border-radius:999px;background:var(--paper);text-decoration:none;transition:transform .1s ease-out,border-color .2s var(--ease)}
+.pdf-link:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-link:active{transform:scale(.97)}
+
+/* 光譜 */
+.spec .bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.spec .st{padding:40px 34px;border-radius:8px;min-height:330px;color:var(--cream)}
+.spec .st b{display:block;font-family:var(--serif);font-size:42px;font-weight:600;margin-bottom:16px}
+.spec .st span{font-size:26px;line-height:1.55;display:block}
+.s1{background:var(--a1);color:var(--ink)!important}.s2{background:var(--a2);color:var(--ink)!important}.s3{background:var(--a3)}.s4{background:var(--a4)}
+.spec .pct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;font-size:24px;color:var(--ink-2)}
+.spec .pct b{color:var(--ink);font-family:var(--serif);font-size:34px;margin-right:8px;font-weight:600}
+
+/* 互動提示頁 */
+.ask{display:flex;flex-direction:column;justify-content:center;height:100%}
+.ask h2{max-width:28em;margin-bottom:56px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1500px;align-items:start}
+.opt{border:1px solid var(--line-2);background:var(--paper);border-radius:14px;padding:16px 30px;font-size:32px;line-height:1.4;display:flex;align-items:center;gap:22px}
+.opt b{font-weight:600;font-family:var(--serif);color:var(--accent);font-size:34px;font-weight:600}
+
+/* 算式 */
+.calc{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+.calc .row{display:grid;grid-template-columns:1fr 360px;align-items:baseline;gap:40px;border-top:1px solid var(--line-2);padding-top:22px}
+.calc .row .lbl{font-size:30px;color:var(--ink-2)}
+.calc .row .val{font-family:var(--serif);font-size:56px;color:var(--ink);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.calc .row.total .val{color:var(--accent);font-size:72px}
+.calc .row.total .lbl{font-weight:700;color:var(--ink)}
+
+/* 提醒帶 */
+.warnline{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:20px 26px;border-left:4px solid var(--warn);background:var(--cream-2);border-radius:0 12px 12px 0;font-size:24px;line-height:1.55;color:var(--ink-2)}
+
+/* 補充頁角標 */
+.plus{position:absolute;top:110px;right:140px;font-size:19px;letter-spacing:.14em;color:var(--ink);border:1px solid var(--line-2);padding:8px 16px;border-radius:999px;background:var(--paper)}
+.dark .plus{color:#B9AFA2;border-color:#3A3631;background:transparent}
+
+/* 章節幕 */
+.act{display:flex;flex-direction:column;justify-content:center;height:100%}
+.act .no{font-family:var(--serif);font-size:200px;color:var(--a1);line-height:1;letter-spacing:-.04em}
+.act h1{margin-top:10px}
+.act .refs{margin-top:34px;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:1500px}
+.act .refs li{font-size:21px;line-height:1.5;color:var(--ink-2);padding-left:2em;text-indent:-2em}
+.act .lead-in{margin-top:30px;font-size:30px;color:var(--ink-2);max-width:28em;line-height:1.6}
+.slide.act-page,.slide.light-scene{background:var(--accent);color:var(--cream)}
+.slide.act-page h1,.slide.act-page h2,.slide.light-scene h1,.slide.light-scene h2,.slide.light-scene p,.slide.light-scene .scene p{color:var(--cream)}
+.slide.act-page .kicker,.slide.light-scene .kicker,.slide.act-page .foot,.slide.light-scene .foot,.slide.act-page .foot span,.slide.light-scene .foot span{color:var(--cream)}
+.slide.act-page .foot,.slide.light-scene .foot{border-top-color:rgba(251,248,242,.35)}
+.slide.act-page .act .no{color:rgba(251,248,242,.28)}
+.act-en{font-size:52px;color:rgba(251,248,242,.8);font-weight:500}
+.slide.act-page .act .refs li,.slide.act-page .act .lead-in{color:rgba(251,248,242,.85)}
+.slide.light-scene .scene .who{color:rgba(251,248,242,.75)}
+.slide.light-scene .scene .q{color:#F6D9DC}
+.slide.light-scene .cover .sub,.slide.light-scene .cover .meta{color:rgba(251,248,242,.85)}
+.slide.light-scene .pdf-link{color:var(--cream);border-color:rgba(251,248,242,.5);background:transparent}
+.slide.light-scene .pdf-link:hover{background:rgba(251,248,242,.12)}
+
+/* ---------- 手機：長頁文件 ---------- */
+@media (max-width:900px){
+  html,body{height:auto;overflow:auto;background:var(--cream)}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:auto;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;transform-origin:0 0;opacity:1;visibility:visible;margin:0 0 var(--mgap,12px);transition:none}
+  .frag{opacity:1;transform:none}
+  #nav,#bar,#pg{display:none}
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:var(--cream);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;opacity:1!important;visibility:visible!important;transition:none;page-break-after:always;break-after:page}
+  .frag{opacity:1!important;transform:none!important}
+  #nav,#bar,#pg,.pdf-link{display:none!important}
+}
+
+/* Topic 3 補充樣式 */
+/* Topic 3 字級放大：1920 畫布的閱讀距離 */
+.card{padding:40px 44px}
+.card .n{font-size:54px;margin-bottom:18px}
+.card h3{font-size:36px;margin-bottom:14px}
+.card p{font-size:29px;line-height:1.6}
+.card .en{font-size:22px}
+.card .rel{font-size:26px;margin-top:18px;padding-top:16px}
+.card.defc h3{font-size:38px}
+.card.defc p{font-size:28px}
+.cards{gap:32px}
+table.tight td{font-size:29px;padding:20px 22px}
+table.tight th{font-size:31px;padding:16px 22px}
+td{font-size:30px}
+td .en,th .en{font-size:21px}
+.warnline{font-size:28px;padding:24px 30px;margin-top:36px}
+.calc{gap:30px}
+.calc .row .lbl{font-size:34px}
+.calc .row .val{font-size:64px}
+.calc .row.total .val{font-size:84px}
+.rows .dd{font-size:30px}
+.rows .tt{font-size:36px}
+.opt{font-size:36px;padding:26px 34px}
+.opt b{font-size:40px}
+.ask h2{margin-bottom:64px}
+h2{font-size:62px}
+.cards.eq>.card{min-height:300px}
+.card.defc{min-height:430px;display:flex;flex-direction:column}
+.card.defc p{font-size:31px;line-height:1.6}
+.card.defc h3{font-size:42px}
+.card.defc .rel{margin-top:auto;font-size:28px}
+.calc .row{padding-top:30px}
+.calc{gap:40px;margin-top:44px}
+
+.task{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:start;margin-top:44px}
+.task ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:28px}
+.task ol li{counter-increment:t;position:relative;padding-left:72px;font-size:34px;line-height:1.5;color:var(--ink)}
+.task ol li::before{content:counter(t);position:absolute;left:0;top:4px;width:48px;height:48px;line-height:48px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:25px;font-weight:700}
+.sheet{background:var(--paper);border:1px dashed var(--a2);border-radius:16px;padding:36px 42px}
+.sheet h3{font-size:36px;margin-bottom:16px;color:var(--accent)}
+.sheet .ln{border-bottom:1px solid var(--line-2);padding:18px 0;font-size:30px;color:var(--ink-2)}
+.timebox{position:absolute;top:96px;right:140px;font-size:22px;font-weight:700;color:var(--cream);background:var(--accent);padding:8px 20px;border-radius:999px;letter-spacing:.06em}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.card .en{display:block;font-family:var(--sans);font-size:19px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card .rel{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-2);font-size:21px;color:var(--accent);font-weight:600}
+.card.defc h3{font-size:30px;margin-bottom:10px;line-height:1.25}
+.card.defc p{font-size:22px}
+td .en,th .en{display:block;font-family:var(--sans);font-size:18px;font-weight:500;color:var(--ink-3)}
+.bad{color:var(--warn)}
+
+.xt2 tr.r1 td{background:var(--accent-tint)}
+.xt2 tr.r2 td{background:#F6EBDD}
+.xt td{min-width:150px;height:96px;font-size:34px;vertical-align:middle}
+.xt th{font-size:32px;text-align:center}
+.mk{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:700;font-size:28px}
+.mk1{background:var(--accent);color:#fff}
+.mk2{background:var(--warn);color:#fff}
+.big-x td{font-size:44px;height:120px}
+.big-x td.sm{color:var(--ink-3);font-size:34px}
+.kbar{display:flex;flex-direction:column;gap:34px;margin-top:30px}
+.kb-row{display:grid;grid-template-columns:330px 1fr 150px;align-items:center;gap:30px}
+.kb-lb{font-size:34px;font-weight:700;color:var(--ink);line-height:1.3}
+.kb-lb small{font-size:22px;font-weight:500;color:var(--ink-3)}
+.kb-track{position:relative;height:64px;background:var(--cream-2);border-radius:10px;overflow:hidden;display:flex}
+.kb-fill{height:100%;background:var(--ink-2)}
+.kb-fill.chance{background:#C9BFAF}
+.kb-fill.kap{background:var(--accent)}
+.kb-gap{position:absolute;top:0;height:100%;border:3px dashed var(--accent);border-radius:0 10px 10px 0;box-sizing:border-box}
+.kb-v{font-family:var(--serif);font-size:64px;font-weight:600;color:var(--ink);text-align:right}
+.kb-v.acc{color:var(--accent);font-size:80px}
+.kscale .card{min-height:380px}
+.kscale .n{font-size:48px}
+.kscale h3{font-size:44px}
+.kscale p{font-size:30px}
+.ks-pass{border-top:10px solid #2f6b4c}.ks-pass .n,.ks-pass h3{color:#2f6b4c}
+.ks-amber{border-top:10px solid #8a5a12}.ks-amber .n,.ks-amber h3{color:#8a5a12}
+.ks-fail{border-top:10px solid #a33a32}.ks-fail .n,.ks-fail h3{color:#a33a32}
+.ks-severe{background:#8f2a24!important;border-color:#8f2a24!important;border-top:10px solid #5e1915!important}.ks-severe .n,.ks-severe h3,.ks-severe p{color:#fff!important}
+
+/* 問卷模擬畫面 */
+.mockwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start;margin-top:10px}
+.mock{background:#fff;border:1px solid var(--line-2);border-radius:16px;box-shadow:0 18px 40px rgba(28,24,21,.10);overflow:hidden}
+.mock-bar{height:44px;background:var(--cream-2);border-bottom:1px solid var(--line-2);display:flex;align-items:center;gap:10px;padding:0 18px}
+.mock-bar i{width:13px;height:13px;border-radius:50%;background:#D9CFB9;display:block}
+.mock-bar span{margin-left:16px;font-size:18px;color:var(--ink-3);background:#fff;border-radius:6px;padding:3px 14px}
+.mock-body{padding:30px 40px 34px}
+.mock-title{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--ink);border-top:8px solid var(--accent);margin:-30px -40px 22px;padding:24px 40px 0}
+.mock-body p{font-size:21px;line-height:1.55;color:var(--ink-2);margin-bottom:9px}
+.mock-q{border:1px solid var(--line);border-radius:10px;padding:10px 20px;margin-top:10px}
+.mock-q b{display:block;font-size:24px;color:var(--ink);margin-bottom:8px}
+.mock-q .hint{font-size:19px;color:var(--ink-3);margin-bottom:2px}
+.mock-in{height:36px;border-bottom:2px solid var(--line-2);font-size:19px;color:#B5AC9E;padding-top:10px}
+.mock-chk{font-size:22px;color:var(--ink);margin-top:10px}
+.mock-chk::before{content:"";display:inline-block;width:22px;height:22px;border:2px solid var(--ink-3);border-radius:4px;vertical-align:-4px;margin-right:12px}
+.notes{display:flex;flex-direction:column;gap:20px}
+.nt{border-left:5px solid var(--accent);background:var(--paper);border-radius:0 12px 12px 0;padding:18px 24px;font-size:26px;line-height:1.5;color:var(--ink)}
+.nt b{display:block;color:var(--accent);font-size:27px;margin-bottom:4px}
+.mock2 .mock-body{padding:18px 34px 20px}
+.mock2 .mock-q{padding:6px 18px;margin-top:7px}
+.mock2 .mock-q b{font-size:22px;margin-bottom:2px}
+.mock2 .mock-q .hint{font-size:17px}
+.mock2 .mock-in{height:26px;padding-top:2px;font-size:17px}
+.mock2 h2{margin-bottom:12px!important}
+.dec td{font-size:27px!important;line-height:1.5;vertical-align:middle}
+.dec td:first-child{font-weight:500;color:var(--ink)}
+.dec td.keep{color:var(--ok);font-weight:700}
+.dec td.drop{color:var(--warn);text-decoration:line-through;text-decoration-thickness:2px}
+.cbx td{font-size:25px!important;vertical-align:top}
+.card .cite{font-size:21px;color:var(--ink-3);margin:2px 0 4px;font-family:var(--sans)}
+.flow td{font-size:25px!important;vertical-align:top}
+.flow td:first-child{font-family:var(--serif);color:var(--accent);font-size:34px!important}
+.flow .rule{display:inline-block;margin-top:6px;font-size:19px;font-weight:700;color:#fff;background:var(--accent);padding:2px 10px;border-radius:6px}
+.xtabs{display:flex;gap:4px;margin:0 0 6px;border-bottom:2px solid var(--line-2)}
+.xtabs span{font-size:19px;padding:6px 16px;border:1px solid var(--line-2);border-bottom:0;border-radius:8px 8px 0 0;background:var(--cream-2);color:var(--ink-2)}
+.xtabs span.on{background:#fff;color:var(--accent);font-weight:700;border-color:var(--accent)}
+.xlt td{font-size:26px!important}
+.xsheet{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:16px 18px;font-size:22px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.xs-h,.xs-r{display:grid;grid-template-columns:70px 1fr 220px;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line)}
+.xs-h{font-weight:700;color:#fff;background:#1C2F52;border-radius:6px}
+.xs-r .dd{background:#FFF4C2;border:1px solid #D9CFB9;border-radius:4px;padding:0 8px}
+.xs-r .dd.open{outline:2px solid var(--accent)}
+.xs-menu{margin:4px 0 0 auto;width:240px;display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:6px;background:#fff}
+.xs-menu span{padding:6px 12px;border-bottom:1px solid var(--line)}
+.xs-menu span.u{color:var(--ink-3)}
+.xsheet.lab .xs-h,.xsheet.lab .xs-r{grid-template-columns:1fr 110px 160px}
+.xs-kv{display:grid;grid-template-columns:220px 1fr;padding:10px 8px;border-bottom:1px solid var(--line);align-items:center}
+.xs-kv b{font-size:26px}
+.xs-kv.pass{background:#EAF4EE;color:#2f6b4c}
+/* 稀疏頁放大 */
+.cards.eq>.card.defc{min-height:470px;padding:42px 44px}
+.card.defc h3{font-size:46px}
+.card.defc .en{font-size:24px;margin-top:8px}
+.card.defc p{font-size:33px;margin-top:10px}
+.card.defc .rel{font-size:30px}
+.xl .card{min-height:400px}
+.xl .card p{font-size:34px}
+.xl .card .n{font-size:64px}
+.xl h2{font-size:72px}
+.xl .lead{font-size:38px}
+.xl .warnline{font-size:32px}
+.xl .task ol li{font-size:37px}
+.xl .sheet p{font-size:32px!important}
+.xl .opt{font-size:40px;padding:36px 40px}
+.xl .opts{gap:36px;max-width:none}
+.xl .calc .row .lbl{font-size:40px}
+.xl .calc .row .val{font-size:84px}
+.xl .calc .row.total .val{font-size:100px}
+.xl .calc .row{padding-top:40px}
+
+.big-t td{font-size:34px;padding:34px 26px}
+table.cmp td{font-size:27px;padding:12px 20px}
+table.cmp th{font-size:28px;padding:12px 20px}
+.card.tp p{font-size:22px}
+.card.tp h3{font-size:36px}
+.big-t th{font-size:34px}
+.xt td,.xt th{text-align:center}
+.xt td:first-child,.xt th:first-child{text-align:left}
+.xt td.dg{background:var(--accent-tint);color:var(--accent);font-weight:700}
+.good{color:var(--ok)}
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="deck">
+
+<section class="slide light-scene" data-layout="cover" data-density="1">
+  <div class="cover">
+    <div class="kicker">員工意向調查　HRM922　碩士在職專班</div>
+    <a class="pdf-link" href="#" onclick="event.preventDefault();window.print();" title="開啟瀏覽器列印，目的地選擇另存為 PDF">另存 PDF</a>
+    <h1>題項設計與關鍵事例法</h1>
+    <div class="sub">Topic 03　題項設計與關鍵事例法（CIT）<br>案例：玻璃心可以量嗎？</div>
+    <div class="meta"><span>國立中山大學 人力資源管理研究所</span><span>王豫萱</span><span>2026 Fall</span></div>
+  </div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">開場</div>
+  <div class="scene">
+    <div class="who">會議室外</div>
+    <p>主管指出報告裡的錯誤，新人隔天請了病假<br>走廊上有人說，現在的年輕人太玻璃心</p>
+    <p class="q frag">這句話裡，哪一部分可以測量？</p>
+  </div>
+  <div class="foot"><span class="lim">Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>01</span></div>
+</section>
+
+<section class="slide" data-layout="map" data-density="3">
+  <div class="kicker">今天的流程</div>
+  <h2>今天的流程</h2>
+  <div class="rows" style="margin-top:26px;gap:10px">
+    <div class="row frag" style="padding:12px 40px"><div class="n">一</div><div class="tt">測量基礎</div><div class="dd">構念、觀察分數與誤差、信度與效度</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">二</div><div class="tt">收集事例</div><div class="dd">關鍵事例法的問卷設計，閱讀已收集的事例</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">三</div><div class="tt">拆解與分類</div><div class="dd">描述、評價、歸因拆開，兩人獨立分類，計算 κ</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">四</div><div class="tt">撰寫題項</div><div class="dd">雙重問題、反向題、6 點量表，自評版與主管評版</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">五</div><div class="tt">內容效度</div><div class="dd">組內自評，對照相近構念的定義</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">六</div><div class="tt">認知訪談</div><div class="dd">前測時怎麼追問，觀念說明</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">七</div><div class="tt">期中作業</div><div class="dd">作業規則說明與選題</div></div>
+  </div>
+  <div class="foot"><span class="lim">Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">01</div><h1>測量基礎</h1>
+  <ul class="refs"><li>Cronbach, L. J., &amp; Meehl, P. E. (1955). Construct validity in psychological tests. Psychological Bulletin, 52(4), 281–302. https://doi.org/10.1037/h0040957</li><li>Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297–334. https://doi.org/10.1007/BF02310555</li></ul></div>
+  <div class="foot"><span class="lim">第一部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>03</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">構念</div>
+  <div class="split" style="grid-template-columns:1fr 1fr;gap:70px">
+    <div>
+      <h2 style="font-size:76px">構念<br><span style="font-size:36px;color:var(--ink-3);font-family:var(--sans)">construct</span></h2>
+      <p class="lead" style="font-size:38px;margin-top:30px">理論上存在、無法直接觀察的潛在變項<br>只能透過一組題目的作答間接推估</p>
+      <p class="lead frag" style="font-size:38px;margin-top:36px">構念是因，作答是果<br>構念程度高的人<br>在一組相關題目上傾向給高分</p>
+    </div>
+    <svg class="frag" viewBox="0 0 760 560" width="760" height="560" font-family="Plus Jakarta Sans, Noto Sans TC">
+      <defs><marker id="arC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7A2033"/></marker></defs>
+      <circle cx="170" cy="280" r="135" fill="#F3E3E4" stroke="#7A2033" stroke-width="4" stroke-dasharray="12 9"/>
+      <text x="170" y="272" text-anchor="middle" font-size="46" font-weight="700" fill="#7A2033">構念</text>
+      <text x="170" y="316" text-anchor="middle" font-size="26" fill="#7A2033">看不到</text>
+      <text x="170" y="360" text-anchor="middle" font-size="22" fill="#44403A">例：工作投入</text>
+      <g stroke="#7A2033" stroke-width="4" fill="none" marker-end="url(#arC)">
+        <line x1="300" y1="225" x2="478" y2="110"/>
+        <line x1="306" y1="280" x2="478" y2="280"/>
+        <line x1="300" y1="335" x2="478" y2="450"/>
+      </g>
+      <g font-size="30" fill="#1C1815">
+        <rect x="490" y="62" width="250" height="96" rx="14" fill="#FFFEFB" stroke="#44403A" stroke-width="3"/><text x="615" y="122" text-anchor="middle">題目一的作答</text><text x="615" y="190" text-anchor="middle" font-size="21" fill="#44403A">例：工作時我精神很好</text>
+        <rect x="490" y="232" width="250" height="96" rx="14" fill="#FFFEFB" stroke="#44403A" stroke-width="3"/><text x="615" y="292" text-anchor="middle">題目二的作答</text><text x="615" y="360" text-anchor="middle" font-size="21" fill="#44403A">例：我對手上的工作有熱忱</text>
+        <rect x="490" y="402" width="250" height="96" rx="14" fill="#FFFEFB" stroke="#44403A" stroke-width="3"/><text x="615" y="462" text-anchor="middle">題目三的作答</text><text x="615" y="530" text-anchor="middle" font-size="21" fill="#44403A">例：做事時我常忘了時間</text>
+      </g>
+      <text x="615" y="30" text-anchor="middle" font-size="26" fill="#44403A">看得到</text>
+    </svg>
+  </div>
+  <div class="foot"><span class="lim">教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u1" target="_blank">測量基礎　單元一：構念</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>04</span></div>
+</section>
+
+<section class="slide xl" data-layout="calc" data-density="3">
+  <div class="kicker">為什麼要用多個題目</div>
+  <h2>觀察分數 ＝ 真分數 ＋ 誤差</h2>
+  <div class="calc">
+    <div class="row frag"><div class="lbl">觀察分數（observed score），實際勾選的分數</div><div class="val">X</div></div>
+    <div class="row frag"><div class="lbl">真分數（true score），在構念上的真正水準</div><div class="val">T</div></div>
+    <div class="row frag"><div class="lbl">隨機誤差（random error），用字、心情、看錯題目</div><div class="val">E</div></div>
+  </div>
+  <p class="lead frag" style="margin-top:30px">每一題都帶有自己的誤差<br>多題合併後，正負誤差互相抵消，分數更接近真分數</p>
+  <div class="foot"><span class="lim">古典測量理論（classical test theory）；教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u1" target="_blank">測量基礎　1.2 為什麼要用多個題目</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="3">
+  <div class="kicker">信度與效度</div>
+  <h2 style="margin-bottom:10px">信度與效度</h2>
+  <p class="lead" style="font-size:30px;max-width:none">信度（reliability）：同一組題目是否一致地一起高、一起低<br>效度（validity）：量到的是不是目標構念，靶心代表目標構念</p>
+  <svg viewBox="0 0 1640 470" width="1640" height="470" font-family="Plus Jakarta Sans, Noto Sans TC">
+      <g class="frag"><circle cx="260" cy="200" r="170" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/><circle cx="260" cy="200" r="136" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/><circle cx="260" cy="200" r="102" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/><circle cx="260" cy="200" r="68" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/><circle cx="260" cy="200" r="34" fill="#EAD3D6" stroke="#D9CFB9" stroke-width="2"/><circle cx="260" cy="200" r="6" fill="#7A2033"/><circle cx="150" cy="140" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="355" cy="85" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="390" cy="270" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="220" cy="320" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="125" cy="240" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="280" cy="170" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="330" cy="210" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><text x="260" y="425" text-anchor="middle" font-size="34" font-weight="700" fill="#1C1815">信度低　效度低</text><text x="260" y="462" text-anchor="middle" font-size="24" fill="#44403A">每次落點都不同</text></g>
+      <g class="frag"><circle cx="820" cy="200" r="170" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/><circle cx="820" cy="200" r="136" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/><circle cx="820" cy="200" r="102" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/><circle cx="820" cy="200" r="68" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/><circle cx="820" cy="200" r="34" fill="#EAD3D6" stroke="#D9CFB9" stroke-width="2"/><circle cx="820" cy="200" r="6" fill="#7A2033"/><circle cx="738" cy="122" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="750" cy="108" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="725" cy="134" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="760" cy="126" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="732" cy="104" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="744" cy="140" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="720" cy="116" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><text x="820" y="425" text-anchor="middle" font-size="34" font-weight="700" fill="#1C1815">信度高　效度低</text><text x="820" y="462" text-anchor="middle" font-size="24" fill="#44403A">落點集中，但偏離靶心</text></g>
+      <g class="frag"><circle cx="1380" cy="200" r="170" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/><circle cx="1380" cy="200" r="136" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/><circle cx="1380" cy="200" r="102" fill="#F4EEE1" stroke="#D9CFB9" stroke-width="2"/><circle cx="1380" cy="200" r="68" fill="#FFFEFB" stroke="#D9CFB9" stroke-width="2"/><circle cx="1380" cy="200" r="34" fill="#EAD3D6" stroke="#D9CFB9" stroke-width="2"/><circle cx="1380" cy="200" r="6" fill="#7A2033"/><circle cx="1386" cy="190" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="1368" cy="204" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="1390" cy="212" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="1376" cy="184" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="1396" cy="198" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="1366" cy="192" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><circle cx="1382" cy="214" r="11" fill="#1C1815" stroke="#FFFEFB" stroke-width="3"/><text x="1380" y="425" text-anchor="middle" font-size="34" font-weight="700" fill="#7A2033">信度高　效度高</text><text x="1380" y="462" text-anchor="middle" font-size="24" fill="#44403A">落點集中，且在靶心</text></g>
+    </svg>
+  <p class="lead frag" style="font-size:30px;margin-top:6px;max-width:none">高信度只代表題目彼此一致，效度需要另外的證據</p>
+  <div class="foot"><span class="lim multi">Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297–334. https://doi.org/10.1007/BF02310555<br>Cronbach, L. J., &amp; Meehl, P. E. (1955). Construct validity in psychological tests. Psychological Bulletin, 52(4), 281–302. https://doi.org/10.1037/h0040957<br>信度在 Topic 05 以 α 與 ω 檢驗；效度今天談內容效度，Topic 05 以因素分析檢驗</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>06</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">效度證據</div>
+  <h2 style="margin-bottom:26px">效度靠累積證據支持</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">內容</div><h3>內容效度<span class="en">content validity</span></h3><p style="font-size:31px">題目是否涵蓋構念的重要面向<br>有沒有遺漏或納入無關內容</p><div class="rel">今天，組內自評</div></div>
+    <div class="card frag"><div class="n">構念</div><h3>構念效度<span class="en">construct validity</span></h3><p style="font-size:31px">與理論上相關的變項相關<br>與無關的變項不相關</p><div class="rel">Topic 05，因素分析</div></div>
+    <div class="card frag"><div class="n">效標</div><h3>效標效度<span class="en">criterion validity</span></h3><p style="font-size:31px">能否預測理論上該預測的結果<br>例如離職</p><div class="rel">本課程不實作，見教材網站單元三</div></div>
+  </div>
+  <div class="foot"><span class="lim multi">Cronbach, L. J., &amp; Meehl, P. E. (1955). Construct validity in psychological tests. Psychological Bulletin, 52(4), 281–302. https://doi.org/10.1037/h0040957</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">02</div><h1>關鍵事例法<br><span class="act-en">critical incident technique</span></h1>
+  <ul class="refs"><li>Flanagan, J. C. (1954). The critical incident technique. Psychological Bulletin, 51(4), 327–358. https://doi.org/10.1037/h0061470</li><li>Farh, J.-L., Zhong, C.-B., &amp; Organ, D. W. (2004). Organizational citizenship behavior in the People’s Republic of China. Organization Science, 15(2), 241–253. https://doi.org/10.1287/orsc.1030.0051</li></ul></div>
+  <div class="foot"><span class="lim">第二部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>08</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="3">
+  <div class="kicker">關鍵事例法</div>
+  <h2 style="margin-bottom:16px">用具體事件取代印象</h2>
+  <p class="lead" style="margin-bottom:30px">Flanagan（1954）的做法：請當事人或旁觀者回想一次實際發生的事件<br><span class="def">記錄到沒在場的人也看得懂</span></p>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">情境</div><h3>當時發生什麼事<span class="en">situation</span></h3><p>時間、場合、在場的人<br>事件的起因</p></div>
+    <div class="card frag"><div class="n">行為</div><h3>當事人做了什麼<span class="en">behavior</span></h3><p>可以被看到或聽到的言行，不寫動機與個性</p></div>
+    <div class="card frag"><div class="n">結果</div><h3>後來怎麼了<span class="en">outcome</span></h3><p>對工作、同事<br>或當事人自己造成的影響</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Flanagan, J. C. (1954). The critical incident technique. Psychological Bulletin, 51(4), 327–358., p. 327. https://doi.org/10.1037/h0061470</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">收集事例的工具</div>
+  <h2 style="margin-bottom:20px">線上問卷開放題與半結構訪談</h2>
+  <table class="tight cmp">
+    <tr><th style="width:260px">步驟</th><th>問法範例</th></tr>
+    <tr class="frag"><td>開場</td><td>說明目的、匿名、不記姓名與公司，可隨時停止</td></tr>
+    <tr class="frag"><td>主問題</td><td>請回想最近一次，同事在工作上被指出錯誤後反應很大的經驗</td></tr>
+    <tr class="frag"><td>情境</td><td>當時發生什麼事，在場有哪些人，事情怎麼開始的</td></tr>
+    <tr class="frag"><td>行為</td><td>當事人說了什麼、做了什麼</td></tr>
+    <tr class="frag"><td>結果</td><td>後來怎麼了，對工作或同事有什麼影響</td></tr>
+    <tr class="frag"><td>補問</td><td>還有沒有另一次不太一樣的經驗，每人一到三則</td></tr>
+  </table>
+  <div class="warnline" style="margin-top:24px;font-size:26px;padding:18px 26px"><div>收案　填答者 20 位以上、涵蓋不同職級，事例 40 則以上，不再出現新類型時停止<br>籠統的事例用短訪談補問；訪談前取得同意，逐字稿去識別化</div></div>
+  <div class="foot"><span class="lim multi">Flanagan, J. C. (1954). The critical incident technique. Psychological Bulletin, 51(4), 327–358. https://doi.org/10.1037/h0061470<br>作業說明頁 FAQ 有收案數量的說明</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="1">
+  <div class="kicker">想一想</div>
+  <div class="scene">
+    <div class="who">寫問卷之前</div>
+    <p style="font-size:120px;line-height:1.2;font-weight:600">玻璃心是什麼？</p>
+    <p class="q frag">先說清楚要收集哪一種事件，問卷才問得出來</p>
+  </div>
+  <div class="foot"><span>Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
+</section>
+
+<section class="slide" data-layout="mock" data-density="4">
+  <div class="kicker">實際歷程　問卷畫面一</div>
+  <h2 style="margin-bottom:20px;font-size:52px">指導語與同意</h2>
+  <div class="mockwrap">
+    <div class="mock">
+      <div class="mock-bar"><i></i><i></i><i></i><span>線上問卷</span></div>
+      <div class="mock-body">
+        <div class="mock-title">職場回饋經驗調查</div>
+        <p>您好，本問卷由國立中山大學人力資源管理研究所課程小組進行，想了解在工作中收到批評或負面回饋之後，人們實際會有哪些反應</p>
+        <p>填答對象：目前在職、年滿 20 歲的工作者</p>
+        <p>作答方式：請回想最近三個月內，您親眼看到或親身經歷的一次具體事件，依序描述當時的情境、當事人的言行與後來的結果；可填一到三則，約需 10 分鐘</p>
+        <p>資料保護：問卷匿名，不詢問姓名、公司與部門；資料只用於課堂作業，以彙整方式呈現，課程結束後刪除</p>
+        <p>參與完全自願，您可以隨時停止作答；如有疑問，請聯絡課程小組（Email）</p>
+        <div class="mock-chk">我已了解上述說明，同意填答</div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="nt frag"><b>不出現玻璃心</b>用中性的描述說明主題<br>避免引導填答者評價他人</div>
+      <div class="nt frag"><b>說明用途與保密</b>誰在做、資料怎麼用、何時刪除</div>
+      <div class="nt frag"><b>對象與作答方式</b>填答資格、回想期間<br>事件要寫什麼、預計時間</div>
+      <div class="nt frag"><b>自願與聯絡</b>可以隨時停止，留下聯絡方式</div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">課堂示範畫面；各組依自己的題目改寫指導語</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
+</section>
+
+<section class="slide mock2" data-layout="mock" data-density="4">
+  <div class="kicker">實際歷程　問卷畫面二</div>
+  <h2 style="margin-bottom:20px;font-size:52px">事例三欄分開問</h2>
+  <div class="mockwrap">
+    <div class="mock">
+      <div class="mock-bar"><i></i><i></i><i></i><span>線上問卷</span></div>
+      <div class="mock-body">
+        <p style="font-size:22px;color:var(--ink)">請回想最近三個月內，一位同事在工作上被指出錯誤或收到負面回饋之後，反應讓您印象深刻的一次經驗</p>
+        <div class="mock-q"><b>1　當時發生什麼事</b><div class="hint">場合、在場的人、事情怎麼開始</div><div class="mock-in">請具體描述</div></div>
+        <div class="mock-q"><b>2　那位同事說了什麼、做了什麼</b><div class="hint">寫看得到、聽得到的言行</div><div class="mock-in">請具體描述</div></div>
+        <div class="mock-q"><b>3　後來怎麼了</b><div class="hint">對工作、同事或當事人的影響</div><div class="mock-in">請具體描述</div></div>
+        <p style="font-size:20px;margin-top:14px;color:var(--ink-3)">還有另一次不太一樣的經驗嗎？　□ 有，繼續填寫　□ 沒有</p>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="nt frag"><b>三欄分開問</b>合在一題，回答容易只剩評價</div>
+      <div class="nt frag"><b>限定期間</b>最近三個月內<br>避免回憶太久以前的事</div>
+      <div class="nt frag"><b>只問行為</b>不問動機與個性</div>
+      <div class="nt frag"><b>最後再問背景</b>職級、產業、年資區間，不問姓名</div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Flanagan, J. C. (1954). The critical incident technique. Psychological Bulletin, 51(4), 327–358. https://doi.org/10.1037/h0061470</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">Excel 範本　工作表一覽</div>
+  <h2 style="margin-bottom:18px">每張工作表由誰填、什麼時候填</h2>
+  <div class="xtabs"><span class="">使用說明</span><span class="">編碼簿</span><span class="">事例清單</span><span class="">甲分類</span><span class="">乙分類</span><span class="">交叉表與κ</span><span class="">標籤驗證</span></div>
+  <table class="tight cmp xlt">
+    <tr><th style="width:250px">工作表</th><th style="width:330px">誰填</th><th>做什麼</th></tr>
+    <tr class="frag"><td>事例清單</td><td>全組</td><td>事例分情境、行為、結果三欄；E 欄篩選保留或剔除</td></tr>
+    <tr class="frag"><td>編碼簿</td><td>全組</td><td>討論出類別，寫定義、納入與排除條件；固定附上無法歸類</td></tr>
+    <tr class="frag"><td>甲分類、乙分類</td><td>甲、乙各自<br>在自己的檔案</td><td>用下拉選單把每則事例歸到一個類別，分類時不討論</td></tr>
+    <tr class="frag"><td>交叉表與κ</td><td>自動計算</td><td>交叉表、κ、判定結果、分歧最多的組合、只有一人分類的提醒</td></tr>
+    <tr class="frag"><td>標籤驗證</td><td>分類完成後才看</td><td>旁人原話中的流行語標籤，落在哪些類別</td></tr>
+  </table>
+  <div class="foot"><span class="lim">黃色格子由各組填寫，灰色格子為公式　<a class="lnk" href="../Assignments/期中作業_事例分類與kappa範本.xlsx" target="_blank" rel="noopener">下載 Excel 範本</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">練習一　閱讀已收集的事例</div>
+  <div class="timebox">10 分鐘</div>
+  <h2>先篩選，再分類</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">打開 Excel 範本，事例分類工作表已有 40 則事例</li>
+      <li class="frag">逐則確認情境、行為、結果是否完整</li>
+      <li class="frag">太籠統、看不出行為的，F 欄選剔除</li>
+      <li class="frag">合理申訴、正當拒絕等不屬於本構念的，也剔除</li>
+      <li class="frag">每組說出一則剔除的事例與理由</li>
+    </ol>
+    <div class="sheet">
+      <h3>課堂素材</h3>
+      <p style="font-size:30px;line-height:1.6">40 則教學用事例<br>依職場常見情境編寫<br>期中作業改用各組自己收集的事例</p>
+      <p style="font-size:28px;margin-top:18px"><a class="lnk" href="../Assignments/期中作業_事例分類與kappa範本.xlsx" target="_blank">Excel 範本：事例分類與 κ</a></p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">課堂練習</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">03</div><h1>拆解與分類</h1>
+  <ul class="refs"><li>Podsakoff, P. M., MacKenzie, S. B., &amp; Podsakoff, N. P. (2016). Recommendations for creating better concept definitions in the organizational, behavioral, and social sciences. Organizational Research Methods, 19(2), 159–203. https://doi.org/10.1177/1094428115624965</li><li>Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37–46. https://doi.org/10.1177/001316446002000104</li><li>Landis, J. R., &amp; Koch, G. G. (1977). The measurement of observer agreement for categorical data. Biometrics, 33(1), 159–174. https://doi.org/10.2307/2529310</li></ul></div>
+  <div class="foot"><span class="lim">第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">拆開一句話</div>
+  <h2 style="margin-bottom:30px">一句玻璃心裡的描述、評價與歸因</h2>
+  <table>
+    <tr><th style="width:300px">成分</th><th>例子</th><th style="width:300px">能否量測</th></tr>
+    <tr class="frag"><td>描述<span class="en">description</span></td><td>被指出錯誤後情緒反應強烈、需要很久才平復、之後避開主管的回饋</td><td class="good" style="font-weight:700">可以，只寫這部分</td></tr>
+    <tr class="frag"><td>評價<span class="en">evaluation</span></td><td>不成熟、抗壓性差、太脆弱</td><td class="bad" style="font-weight:700">不放進題目</td></tr>
+    <tr class="frag"><td>歸因<span class="en">attribution</span></td><td>這一代被保護得太好、成長環境太順</td><td class="bad" style="font-weight:700">不放進題目，屬於待檢驗的假設</td></tr>
+  </table>
+  <div class="foot"><span class="lim">評價與歸因寫進題目，量到的會是填答者對當事人的看法</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">拆解示範</div>
+  <h2 style="margin-bottom:26px">把一句話拆成描述、評價、歸因</h2>
+  <table class="tight dec">
+    <tr><th style="width:560px">原句</th><th>描述<span class="en">保留</span></th><th style="width:250px">評價<span class="en">刪除</span></th><th style="width:300px">歸因<span class="en">刪除</span></th></tr>
+    <tr class="frag"><td>他被主管念兩句就請假兩天<br>這一代就是抗壓性差</td><td class="keep">被主管指出錯誤後<br>隔天請假兩天</td><td class="drop">抗壓性差</td><td class="drop">這一代</td></tr>
+    <tr class="frag"><td>比稿落選、主管講評完<br>他就把提案從共用資料夾刪掉<br>心臟太小顆，從小被保護得太好</td><td class="keep">收到講評後<br>刪除自己的提案檔案</td><td class="drop">心臟太小顆</td><td class="drop">從小被保護得太好</td></tr>
+    <tr class="frag"><td>實作評量不及格<br>她當天就說要請長假<br>這屆新人都太玻璃心</td><td class="keep">評量不及格當天<br>提出長假申請</td><td class="drop">太玻璃心</td><td class="drop">這屆新人</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:28px;margin-top:24px">只有描述可以寫成題目；評價與歸因留給資料檢驗</p>
+  <div class="foot"><span class="lim">Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="3">
+  <div class="kicker">命名</div>
+  <div class="split" style="grid-template-columns:1fr 1.05fr;gap:90px">
+    <div>
+      <h2 style="font-size:76px;margin-bottom:40px">量表不叫玻璃心</h2>
+      <p class="lead" style="font-size:40px">玻璃心帶有貶義<br>也預設了世代歸因</p>
+      <p class="lead" style="font-size:40px;margin-top:40px">暫定中性名稱<br><span class="def" style="font-size:52px">批評反應敏感度</span></p>
+      <p class="lead" style="font-size:40px;margin-top:40px">名稱只描述被批評時的反應<br>不判斷好壞</p>
+    </div>
+    <div>
+      <div class="warnline frag" style="margin-top:0;font-size:33px;padding:40px 44px;line-height:1.6"><div><b style="font-size:38px">年齡刻板印象</b><br>題目不出現年齡、世代與成長背景<br>年齡組別是否有差異<br>留到資料分析時檢驗</div></div>
+      <div class="warnline frag" style="margin-top:40px;font-size:33px;padding:40px 44px;line-height:1.6"><div><b style="font-size:38px">自評與他評</b><br>情緒強度與平復速度只有本人知道<br>主管只能看到外顯行為<br>兩個版本量到的範圍不同<br>分數不能直接互換</div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">寫定義</div>
+  <h2 style="margin-bottom:26px">構念定義必須清楚明確</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">屬性</div><h3>它是什麼</h3><p>情緒、認知或行為反應，寫成可以有高低程度的特性</p></div>
+    <div class="card frag"><div class="n">對象</div><h3>誰身上的特性</h3><p>個人、團隊或組織；本練習為在職員工個人</p></div>
+    <div class="card frag"><div class="n">範圍</div><h3>什麼算、什麼不算</h3><p>寫出排除條件<br>例如合理申訴不算</p></div>
+  </div>
+  <div class="warnline" style="font-size:26px"><div>句型參考　批評反應敏感度，指員工在工作中接收到負面回饋時，產生強烈且持久的情緒反應，並因此迴避後續回饋的程度</div></div>
+  <div class="foot"><span class="lim multi">Podsakoff, P. M., MacKenzie, S. B., &amp; Podsakoff, N. P. (2016). Recommendations for creating better concept definitions in the organizational, behavioral, and social sciences. Organizational Research Methods, 19(2), 159–203. https://doi.org/10.1177/1094428115624965</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">編碼簿</div>
+  <h2 style="margin-bottom:24px">編碼簿（codebook）的欄位</h2>
+  <table class="tight cmp">
+    <tr><th style="width:250px">欄位</th><th style="width:520px">內容</th><th>示範</th></tr>
+    <tr class="frag"><td>向度名稱</td><td>來自事例本身的描述性名稱</td><td>迴避回饋</td></tr>
+    <tr class="frag"><td>定義</td><td>一句話，寫屬性與範圍</td><td>收到負面回饋後<br>減少與回饋來源互動的行為</td></tr>
+    <tr class="frag"><td>納入條件</td><td>什麼樣的事例歸到這一類</td><td>請假、不再主動詢問<br>改走其他路線避開主管</td></tr>
+    <tr class="frag"><td>排除條件</td><td>相近但不歸這一類的事例</td><td>當場哭泣歸到情緒反應強度</td></tr>
+    <tr class="frag"><td>典型事例</td><td>一到兩則原始事例</td><td>事例編號 07、15</td></tr>
+  </table>
+  <div class="warnline" style="margin-top:24px"><div>向度命名來自事例，不來自現成理論<br>事例太少的類別，考慮與其他類別合併</div></div>
+  <div class="foot"><span class="lim multi">Farh, J.-L., Zhong, C.-B., &amp; Organ, D. W. (2004). Organizational citizenship behavior in the People’s Republic of China. Organization Science, 15(2), 241–253. https://doi.org/10.1287/orsc.1030.0051<br>Farh 等人（2004）將 27 類事例歸納為 10 個向度</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">編碼簿範例</div>
+  <h2 style="margin-bottom:22px">三個向度的完整編碼簿</h2>
+  <table class="tight cmp cbx">
+    <tr><th style="width:290px">向度</th><th style="width:430px">定義</th><th>納入條件</th><th style="width:430px">排除條件</th></tr>
+    <tr class="frag"><td>情緒反應強度<span class="en">典型事例 01、04、06</span></td><td>收到負面回饋當下<br>可觀察到的情緒反應</td><td>哭泣、聲音發抖、臉紅<br>當場激動辯解</td><td>事後才出現的低落<br>歸到平復所需時間</td></tr>
+    <tr class="frag"><td>平復所需時間<span class="en">典型事例 07、08、10</span></td><td>收到負面回饋後<br>回到原本工作狀態所需的時間</td><td>數小時到數天無法專心<br>反覆想著那句評語</td><td>當下的情緒反應<br>歸到情緒反應強度</td></tr>
+    <tr class="frag"><td>迴避回饋<span class="en">典型事例 13、14、15</span></td><td>收到負面回饋後<br>減少與回饋來源互動的行為</td><td>不再主動詢問、避開給回饋的人<br>取消面談</td><td>依程序提出申訴或說明<br>不屬於本構念</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:26px;margin-top:22px">排除條件寫出相鄰向度的界線<br>兩位編碼者遇到模糊事例時，依這一欄裁決</p>
+  <div class="foot"><span class="lim">事例編號對應 Excel 範本的課堂事例</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="4">
+  <div class="kicker">交叉表　步驟一</div>
+  <h2 style="margin-bottom:30px">每一則事例，在表上畫一筆</h2>
+  <div style="display:grid;grid-template-columns:600px 1fr;gap:80px;align-items:center">
+    <div>
+      <table class="tight xt2">
+        <tr><th>事例</th><th>甲歸為</th><th>乙歸為</th></tr>
+        <tr class="r1"><td>01</td><td>情緒</td><td>情緒</td></tr>
+        <tr class="r2"><td>02</td><td>情緒</td><td>平復</td></tr>
+        <tr><td>03</td><td>迴避</td><td>迴避</td></tr>
+        <tr><td>04</td><td>平復</td><td>平復</td></tr>
+        <tr><td style="color:var(--ink-3)">⋯</td><td colspan="2" style="color:var(--ink-3)">共 20 則</td></tr>
+      </table>
+    </div>
+    <div>
+      <table class="tight xt">
+        <tr><th>甲 ＼ 乙</th><th>情緒</th><th>平復</th><th>迴避</th></tr>
+        <tr><td>情緒</td><td class="dg"><span class="frag mk mk1">01</span></td><td><span class="frag mk mk2">02</span></td><td></td></tr>
+        <tr><td>平復</td><td class="dg"></td><td class="dg"></td><td></td></tr>
+        <tr><td>迴避</td><td></td><td></td><td class="dg"></td></tr>
+      </table>
+      <p class="lead frag" style="font-size:32px;margin-top:30px">橫列看甲歸到哪一類，直欄看乙歸到哪一類<br>事例 01 兩人都歸情緒，落在<span class="def">對角線</span><br>事例 02 甲歸情緒、乙歸平復，落在對角線外</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">數字為課堂示範</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
+</section>
+
+<section class="slide" data-layout="split" data-density="4">
+  <div class="kicker">交叉表　步驟二</div>
+  <h2 style="margin-bottom:30px">20 則全部畫完，數一數每一格</h2>
+  <div style="display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center">
+    <table class="tight xt big-x">
+      <tr><th>甲 ＼ 乙</th><th>情緒</th><th>平復</th><th>迴避</th><th>甲合計</th></tr>
+      <tr><td>情緒</td><td class="dg">6</td><td>1</td><td>0</td><td class="sm">7</td></tr>
+      <tr><td>平復</td><td>1</td><td class="dg">5</td><td>1</td><td class="sm">7</td></tr>
+      <tr><td>迴避</td><td>0</td><td>1</td><td class="dg">5</td><td class="sm">6</td></tr>
+      <tr><td>乙合計</td><td class="sm">7</td><td class="sm">7</td><td class="sm">6</td><td class="sm">20</td></tr>
+    </table>
+    <div>
+      <p class="lead frag" style="font-size:34px"><span class="def">對角線</span>加起來<br>6 ＋ 5 ＋ 5 ＝ 16 則<br>兩人歸到同一類</p>
+      <p class="lead frag" style="font-size:34px;margin-top:30px">對角線外 4 則<br>兩人意見不同</p>
+      <p class="lead frag" style="font-size:34px;margin-top:30px">分歧最多的組合<br>決定編碼簿先修哪一類</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">Excel 範本會自動產生這張表　<a class="lnk" href="../Assignments/期中作業_事例分類與kappa範本.xlsx" target="_blank">事例分類與 κ 範本</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+</section>
+
+<section class="slide" data-layout="calc" data-density="3">
+  <div class="kicker">Cohen’s κ</div>
+  <h2 style="margin-bottom:20px">80% 的一致，有多少是碰巧</h2>
+  <div class="kbar">
+    <div class="kb-row frag"><div class="kb-lb">觀察同意率<br><small>16 ÷ 20</small></div><div class="kb-track"><div class="kb-fill" style="width:80%"></div></div><div class="kb-v">.80</div></div>
+    <div class="kb-row frag"><div class="kb-lb">碰巧一致率<br><small>兩人隨意分類也會同類</small></div><div class="kb-track"><div class="kb-fill chance" style="width:33.5%"></div></div><div class="kb-v">.335</div></div>
+    <div class="kb-row frag"><div class="kb-lb">κ<br><small>扣掉碰巧之後</small></div><div class="kb-track"><div class="kb-fill chance" style="width:33.5%"></div><div class="kb-fill kap" style="width:46.5%"></div><div class="kb-gap" style="left:33.5%;width:66.5%"></div></div><div class="kb-v acc">.70</div></div>
+  </div>
+  <p class="lead frag" style="font-size:30px;margin-top:26px">碰巧一致率　甲、乙各有 7/20 歸情緒，同時歸情緒的機會是 .35 × .35，三類加總得 .335<br>κ　碰巧以外還有 .665 的空間<br>兩人實際多做到 .465，.465 ÷ .665 ＝ .70</p>
+  <div class="foot"><span class="lim multi">Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37–46. https://doi.org/10.1177/001316446002000104<br>數字接續前一頁的交叉表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="3">
+  <div class="kicker">κ 的判讀</div>
+  <h2 style="margin-bottom:30px">本課程以 .61 為通過標準</h2>
+  <div class="cards c4 eq kscale">
+    <div class="card frag ks-pass"><div class="n">.61 以上</div><h3>通過</h3><p>高度一致<br>.81 以上幾乎完全一致<br>可用編碼簿<br>分類其餘事例</p></div>
+    <div class="card frag ks-amber"><div class="n">.41–.60</div><h3>未通過</h3><p>中等一致<br>修編碼簿<br>兩人重新分類</p></div>
+    <div class="card frag ks-fail"><div class="n">.01–.40</div><h3>不通過</h3><p>一致性偏低<br>類別定義重寫</p></div>
+    <div class="card frag ks-severe"><div class="n">0 以下</div><h3>嚴重</h3><p>一致程度未超過<br>隨機一致的水準<br>先一起重談定義</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Landis, J. R., &amp; Koch, G. G. (1977). The measurement of observer agreement for categorical data. Biometrics, 33(1), 159–174., p. 165. https://doi.org/10.2307/2529310</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">Excel 操作　編碼簿與獨立分類</div>
+  <h2 style="margin-bottom:14px">先定類別，再各自分類</h2>
+  <div class="xtabs"><span class="">使用說明</span><span class="">編碼簿</span><span class="">事例清單</span><span class="on">甲分類</span><span class="">乙分類</span><span class="">交叉表與κ</span><span class="">標籤驗證</span></div>
+  <div class="task" style="margin-top:22px">
+    <ol>
+      <li class="frag">全組讀完保留的事例，討論出類別<br>填入編碼簿的類別名稱、定義、納入與排除條件</li>
+      <li class="frag">甲、乙各自另存一份檔案</li>
+      <li class="frag">甲只填甲分類、乙只填乙分類<br>E 欄用下拉選單選類別</li>
+      <li class="frag">哪一類都不合，選無法歸類，不要硬塞</li>
+    </ol>
+    <div class="xsheet">
+      <div class="xs-h"><span>編號</span><span>行為</span><span>甲的分類</span></div>
+      <div class="xs-r"><span>01</span><span>當場眼眶泛紅，說話開始哽咽</span><span class="dd">情緒反應強度 ▾</span></div>
+      <div class="xs-r"><span>02</span><span>在座位上沉默很久，午餐也沒去吃</span><span class="dd">平復所需時間 ▾</span></div>
+      <div class="xs-r"><span>03</span><span>拿著企劃書站起來大聲辯解</span><span class="dd open">▾</span></div>
+      <div class="xs-menu"><span>情緒反應強度</span><span>平復所需時間</span><span>迴避回饋</span><span class="u">無法歸類</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">分類時不看另一位組員的檔案，κ 才代表獨立判斷的一致程度</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">Excel 操作　合併與看結果</div>
+  <h2 style="margin-bottom:14px">把乙的分類貼回同一個檔案</h2>
+  <div class="xtabs"><span class="">使用說明</span><span class="">編碼簿</span><span class="">事例清單</span><span class="">甲分類</span><span class="">乙分類</span><span class="on">交叉表與κ</span><span class="">標籤驗證</span></div>
+  <div class="task" style="margin-top:22px">
+    <ol>
+      <li class="frag">乙在自己的檔案，複製乙分類 E 欄</li>
+      <li class="frag">貼到甲檔案的乙分類 E 欄<br>選擇性貼上：值</li>
+      <li class="frag">打開交叉表與κ，看 κ 與判定顏色</li>
+      <li class="frag">檢查只有一人分類、未納入計算兩格都是 0</li>
+      <li class="frag">不一致的事例討論後<br>記在事例清單 J、K 欄</li>
+    </ol>
+    <div class="xsheet">
+      <div class="xs-kv"><span>事例總數 N</span><b>33</b></div>
+      <div class="xs-kv"><span>Cohen’s κ</span><b>.79</b></div>
+      <div class="xs-kv pass"><span>判定</span><b>通過：高度一致</b></div>
+      <div class="xs-kv"><span>分歧最多的組合</span><b style="font-size:20px">甲歸情緒、乙歸平復，共 3 則</b></div>
+      <div class="xs-kv"><span>只有一人分類</span><b>0</b></div>
+      <div class="xs-kv"><span>未納入計算</span><b>0</b></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">畫面數字為示意；三位組員時，把三人的分類欄貼到編碼一致性計算器的三人模式</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">練習二　拆解與獨立分類</div>
+  <div class="timebox">30 分鐘</div>
+  <h2>兩人各自分類，再比對</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">全組討論出類別，填入編碼簿</li>
+      <li class="frag">甲、乙各自另存檔案，分類時不討論</li>
+      <li class="frag">乙的分類貼回甲的檔案</li>
+      <li class="frag">看 κ、判定與分歧最多的組合</li>
+      <li class="frag">討論不一致的事例，寫下最後的決定</li>
+    </ol>
+    <div class="sheet">
+      <h3>命名提示，以組內事例為準</h3>
+      <div class="ln">情緒反應強度</div>
+      <div class="ln">平復所需時間</div>
+      <div class="ln">迴避回饋</div>
+      <div class="ln">以組內事例為準，可增減</div>
+      <p style="font-size:26px;margin-top:16px"><a class="lnk" href="../Handout/Topic11_開放題分析的演進/編碼一致性計算器.html" target="_blank">編碼一致性計算器</a><br><a class="lnk" href="../Assignments/期中作業_事例分類與kappa範本.xlsx" target="_blank">Excel 範本：事例分類與 κ</a></p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">課堂練習</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">κ 偏低時</div>
+  <h2 style="margin-bottom:26px">修編碼簿，再獨立編碼一次</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">找原因</div><p>列出兩人分歧的事例<br>看分歧集中在哪兩類<br>計算器會標出<br>分歧最多的格子</p></div>
+    <div class="card frag"><div class="n">修定義</div><p>補納入與排除條件<br>加上裁決規則與範例</p></div>
+    <div class="card frag"><div class="n">重編碼</div><p>兩人依新版編碼簿<br>各自重新分類<br>再算一次 κ</p></div>
+  </div>
+  <div class="warnline"><div>先討論再編碼，κ 會變高，但已經不是獨立判斷；企劃書要附兩次的 κ 與修改紀錄</div></div>
+  <div class="foot"><span class="lim multi">Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37–46. https://doi.org/10.1177/001316446002000104</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">Excel 操作　標籤驗證</div>
+  <h2 style="margin-bottom:14px">分類完成後，才看旁人怎麼說</h2>
+  <div class="xtabs"><span class="">使用說明</span><span class="">編碼簿</span><span class="">事例清單</span><span class="">甲分類</span><span class="">乙分類</span><span class="">交叉表與κ</span><span class="on">標籤驗證</span></div>
+  <div class="task" style="margin-top:22px">
+    <ol>
+      <li class="frag">分類與討論都完成後，才打開標籤驗證</li>
+      <li class="frag">填入事例當時旁人的原話</li>
+      <li class="frag">表格統計各類別被貼上玻璃心標籤的次數</li>
+      <li class="frag">標籤集中在某幾類<br>代表這個詞主要指這些行為<br>標籤分散在各類<br>代表這個詞的意思很廣</li>
+    </ol>
+    <div class="xsheet lab">
+      <div class="xs-h"><span>類別</span><span>事例數</span><span>被貼上標籤</span></div>
+      <div class="xs-r"><span>情緒反應強度</span><span>9</span><span>6</span></div>
+      <div class="xs-r"><span>平復所需時間</span><span>8</span><span>3</span></div>
+      <div class="xs-r"><span>迴避回饋</span><span>12</span><span>7</span></div>
+      <div class="xs-r"><span>無法歸類</span><span>4</span><span>1</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">原話多半帶有評價或歸因，分類時先不看，避免依旁人的形容詞分類；數字為示意</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">04</div><h1>撰寫題項</h1>
+  <ul class="refs"><li>Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</li><li>DeVellis, R. F., &amp; Thorpe, C. T. (2022). Scale development: Theory and applications (5th ed.). SAGE.</li></ul></div>
+  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">常見問題題目</div>
+  <h2 style="margin-bottom:26px">原題與修改</h2>
+  <table class="tight">
+    <tr><th style="width:300px">問題</th><th>原題</th><th>修改後</th></tr>
+    <tr class="frag"><td>雙重問題<span class="en">double-barreled</span></td><td class="bad">被批評時，我會難過而且會反駁</td><td class="good">拆成兩題，難過與反駁各一題</td></tr>
+    <tr class="frag"><td>評價字眼<span class="en">evaluative wording</span></td><td class="bad">我的抗壓性很差</td><td class="good">被主管指出錯誤後，我會難過很久</td></tr>
+    <tr class="frag"><td>雙重否定<span class="en">double negative</span></td><td class="bad">我不會不在意別人的批評</td><td class="good">別人的批評會讓我在意很久</td></tr>
+    <tr class="frag"><td>情境模糊<span class="en">vague context</span></td><td class="bad">我很容易受傷</td><td class="good">工作上收到負面回饋時，我的情緒會受到明顯影響</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
+</section>
+
+<section class="slide xl" data-layout="split" data-density="3">
+  <div class="kicker">反向題</div>
+  <div class="split">
+    <div>
+      <h2>反向題的用途與代價</h2>
+      <p class="lead">用途<br>提醒填答者讀完題目<br>偵測一路勾同一格的作答</p>
+      <p class="lead frag" style="margin-top:40px">代價<br>在因素分析中自成一個方法因素<br>信度較低<br>讀不懂的人會答反</p>
+    </div>
+    <div>
+      <div class="card frag" style="margin-bottom:24px;padding:30px 40px;min-height:0"><h3>建議寫法</h3><p style="font-size:33px">用語意相反的正向敘述，例如<br><span class="good">收到批評後，我很快就能回到工作</span></p></div>
+      <div class="card frag" style="padding:30px 40px;min-height:0"><h3>避免寫法</h3><p style="font-size:33px">在原題加上否定詞，例如<br><span class="bad">收到批評後，我不會無法專心</span></p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>教材網站　<a class="lnk" href="../Handout/Topic4_題項與量表設計/Topic4_題項與量表設計_課程網站.html#u3" target="_blank">題項與量表設計　單元三：反向題的用途與陷阱</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>34</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">自評與主管評</div>
+  <h2 style="margin-bottom:26px">自評版與主管評版</h2>
+  <table class="tight">
+    <tr><th style="width:280px">向度</th><th>自評版</th><th>主管評版</th></tr>
+    <tr class="frag"><td>情緒反應強度</td><td>工作上被指出錯誤時<br>我的情緒會受到明顯影響</td><td>被指出錯誤時<br>這位部屬的情緒反應明顯可見</td></tr>
+    <tr class="frag"><td>平復所需時間</td><td>收到負面回饋後<br>我需要一段時間才能專心工作</td><td>收到負面回饋後，這位部屬<br>需要一段時間才能回到工作狀態</td></tr>
+    <tr class="frag"><td>迴避回饋</td><td>我會避免主動向主管詢問工作表現</td><td>這位部屬很少主動詢問自己的工作表現</td></tr>
+  </table>
+  <div class="warnline"><div>量尺　6 點，1 非常不同意、2 不同意、3 有點不同意、4 有點同意、5 同意、6 非常同意，不設中點<br>題目為示範，各組以自己的事例與向度為準</div></div>
+  <div class="foot"><span class="lim">Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>35</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">練習三　撰寫題項</div>
+  <div class="timebox">30 分鐘</div>
+  <h2>依向度寫出題庫初稿</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">每個向度寫 8 題以上自評版<br>題目來自組內事例</li>
+      <li class="frag">每個向度至少 1 題反向題，在題號旁標示</li>
+      <li class="frag">挑出主管看得到的題目，改寫成主管評版</li>
+      <li class="frag">逐題檢查雙重問題、評價字眼、否定詞與情境</li>
+      <li class="frag">題目與定義寫在同一張紙上</li>
+    </ol>
+    <div class="sheet">
+      <h3>題數的依據</h3>
+      <p style="font-size:24px;line-height:1.6">Hinkin（1998）建議最終每個向度 4 到 6 題，初稿題數約為最終題數的兩倍<br>刪題後才有餘裕</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>36</span></div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">休息</div>
+  <div class="scene">
+    <div class="who">休息 10 分鐘</div>
+    <p>回來之後，對照相近構念檢查題目</p>
+  </div>
+  <div class="foot"><span class="lim">Topic 03</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>37</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">05</div><h1>內容效度<br><span class="act-en">content validity</span></h1>
+  <ul class="refs"><li>Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243–1265. https://doi.org/10.1037/apl0000406</li><li>Lynn, M. R. (1986). Determination and quantification of content validity. Nursing Research, 35(6), 382–385. https://doi.org/10.1097/00006199-198611000-00017</li><li>Anderson, J. C., &amp; Gerbing, D. W. (1991). Predicting the performance of measures in a confirmatory factor analysis with a pretest assessment of their substantive validities. Journal of Applied Psychology, 76(5), 732–740. https://doi.org/10.1037/0021-9010.76.5.732</li></ul></div>
+  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">內容效度的檢驗方法</div>
+  <h2 style="margin-bottom:26px">請別人判斷題目量的是什麼</h2>
+  <table class="tight">
+    <tr><th style="width:420px">方法</th><th>做法</th></tr>
+    <tr class="frag"><td>內容效度指數<span class="en">content validity index（CVI）；Lynn, 1986</span></td><td>專家逐題評定與構念的相關程度，計算評為相關的專家比例</td></tr>
+    <tr class="frag"><td>實質效度<span class="en">substantive validity（psa、csv）；Anderson &amp; Gerbing, 1991</span></td><td>評審把每題歸到幾個構念定義之一，計算歸對的比例</td></tr>
+    <tr class="frag"><td>定義對應性<span class="en">definitional correspondence</span></td><td>題目與本構念定義的吻合程度</td></tr>
+    <tr class="frag"><td>定義區辨性<span class="en">definitional distinctiveness</span></td><td>題目與本構念的吻合程度<br>要高於與相近構念的吻合程度；Colquitt 等人（2019）兩者並用</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">psa：proportion of substantive agreement；csv：substantive validity coefficient<br>Lynn, M. R. (1986). Determination and quantification of content validity. Nursing Research, 35(6), 382–385. https://doi.org/10.1097/00006199-198611000-00017<br>Anderson, J. C., &amp; Gerbing, D. W. (1991). Predicting the performance of measures in a confirmatory factor analysis with a pretest assessment of their substantive validities. Journal of Applied Psychology, 76(5), 732–740. https://doi.org/10.1037/0021-9010.76.5.732<br>Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243–1265. https://doi.org/10.1037/apl0000406</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>39</span></div>
+</section>
+
+<section class="slide" data-layout="map" data-density="3">
+  <div class="kicker">怎麼找到相近構念</div>
+  <h2 style="margin-bottom:26px">從定義出發，系統性地找文獻</h2>
+  <div class="rows" style="gap:12px">
+    <div class="row frag" style="grid-template-columns:90px 330px 1fr;padding:16px 36px"><div class="n">一</div><div class="tt">列出關鍵詞</div><div class="dd">從自己的定義拆出中英文關鍵詞<br>例如 criticism、negative feedback、reaction、sensitivity</div></div>
+    <div class="row frag" style="grid-template-columns:90px 330px 1fr;padding:16px 36px"><div class="n">二</div><div class="tt">選資料庫</div><div class="dd">英文用 APA PsycInfo、Web of Science、Google Scholar<br>中文用華藝線上圖書館</div></div>
+    <div class="row frag" style="grid-template-columns:90px 330px 1fr;padding:16px 36px"><div class="n">三</div><div class="tt">先讀回顧文章</div><div class="dd">統合分析（meta-analysis）、文獻回顧（review）<br>量表發展（scale development）文章</div></div>
+    <div class="row frag" style="grid-template-columns:90px 330px 1fr;padding:16px 36px"><div class="n">四</div><div class="tt">前後追引用</div><div class="dd">往前查關鍵文獻引用的文獻，往後查引用它的文獻<br>backward / forward citation</div></div>
+    <div class="row frag" style="grid-template-columns:90px 330px 1fr;padding:16px 36px"><div class="n">五</div><div class="tt">記錄定義</div><div class="dd">構念名稱、定義、出處、與本構念的差別<br>只讀定義，不看量表題目</div></div>
+  </div>
+  <div class="foot"><span class="lim multi">Podsakoff, P. M., MacKenzie, S. B., &amp; Podsakoff, N. P. (2016). Recommendations for creating better concept definitions in the organizational, behavioral, and social sciences. Organizational Research Methods, 19(2), 159–203. https://doi.org/10.1177/1094428115624965</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>40</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">相近構念卡　一</div>
+  <h2 style="margin-bottom:24px">預期正相關的構念</h2>
+  <div class="cards c3 eq"><div class="card defc frag"><h3>神經質<span class="en">neuroticism</span></h3><div class="cite">Lahey（2009）</div><p>相對穩定的傾向<br>面對威脅、挫折或失落時<br>容易以負向情緒回應</p><div class="rel">重疊程度最高</div></div><div class="card defc frag"><h3>拒絕敏感度<span class="en">rejection sensitivity</span></h3><div class="cite">Downey &amp; Feldman（1996）</div><p>焦慮地預期被拒絕<br>容易在他人行為中察覺拒絕<br>並過度反應</p><div class="rel">對人際拒絕的預期與反應</div></div><div class="card defc frag"><h3>脆弱型自戀<span class="en">vulnerable narcissism</span></h3><div class="cite">Hendin &amp; Cheek（1997）</div><p>以過度敏感、脆弱與自我中心<br>為特徵的隱性自戀<br>對批評特別敏感</p><div class="rel">對批評過度敏感是核心特徵之一</div></div></div>
+  <div class="foot"><span class="lim multi">Lahey, B. B. (2009). Public health significance of neuroticism. American Psychologist, 64(4), 241–256., p. 241. https://doi.org/10.1037/a0015309<br>Downey, G., &amp; Feldman, S. I. (1996). Implications of rejection sensitivity for intimate relationships. Journal of Personality and Social Psychology, 70(6), 1327–1343., p. 1327. https://doi.org/10.1037/0022-3514.70.6.1327<br>Hendin, H. M., &amp; Cheek, J. M. (1997). Assessing hypersensitive narcissism: A reexamination of Murray’s Narcism Scale. Journal of Research in Personality, 31(4), 588–599. https://doi.org/10.1006/jrpe.1997.2204</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>41</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">相近構念卡　二</div>
+  <h2 style="margin-bottom:24px">自我評價與特質</h2>
+  <div class="cards c3 eq"><div class="card defc frag"><h3>脆弱自尊<span class="en">fragile / contingent self-esteem</span></h3><div class="cite">Kernis（2003）</div><p>自尊依附在條件與外在評價上<br>不穩定並帶有防衛</p><div class="rel">自尊隨外在評價起伏</div></div><div class="card defc frag"><h3>核心自我評價<span class="en">core self-evaluations</span></h3><div class="cite">Judge et al.（2003）</div><p>由自尊、一般自我效能、神經質（反向）<br>與控制信念構成的人格特質</p><div class="rel">高階構念（higher-order construct）<br>神經質是其組成之一</div></div><div class="card defc frag"><h3>感覺處理敏感度<span class="en">sensory processing sensitivity</span></h3><div class="cite">Aron &amp; Aron（1997）</div><p>刺激處理較深<br>較易受刺激影響的特質<br>和內向與情緒性部分獨立</p><div class="rel">描述相似現象而不帶貶義</div></div></div>
+  <div class="foot"><span class="lim multi">Kernis, M. H. (2003). Toward a conceptualization of optimal self-esteem. Psychological Inquiry, 14(1), 1–26., p. 1. https://doi.org/10.1207/S15327965PLI1401_01<br>Judge, T. A., Erez, A., Bono, J. E., &amp; Thoresen, C. J. (2003). The core self-evaluations scale: Development of a measure. Personnel Psychology, 56(2), 303–331., p. 303. https://doi.org/10.1111/j.1744-6570.2003.tb00152.x<br>Aron, E. N., &amp; Aron, A. (1997). Sensory-processing sensitivity and its relation to introversion and emotionality. Journal of Personality and Social Psychology, 73(2), 345–368., p. 345. https://doi.org/10.1037/0022-3514.73.2.345</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>42</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">相近構念卡　三</div>
+  <h2 style="margin-bottom:24px">預期負相關的構念</h2>
+  <div class="cards c3 eq"><div class="card defc frag"><h3>回饋導向<span class="en">feedback orientation</span></h3><div class="cite">Linderbaum &amp; Levy（2010）</div><p>個人對回饋整體的接受程度，多向度構念</p><div class="rel">預期負相關<br>工作情境中最直接的對照</div></div><div class="card defc frag"><h3>心理韌性<span class="en">resilience</span></h3><div class="cite">Smith et al.（2008）</div><p>從壓力中反彈或恢復的能力</p><div class="rel">預期負相關，對應平復所需時間</div></div><div class="card defc frag"><h3>痛苦耐受度<span class="en">distress tolerance</span></h3><div class="cite">Simons &amp; Gaher（2005）</div><p>經歷並承受<br>負向情緒狀態的能力</p><div class="rel">預期負相關，對應情緒反應強度</div></div></div>
+  <div class="foot"><span class="lim multi">Linderbaum, B. A., &amp; Levy, P. E. (2010). The development and validation of the Feedback Orientation Scale (FOS). Journal of Management, 36(6), 1372–1405., p. 1372. https://doi.org/10.1177/0149206310373145<br>Smith, B. W., Dalen, J., Wiggins, K., Tooley, E., Christopher, P., &amp; Bernard, J. (2008). The Brief Resilience Scale: Assessing the ability to bounce back. International Journal of Behavioral Medicine, 15(3), 194–200., p. 194. https://doi.org/10.1080/10705500802222972<br>Simons, J. S., &amp; Gaher, R. M. (2005). The Distress Tolerance Scale: Development and validation of a self-report measure. Motivation and Emotion, 29(2), 83–102., p. 83. https://doi.org/10.1007/s11031-005-7955-3</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>43</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">練習四　組內自評</div>
+  <div class="timebox">20 分鐘</div>
+  <h2>對照相近構念，檢查自己的題目</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">組內兩人一組，各自讀一次本組的定義</li>
+      <li class="frag">逐題評定與定義的吻合程度，1 到 6 分</li>
+      <li class="frag">發下相近構念卡，逐題判斷是否更像某一張卡</li>
+      <li class="frag">比對兩人的判斷，找出被歸到相近構念的題目</li>
+      <li class="frag">決定每一題保留、修改或刪除，並寫下理由</li>
+    </ol>
+    <div class="sheet">
+      <h3>自評表欄位</h3>
+      <div class="ln">題號</div>
+      <div class="ln">與定義吻合程度　1 至 6</div>
+      <div class="ln">更像哪一張相近構念卡</div>
+      <div class="ln">修改建議</div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243–1265. https://doi.org/10.1037/apl0000406</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>44</span></div>
+</section>
+
+<section class="slide xl" data-layout="ask" data-density="2">
+  <div class="kicker">自評之後</div>
+  <div class="ask">
+    <h2>被歸到相近構念的題目<br>要怎麼處理？</h2>
+    <div class="opts">
+      <div class="opt frag"><b>A</b>修改定義<br>說清楚差在哪</div>
+      <div class="opt frag"><b>B</b>刪題或改寫</div>
+      <div class="opt frag"><b>C</b>承認重疊，記錄下來</div>
+    </div>
+    <p class="lead frag" style="margin-top:60px">這一步是概念層次的區辨，資料層次的檢驗留到因素分析之後</p>
+  </div>
+  <div class="foot"><span class="lim multi">Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243–1265. https://doi.org/10.1037/apl0000406</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>45</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">06</div><h1>認知訪談<br><span class="act-en">cognitive interviewing</span></h1>
+  <ul class="refs"><li>Willis, G. B. (2005). Cognitive interviewing: A tool for improving questionnaire design. SAGE.</li><li>Beatty, P. C., &amp; Willis, G. B. (2007). Research synthesis: The practice of cognitive interviewing. Public Opinion Quarterly, 71(2), 287–311. https://doi.org/10.1093/poq/nfm006</li></ul></div>
+  <div class="foot"><span class="lim">第六部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>46</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">認知訪談</div>
+  <h2 style="margin-bottom:16px">填答者看到題目時想了什麼</h2>
+  <table class="tight">
+    <tr><th style="width:300px">作答環節</th><th>追問範例</th></tr>
+    <tr class="frag"><td>理解<span class="en">comprehension</span></td><td>請用自己的話說這題在問什麼，批評指的是哪一種情況</td></tr>
+    <tr class="frag"><td>回想<span class="en">retrieval</span></td><td>作答時想到的是哪一次經驗，最近一次是什麼時候</td></tr>
+    <tr class="frag"><td>判斷<span class="en">judgment</span></td><td>為什麼選 4 不選 5，兩者差在哪</td></tr>
+    <tr class="frag"><td>作答<span class="en">response</span></td><td>有沒有想勾但量尺上沒有的答案，會不會擔心被主管看到</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">本次期中作業不實作認知訪談前測<br>Willis, G. B. (2005). Cognitive interviewing: A tool for improving questionnaire design. SAGE.<br>Beatty, P. C., &amp; Willis, G. B. (2007). Research synthesis: The practice of cognitive interviewing. Public Opinion Quarterly, 71(2), 287–311. https://doi.org/10.1093/poq/nfm006</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>47</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1">
+  <div class="act"><div class="no">07</div><h1>期中團體作業啟動</h1>
+  <p class="lead-in">新概念量表設計，10 月 29 日 23:59 截止，10 月 30 日發表</p></div>
+  <div class="foot"><span class="lim">第七部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>48</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">期中作業要做什麼</div>
+  <h2 style="margin-bottom:22px">期中作業的流程與產出</h2>
+  <table class="tight cmp flow">
+    <tr><th style="width:90px"></th><th style="width:420px">階段</th><th>做什麼</th><th style="width:400px">產出</th></tr>
+    <tr class="frag"><td>一</td><td>界定流行語<br>收集事例</td><td>蒐集中英文商業媒體報導，寫出日常用法<br>用問卷或訪談收集事例</td><td>流行語摘要、事例清單</td></tr>
+    <tr class="frag"><td>二</td><td>分類與 κ<br><span class="rule">規則一：查相近構念的定義</span></td><td>兩人獨立分類、計算 κ、命名向度<br>查最接近構念的定義，寫出差別</td><td>編碼簿、κ、定義區辨說明</td></tr>
+    <tr class="frag"><td>三</td><td>題項與預試<br><span class="rule">規則一：題庫定稿前不看量表題目</span></td><td>依向度寫題目<br>預試至少 100 人</td><td>題庫初稿與定稿日期、預試資料</td></tr>
+    <tr class="frag"><td>四</td><td>項目分析與 EFA</td><td>項目分析、探索性因素分析、信度</td><td>分析報表、最終量表</td></tr>
+    <tr class="frag"><td>五</td><td>對照既有構念<br><span class="rule">規則二：對照章節分兩層</span></td><td>這時才查既有量表的題目與向度<br>判斷同名異義、異名同義或新向度</td><td>企劃書與簡報，10/29 截止</td></tr>
+  </table>
+  <div class="foot"><span class="lim">兩條規則的完整說明見下一頁</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>49</span></div>
+</section>
+
+<section class="slide" data-layout="cards" data-density="4">
+  <div class="kicker">期中作業規則</div>
+  <h2 style="margin-bottom:26px">兩條規則：什麼時候查文獻、查了要寫什麼</h2>
+  <div class="cards c2 eq">
+    <div class="card frag"><div class="n">規則一</div><h3>寫題目之前，先查定義<span class="en">第二、三階段</span></h3><p>事例分類完成後，查最接近的二到三個構念的定義<br>寫出自己的構念和它們差在哪裡<br>既有量表的題目，到題庫初稿定稿之後才能看<br>企劃書附上題庫定稿日期與查閱題目的日期</p></div>
+    <div class="card frag"><div class="n">規則二</div><h3>與既有構念的對照<span class="en">第五階段</span></h3><p>企劃書必須有這一節，分兩層<br>概念層，寫題目之前的定義區辨<br>實證層，因素分析之後<br>與二到三份既有量表的向度對應</p></div>
+  </div>
+  <div class="warnline"><div>為什麼這樣規定：先查定義，才能及早發現和既有構念重疊；題目晚點看，題目才會來自事例，不會改寫現成量表<br>違反任一條規則，相關評分向度以不及格計算</div></div>
+  <div class="foot"><span class="lim multi">Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243–1265. https://doi.org/10.1037/apl0000406<br>作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>50</span></div>
+</section>
+
+<section class="slide" data-layout="timeline" data-density="4">
+  <div class="kicker">時程</div>
+  <h2 style="margin-bottom:30px">選題到發表</h2>
+  <div class="rows" style="gap:14px">
+    <div class="row frag" style="grid-template-columns:270px 1fr;padding:18px 40px"><div class="tt">10/2</div><div class="dd">選題，作業啟動</div></div>
+    <div class="row frag" style="grid-template-columns:270px 1fr;padding:18px 40px"><div class="tt">10/9 連假</div><div class="dd">線上問卷收集事例，兩人獨立分類並計算 κ，查相近構念的定義</div></div>
+    <div class="row frag" style="grid-template-columns:270px 1fr;padding:18px 40px"><div class="tt">10/16</div><div class="dd">Topic 04 抽樣與資料品質，課後設計預試與草率作答篩檢</div></div>
+    <div class="row frag" style="grid-template-columns:270px 1fr;padding:18px 40px"><div class="tt">10/23</div><div class="dd">Topic 05 項目分析、EFA 與信度，帶預試資料與筆電</div></div>
+    <div class="row frag" style="grid-template-columns:270px 1fr;padding:18px 40px"><div class="tt">10/29 23:59</div><div class="dd">企劃書與發表簡報各一份 PDF，上傳 Google Classroom</div></div>
+    <div class="row frag" style="grid-template-columns:270px 1fr;padding:18px 40px"><div class="tt">10/30</div><div class="dd">每組 15 分鐘發表加 5 分鐘答辯</div></div>
+  </div>
+  <div class="foot"><span class="lim">詳細內容以作業說明頁為準</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>51</span></div>
+</section>
+
+<section class="slide" data-layout="topics" data-density="4">
+  <div class="kicker">期中作業選題</div>
+  <h2>六個網路流行語，每組認領一個</h2>
+  <div class="cards c3 eq tp-grid"><div class="card tp"><div class="tp-no">TOPIC A</div><h3>桌邊轟炸<span class="tp-en">Desk Bombing</span></h3><p>同事沒有預約、沒有訊息，直接走到座位旁邊開口，正在專心的工作當場中斷</p><div class="tp-links">延伸閱讀　<a href="https://www.managertoday.com.tw/articles/view/66478" target="_blank" class="lnk">經理人 2023</a>　<a href="https://theweek.com/labor/1017876/desk-bombing-is-not-a-crime" target="_blank" class="lnk">The Week 2022</a></div></div><div class="card tp"><div class="tp-no">TOPIC B</div><h3>轉職休克<span class="tp-en">Shift Shock</span></h3><p>面試時聽到的職務、文化與彈性，到職後才發現完全是另一回事，第一個月就想走</p><div class="tp-links">延伸閱讀　<a href="https://blog.104.com.tw/workplace-trending-words/#08" target="_blank" class="lnk">104 職場力 2023</a>　<a href="https://www.fastcompany.com/91114964/what-is-shift-shock-and-how-does-it-impact-workers" target="_blank" class="lnk">Fast Company 2024</a></div></div><div class="card tp"><div class="tp-no">TOPIC C</div><h3>廁底放鬆<span class="tp-en">Restroom Lurking</span></h3><p>事情辦完了卻還關著隔間門不想出去，廁所變成辦公室裡唯一沒有人看得到的地方</p><div class="tp-links">延伸閱讀　<a href="https://www.businessweekly.com.tw/careers/blog/3022370" target="_blank" class="lnk">商周 2026</a>　<a href="https://www.forbes.com/sites/bryanrobinson/2026/05/22/restroom-lurking-on-the-rise-as-workers-seek-refuge-from-job-stress/" target="_blank" class="lnk">Forbes 2026</a></div></div><div class="card tp"><div class="tp-no">TOPIC D</div><h3>憤怒求職<span class="tp-en">Rage Applying</span></h3><p>被主管罵、被加班、被同事推工作之後，當晚一口氣投出十幾封履歷，隔天氣消了也沒去</p><div class="tp-links">延伸閱讀　<a href="https://blog.104.com.tw/workplace-trending-words/#02" target="_blank" class="lnk">104 職場力 2023</a>　<a href="https://time.com/6268814/rage-applying-how-to-find-jobs/" target="_blank" class="lnk">TIME 2023</a></div></div><div class="card tp"><div class="tp-no">TOPIC E</div><h3>咖啡打卡<span class="tp-en">Coffee Badging</span></h3><p>公司規定要進辦公室，於是早上刷卡露臉、喝杯咖啡、開一場會，中午前就回家繼續工作</p><div class="tp-links">延伸閱讀　<a href="https://www.businessweekly.com.tw/international/blog/3013688" target="_blank" class="lnk">商周 2023</a>　<a href="https://www.cnbc.com/2024/12/18/how-coffee-badging-became-a-revolt-against-return-to-office-mandates.html" target="_blank" class="lnk">CNBC 2024</a></div></div><div class="card tp"><div class="tp-no">TOPIC F</div><h3>安靜休假<span class="tp-en">Quiet Vacationing</span></h3><p>沒有請假，人卻在外地，靠排程訊息與偶爾回覆維持在線的樣子</p><div class="tp-links">延伸閱讀　<a href="https://www.gvm.com.tw/article/113107" target="_blank" class="lnk">遠見 2024</a>　<a href="https://www.cnbc.com/2024/07/03/gen-zers-millennials-quiet-vacation-during-fourth-of-july-week.html" target="_blank" class="lnk">CNBC 2024</a></div></div></div>
+
+  <div class="foot"><span class="lim">組間不重複，只能從這六個題目中選擇；延伸閱讀皆為免費全文</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>52</span></div>
+</section>
+
+<section class="slide" data-layout="task" data-density="3">
+  <div class="kicker">10 月 9 日連假</div>
+  <h2>連假期間各組要完成的工作</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">寫好事例收集問卷或訪談大綱<br>發放問卷並完成半結構訪談</li>
+      <li class="frag">整理事例清單，籠統的事例補問或剔除</li>
+      <li class="frag">兩位以上組員用 Excel 範本獨立分類<br>計算 κ，記錄分歧的處理</li>
+      <li class="frag">完成編碼簿與向度命名<br>查相近構念的定義，寫區辨說明</li>
+      <li class="frag">依向度寫出預試題目初稿<br>標上定稿日期</li>
+    </ol>
+    <div class="sheet">
+      <h3>對照今天的練習</h3>
+      <div class="ln">事例卡　練習一</div>
+      <div class="ln">獨立分類與 κ　練習二</div>
+      <div class="ln">題目初稿　練習三</div>
+      <div class="ln">定義區辨　練習四</div>
+          </div>
+  </div>
+  <div class="foot"><span class="lim">無實體授課，有問題在 Google Classroom 提出　<a class="lnk" href="../Assignments/期中作業_事例分類與kappa範本.xlsx" target="_blank">Excel 範本：事例分類與 κ</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>53</span></div>
+</section>
+
+<section class="slide" data-layout="next" data-density="3">
+  <div class="kicker">下一步</div>
+  <h2>下次上課　10 月 16 日 Topic 04</h2>
+  <div class="rows" style="margin-top:32px">
+    <div class="row" style="grid-template-columns:200px 1fr">
+      <div class="tt">作業</div>
+      <div class="dd">連假期間的工作見前一頁<br><a href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" class="lnk">期中團體作業說明頁</a>　<a href="../Assignments/期中作業_企劃書範本.docx" class="lnk" target="_blank" rel="noopener">Word 企劃書範本</a>　<a href="../Assignments/期中作業_事例分類與kappa範本.xlsx" class="lnk" target="_blank" rel="noopener">Excel 範本</a></div>
+    </div>
+    <div class="row" style="grid-template-columns:200px 1fr">
+      <div class="tt">課後閱讀</div>
+      <div class="dd">測量基礎單元一，題項與量表設計單元一到單元三<br><a href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html" target="_blank" class="lnk">課堂互動教材網站　測量基礎</a>　<a href="../Handout/Topic4_題項與量表設計/Topic4_題項與量表設計_課程網站.html" target="_blank" class="lnk">題項與量表設計</a></div>
+    </div>
+    <div class="row" style="grid-template-columns:200px 1fr">
+      <div class="tt">玻璃心後續</div>
+      <div class="dd">10 月 23 日 Topic 05，以標準題庫與模擬資料做項目分析、EFA 與信度</div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>54</span></div>
+</section>
+
+</div></div>
+
+<div id="bar"><i></i></div>
+<div id="pg">1 / 55</div>
+<div id="nav">
+  <button id="prev" aria-label="上一頁">←</button>
+  <button id="next" aria-label="下一頁">→</button>
+  <button id="fs" aria-label="全螢幕">⛶</button>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var mobile=function(){return innerWidth<=900;};
+
+  function fit(){
+    if(mobile()){
+      var s=innerWidth/1920;
+      slides.forEach(function(sl){sl.style.transform='scale('+s+')';sl.style.marginBottom=(-1080*(1-s)+12)+'px';});
+      return;
+    }
+    slides.forEach(function(sl){sl.style.transform='';sl.style.marginBottom='';});
+    var s=Math.min(innerWidth/1920, innerHeight/1080);
+    deck.style.setProperty('--s',s);
+    deck.style.setProperty('--tx',((innerWidth-1920*s)/2)+'px');
+    deck.style.setProperty('--ty',((innerHeight-1080*s)/2)+'px');
+  }
+  function frags(i){return Array.prototype.slice.call(slides[i].querySelectorAll('.frag'));}
+  function show(i,revealAll){
+    i=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+    frags(i).forEach(function(f){f.classList.toggle('in',!!revealAll);});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+N;
+    document.querySelector('#bar i').style.width=((i+1)/N*100)+'%';
+    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){
+    var f=frags(cur).filter(function(x){return !x.classList.contains('in');});
+    if(f.length){f[0].classList.add('in');return;}
+    if(cur<N-1) show(cur+1,false);
+  }
+  function prev(){
+    var f=frags(cur).filter(function(x){return x.classList.contains('in');});
+    if(f.length){f[f.length-1].classList.remove('in');return;}
+    if(cur>0) show(cur-1,true);
+  }
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(mobile()) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0,false);}
+    else if(e.key==='End'){show(N-1,true);}
+    else if(e.key==='f'||e.key==='F'){toggleFS();}
+  });
+  var wheelT=0;
+  addEventListener('wheel',function(e){
+    if(mobile()) return;
+    var t=Date.now(); if(t-wheelT<420) return; wheelT=t;
+    if(e.deltaY>10) next(); else if(e.deltaY<-10) prev();
+  },{passive:true});
+  var tx=null;
+  addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){
+    if(mobile()||tx===null) return;
+    var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(dx<-40) next(); else if(dx>40) prev();
+  },{passive:true});
+
+  function toggleFS(){
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else{var el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);}
+  }
+  document.getElementById('fs').addEventListener('click',toggleFS);
+  document.addEventListener('fullscreenchange',function(){
+    document.body.classList.toggle('fs',!!document.fullscreenElement);
+    setTimeout(fit,60);
+  });
+  var idleT=null;
+  function wake(){
+    if(!document.body.classList.contains('fs')) return;
+    document.body.classList.remove('idle'); clearTimeout(idleT);
+    idleT=setTimeout(function(){document.body.classList.add('idle');},2200);
+  }
+  ['mousemove','mousedown','touchstart','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true});});
+
+  addEventListener('resize',fit);
+  fit();
+  var h=parseInt((location.hash||'#1').slice(1),10);
+  show(isNaN(h)?0:h-1,false);
+  if(mobile()){slides.forEach(function(s){s.classList.add('on');});}
+})();
+</script>
+</body>
+</html>

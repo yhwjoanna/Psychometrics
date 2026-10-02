@@ -131,8 +131,8 @@ body.full .simple-only{display:none!important}
   </div>
   <div class="tb-right">
     <div class="tb-topic">課內工具：離職成本試算小工具</div>
-    <a href="../../index.html" class="top-nav-btn">⌂ 返回課程首頁</a>
-    <a href="Topic2_為什麼要做員工意見調查_課程網站.html" class="top-nav-btn">課堂互動教材網站 Topic 2</a>
+    <a href="../../index.html" class="top-nav-btn" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+    <a href="Topic2_為什麼要做員工意見調查_課程網站.html" class="top-nav-btn" target="_blank" rel="noopener">課堂互動教材網站 Topic 02</a>
   </div>
 </header>
 <main>
@@ -141,7 +141,7 @@ body.full .simple-only{display:none!important}
 <p class="subtitle" id="subtitle"></p>
 
 <div class="modebar">
-  <button class="mode on" id="m_simple" onclick="setMode('simple')">簡版　Topic 2 課堂用</button>
+  <button class="mode on" id="m_simple" onclick="setMode('simple')">簡版　Topic 02 課堂用</button>
   <button class="mode" id="m_full" onclick="setMode('full')">完整版　Topic 13 業務論證用</button>
 </div>
 
@@ -240,7 +240,7 @@ body.full .simple-only{display:none!important}
   <div class="ref">Boushey, H., &amp; Glynn, S. J. (2012). There are significant business costs to replacing employees. Center for American Progress.</div>
 </div>
 </main>
-<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 2 與 Topic 13 使用。結果為估算，提案時應附上假設清單</footer>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 02 與 Topic 13 使用。結果為估算，提案時應附上假設清單</footer>
 
 <script>
 /* ---------- 資料模型 ---------- */
@@ -415,7 +415,7 @@ function restoreLocal(){try{var s=localStorage.getItem('turnoverTool');if(!s){al
 var PRESET=JSON.parse(JSON.stringify({groups:groups,q:{n:300,to:15,sal:80,mul:5},s:{cost:150,s1:1,s2:2,s3:3,cap:true}}));
 function loadPreset(){apply(JSON.parse(JSON.stringify(PRESET)));}
 function resetAll(){groups=[{name:'職群 1',n:0,to:0,reg:100,sal:0,gm:0,mgrSal:0,comp:COMP_DEF()}];cur=0;renderGroups();renderComp();calc();}
-function setMode(m){document.body.classList.remove('simple','full');document.body.classList.add(m);m_simple.classList.toggle('on',m==='simple');m_full.classList.toggle('on',m==='full');document.getElementById('subtitle').textContent=m==='simple'?'配合 Topic 2 使用。用一個成本倍數建立離職成本的量級直覺，金額單位為萬元，結果為估算':'配合 Topic 13 期末專題的業務論證使用。倍數由各項成本拆解算出，輸出利潤影響、淨效益與假設清單，金額單位為萬元';try{history.replaceState(null,'',m==='full'?'#full':location.pathname.split('/').pop());}catch(e){}}
+function setMode(m){document.body.classList.remove('simple','full');document.body.classList.add(m);m_simple.classList.toggle('on',m==='simple');m_full.classList.toggle('on',m==='full');document.getElementById('subtitle').textContent=m==='simple'?'配合 Topic 02 使用。用一個成本倍數建立離職成本的量級直覺，金額單位為萬元，結果為估算':'配合 Topic 13 期末專題的業務論證使用。倍數由各項成本拆解算出，輸出利潤影響、淨效益與假設清單，金額單位為萬元';try{history.replaceState(null,'',m==='full'?'#full':location.pathname.split('/').pop());}catch(e){}}
 setMode(location.hash==='#full'?'full':'simple');
 window.addEventListener('hashchange',function(){setMode(location.hash==='#full'?'full':'simple');});
 renderGroups();renderComp();calc();
