@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 03：題項與量表設計｜員工意向調查</title>
+<style>
+
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+
+  /* 2.2 作答畫面示意 */
+  .fmt-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:14px 0 18px;}
+  @media (max-width:760px){.fmt-grid{grid-template-columns:1fr;} .stapel{flex-wrap:wrap;}}
+  .fmt{background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px 16px;}
+  .fmt h4{font-size:15px; color:var(--navy); margin:0 0 2px;}
+  .fmt .fen{font-size:12.5px; color:var(--muted); margin-bottom:10px;}
+  .fmt .fq{font-size:14.5px; color:var(--ink); margin-bottom:10px;}
+  .fmt .tag{display:inline-block; font-size:12px; padding:1px 8px; border-radius:10px; background:var(--lightblue); color:var(--navy); margin-left:6px; vertical-align:2px;}
+  .fmt .tag.rk{background:#f6ecdf; color:#8a5a12;}
+  .opts-row{display:flex; gap:6px; flex-wrap:wrap;}
+  .ob{flex:1; min-width:46px; border:1.5px solid #b9c6de; border-radius:6px; text-align:center; font-size:12.5px; padding:6px 2px; color:var(--ink); line-height:1.3;}
+  .ob.on{background:var(--blue); border-color:var(--blue); color:#fff;}
+  .radio{display:inline-flex; align-items:center; gap:6px; margin-right:18px; font-size:14px;}
+  .radio i{width:15px; height:15px; border:1.5px solid #8796b0; border-radius:50%; display:inline-block;}
+  .radio i.on{background:var(--blue); border-color:var(--blue); box-shadow:inset 0 0 0 3px #fff;}
+  .sd{display:grid; grid-template-columns:62px 1fr 62px; align-items:center; gap:8px; font-size:13.5px; margin:6px 0;}
+  .sd span:first-child{text-align:right;}
+  .sd .dots{display:flex; justify-content:space-between;}
+  .sd .dots i{width:14px; height:14px; border:1.5px solid #8796b0; border-radius:50%;}
+  .sd .dots i.on{background:var(--blue); border-color:var(--blue);}
+  .stapel{display:flex; flex-wrap:nowrap; align-items:center; justify-content:center; gap:3px;}
+  .stapel b{font-weight:400; font-size:12px; width:26px; text-align:center; border:1px solid #c9d3e3; border-radius:4px; padding:1px 0;}
+  .stapel b.on{background:var(--blue); color:#fff; border-color:var(--blue);}
+  .stapel .ctr{padding:5px 8px; white-space:nowrap; text-align:center; font-weight:700; background:var(--lightblue); color:var(--navy); border-radius:6px; margin:0 4px;}
+  .pair{display:grid; grid-template-columns:1fr 34px 1fr; gap:6px; align-items:center; margin:5px 0; font-size:13.5px;}
+  .pair span{border:1.5px solid #b9c6de; border-radius:6px; padding:5px 8px; text-align:center;}
+  .pair span.on{background:var(--blue); border-color:var(--blue); color:#fff;}
+  .pair em{font-style:normal; text-align:center; color:var(--muted); font-size:12px;}
+  .rank{display:flex; flex-direction:column; gap:5px;}
+  .rank div{display:flex; align-items:center; gap:10px; font-size:13.5px;}
+  .rank b{width:26px; height:26px; border:1.5px solid var(--blue); border-radius:6px; display:inline-flex; align-items:center; justify-content:center; color:var(--blue);}
+  .piles{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  .pile{background:var(--paleblue); border-radius:8px; padding:8px 6px; text-align:center;}
+  .pile .ph{font-size:12px; color:var(--navy); font-weight:700; margin-bottom:6px;}
+  .pile span{display:block; background:#fff; border:1px solid #c9d3e3; border-radius:5px; font-size:12px; padding:3px 2px; margin-top:4px; box-shadow:0 1px 0 rgba(0,0,0,.05);}
+  .face-on svg circle:first-child{stroke:var(--blue); stroke-width:3; fill:var(--lightblue);}
+  .fmt .fnote{font-size:12.5px; color:var(--muted); margin-top:8px;}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-panel .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:15px; line-height:1.7;}
+  .pg-panel .dcreveal.good{display:block; background:var(--palegreen); border-left:4px solid #337052; color:#1f4a35;}
+  .pg-panel .dcreveal.bad{display:block; background:#fdecec; border-left:4px solid #c0564f; color:#8a2a24;}
+  .pg-btn.ghost.picked-ok{background:#337052; border-color:#337052; color:#fff;}
+  .pg-btn.ghost.picked-no{background:#fdecec; border-color:#c0564f; color:#a33a32; text-decoration:line-through;}
+  .pg-btn:disabled{opacity:.45; cursor:default;}
+  .pg-btn:active{transform:scale(.97);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 03：題項與量表設計</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 03<br>題項與量表設計</div>
+    <div class="t2">Topic 03: Item Writing &amp; Scale Design<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">題目與量表</div>
+    <a data-u="u1">單元一：題目來源與編製原則</a>
+    <a data-u="u2">單元二：測量尺度與量表形式</a>
+    <div class="grp">三個設計議題</div>
+    <a data-u="u3">單元三：反向題的用途與陷阱</a>
+    <a data-u="u4">單元四：共同方法偏誤</a>
+    <a data-u="u5">單元五：題數與作答疲勞</a>
+    <div class="grp">文獻</div>
+    <a data-u="u6">單元六：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>Topic 03　題項與量表設計</h1>
+  <div class="subtitle">員工意向調查課程．Topic 03．適用對象：人管所碩士班</div>
+  <p>測量基礎單元確立了測量的判準：構念要靠多題間接測量，並且要有信度與效度。本主題往前一步，處理題目本身怎麼寫、量表怎麼設計。先看題目從哪裡來與編製的基本原則，接著認識測量尺度與各種量表形式（特別是李克特量表的點數與中間選項），再處理三個會侵蝕資料品質的設計議題：反向題的用途與陷阱、共同方法偏誤，以及題數與作答疲勞的取捨。</p>
+  <h2>本主題單元</h2>
+  <table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td>一、題目來源與編製原則</td><td>掌握既有量表與自行編製的取捨，並能診斷常見的劣質題目</td></tr>
+    <tr><td>二、測量尺度與量表形式</td><td>區分四種測量尺度，掌握李克特量表的點數與中間選項設計</td></tr>
+    <tr><td>三、反向題的用途與陷阱</td><td>說明反向題的作用，以及它可能引入的誤答與結構問題</td></tr>
+    <tr><td>四、共同方法偏誤</td><td>理解方法偏誤的來源，並能提出程序性與統計性的因應</td></tr>
+    <tr><td>五、題數與作答疲勞</td><td>用實證理解問卷長度對參與率與資料品質的代價</td></tr>
+    <tr><td>六、參考文獻</td><td>本主題引用來源與專有名詞對照表</td></tr>
+  </table>
+  <h2>問卷調查法的基本步驟</h2>
+  <p>把本主題放回整個調查流程來看。問卷調查法可分為七個基本步驟，本主題處理的是其中的題項設計與前測預試。</p>
+  <table>
+    <tr><th style="width:12%">步驟</th><th>內容</th></tr>
+    <tr><td>1</td><td>定義研究問題與目標</td></tr>
+    <tr><td>2</td><td>定義母體與樣本</td></tr>
+    <tr><td>3</td><td>決定收集資料方式</td></tr>
+    <tr><td>4</td><td>設計問卷內容與題項</td></tr>
+    <tr><td>5</td><td>前測預試與問卷修正</td></tr>
+    <tr><td>6</td><td>正式施測</td></tr>
+    <tr><td>7</td><td>資料分析與結果解釋</td></tr>
+  </table>
+  <h2>本主題學習目標</h2>
+  <div class="card">
+    <p>修畢本主題後，學生應能：其一，判斷該沿用既有量表或自行編製，並說出量表編製的基本流程；其二，指出並修正雙重問題、引導性用語等常見的題目缺陷；其三，就一個測量目的選擇合適的量表形式與李克特點數，並說明中間選項的取捨；其四，說明反向題的用途與其可能造成的誤答與因素結構問題；其五，指出共同方法偏誤的主要來源，並提出至少兩種程序性補救；其六，用問卷長度的實證，說明題數與資料品質的取捨；其七，規劃認知訪談前測與小樣本預試，執行題目修正循環。</p>
+  </div>
+  <div class="note"><span class="lb">使用說明</span>導覽列可切換單元。各單元末附兩階段自我檢測題：先作答並標注信心，答對後才展開第二層機制確認；校準面板僅記錄每題第一次作答。本網站為單一檔案、離線可用；重新整理會清空作答紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>只計每題第一次作答；高信心且答錯屬過度自信區，建議回到該單元重讀；低信心且答對表示理解比自己以為的更穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 題目來源與編製原則 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：題目來源與編製原則</h1>
+  <div class="subtitle">主要依據：Hinkin (1998)、Farh et al. (2004)；Smith (2003)</div>
+
+  <h2>1.1 題目從哪裡來</h2>
+  <p>設計問卷的第一個決策不是寫題目，而是先問：這個變項有沒有現成、經過驗證的量表。做法上有兩條路。若已有合適量表，應徵求原作者同意後直接引用，或在必要時適當修改再使用；若確實沒有，才自行編製。</p>
+  <p>優先沿用既有量表，理由來自測量基礎單元談過的效度邏輯：效度靠長期累積的證據，一份已發表的量表背後有內容、構念與效標效度的累積，自編題目則要從零開始承擔這些驗證責任。自行編製並非不可，但要走完整的量表發展流程（Hinkin, 1998）：先依理論演繹或從實務資料歸納產生題項，再做內容效度檢核、預試、因素分析檢驗結構、估計信度，最後檢驗與效標的關聯。</p>
+
+  <h2>1.2 自編路線的示範：關鍵事例法</h2>
+  <p>自行編製量表時，題目不能憑空想，要有系統的來源。Farh、Zhong 與 Organ（2004）發展華人情境的組織公民行為（organizational citizenship behavior, OCB）量表，就是經典示範：他們認為 OCB 的概念與向度均在北美發展，未必適用華人文化，於是以關鍵事例法（critical incident technique）從在地資料重新歸納向度。研究分四步驟。</p>
+  <table>
+    <tr><th style="width:8%">步驟</th><th style="width:26%">工作</th><th>做法重點</th></tr>
+    <tr><td>1</td><td>收集關鍵事例</td><td>以開放式問題請 158 位受訪者各舉出數個員工自發性行為的例子（主管或公司未明示要求的事），共得 726 個事例</td></tr>
+    <tr><td>2</td><td>專家分類與信度檢驗</td><td>專家先篩除不清楚或無關的事例（726 → 665），反覆討論歸成 27 類；再由三組評分者獨立評分類的同意程度，對同意度低者重新討論</td></tr>
+    <tr><td>3</td><td>計算事例頻率</td><td>以各類事例數除以總事例數，頻率過低的類別（不足三個事例、無法估信度）考慮刪除</td></tr>
+    <tr><td>4</td><td>向度命名與編製題目</td><td>將 27 類歸納為 10 個更抽象的向度，區分西方共通與華人特有；再選擇量尺與評量者（如主管評部屬、Likert 五點）編出題目</td></tr>
+  </table>
+  <p>以步驟二為例，事例「下班仍然留下來在公司」「常常自願加班」被歸為同一類（會超時工作），再由三位評分者獨立判斷是否同意此歸類、計算同意百分比，屬於測量基礎單元評分者間信度的實際應用。</p>
+  
+  <h2>1.3 題目編製的八項原則</h2>
+  <p>原則之前，先看受訪者作答時經過哪些步驟。調查方法學把作答拆成四個階段（Tourangeau et al., 2000，書籍）。</p>
+  <table>
+    <tr><th style="width:16%">階段</th><th style="width:40%">受訪者在做什麼</th><th>題目哪裡寫不好，會影響這個階段</th></tr>
+    <tr><td>理解</td><td>判斷這題在問什麼</td><td>語意模糊</td></tr>
+    <tr><td>提取</td><td>從記憶中找相關經驗</td><td>參照期間太長</td></tr>
+    <tr><td>判斷</td><td>把經驗整合成一個評價</td><td>一題問兩件事</td></tr>
+    <tr><td>作答</td><td>把評價對應到選項上</td><td>選項不對稱</td></tr>
+  </table>
+  <p>受訪者跳過任一階段，產出的就是 Topic 04 要偵測的草率作答。</p>
+  <p>就算是沿用或修改既有量表，題目的敘述品質仍會決定資料品質。下列八項是實務上常用的檢查原則，幫助受訪者順利走完這四個階段。</p>
+  <table>
+    <tr><th style="width:6%">#</th><th style="width:40%">原則</th><th>理由</th></tr>
+    <tr><td>1</td><td>先充分進行文獻探討再設計問卷</td><td>確保選到合適的量表，有經過驗證的量表時優先沿用</td></tr>
+    <tr><td>2</td><td>設計時就想清楚變項將如何量化分析</td><td>避免資料回收後才發現無法分析</td></tr>
+    <tr><td>3</td><td>題目敘述清楚且簡潔</td><td>降低受訪者誤解的機會</td></tr>
+    <tr><td>4</td><td>不使用雙重問題（double-barreled）</td><td>一題問兩件事時，兩者的答案可能不同，受訪者無從作答</td></tr>
+    <tr><td>5</td><td>不使用偏見性字眼或引導性問題</td><td>避免把研究者的既定觀點帶進作答</td></tr>
+    <tr><td>6</td><td>用受訪者熟悉的用語，而非專有名詞</td><td>避免受訪者看不懂題意</td></tr>
+    <tr><td>7</td><td>不要求受訪者回憶太久以前的事</td><td>過久的回憶容易失真，甚至產生假記憶。例如請員工評價兩年前組織整併期間主管的溝通方式，多數人只記得整體印象，細節容易與後來的經驗混淆；改為詢問最近三個月的經驗，並在題目中寫明參照期間</td></tr>
+    <tr><td>8</td><td>正式發放前反覆檢查校對</td><td>避免印刷錯誤與跳題邏輯出錯</td></tr>
+  </table>
+
+  <h2>1.4 題目診斷練習</h2>
+  <p>下面三題各有一個典型缺陷。先自行判斷問題出在哪裡，再點選看解析。</p>
+  <div class="calc">
+    <div class="pg-panel">
+      <p style="margin-bottom:4px;"><strong>題目一</strong>：我的工作環境能讓我有效率地完成工作，並能讓我發揮所長。</p>
+      <p style="margin-bottom:10px;color:var(--muted);">作答選項：非常不同意　1　2　3　4　5　6　非常同意</p>
+      <div class="pg-ctrl">
+        <button class="pg-btn ghost" onclick="idFeed(this,'d1',false,'用語並不艱澀；這題一題問了兩件事。')">用語太專業</button>
+        <button class="pg-btn ghost" onclick="idFeed(this,'d1',true,'正確：這是雙重問題（double-barreled）。有效率地完成工作與發揮所長是兩件事，若受訪者只同意其中一項就無法作答。修正方式是拆成兩題分別詢問。')">雙重問題</button>
+        <button class="pg-btn ghost" onclick="idFeed(this,'d1',false,'題目沒有表露立場；這題一題問了兩件事。')">引導性用語</button>
+      </div>
+      <div class="dcreveal" id="d1r"></div>
+    </div>
+    <div class="pg-panel">
+      <p style="margin-bottom:4px;"><strong>題目二</strong>：您對於目前公司所提供的員工福利是否滿意？</p>
+      <p style="margin-bottom:10px;color:var(--muted);">作答選項：□ 是　□ 否</p>
+      <div class="pg-ctrl">
+        <button class="pg-btn ghost" onclick="idFeed(this,'d2',true,'正確：問法過於籠統，且採是與否的二分形式。員工福利涵蓋保險、休假、補助等多項，滿意程度也非二分。修正方式是拆分具體面向，並改用程度量表作答。')">過於籠統且二分</button>
+        <button class="pg-btn ghost" onclick="idFeed(this,'d2',false,'題目沒有雙重否定；這題範圍籠統，又以是否作答。')">雙重否定</button>
+        <button class="pg-btn ghost" onclick="idFeed(this,'d2',false,'題目沒有要求回憶過去；這題範圍籠統，又以是否作答。')">回憶太久以前</button>
+      </div>
+      <div class="dcreveal" id="d2r"></div>
+    </div>
+    <div class="pg-panel">
+      <p style="margin-bottom:8px;"><strong>題目三</strong>：難道您不認為公司應該提供更多教育訓練嗎？</p>
+      <div class="pg-ctrl">
+        <button class="pg-btn ghost" onclick="idFeed(this,'d3',false,'這題只問了一件事，問題出在措辭引導與雙重否定。')">雙重問題</button>
+        <button class="pg-btn ghost" onclick="idFeed(this,'d3',false,'用語並不專業艱澀，問題出在措辭引導與雙重否定。')">用語太專業</button>
+        <button class="pg-btn ghost" onclick="idFeed(this,'d3',true,'正確：難道您不認為既是引導性措辭、又含雙重否定，把研究者的立場放進題目，並增加理解負擔。修正方式是改為中性敘述，例如：公司目前提供的教育訓練足夠。')">引導且雙重否定</button>
+      </div>
+      <div class="dcreveal" id="d3r"></div>
+    </div>
+  </div>
+  <h2>1.5 人口統計變項的設計</h2>
+  <p>問卷結尾的人口統計變項看似例行，設計不當卻會觸發拒答偏誤（refusal-to-answer bias）——受訪者覺得被冒犯或擔心被識別，選擇跳過甚至放棄整份問卷。常用的處理原則如下。</p>
+  <table>
+    <tr><th style="width:22%">變項</th><th>常用選項與注意事項</th></tr>
+    <tr><td>性別</td><td>男性、女性、其他</td></tr>
+    <tr><td>婚姻</td><td>已婚、喪偶、離婚、分居、從未結婚。避免使用「婚姻狀況」一詞，改以「目前您是…」詢問</td></tr>
+    <tr><td>教育</td><td>避免使用「教育程度」，改以「您的學歷是…」詢問</td></tr>
+    <tr><td>年齡、收入</td><td>直接詢問實際數值通常填答率較低，但較適合相關與迴歸分析；以區間詢問則填答率較高但資訊較粗，須權衡</td></tr>
+    <tr><td>產業、公司規模、團隊人數</td><td>受訪者可能不清楚而誤填，建議由研究者編碼，或由人資、部門主管等可信來源提供</td></tr>
+  </table>
+  <p>此外，人口變項的組合也牽動匿名性：部門加職級加年資往往足以識別個人，這是 Topic 04 極小群組與匿名門檻的主題。</p>
+
+    <p>位置也是設計決策。匿名問卷的背景資料建議放在問卷最後，理由有二：</p>
+    <ol>
+      <li>受訪者對正題較有耐心，背景題放後面，正題的填答較不失真。</li>
+      <li>先問背景會讓受訪者感覺可能被辨識，敏感的背景題放開頭，甚至會讓受訪者放棄整份問卷。</li>
+    </ol>
+    <p>例外是需要依背景跳題時，例如某一區塊只給主管作答，該變項只能放前面；這時更要在指導語說明用途（Topic 02 施測前的溝通）與匿名保護（Topic 04 匿名與保密）。</p>
+<h2>1.6 前測與預試</h2>
+  <p>題目寫完不等於可以上線，正式施測前有兩道檢驗。第一道是前測（pretest），以認知訪談（cognitive interviewing）為主：請少數目標對象一邊作答一邊說出理解，包括這題在問什麼、為什麼選這個答案，藉此找出誤解題意、詞彙不熟、選項不周延等問題。前測的目的是了解受訪者如何理解題目，選項本身的分布留到預試再看。</p>
+  <p>第二道是預試（pilot test），以小樣本（實務上常見數十人）完整跑一次問卷流程，檢查作答時間、跳題邏輯、遺漏型態，並對量表做初步的信度與題目分析，題總相關偏低或變異過小的題目列為修正對象。兩道檢驗後修題、再測，直到沒有重大問題才定稿。</p>
+  <div class="note"><span class="lb">與期中團體作業的關係</span>期中團體作業依本單元的流程進行：收集關鍵事例、兩人獨立分類並以 Cohen&#8217;s κ 檢驗一致性（Cohen, 1960）、查相近構念的定義並寫出區辨（Colquitt et al., 2019）、撰寫題目、完成預試。規則、時程與範本見<a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業說明頁</a>。</div>
+  <div class="key"><span class="lb">本單元要點</span>題目設計的第一步是判斷該沿用既有量表或自行編製；沿用經驗證的量表能承接既有的效度證據，自編則要走完整流程，關鍵事例法是從在地資料歸納向度的經典作法（Farh et al., 2004）。題目敘述要通過八項原則檢查，最常見的缺陷是雙重問題與引導性措辭；人口變項的用語與精細度會影響拒答與匿名，需一併設計；定稿前要以認知訪談前測與小樣本預試檢驗，經修正循環後才上線。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 1-1</div>
+    <div class="qbody">
+      <p>某公司想測量員工對主管的信任，研究者打算自行編製五題。依本單元的觀點，最恰當的第一步是什麼？</p>
+      <label><input type="radio" name="q11" value="a"> 直接憑經驗寫出五題，再看信度好不好</label>
+      <label><input type="radio" name="q11" value="b"> 先做文獻探討，確認是否已有經驗證的信任量表可沿用或修改</label>
+      <label><input type="radio" name="q11" value="c"> 先決定要用幾點量表，再回頭想題目</label>
+      <label><input type="radio" name="q11" value="d"> 先發出去問問看，反正之後可以刪題</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q11r" value="a"> 因為經驗證的量表已累積內容、構念與效標效度的證據，自編則須自行承擔完整的驗證責任</label>
+      <label><input type="radio" name="q11r" value="b"> 因為自編題目的信度一定比較低</label>
+      <label><input type="radio" name="q11r" value="c"> 因為量表點數決定了題目內容</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q11c" value="低"> 低</label>
+        <label><input type="radio" name="q11c" value="中"> 中</label>
+        <label><input type="radio" name="q11c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q11','b','a','正確。先確認有無既有量表，是題目設計的第一個決策。','關鍵在效度證據的累積：沿用既有量表可承接證據，自編須自行驗證。','再想想：在寫題目之前，應該先確認什麼？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2 測量尺度與量表形式 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：測量尺度與量表形式</h1>
+  <div class="subtitle">主要依據：Schuman &amp; Presser (1981)；Smith (2003)</div>
+
+  <h2>2.1 四種測量尺度</h2>
+  <p>題目採用什麼尺度，決定了之後能做哪些統計分析，所以在設計階段就要想清楚。四種尺度由弱到強如下。</p>
+  <table>
+    <tr><th style="width:16%">尺度</th><th style="width:34%">性質</th><th>員工意見調查中的例子</th></tr>
+    <tr><td>名義 nominal</td><td>只做分類，類別之間沒有大小</td><td>部門、廠區、人員類別</td></tr>
+    <tr><td>次序 ordinal</td><td>可排序，但相鄰兩級的距離不相等</td><td>教育程度、職級</td></tr>
+    <tr><td>等距 interval</td><td>可排序且相鄰單位距離相等，無絕對零點</td><td>李克特量表分數（實務上多視為等距）</td></tr>
+    <tr><td>比例 ratio</td><td>有絕對零點，可計算倍數關係</td><td>年資、工時、離職人數</td></tr>
+  </table>
+
+  <h2>2.2 量表的回答形式</h2>
+  <p>依受訪者如何作答，量表可分為兩大類。評比量表請受訪者對每個項目各自給分，是員工意見調查最常用的形式；排序量表則請受訪者在項目之間做比較。</p>
+  <table>
+    <tr><th style="width:22%">類型</th><th style="width:30%">形式</th><th>說明</th></tr>
+    <tr><td rowspan="5">評比量表<br>rating scale</td><td>圖形式評等量表</td><td>以圖像呈現程度，直觀易答，常見於疼痛或情緒評估</td></tr>
+    <tr><td>簡單分類量表</td><td>是與否等類別選項，屬名義尺度</td></tr>
+    <tr><td>李克特量表</td><td>對敘述句表達同意程度，員工意見調查最常用</td></tr>
+    <tr><td>語意差異量表</td><td>用一組對立形容詞構成的雙極尺度評估對象</td></tr>
+    <tr><td>史德培尺度</td><td>語意差異量表的修正版：以單一形容詞為中心，用正負雙向（通常 +5 至 −5 共十點）表達方向與強度</td></tr>
+    <tr><td rowspan="3">排序量表<br>ranking scale</td><td>配對比較</td><td>兩兩相比選出偏好，比較次數為 n(n−1)/2</td></tr>
+    <tr><td>次序排列</td><td>直接對所有選項排序</td></tr>
+    <tr><td>連續區間</td><td>項目很多時，以卡片對比方式分段排序</td></tr>
+  </table>
+  <p style="margin-top:6px;"><strong>各形式的作答畫面示意</strong>　深色為受訪者選取的位置</p>
+  <div class="fmt-grid">
+    <div class="fmt"><h4>圖形式評等量表<span class="tag">評比</span></h4><div class="fen">graphic rating scale</div>
+      <div class="fq">今天的工作量讓您覺得如何？</div>
+      <div style="display:flex;gap:6px;align-items:center;"><div style="text-align:center;flex:1;"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#8796b0" stroke-width="1.6"/><circle cx="14" cy="16" r="1.8" fill="#44506a"/><circle cx="26" cy="16" r="1.8" fill="#44506a"/><path d="M12 29 Q20 22 28 29" fill="none" stroke="#44506a" stroke-width="1.8" stroke-linecap="round"/></svg></div><div style="text-align:center;flex:1;"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#8796b0" stroke-width="1.6"/><circle cx="14" cy="16" r="1.8" fill="#44506a"/><circle cx="26" cy="16" r="1.8" fill="#44506a"/><path d="M12 28 Q20 24.5 28 28" fill="none" stroke="#44506a" stroke-width="1.8" stroke-linecap="round"/></svg></div><div style="text-align:center;flex:1;"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#8796b0" stroke-width="1.6"/><circle cx="14" cy="16" r="1.8" fill="#44506a"/><circle cx="26" cy="16" r="1.8" fill="#44506a"/><path d="M12 27 L28 27" fill="none" stroke="#44506a" stroke-width="1.8" stroke-linecap="round"/></svg></div><div style="text-align:center;flex:1;" class="face-on"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#8796b0" stroke-width="1.6"/><circle cx="14" cy="16" r="1.8" fill="#44506a"/><circle cx="26" cy="16" r="1.8" fill="#44506a"/><path d="M12 26 Q20 29.5 28 26" fill="none" stroke="#44506a" stroke-width="1.8" stroke-linecap="round"/></svg></div><div style="text-align:center;flex:1;"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#8796b0" stroke-width="1.6"/><circle cx="14" cy="16" r="1.8" fill="#44506a"/><circle cx="26" cy="16" r="1.8" fill="#44506a"/><path d="M12 25 Q20 32 28 25" fill="none" stroke="#44506a" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+      <div class="fnote">以圖像代替文字，識字或語言不同的受訪者也能作答</div></div>
+    <div class="fmt"><h4>簡單分類量表<span class="tag">評比</span></h4><div class="fen">simple category scale</div>
+      <div class="fq">您目前是否擔任主管職？</div>
+      <div><span class="radio"><i class="on"></i>是</span><span class="radio"><i></i>否</span></div>
+      <div class="fnote">只能分類，看不出程度高低</div></div>
+    <div class="fmt"><h4>李克特量表<span class="tag">評比</span></h4><div class="fen">Likert scale</div>
+      <div class="fq">我的主管會定期給我工作上的回饋</div>
+      <div class="opts-row"><div class="ob">非常<br>不同意</div><div class="ob">不同意</div><div class="ob">普通</div><div class="ob on">同意</div><div class="ob">非常<br>同意</div></div>
+      <div class="fnote">對敘述句表達同意程度；點數與是否保留中間選項見 2.3</div></div>
+    <div class="fmt"><h4>語意差異量表<span class="tag">評比</span></h4><div class="fen">semantic differential scale</div>
+      <div class="fq">您覺得本部門的週會：</div>
+      <div class="sd"><span>沒效率</span><div class="dots"><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i></div><span>有效率</span></div>
+      <div class="sd"><span>氣氛冷淡</span><div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div><span>氣氛熱絡</span></div>
+      <div class="sd"><span>沒有用</span><div class="dots"><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i></div><span>有用</span></div>
+      <div class="fnote">每一列是一組意思相反的形容詞</div></div>
+    <div class="fmt"><h4>史德培尺度<span class="tag">評比</span></h4><div class="fen">Stapel scale</div>
+      <div class="fq">下列描述用在本部門的週會，有多貼切？</div>
+      <div class="stapel"><b>−5</b><b>−4</b><b>−3</b><b>−2</b><b>−1</b><div class="ctr">溝通清楚</div><b>+1</b><b>+2</b><b class="on">+3</b><b>+4</b><b>+5</b></div>
+      <div class="fnote">只寫一個形容詞，用正負方向表示貼切或不貼切</div></div>
+    <div class="fmt"><h4>配對比較<span class="tag rk">排序</span></h4><div class="fen">paired comparison</div>
+      <div class="fq">每一組中，您較重視哪一項福利？</div>
+      <div class="pair"><span class="on">彈性工時</span><em>或</em><span>薪資調整</span></div>
+      <div class="pair"><span>彈性工時</span><em>或</em><span class="on">進修補助</span></div>
+      <div class="pair"><span class="on">薪資調整</span><em>或</em><span>進修補助</span></div>
+      <div class="fnote">3 個項目兩兩相比共 3 組；項目為 n 個時共 n(n−1)/2 組，10 個項目就要 45 組</div></div>
+    <div class="fmt"><h4>次序排列<span class="tag rk">排序</span></h4><div class="fen">rank order</div>
+      <div class="fq">請依重視程度排序，1 為最重視</div>
+      <div class="rank"><div><b>2</b>彈性工時</div><div><b>1</b>薪資調整</div><div><b>4</b>員工旅遊</div><div><b>3</b>進修補助</div></div>
+      <div class="fnote">每個名次只能用一次，看得出先後，看不出差距大小</div></div>
+    <div class="fmt"><h4>連續區間<span class="tag rk">排序</span></h4><div class="fen">項目很多時分段排序</div>
+      <div class="fq">把 9 張福利卡片分成三堆，再在各堆內排序</div>
+      <div class="piles"><div class="pile"><div class="ph">最重視</div><span>薪資調整</span><span>彈性工時</span><span>健康檢查</span></div><div class="pile"><div class="ph">中間</div><span>進修補助</span><span>團體保險</span><span>年終聚餐</span></div><div class="pile"><div class="ph">最不重視</div><span>員工旅遊</span><span>社團補助</span><span>節慶禮品</span></div></div>
+      <div class="fnote">先粗分再細排，減輕一次比較全部項目的負擔</div></div>
+  </div>
+
+
+  <h2>2.3 李克特量表的兩個設計決策</h2>
+  <p>李克特量表最常爭論的兩件事是點數與中間選項。點數太少會壓縮變異、不易區辨個別差異；點數太多則超出受訪者能穩定分辨的程度，反而增加雜訊。實務上多採 5 至 7 點。</p>
+  <p>中間選項則是取捨問題。採奇數點會出現中間選項（如普通、不確定），採偶數點則強迫受訪者選邊。Schuman 與 Presser（1981）以實驗設計比較主動提供中間選項與否，發現主動提供時，選擇中間選項的比例明顯較高。</p>
+  <p>這代表提供中間選項時，一部分原本會表達立場的受訪者會改選中間選項。是否提供，要看研究目的是想保留真實的中立立場，還是想強迫表態。本課的模擬資料集採 6 點、不設中間點，屬於後者的選擇。</p>
+  <div class="calc">
+    <div class="pg-ctrl" id="lkBtns">
+      <button class="pg-btn" onclick="likertShow(4)">4 點</button>
+      <button class="pg-btn ghost" onclick="likertShow(5)">5 點</button>
+      <button class="pg-btn ghost" onclick="likertShow(6)">6 點</button>
+      <button class="pg-btn ghost" onclick="likertShow(7)">7 點</button>
+    </div>
+    <div id="lkOut" style="margin-top:10px;"></div>
+    <p class="interp">切換點數，觀察中間選項的有無。偶數點強迫表態、奇數點保留中立；點數越多，選項間的語意差距越細，但受訪者未必能穩定分辨。</p>
+  </div>
+  <div class="key"><span class="lb">本單元要點</span>尺度決定可用的分析方法，設計時就要決定。員工意見調查以李克特這類評比量表為主；點數多採 5 至 7 點，中間選項的有無是取捨——提供時，部分原本會表達立場的受訪者會改選中間選項（Schuman &amp; Presser, 1981），不提供則強迫選邊。沒有絕對正確的設計，只有與研究目的一致的設計。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 2-1</div>
+    <div class="qbody">
+      <p>研究團隊希望盡量減少受訪者以中立回答迴避表態，最貼近這個目的的設計是什麼？</p>
+      <label><input type="radio" name="q21" value="a"> 採 5 點量表並保留中間選項</label>
+      <label><input type="radio" name="q21" value="b"> 採偶數點（如 6 點）量表，不設中間選項</label>
+      <label><input type="radio" name="q21" value="c"> 把點數增加到 11 點</label>
+      <label><input type="radio" name="q21" value="d"> 改用是與否的二分題</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q21r" value="a"> 因為實驗顯示主動提供中間選項時，選擇中間選項的比例明顯較高，移除它可促使受訪者選邊</label>
+      <label><input type="radio" name="q21r" value="b"> 因為點數越多，中立回答就越少</label>
+      <label><input type="radio" name="q21r" value="c"> 因為二分題最能反映態度的程度</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q21c" value="低"> 低</label>
+        <label><input type="radio" name="q21c" value="中"> 中</label>
+        <label><input type="radio" name="q21c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q21','b','a','正確。偶數點不設中間選項，可減少以中立迴避表態。','關鍵在實驗證據：提供中間選項會提高中立回答的比例。','再想想：中間選項的有無，會如何影響作答分布？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 反向題 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：反向題的用途與陷阱</h1>
+  <div class="subtitle">主要依據：Weijters &amp; Baumgartner (2012)</div>
+
+  <h2>3.1 為什麼要放反向題</h2>
+  <p>測量基礎單元已經說明反向題與反向計分的機制。這裡處理設計層面的問題：為什麼要放，以及放了會有什麼代價。反向題的主要用途是為了避免受試者的默許偏誤（acquiescence bias）——部分受訪者傾向不管題意一律同意，若一份量表全是正向題，這種作答會被誤讀為構念很高。夾入方向相反的題目後，不看題意、一律給高分的受訪者會在反向題上前後矛盾，因而比較容易被察覺，這也是 Topic 04 草率作答偵測的基礎之一。</p>
+
+  <h2>3.2 反向題的三個代價</h2>
+  <p>Weijters 與 Baumgartner（2012）回顧了反向與否定題項的相關研究，指出這類題目雖有用，卻會系統性地引入誤答（misresponse）。主要代價有三。</p>
+  <ul>
+    <li>認知負擔與誤答：反向或含否定詞的題目需要多一道語意轉換，部分受訪者會答錯方向，尤其在快速作答或語文能力較弱時。</li>
+    <li>干擾因素結構：誤答會讓反向題彼此相關，在因素分析中形成一個由題目措辭造成的假因素（method factor），形式上像第二個構念，來源是題目措辭。</li>
+    <li>拉低信度：誤答讓反向題與其他題目的相關下降，內部一致性隨之被低估（測量基礎單元的信度異常案例是同一機制較嚴重的情形）。</li>
+  </ul>
+
+  <h2>3.3 實務建議</h2>
+  <p>回顧的結論不是不要用，而是要謹慎用（Weijters &amp; Baumgartner, 2012）。綜合該回顧與實務慣例，可行的做法包括：使用語意上真正相反的敘述，而非在正向題前加上不字這類單純否定；避免雙重否定；反向題不要過多，也不要集中排在一起；分析前務必檢查題總相關與因素結構，確認反向計分正確且沒有形成措辭因素。</p>
+  <div class="key"><span class="lb">本單元要點</span>反向題的用途是對抗默許偏誤、並協助偵測不看題目的作答，但代價是誤答、可能形成措辭造成的假因素、以及信度被低估。建議用語意相反而非單純加否定詞、數量適中、不集中排列，並在分析前檢查題總相關與因素結構。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 3-1</div>
+    <div class="qbody">
+      <p>一份量表放了六題反向題，因素分析後出現一個由這六題單獨構成的因素。最合理的解讀是什麼？</p>
+      <label><input type="radio" name="q31" value="a"> 這六題測到了一個真實存在的第二構念，應保留為獨立構面</label>
+      <label><input type="radio" name="q31" value="b"> 這很可能是題目措辭造成的方法因素，反映反向題的誤答，而非真實構念</label>
+      <label><input type="radio" name="q31" value="c"> 這代表量表的信度很高</label>
+      <label><input type="radio" name="q31" value="d"> 這代表反向題設計得很成功</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q31r" value="a"> 因為反向題的誤答會讓這些題目彼此相關，形成由措辭而非構念造成的假因素</label>
+      <label><input type="radio" name="q31r" value="b"> 因為因素分析出現的因素必然代表真實構念</label>
+      <label><input type="radio" name="q31r" value="c"> 因為反向題本來就該自成一個構面</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q31c" value="低"> 低</label>
+        <label><input type="radio" name="q31c" value="中"> 中</label>
+        <label><input type="radio" name="q31c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q31','b','a','正確。這是典型的措辭造成的方法因素，而非真實構念。','關鍵在成因：誤答讓反向題彼此相關，形成措辭因素。','再想想：一個剛好由所有反向題組成的因素，比較像構念還是措辭效果？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 共同方法偏誤 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：共同方法偏誤</h1>
+  <div class="subtitle">主要依據：Podsakoff et al. (2003)</div>
+
+  <h2>4.1 什麼是共同方法偏誤</h2>
+  <p>共同方法偏誤（common method bias）指的是：變項之間觀察到的相關，有一部分不是來自構念本身的關係，而是來自它們用了同一種測量方法。員工意見調查最典型的情境是——敬業度與主管支持都由同一位員工、在同一份問卷、同一個時間點、用同樣的李克特形式回答。這時兩者的相關可能被系統性地膨脹，讓研究者高估了關係強度。</p>
+  <p>這個問題之所以重要，是因為它不會出現在信度指標上：α 可能很高，維度也很乾淨，但變項之間的關係仍被方法本身扭曲。因此它是效度層次的威脅，不是信度層次的問題。</p>
+
+  <h2>4.2 主要來源</h2>
+  <p>Podsakoff 等人（2003）系統整理了方法偏誤的來源，可歸為四類。</p>
+  <ul>
+    <li>共同來源：自變項與依變項由同一人回答，個人的一般情緒或自我形象會同時影響兩者。</li>
+    <li>題目特徵：題目社會期許性高、措辭複雜或模糊，使受訪者以一致的方式回答而非依實際情況。</li>
+    <li>題目脈絡：題目的排列順序、共用的作答錨點或指導語，讓相鄰題目產生額外的關聯。</li>
+    <li>測量脈絡：同一時間、同一地點、同一媒介施測，使暫時性的情境因素同時影響所有作答。</li>
+  </ul>
+
+  <h2>4.3 程序性與統計性補救</h2>
+  <p>補救分兩類。程序性補救是在設計階段就把來源切開，效果通常優於事後補救：把自變項與依變項的來源分開（例如態度由員工自評、績效由主管評），把測量的時間或情境分開，明確保障匿名以降低社會期許，並在題目與作答形式上做變化、打散題序。統計性補救則是在分析階段檢驗或控制，例如單因子檢定、加入未測量的潛在方法因子等，但這些只能檢查與部分校正，無法取代設計階段的預防。</p>
+  <div class="key"><span class="lb">本單元要點</span>共同方法偏誤是同一測量方法造成的相關扭曲，屬效度威脅，無法從 α 察覺。來源包括共同來源、題目特徵、題目脈絡與測量脈絡。最有效的因應是程序性補救——分開來源、分開時間、保障匿名、變化題目與作答形式；統計性補救只能事後檢查與部分校正。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 4-1</div>
+    <div class="qbody">
+      <p>某研究以同一份問卷、同一時間，請員工同時自評工作壓力與工作績效，發現兩者高度相關。最需要優先考慮的問題是什麼？</p>
+      <label><input type="radio" name="q41" value="a"> 量表信度不足，應增加題數</label>
+      <label><input type="radio" name="q41" value="b"> 相關可能被共同方法偏誤膨脹，因為兩個變項來自同一來源、同一時間、同一形式</label>
+      <label><input type="radio" name="q41" value="c"> 應改用奇數點量表</label>
+      <label><input type="radio" name="q41" value="d"> 這代表壓力確實導致績效提升</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q41r" value="a"> 因為同一來源與同一施測情境會系統性地扭曲變項間的相關，且此問題不會反映在 α 上</label>
+      <label><input type="radio" name="q41r" value="b"> 因為題數太少一定會造成高相關</label>
+      <label><input type="radio" name="q41r" value="c"> 因為高相關必然代表因果關係</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q41c" value="低"> 低</label>
+        <label><input type="radio" name="q41c" value="中"> 中</label>
+        <label><input type="radio" name="q41c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q41','b','a','正確。同源、同時、同形式的設計，最需優先考慮方法偏誤。','它是效度威脅，不會反映在信度指標上。','再想想：兩個變項共用了哪些東西？這會造成什麼？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 題數與作答疲勞 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：題數與作答疲勞</h1>
+  <div class="subtitle">主要依據：Galesic &amp; Bosnjak (2009)</div>
+
+  <h2>5.1 長度的代價</h2>
+  <p>想問的東西總是比能問的多，於是題數成為每份問卷都要面對的取捨。Galesic 與 Bosnjak（2009）以網路問卷做實驗，操弄事先告知的長度（10、20、30 分鐘）並隨機排列題組，檢驗長度與題目位置對參與和資料品質的影響。</p>
+  <p>結果分兩個層次。第一是參與：事先告知的問卷越長，願意開始作答的人越少，長度在受訪者決定要不要填之前就已經產生影響。</p>
+  <p>第二是作答品質：同一份問卷裡，排在越後面的題目，回答品質越差。研究用下列四個指標觀察：</p>
+  <table>
+    <tr><th style="width:26%">觀察什麼</th><th style="width:22%">排在後面的題目會怎樣</th><th>代表什麼</th></tr>
+    <tr><td>每題花的作答時間</td><td>變短</td><td>受訪者讀題與思考的時間變少</td></tr>
+    <tr><td>跳過不答的比例</td><td>上升</td><td>更多題目沒有回答</td></tr>
+    <tr><td>開放題寫的字數</td><td>變少</td><td>回答變得簡短、籠統</td></tr>
+    <tr><td>同一組題目之間的分數差異</td><td>變小</td><td>各題容易勾同一個分數，看不出題目之間的差別</td></tr>
+  </table>
+  <p>問卷後段不只回收較少，回答本身的品質也較差。</p>
+
+  <h2>5.2 取捨與實務建議</h2>
+  <p>這些發現給設計者三個提醒。第一，題數不是免費的，每多一題都以參與率與後段品質為代價。第二，重要的構面應排在前段，讓它拿到品質最好的作答；把核心測量放在最後是常見的錯誤。第三，若必須做長問卷，可考慮分批施測、隨機化題組順序以免固定某些構面永遠吃虧，並在事前誠實告知所需時間。與其問完所有想問的，不如問完真正要用來做決策的——這也呼應 Topic 02 的原則：先確認調查的目的與功能定位。</p>
+  <div class="key"><span class="lb">本單元要點</span>問卷長度同時影響參與與資料品質：事先告知越長，願意開始作答的比例越低；同一份問卷越後面的題目，作答時間越短、未作答越多、開放題越短、變異越小。實務上應把重要構面放前段、隨機化題組順序、誠實告知時間，並以決策需求而非好奇心決定題數。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 5-1</div>
+    <div class="qbody">
+      <p>一份 80 題的員工意見調查，把最關鍵的敬業度構面排在問卷最後。依本單元的實證，最可能的後果是什麼？</p>
+      <label><input type="radio" name="q51" value="a"> 沒有影響，因為題目順序不會改變作答</label>
+      <label><input type="radio" name="q51" value="b"> 敬業度的資料品質最差：作答時間較短、未作答較多、變異較小</label>
+      <label><input type="radio" name="q51" value="c"> 排在最後會讓受訪者更認真作答</label>
+      <label><input type="radio" name="q51" value="d"> 只會影響開放題，不影響李克特題</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q51r" value="a"> 因為實驗顯示越後面的題目作答時間越短、未作答比例越高、題組內變異越小</label>
+      <label><input type="radio" name="q51r" value="b"> 因為題目順序只影響回收率，不影響作答品質</label>
+      <label><input type="radio" name="q51r" value="c"> 因為受訪者會把最後的題目當成最重要的</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q51c" value="低"> 低</label>
+        <label><input type="radio" name="q51c" value="中"> 中</label>
+        <label><input type="radio" name="q51c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q51','b','a','正確。核心構面排在最後，會拿到品質最差的作答。','關鍵在位置效應：越後面的題目投入越低、未作答越多、變異越小。','再想想：實驗發現題目位置越後面，哪些指標會惡化？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U6 參考文獻 ==================== -->
+<section class="unit" id="u6">
+  <h1>單元六：參考文獻</h1>
+
+  <h2>學術文獻</h2>
+  <div class="refline">Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37&#8211;46. <a href="https://doi.org/10.1177/001316446002000104" target="_blank" rel="noopener">https://doi.org/10.1177/001316446002000104</a></div>
+  <div class="refline">Colquitt, J. A., Sabey, T. B., Rodell, J. B., &amp; Hill, E. T. (2019). Content validation guidelines: Evaluation criteria for definitional correspondence and definitional distinctiveness. Journal of Applied Psychology, 104(10), 1243&#8211;1265. <a href="https://doi.org/10.1037/apl0000406" target="_blank" rel="noopener">https://doi.org/10.1037/apl0000406</a></div>
+  <div class="refline">Farh, J.-L., Zhong, C.-B., &amp; Organ, D. W. (2004). Organizational citizenship behavior in the People&#8217;s Republic of China. Organization Science, 15(2), 241&#8211;253. <a href="https://doi.org/10.1287/orsc.1030.0051" target="_blank" rel="noopener">https://doi.org/10.1287/orsc.1030.0051</a></div>
+  <div class="refline">Galesic, M., &amp; Bosnjak, M. (2009). Effects of questionnaire length on participation and indicators of response quality in a web survey. Public Opinion Quarterly, 73(2), 349&#8211;360. <a href="https://doi.org/10.1093/poq/nfp031" target="_blank" rel="noopener">https://doi.org/10.1093/poq/nfp031</a></div>
+  <div class="refline">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104&#8211;121. <a href="https://doi.org/10.1177/109442819800100106" target="_blank" rel="noopener">https://doi.org/10.1177/109442819800100106</a></div>
+  <div class="refline">Podsakoff, P. M., MacKenzie, S. B., Lee, J.-Y., &amp; Podsakoff, N. P. (2003). Common method biases in behavioral research: A critical review of the literature and recommended remedies. Journal of Applied Psychology, 88(5), 879&#8211;903. <a href="https://doi.org/10.1037/0021-9010.88.5.879" target="_blank" rel="noopener">https://doi.org/10.1037/0021-9010.88.5.879</a></div>
+  <div class="refline">Weijters, B., &amp; Baumgartner, H. (2012). Misresponse to reversed and negated items in surveys: A review. Journal of Marketing Research, 49(5), 737&#8211;747. <a href="https://doi.org/10.1509/jmr.11.0368" target="_blank" rel="noopener">https://doi.org/10.1509/jmr.11.0368</a></div>
+  <div class="refline">Schuman, H., &amp; Presser, S. (1981). Questions and answers in attitude surveys: Experiments on question form, wording, and context. Academic Press.</div>
+  <div class="refline">Smith, F. J. (2003). Organizational surveys: The diagnosis and betterment of organizations through their members. Lawrence Erlbaum Associates.</div>
+  <div class="note"><span class="lb">來源性質</span>本主題的設計原則與實證主張以有 DOI 的同儕審查期刊文獻為主：量表發展流程（Hinkin, 1998）、反向題的誤答與方法因素（Weijters &amp; Baumgartner, 2012）、共同方法偏誤（Podsakoff et al., 2003）、問卷長度效應（Galesic &amp; Bosnjak, 2009）、華人情境的量表發展範例（Farh et al., 2004）。Schuman &amp; Presser（1981）與 Smith（2003）為專書，前者為中間選項實驗的來源、後者為題目編製原則的架構來源。</div>
+
+  <h2>專有名詞對照表</h2>
+  <table>
+    <tr><th style="width:26%">中文名詞</th><th style="width:30%">英文</th><th>說明</th></tr>
+    <tr><td>雙重問題</td><td>double-barreled question</td><td>一題同時問兩件事，受訪者無法一致作答</td></tr>
+    <tr><td>李克特量表</td><td>Likert scale</td><td>對敘述句表達同意程度的評比量表，實務上多視為等距</td></tr>
+    <tr><td>中間選項</td><td>middle / neutral option</td><td>奇數點量表的中立選項；提供與否會改變作答分布</td></tr>
+    <tr><td>默許偏誤</td><td>acquiescence bias</td><td>不管題意一律傾向同意的作答傾向</td></tr>
+    <tr><td>反向題</td><td>reverse-worded item</td><td>題意與構念相反的題目，計分前須反向計分</td></tr>
+    <tr><td>方法因素</td><td>method factor</td><td>由測量方式或題目措辭造成、而非真實構念的因素</td></tr>
+    <tr><td>共同方法偏誤</td><td>common method bias</td><td>同一測量方法造成的變項間相關扭曲</td></tr>
+  </table>
+  <footer>本教學網站為單一 HTML 檔案，離線可用。Topic 03：題項與量表設計。文獻以同儕審查期刊為主並附 DOI；題目編製原則與量表形式架構引自 Smith (2003) 專書。供教學使用。</footer>
+</section>
+
+</main>
+</div>
+
+<script>
+window.QUIZ_TOTAL = 5;
+
+
+// ---- Interactive: item diagnosis feedback (u1) ----
+function idFeed(btn, id, ok, msg){
+  var rv=document.getElementById(id+'r');
+  rv.className='dcreveal '+(ok?'good':'bad');
+  rv.textContent=(ok?'':'不正確：')+msg+(ok?'':'　請再選一次。');
+  btn.classList.remove('picked-ok','picked-no');
+  btn.classList.add(ok?'picked-ok':'picked-no');
+  if(ok){ btn.parentNode.querySelectorAll('.pg-btn').forEach(function(b){ if(b!==btn) b.disabled=true; }); }
+}
+
+// ---- Interactive: Likert points and middle option (u2) ----
+var lkLabels={
+  4:['非常不同意','不同意','同意','非常同意'],
+  5:['非常不同意','不同意','普通','同意','非常同意'],
+  6:['非常不同意','不同意','有點不同意','有點同意','同意','非常同意'],
+  7:['非常不同意','不同意','有點不同意','普通','有點同意','同意','非常同意']
+};
+function likertShow(n){
+  var btns=document.getElementById('lkBtns').getElementsByTagName('button');
+  var pts=[4,5,6,7];
+  for(var i=0;i<btns.length;i++){ btns[i].className=(pts[i]===n)?'pg-btn':'pg-btn ghost'; }
+  var L=lkLabels[n], odd=(n%2===1), mid=odd?Math.floor(n/2):-1;
+  var s='<div style="display:flex; gap:6px; flex-wrap:wrap;">';
+  for(var k=0;k<n;k++){
+    var isMid=(k===mid);
+    s+='<div style="flex:1; min-width:78px; text-align:center; border:1px solid '+(isMid?'#8a6420':'var(--line)')+'; '
+      +'background:'+(isMid?'var(--paleamber)':'#fff')+'; border-radius:8px; padding:8px 4px;">'
+      +'<div style="font-size:15px; font-weight:700; color:var(--navy);">'+(k+1)+'</div>'
+      +'<div style="font-size:11.5px; color:'+(isMid?'#8a6420':'var(--muted)')+'; line-height:1.4;">'+L[k]+'</div></div>';
+  }
+  s+='</div>';
+  s+='<div style="margin-top:10px; font-size:14px; color:'+(odd?'#8a6420':'#337052')+';">'
+   + (odd? '奇數點：含中間選項（第 '+(mid+1)+' 點，已標示）。保留真實中立立場，但部分受訪者會用它迴避表態。'
+         : '偶數點：不含中間選項，強迫受訪者選邊。本課模擬資料集採 6 點，即屬此設計。')+'</div>';
+  document.getElementById('lkOut').innerHTML=s;
+}
+
+/* ===== Course-website interactive framework (content-agnostic) =====
+   Reuse these EXACT function/class names; the CSS and quiz markup depend on them.
+   Content-specific data (decision cases, simulators, SVG animations) is added
+   per-site below the framework, then init calls at the very end. */
+
+/* ---- unit navigation ---- */
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+
+/* 支援網址錨點深連結，例如 ...html#u2 開頁時直接切換到單元二 */
+if (location.hash) {
+  var hashUnit = location.hash.slice(1);
+  var hashTarget = document.querySelector('#nav a[data-u="' + hashUnit + '"]');
+  if (hashTarget) hashTarget.click();
+}
+
+/* ---- two-stage two-tier calibration quiz ----
+   Tier 1 = answer + confidence; Tier 2 (mechanism reason) unlocks only after a
+   correct answer, so reason options never leak the answer. Calibration panel ids:
+   cal-{h,m,l}-{0,1,2}, calNote. window.QUIZ_TOTAL = number of quizzes. */
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+    var btn1=box.querySelector('button'); if(btn1) btn1.textContent='檢查答案';
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標注信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，屬過度自信區，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板僅記第一次作答，<a href="javascript:void(0)" onclick="goUnit(\'u0\')">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方完成第二層機制確認。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，代表結論記得而機制未通，重讀機制段落的效益最大。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='此理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板僅記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+(window.QUIZ_TOTAL||n)+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未完成機制確認'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，建議優先回到對應單元複習。'; }
+  else if(n>0){ msg+='目前沒有過度自信的題目。'; }
+  noteEl.textContent=msg;
+}
+
+/* ---- prediction "guess then reveal" ---- */
+function predReveal(btn,valId,trueVal,trueTxt,expl){
+  var rv=btn.closest('.pred').querySelector('.preveal');
+  rv.style.display='block';
+  rv.innerHTML='<strong>預測值：'+document.getElementById(valId).textContent+'；真值：'+trueTxt+'。</strong>'+expl;
+}
+
+/* ---- decision-forcing case (generic) ----
+   Set window.DC_DATA={d1:{a:{cls:'good|mid|bad',txt:'..'},...},...},
+   window.DC_BEST={d1:'b',...}, window.DC_POINTS=['d1',...],
+   optional window.DC_SUMMARY=function(good,total){return '...'}. */
+var dcState={};
+function dcChoose(btn,dp,opt){
+  if(dcState[dp]) return; dcState[dp]=opt;
+  btn.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){b.disabled=true;});
+  btn.classList.add('chosen');
+  var d=(window.DC_DATA||{})[dp][opt], rv=document.getElementById(dp+'r');
+  rv.className='dcreveal '+d.cls; rv.textContent=d.txt;
+}
+function dcSummary(){
+  var need=window.DC_POINTS||[], best=window.DC_BEST||{};
+  var missing=need.filter(function(k){return !dcState[k];});
+  var rv=document.getElementById('dcsum');
+  if(missing.length){ rv.className='dcreveal mid'; rv.textContent='尚有 '+missing.length+' 個決策點未完成，請先逐一選定。'; return; }
+  var good=0; need.forEach(function(k){ if(dcState[k]===best[k]) good++; });
+  var msg=(window.DC_SUMMARY? window.DC_SUMMARY(good,need.length): '完成 '+good+' / '+need.length+' 個決策對應文獻最佳選項。');
+  rv.className='dcreveal '+(good===need.length?'good':(good>=Math.ceil(need.length*0.6)?'mid':'bad'));
+  rv.textContent=msg;
+}
+function dcReset(){
+  dcState={};
+  (window.DC_POINTS||[]).forEach(function(k){
+    var rv=document.getElementById(k+'r'); rv.className='dcreveal'; rv.textContent='';
+    rv.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){ b.disabled=false; b.classList.remove('chosen'); });
+  });
+  var s=document.getElementById('dcsum'); s.className='dcreveal'; s.textContent='';
+}
+
+/* ---- copy code block ---- */
+function copyCode(btn){
+  var pre=btn.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(function(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); });
+}
+
+/* ===== per-site content data + init calls go BELOW this line =====
+   e.g. window.QUIZ_TOTAL = 10;  window.DC_DATA={...}; ... then:
+   initQuizzes();  (and any custom widget init) */
+initQuizzes();
+
+// ---- interactive init ----
+likertShow(6);
+</script>
+</body>
+</html>

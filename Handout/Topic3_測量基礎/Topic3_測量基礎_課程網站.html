@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 03：測量基礎｜員工意向調查</title>
+<style>
+
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 03：測量基礎</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 03<br>測量基礎</div>
+    <div class="t2">Topic 03: Foundations of Measurement<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">構念與信度</div>
+    <a data-u="u1">單元一：構念</a>
+    <a data-u="u2">單元二：信度與 α</a>
+    <div class="grp">效度與診斷</div>
+    <a data-u="u3">單元三：效度</a>
+    <a data-u="u4">單元四：信度異常診斷</a>
+    <div class="grp">文獻</div>
+    <a data-u="u5">單元五：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>Topic 03　測量基礎</h1>
+  <div class="subtitle">員工意向調查課程．Topic 03．適用對象：人管所碩士班</div>
+  <p>敬業度、組織承諾這些構念看不見、摸不著，卻要用問卷把它們變成分數。這一步做得好不好，決定了後面所有分析與行動的可信度。本主題用直覺的方式建立三個測量的基本概念——構念、信度、效度，說明為什麼量表不能隨意自編，並用一個信度異常的診斷案例，示範如何從資料看出測量出了問題。本主題輕量、重觀念，不深入公式推導。</p>
+  <h2>本主題單元</h2>
+  <table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td>一、構念：從看不見到測得到</td><td>理解構念是潛在變項，需以多個題目間接測量</td></tr>
+    <tr><td>二、信度：一致性與 Cronbach's α</td><td>用直覺理解內部一致性、α 的判讀與陷阱</td></tr>
+    <tr><td>三、效度：是否測到目標構念</td><td>區分內容、構念、效標效度，說明為何不宜隨意自編量表</td></tr>
+    <tr><td>四、診斷案例：信度異常</td><td>從題總相關看出反向題誤植，並修正</td></tr>
+    <tr><td>五、參考文獻</td><td>本主題引用來源與專有名詞對照表</td></tr>
+  </table>
+  <h2>本主題學習目標</h2>
+  <div class="card">
+    <p>修畢本主題後，學生應能：其一，說明構念與測量題目的關係，以及為何要用多個題目；其二，判讀 Cronbach's α 並指出它的兩個常見陷阱（題數與單一維度）；其三，區分內容、構念與效標效度，說明隨意自編量表的風險；其四，從題總相關診斷出反向題誤植造成的信度異常並加以修正。</p>
+  </div>
+  <div class="note"><span class="lb">使用說明</span>導覽列可切換單元。各單元末附兩階段自我檢測題：先作答並標注信心，答對後才展開第二層機制確認；校準面板僅記錄每題第一次作答。本網站為單一檔案、離線可用；重新整理會清空作答紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>只計每題第一次作答；高信心且答錯屬過度自信區，建議回到該單元重讀；低信心且答對表示理解比自己以為的更穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 構念 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：構念——從看不見到測得到</h1>
+  <div class="subtitle">主要依據：Cronbach &amp; Meehl (1955)</div>
+
+  <h2>1.1 什麼是構念</h2>
+  <p>員工意見調查想測的東西，多半看不見也摸不著：敬業度、組織承諾、對主管的信任。這些叫構念（construct），是理論上存在、但無法直接觀察的潛在變項（latent variable）。可以用溫度來類比：沒有人看得到熱本身，只能透過溫度計裡水銀柱的高度，間接得知現在幾度。敬業度也一樣，看不到、摸不到，只能透過員工在一些題目上的作答間接推估。</p>
+  <p>既然量不到構念本身，一份問卷的邏輯就是：構念是因、作答是果。因為某人敬業度高，所以他在多個相關題目上傾向給高分；反過來，也能從這些高分回推其敬業度。</p>
+  <div class="note"><span class="lb">例：一個構念、多個題目</span>要測敬業度這個看不見的構念，通常會用一組從不同角度切入的題目，例如：我早上期待去上班、我願意為工作多付出、我對公司有歸屬感。沒有任何單一題目等於敬業度本身；這一組題目共同指向的東西，就是所要測的構念。</div>
+
+  <h2>1.2 為什麼要用多個題目</h2>
+  <p>單一題目測一個構念幾乎不可靠：任何一題的作答，都同時混雜了構念本身、題目用字的偶然效果，以及作答當下的雜訊（例如當天心情、看錯題意、手滑點錯）。古典測量理論（Classical Test Theory, CTT）用一個簡單的式子概括這件事：一個人在某題上實際填出來的分數（觀察分數，observed score），等於他在該構念上的真正水準（真分數，true score）加上一個隨機誤差（random error）。</p>
+  <div class="formula">觀察分數 X　＝　真分數 T　＋　誤差 E</div>
+  <p>用體重計最容易體會這個式子。同一個人早上連續站上體重計五次，讀數可能是 60.2、59.8、60.1、60.3、59.6 公斤——每次都不完全一樣。真正的體重（真分數）只有一個，每次的上下差異來自站的位置、地板不平、機器抖動等隨機誤差。量一次可能不準，但把五次平均起來，隨機誤差有的偏高、有的偏低、正負互相抵消，平均值就更接近真實體重。</p>
+  <p>問卷用多個題目測一個構念，道理完全一樣：每一題都帶有自己的雜訊，把一組題目合起來看，雜訊被平均掉，剩下的部分就更接近真分數，共同指向的構念也才浮現出來。因此一個構面通常由一組題目組成、而不是只用一題——多題並用不是為了問卷變長，而是為了讓誤差被平均掉。</p>
+  <div class="key"><span class="lb">本單元要點</span>構念是看不見的潛在變項，只能用多個題目間接測量。觀察分數 = 真分數 + 誤差；多題並用是為了讓各題的隨機誤差互相抵消、讓共同的構念浮現，而不是為了讓問卷變長。理解這一點，才能理解接下來的信度（題目彼此夠不夠一致）與效度（題目測到的是不是目標構念）。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 1-1</div>
+    <div class="qbody">
+      <p>為什麼測量敬業度這類構念時，通常要用一組題目而不是單一題目？</p>
+      <label><input type="radio" name="q11" value="a"> 因為問卷越長越專業</label>
+      <label><input type="radio" name="q11" value="b"> 因為構念看不見，多個題目能讓共同的構念浮現、並讓個別題目的雜訊互相抵消</label>
+      <label><input type="radio" name="q11" value="c"> 因為單一題目的分數一定是錯的</label>
+      <label><input type="radio" name="q11" value="d"> 因為題目越多，構念就越強</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q11r" value="a"> 因為觀察分數含真分數與誤差，多題並用能平均掉個別題目的誤差</label>
+      <label><input type="radio" name="q11r" value="b"> 因為題數本身就是構念強度</label>
+      <label><input type="radio" name="q11r" value="c"> 因為長問卷比較有權威</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q11c" value="低"> 低</label>
+        <label><input type="radio" name="q11c" value="中"> 中</label>
+        <label><input type="radio" name="q11c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q11','b','a','正確。多題並用讓共同構念浮現、雜訊互相抵消。','關鍵在測量誤差：觀察分數含真分數與誤差，多題能平均掉個別誤差。','再想想：多題的價值在於處理什麼問題？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2 信度 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：信度——一致性與 Cronbach's α</h1>
+  <div class="subtitle">主要依據：Cronbach (1951)、Cortina (1993)、McNeish (2018)、Speer (2026)</div>
+
+  <h2>2.1 信度是什麼</h2>
+  <p>信度（reliability）指測量的一致性與穩定性。用一把尺來類比：同一個人用這把尺量身高，量五次都差不多，這把尺就穩、信度高；如果忽高忽低，信度就低。問卷也一樣，測敬業度的那組題目，應能穩定地反映同一件事，而不是隨機亂跳。</p>
+  <p>員工意見調查最關心的是內部一致性（internal consistency）：同一個構面裡的題目，是否傾向一起高、一起低。舉例來說，如果對「我願意為工作多付出」給高分的人，通常對「我對公司有歸屬感」也給高分，這兩題就正相關，代表它們在測同一個東西；這種題目與題目之間的相關，就叫題間相關（inter-item correlation）。題間相關越高，代表這組題目越像在一起測同一個構念。</p>
+  <p>衡量內部一致性最常用的指標是 Cronbach's α（Cronbach, 1951）。它可以理解為：把題目隨機分成兩半、算這兩半分數的相關，再對所有可能的分法取平均。數值介於 0 到 1，越高代表題目越一致。一個很粗略的直覺是：α 越高，代表分數裡穩定的真訊號占比越高、隨機雜訊占比越低（這只是幫助理解的直覺，不是精確定義）。</p>
+
+  <h2>2.2 α 受什麼影響：互動試算</h2>
+  <p>α 同時取決於兩件事：題數 k（這個構面用了幾題），以及題目之間的平均相關 r̄（題目彼此有多一致，就是前面說的題間相關的平均）。用標準化 α 的公式 α = k·r̄ ÷ [1 + (k−1)·r̄] 就能看出兩者如何影響 α。拉動下面兩個滑桿試算看看：把題數拉多、或把題間相關拉高，α 都會上升。特別注意一件事——就算題間相關 r̄ 不高，只要把題數拉多，α 照樣可以很高。</p>
+  <div class="calc">
+    <div class="pg-ctrl"><span style="min-width:150px;">題數 k：<strong id="kVal">6</strong></span>
+      <input type="range" id="kSlider" min="2" max="20" value="6" oninput="alphaCalc()"></div>
+    <div class="pg-ctrl"><span style="min-width:150px;">平均題間相關 r̄：<strong id="rVal">0.30</strong></span>
+      <input type="range" id="rSlider" min="0" max="90" value="30" oninput="alphaCalc()"></div>
+    <div id="alphaOut" style="margin-top:12px;"></div>
+    <p class="interp">觀察：即使題目品質普通（r̄ 不高），只要題數夠多，α 仍可能很高。這是 α 的第一個陷阱——高 α 不必然代表題目品質好，也可能只是題數多所造成（Cortina, 1993）。</p>
+  </div>
+
+  <h2>2.3 判讀 α 的兩個陷阱</h2>
+  <p>常見的判讀門檻是 α ≥ .70 可接受、.80 以上佳，但門檻是慣例，不是固定標準。判讀 α 時要避免兩個陷阱。</p>
+  <p>第一，題數陷阱：α 會隨題數上升。二十題的量表，就算題目彼此關係普通，α 也很容易超過 .90。所以看到高 α，不能馬上說題目精煉，因為它可能只是題數多所造成（上面的互動試算示範了這一點）。</p>
+  <p>第二，維度陷阱：α 假設一個構面裡的所有題目都在測同一件事（單一維度，unidimensional）。所謂維度，就是題目背後真正在測的東西有幾個。舉例來說，如果把「對主管的信任」和「對公司制度的信任」放進同一份量表、當成一個「信任」構面，裡面就包含兩個不同的子概念，就是兩個維度混在一起。這種情況 α 可能仍然偏高，卻掩蓋了「測了兩個東西」的問題——之後算平均、做比較時就會出錯。</p>
+  <div class="note"><span class="lb">怎麼辦</span>為避免誤判，Cortina（1993）建議報告 α 時一併附上題數與平均題間相關，並另外用因素分析檢查維度，不要只看單一 α 值。此外，α 還假設每一題對真分數的貢獻都相等（這個假設叫 tau 等值，tau-equivalent），實務上常不成立；一旦被違反，α 通常會低估信度，讓量表看起來比實際更不可靠。因此 α 是信度的下限估計。近年方法學建議，條件不符時改用假設較寬鬆的 McDonald's ω（可想成修正了 α 的嚴格假設、更貼近實際的信度估計），或最大下界（greatest lower bound, GLB）、Coefficient H 等替代指標（McNeish, 2018）。</div>
+  <h2>2.4 其他信度類型：評分者間信度與新興應用</h2>
+  <p>Cronbach's α 處理的是同一份問卷內多個題目的內部一致性。但信度不只這一種。當一個構念不是靠受測者自評、而是靠評分者去評定或編碼時，關心的就是評分者間信度（inter-rater reliability, IRR）：不同評分者對同一批對象給的分數是否一致。它常見於面試評分、能力評鑑，以及員工意見調查裡最相關的情境——開放題的人工編碼。傳統上以評分者之間的相關或組內相關（intraclass correlation, ICC）估計。</p>
+  <p>新興的用法把這個老問題帶到新場景。近年愈來愈多研究用大型語言模型（large language model, LLM）自動替文字資料評分或編碼（見 Topic 09 開放題分析）。一個直覺做法是把 AI 分數與專家（subject-matter expert, SME）評分求相關，以此宣稱 AI 的評分者間信度。但 Speer（2026）指出這是有問題的：相關取向假設 AI 與人類評分可互相替換（平行），而 LLM 與人類的評分方式很可能不平行，這個假設難以成立也難以驗證，會讓相關估計嚴重偏誤。他改以因素分析（factor analysis）取向——把 AI 分數與專家評分視為同一潛在構念的指標，用 AI 指標的標準化因素負荷量平方來估計 AI 的信度。這正呼應本單元的核心：信度要看它假設了什麼、又是否成立，換了工具（AI）不代表可以換掉這個提問。</p>
+  <div class="key"><span class="lb">本單元要點</span>信度不只一種：α 看多題的內部一致性，評分者間信度看多位評分者的一致性；兩者都在問「量得一不一致」。判讀 α 記住兩個陷阱：題數增加會提高 α、α 假設單一維度；條件不符時可改用 ω。用 AI 替文字評分是新興趨勢，但驗證其信度時，用相關取向可能因假設不成立而嚴重偏誤，Speer（2026）主張改用因素分析取向。信度是必要條件，但下一單元會看到，它不保證效度。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 2-1</div>
+    <div class="qbody">
+      <p>某量表有 20 題，Cronbach's α = .92。下列判讀何者最恰當？</p>
+      <label><input type="radio" name="q21" value="a"> α 很高，代表題目一定都很精煉、且必為單一維度</label>
+      <label><input type="radio" name="q21" value="b"> α 高一部分可能來自題數多；還要檢查是否單一維度，不能只看 α 值</label>
+      <label><input type="radio" name="q21" value="c"> α 高就代表效度也高</label>
+      <label><input type="radio" name="q21" value="d"> α 超過 .70 就不必再看任何其他證據</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q21r" value="a"> 因為 α 會隨題數上升，且它假設單一維度，高 α 可能掩蓋混維度問題</label>
+      <label><input type="radio" name="q21r" value="b"> 因為 α 越高，題目必然越少雜訊</label>
+      <label><input type="radio" name="q21r" value="c"> 因為 α 直接等於效度</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q21c" value="低"> 低</label>
+        <label><input type="radio" name="q21c" value="中"> 中</label>
+        <label><input type="radio" name="q21c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q21','b','a','正確。20 題的高 α 有部分是題數效果，且 α 假設單一維度，需另行檢查。','關鍵：α 受題數影響、又假設單一維度，故不能只看數值。','再想想：20 題的 α=.92，有多少來自題數？維度呢？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 效度 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：效度——是否測到目標構念</h1>
+  <div class="subtitle">主要依據：Cronbach &amp; Meehl (1955)</div>
+
+  <h2>3.1 信度不等於效度</h2>
+  <p>信度問的是量得一不一致，效度（validity）問的是量到的是不是目標構念。這是兩件不同的事，很容易混淆。</p>
+  <p>用體重計再舉一次例：如果一把體重計每次都固定多秤三公斤，那它很穩定——同一個人量五次都得到一樣（偏高）的讀數，信度很高；但它始終量錯，效度很低。一致，不代表正確。</p>
+  <p>回到問卷：一份題目彼此高度一致的量表（高 α），也可能只是很一致地測到了另一個構念。所以信度是效度的必要條件，卻不是充分條件——高 α 只說明題目彼此一致，並不保證測到的真的是敬業度，而不是別的東西。</p>
+  <h2>3.2 三種常見的效度證據</h2>
+  <p>效度沒有全有或全無的判定，要靠累積證據支持一個測量的解釋（Cronbach &amp; Meehl, 1955）。他們的核心想法是：一個構念不是孤立的，它跟其他構念之間有理論上該有的關係——例如敬業度高的人，理論上離職率該較低、績效該較好。這一整組理論上該成立的關係，叫法則網絡（nomological network）；驗證效度，就是去累積證據、看這些該出現的關係是否真的出現。常見的三類效度證據，各舉一例：</p>
+  <ul>
+    <li>內容效度（content validity）：題目有沒有涵蓋構念的重要面向、有沒有遺漏重要面向或納入無關內容。例如一份敬業度量表若只問對薪水滿不滿意，就漏掉了投入與歸屬，內容效度不足。</li>
+    <li>構念效度（construct validity）：量表與理論上該相關的變項是否相關、與該無關的是否無關。例如敬業度量表應與組織承諾正相關（收斂），而與打字速度這種無關的東西不相關（區辨）。</li>
+    <li>效標效度（criterion validity）：量表能不能預測理論上該預測的結果。例如敬業度量表能否預測後續的離職與績效（呼應 Topic 02 的 Rubenstein、Harter）。</li>
+  </ul>
+  <h2>3.3 為什麼不宜隨意自編量表</h2>
+  <p>正因為效度要靠長期累積的證據，隨手自編幾題就上線是有風險的。題目看起來合理，不代表它們真的測到目標構念，也可能無意間測進了別的東西。前一單元自我檢測的例子就是這樣：一份自編的工作壓力量表 α 很高，結果它測到的主要是工作負荷——題目一致，卻測錯了構念。</p>
+  <p>已發表、經過驗證的量表，背後有內容、構念與效標效度的累積證據，站在它們的肩膀上，比從零開始更穩。若情境特殊、非自編不可，也應遵循題目撰寫與驗證的程序（見同一主題的題項與量表設計單元），不宜憑直覺編寫題目。</p>
+  <div class="key"><span class="lb">本單元要點</span>信度不等於效度：一致地量錯仍是錯。效度靠累積證據支持——內容、構念、效標三類。這也是為何不宜隨意自編量表：看似合理的題目未必測到目標構念。有經過驗證的量表時優先沿用，非自編不可時要走驗證程序。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 3-1</div>
+    <div class="qbody">
+      <p>一份自編的「工作壓力」量表 Cronbach's α = .88，但研究者發現它主要反映的是「工作負荷」而非壓力感受。這最能說明什麼？</p>
+      <label><input type="radio" name="q31" value="a"> α 高就代表沒問題，這份量表可以直接用</label>
+      <label><input type="radio" name="q31" value="b"> 高信度不保證效度：題目一致，但可能一致地測到了另一個構念</label>
+      <label><input type="radio" name="q31" value="c"> α 高代表效度一定也高</label>
+      <label><input type="radio" name="q31" value="d"> 這是題數太少造成的問題</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q31r" value="a"> 因為信度只說明題目一致，效度才問測到的是不是目標構念</label>
+      <label><input type="radio" name="q31r" value="b"> 因為 α 越高，測到的構念一定越正確</label>
+      <label><input type="radio" name="q31r" value="c"> 因為壓力與負荷是同一件事</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q31c" value="低"> 低</label>
+        <label><input type="radio" name="q31c" value="中"> 中</label>
+        <label><input type="radio" name="q31c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q31','b','a','正確。這是信度高但效度存疑的情形：一致地測到了另一個構念。','關鍵：信度只管一致、效度才管測對；一致地量錯仍是效度問題。','再想想：α 高說明的是一致，還是測對？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 信度異常診斷 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：診斷案例——信度異常</h1>
+  <div class="subtitle">主要依據：Cronbach (1951)；本課模擬資料集</div>
+
+  <h2>4.1 反向題與反向計分</h2>
+  <p>一份量表裡，大多數是正向題：給高分代表構念高。例如敬業度量表的「我喜歡我的工作」，給 6 分代表敬業度高。但設計者有時會刻意放一兩題反向題（reverse-worded item），題意跟構念相反，給高分反而代表構念低，例如「我常常想離職」。反向題的用意，是防止受測者不看題目、一律給高分（題項與量表設計單元會細談）。</p>
+  <p>反向題在計分前必須反向計分（reverse scoring）——把它的分數倒過來，讓它跟其他題目同方向。以 6 點量表為例，就用 7 減掉原始分數（原本給 1 分變成 6 分，給 6 分變成 1 分）。倒過來之後，「我常常想離職」給低分的人（不太想離職、敬業程度高），反向計分後就變高分，方向才和其他正向題一致。</p>
+  <p>本課模擬資料集的 AI 導入態度構面，刻意放入一個常見錯誤：其中一題反向題（例如「我擔心 AI 會取代我的工作」）在計分時忘了反向計分。結果這一題跟構面其他題目呈相反方向、變成負相關，整個構面的內部一致性因此下降，α 變得異常低。這種錯誤在實務中很常見，而且只看構面總分不會發現，必須看題目層次的診斷指標。</p>
+  <h2>4.2 以題總相關診斷問題題目</h2>
+  <p>最實用的診斷指標是題總相關（item-total correlation）：把某一題單獨拿出來，和該構面其餘題目的加總算相關，看這一題跟大家走不走同一個方向。直覺是——如果一題真的在測同一個構念，填答者在這一題和在其他題目上應該方向一致，所以題總相關應該是中高的正值。反過來，如果某一題出現負的或接近零的題總相關，這一題就需要檢查：可能是題目品質差，也可能是反向題忘了反向計分，作答方向與其他題目相反。下方示意先呈現信度下降，再套用反向計分修正，即可觀察 α 如何回升。</p>
+  <div class="calc">
+    <div id="relOut"></div>
+    <div class="pg-ctrl" style="margin-top:12px;">
+      <button class="pg-btn" onclick="relToggle()">套用／取消反向計分修正</button>
+    </div>
+    <p class="interp">示意資料。修正前第 4 題（反向題）題總相關為負、α 偏低；套用反向計分後，該題轉為正相關、α 回升。診斷的關鍵不在總分，而在題目層次的題總相關。</p>
+  </div>
+  <div class="key"><span class="lb">本單元要點</span>信度異常常見的錯誤是反向題忘了反向計分，特徵是該題的題總相關為負、α 隨之下降。只看總分或只看 α 值都看不出來，要看題目層次的題總相關。修正後 α 回升，說明問題不在構念、而在計分。這也預告題項與量表設計單元的內容：反向題是有用的設計，但計分錯誤會讓信度明顯下降。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 4-1</div>
+    <div class="qbody">
+      <p>某構面 Cronbach's α 異常低，檢查發現其中一題的題總相關是負的，其餘題目都是中高正相關。最可能的原因與處置是？</p>
+      <label><input type="radio" name="q41" value="a"> 整個構念不存在，應刪除整個構面</label>
+      <label><input type="radio" name="q41" value="b"> 該題很可能是反向題忘了反向計分，先反向計分再重算 α</label>
+      <label><input type="radio" name="q41" value="c"> α 低是正常的，不必處理</label>
+      <label><input type="radio" name="q41" value="d"> 應該再多加幾題來提高 α</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q41r" value="a"> 因為單一題目呈負的題總相關、其餘為正，最典型的成因就是反向題未反向計分</label>
+      <label><input type="radio" name="q41r" value="b"> 因為 α 低一定代表構念有問題</label>
+      <label><input type="radio" name="q41r" value="c"> 因為加題一定能解決任何信度問題</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q41c" value="低"> 低</label>
+        <label><input type="radio" name="q41c" value="中"> 中</label>
+        <label><input type="radio" name="q41c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q41','b','a','正確。單題負題總相關、其餘為正，最典型就是反向題未反向計分。','關鍵在症狀模式：只有一題負相關、其餘正常，指向計分而非構念問題。','再想想：只有一題出問題、其餘正常，比較像構念不存在，還是計分出錯？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 參考文獻 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：參考文獻</h1>
+
+  <h2>學術文獻</h2>
+  <div class="refline">Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297&#8211;334. <a href="https://doi.org/10.1007/BF02310555" target="_blank" rel="noopener">https://doi.org/10.1007/BF02310555</a></div>
+  <div class="refline">Cronbach, L. J., &amp; Meehl, P. E. (1955). Construct validity in psychological tests. Psychological Bulletin, 52(4), 281&#8211;302. <a href="https://doi.org/10.1037/h0040957" target="_blank" rel="noopener">https://doi.org/10.1037/h0040957</a></div>
+  <div class="refline">Cortina, J. M. (1993). What is coefficient alpha? An examination of theory and applications. Journal of Applied Psychology, 78(1), 98&#8211;104. <a href="https://doi.org/10.1037/0021-9010.78.1.98" target="_blank" rel="noopener">https://doi.org/10.1037/0021-9010.78.1.98</a></div>
+  <div class="refline">McNeish, D. (2018). Thanks coefficient alpha, we&#8217;ll take it from here. Psychological Methods, 23(3), 412&#8211;433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a></div>
+  <div class="refline">Speer, A. B. (2026). Inter-rater reliability of AI scores: A call to move from correlational to factor analytical estimation. Personnel Psychology. Advance online publication. <a href="https://doi.org/10.1111/peps.70036" target="_blank" rel="noopener">https://doi.org/10.1111/peps.70036</a></div>
+  <div class="note"><span class="lb">來源性質</span>本主題五篇皆為同儕審查期刊文獻並附 DOI：Cronbach (1951) 提出 α、Cronbach &amp; Meehl (1955) 奠定構念效度、Cortina (1993) 釐清 α 的題數與維度陷阱、McNeish (2018) 討論 α 的假設限制與 ω 等替代方案、Speer (2026) 提出以因素分析估計 AI 評分的評分者間信度（開放取用）。信度異常的診斷以本課模擬資料集為教學實例。</div>
+
+  <h2>專有名詞對照表</h2>
+  <table>
+    <tr><th style="width:26%">中文名詞</th><th style="width:30%">英文</th><th>說明</th></tr>
+    <tr><td>構念</td><td>construct</td><td>理論上存在但無法直接觀察的潛在變項</td></tr>
+    <tr><td>潛在變項</td><td>latent variable</td><td>看不見、需以多個指標間接測量的變項</td></tr>
+    <tr><td>古典測量理論</td><td>Classical Test Theory (CTT)</td><td>觀察分數 X ＝ 真分數 T ＋ 誤差 E 的測量架構</td></tr>
+    <tr><td>真分數／誤差</td><td>true score / random error</td><td>構念的真實水準，與構念無關的隨機雜訊；多題並用可平均掉誤差</td></tr>
+    <tr><td>信度</td><td>reliability</td><td>測量的一致性與可重複性</td></tr>
+    <tr><td>內部一致性</td><td>internal consistency</td><td>同一構面內題目彼此一致的程度</td></tr>
+    <tr><td>評分者間信度</td><td>inter-rater reliability (IRR)</td><td>不同評分者對同一批對象評分的一致程度</td></tr>
+    <tr><td>Cronbach's α</td><td>Cronbach's alpha</td><td>最常用的內部一致性指標，受題數與題間相關影響</td></tr>
+    <tr><td>效度</td><td>validity</td><td>測量是否真的量到所宣稱的構念</td></tr>
+    <tr><td>法則網絡</td><td>nomological network</td><td>構念與其他構念、可觀察指標之間的法則關係，用來定義並驗證構念</td></tr>
+    <tr><td>tau 等值</td><td>tau-equivalent</td><td>α 的假設之一：各題目對真分數貢獻相等；不成立時 α 會低估信度</td></tr>
+    <tr><td>題總相關</td><td>item-total correlation</td><td>單題與該構面其餘題目加總的相關，用於診斷問題題目</td></tr>
+  </table>
+  <footer>本教學網站為單一 HTML 檔案，離線可用。Topic 03：測量基礎。文獻皆為同儕審查期刊並附 DOI；信度異常以本課模擬資料集為教學實例。供教學使用。</footer>
+</section>
+
+</main>
+</div>
+
+<script>
+window.QUIZ_TOTAL = 4;
+
+
+// ---- Interactive: Cronbach's alpha intuition calculator (u2) ----
+function alphaCalc(){
+  var k=+document.getElementById('kSlider').value;
+  var r=(+document.getElementById('rSlider').value)/100;
+  var a=(k*r)/(1+(k-1)*r);
+  document.getElementById('kVal').textContent=k;
+  document.getElementById('rVal').textContent=r.toFixed(2);
+  var pct=Math.max(0,Math.min(1,a))*100;
+  var band = a>=0.9?['可能有冗題','#8a6420']:(a>=0.8?['佳','#337052']:(a>=0.7?['可接受','#33568e']:['偏低','#c0564f']));
+  var s='<div style="font-size:30px; font-weight:800; color:var(--navy);">α = '+a.toFixed(2)+'　<span style="font-size:15px; font-weight:700; color:'+band[1]+';">'+band[0]+'</span></div>';
+  s+='<div style="height:14px; border-radius:7px; background:#eef2f8; margin:10px 0 4px; overflow:hidden;"><div style="height:100%; width:'+pct.toFixed(0)+'%; background:'+band[1]+'; transition:width .25s;"></div></div>';
+  s+='<div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted);"><span>0</span><span>.70</span><span>1.0</span></div>';
+  document.getElementById('alphaOut').innerHTML=s;
+}
+
+// ---- Interactive: reliability collapse diagnosis (u4) ----
+var relFixed=false;
+function relRender(){
+  var items=['第 1 題','第 2 題','第 3 題','第 4 題（反向題）','第 5 題','第 6 題'];
+  var broken=[0.62,0.58,0.55,-0.44,0.60,0.57], fixed=[0.64,0.61,0.58,0.49,0.62,0.59];
+  var vals=relFixed?fixed:broken, a=relFixed?0.83:0.55;
+  var s='<div style="font-size:15px; margin-bottom:8px;">AI 導入態度構面　題總相關（item-total correlation）</div>';
+  for(var i=0;i<items.length;i++){
+    var v=vals[i], neg=v<0, w=Math.abs(v)*100*0.6, col=neg?'#c0564f':(i===3?'#337052':'#33568e');
+    s+='<div style="display:flex; align-items:center; gap:10px; margin:5px 0;">'
+      +'<span style="width:120px; font-size:12.5px; color:'+(neg?'#c0564f':'var(--muted)')+';">'+items[i]+'</span>'
+      +'<div style="flex:1; position:relative; height:16px; background:#f2f5fa; border-radius:5px;">'
+      +'<div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:#c9cfd8;"></div>'
+      +'<div style="position:absolute; top:2px; height:12px; border-radius:3px; background:'+col+'; '
+      + (neg?('right:50%; width:'+w.toFixed(0)+'%;'):('left:50%; width:'+w.toFixed(0)+'%;'))+'"></div></div>'
+      +'<span style="width:44px; text-align:right; font-size:12px; color:'+(neg?'#c0564f':'#24292f')+';">'+(v>=0?'+':'−')+Math.abs(v).toFixed(2)+'</span></div>';
+  }
+  var ac=relFixed?'#337052':'#c0564f';
+  s+='<div style="margin-top:10px; font-size:16px; font-weight:800; color:'+ac+';">Cronbach\'s α = '+a.toFixed(2)+'　<span style="font-size:13px; font-weight:700;">'+(relFixed?'修正後：回升到可接受':'修正前：異常偏低')+'</span></div>';
+  document.getElementById('relOut').innerHTML=s;
+}
+function relToggle(){ relFixed=!relFixed; relRender(); }
+
+/* ===== Course-website interactive framework (content-agnostic) =====
+   Reuse these EXACT function/class names; the CSS and quiz markup depend on them.
+   Content-specific data (decision cases, simulators, SVG animations) is added
+   per-site below the framework, then init calls at the very end. */
+
+/* ---- unit navigation ---- */
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+
+/* 支援網址錨點深連結，例如 ...html#u2 開頁時直接切換到單元二 */
+if (location.hash) {
+  var hashUnit = location.hash.slice(1);
+  var hashTarget = document.querySelector('#nav a[data-u="' + hashUnit + '"]');
+  if (hashTarget) hashTarget.click();
+}
+
+/* ---- two-stage two-tier calibration quiz ----
+   Tier 1 = answer + confidence; Tier 2 (mechanism reason) unlocks only after a
+   correct answer, so reason options never leak the answer. Calibration panel ids:
+   cal-{h,m,l}-{0,1,2}, calNote. window.QUIZ_TOTAL = number of quizzes. */
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+    var btn1=box.querySelector('button'); if(btn1) btn1.textContent='檢查答案';
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標注信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，屬過度自信區，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板僅記第一次作答，<a href="javascript:void(0)" onclick="goUnit(\'u0\')">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方完成第二層機制確認。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，代表結論記得而機制未通，重讀機制段落的效益最大。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='此理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板僅記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+(window.QUIZ_TOTAL||n)+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未完成機制確認'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，建議優先回到對應單元複習。'; }
+  else if(n>0){ msg+='目前沒有過度自信的題目。'; }
+  noteEl.textContent=msg;
+}
+
+/* ---- prediction "guess then reveal" ---- */
+function predReveal(btn,valId,trueVal,trueTxt,expl){
+  var rv=btn.closest('.pred').querySelector('.preveal');
+  rv.style.display='block';
+  rv.innerHTML='<strong>預測值：'+document.getElementById(valId).textContent+'；真值：'+trueTxt+'。</strong>'+expl;
+}
+
+/* ---- decision-forcing case (generic) ----
+   Set window.DC_DATA={d1:{a:{cls:'good|mid|bad',txt:'..'},...},...},
+   window.DC_BEST={d1:'b',...}, window.DC_POINTS=['d1',...],
+   optional window.DC_SUMMARY=function(good,total){return '...'}. */
+var dcState={};
+function dcChoose(btn,dp,opt){
+  if(dcState[dp]) return; dcState[dp]=opt;
+  btn.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){b.disabled=true;});
+  btn.classList.add('chosen');
+  var d=(window.DC_DATA||{})[dp][opt], rv=document.getElementById(dp+'r');
+  rv.className='dcreveal '+d.cls; rv.textContent=d.txt;
+}
+function dcSummary(){
+  var need=window.DC_POINTS||[], best=window.DC_BEST||{};
+  var missing=need.filter(function(k){return !dcState[k];});
+  var rv=document.getElementById('dcsum');
+  if(missing.length){ rv.className='dcreveal mid'; rv.textContent='尚有 '+missing.length+' 個決策點未完成，請先逐一選定。'; return; }
+  var good=0; need.forEach(function(k){ if(dcState[k]===best[k]) good++; });
+  var msg=(window.DC_SUMMARY? window.DC_SUMMARY(good,need.length): '完成 '+good+' / '+need.length+' 個決策對應文獻最佳選項。');
+  rv.className='dcreveal '+(good===need.length?'good':(good>=Math.ceil(need.length*0.6)?'mid':'bad'));
+  rv.textContent=msg;
+}
+function dcReset(){
+  dcState={};
+  (window.DC_POINTS||[]).forEach(function(k){
+    var rv=document.getElementById(k+'r'); rv.className='dcreveal'; rv.textContent='';
+    rv.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){ b.disabled=false; b.classList.remove('chosen'); });
+  });
+  var s=document.getElementById('dcsum'); s.className='dcreveal'; s.textContent='';
+}
+
+/* ---- copy code block ---- */
+function copyCode(btn){
+  var pre=btn.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(function(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); });
+}
+
+/* ===== per-site content data + init calls go BELOW this line =====
+   e.g. window.QUIZ_TOTAL = 10;  window.DC_DATA={...}; ... then:
+   initQuizzes();  (and any custom widget init) */
+initQuizzes();
+
+// ---- interactive init ----
+alphaCalc();
+relRender();
+</script>
+</body>
+</html>

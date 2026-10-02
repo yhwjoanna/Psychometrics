@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>編碼一致性計算器｜員工意向調查</title>
+<style>
+:root{--navy:#12335c; --blue:#2e5e8f; --bg:#f5f7fa; --card:#ffffff; --line:#e3e9f2; --muted:#5f6e84; --ink:#243447;
+  --pass:#2f6b4c; --pass-bg:#eaf4ee; --amber:#8a5a12; --amber-bg:#fbf2e1; --fail:#a33a32; --fail-bg:#fbeceb; --severe:#ffffff; --severe-bg:#8f2a24;
+  --accent:#7A2033; --accent-tint:#F3E3E4;}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.75; font-size:clamp(15px,1.05vw,17px);}
+.topbar{background:var(--navy); color:#fff; padding:14px clamp(16px,4vw,48px); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; justify-content:space-between;}
+.topbar .t{font-size:clamp(18px,1.6vw,22px); font-weight:800;}
+.topbar .s{font-size:14px; opacity:.85; display:block;}
+.home{color:#fff; border:1px solid rgba(255,255,255,.45); border-radius:20px; padding:5px 14px; font-size:14px; font-weight:600; text-decoration:none; white-space:nowrap; transition:background .2s ease;}
+.home:hover{background:rgba(255,255,255,.12);}
+.home:active{transform:scale(.97);}
+main{max-width:980px; margin:0 auto; padding:clamp(16px,3vw,36px);}
+h2{color:var(--navy); font-size:clamp(17px,1.3vw,20px); margin:0 0 12px;}
+h3{color:var(--navy); font-size:16px; margin:18px 0 8px;}
+p{margin:0 0 12px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:clamp(14px,2vw,24px); margin-bottom:18px;}
+.steps{list-style:none; counter-reset:s; margin:0 0 6px;}
+.steps>li{counter-increment:s; position:relative; padding-left:38px; margin-bottom:14px;}
+.steps>li::before{content:counter(s); position:absolute; left:0; top:2px; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:var(--navy); color:#fff; font-size:14px; font-weight:700;}
+.steps b{color:var(--navy);}
+.eg{background:#eef2f8; border-radius:8px; padding:10px 14px; font-size:15px; margin-top:6px;}
+label.fld{display:block; font-size:14px; color:var(--muted); font-weight:700;}
+select,input[type=text]{padding:8px 10px; margin-top:4px; border:1px solid var(--line); border-radius:8px; font-size:16px; font-family:inherit; background:#fff; color:var(--ink);}
+.names{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+.names input{width:130px;}
+.tblwrap{width:100%; overflow-x:auto; margin-top:10px;}
+table{border-collapse:collapse; font-size:15px;}
+th,td{border:1px solid var(--line); padding:7px 10px; text-align:center; white-space:nowrap;}
+th{background:#eef2f8; color:var(--navy); font-weight:700;}
+th.corner{font-size:13px; line-height:1.4; color:var(--muted); font-weight:600;}
+td input{width:68px; padding:6px; text-align:center; border:1px solid var(--line); border-radius:6px; font-size:16px;}
+td.dg{background:var(--accent-tint);}
+td.dg input{border-color:var(--accent); font-weight:700; color:var(--accent);}
+td.sum{color:var(--muted); font-weight:700;}
+.legend{font-size:14px; color:var(--muted); margin-top:8px;}
+.legend i{display:inline-block; width:14px; height:14px; background:var(--accent-tint); border:1px solid var(--accent); border-radius:3px; vertical-align:-2px; margin-right:6px;}
+.res{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:6px;}
+.rbox{background:#eef2f8; border-radius:10px; padding:14px; text-align:center;}
+.rbox .n{font-size:clamp(26px,3vw,34px); font-weight:800; color:var(--navy); font-variant-numeric:tabular-nums;}
+.rbox .l{font-size:14px; color:var(--ink); font-weight:700;}
+.rbox .d{font-size:13px; color:var(--muted); margin-top:2px; line-height:1.5;}
+.verdict{border-radius:12px; padding:16px 18px; margin-top:16px; border-left:6px solid; transition:background .2s ease;}
+.verdict .vt{font-size:clamp(18px,1.6vw,21px); font-weight:800; margin-bottom:6px;}
+.verdict p{margin:0 0 8px;}
+.verdict p:last-child{margin-bottom:0;}
+.v-pass{background:var(--pass-bg); border-color:var(--pass); color:var(--pass);}
+.v-amber{background:var(--amber-bg); border-color:var(--amber); color:var(--amber);}
+.v-fail{background:var(--fail-bg); border-color:var(--fail); color:var(--fail);}
+.v-severe{background:var(--severe-bg); border-color:#5e1915; color:var(--severe);}
+.v-none{background:#eef2f8; border-color:var(--muted); color:var(--ink);}
+.verdict .exp{color:var(--ink);}
+.v-severe .exp{color:#fff;}
+.scale{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:8px; font-size:14px;}
+.scale div{border-radius:8px; padding:8px 10px; line-height:1.5;}
+.scale b{display:block;}
+.formula{background:#eef2f8; border-radius:10px; padding:12px 16px; text-align:center; font-size:16px; margin:12px 0; color:var(--navy); font-weight:700;}
+.warnb{background:#faf4e8; border-left:4px solid var(--amber); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.lb{font-weight:800; color:var(--navy); margin-right:6px;}
+.ref{font-size:13px; color:var(--muted); margin-top:6px;}
+a{color:var(--blue);}
+footer{color:var(--muted); font-size:13px; text-align:center; padding:18px;}
+.tabs{display:flex; gap:8px; margin-bottom:14px;}
+.tab{font:inherit; font-size:16px; font-weight:700; padding:9px 22px; border-radius:999px; border:1.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer;}
+.tab.on{background:var(--navy); color:#fff;}
+.tab:active{transform:scale(.97);}
+.paste3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:8px;}
+.paste3 textarea{width:100%; height:260px; margin-top:4px; border:1px solid var(--line); border-radius:8px; padding:8px 10px; font:inherit; font-size:15px; line-height:1.7; resize:vertical;}
+.mini{font:inherit; font-size:13px; padding:2px 10px; border-radius:6px; border:1px solid var(--line); background:#fff; cursor:pointer; margin-left:8px;}
+@media (max-width:640px){.paste3{grid-template-columns:1fr;} .paste3 textarea{height:160px;}}
+@media (max-width:640px){.scale{grid-template-columns:1fr 1fr;} .names input{width:46%;}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+@media print{.topbar{background:#fff; color:var(--navy); border-bottom:2px solid var(--navy);} .home{display:none;} body{background:#fff;} .card{break-inside:avoid;} *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div><span class="t">編碼一致性計算器　Cohen&#8217;s κ</span><span class="s">員工意向調查．Topic 03 期中作業與 Topic 09 開放題分析使用</span></div>
+  <a class="home" href="../../index.html" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+</div>
+<main>
+
+<div class="tabs" role="tablist">
+  <button class="tab on" id="t2" onclick="setMode(2)" role="tab">兩位組員</button>
+  <button class="tab" id="t3" onclick="setMode(3)" role="tab">三位組員</button>
+</div>
+<div id="m2">
+<div class="card">
+  <h2>操作步驟</h2>
+  <ol class="steps">
+    <li><b>兩人各自分類</b>　甲、乙兩位組員不討論，各自把每一則事例歸到一個類別，記成一張事例清單：事例編號、甲的分類、乙的分類</li>
+    <li><b>選類別數，替類別命名</b>　類別名稱只用來顯示，可以不填</li>
+    <li><b>逐則事例填進交叉表</b>　橫列是甲的分類，直欄是乙的分類；每一則事例在對應的格子加 1，格子裡填的是事例數
+      <div class="eg">例如某則事例甲歸為類別 A、乙歸為類別 B，就在甲類別 A 那一列、乙類別 B 那一欄加 1<br>全部事例填完後，所有格子加起來等於事例總數</div></li>
+    <li><b>看結果</b>　粉紅色的對角線格子是兩人歸到同一類的事例；下方會顯示 κ 與是否通過</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>輸入交叉表</h2>
+  <label class="fld">類別數
+    <select id="inC" onchange="buildGrid()">
+      <option value="2">2</option><option value="3" selected>3</option>
+      <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+    </select>
+  </label>
+  <div class="names" id="names"></div>
+  <div class="tblwrap"><table id="grid"></table></div>
+  <p class="legend"><i></i>對角線：兩人歸到同一類的事例數。預設數字為 40 則事例的練習資料，可直接改成自己組的數字</p>
+</div>
+
+<div class="card">
+  <h2>結果</h2>
+  <div class="res">
+    <div class="rbox"><div class="l">觀察同意率</div><div class="n" id="outPo">–</div><div class="d" id="dPo">兩人分到同一類的比例</div></div>
+    <div class="rbox"><div class="l">碰巧一致率（期望同意率）</div><div class="n" id="outPe">–</div><div class="d">兩人各自依自己的類別比例隨意分類時，也會分到同一類的比例</div></div>
+    <div class="rbox"><div class="l">Cohen&#8217;s κ</div><div class="n" id="outKap">–</div><div class="d">扣除碰巧一致之後的一致程度</div></div>
+  </div>
+  <div class="verdict v-none" id="verdict"><div class="vt" id="vTitle">請輸入事例數</div><p class="exp" id="vExp"></p><p class="exp" id="vAct"></p></div>
+</div>
+
+</div>
+<div id="m3" hidden>
+<div class="card">
+  <h2>操作步驟</h2>
+  <ol class="steps">
+    <li><b>三人各自分類</b>　甲、乙、丙三位組員不討論，各自把每一則事例歸到一個類別</li>
+    <li><b>貼上分類</b>　從 Excel 複製各自的分類欄，貼到下方三個欄位；每一行是一則事例，三欄的行數與順序要一致
+      <div class="eg">第 1 行是事例 01，第 2 行是事例 02，依此類推；類別名稱要寫法一致，例如都寫「迴避回饋」</div></li>
+    <li><b>看結果</b>　下方會顯示兩兩之間的 Cohen&#8217;s κ、平均值，以及三人整體的 Fleiss&#8217; κ</li>
+  </ol>
+</div>
+<div class="card">
+  <h2>貼上三人的分類</h2>
+  <div class="paste3">
+    <label class="fld">甲的分類<textarea id="r1" oninput="calc3()"></textarea></label>
+    <label class="fld">乙的分類<textarea id="r2" oninput="calc3()"></textarea></label>
+    <label class="fld">丙的分類<textarea id="r3" oninput="calc3()"></textarea></label>
+  </div>
+  <p class="legend">預設內容為 12 則事例的練習資料，可直接貼上自己組的分類取代　<button class="mini" onclick="clear3()">清空</button></p>
+</div>
+<div class="card">
+  <h2>結果</h2>
+  <div class="res">
+    <div class="rbox"><div class="l">甲與乙</div><div class="n" id="k12">–</div><div class="d">Cohen&#8217;s κ</div></div>
+    <div class="rbox"><div class="l">甲與丙</div><div class="n" id="k13">–</div><div class="d">Cohen&#8217;s κ</div></div>
+    <div class="rbox"><div class="l">乙與丙</div><div class="n" id="k23">–</div><div class="d">Cohen&#8217;s κ</div></div>
+  </div>
+  <div class="res">
+    <div class="rbox"><div class="l">兩兩平均（Light&#8217;s κ）</div><div class="n" id="kL">–</div><div class="d">三組 Cohen&#8217;s κ 的平均</div></div>
+    <div class="rbox"><div class="l">Fleiss&#8217; κ</div><div class="n" id="kF">–</div><div class="d">三人整體的一致程度，判定以這個數值為準</div></div>
+    <div class="rbox"><div class="l">三人完全一致</div><div class="n" id="pAll">–</div><div class="d" id="dAll">三人歸到同一類的事例比例</div></div>
+  </div>
+  <div class="verdict v-none" id="verdict3"><div class="vt" id="vTitle3">請貼上三人的分類</div><p class="exp" id="vExp3"></p><p class="exp" id="vAct3"></p></div>
+</div>
+</div>
+<div class="card">
+  <h2>判讀標準</h2>
+  <div class="scale">
+    <div class="v-pass" style="border-left:4px solid var(--pass)"><b>.61 以上　通過</b>高度一致；.81 以上幾乎完全一致</div>
+    <div class="v-amber" style="border-left:4px solid var(--amber)"><b>.41 至 .60　未通過</b>中等一致，修編碼簿後重新分類</div>
+    <div class="v-fail" style="border-left:4px solid var(--fail)"><b>.01 至 .40　不通過</b>一致性偏低，類別定義需重寫</div>
+    <div class="v-severe" style="border-left:4px solid #5e1915"><b>0 以下　嚴重</b>一致程度未超過隨機一致的水準，分類規則沒有共識</div>
+  </div>
+  <div class="formula">κ　＝　（觀察同意率 − 碰巧一致率）÷（1 − 碰巧一致率）</div>
+  <p>三位組員時，Fleiss&#8217; κ 用同樣的邏輯計算三人整體的一致程度（Fleiss, 1971）；兩兩平均是三組 Cohen&#8217;s κ 的平均（Light, 1971），可以看出是哪兩人的判斷差距較大。</p>
+  <p>觀察同意率是對角線事例數除以事例總數。碰巧一致率由兩人各類別的比例相乘後加總：甲有 40% 的事例歸到類別 A、乙有 38%，兩人隨意分類時就有 .40 × .38 的機率同時歸到類別 A。κ 把這部分扣掉，所以比觀察同意率嚴格（Cohen, 1960）。多數事例集中在同一類時，碰巧一致率會偏高，只報觀察同意率會高估兩人的一致性。</p>
+  <p>判讀分級依 Landis 與 Koch（1977）的慣例，本課程以 .61 為通過標準。</p>
+  <div class="warnb"><span class="lb">使用提醒</span>先各自獨立分類再填表；先討論後分類，κ 會偏高，已經不是獨立判斷。κ 未通過時，修訂編碼簿的定義、納入與排除條件、裁決規則，兩人再各自重新分類一次；企劃書附上兩次的 κ 與修改紀錄。本工具處理兩到三位編碼者、名義類別的情境。</div>
+  <p class="ref">Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37&#8211;46. <a href="https://doi.org/10.1177/001316446002000104" target="_blank" rel="noopener">https://doi.org/10.1177/001316446002000104</a></p>
+  <p class="ref">Fleiss, J. L. (1971). Measuring nominal scale agreement among many raters. Psychological Bulletin, 76(5), 378&#8211;382. <a href="https://doi.org/10.1037/h0031619" target="_blank" rel="noopener">https://doi.org/10.1037/h0031619</a></p>
+  <p class="ref">Landis, J. R., &amp; Koch, G. G. (1977). The measurement of observer agreement for categorical data. Biometrics, 33(1), 159&#8211;174. <a href="https://doi.org/10.2307/2529310" target="_blank" rel="noopener">https://doi.org/10.2307/2529310</a></p>
+  <p class="ref">Light, R. J. (1971). Measures of response agreement for qualitative data: Some generalizations and alternatives. Psychological Bulletin, 76(5), 365&#8211;377. <a href="https://doi.org/10.1037/h0031643" target="_blank" rel="noopener">https://doi.org/10.1037/h0031643</a></p>
+</div>
+
+</main>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 03 期中量表作業與 Topic 09 開放題分析使用。</footer>
+<script>
+var DEMO_NAMES=['類別 A','類別 B','類別 C'];
+var DEMO=[[12,3,1],[2,9,2],[1,2,8]];
+function nm(i){var el=document.getElementById('nm'+i);var v=el&&el.value.trim();return v||('類別 '+(i+1));}
+function buildGrid(){
+  var c=+document.getElementById('inC').value, h='';
+  for(var i=0;i<c;i++){h+='<input type="text" id="nm'+i+'" placeholder="類別 '+(i+1)+' 名稱" value="'+(c===3?DEMO_NAMES[i]:'')+'" oninput="relabel()">';}
+  document.getElementById('names').innerHTML=h;
+  var s='<tr><th class="corner">甲的分類 ↓<br>乙的分類 →</th>';
+  for(var j=0;j<c;j++) s+='<th id="ch'+j+'"></th>';
+  s+='<th>甲合計</th></tr>';
+  for(var i=0;i<c;i++){
+    s+='<tr><th id="rh'+i+'"></th>';
+    for(var j=0;j<c;j++){
+      var v=(c===3)?DEMO[i][j]:0;
+      s+='<td class="'+(i===j?'dg':'')+'"><input type="number" min="0" step="1" inputmode="numeric" id="c'+i+'_'+j+'" value="'+v+'" oninput="calcKap()" aria-label="甲 '+(i+1)+'，乙 '+(j+1)+'"></td>';
+    }
+    s+='<td class="sum" id="rs'+i+'">–</td></tr>';
+  }
+  s+='<tr><th>乙合計</th>';
+  for(var j=0;j<c;j++) s+='<td class="sum" id="cs'+j+'">–</td>';
+  s+='<td class="sum" id="tot">–</td></tr>';
+  document.getElementById('grid').innerHTML=s;
+  relabel();
+}
+function relabel(){
+  var c=+document.getElementById('inC').value;
+  for(var i=0;i<c;i++){document.getElementById('rh'+i).textContent='甲：'+nm(i);document.getElementById('ch'+i).textContent='乙：'+nm(i);}
+  calcKap();
+}
+function f2(x){return x.toFixed(2).replace(/^0\./,'.').replace(/^-0\./,'-.');}
+function pct(x){return Math.round(x*100)+'%';}
+function setV(cls,title,exp,act){
+  var v=document.getElementById('verdict'); v.className='verdict '+cls;
+  document.getElementById('vTitle').textContent=title;
+  document.getElementById('vExp').textContent=exp;
+  document.getElementById('vAct').textContent=act;
+}
+function calcKap(){
+  var c=+document.getElementById('inC').value, m=[], tot=0;
+  for(var i=0;i<c;i++){m[i]=[];for(var j=0;j<c;j++){var v=Math.max(0,Math.floor(+document.getElementById('c'+i+'_'+j).value||0));m[i][j]=v;tot+=v;}}
+  var diag=0,rs=[],cs=[];
+  for(var i=0;i<c;i++){rs[i]=0;cs[i]=0;}
+  for(var i=0;i<c;i++)for(var j=0;j<c;j++){rs[i]+=m[i][j];cs[j]+=m[i][j];if(i===j)diag+=m[i][j];}
+  for(var i=0;i<c;i++){document.getElementById('rs'+i).textContent=rs[i];document.getElementById('cs'+i).textContent=cs[i];}
+  document.getElementById('tot').textContent=tot;
+  if(tot===0){['outPo','outPe','outKap'].forEach(function(id){document.getElementById(id).textContent='–';});setV('v-none','請輸入事例數','','');return;}
+  var po=diag/tot, pe=0;
+  for(var i=0;i<c;i++) pe+=rs[i]*cs[i];
+  pe=pe/(tot*tot);
+  document.getElementById('outPo').textContent=f2(po);
+  document.getElementById('outPe').textContent=f2(pe);
+  document.getElementById('dPo').textContent=tot+' 則中有 '+diag+' 則分到同一類';
+  if(pe>=1){document.getElementById('outKap').textContent='—';setV('v-severe','無法計算','兩人都把所有事例歸到同一類，碰巧一致率為 100%，κ 沒有定義。','檢查類別是否切得太粗，或事例是否都屬於同一種情況。');return;}
+  var k=(po-pe)/(1-pe);
+  document.getElementById('outKap').textContent=f2(k);
+  var exp='兩人在 '+tot+' 則事例中有 '+diag+' 則分到同一類，觀察同意率 '+pct(po)+'；其中約 '+pct(pe)+' 是兩人隨意分類也會出現的碰巧一致。扣除之後，κ ＝ '+f2(k)+'。';
+  var mi=-1,mj=-1,mx=0;
+  for(var i=0;i<c;i++)for(var j=0;j<c;j++){if(i!==j&&m[i][j]>mx){mx=m[i][j];mi=i;mj=j;}}
+  var hot=mx>0?'分歧最多的格子：甲歸「'+nm(mi)+'」、乙歸「'+nm(mj)+'」，共 '+mx+' 則。先把這兩類的定義與排除條件寫清楚。':'';
+  if(k>=0.81) setV('v-pass','通過：幾乎完全一致',exp,'可以用這份編碼簿分類其餘事例。'+(hot?' '+hot.replace('先把','仍可檢查'):''));
+  else if(k>=0.61) setV('v-pass','通過：高度一致',exp,'可以用這份編碼簿分類其餘事例；不一致的事例開會討論，記錄最後的決定。'+(hot?' '+hot:''));
+  else if(k>=0.41) setV('v-amber','未通過：中等一致',exp,'修訂編碼簿後，兩人各自重新分類，再算一次 κ。'+(hot?' '+hot:''));
+  else if(k>0) setV('v-fail','不通過：一致性偏低',exp,'類別定義需要重寫：補上納入與排除條件、典型事例與裁決規則，兩人各自重新分類。'+(hot?' '+hot:''));
+  else setV('v-severe','嚴重：一致程度未超過隨機一致的水準',exp,'兩人對類別的理解不同，先一起重新討論每個類別的定義與典型事例，改寫編碼簿後再各自重新分類。'+(hot?' '+hot:''));
+}
+buildGrid();
+
+function setMode(k){document.getElementById('m2').hidden=(k!==2);document.getElementById('m3').hidden=(k!==3);
+  document.getElementById('t2').classList.toggle('on',k===2);document.getElementById('t3').classList.toggle('on',k===3);if(k===3)calc3();}
+var D3=[['類別 A','類別 A','類別 A'],['類別 A','類別 A','類別 B'],['類別 B','類別 B','類別 B'],['類別 C','類別 C','類別 C'],['類別 A','類別 A','類別 A'],['類別 B','類別 C','類別 B'],['類別 C','類別 C','類別 C'],['類別 B','類別 B','類別 B'],['類別 A','類別 B','類別 A'],['類別 C','類別 C','類別 A'],['類別 B','類別 B','類別 B'],['類別 A','類別 A','類別 A']];
+function lines(id){return document.getElementById(id).value.split(/\r?\n/).map(function(x){return x.trim();});}
+function cohen(a,b){var n=a.length,cats={},po=0,pe=0;a.forEach(function(x,i){cats[x]=1;cats[b[i]]=1;if(x===b[i])po++;});po/=n;
+  Object.keys(cats).forEach(function(c){var pa=a.filter(function(x){return x===c;}).length/n,pb=b.filter(function(x){return x===c;}).length/n;pe+=pa*pb;});
+  return pe>=1?NaN:(po-pe)/(1-pe);}
+function fleiss(rows){var N=rows.length,n=3,cats={},P=0;rows.forEach(function(r){r.forEach(function(x){cats[x]=(cats[x]||0)+1;});
+  var c={};r.forEach(function(x){c[x]=(c[x]||0)+1;});var s=0;Object.keys(c).forEach(function(k){s+=c[k]*c[k];});P+=(s-n)/(n*(n-1));});
+  P/=N;var Pe=0;Object.keys(cats).forEach(function(k){var p=cats[k]/(N*n);Pe+=p*p;});return Pe>=1?NaN:(P-Pe)/(1-Pe);}
+function setV3(cls,t,e,a){document.getElementById('verdict3').className='verdict '+cls;document.getElementById('vTitle3').textContent=t;document.getElementById('vExp3').textContent=e;document.getElementById('vAct3').textContent=a;}
+function calc3(){var A=lines('r1'),B=lines('r2'),C=lines('r3');var L=Math.max(A.length,B.length,C.length),rows=[],skip=0;
+  for(var i=0;i<L;i++){var x=A[i]||'',y=B[i]||'',z=C[i]||'';if(x&&y&&z)rows.push([x,y,z]);else if(x||y||z)skip++;}
+  var ids=['k12','k13','k23','kL','kF','pAll'];
+  if(rows.length<2){ids.forEach(function(d){document.getElementById(d).textContent='–';});setV3('v-none','請貼上三人的分類','','');return;}
+  var a=rows.map(function(r){return r[0];}),b=rows.map(function(r){return r[1];}),c=rows.map(function(r){return r[2];});
+  var k12=cohen(a,b),k13=cohen(a,c),k23=cohen(b,c),kl=(k12+k13+k23)/3,kf=fleiss(rows);
+  var all=rows.filter(function(r){return r[0]===r[1]&&r[1]===r[2];}).length;
+  [['k12',k12],['k13',k13],['k23',k23],['kL',kl],['kF',kf]].forEach(function(p){document.getElementById(p[0]).textContent=isNaN(p[1])?'—':f2(p[1]);});
+  document.getElementById('pAll').textContent=pct(all/rows.length);document.getElementById('dAll').textContent=rows.length+' 則中有 '+all+' 則三人歸到同一類';
+  var pairs=[['甲與乙',k12],['甲與丙',k13],['乙與丙',k23]].sort(function(p,q){return p[1]-q[1];});
+  var exp='三人都有分類的事例共 '+rows.length+' 則'+(skip?'；另有 '+skip+' 則有人沒填，未納入計算':'')+'。Fleiss’ κ ＝ '+f2(kf)+'，兩兩平均 ＝ '+f2(kl)+'。';
+  var low='一致程度最低的是'+pairs[0][0]+'（'+f2(pairs[0][1])+'），先比對這兩人的分歧事例。';
+  if(isNaN(kf))setV3('v-severe','無法計算','三人都把所有事例歸到同一類，κ 沒有定義。','檢查類別是否切得太粗。');
+  else if(kf>=0.81)setV3('v-pass','通過：幾乎完全一致',exp,'可以用這份編碼簿分類其餘事例。');
+  else if(kf>=0.61)setV3('v-pass','通過：高度一致',exp,'可以用這份編碼簿分類其餘事例；不一致的事例開會討論，記錄最後的決定。'+low);
+  else if(kf>=0.41)setV3('v-amber','未通過：中等一致',exp,'修訂編碼簿後，三人各自重新分類，再算一次。'+low);
+  else if(kf>0)setV3('v-fail','不通過：一致性偏低',exp,'類別定義需要重寫：補上納入與排除條件、典型事例與裁決規則，三人各自重新分類。'+low);
+  else setV3('v-severe','嚴重：一致程度未超過隨機一致的水準',exp,'三人對類別的理解不同，先一起重新討論每個類別的定義與典型事例，改寫編碼簿後再各自重新分類。');}
+function clear3(){['r1','r2','r3'].forEach(function(d){document.getElementById(d).value='';});calc3();}
+['r1','r2','r3'].forEach(function(id,k){document.getElementById(id).value=D3.map(function(r){return r[k];}).join('\n');});
+</script>
+</body>
+</html>
