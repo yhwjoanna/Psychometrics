@@ -393,6 +393,10 @@ table.cmp th{font-size:28px;padding:12px 20px}
 
 .t4 td{font-size:27px!important;vertical-align:top}
 .t4 td:first-child{white-space:normal}
+.nt td{vertical-align:middle;font-size:27px!important;padding:13px 18px!important}
+.nt th{font-size:26px!important}
+.nt td.req{font-weight:700;color:var(--accent)}
+.nt tr.floor td{background:#FBF2E1}
 .t4s td{font-size:24px!important;padding:14px 16px!important}
 .t4s th{font-size:26px!important}
 .wpage{background:#fff;border:1px solid #D9CFB9;box-shadow:0 14px 34px rgba(28,24,21,.12);padding:34px 46px;font-family:"BiauKai","DFKai-SB","標楷體",var(--serif);position:relative}
@@ -537,17 +541,14 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="foot"><span class="lim">樣本數計算器的原理見教材網站　<a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html#u1" target="_blank" rel="noopener">抽樣　單元一：普查與抽樣</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>08</span></div>
 </section>
 
-<section class="slide" data-layout="big" data-density="2">
+<section class="slide" data-layout="table" data-density="4">
   <div class="kicker">預試人數</div>
-  <div class="big">
-    <div class="num">120<small>人</small></div>
-    <div>
-      <h2>題庫有 24 題時<br>預試至少 120 人</h2>
-      <p class="lead">3 個向度 × 每個向度 8 題 ＝ 24 題<br>24 題 × 5 ＝ 120 人，高於 100 人的下限</p>
-      <p class="lead frag" style="margin-top:22px">草率作答會被剔除<br>發放時多收兩成，篩檢後仍能達標</p>
-    </div>
-  </div>
-  <div class="foot"><span class="lim">期中作業規定：預試人數至少為題數的五倍，且不低於 100 人</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+  <h2 style="margin-bottom:18px">題數 × 5，且不低於 100 人</h2>
+  <table class="tight t4 nt">
+    <tr><th style="width:330px">題庫組合</th><th style="width:150px">題數</th><th style="width:260px">規定人數</th><th style="width:300px">需回收<span class="en">多收兩成，預留剔除</span></th><th>需發放<span class="en">回收率 90%</span></th><th>需發放<span class="en">回收率 80%</span></th></tr>
+    <tr class="frag floor"><td>2 個向度 × 6 題</td><td>12 題</td><td class="req">100 人<span class=en>60 未達 100</span></td><td>120 人</td><td>134 人</td><td>150 人</td></tr><tr class="frag floor"><td>3 個向度 × 6 題</td><td>18 題</td><td class="req">100 人<span class=en>90 未達 100</span></td><td>120 人</td><td>134 人</td><td>150 人</td></tr><tr class="frag"><td>3 個向度 × 8 題</td><td>24 題</td><td class="req">120 人</td><td>144 人</td><td>160 人</td><td>180 人</td></tr><tr class="frag"><td>3 個向度 × 10 題</td><td>30 題</td><td class="req">150 人</td><td>180 人</td><td>200 人</td><td>225 人</td></tr><tr class="frag"><td>4 個向度 × 8 題</td><td>32 題</td><td class="req">160 人</td><td>192 人</td><td>214 人</td><td>240 人</td></tr><tr class="frag"><td>5 個向度 × 8 題</td><td>40 題</td><td class="req">200 人</td><td>240 人</td><td>267 人</td><td>300 人</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">規定人數 ＝ 題數 × 5，最低 100；需回收 ＝ 規定人數 × 1.2<br>需發放 ＝ 需回收 ÷ 回收率；小數無條件進位</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">03</div><h1>匿名與回應率</h1><ul class="refs"><li>Fan, W., &amp; Yan, Z. (2010). Factors affecting response rates of the web survey: A systematic review. Computers in Human Behavior, 26(2), 132–139. https://doi.org/10.1016/j.chb.2009.10.015</li></ul></div>
