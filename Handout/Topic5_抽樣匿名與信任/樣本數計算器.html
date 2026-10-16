@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>樣本數計算器｜員工意向調查</title>
+<style>
+:root{--navy:#12335c; --blue:#2e5e8f; --bg:#f5f7fa; --card:#ffffff; --line:#e3e9f2; --muted:#6b7a90; --ink:#243447; --good:#337052; --warn:#8a6420;}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.75; font-size:clamp(15px,1.05vw,17px);}
+.topbar{background:var(--navy); color:#fff; padding:14px clamp(16px,4vw,48px); display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline;}
+.topbar .t{font-size:clamp(18px,1.6vw,22px); font-weight:800;}
+.topbar .s{font-size:13px; opacity:.85;}
+main{max-width:980px; margin:0 auto; padding:clamp(16px,3vw,36px);}
+h2{color:var(--navy); font-size:clamp(17px,1.3vw,20px); margin:26px 0 10px;}
+p{margin:0 0 12px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:clamp(14px,2vw,22px); margin-bottom:18px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;}
+label.fld{display:block; font-size:14px; color:var(--muted); font-weight:700;}
+input[type=number],select{width:100%; padding:9px 10px; margin-top:4px; border:1px solid var(--line); border-radius:8px; font-size:16px; font-family:inherit; background:#fff; color:var(--ink);}
+input[type=range]{width:100%; margin-top:10px;}
+.res{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:16px;}
+.rbox{background:#eef2f8; border-radius:10px; padding:14px; text-align:center;}
+.rbox .n{font-size:clamp(26px,3vw,34px); font-weight:800; color:var(--navy);}
+.rbox .l{font-size:13px; color:var(--muted);}
+.bar{height:16px; border-radius:8px; background:#e3e9f2; overflow:hidden; margin:6px 0 2px;}
+.bar>div{height:100%; background:var(--blue); transition:width .25s;}
+.note{background:#f2f6ee; border-left:4px solid var(--good); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.warnb{background:#faf4e8; border-left:4px solid var(--warn); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.lb{font-weight:800; color:var(--navy); margin-right:6px;}
+.formula{background:#eef2f8; border-radius:10px; padding:12px 16px; text-align:center; font-size:15px; margin:12px 0; color:var(--navy); font-weight:700;}
+table{width:100%; border-collapse:collapse; margin:10px 0; font-size:14px; display:block; overflow-x:auto;}
+th,td{border:1px solid var(--line); padding:7px 10px; text-align:center; white-space:nowrap;}
+th{background:#eef2f8; color:var(--navy);}
+.ref{font-size:13px; color:var(--muted); margin-top:6px;}
+a{color:var(--blue);}
+footer{color:var(--muted); font-size:12px; text-align:center; padding:18px;}
+@media (max-width:600px){.grid{grid-template-columns:1fr;}}
+@media print{.topbar{background:#fff; color:var(--navy); border-bottom:2px solid var(--navy);} body{background:#fff;} .card{break-inside:avoid;} input[type=range]{display:none;}}
+.topbar .home{margin-left:auto;color:#fff;border:1px solid rgba(255,255,255,.45);border-radius:20px;padding:4px 14px;font-size:14px;font-weight:600;text-decoration:none}
+.topbar .home:active{transform:scale(.97)}
+@media print{.topbar .home{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="t">樣本數計算器</span><span class="s">員工意向調查課程．配合 Topic 04 使用．教學工具</span><a class="home" href="../../index.html" target="_blank" rel="noopener">⌂ 返回課程首頁</a></div>
+<main>
+
+<div class="card">
+  <h2 style="margin-top:0;">輸入條件</h2>
+  <div class="grid">
+    <label class="fld">母體人數 N（全體員工數）
+      <input type="number" id="inN" value="1000" min="10" max="10000000" oninput="calc()">
+    </label>
+    <label class="fld">信賴水準
+      <select id="inCL" onchange="calc()">
+        <option value="2.706">90%</option>
+        <option value="3.841" selected>95%（慣例）</option>
+        <option value="6.635">99%</option>
+      </select>
+    </label>
+    <label class="fld">抽樣誤差容忍度 ±<span id="dVal">5</span>%
+      <input type="range" id="inD" min="1" max="10" value="5" oninput="calc()">
+    </label>
+    <label class="fld">預期回應率 <span id="rrVal">70</span>%
+      <input type="range" id="inRR" min="20" max="100" value="70" oninput="calc()">
+    </label>
+  </div>
+  <div class="res">
+    <div class="rbox"><div class="n" id="outS">–</div><div class="l">建議樣本數（有效回收）</div></div>
+    <div class="rbox"><div class="n" id="outSend">–</div><div class="l">需發放份數（依回應率回推）</div></div>
+    <div class="rbox"><div class="n" id="outPct">–</div><div class="l">樣本佔母體比例</div></div>
+  </div>
+  <div style="margin-top:14px;">
+    <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--muted);"><span>樣本佔母體</span><span id="barLab"></span></div>
+    <div class="bar"><div id="barFill" style="width:0%"></div></div>
+  </div>
+  <p id="advice" style="margin-top:12px; font-weight:700; color:var(--navy);"></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">計算依據</h2>
+  <div class="formula">s　＝　χ²·N·P(1−P)　÷　［d²(N−1)　＋　χ²·P(1−P)］</div>
+  <p>χ² 為對應信賴水準的卡方值（95% 時為 3.841）、N 為母體數、d 為誤差容忍度、P 取 0.5（比例未知時最保守的假設，使所需樣本最大）。此即 Krejcie 與 Morgan（1970）建議樣本數表所用的有限母體公式；預設值（95%、±5%）下 N = 1,000 得 278，與 Topic 04 教材網站的示範一致。發放份數＝建議樣本數 ÷ 預期回應率，無條件進位。</p>
+  <div class="warnb"><span class="lb">兩個提醒</span>其一，公式只防抽樣誤差——總調查誤差還有涵蓋、無回應與測量三個來源（抽樣教材網站單元一），樣本數算得再準也堵不住其他三個洞。其二，達成樣本數不等於樣本代表性：若缺席的人系統性不同（無回應偏誤，抽樣教材網站單元三），再大的樣本也會偏。</div>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">普查還是抽樣</h2>
+  <p>員工意見調查的常態是全員邀請的普查式設計：組織名冊完整、發放成本低，且全員邀請本身傳達每個人的意見都算數的訊息。抽樣的適用情境：母體很大且施測成本高（如多國集團的深度題本）、脈動調查想輪流抽組以降低填答負擔、或前測預試階段。判斷參考：試把母體數輸入上方——當建議樣本數已接近母體（比例條超過八成），抽樣省不了多少成本，直接普查；當母體數千人以上、樣本比例明顯下降，抽樣才開始划算，此時建議採分層隨機抽樣（依部門或職級分層），確保各層都有足夠人數可供下鑽比較。</p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">速查表（95%、±5%、P = 0.5）</h2>
+  <table id="quickTab"></table>
+  <p class="ref">Krejcie, R. V., &amp; Morgan, D. W. (1970). Determining sample size for research activities. Educational and Psychological Measurement, 30(3), 607&#8211;610. <a href="https://doi.org/10.1177/001316447003000308" target="_blank" rel="noopener">https://doi.org/10.1177/001316447003000308</a></p>
+</div>
+
+</main>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 04 抽樣、匿名與信任使用。計算結果為統計建議值，實務決策仍須考量回應率與代表性。</footer>
+<script>
+function sampleSize(N,chi,d){
+  var P=0.5;
+  return Math.ceil(chi*N*P*(1-P)/(d*d*(N-1)+chi*P*(1-P)));
+}
+function calc(){
+  var N=parseInt(document.getElementById('inN').value,10);
+  var chi=parseFloat(document.getElementById('inCL').value);
+  var d=parseInt(document.getElementById('inD').value,10)/100;
+  var rr=parseInt(document.getElementById('inRR').value,10)/100;
+  document.getElementById('dVal').textContent=Math.round(d*100);
+  document.getElementById('rrVal').textContent=Math.round(rr*100);
+  if(!N||N<10){document.getElementById('outS').textContent='–';return;}
+  var s=Math.min(sampleSize(N,chi,d),N);
+  var send=Math.min(Math.ceil(s/rr),N);
+  var pct=s/N*100;
+  document.getElementById('outS').textContent=s.toLocaleString();
+  document.getElementById('outSend').textContent=send.toLocaleString();
+  document.getElementById('outPct').textContent=pct.toFixed(pct<10?1:0)+'%';
+  document.getElementById('barFill').style.width=Math.min(100,pct).toFixed(1)+'%';
+  document.getElementById('barLab').textContent=s.toLocaleString()+' / '+N.toLocaleString();
+  var adv;
+  if(pct>=80) adv='建議樣本已達母體的八成以上——抽樣省不了多少成本，建議直接普查（全員邀請）。';
+  else if(send>=N) adv='依此回應率，需發放份數已達全體——等同普查，重點轉向回應率管理（抽樣教材網站單元三）。';
+  else if(pct>=30) adv='樣本比例仍高，可抽樣亦可普查；員工意見調查多數情境建議全員邀請，兼顧訊息意義與下鑽分析的格子人數。';
+  else adv='母體較大，抽樣開始划算；建議依部門或職級分層隨機抽樣，確保各層有足夠人數供群組比較（Topic 9）。';
+  document.getElementById('advice').textContent=adv;
+}
+(function(){
+  var Ns=[50,100,200,300,500,800,1000,1500,2000,3000,5000,10000,50000,100000];
+  var s='<tr><th>母體 N</th>'+Ns.map(function(n){return '<th>'+n.toLocaleString()+'</th>';}).join('')+'</tr>';
+  s+='<tr><td>建議樣本 s</td>'+Ns.map(function(n){return '<td>'+sampleSize(n,3.841,0.05)+'</td>';}).join('')+'</tr>';
+  document.getElementById('quickTab').innerHTML=s;
+  calc();
+})();
+</script>
+</body>
+</html>

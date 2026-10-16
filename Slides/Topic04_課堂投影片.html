@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>員工意向調查｜Topic 04 課堂投影片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --a1:#EAD3D6;--a2:#C98F98;--a3:#A25462;--a4:#7A2033;--ok:#4B6B4F;--warn:#8A5A1E;
+  --serif:'Newsreader','Noto Serif TC','Songti TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei UI',sans-serif;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0F0D0B;font-family:var(--sans);color:var(--ink-2);-webkit-font-smoothing:antialiased}
+button{font:inherit}
+
+/* ---------- 外殼：固定畫布縮放 ---------- */
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{width:1920px;height:1080px;position:absolute;left:0;top:0;transform-origin:0 0;
+  transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--s,1))}
+.slide{position:absolute;inset:0;background:var(--cream);padding:110px 140px 130px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
+.slide.dark{background:var(--ink);color:#D9D2C6}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--cream)}
+
+/* 控制列 */
+#bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);z-index:20}
+#bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .32s var(--ease)}
+#nav{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;z-index:20;transition:opacity .32s var(--ease)}
+#nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(28,24,21,.72);
+  color:#EDE6D8;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:transform .1s ease-out,background .2s var(--ease);backdrop-filter:blur(10px)}
+#nav button:active{transform:scale(.94)}
+#nav button:hover{background:rgba(122,32,51,.85)}
+#pg{position:fixed;left:20px;bottom:16px;font-size:13px;color:rgba(237,230,216,.6);z-index:20;font-variant-numeric:tabular-nums;transition:opacity .32s var(--ease)}
+body.fs.idle #nav,body.fs.idle #pg{opacity:0;pointer-events:none}
+body.fs.idle{cursor:none}
+
+/* ---------- 字級階梯（1920 畫布）---------- */
+h1,h2,h3{font-family:var(--serif);color:var(--ink);font-weight:600;letter-spacing:-.015em}
+h1{font-size:96px;line-height:1.08}
+h2{font-size:58px;line-height:1.3}
+h3{font-size:36px;line-height:1.35}
+p,li,td,th{font-size:30px;line-height:1.6}
+.kicker{position:absolute;top:100px;left:140px;display:flex;align-items:center;gap:18px;font-size:26px;font-weight:700;letter-spacing:.16em;color:var(--ink);margin:0}
+.slide{padding-top:170px}
+.dark .kicker{color:var(--a2)}
+.kicker .sup{letter-spacing:.04em;font-weight:600;font-size:18px;color:var(--cream);background:var(--accent);padding:5px 12px;border-radius:6px}
+.dark .kicker .sup{background:var(--a2);color:var(--ink)}
+.foot{position:absolute;left:140px;right:140px;bottom:52px;display:flex;justify-content:space-between;gap:40px;
+  font-size:20px;line-height:1.45;color:var(--ink-2);border-top:1px solid var(--line-2);padding-top:16px}
+.dark .foot{color:#8F877B;border-top-color:#33302B}
+.foot .lim{max-width:900px}
+.foot .mid{white-space:nowrap}
+.foot .multi{font-size:13px;line-height:1.35;max-width:1050px}
+.foot>span:last-child{min-width:40px;text-align:right}
+.foot-fig{left:60px;right:60px;bottom:14px;padding-top:10px;align-items:flex-end}
+.foot-fig .ref{font-size:12px!important;line-height:1.35;max-width:1300px}
+.lead{font-size:34px;line-height:1.65;color:var(--ink-2);max-width:32em}
+.dark .lead{color:#D9D2C6}
+.muted{color:var(--ink-2)}
+.acc{color:var(--accent)}
+.def{color:var(--accent);font-weight:600}
+.num{font-family:var(--serif);font-weight:600;letter-spacing:-.04em;color:var(--accent);line-height:.9}
+.dark .num{color:#E3B7BE}
+
+/* 分段揭露 */
+.frag{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.frag.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .slide,.frag{transition:opacity .2s ease}
+  .frag{transform:none}
+}
+
+/* ---------- 版型 ---------- */
+/* 封面 */
+.cover{display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.cover .sub{font-family:var(--serif);font-size:40px;color:var(--ink-2);margin-top:28px;line-height:1.45}
+.cover .meta{margin-top:56px;font-size:24px;color:var(--ink-2);display:flex;gap:40px}
+
+/* 情境頁 */
+.scene{display:flex;flex-direction:column;justify-content:center;height:100%}
+.scene .who{font-size:24px;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:34px}
+.scene p{font-family:var(--serif);font-size:52px;line-height:1.5;max-width:26em;color:var(--ink)}
+.scene .q{margin-top:44px;font-family:var(--sans);font-size:34px;color:var(--accent);font-weight:600}
+
+/* 大字頁 */
+.big{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:60px;height:100%}
+.big .num{font-size:360px}
+.big .num small{font-size:140px;letter-spacing:0}
+.big h2{margin-bottom:26px}
+.big p{max-width:22em}
+
+/* 三數並列 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.trio .cell{border-top:3px solid var(--line-2);padding-top:26px}
+.trio .cell.hi{border-top-color:var(--accent)}
+.trio .num{font-size:150px;margin-bottom:14px}
+.trio p{font-size:27px;line-height:1.5;color:var(--ink)}
+
+/* 表格 */
+table{border-collapse:collapse;width:100%}
+th{font-family:var(--serif);font-weight:600;font-size:32px;text-align:left;padding:18px 24px;color:var(--ink);border-bottom:2px solid var(--ink)}
+td{padding:20px 24px;border-top:1px solid var(--line-2);vertical-align:top;font-size:27px;line-height:1.5}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.hi-col{background:var(--paper)}
+th.hi-col{color:var(--accent)}
+table.tight td,table.tight th{padding:13px 20px;font-size:24px}
+table.tight th{font-size:26px;line-height:1.3}
+
+/* 圖文兩欄 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;height:100%}
+.split h2{margin-bottom:26px}
+
+/* 卡片列 */
+.cards{display:grid;gap:26px;margin-top:20px;align-items:start}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.cards.c5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:30px 34px}
+.card .n{font-family:var(--serif);font-size:44px;color:var(--accent);font-weight:600;line-height:1;margin-bottom:16px}
+.card h3{font-size:30px;margin-bottom:12px}
+.card p{font-size:24px;line-height:1.55;color:var(--ink)}
+.card.dark{background:var(--ink);border-color:var(--ink);color:#D9D2C6}
+.card.dark h3{color:var(--cream)}
+.card.dark p{color:#C9C2B7}
+.card.dark .n{color:#E3B7BE}
+
+/* 橫向卡片列 */
+.rows{display:flex;flex-direction:column;gap:18px}
+.rows .row{display:grid;grid-template-columns:110px 300px 1fr;align-items:center;gap:30px;background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 40px}
+.rows .n{font-family:var(--serif);font-size:48px;color:var(--accent);font-weight:600;line-height:1}
+.rows .tt{font-family:var(--serif);font-size:34px;color:var(--ink);font-weight:600}
+.rows .dd{font-size:25px;line-height:1.55;color:var(--ink)}
+.rd{display:flex;gap:14px;align-items:flex-start}
+.rd+.rd{margin-top:10px}
+.rd-no{flex:0 0 34px;width:34px;height:34px;line-height:34px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700;margin-top:3px}
+.lnk{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:6px}
+.tp-grid{gap:24px;margin-top:30px}
+.card.tp{padding:28px 32px 24px}
+.tp-no{font-family:var(--serif);font-size:18px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-bottom:6px}
+.card.tp h3{font-size:36px;margin-bottom:14px;line-height:1.2}
+.tp-en{display:block;font-family:var(--sans);font-size:20px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card.tp{display:flex;flex-direction:column}
+.card.tp p{font-size:23px;line-height:1.5}
+.tp-links{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line-2);font-size:19px;color:var(--ink-3)}
+.tp-links .lnk{font-size:19px}
+.cards.eq{align-items:stretch}
+.cards.eq>.card{height:100%}
+.pdf-link{position:absolute;top:100px;right:140px;font-size:20px;color:var(--ink-2);border:1px solid var(--line-2);padding:8px 18px;border-radius:999px;background:var(--paper);text-decoration:none;transition:transform .1s ease-out,border-color .2s var(--ease)}
+.pdf-link:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-link:active{transform:scale(.97)}
+
+/* 光譜 */
+.spec .bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.spec .st{padding:40px 34px;border-radius:8px;min-height:330px;color:var(--cream)}
+.spec .st b{display:block;font-family:var(--serif);font-size:42px;font-weight:600;margin-bottom:16px}
+.spec .st span{font-size:26px;line-height:1.55;display:block}
+.s1{background:var(--a1);color:var(--ink)!important}.s2{background:var(--a2);color:var(--ink)!important}.s3{background:var(--a3)}.s4{background:var(--a4)}
+.spec .pct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;font-size:24px;color:var(--ink-2)}
+.spec .pct b{color:var(--ink);font-family:var(--serif);font-size:34px;margin-right:8px;font-weight:600}
+
+/* 互動提示頁 */
+.ask{display:flex;flex-direction:column;justify-content:center;height:100%}
+.ask h2{max-width:28em;margin-bottom:56px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1500px;align-items:start}
+.opt{border:1px solid var(--line-2);background:var(--paper);border-radius:14px;padding:16px 30px;font-size:32px;line-height:1.4;display:flex;align-items:center;gap:22px}
+.opt b{font-weight:600;font-family:var(--serif);color:var(--accent);font-size:34px;font-weight:600}
+
+/* 算式 */
+.calc{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+.calc .row{display:grid;grid-template-columns:1fr 360px;align-items:baseline;gap:40px;border-top:1px solid var(--line-2);padding-top:22px}
+.calc .row .lbl{font-size:30px;color:var(--ink-2)}
+.calc .row .val{font-family:var(--serif);font-size:56px;color:var(--ink);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.calc .row.total .val{color:var(--accent);font-size:72px}
+.calc .row.total .lbl{font-weight:700;color:var(--ink)}
+
+/* 提醒帶 */
+.warnline{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:20px 26px;border-left:4px solid var(--warn);background:var(--cream-2);border-radius:0 12px 12px 0;font-size:24px;line-height:1.55;color:var(--ink-2)}
+
+/* 補充頁角標 */
+.plus{position:absolute;top:110px;right:140px;font-size:19px;letter-spacing:.14em;color:var(--ink);border:1px solid var(--line-2);padding:8px 16px;border-radius:999px;background:var(--paper)}
+.dark .plus{color:#B9AFA2;border-color:#3A3631;background:transparent}
+
+/* 章節幕 */
+.act{display:flex;flex-direction:column;justify-content:center;height:100%}
+.act .no{font-family:var(--serif);font-size:200px;color:var(--a1);line-height:1;letter-spacing:-.04em}
+.act h1{margin-top:10px}
+.act .refs{margin-top:34px;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:1500px}
+.act .refs li{font-size:21px;line-height:1.5;color:var(--ink-2);padding-left:2em;text-indent:-2em}
+.act .lead-in{margin-top:30px;font-size:30px;color:var(--ink-2);max-width:28em;line-height:1.6}
+.slide.act-page,.slide.light-scene{background:var(--accent);color:var(--cream)}
+.slide.act-page h1,.slide.act-page h2,.slide.light-scene h1,.slide.light-scene h2,.slide.light-scene p,.slide.light-scene .scene p{color:var(--cream)}
+.slide.act-page .kicker,.slide.light-scene .kicker,.slide.act-page .foot,.slide.light-scene .foot,.slide.act-page .foot span,.slide.light-scene .foot span{color:var(--cream)}
+.slide.act-page .foot,.slide.light-scene .foot{border-top-color:rgba(251,248,242,.35)}
+.slide.act-page .act .no{color:rgba(251,248,242,.28)}
+.act-en{font-size:52px;color:rgba(251,248,242,.8);font-weight:500}
+.slide.act-page .act .refs li,.slide.act-page .act .lead-in{color:rgba(251,248,242,.85)}
+.slide.light-scene .scene .who{color:rgba(251,248,242,.75)}
+.slide.light-scene .scene .q{color:#F6D9DC}
+.slide.light-scene .cover .sub,.slide.light-scene .cover .meta{color:rgba(251,248,242,.85)}
+.slide.light-scene .pdf-link{color:var(--cream);border-color:rgba(251,248,242,.5);background:transparent}
+.slide.light-scene .pdf-link:hover{background:rgba(251,248,242,.12)}
+
+/* ---------- 手機：長頁文件 ---------- */
+@media (max-width:900px){
+  html,body{height:auto;overflow:auto;background:var(--cream)}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:auto;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;transform-origin:0 0;opacity:1;visibility:visible;margin:0 0 var(--mgap,12px);transition:none}
+  .frag{opacity:1;transform:none}
+  #nav,#bar,#pg{display:none}
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:var(--cream);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;opacity:1!important;visibility:visible!important;transition:none;page-break-after:always;break-after:page}
+  .frag{opacity:1!important;transform:none!important}
+  #nav,#bar,#pg,.pdf-link{display:none!important}
+}
+
+/* Topic 03 補充樣式 */
+/* Topic 03 字級放大：1920 畫布的閱讀距離 */
+.card{padding:40px 44px}
+.card .n{font-size:54px;margin-bottom:18px}
+.card h3{font-size:36px;margin-bottom:14px}
+.card p{font-size:29px;line-height:1.6}
+.card .en{font-size:22px}
+.card .rel{font-size:26px;margin-top:18px;padding-top:16px}
+.card.defc h3{font-size:38px}
+.card.defc p{font-size:28px}
+.cards{gap:32px}
+table.tight td{font-size:29px;padding:20px 22px}
+table.tight th{font-size:31px;padding:16px 22px}
+td{font-size:30px}
+td .en,th .en{font-size:21px}
+.warnline{font-size:28px;padding:24px 30px;margin-top:36px}
+.calc{gap:30px}
+.calc .row .lbl{font-size:34px}
+.calc .row .val{font-size:64px}
+.calc .row.total .val{font-size:84px}
+.rows .dd{font-size:30px}
+.rows .tt{font-size:36px}
+.opt{font-size:36px;padding:26px 34px}
+.opt b{font-size:40px}
+.ask h2{margin-bottom:64px}
+h2{font-size:62px}
+.cards.eq>.card{min-height:300px}
+.card.defc{min-height:430px;display:flex;flex-direction:column}
+.card.defc p{font-size:31px;line-height:1.6}
+.card.defc h3{font-size:42px}
+.card.defc .rel{margin-top:auto;font-size:28px}
+.calc .row{padding-top:30px}
+.calc{gap:40px;margin-top:44px}
+
+.task{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:start;margin-top:44px}
+.task ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:28px}
+.task ol li{counter-increment:t;position:relative;padding-left:72px;font-size:34px;line-height:1.5;color:var(--ink)}
+.task ol li::before{content:counter(t);position:absolute;left:0;top:4px;width:48px;height:48px;line-height:48px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:25px;font-weight:700}
+.sheet{background:var(--paper);border:1px dashed var(--a2);border-radius:16px;padding:36px 42px}
+.sheet h3{font-size:36px;margin-bottom:16px;color:var(--accent)}
+.sheet .ln{border-bottom:1px solid var(--line-2);padding:18px 0;font-size:30px;color:var(--ink-2)}
+.timebox{position:absolute;top:96px;right:140px;font-size:22px;font-weight:700;color:var(--cream);background:var(--accent);padding:8px 20px;border-radius:999px;letter-spacing:.06em}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.card .en{display:block;font-family:var(--sans);font-size:19px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card .rel{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-2);font-size:21px;color:var(--accent);font-weight:600}
+.card.defc h3{font-size:30px;margin-bottom:10px;line-height:1.25}
+.card.defc p{font-size:22px}
+td .en,th .en{display:block;font-family:var(--sans);font-size:18px;font-weight:500;color:var(--ink-3)}
+.bad{color:var(--warn)}
+
+.xt2 tr.r1 td{background:var(--accent-tint)}
+.xt2 tr.r2 td{background:#F6EBDD}
+.xt td{min-width:150px;height:96px;font-size:34px;vertical-align:middle}
+.xt th{font-size:32px;text-align:center}
+.mk{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:700;font-size:28px}
+.mk1{background:var(--accent);color:#fff}
+.mk2{background:var(--warn);color:#fff}
+.big-x td{font-size:44px;height:120px}
+.big-x td.sm{color:var(--ink-3);font-size:34px}
+.kbar{display:flex;flex-direction:column;gap:34px;margin-top:30px}
+.kb-row{display:grid;grid-template-columns:330px 1fr 150px;align-items:center;gap:30px}
+.kb-lb{font-size:34px;font-weight:700;color:var(--ink);line-height:1.3}
+.kb-lb small{font-size:22px;font-weight:500;color:var(--ink-3)}
+.kb-track{position:relative;height:64px;background:var(--cream-2);border-radius:10px;overflow:hidden;display:flex}
+.kb-fill{height:100%;background:var(--ink-2)}
+.kb-fill.chance{background:#C9BFAF}
+.kb-fill.kap{background:var(--accent)}
+.kb-gap{position:absolute;top:0;height:100%;border:3px dashed var(--accent);border-radius:0 10px 10px 0;box-sizing:border-box}
+.kb-v{font-family:var(--serif);font-size:64px;font-weight:600;color:var(--ink);text-align:right}
+.kb-v.acc{color:var(--accent);font-size:80px}
+.kscale .card{min-height:380px}
+.kscale .n{font-size:48px}
+.kscale h3{font-size:44px}
+.kscale p{font-size:30px}
+.ks-pass{border-top:10px solid #2f6b4c}.ks-pass .n,.ks-pass h3{color:#2f6b4c}
+.ks-amber{border-top:10px solid #8a5a12}.ks-amber .n,.ks-amber h3{color:#8a5a12}
+.ks-fail{border-top:10px solid #a33a32}.ks-fail .n,.ks-fail h3{color:#a33a32}
+.ks-severe{background:#8f2a24!important;border-color:#8f2a24!important;border-top:10px solid #5e1915!important}.ks-severe .n,.ks-severe h3,.ks-severe p{color:#fff!important}
+
+/* 問卷模擬畫面 */
+.mockwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start;margin-top:10px}
+.mock{background:#fff;border:1px solid var(--line-2);border-radius:16px;box-shadow:0 18px 40px rgba(28,24,21,.10);overflow:hidden}
+.mock-bar{height:44px;background:var(--cream-2);border-bottom:1px solid var(--line-2);display:flex;align-items:center;gap:10px;padding:0 18px}
+.mock-bar i{width:13px;height:13px;border-radius:50%;background:#D9CFB9;display:block}
+.mock-bar span{margin-left:16px;font-size:18px;color:var(--ink-3);background:#fff;border-radius:6px;padding:3px 14px}
+.mock-body{padding:30px 40px 34px}
+.mock-title{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--ink);border-top:8px solid var(--accent);margin:-30px -40px 22px;padding:24px 40px 0}
+.mock-body p{font-size:21px;line-height:1.55;color:var(--ink-2);margin-bottom:9px}
+.mock-q{border:1px solid var(--line);border-radius:10px;padding:10px 20px;margin-top:10px}
+.mock-q b{display:block;font-size:24px;color:var(--ink);margin-bottom:8px}
+.mock-q .hint{font-size:19px;color:var(--ink-3);margin-bottom:2px}
+.mock-in{height:36px;border-bottom:2px solid var(--line-2);font-size:19px;color:#B5AC9E;padding-top:10px}
+.mock-chk{font-size:22px;color:var(--ink);margin-top:10px}
+.mock-chk::before{content:"";display:inline-block;width:22px;height:22px;border:2px solid var(--ink-3);border-radius:4px;vertical-align:-4px;margin-right:12px}
+.notes{display:flex;flex-direction:column;gap:20px}
+.nt{border-left:5px solid var(--accent);background:var(--paper);border-radius:0 12px 12px 0;padding:18px 24px;font-size:26px;line-height:1.5;color:var(--ink)}
+.nt b{display:block;color:var(--accent);font-size:27px;margin-bottom:4px}
+.mock2 .mock-body{padding:18px 34px 20px}
+.mock2 .mock-q{padding:6px 18px;margin-top:7px}
+.mock2 .mock-q b{font-size:22px;margin-bottom:2px}
+.mock2 .mock-q .hint{font-size:17px}
+.mock2 .mock-in{height:26px;padding-top:2px;font-size:17px}
+.mock2 h2{margin-bottom:12px!important}
+.dec td{font-size:27px!important;line-height:1.5;vertical-align:middle}
+.dec td:first-child{font-weight:500;color:var(--ink)}
+.dec td.keep{color:var(--ok);font-weight:700}
+.dec td.drop{color:var(--warn);text-decoration:line-through;text-decoration-thickness:2px}
+.cbx td{font-size:25px!important;vertical-align:top}
+.card .cite{font-size:21px;color:var(--ink-3);margin:2px 0 4px;font-family:var(--sans)}
+.flow td{font-size:25px!important;vertical-align:top}
+.flow td:first-child{font-family:var(--serif);color:var(--accent);font-size:34px!important}
+.flow .rule{display:inline-block;margin-top:6px;font-size:19px;font-weight:700;color:#fff;background:var(--accent);padding:2px 10px;border-radius:6px}
+.xtabs{display:flex;gap:4px;margin:0 0 6px;border-bottom:2px solid var(--line-2)}
+.xtabs span{font-size:19px;padding:6px 16px;border:1px solid var(--line-2);border-bottom:0;border-radius:8px 8px 0 0;background:var(--cream-2);color:var(--ink-2)}
+.xtabs span.on{background:#fff;color:var(--accent);font-weight:700;border-color:var(--accent)}
+.xlt td{font-size:26px!important}
+.xsheet{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:16px 18px;font-size:22px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.xs-h,.xs-r{display:grid;grid-template-columns:70px 1fr 220px;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line)}
+.xs-h{font-weight:700;color:#fff;background:#1C2F52;border-radius:6px}
+.xs-r .dd{background:#FFF4C2;border:1px solid #D9CFB9;border-radius:4px;padding:0 8px}
+.xs-r .dd.open{outline:2px solid var(--accent)}
+.xs-menu{margin:4px 0 0 auto;width:240px;display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:6px;background:#fff}
+.xs-menu span{padding:6px 12px;border-bottom:1px solid var(--line)}
+.xs-menu span.u{color:var(--ink-3)}
+.xsheet.lab .xs-h,.xsheet.lab .xs-r{grid-template-columns:1fr 110px 160px}
+.xs-kv{display:grid;grid-template-columns:220px 1fr;padding:10px 8px;border-bottom:1px solid var(--line);align-items:center}
+.xs-kv b{font-size:26px}
+.xs-kv.pass{background:#EAF4EE;color:#2f6b4c}
+/* 稀疏頁放大 */
+.cards.eq>.card.defc{min-height:470px;padding:42px 44px}
+.card.defc h3{font-size:46px}
+.card.defc .en{font-size:24px;margin-top:8px}
+.card.defc p{font-size:33px;margin-top:10px}
+.card.defc .rel{font-size:30px}
+.xl .card{min-height:400px}
+.xl .card p{font-size:34px}
+.xl .card .n{font-size:64px}
+.xl h2{font-size:72px}
+.xl .lead{font-size:38px}
+.xl .warnline{font-size:32px}
+.xl .task ol li{font-size:37px}
+.xl .sheet p{font-size:32px!important}
+.xl .opt{font-size:40px;padding:36px 40px}
+.xl .opts{gap:36px;max-width:none}
+.xl .calc .row .lbl{font-size:40px}
+.xl .calc .row .val{font-size:84px}
+.xl .calc .row.total .val{font-size:100px}
+.xl .calc .row{padding-top:40px}
+
+.big-t td{font-size:34px;padding:34px 26px}
+table.cmp td{font-size:27px;padding:12px 20px}
+table.cmp th{font-size:28px;padding:12px 20px}
+.card.tp p{font-size:22px}
+.card.tp h3{font-size:36px}
+.big-t th{font-size:34px}
+.xt td,.xt th{text-align:center}
+.xt td:first-child,.xt th:first-child{text-align:left}
+.xt td.dg{background:var(--accent-tint);color:var(--accent);font-weight:700}
+.good{color:var(--ok)}
+
+.t4 td{font-size:27px!important;vertical-align:top}
+.t4 td:first-child{white-space:normal}
+.dmock{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:10px 14px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.dmock table td,.dmock table th{font-size:22px!important;padding:8px 10px!important;text-align:center;border-top:1px solid var(--line)}
+.dmock table th{background:#1C2F52;color:#fff;font-family:var(--sans);font-size:20px!important}
+.dmock td.flag{background:#FBECEB;color:#A33A32;font-weight:700}
+.dmock td.ok{color:#2f6b4c;font-weight:700}
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="deck">
+
+<section class="slide light-scene" data-layout="cover" data-density="1">
+  <div class="cover">
+    <div class="kicker">員工意向調查　HRM922　碩士在職專班</div>
+    <a class="pdf-link" href="#" onclick="event.preventDefault();window.print();" title="開啟瀏覽器列印，目的地選擇另存為 PDF">另存 PDF</a>
+    <h1>抽樣策略與調查資料品質防線</h1>
+    <div class="sub">Topic 04　抽樣、匿名、草率作答與 AI 代答<br>案例：玻璃心可以量嗎？（續）</div>
+    <div class="meta"><span>國立中山大學 人力資源管理研究所</span><span>王豫萱</span><span>2026 Fall</span></div>
+  </div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">開場</div>
+  <div class="scene">
+    <div class="who">連假之後</div>
+    <p>事例收回來了，κ 也算完了<br>手上有一份向度與題目的初稿</p>
+    <p class="q frag">接下來要找誰填？收回來的資料能不能信？</p>
+  </div>
+  <div class="foot"><span class="lim">Topic 04</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>01</span></div>
+</section>
+
+<section class="slide" data-layout="map" data-density="3">
+  <div class="kicker">今天的流程</div>
+  <h2>今天的流程</h2>
+  <div class="rows" style="margin-top:26px;gap:12px">
+    <div class="row frag" style="padding:14px 40px"><div class="n">一</div><div class="tt">事例到題庫</div><div class="dd">依編碼簿把事例改寫成題目，整理成題庫初稿</div></div>
+    <div class="row frag" style="padding:14px 40px"><div class="n">二</div><div class="tt">預試的樣本</div><div class="dd">普查或抽樣、預試要找多少人</div></div>
+    <div class="row frag" style="padding:14px 40px"><div class="n">三</div><div class="tt">匿名與回應率</div><div class="dd">匿名與保密、極小群組、提高回應率</div></div>
+    <div class="row frag" style="padding:14px 40px"><div class="n">四</div><div class="tt">資料品質</div><div class="dd">直線作答、隨機作答、AI 代答的快篩</div></div>
+    <div class="row frag" style="padding:14px 40px"><div class="n">五</div><div class="tt">EFA 的資料</div><div class="dd">10/23 做因素分析之前，資料要整理成什麼樣子</div></div>
+  </div>
+  <div class="foot"><span class="lim">Topic 04</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">01</div><h1>事例到題庫</h1><ul class="refs"><li>Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</li></ul></div>
+  <div class="foot"><span class="lim">第一部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>03</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">事例改寫成題目</div>
+  <h2 style="margin-bottom:24px">保留行為，拿掉當事人與情境細節</h2>
+  <table class="tight t4">
+    <tr><th style="width:560px">事例中的行為</th><th style="width:300px">向度</th><th>改寫成的題目（自評）</th></tr>
+    <tr class="frag"><td>被指出數據有誤後<br>整個下午反覆核對同一份檔案</td><td>平復所需時間</td><td>被指出錯誤後<br>我很難把注意力轉回其他工作</td></tr>
+    <tr class="frag"><td>考核面談後<br>把主管的邀約一延再延</td><td>迴避回饋</td><td>收到負面評價後<br>我會延後與主管面談的時間</td></tr>
+    <tr class="frag"><td>會議上被質疑時<br>聲音明顯發抖、說不下去</td><td>情緒反應強度</td><td>當眾被質疑時<br>我很難維持平穩的語氣</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:28px;margin-top:22px">一則事例可以改寫成不只一題；同一向度的題目要從不同事例取材</p>
+  <div class="foot"><span class="lim">示範題目為課堂練習用，各組以自己的事例與編碼簿為準</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>04</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">題庫初稿</div>
+  <h2 style="margin-bottom:26px">題庫定稿前的檢查</h2>
+  <div class="cards c4 eq">
+    <div class="card frag"><div class="n">題數</div><p>每個向度 8 題以上<br>最終保留 4 到 6 題</p></div>
+    <div class="card frag"><div class="n">來源</div><p>每題標出<br>取材的事例編號</p></div>
+    <div class="card frag"><div class="n">寫法</div><p>一題一件事<br>沒有評價字眼<br>沒有否定詞<br>反向題另外標示</p></div>
+    <div class="card frag"><div class="n">日期</div><p>寫下題庫定稿日期<br>定稿後才能查閱<br>既有量表的題目</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">02</div><h1>預試的樣本</h1><ul class="refs"></ul></div>
+  <div class="foot"><span class="lim">第二部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>06</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">普查或抽樣</div>
+  <h2 style="margin-bottom:24px">正式調查與預試，樣本數的定法不同</h2>
+  <table class="tight t4">
+    <tr><th style="width:330px"></th><th>正式的員工調查</th><th>期中作業的預試</th></tr>
+    <tr class="frag"><td>目的</td><td>推估全體員工的意見</td><td>檢驗題目與因素結構</td></tr>
+    <tr class="frag"><td>對象</td><td>公司全體員工，或從中抽樣</td><td>各組人脈中的在職者</td></tr>
+    <tr class="frag"><td>樣本數怎麼定</td><td>依母體人數與可接受的抽樣誤差計算<br><a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/樣本數計算器.html" target="_blank" rel="noopener">樣本數計算器</a></td><td>至少為題數的五倍，且不低於 100 人</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:28px;margin-top:22px">預試不是隨機抽樣，結果只用來改進量表，不用來推論任何公司的員工</p>
+  <div class="foot"><span class="lim">樣本數計算器的原理見教材網站　<a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html#u1" target="_blank" rel="noopener">抽樣　單元一：普查與抽樣</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
+</section>
+
+<section class="slide" data-layout="big" data-density="2">
+  <div class="kicker">預試人數</div>
+  <div class="big">
+    <div class="num">120<small>人</small></div>
+    <div>
+      <h2>題庫有 24 題時<br>預試至少 120 人</h2>
+      <p class="lead">3 個向度 × 每個向度 8 題 ＝ 24 題<br>24 題 × 5 ＝ 120 人，高於 100 人的下限</p>
+      <p class="lead frag" style="margin-top:22px">草率作答會被剔除<br>發放時多收兩成，篩檢後仍能達標</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">期中作業規定：預試人數至少為題數的五倍，且不低於 100 人</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>08</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">03</div><h1>匿名與回應率</h1><ul class="refs"><li>Fan, W., &amp; Yan, Z. (2010). Factors affecting response rates of the web survey: A systematic review. Computers in Human Behavior, 26(2), 132–139. https://doi.org/10.1016/j.chb.2009.10.015</li></ul></div>
+  <div class="foot"><span class="lim">第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">匿名與保密</div>
+  <h2 style="margin-bottom:24px">對填答者承諾之前，先分清楚</h2>
+  <table class="tight t4">
+    <tr><th style="width:240px"></th><th>匿名<span class="en">anonymity</span></th><th>保密<span class="en">confidentiality</span></th></tr>
+    <tr class="frag"><td>做法</td><td>不收集任何可辨識身分的資料</td><td>收集身分資料，但只有研究者看得到</td></tr>
+    <tr class="frag"><td>可以承諾</td><td>沒有人知道是誰填的</td><td>不會讓主管或公司知道個別答案</td></tr>
+    <tr class="frag"><td>注意</td><td>背景題組合起來仍可能辨識個人</td><td>要說明誰看得到、資料存多久</td></tr>
+  </table>
+  <div class="warnline frag"><div>極小群組：某一組人數少於 5 人時不單獨呈現結果，併入上一層彙總，避免從結果反推個人</div></div>
+  <div class="foot"><span class="lim">教材網站　<a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html#u2" target="_blank" rel="noopener">匿名　單元二：匿名與保密的區別</a>　<a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html#u5" target="_blank" rel="noopener">單元五：小群組揭露風險與匿名門檻</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">提高回應率</div>
+  <h2 style="margin-bottom:26px">發放前、發放中、發放後</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">發放前</div><p>指導語寫出執行單位與用途<br>問卷精簡，手機也能填<br>預告作答時間</p></div>
+    <div class="card frag"><div class="n">發放中</div><p>邀請訊息具名<br>說明為什麼找對方<br>一到兩次提醒<br>間隔幾天</p></div>
+    <div class="card frag"><div class="n">發放後</div><p>記錄發出與回收的數量<br>企劃書寫出回收率<br>與發放管道</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Fan, W., &amp; Yan, Z. (2010). Factors affecting response rates of the web survey: A systematic review. Computers in Human Behavior, 26(2), 132–139. https://doi.org/10.1016/j.chb.2009.10.015<br>教材網站　<a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html#u3" target="_blank" rel="noopener">單元三：回應率管理</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>資料品質<br><span class=act-en>careless responding</span></h1><ul class="refs"><li>Meade, A. W., &amp; Craig, S. B. (2012). Identifying careless responses in survey data. Psychological Methods, 17(3), 437–455. https://doi.org/10.1037/a0028085</li><li>Zhang, S., Xu, J., &amp; Alvero, A. J. (2025). Generative AI meets open-ended survey responses: Research participant use of AI and homogenization. Sociological Methods &amp; Research, 54(3), 1197–1242. https://doi.org/10.1177/00491241251327130</li></ul></div>
+  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">要篩掉的作答</div>
+  <h2 style="margin-bottom:24px">長什麼樣子，怎麼抓</h2>
+  <table class="tight t4">
+    <tr><th style="width:300px">類型</th><th>資料上的樣子</th><th style="width:560px">快篩方法</th></tr>
+    <tr class="frag"><td>直線作答<span class="en">straightlining</span></td><td>連續很多題選同一個選項</td><td>計算最長連續相同作答的題數<br>正向題與反向題答案互相矛盾</td></tr>
+    <tr class="frag"><td>隨機作答<span class="en">random responding</span></td><td>答案沒有規律，前後矛盾</td><td>注意力檢核題答錯<br>作答時間短到不可能讀完題目</td></tr>
+    <tr class="frag"><td>AI 代答<span class="en">AI-generated responses</span></td><td>開放題回答冗長、工整、語氣相似</td><td>見下一頁的文字特徵</td></tr>
+  </table>
+  <div class="foot"><span class="lim multi">Meade, A. W., &amp; Craig, S. B. (2012). Identifying careless responses in survey data. Psychological Methods, 17(3), 437–455. https://doi.org/10.1037/a0028085<br>教材網站　<a class="lnk" href="../Handout/Topic6_草率作答偵測/Topic6_草率作答偵測_課程網站.html#u2" target="_blank" rel="noopener">草率作答　單元二：型態</a>　<a class="lnk" href="../Handout/Topic6_草率作答偵測/Topic6_草率作答偵測_課程網站.html#u3" target="_blank" rel="noopener">單元四：偵測方法總覽</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">快篩示範</div>
+  <h2 style="margin-bottom:20px">五位填答者，哪幾位要再檢查？</h2>
+  <div class="dmock">
+    <table>
+      <tr><th>編號</th><th>A1</th><th>A2</th><th>A3</th><th>A4（反向）</th><th>A5</th><th>A6</th><th>A7</th><th>A8</th><th>作答秒數</th><th>快篩結果</th></tr>
+      <tr class="frag"><td>101</td><td>5</td><td>4</td><td>5</td><td>2</td><td>4</td><td>5</td><td>4</td><td>5</td><td>212</td><td class="ok">通過</td></tr>
+      <tr class="frag"><td>102</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td>58</td><td class="flag">直線作答</td></tr>
+      <tr class="frag"><td>103</td><td>1</td><td>6</td><td>2</td><td>6</td><td>1</td><td>5</td><td>6</td><td>1</td><td>41</td><td class="flag">隨機作答</td></tr>
+      <tr class="frag"><td>104</td><td>2</td><td>3</td><td>2</td><td>5</td><td>3</td><td>2</td><td>2</td><td>3</td><td>190</td><td class="ok">通過</td></tr>
+      <tr class="frag"><td>105</td><td>6</td><td>6</td><td>5</td><td>6</td><td>6</td><td>5</td><td>6</td><td>6</td><td>175</td><td class="flag">反向題矛盾</td></tr>
+    </table>
+  </div>
+  <p class="lead frag" style="font-size:27px;margin-top:20px">102 八題都選 4，又只花 58 秒；103 前後跳動、41 秒填完<br>105 正向題都給高分，反向題 A4 也給 6 分，兩者互相矛盾</p>
+  <div class="foot"><span class="lim">數字為示意；課內演練見教材網站　<a class="lnk" href="../Handout/Topic6_草率作答偵測/Topic6_草率作答偵測_課程網站.html#u8" target="_blank" rel="noopener">單元九：偵測演練場</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">AI 代答的文字特徵</div>
+  <h2 style="margin-bottom:26px">開放題回答出現這些特徵，再人工複核</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">長度</div><p>回答明顯比其他人長<br>結構完整、分點條列</p></div>
+    <div class="card frag"><div class="n">語氣</div><p>用詞工整、沒有口語<br>缺少具體的人、時、地</p></div>
+    <div class="card frag"><div class="n">相似</div><p>不同填答者的回答<br>句型與用詞彼此相似</p></div>
+  </div>
+  <div class="warnline frag"><div>Zhang 等人（2025）發現，填答者用 AI 回答開放題時，答案之間的差異變小，內容趨於一致<br>單一特徵不足以判定，多項特徵同時出現時，再回頭看該份問卷的其他作答</div></div>
+  <div class="foot"><span class="lim multi">Zhang, S., Xu, J., &amp; Alvero, A. J. (2025). Generative AI meets open-ended survey responses: Research participant use of AI and homogenization. Sociological Methods &amp; Research, 54(3), 1197–1242. https://doi.org/10.1177/00491241251327130<br>教材網站　<a class="lnk" href="../Handout/Topic6_草率作答偵測/Topic6_草率作答偵測_課程網站.html#u5c" target="_blank" rel="noopener">單元三：機器人與 AI 代答</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">篩檢規則</div>
+  <h2>收資料之前，先寫好剔除規則</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">問卷加入一到兩題注意力檢核題</li>
+      <li class="frag">先寫好剔除標準<br>例如作答時間、連續相同作答的題數</li>
+      <li class="frag">依序套用每一條標準，記錄各剔除幾人</li>
+      <li class="frag">剔除後的有效樣本仍要達到預試人數</li>
+    </ol>
+    <div class="sheet">
+      <h3>企劃書 4.4 要寫的內容</h3>
+      <div class="ln">篩檢指標與標準</div>
+      <div class="ln">各指標剔除人數</div>
+      <div class="ln">最後的有效樣本數</div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">先看資料再決定標準，容易為了想要的結果調整門檻</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">05</div><h1>EFA 的資料<br><span class=act-en>exploratory factor analysis</span></h1><ul class="refs"></ul></div>
+  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">資料格式</div>
+  <h2 style="margin-bottom:20px">一列一位填答者，一欄一題</h2>
+  <div class="dmock">
+    <table>
+      <tr><th>編號</th><th>A1</th><th>A2</th><th>A3（反向）</th><th>B1</th><th>B2</th><th>⋯</th><th>職級</th><th>年資</th></tr>
+      <tr><td>101</td><td>5</td><td>4</td><td>2</td><td>3</td><td>4</td><td>⋯</td><td>2</td><td>3</td></tr>
+      <tr><td>102</td><td>2</td><td>3</td><td>5</td><td>2</td><td>1</td><td>⋯</td><td>1</td><td>1</td></tr>
+      <tr><td>103</td><td>6</td><td>5</td><td>1</td><td>5</td><td>6</td><td>⋯</td><td>3</td><td>2</td></tr>
+    </table>
+  </div>
+  <div class="cards c3 eq" style="margin-top:22px">
+    <div class="card frag" style="min-height:0;padding:24px 30px"><p>作答存成數字 1 到 6<br>不要存成文字</p></div>
+    <div class="card frag" style="min-height:0;padding:24px 30px"><p>反向題先保留原始分數<br>分析時再反向計分</p></div>
+    <div class="card frag" style="min-height:0;padding:24px 30px"><p>剔除後的資料存成 CSV<br>原始資料另存一份</p></div>
+  </div>
+  <div class="foot"><span class="lim">題目代號建議用向度字母加題號，例如 A1、B2</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">本週工作</div>
+  <h2>10 月 23 日之前</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">題庫定稿，寫下定稿日期</li>
+      <li class="frag">建立線上預試問卷，加入注意力檢核題</li>
+      <li class="frag">發放並收回至少題數五倍、不低於 100 人</li>
+      <li class="frag">依事先寫好的規則篩檢，記錄剔除人數</li>
+      <li class="frag">整理成 CSV，10/23 帶筆電與資料到課堂</li>
+    </ol>
+    <div class="sheet">
+      <h3>10/23 Topic 05</h3>
+      <p style="font-size:30px;line-height:1.6">在 JASP 做項目分析、EFA 與信度<br>請事先安裝 JASP<br>先用課堂提供的玻璃心模擬資料練習<br>再跑各組的預試資料</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+</section>
+
+<section class="slide" data-layout="next" data-density="3">
+  <div class="kicker">下一步</div>
+  <h2>下次上課　10 月 23 日 Topic 05</h2>
+  <div class="rows" style="margin-top:32px">
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">課後閱讀</div><div class="dd">抽樣、匿名與回應率　<a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">課堂互動教材網站　抽樣匿名與信任</a><br>草率作答與 AI 代答　<a class="lnk" href="../Handout/Topic6_草率作答偵測/Topic6_草率作答偵測_課程網站.html" target="_blank" rel="noopener">課堂互動教材網站　草率作答偵測</a></div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">課內工具</div><div class="dd"><a class="lnk" href="../Handout/Topic5_抽樣匿名與信任/樣本數計算器.html" target="_blank" rel="noopener">樣本數計算器</a></div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">準備</div><div class="dd">安裝 JASP，帶筆電與預試資料 CSV</div></div>
+  </div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+</section>
+
+
+
+</div></div>
+
+<div id="bar"><i></i></div>
+<div id="pg">1 / 21</div>
+<div id="nav">
+  <button id="prev" aria-label="上一頁">←</button>
+  <button id="next" aria-label="下一頁">→</button>
+  <button id="fs" aria-label="全螢幕">⛶</button>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var mobile=function(){return innerWidth<=900;};
+
+  function fit(){
+    if(mobile()){
+      var s=innerWidth/1920;
+      slides.forEach(function(sl){sl.style.transform='scale('+s+')';sl.style.marginBottom=(-1080*(1-s)+12)+'px';});
+      return;
+    }
+    slides.forEach(function(sl){sl.style.transform='';sl.style.marginBottom='';});
+    var s=Math.min(innerWidth/1920, innerHeight/1080);
+    deck.style.setProperty('--s',s);
+    deck.style.setProperty('--tx',((innerWidth-1920*s)/2)+'px');
+    deck.style.setProperty('--ty',((innerHeight-1080*s)/2)+'px');
+  }
+  function frags(i){return Array.prototype.slice.call(slides[i].querySelectorAll('.frag'));}
+  function show(i,revealAll){
+    i=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+    frags(i).forEach(function(f){f.classList.toggle('in',!!revealAll);});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+N;
+    document.querySelector('#bar i').style.width=((i+1)/N*100)+'%';
+    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){
+    var f=frags(cur).filter(function(x){return !x.classList.contains('in');});
+    if(f.length){f[0].classList.add('in');return;}
+    if(cur<N-1) show(cur+1,false);
+  }
+  function prev(){
+    var f=frags(cur).filter(function(x){return x.classList.contains('in');});
+    if(f.length){f[f.length-1].classList.remove('in');return;}
+    if(cur>0) show(cur-1,true);
+  }
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(mobile()) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0,false);}
+    else if(e.key==='End'){show(N-1,true);}
+    else if(e.key==='f'||e.key==='F'){toggleFS();}
+  });
+  var wheelT=0;
+  addEventListener('wheel',function(e){
+    if(mobile()) return;
+    var t=Date.now(); if(t-wheelT<420) return; wheelT=t;
+    if(e.deltaY>10) next(); else if(e.deltaY<-10) prev();
+  },{passive:true});
+  var tx=null;
+  addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){
+    if(mobile()||tx===null) return;
+    var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(dx<-40) next(); else if(dx>40) prev();
+  },{passive:true});
+
+  function toggleFS(){
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else{var el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);}
+  }
+  document.getElementById('fs').addEventListener('click',toggleFS);
+  document.addEventListener('fullscreenchange',function(){
+    document.body.classList.toggle('fs',!!document.fullscreenElement);
+    setTimeout(fit,60);
+  });
+  var idleT=null;
+  function wake(){
+    if(!document.body.classList.contains('fs')) return;
+    document.body.classList.remove('idle'); clearTimeout(idleT);
+    idleT=setTimeout(function(){document.body.classList.add('idle');},2200);
+  }
+  ['mousemove','mousedown','touchstart','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true});});
+
+  addEventListener('resize',fit);
+  fit();
+  var h=parseInt((location.hash||'#1').slice(1),10);
+  show(isNaN(h)?0:h-1,false);
+  if(mobile()){slides.forEach(function(s){s.classList.add('on');});}
+})();
+</script>
+</body>
+</html>

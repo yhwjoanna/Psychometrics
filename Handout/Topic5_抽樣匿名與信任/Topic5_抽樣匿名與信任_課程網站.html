@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 04：抽樣、匿名性與信任｜員工意向調查</title>
+<style>
+
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 04：抽樣、匿名性與信任</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 04<br>抽樣、匿名性與信任</div>
+    <div class="t2">Topic 04: Sampling, Anonymity &amp; Trust<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">抽樣</div>
+    <a data-u="u1">單元一：普查與抽樣</a>
+    <div class="grp">信任</div>
+    <a data-u="u2">單元二：匿名與保密的區別</a>
+    <a data-u="u3">單元三：回應率管理</a>
+    <a data-u="u4">單元四：心理安全感與真實作答</a>
+    <a data-u="u5">單元五：小群組揭露風險與匿名門檻</a>
+    <div class="grp">文獻</div>
+    <a data-u="u6">單元六：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>Topic 04　抽樣、匿名性與信任</h1>
+  <div class="subtitle">員工意向調查課程．Topic 04．適用對象：人管所碩士班</div>
+  <p>題目設計好了，接下來要決定問誰、以及如何讓被問的人願意說真話。本主題前半處理抽樣：普查與抽樣的取捨、樣本要多大才夠。後半處理信任：匿名與保密是兩件事、回應率的實證基準與管理、心理安全感如何影響真實作答，以及員工意見調查特有的風險——人口變項交叉後的小群組可能讓匿名承諾失效，需要匿名門檻來守住。</p>
+  <h2>本主題單元</h2>
+  <table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td>一、普查與抽樣</td><td>掌握母體、樣本與抽樣誤差，能做普查與抽樣的取捨並估算樣本數</td></tr>
+    <tr><td>二、匿名與保密的區別</td><td>區分匿名與保密，並能依情境選擇與誠實承諾</td></tr>
+    <tr><td>三、回應率管理</td><td>認識回應率的實證基準，並能診斷與提升回應率</td></tr>
+    <tr><td>四、心理安全感與真實作答</td><td>理解心理安全感如何影響作答的真實性</td></tr>
+    <tr><td>五、小群組揭露風險與匿名門檻</td><td>辨識交叉群組的識別風險，並設定合理的匿名門檻</td></tr>
+    <tr><td>六、參考文獻</td><td>本主題引用來源與專有名詞對照表</td></tr>
+  </table>
+  <h2>本主題學習目標</h2>
+  <div class="card">
+    <p>修畢本主題後，學生應能：其一，區分母體與樣本，說明抽樣誤差的意義，並依情境選擇普查或抽樣；其二，用公式或對照表估算所需樣本數；其三，準確區分匿名與保密，並說明誤用承諾的後果；其四，用實證基準判讀回應率並提出提升作法；其五，說明心理安全感與真實作答的關係；其六，辨識小群組揭露風險，並設定與溝通匿名門檻。</p>
+  </div>
+  <div class="note"><span class="lb">使用說明</span>導覽列可切換單元。各單元末附兩階段自我檢測題：先作答並標注信心，答對後才展開第二層機制確認；校準面板僅記錄每題第一次作答。本網站為單一檔案、離線可用；重新整理會清空作答紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>只計每題第一次作答；高信心且答錯屬過度自信區，建議回到該單元重讀；低信心且答對表示理解比自己以為的更穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 普查與抽樣 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：普查與抽樣</h1>
+  <div class="subtitle">主要依據：Krejcie &amp; Morgan (1970)；Groves &amp; Lyberg (2010)</div>
+
+  <h2>1.1 母體、樣本與抽樣誤差</h2>
+  <p>調查前要先界定母體（population）：這次想了解的全體對象，例如全公司一千名員工。若對母體的每一位都施測，就是普查（census，全面調查）；若只抽出一部分人施測、再用結果推論母體，就是抽樣（sampling），抽出的那部分人叫樣本（sample）。</p>
+  <p>抽樣必然帶來抽樣誤差（sampling error）：樣本畢竟不是母體，抽出的人未必完全代表全體，推論就有不確定性。誤差大小取決於樣本怎麼抽（隨機與否）與抽多少人。另一個獨立的問題是效度——就算樣本完美代表母體，題目若測不到想測的東西，答案仍然無法回答研究問題（Topic 03）。兩者都要顧，缺一不可。</p>
+
+  <h2>1.2 普查與抽樣的取捨</h2>
+  <table>
+    <tr><th style="width:14%">面向</th><th>普查（census）</th><th>抽樣（sampling）</th></tr>
+    <tr><td>資料</td><td>取得全體資料，結果最接近事實，以敘述統計為主</td><td>僅得部分資料，須以推論統計推估母體，有估計誤差</td></tr>
+    <tr><td>成本</td><td>人力、物力、時間花費高，事前規劃複雜</td><td>花費較低即可得到接近事實的結果</td></tr>
+    <tr><td>執行</td><td>需要完善的管理與追蹤，否則答案容易失真</td><td>相對易管理、執行確實；可對少數人做較深入的蒐集（如訪談）</td></tr>
+    <tr><td>難點</td><td>組織與經費的負擔</td><td>抽樣方法與樣本數的決定</td></tr>
+  </table>
+  <p>員工意見調查的慣例是：年度敬業度調查多採普查——因為調查本身也是溝通（每個人都被邀請、都有發聲機會），且需要下鑽到部門層級看結果；脈動調查與深入訪談則常用抽樣，以較低成本追蹤趨勢。這個取捨也呼應 Topic 02 的規劃六問：想知道什麼、結果用在哪裡，決定了問誰。</p>
+
+  <h2>1.3 樣本要多大：互動試算</h2>
+  <p>抽樣時最常見的問題是要抽多少人。Krejcie 與 Morgan（1970）提供了廣被使用的公式與對照表：在 95% 信心水準、抽樣誤差 5% 的預設下，由母體大小即可查出建議樣本數。拉動下方滑桿觀察一個重要的現象——樣本需求並不隨母體等比成長。</p>
+  <div class="calc">
+    <div class="pg-ctrl"><span style="min-width:170px;">母體大小 N：<strong id="nVal">1000</strong></span>
+      <input type="range" id="nSlider" min="0" max="23" value="11" oninput="ssCalc()"></div>
+    <div id="ssOut" style="margin-top:12px;"></div>
+    <p class="interp">計算採 Krejcie 與 Morgan（1970）公式（95% 信心水準、誤差 5%、p=.5）。母體一千人約需 278 人，母體十萬人也只需約 383 人——母體越大，樣本占比越低。注意：這是隨機抽樣下的統計需求，實務上還要除以預期回應率往上加抽（見單元三）。</p>
+  </div>
+  <div class="key"><span class="lb">本單元要點</span>母體是想了解的全體，樣本是實際施測的部分，抽樣誤差是兩者間的不確定性。普查取全貌與溝通效果、成本高；抽樣省成本、須處理代表性與推論。樣本數可用 Krejcie 與 Morgan 的公式估算，且需求不隨母體等比成長；實際邀請人數還要考慮回應率。</div>
+
+    <h2>1.4 抽樣方法的類型與誤差地圖</h2>
+  <p>抽樣誤差只是調查誤差的一種。總調查誤差（total survey error）架構把誤差整理為四個主要來源（Groves &amp; Lyberg, 2010）：涵蓋誤差——名冊沒涵蓋到母體的一部分（如外派或無公司信箱的員工收不到問卷）；抽樣誤差——只抽部分人造成的隨機波動（1.1 至 1.3 處理這一項）；無回應誤差——被邀請卻沒填的人與填答者系統性不同（單元三的主題）；測量誤差——題目與作答過程造成的失真（Topic 03 的測量品質與本主題的草率作答）。這張地圖說明：樣本數算得再精確，也只處理四類誤差中的一類。</p>
+  <p>需要抽樣時，方法分兩類。機率抽樣：每人中選機率已知——簡單隨機抽樣（名冊亂數抽取）與分層隨機抽樣（依部門或職級先分層再抽，確保各層有足夠人數，是員工意見調查最常用的設計）；只有機率抽樣支持嚴格的統計推論。非機率抽樣：便利抽樣（誰方便找誰）、立意抽樣（依判斷挑選特定對象，如焦點訪談的對象選擇）、滾雪球抽樣（由受訪者轉介）——執行容易但樣本可能系統性偏斜，推論到全體時要明白交代限制。員工意見調查的常態是全員邀請的普查式設計，此時重心不在抽樣誤差，而在無回應與測量兩個來源。</p>
+  <div class="key"><span class="lb">本節要點</span>四個誤差來源：涵蓋、抽樣、無回應、測量——各有對應的課程單元。機率抽樣（簡單隨機、分層）支持推論；非機率抽樣（便利、立意、滾雪球）要交代限制。全員邀請的調查重心在無回應與測量。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 1-1</div>
+    <div class="qbody">
+      <p>公司有 1,000 名員工，人資想以抽樣做一次快速脈動調查（95% 信心、5% 誤差）。關於樣本數，下列何者正確？</p>
+      <label><input type="radio" name="q11" value="a"> 至少要抽一半（500 人）才有代表性</label>
+      <label><input type="radio" name="q11" value="b"> 依 Krejcie 與 Morgan 的估算約需 278 人，且實際邀請人數應再考慮回應率</label>
+      <label><input type="radio" name="q11" value="c"> 抽 30 人就一定足夠</label>
+      <label><input type="radio" name="q11" value="d"> 母體變成十萬人時，樣本也要等比放大一百倍</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q11r" value="a"> 因為樣本需求由信心水準與誤差決定，不隨母體等比成長，且回應率會使實得樣本少於邀請數</label>
+      <label><input type="radio" name="q11r" value="b"> 因為樣本一定要占母體的固定比例才有效</label>
+      <label><input type="radio" name="q11r" value="c"> 因為樣本越小，誤差越小</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q11c" value="低"> 低</label>
+        <label><input type="radio" name="q11c" value="中"> 中</label>
+        <label><input type="radio" name="q11c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q11','b','a','正確。一千人母體約需 278 人，邀請數還要除以預期回應率。','關鍵：樣本需求由精度決定、非母體比例，並要預留回應率。','再想想：試算器顯示母體一千人需要多少？十萬人呢？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2 匿名與保密 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：匿名與保密的區別</h1>
+  <div class="subtitle">主要依據：業界實務慣例；Harvard FAQ 實例（Topic 02）</div>
+
+  <h2>2.1 兩個常被混用的承諾</h2>
+  <p>對員工說這份調查是匿名的之前，要先確定自己說的是哪一種。匿名（anonymity）指連研究者或系統都無法把回答連回個人——不蒐集姓名工號、不留可識別的紀錄。保密（confidentiality）則是回答可以被連回個人（例如為了跨時點串接或寄送提醒），但承諾只有特定人員能接觸原始資料、報告只呈現彙總結果。</p>
+  <table>
+    <tr><th style="width:16%">面向</th><th>匿名 anonymity</th><th>保密 confidentiality</th></tr>
+    <tr><td>能否識別</td><td>任何人都無法連回個人</td><td>技術上可連回，但承諾不揭露</td></tr>
+    <tr><td>可做的事</td><td>單次橫斷調查</td><td>跨時點追蹤、串接人資資料、寄送填答提醒</td></tr>
+    <tr><td>信任基礎</td><td>技術上不可能被識別</td><td>對管理制度與執行者的信任</td></tr>
+    <tr><td>常見作法</td><td>不記名、鏈接不含識別碼</td><td>第三方持有對照表、限定接觸權限</td></tr>
+  </table>
+
+  <h2>2.2 誤用承諾的後果</h2>
+  <p>兩者的選擇是研究設計問題：想跨年追蹤同一批人、或想把調查串接離職紀錄，就只能做保密、不能做匿名。真正的紅線是說一套做一套——向員工承諾匿名，實際上卻留有可識別的對應；一旦被發現，損失的不是單次調查，而是往後所有調查的作答意願與真實性。承諾要與技術事實一致，並把誰能看到什麼講清楚（如 Topic 02 哈佛 FAQ 的作法：由第三方執行、主管看不到個別答案）。此外要注意：即使真匿名，人口變項的組合仍可能反推出個人——這是單元五的主題。</p>
+  <div class="key"><span class="lb">本單元要點</span>匿名是無法識別，保密是可識別但承諾不揭露；跨時點追蹤與資料串接只能靠保密設計。承諾必須與技術事實一致，誤用承諾一旦被拆穿，賠上的是長期的信任。匿名也不是絕對安全——交叉的人口變項可能讓匿名失效。</div>
+
+    <div class="note"><span class="lb">匿名的另一面</span>匿名保護真話，也降低問責：實驗顯示匿名情境下被罕見題旗標的作答者較多、自陳注意力較低。匿名承諾與資料品質如何兼顧——以檢測題與一致性指標補位——見本主題草率作答教材網站的偵測方法與深度選讀。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 2-1</div>
+    <div class="qbody">
+      <p>人資想比較同一批員工今年與明年的敬業度變化，又打算向員工承諾「完全匿名」。這個設計的問題在哪裡？</p>
+      <label><input type="radio" name="q21" value="a"> 沒有問題，匿名與追蹤可以同時成立</label>
+      <label><input type="radio" name="q21" value="b"> 跨時點追蹤需要能連回個人，只能承諾保密而非匿名；承諾匿名就是說一套做一套</label>
+      <label><input type="radio" name="q21" value="c"> 問題只在樣本數不夠</label>
+      <label><input type="radio" name="q21" value="d"> 只要員工不知道，就沒有關係</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q21r" value="a"> 因為匿名指無法連回個人，與跨時點串接互斥；承諾與技術事實不一致會摧毀長期信任</label>
+      <label><input type="radio" name="q21r" value="b"> 因為匿名與保密是同義詞，怎麼說都可以</label>
+      <label><input type="radio" name="q21r" value="c"> 因為追蹤研究不需要識別個人</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q21c" value="低"> 低</label>
+        <label><input type="radio" name="q21c" value="中"> 中</label>
+        <label><input type="radio" name="q21c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q21','b','a','正確。追蹤設計與匿名互斥，只能誠實承諾保密並說明誰能看到什麼。','關鍵：匿名=無法識別；追蹤=必須識別。兩者互斥，承諾要與事實一致。','再想想：要追蹤同一批人，技術上必須能做到什麼？這與匿名相容嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 回應率 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：回應率管理</h1>
+  <div class="subtitle">主要依據：Baruch &amp; Holtom (2008)；Fan &amp; Yan (2010)</div>
+
+  <h2>3.1 回應率為什麼重要</h2>
+  <p>回應率（response rate）是實際填答人數除以受邀人數。它重要不只因為樣本變小，更因為不回應通常不是隨機的：最不滿、最忙碌或最不信任的人往往最不填。若缺席者與填答者系統性不同，結果就會偏誤——這叫無回應偏誤（nonresponse bias）。回應率本身也是一個訊號：長期偏低往往反映員工不相信調查會帶來改變（Topic 01 的資料到行動落差）。</p>
+
+  <h2>3.2 實證基準</h2>
+  <p>多低算低？Baruch 與 Holtom（2008）分析 2000 與 2005 年 17 本學術期刊的 490 份調查研究（涵蓋逾四十萬名受訪者），提供了常用的基準：以個人為對象的調查，平均回應率約 52.7%（標準差 20.4）；以組織為對象（由組織代表填答）約 35.7%。研究也發現：回應率在該十年間大致穩定；電子化施測的回應率不低於傳統郵寄；而誘因的使用與回應率沒有顯著關聯。組織內部的員工意見調查因有雇主動員，實務上常明顯高於此學術基準（供應商的實務經驗常以七成以上為成熟方案的參考值，屬業界慣例說法、非學術數據）。</p>
+
+  <h2>3.3 提升回應率的作法</h2>
+  <p>可著力的手段大致分三層。設計層：問卷精簡（Topic 03 的長度證據）、行動裝置友善、施測時點避開旺季。溝通層：事前說明目的與用途（Topic 02 六問與哈佛 FAQ）、高階主管公開背書、施測期間的提醒。信任層：誠實的匿名或保密承諾（單元二）、以及最根本的——上一次調查後真的發生了改變。技巧只能錦上添花，員工願不願意填，長期取決於填了有沒有用。</p>
+  <div class="key"><span class="lb">本單元要點</span>回應率低的真正威脅是無回應偏誤：缺席者可能是最需要被聽見的人。學術基準約為個人 52.7%、組織 35.7%（Baruch &amp; Holtom, 2008），企業內部調查通常應更高。提升靠設計精簡、溝通到位與信任累積；長期而言，回應率是員工對「填了有沒有用」的投票。</div>
+
+    <h2>3.4 執行面清單：從邀請函到資料安全</h2>
+  <p>網路調查回應率的系統性回顧（Fan &amp; Yan, 2010）把影響因素沿執行流程整理，可轉成一張執行清單。發放前：指導語揭露執行單位（具公信力的執行者提高作答意願）、邀請函個人化（稱謂與單位讓對方知道不是罐頭訊息，但不揭露個資）、發送具體說明調查方式的事前提醒。發放中：問卷送出後首日回收最多、隨後逐日遞減，追蹤提醒依此節奏安排一至兩波；電子信箱不易取得的族群改用混合模式（附 QR code 的紙卡或實體信函）。誘因：金錢類誘因整體最有效；組織內調查宜採集體式設計（如全單位回應率達標即公開結果並啟動行動），與 Topic 12 的參與誘因原則一致。系統面：調查軟體支援電腦、手機、平板多介面；資料安全三件事——施測期間定期備份、關閉填答者瀏覽結果的功能、問卷資料與個資分檔加密存放（後者也是個人資料保護的基本要求）。</p>
+  <div class="key"><span class="lb">本節要點</span>回應率的執行面：執行單位揭露、個人化邀請、事前提醒與一至兩波追蹤、集體式誘因、混合模式補涵蓋、多介面支援與資料安全三原則。清單管的是執行成本，3.3 的信任層仍是回應率的長期底盤。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 3-1</div>
+    <div class="qbody">
+      <p>某公司調查回應率 45%，人資主張「有將近半數意見，足以代表全體」。這個主張最大的風險是什麼？</p>
+      <label><input type="radio" name="q31" value="a"> 沒有風險，45% 已超過統計要求</label>
+      <label><input type="radio" name="q31" value="b"> 不回應可能不是隨機的：缺席的 55% 可能系統性地更不滿或更不信任，結果因此偏誤</label>
+      <label><input type="radio" name="q31" value="c"> 風險只在樣本數太小，加抽即可解決</label>
+      <label><input type="radio" name="q31" value="d"> 回應率與結果品質無關</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q31r" value="a"> 因為無回應偏誤的關鍵在缺席者與填答者是否系統性不同，而非人數比例本身</label>
+      <label><input type="radio" name="q31r" value="b"> 因為只要超過四成就一定有代表性</label>
+      <label><input type="radio" name="q31r" value="c"> 因為缺席的人本來就沒有意見</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q31c" value="低"> 低</label>
+        <label><input type="radio" name="q31c" value="中"> 中</label>
+        <label><input type="radio" name="q31c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q31','b','a','正確。關鍵是缺席者與填答者的系統性差異，即無回應偏誤。','關鍵在偏誤而非比例：缺席若非隨機，比例再高也可能失真。','再想想：最不滿的員工，比較可能出現在填答者還是缺席者中？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 心理安全 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：心理安全感與真實作答</h1>
+  <div class="subtitle">主要依據：Edmondson (1999)</div>
+
+  <h2>4.1 概念與來源</h2>
+  <p>心理安全感（psychological safety）指成員相信在這個環境裡承擔人際風險是安全的——說出問題、承認錯誤、提出異議，不會因此受罰或被羞辱。Edmondson（1999）在 51 個工作團隊的研究中提出此構念，發現心理安全感高的團隊有更多學習行為（求助、回報錯誤、討論問題），並透過學習行為連到績效。</p>
+  <h2>4.2 對調查作答的意涵</h2>
+  <p>填一份員工意見調查，本質上就是一次人際風險的決策：說真話（尤其負面意見）值不值得。心理安全感低的單位，員工傾向自我審查——分數一致偏高、開放題空白或只寫客套話、敏感題跳答。這造成一個弔詭：最需要被聽見的單位，交回來的資料反而最失真。因此讀調查結果時，一面倒的高分未必是好消息，可能是不敢說；而匿名承諾（單元二）、匿名門檻（單元五）與事後不究責的處理方式，都是在為真實作答創造安全條件。心理安全感同時是調查要測量的對象，也是調查能否測準的前提。</p>
+  <div class="key"><span class="lb">本單元要點</span>心理安全感是對人際風險的安全感（Edmondson, 1999）。它影響員工敢不敢在調查裡說真話：低安全感單位的資料傾向假性偏高、開放題貧乏。一面倒的高分可能是警訊而非佳績；匿名設計、匿名門檻與不究責的後續處理，是讓真話出現的條件。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 4-1</div>
+    <div class="qbody">
+      <p>某單位主管管理風格強勢，該單位調查分數全公司最高、開放題幾乎空白。最值得優先考慮的解讀是什麼？</p>
+      <label><input type="radio" name="q41" value="a"> 該單位管理卓越，應直接列為標竿</label>
+      <label><input type="radio" name="q41" value="b"> 可能是心理安全感低導致的自我審查：分數假性偏高、真話不敢說</label>
+      <label><input type="radio" name="q41" value="c"> 開放題空白代表員工沒有任何意見</label>
+      <label><input type="radio" name="q41" value="d"> 分數高就不需要任何後續了解</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q41r" value="a"> 因為低心理安全感會使員工自我審查，造成分數一致偏高、開放題貧乏的組合</label>
+      <label><input type="radio" name="q41r" value="b"> 因為分數越高，資料一定越真實</label>
+      <label><input type="radio" name="q41r" value="c"> 因為強勢管理必然帶來高敬業度</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q41c" value="低"> 低</label>
+        <label><input type="radio" name="q41c" value="中"> 中</label>
+        <label><input type="radio" name="q41c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q41','b','a','正確。高分加空白開放題的組合，優先懷疑自我審查。','關鍵：低心理安全感的典型痕跡是一致偏高的分數與貧乏的開放題。','再想想：不敢說真話的單位，資料會長什麼樣子？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 小群組匿名門檻 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：小群組揭露風險與匿名門檻</h1>
+  <div class="subtitle">主要依據：業界實務慣例；本課模擬資料集</div>
+
+  <h2>5.1 交叉之後，匿名可能失效</h2>
+  <p>就算問卷不記名，報表的切分方式仍可能讓人被認出來。單看廠區，每格人數都很多；但廠區交叉部門、再交叉職級之後，格子會快速變小——高雄廠品保部的主管若只有兩人，這格的平均分數等於直接掀了那兩人的底牌。這叫小群組揭露風險：識別不是來自姓名，而是來自人口變項的組合。Topic 03 人口變項那節的提醒，在這裡實際發生。</p>
+
+  <h2>5.2 匿名門檻：互動示意</h2>
+  <p>業界的標準做法是設匿名門檻（anonymity threshold），也就是報表的最低顯示人數：人數低於門檻的群組不單獨呈現報表，常見門檻為 5 到 10 人。匿名門檻是供應商與實務界的用語；學術上對應統計揭露控制（statistical disclosure control）文獻中的門檻規則（threshold rule），即最小細格人數的限制，官方統計機構發布資料時使用同一原理。拉動下方滑桿，觀察門檻如何在「看得細」與「守得住」之間取捨。</p>
+  <div class="calc">
+    <div class="pg-ctrl"><span style="min-width:170px;">匿名門檻：<strong id="mtVal">5</strong> 人以下隱藏</span>
+      <input type="range" id="mtSlider" min="2" max="15" value="5" oninput="maskDemo()"></div>
+    <div id="maskOut" style="margin-top:12px;"></div>
+    <p class="interp">示意資料：某廠區各部門×職級的人數格。被隱藏的格子不單獨出報表，其人數併入上一層彙總。門檻越高越安全，但可下鑽的細度越低；門檻越低看得越細，但小格子的成員形同被指認。模擬資料集中也埋有人數過少的交叉群組，可實際演練。</p>
+  </div>
+
+  <h2>5.3 實務準則</h2>
+  <p>設定與執行匿名門檻時的常用準則：門檻事前公告（讓員工知道幾人以下不出報表，這本身就是信任溝通）；門檻要防差分洩漏——若部門總表與各職級分表同時提供，被隱藏的格子可能用減法還原，彙總層級也要一致處理；開放題引用要去識別化，一句有特定事件細節的原話可能比分數更容易認人；門檻不是越高越好，高到看不見問題單位，調查就失去診斷功能。這些取捨也要符合台灣個人資料保護法的要求。</p>
+  <div class="key"><span class="lb">本單元要點</span>匿名可能被人口變項的交叉打破：格子越切越細，人就越容易被認出。匿名門檻（常見 5 至 10 人）是守住承諾的底線，但要防差分洩漏、涵蓋開放題，並在細度與安全之間取捨。門檻與規則應事前公告——保護做得到又說得清，員工才敢說真話。</div>
+
+  <div class="quiz">
+    <div class="qhead">自我檢測 5-1</div>
+    <div class="qbody">
+      <p>報表系統設了 5 人匿名門檻，但同時提供部門總表（20 人）與該部門四個職級的分表（8、6、4、2 人，後兩格已隱藏）。這個設計還有什麼漏洞？</p>
+      <label><input type="radio" name="q51" value="a"> 沒有漏洞，低於門檻的格子已經遮了</label>
+      <label><input type="radio" name="q51" value="b"> 差分洩漏：用部門總表減去未隱藏的分表，可以反推出被隱藏群組的資訊</label>
+      <label><input type="radio" name="q51" value="c"> 漏洞只在門檻太高</label>
+      <label><input type="radio" name="q51" value="d"> 只要不公布姓名就不可能識別任何人</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q51r" value="a"> 因為彙總與分表同時提供時，可用減法還原被隱藏群組，隱藏規則必須考慮各層級的一致性</label>
+      <label><input type="radio" name="q51r" value="b"> 因為遮掉的格子就完全消失，不可能被推算</label>
+      <label><input type="radio" name="q51r" value="c"> 因為識別一定需要姓名</label>
+      <div class="tier">作答信心</div>
+      <div class="conf">
+        <label><input type="radio" name="q51c" value="低"> 低</label>
+        <label><input type="radio" name="q51c" value="中"> 中</label>
+        <label><input type="radio" name="q51c" value="高"> 高</label>
+      </div>
+      <button onclick="checkQuiz2(this,'q51','b','a','正確。這是差分洩漏：總表減分表即可還原被隱藏的格子。','關鍵：隱藏規則要跨層級一致，防止用彙總與明細做減法還原。','再想想：20 減 8 減 6，剩下的數字屬於誰？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U6 參考文獻 ==================== -->
+<section class="unit" id="u6">
+  <h1>單元六：參考文獻</h1>
+
+  <h2>學術文獻</h2>
+  <div class="refline">Baruch, Y., &amp; Holtom, B. C. (2008). Survey response rate levels and trends in organizational research. Human Relations, 61(8), 1139&#8211;1160. <a href="https://doi.org/10.1177/0018726708094863" target="_blank" rel="noopener">https://doi.org/10.1177/0018726708094863</a></div>
+  <div class="refline">Edmondson, A. (1999). Psychological safety and learning behavior in work teams. Administrative Science Quarterly, 44(2), 350&#8211;383. <a href="https://doi.org/10.2307/2666999" target="_blank" rel="noopener">https://doi.org/10.2307/2666999</a></div>
+  <div class="refline">Fan, W., &amp; Yan, Z. (2010). Factors affecting response rates of the web survey: A systematic review. Computers in Human Behavior, 26(2), 132&#8211;139. <a href="https://doi.org/10.1016/j.chb.2009.10.015" target="_blank" rel="noopener">https://doi.org/10.1016/j.chb.2009.10.015</a></div>
+  <div class="refline">Groves, R. M., &amp; Lyberg, L. (2010). Total survey error: Past, present, and future. Public Opinion Quarterly, 74(5), 849&#8211;879. <a href="https://doi.org/10.1093/poq/nfq065" target="_blank" rel="noopener">https://doi.org/10.1093/poq/nfq065</a></div>
+  <div class="refline">Krejcie, R. V., &amp; Morgan, D. W. (1970). Determining sample size for research activities. Educational and Psychological Measurement, 30(3), 607&#8211;610. <a href="https://doi.org/10.1177/001316447003000308" target="_blank" rel="noopener">https://doi.org/10.1177/001316447003000308</a></div>
+  <div class="note"><span class="lb">來源性質</span>本主題三篇皆為同儕審查期刊文獻並附 DOI：樣本數估算（Krejcie &amp; Morgan, 1970）、回應率基準（Baruch &amp; Holtom, 2008）、心理安全感（Edmondson, 1999）。匿名與保密的區別、匿名門檻（5 至 10 人）與差分洩漏防範屬業界實務慣例，教學上以本課模擬資料集之小群組情境演練；相關法遵要求依台灣個人資料保護法。</div>
+
+  <h2>專有名詞對照表</h2>
+  <table>
+    <tr><th style="width:26%">中文名詞</th><th style="width:30%">英文</th><th>說明</th></tr>
+    <tr><td>母體／樣本</td><td>population / sample</td><td>想了解的全體；實際施測的部分</td></tr>
+    <tr><td>普查／抽樣</td><td>census / sampling</td><td>對全體施測；抽出部分推論全體</td></tr>
+    <tr><td>抽樣誤差</td><td>sampling error</td><td>樣本與母體之間的不確定性</td></tr>
+    <tr><td>匿名／保密</td><td>anonymity / confidentiality</td><td>無法識別個人；可識別但承諾不揭露</td></tr>
+    <tr><td>回應率</td><td>response rate</td><td>實際填答人數除以受邀人數</td></tr>
+    <tr><td>無回應偏誤</td><td>nonresponse bias</td><td>缺席者與填答者系統性不同造成的偏誤</td></tr>
+    <tr><td>心理安全感</td><td>psychological safety</td><td>相信承擔人際風險是安全的共享信念</td></tr>
+    <tr><td>匿名門檻</td><td>anonymity threshold</td><td>報表的最低顯示人數；低於門檻的群組不單獨呈現</td></tr>
+    <tr><td>差分洩漏</td><td>disclosure by differencing</td><td>用彙總與明細相減，反推被隱藏群組的資訊</td></tr>
+  </table>
+  <footer>本教學網站為單一 HTML 檔案，離線可用。Topic 04：抽樣、匿名性與信任。文獻以同儕審查期刊為主並附 DOI；匿名門檻實務屬業界慣例並以模擬資料演練。供教學使用。</footer>
+</section>
+
+</main>
+</div>
+
+<script>
+window.QUIZ_TOTAL = 5;
+
+
+// ---- Interactive: sample size calculator, Krejcie & Morgan 1970 (u1) ----
+function ssCalc(){
+  var steps=[20,30,50,75,100,150,200,300,400,500,750,1000,1500,2000,3000,5000,7500,10000,15000,20000,30000,50000,75000,100000];
+  var N=steps[+document.getElementById('nSlider').value];
+  var X2=3.841, P=0.5, d=0.05;
+  var s=Math.ceil((X2*N*P*(1-P)) / (d*d*(N-1) + X2*P*(1-P)));
+  document.getElementById('nVal').textContent=N.toLocaleString();
+  var pct=(s/N*100);
+  var out='<div style="font-size:28px; font-weight:800; color:var(--navy);">建議樣本數 s = '+s.toLocaleString()+'　<span style="font-size:14px; font-weight:700; color:var(--muted);">（占母體 '+(pct>=100?100:pct.toFixed(1))+'%）</span></div>';
+  var w=Math.min(100,pct);
+  out+='<div style="height:14px; border-radius:7px; background:#eef2f8; margin:10px 0 4px; overflow:hidden;"><div style="height:100%; width:'+w.toFixed(1)+'%; background:var(--blue);"></div></div>';
+  out+='<div style="font-size:12px; color:var(--muted);">藍色部分為樣本占母體的比例：母體越大，需要的比例越低。</div>';
+  document.getElementById('ssOut').innerHTML=out;
+}
+
+// ---- Interactive: small-group masking demo (u5) ----
+var maskCells=[
+  ['生產部',[ ['基層',48],['資深',22],['主管',6],['高階',2] ]],
+  ['品保部',[ ['基層',14],['資深',7],['主管',3],['高階',1] ]],
+  ['行政部',[ ['基層',9],['資深',5],['主管',2],['高階',1] ]]
+];
+function maskDemo(){
+  var t=+document.getElementById('mtSlider').value;
+  document.getElementById('mtVal').textContent=t;
+  var s='<table style="margin:0;"><tr><th style="width:20%">部門</th>';
+  ['基層','資深','主管','高階'].forEach(function(x){ s+='<th>'+x+'</th>'; });
+  s+='</tr>';
+  var masked=0,total=0;
+  maskCells.forEach(function(row){
+    s+='<tr><td>'+row[0]+'</td>';
+    row[1].forEach(function(c){
+      total++;
+      if(c[1]<=t){ masked++;
+        s+='<td style="background:#fdecec; color:#8f3a34; font-weight:700;">隱藏（'+c[1]+' 人）</td>';
+      } else {
+        s+='<td style="background:var(--palegreen);">'+c[1]+' 人，可出報表</td>';
+      }
+    });
+    s+='</tr>';
+  });
+  s+='</table>';
+  s+='<div style="margin-top:8px; font-size:14px; color:var(--muted);">門檻 '+t+' 人以下：'+masked+' / '+total+' 格被隱藏。被隱藏的格子不單獨出報表，其人數併入部門彙總。</div>';
+  document.getElementById('maskOut').innerHTML=s;
+}
+
+/* ===== Course-website interactive framework (content-agnostic) =====
+   Reuse these EXACT function/class names; the CSS and quiz markup depend on them.
+   Content-specific data (decision cases, simulators, SVG animations) is added
+   per-site below the framework, then init calls at the very end. */
+
+/* ---- unit navigation ---- */
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+
+/* 支援網址錨點深連結，例如 ...html#u2 開頁時直接切換到單元二 */
+if (location.hash) {
+  var hashUnit = location.hash.slice(1);
+  var hashTarget = document.querySelector('#nav a[data-u="' + hashUnit + '"]');
+  if (hashTarget) hashTarget.click();
+}
+
+/* ---- two-stage two-tier calibration quiz ----
+   Tier 1 = answer + confidence; Tier 2 (mechanism reason) unlocks only after a
+   correct answer, so reason options never leak the answer. Calibration panel ids:
+   cal-{h,m,l}-{0,1,2}, calNote. window.QUIZ_TOTAL = number of quizzes. */
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+    var btn1=box.querySelector('button'); if(btn1) btn1.textContent='檢查答案';
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標注信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，屬過度自信區，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板僅記第一次作答，<a href="javascript:void(0)" onclick="goUnit(\'u0\')">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方完成第二層機制確認。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，代表結論記得而機制未通，重讀機制段落的效益最大。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='此理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板僅記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+(window.QUIZ_TOTAL||n)+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未完成機制確認'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，建議優先回到對應單元複習。'; }
+  else if(n>0){ msg+='目前沒有過度自信的題目。'; }
+  noteEl.textContent=msg;
+}
+
+/* ---- prediction "guess then reveal" ---- */
+function predReveal(btn,valId,trueVal,trueTxt,expl){
+  var rv=btn.closest('.pred').querySelector('.preveal');
+  rv.style.display='block';
+  rv.innerHTML='<strong>預測值：'+document.getElementById(valId).textContent+'；真值：'+trueTxt+'。</strong>'+expl;
+}
+
+/* ---- decision-forcing case (generic) ----
+   Set window.DC_DATA={d1:{a:{cls:'good|mid|bad',txt:'..'},...},...},
+   window.DC_BEST={d1:'b',...}, window.DC_POINTS=['d1',...],
+   optional window.DC_SUMMARY=function(good,total){return '...'}. */
+var dcState={};
+function dcChoose(btn,dp,opt){
+  if(dcState[dp]) return; dcState[dp]=opt;
+  btn.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){b.disabled=true;});
+  btn.classList.add('chosen');
+  var d=(window.DC_DATA||{})[dp][opt], rv=document.getElementById(dp+'r');
+  rv.className='dcreveal '+d.cls; rv.textContent=d.txt;
+}
+function dcSummary(){
+  var need=window.DC_POINTS||[], best=window.DC_BEST||{};
+  var missing=need.filter(function(k){return !dcState[k];});
+  var rv=document.getElementById('dcsum');
+  if(missing.length){ rv.className='dcreveal mid'; rv.textContent='尚有 '+missing.length+' 個決策點未完成，請先逐一選定。'; return; }
+  var good=0; need.forEach(function(k){ if(dcState[k]===best[k]) good++; });
+  var msg=(window.DC_SUMMARY? window.DC_SUMMARY(good,need.length): '完成 '+good+' / '+need.length+' 個決策對應文獻最佳選項。');
+  rv.className='dcreveal '+(good===need.length?'good':(good>=Math.ceil(need.length*0.6)?'mid':'bad'));
+  rv.textContent=msg;
+}
+function dcReset(){
+  dcState={};
+  (window.DC_POINTS||[]).forEach(function(k){
+    var rv=document.getElementById(k+'r'); rv.className='dcreveal'; rv.textContent='';
+    rv.closest('.dcbody').querySelectorAll('.dcopt').forEach(function(b){ b.disabled=false; b.classList.remove('chosen'); });
+  });
+  var s=document.getElementById('dcsum'); s.className='dcreveal'; s.textContent='';
+}
+
+/* ---- copy code block ---- */
+function copyCode(btn){
+  var pre=btn.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(function(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); });
+}
+
+/* ===== per-site content data + init calls go BELOW this line =====
+   e.g. window.QUIZ_TOTAL = 10;  window.DC_DATA={...}; ... then:
+   initQuizzes();  (and any custom widget init) */
+initQuizzes();
+
+// ---- interactive init ----
+ssCalc();
+maskDemo();
+</script>
+</body>
+</html>
