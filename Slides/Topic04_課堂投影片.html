@@ -402,6 +402,12 @@ table.cmp th{font-size:28px;padding:12px 20px}
 .wpage table th{background:#E3EAF4;color:#1C2F52;font-weight:700}
 .wpage table td:first-child{font-weight:400;white-space:normal}
 .wstamp{position:absolute;top:18px;right:22px;font-family:var(--sans);font-size:18px;font-weight:700;color:var(--accent);border:2px solid var(--accent);border-radius:6px;padding:2px 10px}
+.wpage table.wsm td,.wpage table.wsm th{font-size:20px!important;padding:7px 10px!important}
+.wpage td.hl{background:#F3E3E4;color:#7A2033;font-weight:700}
+.dmock td.hl2{background:#F3E3E4;color:#7A2033;font-weight:700}
+.xlist table td,.xlist table th{text-align:left!important}
+.xlist td.hl2{text-align:center!important}
+.xcap{font-size:19px;font-weight:700;color:#1C2F52;padding:2px 4px 6px}
 .dmock{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:10px 14px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
 .dmock table td,.dmock table th{font-size:22px!important;padding:8px 10px!important;text-align:center;border-top:1px solid var(--line)}
 .dmock table th{background:#1C2F52;color:#fff;font-family:var(--sans);font-size:20px!important}
@@ -464,16 +470,39 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="foot"><span class="lim">主管評只寫主管看得到的行為；示範題目為課堂練習用，各組以自己的事例與編碼簿為準</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>04</span></div>
 </section>
 
-<section class="slide xl" data-layout="cards" data-density="3">
+<section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">題庫初稿</div>
-  <h2 style="margin-bottom:26px">題庫定稿前的檢查</h2>
-  <div class="cards c4 eq">
-    <div class="card frag"><div class="n">題數</div><p>每個向度 8 題以上<br>最終保留 4 到 6 題</p></div>
-    <div class="card frag"><div class="n">來源</div><p>每題標出<br>取材的事例編號</p></div>
-    <div class="card frag"><div class="n">寫法</div><p>一題一件事<br>沒有評價字眼<br>沒有否定詞<br>反向題另外標示</p></div>
-    <div class="card frag"><div class="n">日期</div><p>寫下題庫定稿日期<br>定稿後才能查閱<br>既有量表的題目</p></div>
+  <h2 style="margin-bottom:16px">每題標出取材的事例編號</h2>
+  <div style="display:grid;grid-template-columns:420px 1fr;gap:40px;align-items:start">
+    <div class="rows" style="gap:12px">
+      <div class="row frag" style="grid-template-columns:1fr;padding:14px 22px"><div class="dd"><b>題數</b>　每個向度 8 題以上<br>最終保留 4 到 6 題</div></div>
+      <div class="row frag" style="grid-template-columns:1fr;padding:14px 22px"><div class="dd"><b>來源</b>　對應事例欄<br>填事例清單的編號</div></div>
+      <div class="row frag" style="grid-template-columns:1fr;padding:14px 22px"><div class="dd"><b>寫法</b>　一題一件事<br>反向題在備註欄標示</div></div>
+      <div class="row frag" style="grid-template-columns:1fr;padding:14px 22px"><div class="dd"><b>日期</b>　寫下題庫定稿日期</div></div>
+    </div>
+    <div>
+      <div class="wpage" style="padding:22px 30px"><span class="wstamp">範例</span>
+        <div class="wh" style="font-size:28px;margin-bottom:4px">4.1 題庫初稿</div>
+        <p style="font-size:21px;margin-bottom:6px">題庫初稿定稿日期：2026 年 10 月 16 日</p>
+        <table class="wsm">
+          <tr><th style="width:160px">向度</th><th style="width:70px">題號</th><th>題目</th><th style="width:120px">對應事例</th><th style="width:90px">備註</th></tr>
+          <tr><td>平復所需時間</td><td>A1</td><td>被指出錯誤後，我很難把注意力轉回其他工作</td><td class="hl">07、08</td><td></td></tr>
+          <tr><td>平復所需時間</td><td>A2</td><td>收到負面回饋後，我會好幾天反覆想著那句評語</td><td class="hl">08、30</td><td></td></tr>
+          <tr><td>迴避回饋</td><td>B1</td><td>收到負面評價後，我會延後與主管面談的時間</td><td class="hl">14</td><td></td></tr>
+          <tr><td>迴避回饋</td><td>B2</td><td>收到批評後，我會主動向對方詢問如何改進</td><td class="hl">15、40</td><td>反向題</td></tr>
+          <tr><td>情緒反應強度</td><td>C1</td><td>當眾被質疑時，我很難維持平穩的語氣</td><td class="hl">01、06</td><td></td></tr>
+        </table>
+      </div>
+      <div class="dmock frag xlist" style="margin-top:14px;padding:6px 10px"><div class="xcap">Excel 範本　事例清單</div>
+        <table>
+          <tr><th style="width:90px">編號</th><th style="width:470px">情境</th><th>行為</th></tr>
+          <tr><td class="hl2">07</td><td>被指出合約金額打錯</td><td>當天下班前都在反覆檢查那份合約，沒辦法做別的事</td></tr>
+          <tr><td class="hl2">14</td><td>年中考核後主管約他討論改進方向</td><td>連續三次以出差為理由取消面談</td></tr>
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
+  <div class="foot"><span class="lim">對應事例欄的編號，即 Excel 範本事例清單 A 欄的編號</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">02</div><h1>預試的樣本</h1><ul class="refs"></ul></div>
