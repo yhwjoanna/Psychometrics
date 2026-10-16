@@ -266,6 +266,10 @@
 .reveal-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;font-family:inherit}
 .reveal-btn:active{transform:scale(.97)}
 .hide{display:none}
+.calc label{display:inline-block;padding:4px 0;cursor:pointer}
+.calc input{margin-right:8px}
+td.ans3.flag{background:#fdecec;color:#a33a32;font-weight:700}
+td.ans3.ok{color:#337052;font-weight:700}
 .adv{font-size:14px;color:var(--muted)}
 </style>
 </head>
@@ -345,17 +349,70 @@
 <section class="unit" id="u3">
   <h1>單元三：AI 代答</h1>
   <div class="subtitle">AI-generated responses</div>
-  <h2>3.1 樣子</h2>
-  <p>已有研究發現，線上樣本中有部分受訪者把開放題交給生成式 AI 回答（Asher et al., 2026；Zhang et al., 2025）。這類回答在選擇題上不一定有異常，主要從開放題的文字看出來。</p>
-  <h2>3.2 判別方式</h2>
+
+  <h2>3.1 什麼是 AI 代答</h2>
+  <p>填答者把問卷題目貼到 ChatGPT 等生成式 AI，再把 AI 產生的文字貼回問卷。已有研究在線上樣本中發現這類回答（Asher et al., 2026），而且使用 AI 的填答者，開放題答案彼此之間的差異變小（Zhang et al., 2025）。</p>
+  <p>AI 代答的回答看起來通順、完整，不像直線作答或隨機作答那樣有明顯的異常，因此要從文字本身判斷。</p>
+
+  <h2>3.2 要看哪一種題目</h2>
   <table>
-    <tr><th style="width:22%">特徵</th><th>開放題上的樣子</th></tr>
-    <tr><td>長度</td><td>回答明顯比其他人長，結構完整、分點條列</td></tr>
-    <tr><td>語氣</td><td>用詞工整、沒有口語，缺少具體的人、時、地</td></tr>
-    <tr><td>相似</td><td>不同填答者的回答句型與用詞彼此相似；Zhang 等人（2025）發現，使用 AI 的回答之間差異較小</td></tr>
+    <tr><th style="width:22%">題型</th><th>能不能看出 AI 代答</th></tr>
+    <tr><td>選擇題</td><td>不容易。AI 選出的答案通常合理，作答型態與一般填答者相近</td></tr>
+    <tr><td>開放題</td><td>比較容易。文字的長度、語氣與內容會留下線索，是主要的判別來源</td></tr>
   </table>
-  <p>單一特徵不足以判定。多項特徵同時出現時，由兩位組員各自複核，兩人都判定是 AI 代答才剔除，並記錄理由。</p>
-  <div class="key"><span class="lb">本單元要點</span>AI 代答靠開放題的文字特徵判別，判定要保守，必須兩人複核。</div>
+  <p>預試問卷至少放一題開放題，請填答者描述自己的具體經驗，之後才有判別依據。</p>
+
+  <h2>3.3 兩種回答的比較</h2>
+  <p>題目：「請描述一次你在工作上使用彈性工時的經驗。」</p>
+  <table>
+    <tr><th style="width:50%">一般填答者</th><th>疑似 AI 代答</th></tr>
+    <tr><td>上個月小孩發燒，我早上十點才進公司，晚上留到七點補回來，主管沒說什麼</td><td>彈性工時制度能有效提升員工的工作與生活平衡。首先，員工可依個人需求安排時間，提高工作效率；其次，有助於增進組織向心力。然而，實施時也須注意溝通協調與績效管理，以確保制度的公平性。</td></tr>
+  </table>
+  <p>左邊的回答短，有具體的時間、人物與事件；右邊的回答沒有回答「你的經驗」，而是寫成一篇論述，用「首先、其次、然而」組織段落，內容適用於任何人。</p>
+
+  <h2>3.4 文字特徵檢核</h2>
+  <p>勾選這份開放題回答出現的特徵，下方會顯示建議的處理方式。</p>
+  <div class="calc" id="aiCheck">
+    <label><input type="checkbox"> 沒有回答自己的經驗，而是寫成一般性的論述</label><br>
+    <label><input type="checkbox"> 缺少具體的人、時間、地點或事件</label><br>
+    <label><input type="checkbox"> 明顯比其他填答者長，段落完整</label><br>
+    <label><input type="checkbox"> 使用「首先、其次、此外、總而言之」等連接詞組織內容</label><br>
+    <label><input type="checkbox"> 正反兩面都談，結論沒有明確立場</label><br>
+    <label><input type="checkbox"> 出現條列符號、粗體符號（例如 **）或標題格式</label><br>
+    <label><input type="checkbox"> 出現臺灣較少使用的用語，例如「優化、質量、賦能」</label><br>
+    <label><input type="checkbox"> 與其他填答者的回答句型或用詞高度相似</label><br>
+    <label><input type="checkbox"> 字數很多，但整份問卷的作答時間很短</label><br>
+    <label><input type="checkbox"> 開放題內容與選擇題的作答方向不一致</label>
+    <div id="aiResult" class="note" style="margin-top:14px"><span class="lb">建議</span>尚未勾選任何特徵：保留</div>
+  </div>
+  <p class="adv">勾選數量的建議是本課程的操作原則，用來決定是否送交複核，不是判定標準。</p>
+
+  <h2>3.5 判定與處理</h2>
+  <ol>
+    <li><b>兩人獨立判讀</b>：兩位組員各自看過開放題回答，再對照同一份問卷的選擇題與作答時間</li>
+    <li><b>兩人都判定才剔除</b>：意見不一致時保留，避免把文筆好或寫得認真的填答者誤刪</li>
+    <li><b>記錄理由</b>：寫下勾選了哪些特徵，放入企劃書 4.4 的篩檢表</li>
+    <li><b>不單獨依賴 AI 偵測工具</b>：網路上的 AI 文字偵測工具可能誤判，只能作為參考</li>
+  </ol>
+
+  <h2>3.6 發放前的預防</h2>
+  <ul>
+    <li>指導語寫明：「請依您自己的經驗作答，不需要使用 AI 工具，沒有標準答案」</li>
+    <li>開放題問具體經驗，例如「最近一次」「請描述當時發生的事」，避免問「你對某制度的看法」這類容易交給 AI 回答的題目</li>
+    <li>開放題不要求長度，寫一兩句也可以，降低填答者求助 AI 的動機</li>
+  </ul>
+
+  <h2>3.7 練習</h2>
+  <p>題目：「請描述一次你在工作上主動幫忙同事的經驗。」判斷下面三則回答是否需要送交複核。</p>
+  <table>
+    <tr><th style="width:8%">編號</th><th>回答</th><th class="ans3 hide" style="width:30%">解析</th></tr>
+    <tr><td>A</td><td>新人不會用報帳系統，我午休陪他弄了半小時</td><td class="ans3 hide ok">保留：短、有具體事件與時間</td></tr>
+    <tr><td>B</td><td>在職場中主動協助同事是展現團隊精神的重要方式。透過分享知識與資源，不僅能提升整體工作效率，也能促進良好的人際關係。總而言之，互助合作是組織成功的關鍵。</td><td class="ans3 hide flag">送交複核：沒有個人經驗、一般性論述、使用總結連接詞</td></tr>
+    <tr><td>C</td><td>去年年底結算，會計同事請產假，我幫她把三間分公司的帳對完，加班兩週，後來主管在會議上有特別提到</td><td class="ans3 hide ok">保留：雖然較長，但有具體的時間、人物與事件</td></tr>
+  </table>
+  <p><button class="reveal-btn" onclick="document.querySelectorAll('.ans3').forEach(function(e){e.classList.remove('hide');});">顯示解析</button></p>
+
+  <div class="key"><span class="lb">本單元要點</span>AI 代答從開放題的文字判斷，看是否有具體的個人經驗；判定要保守，兩人複核都同意才剔除。</div>
 </section>
 
 <section class="unit" id="u4">
@@ -426,6 +483,21 @@ if (location.hash) {
   var hashTarget = document.querySelector('#nav a[data-u="' + location.hash.slice(1) + '"]');
   if (hashTarget) hashTarget.click();
 }
+</script>
+<script>
+(function(){
+  var box=document.getElementById('aiCheck'); if(!box) return;
+  var out=document.getElementById('aiResult');
+  box.addEventListener('change',function(){
+    var n=box.querySelectorAll('input:checked').length, msg;
+    if(n===0) msg='尚未勾選任何特徵：保留';
+    else if(n===1) msg='勾選 1 項：單一特徵不足以判定，保留';
+    else if(n<=3) msg='勾選 '+n+' 項：列為可疑，交由兩位組員各自複核';
+    else msg='勾選 '+n+' 項：特徵明顯，仍須兩位組員複核都同意後才剔除';
+    out.innerHTML='<span class="lb">建議</span>'+msg;
+    out.className=n>=2?'warn':'note'; out.style.marginTop='14px';
+  });
+})();
 </script>
 </body>
 </html>
