@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 04：草率作答快篩（簡易版）｜員工意向調查</title>
+<style>
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+.mini{width:100%;border-collapse:collapse;margin:10px 0}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mini{min-width:760px}
+.mini td,.mini th{white-space:nowrap;border:1px solid var(--line);padding:6px 8px;text-align:center;font-size:14px}
+.mini th{background:var(--lightblue);color:var(--navy)}
+.mini td.flag{background:#fdecec;color:#a33a32;font-weight:700}
+.mini td.ok{color:#337052;font-weight:700}
+.reveal-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.reveal-btn:active{transform:scale(.97)}
+.hide{display:none}
+.adv{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 04：草率作答快篩</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 04<br>草率作答快篩</div>
+    <div class="t2">簡易版：直線作答、隨機作答、AI 代答<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">三種作答</div>
+    <a data-u="u1">單元一：直線作答</a>
+    <a data-u="u2">單元二：隨機作答</a>
+    <a data-u="u3">單元三：AI 代答</a>
+    <div class="grp">實作</div>
+    <a data-u="u4">單元四：篩檢流程與企劃書</a>
+    <a data-u="u5">單元五：快篩演練</a>
+    <div class="grp">文獻</div>
+    <a data-u="u6">單元六：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<section class="unit active" id="u0">
+  <h1>草率作答快篩（簡易版）</h1>
+  <div class="subtitle">員工意向調查課程．Topic 04．配合期中作業的預試資料使用</div>
+  <p>不是每一位填答者都認真作答。預試資料進入項目分析與因素分析之前，要先篩掉三種作答：直線作答、隨機作答與 AI 代答。本網站只介紹用 Excel 或肉眼就能完成的判別方式。</p>
+  <table>
+    <tr><th style="width:24%">作答</th><th>樣子</th><th style="width:38%">主要判別方式</th></tr>
+    <tr><td>直線作答</td><td>連續很多題選同一個選項</td><td>最長連續相同作答、反向題矛盾</td></tr>
+    <tr><td>隨機作答</td><td>答案沒有規律，前後矛盾</td><td>注意力檢核題、作答時間</td></tr>
+    <tr><td>AI 代答</td><td>開放題回答冗長、工整、彼此相似</td><td>文字特徵，再人工複核</td></tr>
+  </table>
+</section>
+
+<section class="unit" id="u1">
+  <h1>單元一：直線作答</h1>
+  <div class="subtitle">straightlining</div>
+  <h2>1.1 樣子</h2>
+  <p>填答者不讀題目，連續很多題都選同一個選項，例如一路選「有點同意」。量表沒有反向題時，直線作答會讓題目之間看起來高度一致，信度反而偏高（Meade &amp; Craig, 2012）。</p>
+  <h2>1.2 判別方式</h2>
+  <ol>
+    <li><b>最長連續相同作答</b>：計算同一份問卷中，連續選同一個選項的最長題數。例如 24 題中連續 12 題以上都一樣，列為可疑（Curran, 2016）。門檻依題數訂定，並在企劃書寫出理由</li>
+    <li><b>反向題矛盾</b>：正向題給高分、反向題也給高分，表示沒有讀題。例如「我很難維持平穩的語氣」與「我能保持平靜」都選 6</li>
+  </ol>
+  <h2>1.3 在 Excel 怎麼做</h2>
+  <p>把每位填答者的作答排成一列，逐列檢查連續相同的選項；題數不多時，用條件式格式把相同數字標上顏色，一眼就能看出整列同色的填答者。</p>
+  <div class="key"><span class="lb">本單元要點</span>直線作答看「連續相同」與「反向題矛盾」兩件事，門檻事先寫好，不要看完資料再決定。</div>
+</section>
+
+<section class="unit" id="u2">
+  <h1>單元二：隨機作答</h1>
+  <div class="subtitle">random responding</div>
+  <h2>2.1 樣子</h2>
+  <p>填答者隨便點選，答案沒有規律，意思相近的題目給出相反的分數，而且通常填得很快。</p>
+  <h2>2.2 判別方式</h2>
+  <ol>
+    <li><b>注意力檢核題</b>：在問卷中放一到兩題有標準答案的題目，例如「本題請選有點同意」。答錯者列為可疑</li>
+    <li><b>作答時間</b>：平均每題少於 2 秒，幾乎不可能讀完題目（Huang et al., 2012）。線上問卷平台多半會記錄開始與結束時間</li>
+    <li><b>相近題目不一致</b>：兩題意思幾乎相同，一題給 6 分、另一題給 1 分</li>
+  </ol>
+  <div class="key"><span class="lb">本單元要點</span>注意力檢核題要在發放前就放進問卷；作答時間要確認平台有記錄。</div>
+</section>
+
+<section class="unit" id="u3">
+  <h1>單元三：AI 代答</h1>
+  <div class="subtitle">AI-generated responses</div>
+  <h2>3.1 樣子</h2>
+  <p>已有研究發現，線上樣本中有部分受訪者把開放題交給生成式 AI 回答（Asher et al., 2026；Zhang et al., 2025）。這類回答在選擇題上不一定有異常，主要從開放題的文字看出來。</p>
+  <h2>3.2 判別方式</h2>
+  <table>
+    <tr><th style="width:22%">特徵</th><th>開放題上的樣子</th></tr>
+    <tr><td>長度</td><td>回答明顯比其他人長，結構完整、分點條列</td></tr>
+    <tr><td>語氣</td><td>用詞工整、沒有口語，缺少具體的人、時、地</td></tr>
+    <tr><td>相似</td><td>不同填答者的回答句型與用詞彼此相似；Zhang 等人（2025）發現，使用 AI 的回答之間差異較小</td></tr>
+  </table>
+  <p>單一特徵不足以判定。多項特徵同時出現時，由兩位組員各自複核，兩人都判定是 AI 代答才剔除，並記錄理由。</p>
+  <div class="key"><span class="lb">本單元要點</span>AI 代答靠開放題的文字特徵判別，判定要保守，必須兩人複核。</div>
+</section>
+
+<section class="unit" id="u4">
+  <h1>單元四：篩檢流程與企劃書</h1>
+  <h2>4.1 發放前</h2>
+  <ol>
+    <li>問卷加入一到兩題注意力檢核題</li>
+    <li>確認平台會記錄作答時間</li>
+    <li>寫好剔除標準，例如作答時間、連續相同作答的題數</li>
+  </ol>
+  <h2>4.2 收回後</h2>
+  <ol>
+    <li>依表列順序套用每一條標準，已被前一項剔除者不重複計算</li>
+    <li>記錄每一項剔除的人數</li>
+    <li>確認剔除後的有效樣本仍達到預試人數：題數 × 5，且不低於 100 人</li>
+  </ol>
+  <h2>4.3 企劃書 4.4 怎麼寫</h2>
+  <table>
+    <tr><th style="width:24%">篩檢指標</th><th>標準</th><th style="width:16%">剔除人數</th></tr>
+    <tr><td>注意力檢核題</td><td>答錯者剔除</td><td>（人數）</td></tr>
+    <tr><td>作答時間</td><td>平均每題少於 2 秒者剔除</td><td>（人數）</td></tr>
+    <tr><td>連續相同作答</td><td>連續（某題數）以上選同一個選項者剔除</td><td>（人數）</td></tr>
+    <tr><td>開放題 AI 代答</td><td>多項文字特徵同時出現，經兩位組員複核確認者剔除</td><td>（人數）</td></tr>
+    <tr><td>有效樣本</td><td>回收數 − 剔除總數</td><td></td></tr>
+  </table>
+</section>
+
+<section class="unit" id="u5">
+  <h1>單元五：快篩演練</h1>
+  <p>下表是某組預試 10 題（Q4 為反向題）的六位填答者。先自己判斷哪幾位要剔除、依據是哪一條標準，再按下方按鈕看解析。標準：注意力檢核題答錯、平均每題少於 2 秒、連續 6 題以上相同、反向題矛盾。</p>
+  <div class="scrollx"><table class="mini">
+    <tr><th>編號</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4（反向）</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th><th>檢核題</th><th>總秒數</th><th class="ans hide">判別</th></tr>
+    <tr><td>201</td><td>4</td><td>5</td><td>4</td><td>3</td><td>5</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td><td>正確</td><td>96</td><td class="ans hide ok">保留</td></tr>
+    <tr><td>202</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td>2</td><td>3</td><td>正確</td><td>44</td><td class="ans hide flag">剔除：連續 8 題相同</td></tr>
+    <tr><td>203</td><td>2</td><td>5</td><td>1</td><td>6</td><td>3</td><td>6</td><td>1</td><td>4</td><td>6</td><td>2</td><td>錯誤</td><td>31</td><td class="ans hide flag">剔除：檢核題答錯</td></tr>
+    <tr><td>204</td><td>5</td><td>6</td><td>5</td><td>6</td><td>6</td><td>5</td><td>6</td><td>5</td><td>6</td><td>6</td><td>正確</td><td>88</td><td class="ans hide flag">剔除：反向題矛盾</td></tr>
+    <tr><td>205</td><td>2</td><td>3</td><td>2</td><td>5</td><td>2</td><td>3</td><td>2</td><td>2</td><td>3</td><td>2</td><td>正確</td><td>17</td><td class="ans hide flag">剔除：平均每題少於 2 秒</td></tr>
+    <tr><td>206</td><td>3</td><td>2</td><td>3</td><td>4</td><td>2</td><td>3</td><td>3</td><td>2</td><td>2</td><td>3</td><td>正確</td><td>110</td><td class="ans hide ok">保留</td></tr>
+  </table></div>
+  <p><button class="reveal-btn" onclick="document.querySelectorAll('.ans').forEach(function(e){e.classList.remove('hide');});document.getElementById('exp5').classList.remove('hide');">顯示判別結果</button></p>
+  <div class="note hide" id="exp5"><span class="lb">解析</span>202 從 Q1 到 Q8 連續 8 題都選 3；203 檢核題答錯，作答也沒有規律；204 正向題都給 5 到 6 分，反向題 Q4 也給 6 分；205 總共 17 秒，平均每題不到 2 秒。201 與 206 的作答有變化、反向題方向合理、時間充足，保留。依表列順序套用標準時，每人只計入第一個符合的標準。</div>
+</section>
+
+<section class="unit" id="u6">
+  <h1>單元六：參考文獻</h1>
+  <div class="refline">Asher, M. W., Gold, G., Chen, E., &amp; Carvalho, P. F. (2026). Chatbots are undermining crowdsourced research in the behavioral sciences: Detecting artificial intelligence-assisted cheating with a keystroke-based tool. <i>Advances in Methods and Practices in Psychological Science, 9</i>(1), Article 25152459261424723. <a href="https://doi.org/10.1177/25152459261424723" target="_blank" rel="noopener">https://doi.org/10.1177/25152459261424723</a></div>
+  <div class="refline">Curran, P. G. (2016). Methods for the detection of carelessly invalid responses in survey data. <i>Journal of Experimental Social Psychology, 66</i>, 4–19. <a href="https://doi.org/10.1016/j.jesp.2015.07.006" target="_blank" rel="noopener">https://doi.org/10.1016/j.jesp.2015.07.006</a></div>
+  <div class="refline">Huang, J. L., Curran, P. G., Keeney, J., Poposki, E. M., &amp; DeShon, R. P. (2012). Detecting and deterring insufficient effort responding to surveys. <i>Journal of Business and Psychology, 27</i>(1), 99–114. <a href="https://doi.org/10.1007/s10869-011-9231-8" target="_blank" rel="noopener">https://doi.org/10.1007/s10869-011-9231-8</a></div>
+  <div class="refline">Meade, A. W., &amp; Craig, S. B. (2012). Identifying careless responses in survey data. <i>Psychological Methods, 17</i>(3), 437–455. <a href="https://doi.org/10.1037/a0028085" target="_blank" rel="noopener">https://doi.org/10.1037/a0028085</a></div>
+  <div class="refline">Zhang, S., Xu, J., &amp; Alvero, A. J. (2025). Generative AI meets open-ended survey responses: Research participant use of AI and homogenization. <i>Sociological Methods &amp; Research, 54</i>(3), 1197–1242. <a href="https://doi.org/10.1177/00491241251327130" target="_blank" rel="noopener">https://doi.org/10.1177/00491241251327130</a></div>
+</section>
+
+</main>
+</div>
+<script>
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+/* 支援網址錨點深連結，例如 ...html#u2 開頁時直接切換到單元二 */
+if (location.hash) {
+  var hashTarget = document.querySelector('#nav a[data-u="' + location.hash.slice(1) + '"]');
+  if (hashTarget) hashTarget.click();
+}
+</script>
+</body>
+</html>
