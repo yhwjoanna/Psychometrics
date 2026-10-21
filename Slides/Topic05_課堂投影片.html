@@ -477,7 +477,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="rows" style="margin-top:24px;gap:14px">
     <div class="row frag" style="padding:16px 40px"><div class="n">一</div><div class="tt">資料準備</div><div class="dd">草率作答篩檢、反向計分、匯入 JASP</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">二</div><div class="tt">項目分析</div><div class="dd">決斷值與校正題總相關，用 Excel 範本計算</div></div>
-    <div class="row frag" style="padding:16px 40px"><div class="n">三</div><div class="tt">探索性因素分析</div><div class="dd">決定因素數目、讀負荷量、刪題後重跑</div></div>
+    <div class="row frag" style="padding:16px 40px"><div class="n">三</div><div class="tt">探索性因素分析</div><div class="dd">因素數目、轉軸、負荷量、刪題與構念效度</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">四</div><div class="tt">信度</div><div class="dd">各向度的 Cronbach’s α 與 McDonald’s ω</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">五</div><div class="tt">企劃書第五章</div><div class="dd">5.1 到 5.4 的填寫範例</div></div>
   </div>
@@ -629,6 +629,17 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="foot"><span class="lim multi">Kaiser, H. F. (1974). An index of factorial simplicity. Psychometrika, 39(1), 31–36. https://doi.org/10.1007/BF02291575</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
 </section>
 
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">轉軸</div>
+  <h2 style="margin-bottom:26px">轉軸讓每一題盡量只落在一個因素</h2>
+  <div class="cards c2 eq">
+    <div class="card frag"><div class="n" style="font-size:38px">直交轉軸</div><p style="font-size:26px;line-height:1.6">orthogonal，例如 varimax<br>假設因素之間不相關<br>因素間相關固定為 0</p></div>
+    <div class="card frag"><div class="n" style="font-size:38px">斜交轉軸</div><p style="font-size:26px;line-height:1.6">oblique，例如 promax、oblimin<br>允許因素之間相關<br>另外輸出因素間相關矩陣</p></div>
+  </div>
+  <div class="warnline frag"><div>同一構念的向度通常彼此相關，本課程採用斜交轉軸<br>斜交轉軸讀 JASP 預設輸出的負荷量表（pattern matrix）</div></div>
+  <div class="foot"><span class="lim multi">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. Psychological Methods, 4(3), 272–299. https://doi.org/10.1037/1082-989X.4.3.272</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+</section>
+
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 操作</div>
   <h2 style="margin-bottom:16px">Factor → Exploratory Factor Analysis</h2>
@@ -651,7 +662,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     </div></div>
   </div>
   <p class="lead frag" style="font-size:26px;margin-top:20px">紅底為需要更改的設定，其餘維持預設<br>顯示門檻改成 0，才看得到每一題在所有因素上的負荷量</p>
-  <div class="foot"><span class="lim multi">斜交轉軸（oblique）允許因素之間相關；同一構念的向度通常彼此相關　Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+  <div class="foot"><span class="lim multi">斜交轉軸（oblique）允許因素之間相關；同一構念的向度通常彼此相關　Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -665,7 +676,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="stat frag" style="margin-top:20px"><div class="k">與預設向度一致</div><p>三個因素，對應三個預設向度</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim multi">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675<br>平行分析為 JASP 預設方法；實心點為高於隨機資料的特徵值</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+  <div class="foot"><span class="lim multi">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675<br>平行分析為 JASP 預設方法；實心點為高於隨機資料的特徵值</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -679,7 +690,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="stat frag" style="margin-top:20px"><div class="k">其餘 13 題</div><p>落在預設的向度<br>因素一平復、二情緒、三迴避</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim">深色粗體為該題最高且達 .40 的負荷量；紅底為需要處理的題目；最小殘差法、promax 斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+  <div class="foot"><span class="lim">深色粗體為該題最高且達 .40 的負荷量；紅底為需要處理的題目；最小殘差法、promax 斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
 </section>
 
 <section class="slide xl" data-layout="task" data-density="3">
@@ -697,7 +708,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <p style="font-size:28px;line-height:1.65">每一題的刪除理由<br>刪題的順序<br>每次重跑的結果</p>
     </div>
   </div>
-  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
@@ -710,7 +721,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <tr class="frag"><td>第三次</td><td>13 題</td><td>每題都只落在一個因素<br>負荷量 .54 到 .78</td><td>保留 13 題</td></tr>
   </table>
   <p class="lead frag" style="font-size:27px;margin-top:22px">C4 的內容同時描述情緒與持續時間<br>平復所需時間向度已有 A2「好幾天反覆想著」描述持續時間</p>
-  <div class="foot"><span class="lim">每次重跑都要重新看平行分析的因素數目；本例三次都建議三個因素</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+  <div class="foot"><span class="lim">每次重跑都要重新看平行分析的因素數目；本例三次都建議三個因素</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -724,11 +735,24 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="stat frag" style="margin-top:20px"><div class="k">因素命名</div><p>依題目內容命名<br>與原本向度一致就沿用</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim">因素間呈中度相關，三個向度屬於同一個構念的不同面向，支持使用斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+  <div class="foot"><span class="lim">因素間呈中度相關，三個向度屬於同一個構念的不同面向，支持使用斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
 </section>
 
-<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>信度<br><span class=act-en>reliability</span></h1><ul class="refs"><li>McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144</li><li>Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</li><li>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</li></ul></div>
-  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">EFA 與構念效度</div>
+  <h2 style="margin-bottom:24px">因素結構是構念效度的一項證據</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:400px">效度證據</th><th>回答的問題</th><th style="width:420px">企劃書的位置</th></tr>
+    <tr class="frag"><td>內容<span class="en">content</span></td><td>題目是否涵蓋構念定義的各個面向</td><td>第三章分類、第四章題庫</td></tr>
+    <tr class="frag"><td>因素結構<span class="en">factorial structure</span></td><td>題目是否形成預設的向度<br>每一題是否落在歸屬的向度</td><td>第五章 EFA</td></tr>
+    <tr class="frag"><td>與其他構念的關係<span class="en">convergent and discriminant</span></td><td>與相近構念相關但可以區別<br>與無關構念不相關</td><td>第六章</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:27px;margin-top:22px">EFA 只回答第二列，與相近構念的區別要由第六章補足</p>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>構念效度的定義與三類效度證據，見課堂互動教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u3" target="_blank" rel="noopener">測量基礎　單元三</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>信度<br><span class=act-en>reliability</span></h1><ul class="refs"><li>McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144</li><li>Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</li><li>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</li><li>Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. Journal of Personality Assessment, 80(1), 99–103. https://doi.org/10.1207/S15327752JPA8001_18</li></ul></div>
+  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -752,7 +776,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="jopt"><span class="box on"></span><span class="chg">Item-rest correlation</span></div>
     </div></div>
   </div>
-  <div class="foot"><span class="lim">畫面為示意，依 JASP 0.95 英文介面繪製；需先從右上角＋號加入 Reliability 模組</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+  <div class="foot"><span class="lim">畫面為示意，依 JASP 0.95 英文介面繪製；需先從右上角＋號加入 Reliability 模組</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
@@ -765,7 +789,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <tr class="frag"><td>情緒反應強度</td><td>C1、C2、C3、C5</td><td>.776</td><td>.780</td></tr>
   </table>
   <div class="warnline frag"><div>α 假設每一題與構念的關聯強度相同；ω 不需要這個假設<br>兩者都報告，以 ω 為主</div></div>
-  <div class="foot"><span class="lim multi">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144<br>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
+  <div class="foot"><span class="lim multi">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144<br>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
 </section>
 
 <section class="slide xl" data-layout="cards" data-density="3">
@@ -777,11 +801,29 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="card frag"><div class="n">.20</div><p style="font-size:26px;line-height:1.6">A5 在向度內的<br>Item-rest correlation</p></div>
   </div>
   <div class="warnline frag"><div>項目分析、因素分析與信度三項結果一致，刪除 A5 的理由才完整<br>只為了提高 α 而刪題，會讓題目內容變窄</div></div>
-  <div class="foot"><span class="lim multi">Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+  <div class="foot"><span class="lim multi">Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">信度的判讀</div>
+  <h2>報告 α 與 ω 時的注意事項</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">逐向度報告<br>三個向度各算一次，不算整份 13 題</li>
+      <li class="frag">.70 為研究初期常用的門檻</li>
+      <li class="frag">題數越多，α 越高<br>報告時一併寫出題數</li>
+      <li class="frag">高於 .90 時，檢查題目內容是否重複</li>
+    </ol>
+    <div class="sheet">
+      <h3>信度與效度</h3>
+      <p style="font-size:28px;line-height:1.65">信度高表示題目一致<br>是否測到目標構念<br>要看效度證據</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. Journal of Personality Assessment, 80(1), 99–103. https://doi.org/10.1207/S15327752JPA8001_18<br>α 的題數與維度陷阱，見課堂互動教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">05</div><h1>企劃書第五章</h1><ul class="refs"></ul></div>
-  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -796,7 +838,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <tr><td>校正題總相關 ≥ .30</td><td>A5 為 .25，未達標準，列入因素分析時檢查；其餘 14 題介於 .34 至 .63</td></tr>
     </table>
   </div>
-  <div class="foot"><span class="lim">附錄 B 附上 Excel 範本的項目分析工作表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+  <div class="foot"><span class="lim">附錄 B 附上 Excel 範本的項目分析工作表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -812,7 +854,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <tr><td>第三次 13 題</td><td>三個因素，負荷量 .54 至 .78，解釋變異量 46%，因素間相關 .34 至 .40</td></tr>
     </table>
   </div>
-  <div class="foot"><span class="lim">最後一次的負荷量表放在 5.2 末尾，表格格式參考前一頁的投影片</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
+  <div class="foot"><span class="lim">最後一次的負荷量表放在 5.2 末尾，表格格式參考前一頁的投影片</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -829,7 +871,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <tr><td>情緒反應強度</td><td>4</td><td>C1、C2、C3、C5</td></tr>
     </table>
   </div>
-  <div class="foot"><span class="lim">5.4 列出每一題的完整題目文字與量尺；向度分數以該向度題目的平均數計算</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
+  <div class="foot"><span class="lim">5.4 列出每一題的完整題目文字與量尺；向度分數以該向度題目的平均數計算</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
 </section>
 
 <section class="slide xl" data-layout="task" data-density="3">
@@ -847,7 +889,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <p style="font-size:28px;line-height:1.65">組別_構念名稱_期中企劃書.pdf<br>組別_構念名稱_期中簡報.pdf</p>
     </div>
   </div>
-  <div class="foot"><span class="lim">作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+  <div class="foot"><span class="lim">作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
 </section>
 
 <section class="slide" data-layout="next" data-density="3">
@@ -858,7 +900,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">練習資料</div><div class="dd"><a class="lnk" href="../Assignments/期中作業_玻璃心預試練習資料.csv" target="_blank" rel="noopener">玻璃心預試練習資料 CSV</a>　<a class="lnk" href="../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">項目分析 Excel 範本</a></div></div>
     <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">複習</div><div class="dd">信度與 α　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">課堂互動教材網站　測量基礎　單元二</a></div></div>
   </div>
-  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
 </section>
 
 
@@ -868,7 +910,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 </div></div>
 
 <div id="bar"><i></i></div>
-<div id="pg">1 / 31</div>
+<div id="pg">1 / 34</div>
 <div id="nav">
   <button id="prev" aria-label="上一頁">←</button>
   <button id="next" aria-label="下一頁">→</button>
