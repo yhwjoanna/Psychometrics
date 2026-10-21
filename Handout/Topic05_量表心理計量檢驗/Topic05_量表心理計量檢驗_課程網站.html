@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 05：量表心理計量檢驗｜員工意向調查</title>
+<style>
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+.mini{width:100%;border-collapse:collapse;margin:10px 0}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mini{min-width:760px}
+.mini td,.mini th{white-space:nowrap;border:1px solid var(--line);padding:6px 8px;text-align:center;font-size:14px}
+.mini th{background:var(--lightblue);color:var(--navy)}
+.mini td.flag{background:#fdecec;color:#a33a32;font-weight:700}
+.mini td.ok{color:#337052;font-weight:700}
+.reveal-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.reveal-btn:active{transform:scale(.97)}
+.hide{display:none}
+.calc label{display:inline-block;padding:4px 0;cursor:pointer}
+.calc input{margin-right:8px}
+td.ans3.flag{background:#fdecec;color:#a33a32;font-weight:700}
+td.ans3.ok{color:#337052;font-weight:700}
+.adv{font-size:14px;color:var(--muted)}
+
+.pt{width:100%;border-collapse:collapse;margin:10px 0}
+.pt td,.pt th{border:1px solid var(--line);padding:7px 10px;text-align:center;font-size:14.5px}
+.pt{min-width:680px}
+.pt th{background:var(--lightblue);color:var(--navy);white-space:nowrap}
+.pt td:first-child{font-weight:700}
+.pt td.hi{font-weight:700;color:var(--navy)}
+.pick{display:flex;gap:6px;justify-content:center}
+.pick button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.pick button.sel-ok{background:var(--palegreen);border-color:var(--green);color:var(--green);font-weight:700}
+.pick button.sel-bad{background:#fdecec;border-color:#c0564f;color:#8f3a34;font-weight:700}
+.pt td.fb{font-size:13.5px;text-align:left;min-width:220px}
+.pt td.fb.ok{color:var(--green)} .pt td.fb.bad{color:#8f3a34}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.steps{counter-reset:s;list-style:none;padding-left:0}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radius:4px;font-size:13.5px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 05：量表心理計量檢驗</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 05<br>量表心理計量檢驗</div>
+    <div class="t2">項目分析、探索性因素分析與信度<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">項目分析</div>
+    <a data-u="u1">單元一：項目分析</a>
+    <div class="grp">探索性因素分析</div>
+    <a data-u="u2">單元二：分析前的檢查</a>
+    <a data-u="u3">單元三：因素數目與轉軸</a>
+    <a data-u="u4">單元四：負荷量與刪題</a>
+    <div class="grp">效度與信度</div>
+    <a data-u="u5">單元五：構念效度與信度</a>
+    <div class="grp">實作</div>
+    <a data-u="u6">單元六：JASP 操作步驟</a>
+    <a data-u="u7">單元七：參考文獻</a>
+  </nav>
+</aside>
+<main>
+
+<section class="unit active" id="u0">
+  <h1>量表心理計量檢驗</h1>
+  <div class="subtitle">員工意向調查課程．Topic 05．對應期中企劃書第五章</div>
+  <p>預試資料收回後，要決定哪些題目留下、量表有幾個向度、每個向度的信度是否足夠。本主題依分析順序說明每一步要看的指標與判讀方式，練習題使用「工作意義感」的示意資料；課堂上的玻璃心練習資料請見<a href="../../Slides/Topic05_課堂投影片.html" target="_blank" rel="noopener">Topic 05 課堂投影片</a>。</p>
+  <div class="flow">
+    <div class="fbox q">草率作答篩檢與反向計分（Topic 04）</div><div class="farrow">↓</div>
+    <div class="fbox">項目分析：決斷值、校正題總相關（企劃書 5.1）</div><div class="farrow">↓</div>
+    <div class="fbox">探索性因素分析：因素數目、負荷量、刪題（企劃書 5.2）</div><div class="farrow">↓</div>
+    <div class="fbox">信度：各向度的 α 與 ω（企劃書 5.3）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">最終量表（企劃書 5.4）</div>
+  </div>
+  <table>
+    <tr><th style="width:28%">工具</th><th>用途</th></tr>
+    <tr><td><a href="../../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">項目分析 Excel 範本</a></td><td>貼上資料後自動計算決斷值與校正題總相關</td></tr>
+    <tr><td>JASP</td><td>探索性因素分析與信度；免費，<a href="https://jasp-stats.org/download/" target="_blank" rel="noopener">官網下載</a></td></tr>
+    <tr><td><a href="../../Assignments/期中作業_玻璃心預試練習資料.csv" target="_blank" rel="noopener">玻璃心預試練習資料</a></td><td>課堂練習用的 185 份模擬資料</td></tr>
+  </table>
+</section>
+
+<section class="unit" id="u1">
+  <h1>單元一：項目分析</h1>
+  <div class="subtitle">item analysis</div>
+  <h2>1.1 決斷值</h2>
+  <p>決斷值（critical ratio，CR）檢查一題能不能區分高分者與低分者。做法是把總分排序，前 27% 為高分組、後 27% 為低分組，比較兩組在這一題的平均數，算出 t 值（Kelley, 1939）。本課程以 t 值 3.00 以上為保留標準。</p>
+  <h2>1.2 校正題總相關</h2>
+  <p>校正題總相關（corrected item-total correlation）是這一題與「其他題目總分」的相關，總分不包含這一題本身。本課程以 .30 以上為保留標準。出現負相關時，多半是反向題沒有反向計分，詳見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u4" target="_blank" rel="noopener">測量基礎　單元四</a>。</p>
+  <h2>1.3 未達標準時的處理</h2>
+  <ol>
+    <li>先看題目內容：是否與構念定義對應、用詞是否籠統</li>
+    <li>標記為「檢查」，進入因素分析後再決定是否刪除</li>
+    <li>刪除時在企劃書 5.1 寫出題號、數值與理由</li>
+  </ol>
+  <h2>1.4 練習：工作意義感 8 題</h2>
+  <p>下表為示意資料。依兩項標準判斷每一題要保留或檢查，按下按鈕後會顯示解析。</p>
+  <div class="scrollx"><table class="pt">
+    <tr><th>題號</th><th>題目</th><th>決斷值 t</th><th>校正題總相關</th><th>你的判斷</th><th>解析</th></tr>
+    <tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M1</td><td style="text-align:left">我的工作對他人有幫助</td><td>8.12</td><td>.58</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M2</td><td style="text-align:left">我認為自己的工作有價值</td><td>7.40</td><td>.52</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="兩項都未達標準；題目描述的是工作環境，與工作意義感無關"><td>M3</td><td style="text-align:left">我的辦公環境很舒適</td><td>2.41</td><td>.21</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M4</td><td style="text-align:left">我做的事情與公司目標有關</td><td>6.85</td><td>.47</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="負相關；這是反向題，先確認是否已反向計分，修正後重算"><td>M5</td><td style="text-align:left">我常懷疑這份工作有什麼意義</td><td>5.10</td><td>−.28</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M6</td><td style="text-align:left">工作讓我覺得人生更充實</td><td>9.03</td><td>.61</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="相關低於 .30；題目內容屬於同事關係，與構念的對應較弱"><td>M7</td><td style="text-align:left">我喜歡和同事一起吃午餐</td><td>4.62</td><td>.27</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M8</td><td style="text-align:left">我能說出自己的工作帶來哪些改變</td><td>7.77</td><td>.55</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr>
+  </table></div>
+  <div class="key"><span class="lb">本單元要點</span>決斷值與校正題總相關要一起看；未達標準的題目先回到題目內容，刪題前再對照因素分析結果。</div>
+</section>
+
+<section class="unit" id="u2">
+  <h1>單元二：分析前的檢查</h1>
+  <div class="subtitle">KMO and Bartlett's test</div>
+  <h2>2.1 KMO 取樣適切性量數</h2>
+  <p>KMO（Kaiser-Meyer-Olkin）檢查題目之間的相關是否足以抽出共同因素，數值介於 0 到 1（Kaiser, 1974）。</p>
+  <table>
+    <tr><th style="width:30%">KMO</th><th>判讀</th></tr>
+    <tr><td>.90 以上</td><td>極佳</td></tr>
+    <tr><td>.80 至 .89</td><td>良好</td></tr>
+    <tr><td>.70 至 .79</td><td>中等</td></tr>
+    <tr><td>.60 至 .69</td><td>普通，可以進行</td></tr>
+    <tr><td>.60 以下</td><td>不適合進行因素分析，先檢查個別題目的 KMO</td></tr>
+  </table>
+  <h2>2.2 Bartlett 球形檢定</h2>
+  <p>檢查題目之間是否彼此無關。p &lt; .05 表示題目之間存在相關，可以進行因素分析。樣本數較大時這項檢定幾乎都會顯著，因此以 KMO 為主要依據。</p>
+  <h2>2.3 樣本數</h2>
+  <p>預試人數至少為題數的 5 倍，且不低於 100 人（Topic 04）。篩檢後的有效樣本也要符合這個標準。</p>
+  <div class="key"><span class="lb">本單元要點</span>KMO 達 .60 以上、Bartlett 檢定顯著、有效樣本足夠，再進行因素分析。</div>
+</section>
+
+<section class="unit" id="u3">
+  <h1>單元三：因素數目與轉軸</h1>
+  <div class="subtitle">number of factors and rotation</div>
+  <h2>3.1 決定因素數目</h2>
+  <table>
+    <tr><th style="width:24%">方法</th><th>做法</th><th style="width:30%">提醒</th></tr>
+    <tr><td>特徵值大於 1</td><td>保留特徵值大於 1 的因素</td><td>容易保留過多因素</td></tr>
+    <tr><td>陡坡圖</td><td>看特徵值曲線在哪裡轉為平緩</td><td>轉折點不明顯時難以判斷</td></tr>
+    <tr><td>平行分析</td><td>實際資料的特徵值高於隨機資料才保留</td><td>JASP 預設方法，建議優先使用</td></tr>
+  </table>
+  <p>平行分析的結果再對照理論上預設的向度數目（Hayton et al., 2004）。兩者不一致時，比較不同因素數目的結果，選擇題目歸屬清楚、能依內容命名的方案，並在企劃書說明理由。</p>
+  <h2>3.2 轉軸</h2>
+  <p>轉軸讓每一題盡量只落在一個因素，結果比較容易解讀。</p>
+  <table>
+    <tr><th style="width:24%">轉軸</th><th>假設</th><th style="width:30%">例子</th></tr>
+    <tr><td>直交轉軸</td><td>因素之間不相關</td><td>varimax</td></tr>
+    <tr><td>斜交轉軸</td><td>允許因素之間相關，並輸出因素間相關</td><td>promax（JASP 預設）、oblimin</td></tr>
+  </table>
+  <p>同一構念的向度通常彼此相關，本課程採用斜交轉軸（Fabrigar et al., 1999）。斜交轉軸時讀 JASP 預設輸出的負荷量表（pattern matrix）。</p>
+  <div class="key"><span class="lb">本單元要點</span>以平行分析決定因素數目並對照理論；採用斜交轉軸，報告因素間相關。</div>
+</section>
+
+<section class="unit" id="u4">
+  <h1>單元四：負荷量與刪題</h1>
+  <div class="subtitle">factor loadings</div>
+  <h2>4.1 讀負荷量</h2>
+  <p>負荷量是題目與因素的關聯強度。每一題找出絕對值最高的負荷量，就是這一題所屬的因素；再對照這一題原本預設的向度。</p>
+  <h2>4.2 刪題規則</h2>
+  <ol>
+    <li>最高的負荷量低於 .40，刪除（Hinkin, 1998）</li>
+    <li>在第二個因素的負荷量也達 .32，屬於跨負荷，刪除（Costello &amp; Osborne, 2005）</li>
+    <li>一次刪一題，從問題最明顯的題目開始，刪完重跑</li>
+    <li>刪題後每個向度至少保留 3 題，題目內容仍涵蓋構念定義</li>
+  </ol>
+  <h2>4.3 因素命名</h2>
+  <p>依每個因素所包含的題目內容命名。與原本預設的向度一致時沿用原名；題目落在非預設的因素時，回頭檢查題目的寫法。</p>
+  <h2>4.4 練習：工作意義感兩個向度</h2>
+  <p>下表為示意資料，W1–W4 預設屬於「工作意義」，W5–W8 預設屬於「工作影響力」。依刪題規則判斷每一題要保留或刪除。</p>
+  <div class="scrollx"><table class="pt">
+    <tr><th>題號</th><th>因素一</th><th>因素二</th><th>你的判斷</th><th>解析</th></tr>
+    <tr data-ans="keep" data-why="只落在因素一"><td>W1</td><td class="hi">.75</td><td class="">.02</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素一"><td>W2</td><td class="hi">.69</td><td class="">.08</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="最高負荷量 .28，低於 .40"><td>W3</td><td class="">.28</td><td class="">.19</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素一"><td>W4</td><td class="hi">.71</td><td class="">−.05</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W5</td><td class="">.04</td><td class="hi">.77</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="因素二 .52、因素一 .36，第二個負荷量達 .32，屬於跨負荷"><td>W6</td><td class="">.36</td><td class="hi">.52</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W7</td><td class="">−.03</td><td class="hi">.70</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W8</td><td class="">.10</td><td class="hi">.66</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr>
+  </table></div>
+  <p class="adv">實際分析時一次只刪一題：先刪 W3，重跑後再確認 W6 是否仍然跨負荷。</p>
+  <div class="key"><span class="lb">本單元要點</span>負荷量低於 .40 或跨負荷的題目，一次刪一題並重跑；每次刪題的理由寫入企劃書 5.2。</div>
+</section>
+
+<section class="unit" id="u5">
+  <h1>單元五：構念效度與信度</h1>
+  <div class="subtitle">construct validity and reliability</div>
+  <h2>5.1 因素結構是構念效度的一項證據</h2>
+  <table>
+    <tr><th style="width:26%">效度證據</th><th>回答的問題</th><th style="width:26%">企劃書的位置</th></tr>
+    <tr><td>內容</td><td>題目是否涵蓋構念定義的各個面向</td><td>第三章、第四章</td></tr>
+    <tr><td>因素結構</td><td>題目是否形成預設的向度</td><td>第五章 EFA</td></tr>
+    <tr><td>與其他構念的關係</td><td>與相近構念相關但可以區別</td><td>第六章</td></tr>
+  </table>
+  <p>構念效度的定義與三類效度證據，見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u3" target="_blank" rel="noopener">測量基礎　單元三</a>。</p>
+  <h2>5.2 信度的計算與判讀</h2>
+  <ol>
+    <li>依因素分析的結果，每個向度分別計算 α 與 ω，不計算整份量表</li>
+    <li>.70 為研究初期常用的門檻</li>
+    <li>題數越多 α 越高，報告時一併寫出題數</li>
+    <li>高於 .90 時，檢查題目內容是否重複（Streiner, 2003）</li>
+    <li>α 假設每一題與構念的關聯強度相同，ω 不需要這個假設，兩者都報告（McNeish, 2018）</li>
+  </ol>
+  <p>JASP 的「if item dropped」欄顯示刪除該題後的信度，可用來確認刪題的決定；只為了提高 α 而刪題，會讓題目內容變窄。α 的題數與維度陷阱，見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a>。</p>
+  <div class="key"><span class="lb">本單元要點</span>EFA 支持向度結構，與相近構念的區別由第六章補足；信度逐向度報告 α 與 ω。</div>
+</section>
+
+<section class="unit" id="u6">
+  <h1>單元六：JASP 操作步驟</h1>
+  <div class="subtitle">JASP 0.95</div>
+  <h2>6.1 開啟資料</h2>
+  <ol class="steps">
+    <li>在 Excel 完成草率作答篩檢與反向計分，另存成 CSV</li>
+    <li>JASP 左上角選單 <code class="k">Open</code>，選擇 CSV 檔</li>
+    <li>確認題目欄位的圖示為尺規（Scale）</li>
+  </ol>
+  <h2>6.2 探索性因素分析</h2>
+  <ol class="steps">
+    <li>上方選單 <code class="k">Factor</code> → <code class="k">Exploratory Factor Analysis</code></li>
+    <li>把所有題目放入 Variables</li>
+    <li>Number of Factors 維持 <code class="k">Parallel analysis</code></li>
+    <li>Analysis Options 維持 <code class="k">Oblique：promax</code> 與 <code class="k">Minimum residual</code></li>
+    <li>Output Options 的 <code class="k">Display loadings above</code> 改成 0</li>
+    <li>勾選 <code class="k">KMO test</code>、<code class="k">Bartlett's test</code>、<code class="k">Scree plot</code></li>
+    <li>刪題時把該題移出 Variables，結果會自動重算</li>
+  </ol>
+  <h2>6.3 信度</h2>
+  <ol class="steps">
+    <li>右上角 <code class="k">＋</code>，勾選 <code class="k">Reliability</code> 模組</li>
+    <li><code class="k">Reliability</code> → <code class="k">Unidimensional Reliability</code></li>
+    <li>每個向度分別放入保留下來的題目</li>
+    <li>勾選 <code class="k">Coefficient ω</code>、<code class="k">Coefficient α</code></li>
+    <li>Individual Item Statistics 勾選 if item dropped 與 <code class="k">Item-rest correlation</code></li>
+  </ol>
+  <div class="note"><span class="lb">提醒</span>選項名稱依 JASP 0.95 英文介面；版本不同時位置可能略有差異。</div>
+</section>
+
+<section class="unit" id="u7">
+  <h1>單元七：參考文獻</h1>
+  <div class="refline">Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. <i>Practical Assessment, Research, and Evaluation, 10</i>, Article 7. <a href="https://doi.org/10.7275/jyj1-4868" target="_blank" rel="noopener">https://doi.org/10.7275/jyj1-4868</a></div><div class="refline">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. <i>Psychological Methods, 4</i>(3), 272–299. <a href="https://doi.org/10.1037/1082-989X.4.3.272" target="_blank" rel="noopener">https://doi.org/10.1037/1082-989X.4.3.272</a></div><div class="refline">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. <i>Organizational Research Methods, 7</i>(2), 191–205. <a href="https://doi.org/10.1177/1094428104263675" target="_blank" rel="noopener">https://doi.org/10.1177/1094428104263675</a></div><div class="refline">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. <i>Organizational Research Methods, 1</i>(1), 104–121. <a href="https://doi.org/10.1177/109442819800100106" target="_blank" rel="noopener">https://doi.org/10.1177/109442819800100106</a></div><div class="refline">JASP Team. (2025). <i>JASP</i> (Version 0.95) [Computer software]. <a href="https://jasp-stats.org" target="_blank" rel="noopener">https://jasp-stats.org</a></div><div class="refline">Kaiser, H. F. (1974). An index of factorial simplicity. <i>Psychometrika, 39</i>(1), 31–36. <a href="https://doi.org/10.1007/BF02291575" target="_blank" rel="noopener">https://doi.org/10.1007/BF02291575</a></div><div class="refline">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. <i>Journal of Educational Psychology, 30</i>(1), 17–24. <a href="https://doi.org/10.1037/h0057123" target="_blank" rel="noopener">https://doi.org/10.1037/h0057123</a></div><div class="refline">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. <i>Psychological Methods, 23</i>(3), 412–433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a></div><div class="refline">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. <i>Journal of Personality Assessment, 80</i>(1), 99–103. <a href="https://doi.org/10.1207/S15327752JPA8001_18" target="_blank" rel="noopener">https://doi.org/10.1207/S15327752JPA8001_18</a></div>
+  <p style="margin-top:14px">作業說明：<a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></p>
+</section>
+
+</main>
+</div>
+<script>
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+/* 支援網址錨點深連結，例如 ...html#u2 開頁時直接切換到單元二 */
+if (location.hash) {
+  var hashTarget = document.querySelector('#nav a[data-u="' + location.hash.slice(1) + '"]');
+  if (hashTarget) hashTarget.click();
+}
+function pick(btn, choice){
+  var tr = btn.closest('tr'), ok = tr.dataset.ans === choice, fb = tr.querySelector('.fb');
+  tr.querySelectorAll('.pick button').forEach(function(b){b.className='';});
+  btn.className = ok ? 'sel-ok' : 'sel-bad';
+  fb.className = 'fb ' + (ok ? 'ok' : 'bad');
+  fb.textContent = (ok ? '正確：' : '再想想：') + tr.dataset.why;
+}
+</script>
+</body>
+</html>
