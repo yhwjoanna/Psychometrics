@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>員工意向調查｜Topic 05 課堂投影片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --a1:#EAD3D6;--a2:#C98F98;--a3:#A25462;--a4:#7A2033;--ok:#4B6B4F;--warn:#8A5A1E;
+  --serif:'Newsreader','Noto Serif TC','Songti TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei UI',sans-serif;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0F0D0B;font-family:var(--sans);color:var(--ink-2);-webkit-font-smoothing:antialiased}
+button{font:inherit}
+
+/* ---------- 外殼：固定畫布縮放 ---------- */
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{width:1920px;height:1080px;position:absolute;left:0;top:0;transform-origin:0 0;
+  transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--s,1))}
+.slide{position:absolute;inset:0;background:var(--cream);padding:110px 140px 130px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
+.slide.dark{background:var(--ink);color:#D9D2C6}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--cream)}
+
+/* 控制列 */
+#bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);z-index:20}
+#bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .32s var(--ease)}
+#nav{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;z-index:20;transition:opacity .32s var(--ease)}
+#nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(28,24,21,.72);
+  color:#EDE6D8;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:transform .1s ease-out,background .2s var(--ease);backdrop-filter:blur(10px)}
+#nav button:active{transform:scale(.94)}
+#nav button:hover{background:rgba(122,32,51,.85)}
+#pg{position:fixed;left:20px;bottom:16px;font-size:13px;color:rgba(237,230,216,.6);z-index:20;font-variant-numeric:tabular-nums;transition:opacity .32s var(--ease)}
+body.fs.idle #nav,body.fs.idle #pg{opacity:0;pointer-events:none}
+body.fs.idle{cursor:none}
+
+/* ---------- 字級階梯（1920 畫布）---------- */
+h1,h2,h3{font-family:var(--serif);color:var(--ink);font-weight:600;letter-spacing:-.015em}
+h1{font-size:96px;line-height:1.08}
+h2{font-size:58px;line-height:1.3}
+h3{font-size:36px;line-height:1.35}
+p,li,td,th{font-size:30px;line-height:1.6}
+.kicker{position:absolute;top:100px;left:140px;display:flex;align-items:center;gap:18px;font-size:26px;font-weight:700;letter-spacing:.16em;color:var(--ink);margin:0}
+.slide{padding-top:170px}
+.dark .kicker{color:var(--a2)}
+.kicker .sup{letter-spacing:.04em;font-weight:600;font-size:18px;color:var(--cream);background:var(--accent);padding:5px 12px;border-radius:6px}
+.dark .kicker .sup{background:var(--a2);color:var(--ink)}
+.foot{position:absolute;left:140px;right:140px;bottom:52px;display:flex;justify-content:space-between;gap:40px;
+  font-size:20px;line-height:1.45;color:var(--ink-2);border-top:1px solid var(--line-2);padding-top:16px}
+.dark .foot{color:#8F877B;border-top-color:#33302B}
+.foot .lim{max-width:900px}
+.foot .mid{white-space:nowrap}
+.foot .multi{font-size:13px;line-height:1.35;max-width:1050px}
+.foot>span:last-child{min-width:40px;text-align:right}
+.foot-fig{left:60px;right:60px;bottom:14px;padding-top:10px;align-items:flex-end}
+.foot-fig .ref{font-size:12px!important;line-height:1.35;max-width:1300px}
+.lead{font-size:34px;line-height:1.65;color:var(--ink-2);max-width:32em}
+.dark .lead{color:#D9D2C6}
+.muted{color:var(--ink-2)}
+.acc{color:var(--accent)}
+.def{color:var(--accent);font-weight:600}
+.num{font-family:var(--serif);font-weight:600;letter-spacing:-.04em;color:var(--accent);line-height:.9}
+.dark .num{color:#E3B7BE}
+
+/* 分段揭露 */
+.frag{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.frag.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .slide,.frag{transition:opacity .2s ease}
+  .frag{transform:none}
+}
+
+/* ---------- 版型 ---------- */
+/* 封面 */
+.cover{display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.cover .sub{font-family:var(--serif);font-size:40px;color:var(--ink-2);margin-top:28px;line-height:1.45}
+.cover .meta{margin-top:56px;font-size:24px;color:var(--ink-2);display:flex;gap:40px}
+
+/* 情境頁 */
+.scene{display:flex;flex-direction:column;justify-content:center;height:100%}
+.scene .who{font-size:24px;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:34px}
+.scene p{font-family:var(--serif);font-size:52px;line-height:1.5;max-width:26em;color:var(--ink)}
+.scene .q{margin-top:44px;font-family:var(--sans);font-size:34px;color:var(--accent);font-weight:600}
+
+/* 大字頁 */
+.big{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:60px;height:100%}
+.big .num{font-size:360px}
+.big .num small{font-size:140px;letter-spacing:0}
+.big h2{margin-bottom:26px}
+.big p{max-width:22em}
+
+/* 三數並列 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.trio .cell{border-top:3px solid var(--line-2);padding-top:26px}
+.trio .cell.hi{border-top-color:var(--accent)}
+.trio .num{font-size:150px;margin-bottom:14px}
+.trio p{font-size:27px;line-height:1.5;color:var(--ink)}
+
+/* 表格 */
+table{border-collapse:collapse;width:100%}
+th{font-family:var(--serif);font-weight:600;font-size:32px;text-align:left;padding:18px 24px;color:var(--ink);border-bottom:2px solid var(--ink)}
+td{padding:20px 24px;border-top:1px solid var(--line-2);vertical-align:top;font-size:27px;line-height:1.5}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.hi-col{background:var(--paper)}
+th.hi-col{color:var(--accent)}
+table.tight td,table.tight th{padding:13px 20px;font-size:24px}
+table.tight th{font-size:26px;line-height:1.3}
+
+/* 圖文兩欄 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;height:100%}
+.split h2{margin-bottom:26px}
+
+/* 卡片列 */
+.cards{display:grid;gap:26px;margin-top:20px;align-items:start}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.cards.c5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:30px 34px}
+.card .n{font-family:var(--serif);font-size:44px;color:var(--accent);font-weight:600;line-height:1;margin-bottom:16px}
+.card h3{font-size:30px;margin-bottom:12px}
+.card p{font-size:24px;line-height:1.55;color:var(--ink)}
+.card.dark{background:var(--ink);border-color:var(--ink);color:#D9D2C6}
+.card.dark h3{color:var(--cream)}
+.card.dark p{color:#C9C2B7}
+.card.dark .n{color:#E3B7BE}
+
+/* 橫向卡片列 */
+.rows{display:flex;flex-direction:column;gap:18px}
+.rows .row{display:grid;grid-template-columns:110px 300px 1fr;align-items:center;gap:30px;background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 40px}
+.rows .n{font-family:var(--serif);font-size:48px;color:var(--accent);font-weight:600;line-height:1}
+.rows .tt{font-family:var(--serif);font-size:34px;color:var(--ink);font-weight:600}
+.rows .dd{font-size:25px;line-height:1.55;color:var(--ink)}
+.rd{display:flex;gap:14px;align-items:flex-start}
+.rd+.rd{margin-top:10px}
+.rd-no{flex:0 0 34px;width:34px;height:34px;line-height:34px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700;margin-top:3px}
+.lnk{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:6px}
+.tp-grid{gap:24px;margin-top:30px}
+.card.tp{padding:28px 32px 24px}
+.tp-no{font-family:var(--serif);font-size:18px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-bottom:6px}
+.card.tp h3{font-size:36px;margin-bottom:14px;line-height:1.2}
+.tp-en{display:block;font-family:var(--sans);font-size:20px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card.tp{display:flex;flex-direction:column}
+.card.tp p{font-size:23px;line-height:1.5}
+.tp-links{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line-2);font-size:19px;color:var(--ink-3)}
+.tp-links .lnk{font-size:19px}
+.cards.eq{align-items:stretch}
+.cards.eq>.card{height:100%}
+.pdf-link{position:absolute;top:100px;right:140px;font-size:20px;color:var(--ink-2);border:1px solid var(--line-2);padding:8px 18px;border-radius:999px;background:var(--paper);text-decoration:none;transition:transform .1s ease-out,border-color .2s var(--ease)}
+.pdf-link:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-link:active{transform:scale(.97)}
+
+/* 光譜 */
+.spec .bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.spec .st{padding:40px 34px;border-radius:8px;min-height:330px;color:var(--cream)}
+.spec .st b{display:block;font-family:var(--serif);font-size:42px;font-weight:600;margin-bottom:16px}
+.spec .st span{font-size:26px;line-height:1.55;display:block}
+.s1{background:var(--a1);color:var(--ink)!important}.s2{background:var(--a2);color:var(--ink)!important}.s3{background:var(--a3)}.s4{background:var(--a4)}
+.spec .pct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;font-size:24px;color:var(--ink-2)}
+.spec .pct b{color:var(--ink);font-family:var(--serif);font-size:34px;margin-right:8px;font-weight:600}
+
+/* 互動提示頁 */
+.ask{display:flex;flex-direction:column;justify-content:center;height:100%}
+.ask h2{max-width:28em;margin-bottom:56px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1500px;align-items:start}
+.opt{border:1px solid var(--line-2);background:var(--paper);border-radius:14px;padding:16px 30px;font-size:32px;line-height:1.4;display:flex;align-items:center;gap:22px}
+.opt b{font-weight:600;font-family:var(--serif);color:var(--accent);font-size:34px;font-weight:600}
+
+/* 算式 */
+.calc{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+.calc .row{display:grid;grid-template-columns:1fr 360px;align-items:baseline;gap:40px;border-top:1px solid var(--line-2);padding-top:22px}
+.calc .row .lbl{font-size:30px;color:var(--ink-2)}
+.calc .row .val{font-family:var(--serif);font-size:56px;color:var(--ink);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.calc .row.total .val{color:var(--accent);font-size:72px}
+.calc .row.total .lbl{font-weight:700;color:var(--ink)}
+
+/* 提醒帶 */
+.warnline{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:20px 26px;border-left:4px solid var(--warn);background:var(--cream-2);border-radius:0 12px 12px 0;font-size:24px;line-height:1.55;color:var(--ink-2)}
+
+/* 補充頁角標 */
+.plus{position:absolute;top:110px;right:140px;font-size:19px;letter-spacing:.14em;color:var(--ink);border:1px solid var(--line-2);padding:8px 16px;border-radius:999px;background:var(--paper)}
+.dark .plus{color:#B9AFA2;border-color:#3A3631;background:transparent}
+
+/* 章節幕 */
+.act{display:flex;flex-direction:column;justify-content:center;height:100%}
+.act .no{font-family:var(--serif);font-size:200px;color:var(--a1);line-height:1;letter-spacing:-.04em}
+.act h1{margin-top:10px}
+.act .refs{margin-top:34px;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:1500px}
+.act .refs li{font-size:21px;line-height:1.5;color:var(--ink-2);padding-left:2em;text-indent:-2em}
+.act .lead-in{margin-top:30px;font-size:30px;color:var(--ink-2);max-width:28em;line-height:1.6}
+.slide.act-page,.slide.light-scene{background:var(--accent);color:var(--cream)}
+.slide.act-page h1,.slide.act-page h2,.slide.light-scene h1,.slide.light-scene h2,.slide.light-scene p,.slide.light-scene .scene p{color:var(--cream)}
+.slide.act-page .kicker,.slide.light-scene .kicker,.slide.act-page .foot,.slide.light-scene .foot,.slide.act-page .foot span,.slide.light-scene .foot span{color:var(--cream)}
+.slide.act-page .foot,.slide.light-scene .foot{border-top-color:rgba(251,248,242,.35)}
+.slide.act-page .act .no{color:rgba(251,248,242,.28)}
+.act-en{font-size:52px;color:rgba(251,248,242,.8);font-weight:500}
+.slide.act-page .act .refs li,.slide.act-page .act .lead-in{color:rgba(251,248,242,.85)}
+.slide.light-scene .scene .who{color:rgba(251,248,242,.75)}
+.slide.light-scene .scene .q{color:#F6D9DC}
+.slide.light-scene .cover .sub,.slide.light-scene .cover .meta{color:rgba(251,248,242,.85)}
+.slide.light-scene .pdf-link{color:var(--cream);border-color:rgba(251,248,242,.5);background:transparent}
+.slide.light-scene .pdf-link:hover{background:rgba(251,248,242,.12)}
+
+/* ---------- 手機：長頁文件 ---------- */
+@media (max-width:900px){
+  html,body{height:auto;overflow:auto;background:var(--cream)}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:auto;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;transform-origin:0 0;opacity:1;visibility:visible;margin:0 0 var(--mgap,12px);transition:none}
+  .frag{opacity:1;transform:none}
+  #nav,#bar,#pg{display:none}
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:var(--cream);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;opacity:1!important;visibility:visible!important;transition:none;page-break-after:always;break-after:page}
+  .frag{opacity:1!important;transform:none!important}
+  #nav,#bar,#pg,.pdf-link{display:none!important}
+}
+
+/* Topic 03 補充樣式 */
+/* Topic 03 字級放大：1920 畫布的閱讀距離 */
+.card{padding:40px 44px}
+.card .n{font-size:54px;margin-bottom:18px}
+.card h3{font-size:36px;margin-bottom:14px}
+.card p{font-size:29px;line-height:1.6}
+.card .en{font-size:22px}
+.card .rel{font-size:26px;margin-top:18px;padding-top:16px}
+.card.defc h3{font-size:38px}
+.card.defc p{font-size:28px}
+.cards{gap:32px}
+table.tight td{font-size:29px;padding:20px 22px}
+table.tight th{font-size:31px;padding:16px 22px}
+td{font-size:30px}
+td .en,th .en{font-size:21px}
+.warnline{font-size:28px;padding:24px 30px;margin-top:36px}
+.calc{gap:30px}
+.calc .row .lbl{font-size:34px}
+.calc .row .val{font-size:64px}
+.calc .row.total .val{font-size:84px}
+.rows .dd{font-size:30px}
+.rows .tt{font-size:36px}
+.opt{font-size:36px;padding:26px 34px}
+.opt b{font-size:40px}
+.ask h2{margin-bottom:64px}
+h2{font-size:62px}
+.cards.eq>.card{min-height:300px}
+.card.defc{min-height:430px;display:flex;flex-direction:column}
+.card.defc p{font-size:31px;line-height:1.6}
+.card.defc h3{font-size:42px}
+.card.defc .rel{margin-top:auto;font-size:28px}
+.calc .row{padding-top:30px}
+.calc{gap:40px;margin-top:44px}
+
+.task{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:start;margin-top:44px}
+.task ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:28px}
+.task ol li{counter-increment:t;position:relative;padding-left:72px;font-size:34px;line-height:1.5;color:var(--ink)}
+.task ol li::before{content:counter(t);position:absolute;left:0;top:4px;width:48px;height:48px;line-height:48px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:25px;font-weight:700}
+.sheet{background:var(--paper);border:1px dashed var(--a2);border-radius:16px;padding:36px 42px}
+.sheet h3{font-size:36px;margin-bottom:16px;color:var(--accent)}
+.sheet .ln{border-bottom:1px solid var(--line-2);padding:18px 0;font-size:30px;color:var(--ink-2)}
+.timebox{position:absolute;top:96px;right:140px;font-size:22px;font-weight:700;color:var(--cream);background:var(--accent);padding:8px 20px;border-radius:999px;letter-spacing:.06em}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.card .en{display:block;font-family:var(--sans);font-size:19px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card .rel{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-2);font-size:21px;color:var(--accent);font-weight:600}
+.card.defc h3{font-size:30px;margin-bottom:10px;line-height:1.25}
+.card.defc p{font-size:22px}
+td .en,th .en{display:block;font-family:var(--sans);font-size:18px;font-weight:500;color:var(--ink-3)}
+.bad{color:var(--warn)}
+
+.xt2 tr.r1 td{background:var(--accent-tint)}
+.xt2 tr.r2 td{background:#F6EBDD}
+.xt td{min-width:150px;height:96px;font-size:34px;vertical-align:middle}
+.xt th{font-size:32px;text-align:center}
+.mk{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:700;font-size:28px}
+.mk1{background:var(--accent);color:#fff}
+.mk2{background:var(--warn);color:#fff}
+.big-x td{font-size:44px;height:120px}
+.big-x td.sm{color:var(--ink-3);font-size:34px}
+.kbar{display:flex;flex-direction:column;gap:34px;margin-top:30px}
+.kb-row{display:grid;grid-template-columns:330px 1fr 150px;align-items:center;gap:30px}
+.kb-lb{font-size:34px;font-weight:700;color:var(--ink);line-height:1.3}
+.kb-lb small{font-size:22px;font-weight:500;color:var(--ink-3)}
+.kb-track{position:relative;height:64px;background:var(--cream-2);border-radius:10px;overflow:hidden;display:flex}
+.kb-fill{height:100%;background:var(--ink-2)}
+.kb-fill.chance{background:#C9BFAF}
+.kb-fill.kap{background:var(--accent)}
+.kb-gap{position:absolute;top:0;height:100%;border:3px dashed var(--accent);border-radius:0 10px 10px 0;box-sizing:border-box}
+.kb-v{font-family:var(--serif);font-size:64px;font-weight:600;color:var(--ink);text-align:right}
+.kb-v.acc{color:var(--accent);font-size:80px}
+.kscale .card{min-height:380px}
+.kscale .n{font-size:48px}
+.kscale h3{font-size:44px}
+.kscale p{font-size:30px}
+.ks-pass{border-top:10px solid #2f6b4c}.ks-pass .n,.ks-pass h3{color:#2f6b4c}
+.ks-amber{border-top:10px solid #8a5a12}.ks-amber .n,.ks-amber h3{color:#8a5a12}
+.ks-fail{border-top:10px solid #a33a32}.ks-fail .n,.ks-fail h3{color:#a33a32}
+.ks-severe{background:#8f2a24!important;border-color:#8f2a24!important;border-top:10px solid #5e1915!important}.ks-severe .n,.ks-severe h3,.ks-severe p{color:#fff!important}
+
+/* 問卷模擬畫面 */
+.mockwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start;margin-top:10px}
+.mock{background:#fff;border:1px solid var(--line-2);border-radius:16px;box-shadow:0 18px 40px rgba(28,24,21,.10);overflow:hidden}
+.mock-bar{height:44px;background:var(--cream-2);border-bottom:1px solid var(--line-2);display:flex;align-items:center;gap:10px;padding:0 18px}
+.mock-bar i{width:13px;height:13px;border-radius:50%;background:#D9CFB9;display:block}
+.mock-bar span{margin-left:16px;font-size:18px;color:var(--ink-3);background:#fff;border-radius:6px;padding:3px 14px}
+.mock-body{padding:30px 40px 34px}
+.mock-title{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--ink);border-top:8px solid var(--accent);margin:-30px -40px 22px;padding:24px 40px 0}
+.mock-body p{font-size:21px;line-height:1.55;color:var(--ink-2);margin-bottom:9px}
+.mock-q{border:1px solid var(--line);border-radius:10px;padding:10px 20px;margin-top:10px}
+.mock-q b{display:block;font-size:24px;color:var(--ink);margin-bottom:8px}
+.mock-q .hint{font-size:19px;color:var(--ink-3);margin-bottom:2px}
+.mock-in{height:36px;border-bottom:2px solid var(--line-2);font-size:19px;color:#B5AC9E;padding-top:10px}
+.mock-chk{font-size:22px;color:var(--ink);margin-top:10px}
+.mock-chk::before{content:"";display:inline-block;width:22px;height:22px;border:2px solid var(--ink-3);border-radius:4px;vertical-align:-4px;margin-right:12px}
+.notes{display:flex;flex-direction:column;gap:20px}
+.nt{border-left:5px solid var(--accent);background:var(--paper);border-radius:0 12px 12px 0;padding:18px 24px;font-size:26px;line-height:1.5;color:var(--ink)}
+.nt b{display:block;color:var(--accent);font-size:27px;margin-bottom:4px}
+.mock2 .mock-body{padding:18px 34px 20px}
+.mock2 .mock-q{padding:6px 18px;margin-top:7px}
+.mock2 .mock-q b{font-size:22px;margin-bottom:2px}
+.mock2 .mock-q .hint{font-size:17px}
+.mock2 .mock-in{height:26px;padding-top:2px;font-size:17px}
+.mock2 h2{margin-bottom:12px!important}
+.dec td{font-size:27px!important;line-height:1.5;vertical-align:middle}
+.dec td:first-child{font-weight:500;color:var(--ink)}
+.dec td.keep{color:var(--ok);font-weight:700}
+.dec td.drop{color:var(--warn);text-decoration:line-through;text-decoration-thickness:2px}
+.cbx td{font-size:25px!important;vertical-align:top}
+.card .cite{font-size:21px;color:var(--ink-3);margin:2px 0 4px;font-family:var(--sans)}
+.flow td{font-size:25px!important;vertical-align:top}
+.flow td:first-child{font-family:var(--serif);color:var(--accent);font-size:34px!important}
+.flow .rule{display:inline-block;margin-top:6px;font-size:19px;font-weight:700;color:#fff;background:var(--accent);padding:2px 10px;border-radius:6px}
+.xtabs{display:flex;gap:4px;margin:0 0 6px;border-bottom:2px solid var(--line-2)}
+.xtabs span{font-size:19px;padding:6px 16px;border:1px solid var(--line-2);border-bottom:0;border-radius:8px 8px 0 0;background:var(--cream-2);color:var(--ink-2)}
+.xtabs span.on{background:#fff;color:var(--accent);font-weight:700;border-color:var(--accent)}
+.xlt td{font-size:26px!important}
+.xsheet{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:16px 18px;font-size:22px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.xs-h,.xs-r{display:grid;grid-template-columns:70px 1fr 220px;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line)}
+.xs-h{font-weight:700;color:#fff;background:#1C2F52;border-radius:6px}
+.xs-r .dd{background:#FFF4C2;border:1px solid #D9CFB9;border-radius:4px;padding:0 8px}
+.xs-r .dd.open{outline:2px solid var(--accent)}
+.xs-menu{margin:4px 0 0 auto;width:240px;display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:6px;background:#fff}
+.xs-menu span{padding:6px 12px;border-bottom:1px solid var(--line)}
+.xs-menu span.u{color:var(--ink-3)}
+.xsheet.lab .xs-h,.xsheet.lab .xs-r{grid-template-columns:1fr 110px 160px}
+.xs-kv{display:grid;grid-template-columns:220px 1fr;padding:10px 8px;border-bottom:1px solid var(--line);align-items:center}
+.xs-kv b{font-size:26px}
+.xs-kv.pass{background:#EAF4EE;color:#2f6b4c}
+/* 稀疏頁放大 */
+.cards.eq>.card.defc{min-height:470px;padding:42px 44px}
+.card.defc h3{font-size:46px}
+.card.defc .en{font-size:24px;margin-top:8px}
+.card.defc p{font-size:33px;margin-top:10px}
+.card.defc .rel{font-size:30px}
+.xl .card{min-height:400px}
+.xl .card p{font-size:34px}
+.xl .card .n{font-size:64px}
+.xl h2{font-size:72px}
+.xl .lead{font-size:38px}
+.xl .warnline{font-size:32px}
+.xl .task ol li{font-size:37px}
+.xl .sheet p{font-size:32px!important}
+.xl .opt{font-size:40px;padding:36px 40px}
+.xl .opts{gap:36px;max-width:none}
+.xl .calc .row .lbl{font-size:40px}
+.xl .calc .row .val{font-size:84px}
+.xl .calc .row.total .val{font-size:100px}
+.xl .calc .row{padding-top:40px}
+
+.big-t td{font-size:34px;padding:34px 26px}
+table.cmp td{font-size:27px;padding:12px 20px}
+table.cmp th{font-size:28px;padding:12px 20px}
+.card.tp p{font-size:22px}
+.card.tp h3{font-size:36px}
+.big-t th{font-size:34px}
+.xt td,.xt th{text-align:center}
+.xt td:first-child,.xt th:first-child{text-align:left}
+.xt td.dg{background:var(--accent-tint);color:var(--accent);font-weight:700}
+.good{color:var(--ok)}
+
+.t4 td{font-size:27px!important;vertical-align:top}
+.t4 td:first-child{white-space:normal}
+.ico{vertical-align:middle!important;padding:6px 10px!important}
+.nt td{vertical-align:middle;font-size:27px!important;padding:13px 18px!important}
+.nt th{font-size:26px!important}
+.nt td.req{font-weight:700;color:var(--accent)}
+.nt tr.floor td{background:#FBF2E1}
+.t4s td{font-size:24px!important;padding:14px 16px!important}
+.t4s th{font-size:26px!important}
+.wpage{background:#fff;border:1px solid #D9CFB9;box-shadow:0 14px 34px rgba(28,24,21,.12);padding:34px 46px;font-family:"BiauKai","DFKai-SB","標楷體",var(--serif);position:relative}
+.wpage .wh{font-size:34px;font-weight:700;color:#1C2F52;margin-bottom:12px}
+.wpage p{font-size:27px;line-height:1.7;color:#1C1815;margin-bottom:8px}
+.wpage table td,.wpage table th{font-size:26px!important;padding:11px 14px!important;border:1px solid #BFB6A6!important;font-family:inherit;vertical-align:top}
+.wpage table th{background:#E3EAF4;color:#1C2F52;font-weight:700}
+.wpage table td:first-child{font-weight:400;white-space:normal}
+.wstamp{position:absolute;top:18px;right:22px;font-family:var(--sans);font-size:18px;font-weight:700;color:var(--accent);border:2px solid var(--accent);border-radius:6px;padding:2px 10px}
+.wpage table.wsm td,.wpage table.wsm th{font-size:20px!important;padding:7px 10px!important}
+.wpage td.hl{background:#F3E3E4;color:#7A2033;font-weight:700}
+.dmock td.hl2{background:#F3E3E4;color:#7A2033;font-weight:700}
+.xlist table td,.xlist table th{text-align:left!important}
+.xlist td.hl2{text-align:center!important}
+.xcap{font-size:19px;font-weight:700;color:#1C2F52;padding:2px 4px 6px}
+.dmock{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:10px 14px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.dmock table td,.dmock table th{font-size:22px!important;padding:8px 10px!important;text-align:center;border-top:1px solid var(--line)}
+.dmock table th{background:#1C2F52;color:#fff;font-family:var(--sans);font-size:20px!important}
+.dmock td.flag{background:#FBECEB;color:#A33A32;font-weight:700}
+.dmock td.ok{color:#2f6b4c;font-weight:700}
+
+.lt td,.lt th{font-size:22px!important;padding:6px 14px!important;text-align:center;font-family:var(--sans)}
+.lt th{background:#1C2F52;color:#fff;font-size:20px!important}
+.lt td:first-child{text-align:left;font-weight:700}
+.lt td.pm{font-weight:700;color:#1C2F52}
+.lt td.bad{background:#FBECEB;color:#A33A32;font-weight:700}
+.lt tr.del td{background:#FBECEB}
+.lt tr.gap td{border-top:3px solid #1C2F52}
+.itms td{font-size:22px!important;padding:7px 12px!important}
+.itms th{font-size:22px!important}
+.jm{background:#fff;border:1px solid #CFC6B4;border-radius:12px;box-shadow:0 12px 30px rgba(28,24,21,.10);overflow:hidden;font-family:var(--sans)}
+.jm .jbar{background:#EDEFF3;border-bottom:1px solid #CFC6B4;padding:10px 18px;font-size:19px;color:#33568E;display:flex;gap:18px;flex-wrap:nowrap;white-space:nowrap}
+.jm .jbar b{color:#1C2F52}
+.jm .jbody{padding:16px 22px;font-size:21px;line-height:1.55}
+.jm .jsec{font-weight:700;color:#1C2F52;margin-top:10px}
+.jm .jopt{display:flex;gap:10px;align-items:center;padding:2px 0}
+.jm .box{display:inline-block;width:18px;height:18px;border:2px solid #33568E;border-radius:3px;position:relative;flex:none}
+.jm .box.on::after{content:"";position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #33568E;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.jm .rad{display:inline-block;width:18px;height:18px;border:2px solid #33568E;border-radius:50%;position:relative;flex:none}
+.jm .rad.on::after{content:"";position:absolute;left:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#33568E}
+.jm .chg{background:#F3E3E4;color:#7A2033;font-weight:700;border-radius:4px;padding:0 6px}
+.jm .def{color:#5F6E84;font-size:18px}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:10px}
+.stat{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 30px}
+.stat .v{font-family:var(--serif);font-size:64px;color:var(--accent);font-weight:600;line-height:1.1}
+.stat .k{font-size:26px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.stat p{font-size:24px;line-height:1.55;color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="deck">
+
+<section class="slide light-scene" data-layout="cover" data-density="1">
+  <div class="cover">
+    <div class="kicker">員工意向調查　HRM922　碩士在職專班</div>
+    <a class="pdf-link" href="#" onclick="event.preventDefault();window.print();" title="開啟瀏覽器列印，目的地選擇另存為 PDF">另存 PDF</a>
+    <h1>量表心理計量檢驗與因素分析實務</h1>
+    <div class="sub">Topic 05　項目分析、探索性因素分析與信度<br>案例：玻璃心可以量嗎？（續）</div>
+    <div class="meta"><span>國立中山大學 人力資源管理研究所</span><span>王豫萱</span><span>2026 Fall</span></div>
+  </div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">開場</div>
+  <div class="scene">
+    <div class="who">預試資料收回來了</div>
+    <p>15 題、三個向度，185 份問卷<br>篩檢之後還有 172 份</p>
+    <p class="q frag">15 題都要留下來嗎？向度真的是三個嗎？</p>
+  </div>
+  <div class="foot"><span class="lim">Topic 05</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>01</span></div>
+</section>
+
+<section class="slide" data-layout="map" data-density="3">
+  <div class="kicker">今天的流程</div>
+  <h2>今天的流程</h2>
+  <div class="rows" style="margin-top:24px;gap:14px">
+    <div class="row frag" style="padding:16px 40px"><div class="n">一</div><div class="tt">資料準備</div><div class="dd">草率作答篩檢、反向計分、匯入 JASP</div></div>
+    <div class="row frag" style="padding:16px 40px"><div class="n">二</div><div class="tt">項目分析</div><div class="dd">決斷值與校正題總相關，用 Excel 範本計算</div></div>
+    <div class="row frag" style="padding:16px 40px"><div class="n">三</div><div class="tt">探索性因素分析</div><div class="dd">決定因素數目、讀負荷量、刪題後重跑</div></div>
+    <div class="row frag" style="padding:16px 40px"><div class="n">四</div><div class="tt">信度</div><div class="dd">各向度的 Cronbach’s α 與 McDonald’s ω</div></div>
+    <div class="row frag" style="padding:16px 40px"><div class="n">五</div><div class="tt">企劃書第五章</div><div class="dd">5.1 到 5.4 的填寫範例</div></div>
+  </div>
+  <div class="foot"><span class="lim">Topic 05</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">課堂練習資料</div>
+  <h2 style="margin-bottom:16px">玻璃心預試資料：15 題、三個向度</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+    <div class="card frag" style="padding:20px 24px"><div class="n" style="font-size:30px;margin-bottom:10px">平復所需時間</div><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>A1</b>　被指出錯誤後，<br>我很難把注意力轉回其他工作</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>A2</b>　收到負面回饋後，<br>我會好幾天反覆想著那句評語</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>A3</b>　被批評的那天，<br>我晚上很難入睡</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>A4</b>　被主管糾正後，<br>我需要很長的時間才能恢復工作狀態</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>A5</b>　我很在意別人對我的看法</p></div><div class="card frag" style="padding:20px 24px"><div class="n" style="font-size:30px;margin-bottom:10px">迴避回饋</div><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>B1</b>　收到負面評價後，<br>我會延後與主管一對一討論的時間</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>B2</b>　收到批評後，<br>我會主動向對方詢問如何改進（反向題）</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>B3</b>　被批評過之後，<br>我會避免再和那位同事討論工作</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>B4</b>　我會避開可能收到評語的場合，<br>例如成果發表會</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>B5</b>　被指出問題後，<br>我會改用 Email 聯絡，<br>避免當面談</p></div><div class="card frag" style="padding:20px 24px"><div class="n" style="font-size:30px;margin-bottom:10px">情緒反應強度</div><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>C1</b>　當眾被質疑時，<br>我很難維持平穩的語氣</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>C2</b>　被批評時，<br>我會眼眶泛紅或說話哽咽</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>C3</b>　被指出錯誤時，<br>我會立刻覺得很生氣</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>C4</b>　被批評後，<br>我會難過好一陣子</p><p style="font-size:21px;line-height:1.5;margin-bottom:8px"><b>C5</b>　被質疑時，<br>我會當場大聲辯解</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:16px">六點量表，1 非常不同意到 6 非常同意<br>另有作答秒數與注意力檢核題兩欄</p>
+  <div class="foot"><span class="lim">模擬資料，供課堂練習；下載　<a class="lnk" href="../Assignments/期中作業_玻璃心預試練習資料.csv" target="_blank" rel="noopener">期中作業_玻璃心預試練習資料.csv</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>03</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">01</div><h1>資料準備</h1><ul class="refs"><li>JASP Team. (2025). JASP (Version 0.95) [Computer software]. https://jasp-stats.org</li></ul></div>
+  <div class="foot"><span class="lim">第一部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>04</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">草率作答篩檢</div>
+  <h2 style="margin-bottom:24px">先套用 Topic 04 寫好的剔除規則</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:420px">篩檢指標</th><th>標準</th><th style="width:220px">剔除人數</th></tr>
+    <tr class="frag"><td>注意力檢核題</td><td>「本題請選同意」沒有選 5 者剔除</td><td>4</td></tr>
+    <tr class="frag"><td>作答時間</td><td>15 題少於 30 秒，平均每題少於 2 秒者剔除</td><td>4</td></tr>
+    <tr class="frag"><td>連續相同作答</td><td>15 題中連續 10 題以上選同一個選項者剔除</td><td>5</td></tr>
+    <tr class="frag"><td>有效樣本</td><td>185 − 13 ＝ 172 份<br>高於 15 題 × 5 ＝ 75 份，也高於 100 份</td><td></td></tr>
+  </table>
+  <div class="foot"><span class="lim">依表列順序套用，已被前一項剔除者不重複計算；Excel 依作答秒數、檢核題排序，就能找出前兩項　<a class="lnk" href="../Handout/Topic6_草率作答偵測/草率作答快篩_簡易版.html" target="_blank" rel="noopener">草率作答快篩</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">反向計分</div>
+  <h2 style="margin-bottom:22px">B2 是反向題，分析前先轉換分數</h2>
+  <div class="kv2">
+    <div>
+      <div class="stat frag"><div class="k">換算方式</div><div class="v">7 − 原始分數</div><p>六點量表：1 換成 6、2 換成 5<br>五點量表改用 6 − 原始分數</p></div>
+      <div class="stat frag" style="margin-top:22px"><div class="k">在 Excel 操作</div><p>在 B2 右邊插入一欄，命名為 B2R<br>輸入 =7−B2 的儲存格公式，往下填滿<br>複製後選擇性貼上：值，再刪除原本的 B2</p></div>
+    </div>
+    <div>
+      <div class="stat frag"><div class="k">沒有反向時</div><div class="v">−.34</div><p>B2 與其他題目總分的相關是負的<br>高分代表的方向和其他題目相反</p></div>
+      <div class="stat frag" style="margin-top:22px"><div class="k">反向之後</div><div class="v">.34</div><p>方向一致，可以加總成向度分數</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">數字為練習資料 172 份的校正題總相關；完成篩檢與反向的資料另存成新的 CSV，原始檔保留</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>06</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">JASP 準備</div>
+  <h2 style="margin-bottom:22px">安裝 JASP，開啟 CSV</h2>
+  <div class="task" style="margin-top:10px">
+    <ol>
+      <li class="frag">到 JASP 官網下載並安裝，免費</li>
+      <li class="frag">左上角選單 Open，選篩檢後的 CSV</li>
+      <li class="frag">確認題目欄位的圖示是尺規<br>代表 Scale，可以做因素分析</li>
+      <li class="frag">信度分析要先加入模組<br>右上角＋號，勾選 Reliability</li>
+    </ol>
+    <div class="jm">
+      <div class="jbar"><b>Descriptives</b><span>T-Tests</span><span>ANOVA</span><span>Regression</span><span><b>Factor</b></span><span class="chg">Reliability</span><span>＋</span></div>
+      <div class="jbody">
+        <table class="lt"><tr><th>編號</th><th>A1</th><th>A2</th><th>A3</th><th>A4</th><th>⋯</th><th>B2R</th><th>⋯</th></tr>
+        <tr><td>P001</td><td>5</td><td>5</td><td>4</td><td>3</td><td>⋯</td><td>3</td><td>⋯</td></tr>
+        <tr><td>P002</td><td>3</td><td>2</td><td>4</td><td>2</td><td>⋯</td><td>4</td><td>⋯</td></tr>
+        <tr><td>P003</td><td>4</td><td>4</td><td>5</td><td>5</td><td>⋯</td><td>5</td><td>⋯</td></tr></table>
+        <p class="def" style="margin-top:10px">Reliability 為選用模組，加入後才會出現在上方選單</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">JASP Team. (2025). JASP (Version 0.95) [Computer software]. https://jasp-stats.org<br>畫面為示意，依 JASP 0.95 英文介面繪製　下載　<a class="lnk" href="https://jasp-stats.org/download/" target="_blank" rel="noopener">jasp-stats.org</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">02</div><h1>項目分析<br><span class=act-en>item analysis</span></h1><ul class="refs"><li>Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. Journal of Educational Psychology, 30(1), 17–24. https://doi.org/10.1037/h0057123</li><li>Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</li></ul></div>
+  <div class="foot"><span class="lim">第二部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>08</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">項目分析的指標</div>
+  <h2 style="margin-bottom:26px">逐題檢查：能不能區分高低分者，方向是否一致</h2>
+  <div class="cards c2 eq">
+    <div class="card frag"><div class="n">決斷值</div><p style="font-size:27px;line-height:1.6">critical ratio，CR<br>總分前 27% 為高分組、後 27% 為低分組<br>比較兩組在該題的平均數，算出 t 值<br><b>t 值 3.00 以上</b>表示能區分高低分者</p></div>
+    <div class="card frag"><div class="n">校正題總相關</div><p style="font-size:27px;line-height:1.6">corrected item-total correlation<br>該題與其他題目總分的相關<br>總分不含該題本身<br><b>.30 以上</b>表示與其他題目方向一致</p></div>
+  </div>
+  <div class="foot"><span class="lim multi">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. Journal of Educational Psychology, 30(1), 17–24. https://doi.org/10.1037/h0057123<br>.30 與 3.00 為本課程採用的檢查門檻，未達門檻的題目先標記，再對照因素分析與題目內容</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Excel 範本操作</div>
+  <h2 style="margin-bottom:14px">貼上資料，自動算出每一題的指標</h2>
+  <div class="xtabs"><span>使用說明</span><span>原始資料</span><span>反向題設定</span><span class="on">項目分析</span><span>計分</span><span>校正總分</span></div>
+  <div class="task" style="margin-top:20px">
+    <ol>
+      <li class="frag">原始資料：從 A1 貼上編號與題目欄位<br>第 1 列是欄位名稱</li>
+      <li class="frag">反向題設定：B2 填量尺點數<br>資料還沒反向的題目選「是」</li>
+      <li class="frag">項目分析：看決斷值、校正題總相關<br>與判定欄</li>
+      <li class="frag">判定為「檢查」的題目<br>回頭看題目內容</li>
+    </ol>
+    <div class="xsheet">
+      <div class="xs-kv"><span>有效樣本數</span><b>172</b></div>
+      <div class="xs-kv"><span>高分組切點（總分 ≥）</span><b>64</b></div>
+      <div class="xs-kv"><span>低分組切點（總分 ≤）</span><b>48</b></div>
+      <div class="xs-kv"><span>高分組／低分組人數</span><b>48／51</b></div>
+      <div class="xs-kv pass"><span>A1　決斷值／相關</span><b>9.72／.53　保留</b></div>
+      <div class="xs-kv" style="background:#FBECEB;color:#A33A32"><span>A5　決斷值／相關</span><b style="font-size:21px">4.23／.25　檢查：低於 .30</b></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">下載　<a class="lnk" href="../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">期中作業_項目分析範本.xlsx</a>；已在 CSV 完成反向的題目，反向題設定不要再選「是」</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">項目分析結果</div>
+  <h2 style="margin-bottom:16px">決斷值都超過 3.00，A5 的校正題總相關只有 .25</h2>
+  <div style="display:grid;grid-template-columns:640px 1fr;gap:50px;align-items:start">
+    <table class="lt" style="font-size:20px"><tr><th>題號</th><th>決斷值 t</th><th>校正題總相關</th><th>判定</th></tr><tr class=""><td>A1</td><td>9.72</td><td class="">.53</td><td>保留</td></tr><tr class=""><td>A2</td><td>8.53</td><td class="">.46</td><td>保留</td></tr><tr class=""><td>A3</td><td>6.22</td><td class="">.40</td><td>保留</td></tr><tr class=""><td>A4</td><td>8.91</td><td class="">.55</td><td>保留</td></tr><tr class="del"><td>A5</td><td>4.23</td><td class="bad">.25</td><td>檢查</td></tr><tr class="gap "><td>B1</td><td>7.96</td><td class="">.48</td><td>保留</td></tr><tr class=""><td>B2</td><td>5.75</td><td class="">.34</td><td>保留</td></tr><tr class=""><td>B3</td><td>6.92</td><td class="">.37</td><td>保留</td></tr><tr class=""><td>B4</td><td>6.89</td><td class="">.43</td><td>保留</td></tr><tr class=""><td>B5</td><td>8.47</td><td class="">.48</td><td>保留</td></tr><tr class="gap "><td>C1</td><td>8.73</td><td class="">.51</td><td>保留</td></tr><tr class=""><td>C2</td><td>7.57</td><td class="">.45</td><td>保留</td></tr><tr class=""><td>C3</td><td>10.41</td><td class="">.52</td><td>保留</td></tr><tr class=""><td>C4</td><td>13.16</td><td class="">.63</td><td>保留</td></tr><tr class=""><td>C5</td><td>5.96</td><td class="">.36</td><td>保留</td></tr></table>
+    <div>
+      <div class="stat frag"><div class="k">A5　我很在意別人對我的看法</div><p>只看決斷值會保留這一題<br>校正題總相關低於 .30</p></div>
+      <div class="stat frag" style="margin-top:22px"><div class="k">回到題目內容</div><p>題目沒有提到批評或負面回饋<br>描述的是一般的在意他人眼光<br>與構念定義的對應較弱</p></div>
+      <div class="stat frag" style="margin-top:22px"><div class="k">先標記</div><p>因素分析之後再決定是否刪除</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">練習資料 172 份，B2 已反向；決斷值為兩組平均數差異的 t 值（不假設兩組變異數相等）</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">03</div><h1>探索性因素分析<br><span class=act-en>exploratory factor analysis</span></h1><ul class="refs"><li>Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. Psychological Methods, 4(3), 272–299. https://doi.org/10.1037/1082-989X.4.3.272</li><li>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</li><li>Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675</li><li>Kaiser, H. F. (1974). An index of factorial simplicity. Psychometrika, 39(1), 31–36. https://doi.org/10.1007/BF02291575</li></ul></div>
+  <div class="foot"><span class="lim">第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="3">
+  <div class="kicker">EFA 在做什麼</div>
+  <h2 style="margin-bottom:12px">從題目之間的相關，找出背後的共同因素</h2>
+  <div style="display:flex;justify-content:center;margin-top:10px"><svg viewBox="0 0 980 310" width="980" height="310" font-family="Noto Sans TC, sans-serif"><ellipse cx="170" cy="70" rx="140" ry="50" fill="#F3E3E4" stroke="#7A2033" stroke-width="2.5"/><text x="170" y="80" font-size="26" text-anchor="middle" fill="#7A2033" font-weight="700">平復所需時間</text><line x1="170" y1="120" x2="64" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="42" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="64" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">A1</text><line x1="170" y1="120" x2="120" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="98" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="120" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">A2</text><line x1="170" y1="120" x2="176" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="154" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="176" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">A3</text><line x1="170" y1="120" x2="232" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="210" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="232" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">A4</text><line x1="170" y1="120" x2="288" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="266" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="288" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">A5</text><ellipse cx="490" cy="70" rx="140" ry="50" fill="#F3E3E4" stroke="#7A2033" stroke-width="2.5"/><text x="490" y="80" font-size="26" text-anchor="middle" fill="#7A2033" font-weight="700">迴避回饋</text><line x1="490" y1="120" x2="384" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="362" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="384" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">B1</text><line x1="490" y1="120" x2="440" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="418" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="440" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">B2</text><line x1="490" y1="120" x2="496" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="474" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="496" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">B3</text><line x1="490" y1="120" x2="552" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="530" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="552" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">B4</text><line x1="490" y1="120" x2="608" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="586" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="608" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">B5</text><ellipse cx="810" cy="70" rx="140" ry="50" fill="#F3E3E4" stroke="#7A2033" stroke-width="2.5"/><text x="810" y="80" font-size="26" text-anchor="middle" fill="#7A2033" font-weight="700">情緒反應強度</text><line x1="810" y1="120" x2="704" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="682" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="704" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">C1</text><line x1="810" y1="120" x2="760" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="738" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="760" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">C2</text><line x1="810" y1="120" x2="816" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="794" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="816" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">C3</text><line x1="810" y1="120" x2="872" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="850" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="872" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">C4</text><line x1="810" y1="120" x2="928" y2="250" stroke="#7A2033" stroke-width="1.6"/><rect x="906" y="250" width="44" height="44" rx="6" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="928" y="280" font-size="19" text-anchor="middle" fill="#1C2F52" font-weight="700">C5</text></svg></div>
+  <div class="cards c3" style="margin-top:22px;align-items:start;flex:none">
+    <div class="card frag" style="padding:22px 28px;height:auto"><p style="font-size:27px;line-height:1.6"><b>因素數目</b><br>資料支持幾個向度</p></div>
+    <div class="card frag" style="padding:22px 28px;height:auto"><p style="font-size:27px;line-height:1.6"><b>負荷量</b><br>每一題和各因素的關聯強度</p></div>
+    <div class="card frag" style="padding:22px 28px;height:auto"><p style="font-size:27px;line-height:1.6"><b>對照預設</b><br>題目是否落在原本歸屬的向度</p></div>
+  </div>
+  <div class="foot"><span class="lim">圖為預設的三向度結構；EFA 不事先指定題目歸屬，由資料決定</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">資料是否適合做因素分析</div>
+  <h2 style="margin-bottom:26px">先看 KMO 與 Bartlett 球形檢定</h2>
+  <div class="cards c2 eq">
+    <div class="card frag"><div class="n">KMO ＝ .84</div><p style="font-size:26px;line-height:1.6">Kaiser-Meyer-Olkin 取樣適切性量數<br>題目之間的相關是否足以抽出共同因素<br>.60 以上可以進行；.80 以上為良好</p></div>
+    <div class="card frag"><div class="n">p <span style="font-family:var(--sans)">&lt;</span> .001</div><p style="font-size:26px;line-height:1.6">Bartlett 球形檢定<br>χ²(105) ＝ 779.88<br>題目之間存在相關<br>達顯著才進行因素分析</p></div>
+  </div>
+  <div class="warnline frag"><div>個別題目的 KMO 也可以檢查：A5 為 .67，其餘 14 題在 .81 到 .90 之間</div></div>
+  <div class="foot"><span class="lim multi">Kaiser, H. F. (1974). An index of factorial simplicity. Psychometrika, 39(1), 31–36. https://doi.org/10.1007/BF02291575</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">JASP 操作</div>
+  <h2 style="margin-bottom:16px">Factor → Exploratory Factor Analysis</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start">
+    <div class="jm"><div class="jbar"><b>Exploratory Factor Analysis</b></div><div class="jbody">
+      <div class="jsec">Variables</div><div>A1、A2 ⋯ C5，15 題全部放入</div>
+      <div class="jsec">Number of Factors</div>
+      <div class="jopt"><span class="rad on"></span>Parallel analysis <span class="def">預設</span></div>
+      <div class="jsec">Analysis Options</div>
+      <div class="jopt"><span class="rad on"></span>Oblique：promax <span class="def">預設</span></div>
+      <div class="jopt">Factoring method：Minimum residual <span class="def">預設</span></div>
+    </div></div>
+    <div class="jm"><div class="jbar"><b>Output Options</b></div><div class="jbody">
+      <div class="jopt">Display loadings above <span class="chg">0</span> <span class="def">預設 0.4</span></div>
+      <div class="jsec">Assumption checks</div>
+      <div class="jopt"><span class="box on"></span><span class="chg">KMO test</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Bartlett's test</span></div>
+      <div class="jsec">Plots</div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Scree plot</span></div>
+    </div></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:20px">紅底為需要更改的設定，其餘維持預設<br>顯示門檻改成 0，才看得到每一題在所有因素上的負荷量</p>
+  <div class="foot"><span class="lim multi">斜交轉軸（oblique）允許因素之間相關；同一構念的向度通常彼此相關　Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">決定因素數目</div>
+  <h2 style="margin-bottom:6px">平行分析建議三個因素</h2>
+  <div style="display:grid;grid-template-columns:880px 1fr;gap:40px;align-items:center">
+    <div><svg viewBox="0 0 860 510" width="860" height="510" font-family="Noto Sans TC, sans-serif"><line x1="80" y1="410.0" x2="830" y2="410.0" stroke="#E6DECE"/><text x="66" y="418.0" font-size="22" text-anchor="end" fill="#5F6E84">0</text><line x1="80" y1="334.0" x2="830" y2="334.0" stroke="#E6DECE"/><text x="66" y="342.0" font-size="22" text-anchor="end" fill="#5F6E84">1</text><line x1="80" y1="258.0" x2="830" y2="258.0" stroke="#E6DECE"/><text x="66" y="266.0" font-size="22" text-anchor="end" fill="#5F6E84">2</text><line x1="80" y1="182.0" x2="830" y2="182.0" stroke="#E6DECE"/><text x="66" y="190.0" font-size="22" text-anchor="end" fill="#5F6E84">3</text><line x1="80" y1="106.0" x2="830" y2="106.0" stroke="#E6DECE"/><text x="66" y="114.0" font-size="22" text-anchor="end" fill="#5F6E84">4</text><line x1="80" y1="30.0" x2="830" y2="30.0" stroke="#E6DECE"/><text x="66" y="38.0" font-size="22" text-anchor="end" fill="#5F6E84">5</text><line x1="80" y1="334.0" x2="830" y2="334.0" stroke="#8a5a12" stroke-dasharray="8 6" stroke-width="2"/><text x="830" y="324.0" font-size="21" text-anchor="end" fill="#8a5a12">特徵值 1</text><polyline points="80.0,292.96 187.14285714285714,302.84000000000003 294.2857142857143,309.68 401.42857142857144,315.76 508.57142857142856,321.84000000000003 615.7142857142857,326.4 722.8571428571429,330.96000000000004 830.0,335.52" fill="none" stroke="#5F6E84" stroke-width="3" stroke-dasharray="3 6"/><polyline points="80.0,63.44 187.14285714285714,270.15999999999997 294.2857142857143,273.96 401.42857142857144,331.72 508.57142857142856,352.24 615.7142857142857,353.0 722.8571428571429,362.88 830.0,364.4" fill="none" stroke="#7A2033" stroke-width="3.5"/><circle cx="80.0" cy="63.44" r="9" fill="#7A2033" stroke="#7A2033" stroke-width="3"/><text x="80.0" y="444" font-size="22" text-anchor="middle" fill="#44403A">1</text><text x="94.0" y="49.44" font-size="22" fill="#7A2033" font-weight="700">4.56</text><circle cx="187.14285714285714" cy="270.15999999999997" r="9" fill="#7A2033" stroke="#7A2033" stroke-width="3"/><text x="187.14285714285714" y="444" font-size="22" text-anchor="middle" fill="#44403A">2</text><text x="201.14285714285714" y="256.15999999999997" font-size="22" fill="#7A2033" font-weight="700">1.84</text><circle cx="294.2857142857143" cy="273.96" r="9" fill="#7A2033" stroke="#7A2033" stroke-width="3"/><text x="294.2857142857143" y="444" font-size="22" text-anchor="middle" fill="#44403A">3</text><text x="308.2857142857143" y="259.96" font-size="22" fill="#7A2033" font-weight="700">1.79</text><circle cx="401.42857142857144" cy="331.72" r="9" fill="#fff" stroke="#7A2033" stroke-width="3"/><text x="401.42857142857144" y="444" font-size="22" text-anchor="middle" fill="#44403A">4</text><text x="415.42857142857144" y="317.72" font-size="22" fill="#7A2033" font-weight="700">1.03</text><circle cx="508.57142857142856" cy="352.24" r="9" fill="#fff" stroke="#7A2033" stroke-width="3"/><text x="508.57142857142856" y="444" font-size="22" text-anchor="middle" fill="#44403A">5</text><circle cx="615.7142857142857" cy="353.0" r="9" fill="#fff" stroke="#7A2033" stroke-width="3"/><text x="615.7142857142857" y="444" font-size="22" text-anchor="middle" fill="#44403A">6</text><circle cx="722.8571428571429" cy="362.88" r="9" fill="#fff" stroke="#7A2033" stroke-width="3"/><text x="722.8571428571429" y="444" font-size="22" text-anchor="middle" fill="#44403A">7</text><circle cx="830.0" cy="364.4" r="9" fill="#fff" stroke="#7A2033" stroke-width="3"/><text x="830.0" y="444" font-size="22" text-anchor="middle" fill="#44403A">8</text><text x="455.0" y="474" font-size="22" text-anchor="middle" fill="#5F6E84">因素序號</text></svg></div>
+    <div>
+      <div class="stat frag"><div class="k">實線：實際資料的特徵值</div><p>第 4 個特徵值 1.03，略高於 1<br>只看特徵值大於 1 會保留四個</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">虛線：隨機資料的特徵值</div><p>實際特徵值高於隨機資料才保留<br>前三個高於虛線，第 4 個低於虛線</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">與預設向度一致</div><p>三個因素，對應三個預設向度</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675<br>平行分析為 JASP 預設方法；實心點為高於隨機資料的特徵值</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">第一次分析　15 題</div>
+  <h2 style="margin-bottom:14px">讀負荷量：每一題最高的負荷量落在哪個因素</h2>
+  <div style="display:grid;grid-template-columns:620px 1fr;gap:50px;align-items:start">
+    <table class="lt"><tr><th style="width:120px">題號</th><th>因素一</th><th>因素二</th><th>因素三</th></tr><tr class=""><td>A1</td><td class="pm">.62</td><td class="">.09</td><td class="">.02</td></tr><tr class=""><td>A2</td><td class="pm">.78</td><td class="">−.15</td><td class="">.02</td></tr><tr class=""><td>A3</td><td class="pm">.76</td><td class="">−.12</td><td class="">−.06</td></tr><tr class=""><td>A4</td><td class="pm">.80</td><td class="">−.04</td><td class="">.02</td></tr><tr class=""><td>A5</td><td class="bad">.16</td><td class="bad">.15</td><td class="">.01</td></tr><tr class="gap"><td>B1</td><td class="">.02</td><td class="">.02</td><td class="pm">.66</td></tr><tr class=""><td>B2</td><td class="">−.06</td><td class="">.00</td><td class="pm">.56</td></tr><tr class=""><td>B3</td><td class="">−.03</td><td class="">−.07</td><td class="pm">.65</td></tr><tr class=""><td>B4</td><td class="">.06</td><td class="">.03</td><td class="pm">.54</td></tr><tr class=""><td>B5</td><td class="">.02</td><td class="">.00</td><td class="pm">.70</td></tr><tr class="gap"><td>C1</td><td class="">−.17</td><td class="pm">.76</td><td class="">.15</td></tr><tr class=""><td>C2</td><td class="">−.02</td><td class="pm">.73</td><td class="">−.06</td></tr><tr class=""><td>C3</td><td class="">.06</td><td class="pm">.60</td><td class="">.04</td></tr><tr class=""><td>C4</td><td class="bad">.37</td><td class="bad">.48</td><td class="">.00</td></tr><tr class=""><td>C5</td><td class="">−.15</td><td class="pm">.78</td><td class="">−.11</td></tr></table>
+    <div>
+      <div class="stat frag"><div class="k">A5</div><p>最高的負荷量只有 .16<br>沒有落在任何一個因素</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">C4　被批評後，我會難過好一陣子</div><p>情緒 .48，平復 .37<br>同時落在兩個因素</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">其餘 13 題</div><p>落在預設的向度<br>因素一平復、二情緒、三迴避</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">深色粗體為該題最高且達 .40 的負荷量；紅底為需要處理的題目；最小殘差法、promax 斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">刪題規則</div>
+  <h2>刪題規則寫在分析之前</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">最高的負荷量低於 .40，刪除</li>
+      <li class="frag">在第二個因素的負荷量也達 .32<br>屬於跨負荷，刪除</li>
+      <li class="frag">一次刪一題，刪完重跑<br>從問題最明顯的題目開始</li>
+      <li class="frag">刪題後確認每個向度仍有 3 題以上<br>題目內容仍涵蓋構念定義</li>
+    </ol>
+    <div class="sheet">
+      <h3>寫入企劃書 5.2</h3>
+      <p style="font-size:28px;line-height:1.65">每一題的刪除理由<br>刪題的順序<br>每次重跑的結果</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">刪題過程</div>
+  <h2 style="margin-bottom:24px">一次刪一題，每次重跑</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:200px">步驟</th><th style="width:280px">分析的題目</th><th>結果</th><th style="width:300px">處理</th></tr>
+    <tr class="frag"><td>第一次</td><td>15 題</td><td>A5 最高負荷量 .16<br>C4 為 .48 與 .37</td><td>先刪 A5</td></tr>
+    <tr class="frag"><td>第二次</td><td>14 題</td><td>C4 為 .48 與 .38<br>仍然跨負荷</td><td>刪 C4</td></tr>
+    <tr class="frag"><td>第三次</td><td>13 題</td><td>每題都只落在一個因素<br>負荷量 .54 到 .78</td><td>保留 13 題</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:27px;margin-top:22px">C4 的內容同時描述情緒與持續時間<br>平復所需時間向度已有 A2「好幾天反覆想著」描述持續時間</p>
+  <div class="foot"><span class="lim">每次重跑都要重新看平行分析的因素數目；本例三次都建議三個因素</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">最後結果　13 題</div>
+  <h2 style="margin-bottom:14px">三個因素對應三個向度</h2>
+  <div style="display:grid;grid-template-columns:620px 1fr;gap:50px;align-items:start">
+    <table class="lt"><tr><th style="width:120px">題號</th><th>平復所需時間</th><th>迴避回饋</th><th>情緒反應強度</th></tr><tr class=""><td>A1</td><td class="pm">.62</td><td class="">.01</td><td class="">.14</td></tr><tr class=""><td>A2</td><td class="pm">.74</td><td class="">.02</td><td class="">−.08</td></tr><tr class=""><td>A3</td><td class="pm">.72</td><td class="">−.05</td><td class="">−.07</td></tr><tr class=""><td>A4</td><td class="pm">.78</td><td class="">.02</td><td class="">.02</td></tr><tr class="gap"><td>B1</td><td class="">.02</td><td class="pm">.66</td><td class="">.03</td></tr><tr class=""><td>B2</td><td class="">−.06</td><td class="pm">.56</td><td class="">.00</td></tr><tr class=""><td>B3</td><td class="">−.03</td><td class="pm">.64</td><td class="">−.07</td></tr><tr class=""><td>B4</td><td class="">.06</td><td class="pm">.54</td><td class="">.03</td></tr><tr class=""><td>B5</td><td class="">.03</td><td class="pm">.69</td><td class="">.01</td></tr><tr class="gap"><td>C1</td><td class="">−.10</td><td class="">.14</td><td class="pm">.75</td></tr><tr class=""><td>C2</td><td class="">.05</td><td class="">−.07</td><td class="pm">.71</td></tr><tr class=""><td>C3</td><td class="">.11</td><td class="">.04</td><td class="pm">.58</td></tr><tr class=""><td>C5</td><td class="">−.08</td><td class="">−.08</td><td class="pm">.71</td></tr></table>
+    <div>
+      <div class="stat frag"><div class="k">解釋變異量</div><div class="v">46%</div><p>三個因素合計</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">因素間相關</div><p>平復與迴避 .40<br>平復與情緒 .34<br>迴避與情緒 .39</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">因素命名</div><p>依題目內容命名<br>與原本向度一致就沿用</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">因素間呈中度相關，三個向度屬於同一個構念的不同面向，支持使用斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>信度<br><span class=act-en>reliability</span></h1><ul class="refs"><li>McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144</li><li>Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</li><li>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</li></ul></div>
+  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">JASP 操作</div>
+  <h2 style="margin-bottom:16px">Reliability → Unidimensional Reliability</h2>
+  <div class="task" style="margin-top:10px">
+    <ol>
+      <li class="frag">每個向度分別跑一次<br>只放該向度保留下來的題目</li>
+      <li class="frag">Scale Statistics 勾選<br>Coefficient ω、Coefficient α</li>
+      <li class="frag">Individual Item Statistics 勾選<br>if item dropped 與 Item-rest correlation</li>
+      <li class="frag">反向題已在資料中轉換<br>Reverse-Scaled Items 不用再放</li>
+    </ol>
+    <div class="jm"><div class="jbar"><b>Unidimensional Reliability</b></div><div class="jbody">
+      <div class="jsec">Variables</div><div>A1、A2、A3、A4</div>
+      <div class="jsec">Scale Statistics</div>
+      <div class="jopt"><span class="box on"></span>Coefficient ω <span class="def">預設</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient α</span></div>
+      <div class="jsec">Individual Item Statistics</div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient ω (if item dropped)</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient α (if item dropped)</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Item-rest correlation</span></div>
+    </div></div>
+  </div>
+  <div class="foot"><span class="lim">畫面為示意，依 JASP 0.95 英文介面繪製；需先從右上角＋號加入 Reliability 模組</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">信度結果</div>
+  <h2 style="margin-bottom:24px">三個向度的 α 與 ω 都在 .70 以上</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:360px">向度</th><th style="width:300px">題目</th><th>Cronbach’s α</th><th>McDonald’s ω</th></tr>
+    <tr class="frag"><td>平復所需時間</td><td>A1–A4</td><td>.805</td><td>.807</td></tr>
+    <tr class="frag"><td>迴避回饋</td><td>B1–B5</td><td>.758</td><td>.760</td></tr>
+    <tr class="frag"><td>情緒反應強度</td><td>C1、C2、C3、C5</td><td>.776</td><td>.780</td></tr>
+  </table>
+  <div class="warnline frag"><div>α 假設每一題與構念的關聯強度相同；ω 不需要這個假設<br>兩者都報告，以 ω 為主</div></div>
+  <div class="foot"><span class="lim multi">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144<br>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
+</section>
+
+<section class="slide xl" data-layout="cards" data-density="3">
+  <div class="kicker">信度與刪題</div>
+  <h2 style="margin-bottom:26px">保留 A5 時，平復所需時間的 α 是 .750</h2>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n">.750</div><p style="font-size:26px;line-height:1.6">A1–A5 五題的 α</p></div>
+    <div class="card frag"><div class="n">.805</div><p style="font-size:26px;line-height:1.6">刪除 A5 後的 α<br>JASP 的 if item dropped 欄</p></div>
+    <div class="card frag"><div class="n">.20</div><p style="font-size:26px;line-height:1.6">A5 在向度內的<br>Item-rest correlation</p></div>
+  </div>
+  <div class="warnline frag"><div>項目分析、因素分析與信度三項結果一致，刪除 A5 的理由才完整<br>只為了提高 α 而刪題，會讓題目內容變窄</div></div>
+  <div class="foot"><span class="lim multi">Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">05</div><h1>企劃書第五章</h1><ul class="refs"></ul></div>
+  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">企劃書第五章　範例</div>
+  <h2 style="margin-bottom:16px">5.1 項目分析，寫出標準與未達標準的題目</h2>
+  <div class="wpage"><span class="wstamp">範例</span>
+    <div class="wh">5.1 項目分析</div>
+    <p>有效樣本 172 份，B2 為反向題，分析前以 7 減原始分數轉換。總分前 27% 與後 27% 分為高低分組（總分 ≥ 64 為高分組 48 人，≤ 48 為低分組 51 人）。</p>
+    <table>
+      <tr><th style="width:300px">標準</th><th>結果</th></tr>
+      <tr><td>決斷值 t ≥ 3.00</td><td>15 題介於 4.23 至 13.16，全部達標準</td></tr>
+      <tr><td>校正題總相關 ≥ .30</td><td>A5 為 .25，未達標準，列入因素分析時檢查；其餘 14 題介於 .34 至 .63</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="lim">附錄 B 附上 Excel 範本的項目分析工作表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">企劃書第五章　範例</div>
+  <h2 style="margin-bottom:16px">5.2 探索性因素分析，寫出設定、刪題過程與最後結果</h2>
+  <div class="wpage" style="padding:24px 36px"><span class="wstamp">範例</span>
+    <div class="wh">5.2 探索性因素分析</div>
+    <p style="font-size:24px">以 JASP 0.95 進行，最小殘差法萃取、promax 斜交轉軸，以平行分析決定因素數目。KMO ＝ .84，Bartlett 球形檢定 χ²(105) ＝ 779.88，p &lt; .001。刪題標準：最高負荷量低於 .40，或在第二個因素的負荷量達 .32。</p>
+    <table>
+      <tr><th style="width:180px">步驟</th><th>結果與處理</th></tr>
+      <tr><td>第一次 15 題</td><td>平行分析建議三個因素；A5 最高負荷量 .16，刪除</td></tr>
+      <tr><td>第二次 14 題</td><td>C4 在情緒反應強度 .48、平復所需時間 .38，跨負荷，刪除</td></tr>
+      <tr><td>第三次 13 題</td><td>三個因素，負荷量 .54 至 .78，解釋變異量 46%，因素間相關 .34 至 .40</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="lim">最後一次的負荷量表放在 5.2 末尾，表格格式參考前一頁的投影片</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">企劃書第五章　範例</div>
+  <h2 style="margin-bottom:16px">5.3 信度與 5.4 最終量表</h2>
+  <div class="wpage" style="padding:24px 36px"><span class="wstamp">範例</span>
+    <div class="wh">5.3 信度</div>
+    <p style="font-size:24px">平復所需時間 α ＝ .805、ω ＝ .807；迴避回饋 α ＝ .758、ω ＝ .760；情緒反應強度 α ＝ .776、ω ＝ .780，皆達 .70。</p>
+    <div class="wh" style="margin-top:14px">5.4 最終量表</div>
+    <table>
+      <tr><th style="width:260px">向度</th><th style="width:140px">題數</th><th>題號</th></tr>
+      <tr><td>平復所需時間</td><td>4</td><td>A1、A2、A3、A4</td></tr>
+      <tr><td>迴避回饋</td><td>5</td><td>B1、B2（反向題）、B3、B4、B5</td></tr>
+      <tr><td>情緒反應強度</td><td>4</td><td>C1、C2、C3、C5</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="lim">5.4 列出每一題的完整題目文字與量尺；向度分數以該向度題目的平均數計算</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">本週工作</div>
+  <h2>10 月 29 日 23:59 之前</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">先用玻璃心練習資料跑完一次<br>對照今天投影片的數字</li>
+      <li class="frag">各組預試資料依同樣步驟分析</li>
+      <li class="frag">完成企劃書第五章，補齊其他章節</li>
+      <li class="frag">企劃書與發表簡報各一份 PDF<br>上傳 Google Classroom</li>
+    </ol>
+    <div class="sheet">
+      <h3>檔名</h3>
+      <p style="font-size:28px;line-height:1.65">組別_構念名稱_期中企劃書.pdf<br>組別_構念名稱_期中簡報.pdf</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+</section>
+
+<section class="slide" data-layout="next" data-density="3">
+  <div class="kicker">下一步</div>
+  <h2>下次上課　10 月 30 日 Topic 06</h2>
+  <div class="rows" style="margin-top:32px">
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">期中發表</div><div class="dd">每組 15 分鐘口頭報告、5 分鐘答辯</div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">練習資料</div><div class="dd"><a class="lnk" href="../Assignments/期中作業_玻璃心預試練習資料.csv" target="_blank" rel="noopener">玻璃心預試練習資料 CSV</a>　<a class="lnk" href="../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">項目分析 Excel 範本</a></div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">複習</div><div class="dd">信度與 α　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">課堂互動教材網站　測量基礎　單元二</a></div></div>
+  </div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+</section>
+
+
+
+
+
+</div></div>
+
+<div id="bar"><i></i></div>
+<div id="pg">1 / 31</div>
+<div id="nav">
+  <button id="prev" aria-label="上一頁">←</button>
+  <button id="next" aria-label="下一頁">→</button>
+  <button id="fs" aria-label="全螢幕">⛶</button>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var mobile=function(){return innerWidth<=900;};
+
+  function fit(){
+    if(mobile()){
+      var s=innerWidth/1920;
+      slides.forEach(function(sl){sl.style.transform='scale('+s+')';sl.style.marginBottom=(-1080*(1-s)+12)+'px';});
+      return;
+    }
+    slides.forEach(function(sl){sl.style.transform='';sl.style.marginBottom='';});
+    var s=Math.min(innerWidth/1920, innerHeight/1080);
+    deck.style.setProperty('--s',s);
+    deck.style.setProperty('--tx',((innerWidth-1920*s)/2)+'px');
+    deck.style.setProperty('--ty',((innerHeight-1080*s)/2)+'px');
+  }
+  function frags(i){return Array.prototype.slice.call(slides[i].querySelectorAll('.frag'));}
+  function show(i,revealAll){
+    i=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+    frags(i).forEach(function(f){f.classList.toggle('in',!!revealAll);});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+N;
+    document.querySelector('#bar i').style.width=((i+1)/N*100)+'%';
+    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){
+    var f=frags(cur).filter(function(x){return !x.classList.contains('in');});
+    if(f.length){f[0].classList.add('in');return;}
+    if(cur<N-1) show(cur+1,false);
+  }
+  function prev(){
+    var f=frags(cur).filter(function(x){return x.classList.contains('in');});
+    if(f.length){f[f.length-1].classList.remove('in');return;}
+    if(cur>0) show(cur-1,true);
+  }
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(mobile()) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0,false);}
+    else if(e.key==='End'){show(N-1,true);}
+    else if(e.key==='f'||e.key==='F'){toggleFS();}
+  });
+  var wheelT=0;
+  addEventListener('wheel',function(e){
+    if(mobile()) return;
+    var t=Date.now(); if(t-wheelT<420) return; wheelT=t;
+    if(e.deltaY>10) next(); else if(e.deltaY<-10) prev();
+  },{passive:true});
+  var tx=null;
+  addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){
+    if(mobile()||tx===null) return;
+    var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(dx<-40) next(); else if(dx>40) prev();
+  },{passive:true});
+
+  function toggleFS(){
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else{var el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);}
+  }
+  document.getElementById('fs').addEventListener('click',toggleFS);
+  document.addEventListener('fullscreenchange',function(){
+    document.body.classList.toggle('fs',!!document.fullscreenElement);
+    setTimeout(fit,60);
+  });
+  var idleT=null;
+  function wake(){
+    if(!document.body.classList.contains('fs')) return;
+    document.body.classList.remove('idle'); clearTimeout(idleT);
+    idleT=setTimeout(function(){document.body.classList.add('idle');},2200);
+  }
+  ['mousemove','mousedown','touchstart','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true});});
+
+  addEventListener('resize',fit);
+  fit();
+  var h=parseInt((location.hash||'#1').slice(1),10);
+  show(isNaN(h)?0:h-1,false);
+  if(mobile()){slides.forEach(function(s){s.classList.add('on');});}
+})();
+</script>
+</body>
+</html>
