@@ -440,6 +440,12 @@ table.cmp th{font-size:28px;padding:12px 20px}
 .jm .rad.on::after{content:"";position:absolute;left:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#33568E}
 .jm .chg{background:#F3E3E4;color:#7A2033;font-weight:700;border-radius:4px;padding:0 6px}
 .jm .def{color:#5F6E84;font-size:18px}
+.jm .zh{color:#7A2033;font-weight:700;margin-left:8px}
+.jm .jbar span small{color:#7A2033}
+.lt td.h2{color:#5F6E84}
+.lt.cmp td{padding:3px 12px!important;font-size:21px!important}
+.lt.cmp th{padding:5px 12px!important}
+.lt td.lowh{color:#8a5a12;font-weight:700}
 .kv2{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:10px}
 .stat{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 30px}
 .stat .v{font-family:var(--serif);font-size:64px;color:var(--accent);font-weight:600;line-height:1.1}
@@ -474,12 +480,13 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="map" data-density="3">
   <div class="kicker">今天的流程</div>
   <h2>今天的流程</h2>
-  <div class="rows" style="margin-top:24px;gap:14px">
+  <div class="rows" style="margin-top:20px;gap:10px">
     <div class="row frag" style="padding:16px 40px"><div class="n">一</div><div class="tt">資料準備</div><div class="dd">草率作答篩檢、反向計分、匯入 JASP</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">二</div><div class="tt">項目分析</div><div class="dd">決斷值與校正題總相關，用 Excel 範本計算</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">三</div><div class="tt">探索性因素分析</div><div class="dd">因素數目、轉軸、負荷量、刪題與構念效度</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">四</div><div class="tt">信度</div><div class="dd">各向度的 Cronbach’s α 與 McDonald’s ω</div></div>
     <div class="row frag" style="padding:16px 40px"><div class="n">五</div><div class="tt">企劃書第五章</div><div class="dd">5.1 到 5.4 的填寫範例</div></div>
+    <div class="row frag" style="padding:16px 40px"><div class="n">六</div><div class="tt">對照、應用與發表</div><div class="dd">第六章、第七章與期中發表簡報</div></div>
   </div>
   <div class="foot"><span class="lim">Topic 05</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
 </section>
@@ -533,12 +540,12 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="task" style="margin-top:10px">
     <ol>
       <li class="frag">到 JASP 官網下載並安裝，免費</li>
-      <li class="frag">左上角選單 Open，選篩檢後的 CSV</li>
-      <li class="frag">確認題目欄位的圖示是尺規<br>代表 Scale，可以做因素分析</li>
-      <li class="frag">信度分析要先加入模組<br>右上角＋號，勾選 Reliability</li>
+      <li class="frag">左上角選單 Open（開啟）<br>選篩檢後的 CSV</li>
+      <li class="frag">確認題目欄位的圖示是尺規<br>Scale（連續變項），可以做因素分析</li>
+      <li class="frag">信度分析要先加入模組<br>右上角＋號，勾選 Reliability（信度分析）</li>
     </ol>
     <div class="jm">
-      <div class="jbar"><b>Descriptives</b><span>T-Tests</span><span>ANOVA</span><span>Regression</span><span><b>Factor</b></span><span class="chg">Reliability</span><span>＋</span></div>
+      <div class="jbar"><span>Descriptives</span><span>T-Tests</span><span>ANOVA</span><span><b>Factor</b> <small>因素分析</small></span><span class="chg">Reliability 信度分析</span><span>＋</span></div>
       <div class="jbody">
         <table class="lt"><tr><th>編號</th><th>A1</th><th>A2</th><th>A3</th><th>A4</th><th>⋯</th><th>B2R</th><th>⋯</th></tr>
         <tr><td>P001</td><td>5</td><td>5</td><td>4</td><td>3</td><td>⋯</td><td>3</td><td>⋯</td></tr>
@@ -548,7 +555,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       </div>
     </div>
   </div>
-  <div class="foot"><span class="lim multi">JASP Team. (2025). JASP (Version 0.95) [Computer software]. https://jasp-stats.org<br>畫面為示意，依 JASP 0.95 英文介面繪製　下載　<a class="lnk" href="https://jasp-stats.org/download/" target="_blank" rel="noopener">jasp-stats.org</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
+  <div class="foot"><span class="lim multi">JASP Team. (2025). JASP (Version 0.95) [Computer software]. https://jasp-stats.org<br>畫面為示意，依 JASP 0.95 繪製；偏好設定可切換繁體中文介面，投影片並列英文與中文名稱　下載　<a class="lnk" href="https://jasp-stats.org/download/" target="_blank" rel="noopener">jasp-stats.org</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">02</div><h1>項目分析<br><span class=act-en>item analysis</span></h1><ul class="refs"><li>Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. Journal of Educational Psychology, 30(1), 17–24. https://doi.org/10.1037/h0057123</li><li>Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106</li></ul></div>
@@ -558,11 +565,26 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide xl" data-layout="cards" data-density="3">
   <div class="kicker">項目分析的指標</div>
   <h2 style="margin-bottom:26px">逐題檢查：能不能區分高低分者，方向是否一致</h2>
-  <div class="cards c2 eq">
-    <div class="card frag"><div class="n">決斷值</div><p style="font-size:27px;line-height:1.6">critical ratio，CR<br>總分前 27% 為高分組、後 27% 為低分組<br>比較兩組在該題的平均數，算出 t 值<br><b>t 值 3.00 以上</b>表示能區分高低分者</p></div>
-    <div class="card frag"><div class="n">校正題總相關</div><p style="font-size:27px;line-height:1.6">corrected item-total correlation<br>該題與其他題目總分的相關<br>總分不含該題本身<br><b>.30 以上</b>表示與其他題目方向一致</p></div>
+  <div class="cards c3 eq">
+    <div class="card frag"><div class="n" style="font-size:38px">決斷值</div><p style="font-size:25px;line-height:1.6">critical ratio，CR<br>高分組與低分組<br>在這一題的平均數差異<br><b>t 值 3.00 以上</b>保留</p></div>
+    <div class="card frag"><div class="n" style="font-size:38px">校正題總相關</div><p style="font-size:25px;line-height:1.6">corrected item-total correlation<br>這一題與其他題目總分的相關<br>總分不含這一題<br><b>.30 以上</b>保留</p></div>
+    <div class="card frag"><div class="n" style="font-size:38px">刪除後 α</div><p style="font-size:25px;line-height:1.6">alpha if item deleted<br>刪掉這一題後<br>其餘題目的 α<br><b>高於全量表 α</b>時檢查</p></div>
   </div>
   <div class="foot"><span class="lim multi">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. Journal of Educational Psychology, 30(1), 17–24. https://doi.org/10.1037/h0057123<br>.30 與 3.00 為本課程採用的檢查門檻，未達門檻的題目先標記，再對照因素分析與題目內容</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">決斷值怎麼算</div>
+  <h2 style="margin-bottom:22px">以 A1 為例，分四個步驟</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:120px">步驟</th><th style="width:560px">做法</th><th>A1 的數字</th></tr>
+    <tr class="frag"><td>一</td><td>每位填答者 15 題加總，得到總分</td><td>172 人的總分介於 28 至 80</td></tr>
+    <tr class="frag"><td>二</td><td>總分前 27% 為高分組、後 27% 為低分組</td><td>總分 ≥ 64 為高分組 48 人，≤ 48 為低分組 51 人<br>切點上同分的人都納入，人數略多於 27%</td></tr>
+    <tr class="frag"><td>三</td><td>兩組各自計算這一題的平均數與變異數</td><td>高分組 M ＝ 4.58、s² ＝ 0.97<br>低分組 M ＝ 2.49、s² ＝ 1.33</td></tr>
+    <tr class="frag"><td>四</td><td>t ＝（高分組 M − 低分組 M）÷ √（s²高 ÷ n高 ＋ s²低 ÷ n低）</td><td>（4.58 − 2.49）÷ √（0.97 ÷ 48 ＋ 1.33 ÷ 51）<br>＝ 2.09 ÷ 0.215 ＝ 9.72</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:26px;margin-top:18px">分子是兩組的平均數差距，分母是這個差距的抽樣誤差；A5 為 1.07 ÷ 0.253 ＝ 4.23</p>
+  <div class="foot"><span class="lim multi">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. Journal of Educational Psychology, 30(1), 17–24. https://doi.org/10.1037/h0057123<br>Excel 範本自動完成四個步驟；t 值以兩組變異數不相等的公式計算</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -573,7 +595,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <ol>
       <li class="frag">原始資料：從 A1 貼上編號與題目欄位<br>第 1 列是欄位名稱</li>
       <li class="frag">反向題設定：B2 填量尺點數<br>資料還沒反向的題目選「是」</li>
-      <li class="frag">項目分析：看決斷值、校正題總相關<br>與判定欄</li>
+      <li class="frag">項目分析：看決斷值、校正題總相關<br>刪除後 α 與判定欄</li>
       <li class="frag">判定為「檢查」的題目<br>回頭看題目內容</li>
     </ol>
     <div class="xsheet">
@@ -581,29 +603,30 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="xs-kv"><span>高分組切點（總分 ≥）</span><b>64</b></div>
       <div class="xs-kv"><span>低分組切點（總分 ≤）</span><b>48</b></div>
       <div class="xs-kv"><span>高分組／低分組人數</span><b>48／51</b></div>
-      <div class="xs-kv pass"><span>A1　決斷值／相關</span><b>9.72／.53　保留</b></div>
-      <div class="xs-kv" style="background:#FBECEB;color:#A33A32"><span>A5　決斷值／相關</span><b style="font-size:21px">4.23／.25　檢查：低於 .30</b></div>
+      <div class="xs-kv"><span>全量表 α</span><b>.831</b></div>
+      <div class="xs-kv pass"><span>A1　決斷值／相關／刪除後 α</span><b style="font-size:20px">9.72／.53／.816　保留</b></div>
+      <div class="xs-kv" style="background:#FBECEB;color:#A33A32"><span>A5　決斷值／相關</span><b style="font-size:20px">4.23／.25／.833　檢查</b></div>
     </div>
   </div>
-  <div class="foot"><span class="lim">下載　<a class="lnk" href="../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">期中作業_項目分析範本.xlsx</a>；已在 CSV 完成反向的題目，反向題設定不要再選「是」</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
+  <div class="foot"><span class="lim">下載　<a class="lnk" href="../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">期中作業_項目分析範本.xlsx</a>；已在 CSV 完成反向的題目，反向題設定不要再選「是」</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">項目分析結果</div>
-  <h2 style="margin-bottom:16px">決斷值都超過 3.00，A5 的校正題總相關只有 .25</h2>
-  <div style="display:grid;grid-template-columns:640px 1fr;gap:50px;align-items:start">
-    <table class="lt" style="font-size:20px"><tr><th>題號</th><th>決斷值 t</th><th>校正題總相關</th><th>判定</th></tr><tr class=""><td>A1</td><td>9.72</td><td class="">.53</td><td>保留</td></tr><tr class=""><td>A2</td><td>8.53</td><td class="">.46</td><td>保留</td></tr><tr class=""><td>A3</td><td>6.22</td><td class="">.40</td><td>保留</td></tr><tr class=""><td>A4</td><td>8.91</td><td class="">.55</td><td>保留</td></tr><tr class="del"><td>A5</td><td>4.23</td><td class="bad">.25</td><td>檢查</td></tr><tr class="gap "><td>B1</td><td>7.96</td><td class="">.48</td><td>保留</td></tr><tr class=""><td>B2</td><td>5.75</td><td class="">.34</td><td>保留</td></tr><tr class=""><td>B3</td><td>6.92</td><td class="">.37</td><td>保留</td></tr><tr class=""><td>B4</td><td>6.89</td><td class="">.43</td><td>保留</td></tr><tr class=""><td>B5</td><td>8.47</td><td class="">.48</td><td>保留</td></tr><tr class="gap "><td>C1</td><td>8.73</td><td class="">.51</td><td>保留</td></tr><tr class=""><td>C2</td><td>7.57</td><td class="">.45</td><td>保留</td></tr><tr class=""><td>C3</td><td>10.41</td><td class="">.52</td><td>保留</td></tr><tr class=""><td>C4</td><td>13.16</td><td class="">.63</td><td>保留</td></tr><tr class=""><td>C5</td><td>5.96</td><td class="">.36</td><td>保留</td></tr></table>
+  <h2 style="margin-bottom:16px">A5 的校正題總相關 .25，刪除後 α 上升</h2>
+  <div style="display:grid;grid-template-columns:760px 1fr;gap:44px;align-items:start">
+    <table class="lt cmp"><tr><th>題號</th><th>決斷值 t</th><th>校正題總相關</th><th>刪除後 α</th><th>判定</th></tr><tr class=""><td>A1</td><td>9.72</td><td class="">.53</td><td class="">.816</td><td>保留</td></tr><tr class=""><td>A2</td><td>8.53</td><td class="">.46</td><td class="">.820</td><td>保留</td></tr><tr class=""><td>A3</td><td>6.22</td><td class="">.40</td><td class="">.824</td><td>保留</td></tr><tr class=""><td>A4</td><td>8.91</td><td class="">.55</td><td class="">.815</td><td>保留</td></tr><tr class="del"><td>A5</td><td>4.23</td><td class="bad">.25</td><td class="bad">.833</td><td>檢查</td></tr><tr class="gap "><td>B1</td><td>7.96</td><td class="">.48</td><td class="">.819</td><td>保留</td></tr><tr class=""><td>B2</td><td>5.75</td><td class="">.34</td><td class="">.827</td><td>保留</td></tr><tr class=""><td>B3</td><td>6.92</td><td class="">.37</td><td class="">.826</td><td>保留</td></tr><tr class=""><td>B4</td><td>6.89</td><td class="">.43</td><td class="">.822</td><td>保留</td></tr><tr class=""><td>B5</td><td>8.47</td><td class="">.48</td><td class="">.819</td><td>保留</td></tr><tr class="gap "><td>C1</td><td>8.73</td><td class="">.51</td><td class="">.818</td><td>保留</td></tr><tr class=""><td>C2</td><td>7.57</td><td class="">.45</td><td class="">.822</td><td>保留</td></tr><tr class=""><td>C3</td><td>1.41</td><td class="">.52</td><td class="">.817</td><td>保留</td></tr><tr class=""><td>C4</td><td>13.16</td><td class="">.63</td><td class="">.810</td><td>保留</td></tr><tr class=""><td>C5</td><td>5.96</td><td class="">.36</td><td class="">.827</td><td>保留</td></tr></table>
     <div>
-      <div class="stat frag"><div class="k">A5　我很在意別人對我的看法</div><p>只看決斷值會保留這一題<br>校正題總相關低於 .30</p></div>
+      <div class="stat frag"><div class="k">A5　我很在意別人對我的看法</div><p>決斷值 4.23 達標準<br>校正題總相關 .25 低於 .30<br>刪除後 α .833 高於全量表 .831</p></div>
       <div class="stat frag" style="margin-top:22px"><div class="k">回到題目內容</div><p>題目沒有提到批評或負面回饋<br>描述的是一般的在意他人眼光<br>與構念定義的對應較弱</p></div>
       <div class="stat frag" style="margin-top:22px"><div class="k">先標記</div><p>因素分析之後再決定是否刪除</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim">練習資料 172 份，B2 已反向；決斷值為兩組平均數差異的 t 值（不假設兩組變異數相等）</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
+  <div class="foot"><span class="lim">練習資料 172 份，B2 已反向；全量表 15 題 α ＝ .831；紅底為未達標準或刪除後 α 高於全量表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">03</div><h1>探索性因素分析<br><span class=act-en>exploratory factor analysis</span></h1><ul class="refs"><li>Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. Psychological Methods, 4(3), 272–299. https://doi.org/10.1037/1082-989X.4.3.272</li><li>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</li><li>Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675</li><li>Kaiser, H. F. (1974). An index of factorial simplicity. Psychometrika, 39(1), 31–36. https://doi.org/10.1007/BF02291575</li></ul></div>
-  <div class="foot"><span class="lim">第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
+  <div class="foot"><span class="lim">第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="3">
@@ -615,7 +638,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="card frag" style="padding:22px 28px;height:auto"><p style="font-size:27px;line-height:1.6"><b>負荷量</b><br>每一題和各因素的關聯強度</p></div>
     <div class="card frag" style="padding:22px 28px;height:auto"><p style="font-size:27px;line-height:1.6"><b>對照預設</b><br>題目是否落在原本歸屬的向度</p></div>
   </div>
-  <div class="foot"><span class="lim">圖為預設的三向度結構；EFA 不事先指定題目歸屬，由資料決定</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
+  <div class="foot"><span class="lim">圖為預設的三向度結構；EFA 不事先指定題目歸屬，由資料決定</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
 </section>
 
 <section class="slide xl" data-layout="cards" data-density="3">
@@ -626,7 +649,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="card frag"><div class="n">p <span style="font-family:var(--sans)">&lt;</span> .001</div><p style="font-size:26px;line-height:1.6">Bartlett 球形檢定<br>χ²(105) ＝ 779.88<br>題目之間存在相關<br>達顯著才進行因素分析</p></div>
   </div>
   <div class="warnline frag"><div>個別題目的 KMO 也可以檢查：A5 為 .67，其餘 14 題在 .81 到 .90 之間</div></div>
-  <div class="foot"><span class="lim multi">Kaiser, H. F. (1974). An index of factorial simplicity. Psychometrika, 39(1), 31–36. https://doi.org/10.1007/BF02291575</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
+  <div class="foot"><span class="lim multi">Kaiser, H. F. (1974). An index of factorial simplicity. Psychometrika, 39(1), 31–36. https://doi.org/10.1007/BF02291575</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
 </section>
 
 <section class="slide xl" data-layout="cards" data-density="3">
@@ -637,32 +660,46 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="card frag"><div class="n" style="font-size:38px">斜交轉軸</div><p style="font-size:26px;line-height:1.6">oblique，例如 promax、oblimin<br>允許因素之間相關<br>另外輸出因素間相關矩陣</p></div>
   </div>
   <div class="warnline frag"><div>同一構念的向度通常彼此相關，本課程採用斜交轉軸<br>斜交轉軸讀 JASP 預設輸出的負荷量表（pattern matrix）</div></div>
-  <div class="foot"><span class="lim multi">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. Psychological Methods, 4(3), 272–299. https://doi.org/10.1037/1082-989X.4.3.272</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+  <div class="foot"><span class="lim multi">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. Psychological Methods, 4(3), 272–299. https://doi.org/10.1037/1082-989X.4.3.272</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">萃取方法</div>
+  <h2 style="margin-bottom:22px">量表發展用共同因素分析</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:330px"></th><th>主成分分析<span class="en">principal component analysis</span></th><th>共同因素分析<span class="en">common factor analysis</span></th></tr>
+    <tr class="frag"><td>分析哪些變異</td><td>題目的全部變異<br>包含測量誤差</td><td>題目之間共有的變異</td></tr>
+    <tr class="frag"><td>目的</td><td>把多題濃縮成少數分數</td><td>找出題目背後的構念</td></tr>
+    <tr class="frag"><td>JASP 選單</td><td>Principal Component Analysis<br>主成分分析</td><td>Exploratory Factor Analysis<br>探索性因素分析，最小殘差法</td></tr>
+    <tr class="frag"><td>同樣 13 題的解釋變異量</td><td>58%</td><td>46%</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:26px;margin-top:18px">本課程用最小殘差法；主成分分析把誤差也算進去，解釋變異量會比較高</p>
+  <div class="foot"><span class="lim multi">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. Psychological Methods, 4(3), 272–299. https://doi.org/10.1037/1082-989X.4.3.272<br>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
-  <div class="kicker">JASP 操作</div>
-  <h2 style="margin-bottom:16px">Factor → Exploratory Factor Analysis</h2>
+  <div class="kicker">JASP 操作　Factor 因素分析選單</div>
+  <h2 style="margin-bottom:16px">Exploratory Factor Analysis 探索性因素分析</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start">
-    <div class="jm"><div class="jbar"><b>Exploratory Factor Analysis</b></div><div class="jbody">
-      <div class="jsec">Variables</div><div>A1、A2 ⋯ C5，15 題全部放入</div>
-      <div class="jsec">Number of Factors</div>
-      <div class="jopt"><span class="rad on"></span>Parallel analysis <span class="def">預設</span></div>
-      <div class="jsec">Analysis Options</div>
-      <div class="jopt"><span class="rad on"></span>Oblique：promax <span class="def">預設</span></div>
-      <div class="jopt">Factoring method：Minimum residual <span class="def">預設</span></div>
+    <div class="jm"><div class="jbar"><b>Exploratory Factor Analysis</b><span class="zh">探索性因素分析</span></div><div class="jbody">
+      <div class="jsec">Variables<span class="zh">變項</span></div><div>A1、A2 ⋯ C5，15 題全部放入</div>
+      <div class="jsec">Number of Factors<span class="zh">因素個數</span></div>
+      <div class="jopt"><span class="rad on"></span>Parallel analysis<span class="zh">平行分析法</span> <span class="def">預設</span></div>
+      <div class="jsec">Analysis Options<span class="zh">分析選項</span></div>
+      <div class="jopt"><span class="rad on"></span>Oblique<span class="zh">斜交</span>：promax <span class="def">預設</span></div>
+      <div class="jopt">Minimum residual<span class="zh">最小殘差法</span> <span class="def">預設</span></div>
     </div></div>
-    <div class="jm"><div class="jbar"><b>Output Options</b></div><div class="jbody">
-      <div class="jopt">Display loadings above <span class="chg">0</span> <span class="def">預設 0.4</span></div>
-      <div class="jsec">Assumption checks</div>
-      <div class="jopt"><span class="box on"></span><span class="chg">KMO test</span></div>
-      <div class="jopt"><span class="box on"></span><span class="chg">Bartlett's test</span></div>
-      <div class="jsec">Plots</div>
-      <div class="jopt"><span class="box on"></span><span class="chg">Scree plot</span></div>
+    <div class="jm"><div class="jbar"><b>Output Options</b><span class="zh">輸出選項</span></div><div class="jbody">
+      <div class="jopt">Display loadings above<span class="zh">負荷量顯示門檻</span> <span class="chg">0</span> <span class="def">預設 0.4</span></div>
+      <div class="jsec">Assumption checks<span class="zh">前提假設的檢驗</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">KMO test　KMO 檢定</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Bartlett's test　球形檢定</span></div>
+      <div class="jsec">Plots<span class="zh">圖形</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Scree plot　陡坡圖</span></div>
     </div></div>
   </div>
   <p class="lead frag" style="font-size:26px;margin-top:20px">紅底為需要更改的設定，其餘維持預設<br>顯示門檻改成 0，才看得到每一題在所有因素上的負荷量</p>
-  <div class="foot"><span class="lim multi">斜交轉軸（oblique）允許因素之間相關；同一構念的向度通常彼此相關　Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+  <div class="foot"><span class="lim multi">中文名稱取自 JASP 0.95 繁體中文介面；介面沒有中文名稱的選項為本課程翻譯　Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -676,7 +713,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="stat frag" style="margin-top:20px"><div class="k">與預設向度一致</div><p>三個因素，對應三個預設向度</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim multi">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675<br>平行分析為 JASP 預設方法；實心點為高於隨機資料的特徵值</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+  <div class="foot"><span class="lim multi">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. Organizational Research Methods, 7(2), 191–205. https://doi.org/10.1177/1094428104263675<br>平行分析為 JASP 預設方法；實心點為高於隨機資料的特徵值</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -690,7 +727,23 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <div class="stat frag" style="margin-top:20px"><div class="k">其餘 13 題</div><p>落在預設的向度<br>因素一平復、二情緒、三迴避</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim">深色粗體為該題最高且達 .40 的負荷量；紅底為需要處理的題目；最小殘差法、promax 斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+  <div class="foot"><span class="lim">深色粗體為該題最高且達 .40 的負荷量；紅底為需要處理的題目；最小殘差法、promax 斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">共同性</div>
+  <h2 style="margin-bottom:18px">共同性：這一題的變異，有多少由共同因素解釋</h2>
+  <div class="kv2">
+    <div>
+      <div class="stat frag"><div class="k">JASP 不直接列出共同性</div><p>負荷量表最右欄是 Uniqueness（獨特性）<br>共同性 ＝ 1 − 獨特性</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">判讀</div><p>.40 到 .70 為常見範圍<br>低於 .40 表示這一題和其他題目的共同部分少<br>搭配負荷量與題目內容一起判斷</p></div>
+    </div>
+    <div>
+      <div class="stat frag"><div class="k">A5（第一次分析）</div><div class="v">.07</div><p>獨特性 .93，幾乎都是這一題自己的變異<br>與負荷量 .16 的結論一致</p></div>
+      <div class="stat frag" style="margin-top:20px"><div class="k">B2、B3、B4（最後結果）</div><div class="v">.29–.37</div><p>低於 .40，但負荷量 .54 以上、內容符合定義<br>保留，並在企劃書 5.2 說明</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim multi">Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
 </section>
 
 <section class="slide xl" data-layout="task" data-density="3">
@@ -708,7 +761,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <p style="font-size:28px;line-height:1.65">每一題的刪除理由<br>刪題的順序<br>每次重跑的結果</p>
     </div>
   </div>
-  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. Practical Assessment, Research, and Evaluation, 10, Article 7. https://doi.org/10.7275/jyj1-4868</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
@@ -721,21 +774,48 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <tr class="frag"><td>第三次</td><td>13 題</td><td>每題都只落在一個因素<br>負荷量 .54 到 .78</td><td>保留 13 題</td></tr>
   </table>
   <p class="lead frag" style="font-size:27px;margin-top:22px">C4 的內容同時描述情緒與持續時間<br>平復所需時間向度已有 A2「好幾天反覆想著」描述持續時間</p>
-  <div class="foot"><span class="lim">每次重跑都要重新看平行分析的因素數目；本例三次都建議三個因素</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+  <div class="foot"><span class="lim">每次重跑都要重新看平行分析的因素數目；本例三次都建議三個因素</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">最後結果　13 題</div>
   <h2 style="margin-bottom:14px">三個因素對應三個向度</h2>
   <div style="display:grid;grid-template-columns:620px 1fr;gap:50px;align-items:start">
-    <table class="lt"><tr><th style="width:120px">題號</th><th>平復所需時間</th><th>迴避回饋</th><th>情緒反應強度</th></tr><tr class=""><td>A1</td><td class="pm">.62</td><td class="">.01</td><td class="">.14</td></tr><tr class=""><td>A2</td><td class="pm">.74</td><td class="">.02</td><td class="">−.08</td></tr><tr class=""><td>A3</td><td class="pm">.72</td><td class="">−.05</td><td class="">−.07</td></tr><tr class=""><td>A4</td><td class="pm">.78</td><td class="">.02</td><td class="">.02</td></tr><tr class="gap"><td>B1</td><td class="">.02</td><td class="pm">.66</td><td class="">.03</td></tr><tr class=""><td>B2</td><td class="">−.06</td><td class="pm">.56</td><td class="">.00</td></tr><tr class=""><td>B3</td><td class="">−.03</td><td class="pm">.64</td><td class="">−.07</td></tr><tr class=""><td>B4</td><td class="">.06</td><td class="pm">.54</td><td class="">.03</td></tr><tr class=""><td>B5</td><td class="">.03</td><td class="pm">.69</td><td class="">.01</td></tr><tr class="gap"><td>C1</td><td class="">−.10</td><td class="">.14</td><td class="pm">.75</td></tr><tr class=""><td>C2</td><td class="">.05</td><td class="">−.07</td><td class="pm">.71</td></tr><tr class=""><td>C3</td><td class="">.11</td><td class="">.04</td><td class="pm">.58</td></tr><tr class=""><td>C5</td><td class="">−.08</td><td class="">−.08</td><td class="pm">.71</td></tr></table>
+    <table class="lt"><tr><th style="width:120px">題號</th><th>平復</th><th>迴避</th><th>情緒</th><th>共同性</th></tr><tr class=""><td>A1</td><td class="pm">.62</td><td class="">.01</td><td class="">.14</td><td class="h2">.47</td></tr><tr class=""><td>A2</td><td class="pm">.74</td><td class="">.02</td><td class="">−.08</td><td class="h2">.53</td></tr><tr class=""><td>A3</td><td class="pm">.72</td><td class="">−.05</td><td class="">−.07</td><td class="h2">.46</td></tr><tr class=""><td>A4</td><td class="pm">.78</td><td class="">.02</td><td class="">.02</td><td class="h2">.63</td></tr><tr class="gap"><td>B1</td><td class="">.02</td><td class="pm">.66</td><td class="">.03</td><td class="h2">.46</td></tr><tr class=""><td>B2</td><td class="">−.06</td><td class="pm">.56</td><td class="">.00</td><td class="lowh">.29</td></tr><tr class=""><td>B3</td><td class="">−.03</td><td class="pm">.64</td><td class="">−.07</td><td class="lowh">.37</td></tr><tr class=""><td>B4</td><td class="">.06</td><td class="pm">.54</td><td class="">.03</td><td class="lowh">.34</td></tr><tr class=""><td>B5</td><td class="">.03</td><td class="pm">.69</td><td class="">.01</td><td class="h2">.50</td></tr><tr class="gap"><td>C1</td><td class="">−.10</td><td class="">.14</td><td class="pm">.75</td><td class="h2">.61</td></tr><tr class=""><td>C2</td><td class="">.05</td><td class="">−.07</td><td class="pm">.71</td><td class="h2">.50</td></tr><tr class=""><td>C3</td><td class="">.11</td><td class="">.04</td><td class="pm">.58</td><td class="h2">.41</td></tr><tr class=""><td>C5</td><td class="">−.08</td><td class="">−.08</td><td class="pm">.71</td><td class="h2">.43</td></tr></table>
     <div>
       <div class="stat frag"><div class="k">解釋變異量</div><div class="v">46%</div><p>三個因素合計</p></div>
       <div class="stat frag" style="margin-top:20px"><div class="k">因素間相關</div><p>平復與迴避 .40<br>平復與情緒 .34<br>迴避與情緒 .39</p></div>
       <div class="stat frag" style="margin-top:20px"><div class="k">因素命名</div><p>依題目內容命名<br>與原本向度一致就沿用</p></div>
     </div>
   </div>
-  <div class="foot"><span class="lim">因素間呈中度相關，三個向度屬於同一個構念的不同面向，支持使用斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
+  <div class="foot"><span class="lim">共同性低於 .40 以黃字標示；因素間呈中度相關，三個向度屬於同一個構念的不同面向，支持使用斜交轉軸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">解釋變異量</div>
+  <h2 style="margin-bottom:22px">三個因素共同解釋 13 題 46% 的變異</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:520px">JASP 的 Factor Characteristics<br>因素特徵表</th><th>平復</th><th>迴避</th><th>情緒</th></tr>
+    <tr class="frag"><td>SumSq. Loadings<br>負荷量平方和</td><td>2.09</td><td>1.99</td><td>1.93</td></tr>
+    <tr class="frag"><td>Proportion var.<br>可解釋變異量之百分比</td><td>16%</td><td>15%</td><td>15%</td></tr>
+    <tr class="frag"><td>Cumulative<br>累積</td><td>16%</td><td>31%</td><td><b>46%</b></td></tr>
+  </table>
+  <div class="warnline frag"><div>社會科學常以 60% 左右作為參考，也接受較低的數值；共同因素分析的數值通常低於主成分分析<br>沒有固定門檻，在 5.2 如實報告累積解釋變異量</div></div>
+  <div class="foot"><span class="lim multi">Hair, J. F., Black, W. C., Babin, B. J., &amp; Anderson, R. E. (2019). Multivariate data analysis (8th ed.). Cengage.<br>表中為轉軸後的數值；JASP 另列未轉軸的數值，累積值相同</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">結構與預設不一致</div>
+  <h2 style="margin-bottom:22px">因素結構和事例歸納的向度不同時</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:420px">情況</th><th>可能的原因</th><th style="width:560px">處理</th></tr>
+    <tr class="frag"><td>兩個向度合併成一個因素</td><td>兩個向度在填答者心中是同一件事</td><td>檢查兩個向度的定義是否可以區分<br>合併後重新命名，修改定義</td></tr>
+    <tr class="frag"><td>一個向度拆成兩個因素</td><td>向度內有兩種不同的行為</td><td>依題目內容分成兩個向度<br>每個因素至少 3 題才保留</td></tr>
+    <tr class="frag"><td>題目落在其他向度</td><td>題目寫法偏向另一個向度</td><td>檢查題目內容，改歸向度或刪除</td></tr>
+    <tr class="frag"><td>反向題自成一個因素</td><td>措辭造成的方法因素</td><td>確認反向計分，檢討反向題寫法</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:26px;margin-top:18px">在企劃書 5.2 寫出與預設的差異與理由，不強行對應</p>
+  <div class="foot"><span class="lim">評分標準：因素結構與事例歸納的向度不一致時，解釋是否誠實；反向題的方法因素見課堂互動教材網站　題項與量表設計　單元三</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
@@ -748,35 +828,35 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <tr class="frag"><td>與其他構念的關係<span class="en">convergent and discriminant</span></td><td>與相近構念相關但可以區別<br>與無關構念不相關</td><td>第六章</td></tr>
   </table>
   <p class="lead frag" style="font-size:27px;margin-top:22px">EFA 只回答第二列，與相近構念的區別要由第六章補足</p>
-  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>構念效度的定義與三類效度證據，見課堂互動教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u3" target="_blank" rel="noopener">測量基礎　單元三</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+  <div class="foot"><span class="lim multi">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. Organizational Research Methods, 1(1), 104–121. https://doi.org/10.1177/109442819800100106<br>構念效度的定義與三類效度證據，見課堂互動教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u3" target="_blank" rel="noopener">測量基礎　單元三</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>信度<br><span class=act-en>reliability</span></h1><ul class="refs"><li>McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144</li><li>Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</li><li>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</li><li>Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. Journal of Personality Assessment, 80(1), 99–103. https://doi.org/10.1207/S15327752JPA8001_18</li></ul></div>
-  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
+  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 操作</div>
-  <h2 style="margin-bottom:16px">Reliability → Unidimensional Reliability</h2>
+  <h2 style="margin-bottom:16px">Reliability 信度分析 → Unidimensional Reliability 單維信度</h2>
   <div class="task" style="margin-top:10px">
     <ol>
       <li class="frag">每個向度分別跑一次<br>只放該向度保留下來的題目</li>
-      <li class="frag">Scale Statistics 勾選<br>Coefficient ω、Coefficient α</li>
-      <li class="frag">Individual Item Statistics 勾選<br>if item dropped 與 Item-rest correlation</li>
-      <li class="frag">反向題已在資料中轉換<br>Reverse-Scaled Items 不用再放</li>
+      <li class="frag">量表統計量勾選 ω 與 α</li>
+      <li class="frag">個別題項統計量勾選<br>若刪除此題項與題項相關</li>
+      <li class="frag">反向題已在資料中轉換<br>Reverse-Scaled Items（反向題）不用再放</li>
     </ol>
-    <div class="jm"><div class="jbar"><b>Unidimensional Reliability</b></div><div class="jbody">
-      <div class="jsec">Variables</div><div>A1、A2、A3、A4</div>
-      <div class="jsec">Scale Statistics</div>
-      <div class="jopt"><span class="box on"></span>Coefficient ω <span class="def">預設</span></div>
-      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient α</span></div>
-      <div class="jsec">Individual Item Statistics</div>
-      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient ω (if item dropped)</span></div>
-      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient α (if item dropped)</span></div>
-      <div class="jopt"><span class="box on"></span><span class="chg">Item-rest correlation</span></div>
+    <div class="jm"><div class="jbar"><b>Unidimensional Reliability</b><span class="zh">單維信度</span></div><div class="jbody">
+      <div class="jsec">Variables<span class="zh">變項</span></div><div>A1、A2、A3、A4</div>
+      <div class="jsec">Scale Statistics<span class="zh">量表統計量</span></div>
+      <div class="jopt"><span class="box on"></span>Coefficient ω<span class="zh">中文介面顯示 ω(CR值)</span> <span class="def">預設</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Coefficient α　Cronbach's α</span></div>
+      <div class="jsec">Individual Item Statistics<span class="zh">個別題項統計量</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">ω (if item dropped)　若刪除此題項</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">α (if item dropped)　若刪除此題項</span></div>
+      <div class="jopt"><span class="box on"></span><span class="chg">Item-rest correlation　此題項與其它所有題項之相關</span></div>
     </div></div>
   </div>
-  <div class="foot"><span class="lim">畫面為示意，依 JASP 0.95 英文介面繪製；需先從右上角＋號加入 Reliability 模組</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+  <div class="foot"><span class="lim">JASP 中文介面把 ω 標為「CR值」，指組合信度（composite reliability），與項目分析的決斷值 CR 不同</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
@@ -789,7 +869,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <tr class="frag"><td>情緒反應強度</td><td>C1、C2、C3、C5</td><td>.776</td><td>.780</td></tr>
   </table>
   <div class="warnline frag"><div>α 假設每一題與構念的關聯強度相同；ω 不需要這個假設<br>兩者都報告，以 ω 為主</div></div>
-  <div class="foot"><span class="lim multi">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144<br>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+  <div class="foot"><span class="lim multi">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. Psychological Methods, 23(3), 412–433. https://doi.org/10.1037/met0000144<br>Nunnally, J. C., &amp; Bernstein, I. H. (1994). Psychometric theory (3rd ed.). McGraw-Hill.</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
 </section>
 
 <section class="slide xl" data-layout="cards" data-density="3">
@@ -801,7 +881,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="card frag"><div class="n">.20</div><p style="font-size:26px;line-height:1.6">A5 在向度內的<br>Item-rest correlation</p></div>
   </div>
   <div class="warnline frag"><div>項目分析、因素分析與信度三項結果一致，刪除 A5 的理由才完整<br>只為了提高 α 而刪題，會讓題目內容變窄</div></div>
-  <div class="foot"><span class="lim multi">Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+  <div class="foot"><span class="lim multi">Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach’s alpha for estimating reliability. But…. Communication Methods and Measures, 14(1), 1–24. https://doi.org/10.1080/19312458.2020.1718629</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
 </section>
 
 <section class="slide xl" data-layout="task" data-density="3">
@@ -819,11 +899,11 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <p style="font-size:28px;line-height:1.65">信度高表示題目一致<br>是否測到目標構念<br>要看效度證據</p>
     </div>
   </div>
-  <div class="foot"><span class="lim multi">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. Journal of Personality Assessment, 80(1), 99–103. https://doi.org/10.1207/S15327752JPA8001_18<br>α 的題數與維度陷阱，見課堂互動教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
+  <div class="foot"><span class="lim multi">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. Journal of Personality Assessment, 80(1), 99–103. https://doi.org/10.1207/S15327752JPA8001_18<br>α 的題數與維度陷阱，見課堂互動教材網站　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">05</div><h1>企劃書第五章</h1><ul class="refs"></ul></div>
-  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
+  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -831,14 +911,15 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <h2 style="margin-bottom:16px">5.1 項目分析，寫出標準與未達標準的題目</h2>
   <div class="wpage"><span class="wstamp">範例</span>
     <div class="wh">5.1 項目分析</div>
-    <p>有效樣本 172 份，B2 為反向題，分析前以 7 減原始分數轉換。總分前 27% 與後 27% 分為高低分組（總分 ≥ 64 為高分組 48 人，≤ 48 為低分組 51 人）。</p>
+    <p style="font-size:23px">有效樣本 172 份，B2 以 7 減原始分數反向。總分前後 27% 分為高低分組（≥ 64 共 48 人，≤ 48 共 51 人）。標準：決斷值 ≥ 3.00、校正題總相關 ≥ .30；全量表 α ＝ .831。</p>
     <table>
-      <tr><th style="width:300px">標準</th><th>結果</th></tr>
-      <tr><td>決斷值 t ≥ 3.00</td><td>15 題介於 4.23 至 13.16，全部達標準</td></tr>
-      <tr><td>校正題總相關 ≥ .30</td><td>A5 為 .25，未達標準，列入因素分析時檢查；其餘 14 題介於 .34 至 .63</td></tr>
+      <tr><th style="width:110px">題號</th><th style="width:200px">決斷值（CR）</th><th style="width:220px">校正題總相關</th><th style="width:180px">刪除後 α</th><th>決定與理由</th></tr>
+      <tr><td>A1</td><td>9.72</td><td>.53</td><td>.816</td><td>保留</td></tr>
+      <tr><td>A5</td><td>4.23</td><td>.25</td><td>.833</td><td>檢查：相關低於 .30、刪除後 α 上升<br>列入因素分析判斷</td></tr>
+      <tr><td>⋯</td><td>⋯</td><td>⋯</td><td>⋯</td><td>⋯</td></tr>
     </table>
   </div>
-  <div class="foot"><span class="lim">附錄 B 附上 Excel 範本的項目分析工作表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+  <div class="foot"><span class="lim">表格欄位與 Word 範本 5.1 相同，15 題都要列出；附錄 B 附上 Excel 範本的項目分析工作表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>34</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -846,15 +927,18 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <h2 style="margin-bottom:16px">5.2 探索性因素分析，寫出設定、刪題過程與最後結果</h2>
   <div class="wpage" style="padding:24px 36px"><span class="wstamp">範例</span>
     <div class="wh">5.2 探索性因素分析</div>
-    <p style="font-size:24px">以 JASP 0.95 進行，最小殘差法萃取、promax 斜交轉軸，以平行分析決定因素數目。KMO ＝ .84，Bartlett 球形檢定 χ²(105) ＝ 779.88，p &lt; .001。刪題標準：最高負荷量低於 .40，或在第二個因素的負荷量達 .32。</p>
-    <table>
-      <tr><th style="width:180px">步驟</th><th>結果與處理</th></tr>
-      <tr><td>第一次 15 題</td><td>平行分析建議三個因素；A5 最高負荷量 .16，刪除</td></tr>
-      <tr><td>第二次 14 題</td><td>C4 在情緒反應強度 .48、平復所需時間 .38，跨負荷，刪除</td></tr>
-      <tr><td>第三次 13 題</td><td>三個因素，負荷量 .54 至 .78，解釋變異量 46%，因素間相關 .34 至 .40</td></tr>
+    <table class="wsm">
+      <tr><th style="width:300px">項目</th><th>結果</th></tr>
+      <tr><td>KMO</td><td>.84</td></tr>
+      <tr><td>Bartlett 球形檢定</td><td>χ²(105) ＝ 779.88，p &lt; .001</td></tr>
+      <tr><td>抽取方法</td><td>最小殘差法（JASP 0.95）</td></tr>
+      <tr><td>轉軸方法</td><td>promax 斜交轉軸</td></tr>
+      <tr><td>因素數的決定依據</td><td>平行分析，三次分析皆建議三個因素，與事例歸納的三個向度一致</td></tr>
+      <tr><td>負荷量門檻</td><td>最高負荷量 ≥ .40；第二個因素 ≥ .32 視為跨負荷</td></tr>
     </table>
+    <p style="font-size:22px;margin-top:10px">刪題過程：第一次刪 A5（負荷量 .16、共同性 .07）；第二次刪 C4（.48 與 .38 跨負荷）。最後 13 題負荷量 .54 至 .78，累積解釋變異量 46%，因素間相關 .34 至 .40；B2、B3、B4 共同性低於 .40，負荷量達標準且內容符合定義，予以保留。</p>
   </div>
-  <div class="foot"><span class="lim">最後一次的負荷量表放在 5.2 末尾，表格格式參考前一頁的投影片</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+  <div class="foot"><span class="lim">表格欄位與 Word 範本 5.2 相同；負荷量表（含共同性）放在 5.2 末尾，格式參考「最後結果　13 題」那一頁</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>35</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -871,7 +955,72 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <tr><td>情緒反應強度</td><td>4</td><td>C1、C2、C3、C5</td></tr>
     </table>
   </div>
-  <div class="foot"><span class="lim">5.4 列出每一題的完整題目文字與量尺；向度分數以該向度題目的平均數計算</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
+  <div class="foot"><span class="lim">5.4 列出每一題的完整題目文字與量尺；計分方式：反向題先以 7 減原始分數，向度分數為該向度題目的平均數</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>36</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">06</div><h1>對照、應用與發表</h1><ul class="refs"><li>Smith, B. W., Dalen, J., Wiggins, K., Tooley, E., Christopher, P., &amp; Bernard, J. (2008). The brief resilience scale: Assessing the ability to bounce back. International Journal of Behavioral Medicine, 15(3), 194–200. https://doi.org/10.1080/10705500802222972</li><li>Simons, J. S., &amp; Gaher, R. M. (2005). The Distress Tolerance Scale: Development and validation of a self-report measure. Motivation and Emotion, 29(2), 83–102. https://doi.org/10.1007/s11031-005-7955-3</li><li>Linderbaum, B. A., &amp; Levy, P. E. (2010). The development and validation of the Feedback Orientation Scale (FOS). Journal of Management, 36(6), 1372–1405. https://doi.org/10.1177/0149206310373145</li></ul></div>
+  <div class="foot"><span class="lim">第六部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>37</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">企劃書第六章　範例</div>
+  <h2 style="margin-bottom:16px">6.2 實證層：與既有量表的向度對應</h2>
+  <div class="wpage" style="padding:24px 36px"><span class="wstamp">範例</span>
+    <div class="wh">6.2 實證層：與既有量表的向度對應</div>
+    <p style="font-size:23px">題庫定稿日期：2026 年 10 月 16 日　既有量表題目查閱日期：2026 年 10 月 24 日</p>
+    <table>
+      <tr><th style="width:220px">本量表向度</th><th>最接近的既有量表與構念</th><th style="width:440px">對應情形</th></tr>
+      <tr><td>平復所需時間</td><td>簡式復原力量表（Smith et al., 2008）<br>從壓力中恢復的能力</td><td>方向相反、內容相近；本量表限定在受到批評之後</td></tr>
+      <tr><td>情緒反應強度</td><td>痛苦耐受度量表（Simons &amp; Gaher, 2005）<br>承受負向情緒的能力</td><td>方向相反、內容相近；本量表限定在受到批評的當下</td></tr>
+      <tr><td>迴避回饋</td><td>回饋導向量表（Linderbaum &amp; Levy, 2010）<br>對回饋的整體接受程度</td><td>部分對應；回饋導向測態度<br>本量表測迴避行為</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="lim">示意內容；各組要實際閱讀既有量表的題目與向度，查閱日期必須晚於題庫定稿日期</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">企劃書第六章　範例</div>
+  <h2 style="margin-bottom:22px">6.3 判斷屬於哪一種結果，並說明證據</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:470px">結果</th><th>意思</th><th style="width:520px">玻璃心的判定（示意）</th></tr>
+    <tr class="frag"><td>名稱相同但內容不同<span class="en">jingle 謬誤</span></td><td>同一個名稱，測的是不同的東西</td><td>無</td></tr>
+    <tr class="frag"><td>名稱不同但內容相同<span class="en">jangle 謬誤</span></td><td>換了名稱，測的是既有構念</td><td>平復所需時間、情緒反應強度<br>與復原力、痛苦耐受度反向對應</td></tr>
+    <tr class="frag"><td>有新向度</td><td>既有量表沒有涵蓋的內容</td><td>迴避回饋：既有量表測態度，本量表測行為</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:26px;margin-top:18px">證據：向度對應表、定義與題目內容的比較<br>誠實指出名稱不同但內容相同，也可以拿高分</p>
+  <div class="foot"><span class="lim">Word 範本 6.3 的說明；jingle 與 jangle 謬誤見 Topic 03 投影片與作業說明頁</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>39</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">企劃書第七章　範例</div>
+  <h2 style="margin-bottom:16px">管理應用：診斷什麼、給誰看、看完做什麼</h2>
+  <div class="wpage" style="padding:24px 36px"><span class="wstamp">範例</span>
+    <div class="wh">七、管理應用</div>
+    <table>
+      <tr><th style="width:200px">項目</th><th>內容</th></tr>
+      <tr><td>診斷什麼</td><td>各部門員工收到批評時的反應型態，例如迴避回饋偏高的單位</td></tr>
+      <tr><td>給誰看</td><td>人資與部門主管；以部門平均呈現，不呈現個人分數，少於 5 人的單位不單獨呈現</td></tr>
+      <tr><td>看完做什麼</td><td>調整考核面談的流程，設計主管給予回饋的訓練</td></tr>
+      <tr><td>使用限制</td><td>自評可能低估；「玻璃心」帶有貶義，量表不用於招募篩選或個人評價，避免強化對年輕世代的刻板印象</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="lim">Word 範本第七章的說明：也要寫出使用上的限制，例如自評與主管評的差異、可能的刻板印象風險</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>40</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">期中發表簡報</div>
+  <h2 style="margin-bottom:22px">15 分鐘的段落與時間分配</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:380px">段落</th><th>內容</th><th style="width:200px">時間</th></tr>
+    <tr class="frag"><td>流行語與定義</td><td>日常用法、媒體報導、定義與排除條件</td><td>2 分鐘</td></tr>
+    <tr class="frag"><td>事例與分類</td><td>兩三則事例、編碼簿、Cohen’s κ</td><td>3 分鐘</td></tr>
+    <tr class="frag"><td>題目與預試</td><td>題目範例、樣本、草率作答篩檢</td><td>2 分鐘</td></tr>
+    <tr class="frag"><td>心理計量檢驗</td><td>項目分析、EFA、信度、刪題理由</td><td>4 分鐘</td></tr>
+    <tr class="frag"><td>與既有構念對照</td><td>向度對應表與判定結果</td><td>2 分鐘</td></tr>
+    <tr class="frag"><td>管理應用</td><td>診斷什麼、給誰看、限制</td><td>2 分鐘</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:26px;margin-top:16px">答辯 5 分鐘：準備刪題理由、結構與預設不同的解釋、與既有構念的差別</p>
+  <div class="foot"><span class="lim">評分標準：15 分鐘內讓人聽懂整個過程，答辯時能說明每個決定的理由，不迴避資料中不理想的結果</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>41</span></div>
 </section>
 
 <section class="slide xl" data-layout="task" data-density="3">
@@ -881,7 +1030,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <ol>
       <li class="frag">先用玻璃心練習資料跑完一次<br>對照今天投影片的數字</li>
       <li class="frag">各組預試資料依同樣步驟分析</li>
-      <li class="frag">完成企劃書第五章，補齊其他章節</li>
+      <li class="frag">完成企劃書第五至七章<br>第六章先查既有量表再寫</li>
       <li class="frag">企劃書與發表簡報各一份 PDF<br>上傳 Google Classroom</li>
     </ol>
     <div class="sheet">
@@ -889,7 +1038,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
       <p style="font-size:28px;line-height:1.65">組別_構念名稱_期中企劃書.pdf<br>組別_構念名稱_期中簡報.pdf</p>
     </div>
   </div>
-  <div class="foot"><span class="lim">作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
+  <div class="foot"><span class="lim">作業說明頁　<a class="lnk" href="../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>42</span></div>
 </section>
 
 <section class="slide" data-layout="next" data-density="3">
@@ -901,7 +1050,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">課後閱讀</div><div class="dd"><a class="lnk" href="../Handout/Topic05_量表心理計量檢驗/Topic05_量表心理計量檢驗_課程網站.html" target="_blank" rel="noopener">課堂互動教材網站　量表心理計量檢驗</a></div></div>
     <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">複習</div><div class="dd">信度與 α　<a class="lnk" href="../Handout/Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">課堂互動教材網站　測量基礎　單元二</a></div></div>
   </div>
-  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>43</span></div>
 </section>
 
 
@@ -911,7 +1060,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 </div></div>
 
 <div id="bar"><i></i></div>
-<div id="pg">1 / 34</div>
+<div id="pg">1 / 44</div>
 <div id="nav">
   <button id="prev" aria-label="上一頁">←</button>
   <button id="next" aria-label="下一頁">→</button>
