@@ -329,8 +329,9 @@ code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radi
     <a data-u="u7">單元七：管理應用與期中發表</a>
     <a data-u="u8">單元八：各章檢核與附錄</a>
     <div class="grp">實作</div>
-    <a data-u="u9">單元九：JASP 操作（中英對照）</a>
-    <a data-u="u10">單元十：參考文獻</a>
+    <a data-u="u9">單元九：Excel 與 JASP 操作截圖</a>
+    <a data-u="u10">單元十：用 AI 跑 R 與結果比對</a>
+    <a data-u="u11">單元十一：參考文獻</a>
   </nav>
 </aside>
 <main>
@@ -689,11 +690,46 @@ code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radi
 </section>
 
 <section class="unit" id="u9">
-  <h1>單元九：JASP 操作（截圖與中英對照）</h1>
-  <div class="subtitle">JASP 0.99．以課堂練習資料（篩檢後 172 份）示範</div>
+  <h1>單元九：Excel 與 JASP 操作截圖</h1>
+  <div class="subtitle">Microsoft Excel 與 JASP 0.99．以課堂練習資料示範</div>
   <p>JASP 可以在偏好設定（Preferences）中切換為繁體中文介面。截圖為中文介面，文字並列英文名稱；介面沒有中文名稱的選項為本課程翻譯。每一步都說明這樣設定的理由。</p>
 
-  <h2>9.1 開啟資料</h2>
+  <h2>9.0 Excel：草率作答篩檢與反向計分</h2>
+  <p>以下用 Excel 處理原始資料，完成後另存成 CSV 給 JASP 使用。<a href="../../Assignments/期中作業_草率作答篩檢示範.xlsx" target="_blank" rel="noopener">草率作答篩檢示範檔</a>已含所有公式，可以直接對照。</p>
+  <ol class="steps">
+    <li>開啟原始資料 CSV，先另存成 Excel 活頁簿（.xlsx）。理由：CSV 不能保存公式與篩選</li>
+  </ol>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e01_raw_c.jpg" alt="原始資料：A 欄編號、B 欄作答秒數、C 欄檢核題，D 到 R 欄是 15 題" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">原始資料：A 欄編號、B 欄作答秒數、C 欄檢核題，D 到 R 欄是 15 題</figcaption></figure>
+  <ol class="steps" start="2">
+    <li>在題目右邊加 15 欄「連1」到「連15」：連1 填 1，連2 輸入 <code class="k">=IF(E2=D2,X2+1,1)</code>，往右、往下填滿。理由：和前一題相同就加 1，不同就從 1 重算，把「連續幾題一樣」變成數字</li>
+    <li>「最長連續相同」欄輸入 <code class="k">=MAX(X2:AL2)</code>。理由：取 15 個計數中最大的那一個</li>
+  </ol>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e02_run_formula_c.jpg" alt="連續相同作答的計數：P013 從連1 到連15 一路累加到 15" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">連續相同作答的計數：P013 從連1 到連15 一路累加到 15</figcaption></figure>
+  <ol class="steps" start="4">
+    <li>三條規則各一欄：檢核題答錯 <code class="k">=IF(C2&lt;&gt;5,"是","")</code>；作答過快 <code class="k">=IF(B2&lt;30,"是","")</code>；直線作答 <code class="k">=IF(S2&gt;=10,"是","")</code>。理由：每條規則分開記錄，企劃書 4.4 才能報告各項剔除人數</li>
+    <li>判定欄 <code class="k">=IF(OR(T2="是",U2="是",V2="是"),"剔除","保留")</code></li>
+  </ol>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e04_flag_formula.jpg" alt="判定欄的公式" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">判定欄的公式</figcaption></figure>
+  <ol class="steps" start="6">
+    <li>判定欄篩選「剔除」，核對人數（檢核題 4、過快 4、直線 5，共 13 人），選取這些列刪除，再清除篩選。理由：先核對人數，避免誤刪</li>
+  </ol>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e05_filtered.jpg" alt="篩選出的 13 位剔除者" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">篩選出的 13 位剔除者</figcaption></figure>
+  <ol class="steps" start="7">
+    <li>在 B2 右邊插入 B2R 欄，輸入 <code class="k">=7-H2</code> 往下填滿；複製後貼上值，再刪除原本的 B2。理由：六點量表反向計分；只留一欄，避免 B2 與 B2R 同時被放進分析</li>
+    <li>刪除作答秒數、檢核題與所有輔助欄，只留編號與題目；檔案 → 另存新檔，格式選 CSV UTF-8（逗號分隔）。理由：JASP 與 R 讀 CSV；UTF-8 保留中文欄名</li>
+  </ol>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e06_reverse.jpg" alt="B2R ＝ 7 − B2" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">B2R ＝ 7 − B2</figcaption></figure>
+  <h2>9.0.1 Excel：項目分析範本</h2>
+  <ol class="steps">
+    <li>原始資料工作表：從 A1 貼上編號與題目。理由：範本從第 1 列讀取題號</li>
+    <li>反向題設定工作表：B2 填 6；B2R 已反向，C 欄不要選「是」。理由：再選一次會被轉回去</li>
+    <li>項目分析工作表：查看全量表 α、每題的決斷值、校正題總相關、刪除後 α 與判定</li>
+  </ol>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e07_template_paste.jpg" alt="原始資料工作表：貼上篩檢後的資料" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">原始資料工作表：貼上篩檢後的資料</figcaption></figure>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e08_reverse_setting.jpg" alt="反向題設定工作表" style="width:100%;max-width:420px;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">反向題設定工作表</figcaption></figure>
+  <figure style="margin:12px 0"><img src="../../Slides/img/topic05/e09_item_results.jpg" alt="項目分析工作表的結果：A5 判定為檢查" style="width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;display:block"><figcaption style="font-size:13px;color:var(--muted);margin-top:4px">項目分析工作表的結果：A5 判定為檢查</figcaption></figure>
+
+  <h2>9.1 開啟資料（JASP）</h2>
   <ol class="steps">
     <li>在 Excel 完成草率作答篩檢與反向計分，另存成 CSV。理由：分析只用有效樣本；反向題先轉換，所有題目的方向才一致</li>
     <li>左上角三條線選單 → 開啟（Open），選擇 CSV 檔</li>
@@ -756,7 +792,157 @@ code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radi
 </section>
 
 <section class="unit" id="u10">
-  <h1>單元十：參考文獻</h1>
+  <h1>單元十：用 AI 跑 R 與結果比對</h1>
+  <div class="subtitle">reproducible analysis</div>
+  <h2>10.1 為什麼要用另一套工具重跑</h2>
+  <p>同一份資料用 Excel、JASP、R 各算一次，數字一致，表示每個步驟與設定都正確；數字不一致，表示某個設定不同。這也是「可重現」：別人拿你的資料與設定，能跑出同樣的數字。</p>
+  <h2>10.2 提示詞</h2>
+  <p>把下面的提示詞交給有程式執行功能的 AI 工具（例如 Claude、ChatGPT），並上傳<a href="../../Assignments/期中作業_玻璃心預試練習資料.csv" target="_blank" rel="noopener">原始資料 CSV</a>。每一個設定都要寫出來，沒寫的部分 AI 會用軟體的預設值。</p>
+  <div class="calcbox" style="font-size:14.5px">請用 R（psych、GPArotation、lavaan）分析我上傳的 CSV，依序執行並寫出完整程式碼：<br>
+  1. 草率作答篩檢：依序剔除檢核題 ≠ 5、作答秒數 &lt; 30、15 題中連續相同 ≥ 10 題者，報告各項人數<br>
+  2. 反向計分：B2 改為 7 − B2，命名 B2R<br>
+  3. 項目分析：總分前後 27% 分組，決斷值用不假設變異數相等的 t 檢定；校正題總相關；刪除該題後的 α<br>
+  4. KMO、Bartlett 球形檢定；平行分析（fa = "pc"，set.seed(2026)）決定因素數<br>
+  5. EFA：psych::fa，fm = "minres"，rotate = "promax"，cor = "cor"（皮爾森相關）<br>
+  6. 刪題：最高負荷量 &lt; .40 先刪，否則第二負荷量 ≥ .32 刪除；一次一題，重跑到沒有題目符合<br>
+  7. 每次報告負荷量、共同性、獨特性；最後報告累積解釋變異量與因素間相關<br>
+  8. 信度：逐向度報告 α 與 ω；ω 用單因素 CFA（lavaan）的未標準化負荷量計算<br>
+  9. 數字取到小數第三位，不要更改上述設定；無法執行時先說明原因</div>
+  <p>AI 產生的程式整理在<a href="../../Assignments/期中作業_玻璃心分析_R腳本.R" target="_blank" rel="noopener">R 腳本</a>，也可以直接在 RStudio 執行：把腳本與原始資料 CSV 放在同一個資料夾，先安裝 psych、GPArotation、lavaan 三個套件，再按 Source。</p>
+  <h2>10.3 AI 的分析結果</h2>
+  <pre style="background:#1F2328;color:#ECE8E1;border-radius:8px;padding:14px 16px;font-size:12.5px;line-height:1.45;overflow-x:auto;max-height:520px">== 1. 草率作答篩檢 ==
+原始樣本 185 ；檢核題答錯 4 ；作答過快 4 ；連續相同 5 
+有效樣本 172 
+
+== 2. 反向計分 ==
+B2 以 7 減原始分數，改名 B2R
+
+== 3. 項目分析（全量表）==
+高分組切點 64 （ 48 人）；低分組切點 48 （ 51 人）
+全量表 alpha = 0.831 
+ 題目 決斷值 校正題總相關 刪除後alpha
+   A1   9.72        0.531       0.816
+   A2   8.53        0.461       0.820
+   A3   6.22        0.401       0.824
+   A4   8.91        0.546       0.815
+   A5   4.23        0.247       0.833
+   B1   7.96        0.480       0.819
+  B2R   5.75        0.343       0.827
+   B3   6.92        0.365       0.826
+   B4   6.89        0.434       0.822
+   B5   8.47        0.483       0.819
+   C1   8.73        0.509       0.818
+   C2   7.57        0.445       0.822
+   C3  10.41        0.521       0.817
+   C4  13.16        0.629       0.810
+   C5   5.96        0.358       0.827
+
+== 4. KMO 與 Bartlett ==
+KMO = 0.843 ；Bartlett chi2( 105 ) = 779.88 ，p = &lt; 2.22e-16 
+
+== 5. 平行分析 ==
+Parallel analysis suggests that the number of factors =  NA  and the number of components =  3 
+建議因素數 = 3 ；實際特徵值： 4.56 1.84 1.79 1.03 0.76 
+
+== 6. 探索性因素分析（最小殘差法、promax、相關矩陣），一次刪一題 ==
+
+第 1 次： 15 題
+       MR1    MR2    MR3 共同性 獨特性
+A1   0.625  0.089  0.016  0.462  0.538
+A2   0.781 -0.146  0.020  0.533  0.467
+A3   0.758 -0.122 -0.062  0.470  0.530
+A4   0.798 -0.043  0.020  0.618  0.382
+A5   0.160  0.151  0.011  0.075  0.925
+B1   0.020  0.025  0.658  0.460  0.540
+B2R -0.057 -0.001  0.564  0.294  0.706
+B3  -0.027 -0.073  0.647  0.372  0.628
+B4   0.063  0.028  0.539  0.338  0.662
+B5   0.019 -0.001  0.701  0.502  0.498
+C1  -0.172  0.760  0.148  0.577  0.423
+C2  -0.021  0.726 -0.063  0.479  0.521
+C3   0.064  0.596  0.039  0.420  0.580
+C4   0.369  0.480 -0.001  0.536  0.464
+C5  -0.149  0.781 -0.105  0.476  0.524
+刪除 A5 ：最高負荷量 0.16 低於 .40
+
+第 2 次： 14 題
+       MR1    MR2    MR3 共同性 獨特性
+A1   0.614  0.110  0.019  0.459  0.541
+A2   0.760 -0.116  0.024  0.530  0.470
+A3   0.742 -0.092 -0.061  0.473  0.527
+A4   0.788 -0.012  0.020  0.626  0.374
+B1   0.022  0.028  0.656  0.459  0.541
+B2R -0.057 -0.004  0.565  0.294  0.706
+B3  -0.032 -0.076  0.649  0.372  0.628
+B4   0.067  0.034  0.537  0.340  0.660
+B5   0.024  0.006  0.696  0.503  0.497
+C1  -0.141  0.752  0.146  0.590  0.410
+C2   0.008  0.726 -0.068  0.496  0.504
+C3   0.074  0.573  0.050  0.400  0.600
+C4   0.377  0.483  0.004  0.532  0.468
+C5  -0.121  0.756 -0.099  0.467  0.533
+刪除 C4 ：第二負荷量 0.377 達 .32
+
+第 3 次： 13 題
+       MR2    MR3    MR1 共同性 獨特性
+A1   0.618  0.014  0.137  0.468  0.532
+A2   0.744  0.024 -0.084  0.531  0.469
+A3   0.717 -0.052 -0.069  0.460  0.540
+A4   0.780  0.019  0.019  0.631  0.369
+B1   0.024  0.655  0.029  0.459  0.541
+B2R -0.056  0.564 -0.005  0.294  0.706
+B3  -0.032  0.644 -0.070  0.371  0.629
+B4   0.063  0.542  0.027  0.338  0.662
+B5   0.027  0.694  0.011  0.504  0.496
+C1  -0.096  0.141  0.747  0.609  0.391
+C2   0.047 -0.068  0.711  0.496  0.504
+C3   0.109  0.045  0.576  0.413  0.587
+C5  -0.082 -0.085  0.708  0.435  0.565
+每一題都只落在一個因素，停止
+累積解釋變異量 = 0.462 
+因素間相關：
+      MR2   MR3   MR1
+MR2 1.000 0.401 0.342
+MR3 0.401 1.000 0.389
+MR1 0.342 0.389 1.000
+
+== 7. 信度（逐向度）==
+平復所需時間 ：alpha = 0.805 ；omega = 0.808 
+迴避回饋 ：alpha = 0.758 ；omega = 0.762 
+情緒反應強度 ：alpha = 0.776 ；omega = 0.777 
+</pre>
+  <h2>10.4 三種工具的結果比對</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>指標</th><th>Excel 範本</th><th>JASP 0.99</th><th>R（AI）</th></tr>
+    <tr><td>有效樣本／全量表 α</td><td>172／.831</td><td>—</td><td>172／.831</td></tr>
+    <tr><td>A5 決斷值／校正題總相關</td><td>4.23／.25</td><td>—</td><td>4.23／.247</td></tr>
+    <tr><td>KMO／Bartlett χ²</td><td>—</td><td>.843／779.878</td><td>.843／779.88</td></tr>
+    <tr><td>第一次 A5、C4 負荷量</td><td>—</td><td>.160；.480 與 .369</td><td>.160；.480 與 .369</td></tr>
+    <tr><td>刪題順序／累積解釋變異量</td><td>—</td><td>A5 → C4／46%</td><td>A5 → C4／46.2%</td></tr>
+    <tr><td>ω（平復、迴避、情緒）</td><td>—</td><td>.808、.762、.777</td><td>.808、.762、.777</td></tr>
+  </table></div>
+  <p>「—」表示該工具不計算這項指標。三者的差異只在小數位數。R 的因素欄名 MR1、MR2、MR3 依解釋量排列，順序可能和 JASP 的因素 1、2、3 不同，對照題目內容即可；因素的正負號也可能相反，不影響解讀。</p>
+  <h2>10.5 設定不同時</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>情況</th><th>會看到的結果</th></tr>
+    <tr><td style="text-align:left">JASP 沒改相關矩陣（預設多序列相關）</td><td style="text-align:left">A4 負荷量 .811（本課程 .798），C4 .507</td></tr>
+    <tr><td style="text-align:left">R 沒指定轉軸（psych 預設 oblimin）</td><td style="text-align:left">C4 為 .487 與 .400</td></tr>
+    <tr><td style="text-align:left">做成主成分分析</td><td style="text-align:left">13 題解釋變異量 58%（本課程 46%）</td></tr>
+    <tr><td style="text-align:left">ω 用 psych::omega 預設算法</td><td style="text-align:left">.807、.760、.780（JASP .808、.762、.777）</td></tr>
+    <tr><td style="text-align:left">B2 沒有反向計分</td><td style="text-align:left">迴避回饋的 α 從 .758 掉到 .409</td></tr>
+  </table></div>
+  <h2>10.6 如何重現分析結果</h2>
+  <ol class="steps">
+    <li>先用練習資料跑一次，對照本頁的數字：有效樣本 172、KMO .843、A5 第一次最高負荷量 .160、三個向度的 ω .808、.762、.777</li>
+    <li>數字不同時依序檢查：有效樣本是否 172 人 → B2 有沒有反向、有沒有反向兩次 → 是否選相關矩陣、最小殘差法、promax → 刪題是否一次一題 → ω 的算法</li>
+    <li>練習資料對得上，再用同樣步驟分析各組的預試資料</li>
+    <li>附錄 B 附上：篩檢後的 CSV、項目分析 Excel、JASP 檔（.jasp）或截圖、R 腳本與 AI 對話紀錄；附錄 D 說明 AI 的用途與人工查核方式</li>
+  </ol>
+  <div class="key"><span class="lb">本單元要點</span>設定寫清楚，三種工具會得到相同數字；對不起來時先檢查設定。AI 負責寫程式與跑程式，設定與刪題判斷由組員決定。</div>
+</section>
+
+<section class="unit" id="u11">
+  <h1>單元十一：參考文獻</h1>
   <div class="refline">Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. <i>Practical Assessment, Research, and Evaluation, 10</i>, Article 7. <a href="https://doi.org/10.7275/jyj1-4868" target="_blank" rel="noopener">https://doi.org/10.7275/jyj1-4868</a></div><div class="refline">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. <i>Psychological Methods, 4</i>(3), 272–299. <a href="https://doi.org/10.1037/1082-989X.4.3.272" target="_blank" rel="noopener">https://doi.org/10.1037/1082-989X.4.3.272</a></div><div class="refline">Hair, J. F., Black, W. C., Babin, B. J., &amp; Anderson, R. E. (2019). <i>Multivariate data analysis</i> (8th ed.). Cengage.</div><div class="refline">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. <i>Organizational Research Methods, 7</i>(2), 191–205. <a href="https://doi.org/10.1177/1094428104263675" target="_blank" rel="noopener">https://doi.org/10.1177/1094428104263675</a></div><div class="refline">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. <i>Organizational Research Methods, 1</i>(1), 104–121. <a href="https://doi.org/10.1177/109442819800100106" target="_blank" rel="noopener">https://doi.org/10.1177/109442819800100106</a></div><div class="refline">JASP Team. (2026). <i>JASP</i> (Version 0.99) [Computer software]. <a href="https://jasp-stats.org" target="_blank" rel="noopener">https://jasp-stats.org</a></div><div class="refline">Kaiser, H. F. (1974). An index of factorial simplicity. <i>Psychometrika, 39</i>(1), 31–36. <a href="https://doi.org/10.1007/BF02291575" target="_blank" rel="noopener">https://doi.org/10.1007/BF02291575</a></div><div class="refline">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. <i>Journal of Educational Psychology, 30</i>(1), 17–24. <a href="https://doi.org/10.1037/h0057123" target="_blank" rel="noopener">https://doi.org/10.1037/h0057123</a></div><div class="refline">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. <i>Psychological Methods, 23</i>(3), 412–433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a></div><div class="refline">Spreitzer, G. M. (1995). Psychological empowerment in the workplace: Dimensions, measurement, and validation. <i>Academy of Management Journal, 38</i>(5), 1442–1465. <a href="https://doi.org/10.2307/256865" target="_blank" rel="noopener">https://doi.org/10.2307/256865</a></div><div class="refline">Steger, M. F., Dik, B. J., &amp; Duffy, R. D. (2012). Measuring meaningful work: The Work and Meaning Inventory (WAMI). <i>Journal of Career Assessment, 20</i>(3), 322–337. <a href="https://doi.org/10.1177/1069072711436160" target="_blank" rel="noopener">https://doi.org/10.1177/1069072711436160</a></div><div class="refline">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. <i>Journal of Personality Assessment, 80</i>(1), 99–103. <a href="https://doi.org/10.1207/S15327752JPA8001_18" target="_blank" rel="noopener">https://doi.org/10.1207/S15327752JPA8001_18</a></div>
   <p style="margin-top:14px">作業說明：<a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></p>
 </section>
