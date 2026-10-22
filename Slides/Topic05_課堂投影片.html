@@ -668,7 +668,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 步驟二</div>
   <h2 style="margin-bottom:18px">載入後的資料：一列一位填答者，一欄一題</h2>
-  <img class="shot" src="img/topic05/s02_data.jpg" style="max-height:500px;" alt="JASP 畫面">
+  <img class="shot" src="img/topic05/s02_data.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
   <div class="cards c3" style="margin-top:18px">
     <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:24px"><b>B2R</b>　已在 Excel 反向計分<br>欄名加 R 方便辨認</p></div>
     <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:24px"><b>長條圖示</b>　JASP 把 1 到 6 的整數<br>判定為次序變項（ordinal）</p></div>
@@ -680,8 +680,8 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="3">
   <div class="kicker">JASP 步驟三</div>
   <h2 style="margin-bottom:18px">因素分析（Factor）→ 探索性因素分析</h2>
-  <div class="shotrow" style="grid-template-columns:820px 1fr;align-items:center">
-    <img class="shot" src="img/topic05/s03_menu.jpg" style="max-height:420px;" alt="JASP 畫面">
+  <div class="shotrow" style="grid-template-columns:900px 1fr;align-items:center">
+    <img class="shot" src="img/topic05/s03_menu.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
     <div>
       <div class="stat frag"><div class="k">選第二項：探索性因素分析</div><p>Exploratory Factor Analysis</p></div>
       <div class="stat frag" style="margin-top:20px"><div class="k">第一項主成分分析是另一個方法</div><p>Principal Component Analysis<br>量表發展不使用</p></div>
@@ -709,11 +709,13 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 步驟五</div>
   <h2 style="margin-bottom:18px">分析選項：斜交 promax、最小殘差法、改選相關矩陣</h2>
-  <img class="shot" src="img/topic05/s05_efa_options.jpg" style="max-height:450px;" alt="JASP 畫面">
-  <div class="cards c3" style="margin-top:18px">
-    <div class="card frag" style="min-height:0;padding:16px 22px"><p style="font-size:25px"><b>轉軸方式：斜交 promax</b><br><span class="why">為什麼：同一構念的向度彼此相關，斜交允許相關</span></p></div>
-    <div class="card frag" style="min-height:0;padding:16px 22px"><p style="font-size:25px"><b>萃取方法：最小殘差法</b><br><span class="why">為什麼：屬於共同因素分析，只分析題目共有的變異</span></p></div>
-    <div class="card frag" style="min-height:0;padding:16px 22px;border-color:var(--accent)"><p style="font-size:25px"><b class="acc">改成相關矩陣</b><br><span class="why">為什麼：與 Excel 項目分析、信度使用同一種相關，數字可以互相對照</span></p></div>
+  <div class="shotrow" style="grid-template-columns:980px 1fr;align-items:center">
+    <img class="shot" src="img/topic05/s05_efa_options.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
+    <div>
+      <div class="stat frag"><div class="k">轉軸方式：斜交 promax</div><p><span class="why">為什麼：同一構念的向度彼此相關，斜交允許相關</span></p></div>
+      <div class="stat frag" style="margin-top:18px"><div class="k">萃取方法：最小殘差法</div><p><span class="why">為什麼：屬於共同因素分析，只分析題目共有的變異</span></p></div>
+      <div class="stat frag" style="margin-top:18px"><div class="k">改成相關矩陣</div><p><span class="why">為什麼：與 Excel 項目分析、信度用同一種相關，數字可以對照</span></p></div>
+    </div>
   </div>
   <div class="foot"><span class="lim">JASP 把 1 到 6 的整數判定為次序變項時，預設改用多序列相關，結果會和本投影片不同；英文介面：Rotation、Oblique、Minimum residual、Correlation matrix</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
 </section>
@@ -749,8 +751,8 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 輸出</div>
   <h2 style="margin-bottom:18px">KMO 檢驗與 Bartlett's 球形檢定</h2>
-  <div class="shotrow" style="grid-template-columns:420px 1fr">
-    <img class="shot" src="img/topic05/s07_kmo_bartlett.jpg" style="max-height:690px;" alt="JASP 畫面">
+  <div class="shotrow" style="grid-template-columns:400px 1fr">
+    <img class="shot" src="img/topic05/s07_kmo_bartlett.jpg" style="max-height:760px;" alt="JASP 畫面">
     <div>
       <div class="stat frag"><div class="k">整體 MSA ＝ 0.843</div><p>Overall MSA 就是 KMO 值<br>.80 以上為良好</p></div>
       <div class="stat frag" style="margin-top:20px"><div class="k">每一題的 MSA</div><p>A5 為 0.670，明顯低於其他題目<br>提醒這一題和其他題目的共同部分少</p></div>
@@ -778,7 +780,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="kicker">JASP 輸出</div>
   <h2 style="margin-bottom:18px">因素負荷量表：每一列是一題，每一欄是一個因素</h2>
   <div class="shotrow" style="grid-template-columns:700px 1fr">
-    <img class="shot" src="img/topic05/s08_loadings15.jpg" style="max-height:640px;" alt="JASP 畫面">
+    <img class="shot" src="img/topic05/s08_loadings15.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
     <div>
       <div class="stat frag"><div class="k">因素 1、2、3</div><p>每一題在三個因素上的負荷量<br>找出每一列絕對值最大的那一格</p></div>
       <div class="stat frag" style="margin-top:20px"><div class="k">獨特性（Uniqueness）</div><p>這一題沒有被共同因素解釋的部分<br>共同性 ＝ 1 − 獨特性</p></div>
@@ -867,8 +869,8 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="kicker">JASP 輸出　第二次與第三次</div>
   <h2 style="margin-bottom:18px">刪 A5 之後 C4 仍然跨負荷；刪 C4 之後每題只落在一個因素</h2>
   <div class="shotrow" style="grid-template-columns:1fr 1fr;gap:40px">
-    <div><p class="lead" style="font-size:24px;margin-bottom:8px">第二次（14 題）：C4 為 0.377 與 0.483</p><img class="shot" src="img/topic05/s11_loadings14.jpg" style="max-height:600px;" alt="JASP 畫面"></div>
-    <div><p class="lead" style="font-size:24px;margin-bottom:8px">第三次（13 題）：負荷量 .54 至 .78</p><img class="shot" src="img/topic05/s13_loadings13.jpg" style="max-height:600px;" alt="JASP 畫面"></div>
+    <div><p class="lead" style="font-size:24px;margin-bottom:8px">第二次（14 題）：C4 為 0.377 與 0.483</p><img class="shot" src="img/topic05/s11_loadings14.jpg" style="max-height:680px;" alt="JASP 畫面"></div>
+    <div><p class="lead" style="font-size:24px;margin-bottom:8px">第三次（13 題）：負荷量 .54 至 .78</p><img class="shot" src="img/topic05/s13_loadings13.jpg" style="max-height:680px;" alt="JASP 畫面"></div>
   </div>
   <div class="foot"><span class="lim">第三次分析中，因素 1 為平復所需時間、因素 2 為迴避回饋、因素 3 為情緒反應強度</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
 </section>
@@ -890,11 +892,13 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">解釋變異量</div>
   <h2 style="margin-bottom:18px">在因素特徵表看累積解釋變異量</h2>
-  <img class="shot" src="img/topic05/s09_characteristics15.jpg" style="max-height:470px;" alt="JASP 畫面">
-  <div class="cards c3" style="margin-top:18px">
-    <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:23px"><b>可解釋變異量之百分比</b><br>每個因素解釋多少比例，0.1560 即 16%</p></div>
-    <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:23px"><b>累積</b><br>最後一列是所有因素合計<br>第一次 44%，刪題後 13 題為 46%</p></div>
-    <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:23px"><b>判讀</b><br>社會科學常以 60% 左右為參考<br>沒有固定門檻，如實報告</p></div>
+  <div class="shotrow" style="grid-template-columns:1080px 1fr;align-items:center">
+    <img class="shot" src="img/topic05/s09_characteristics15.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
+    <div>
+      <div class="stat frag"><div class="k">可解釋變異量之百分比</div><p>每個因素解釋多少比例，0.1560 即 16%</p></div>
+      <div class="stat frag" style="margin-top:18px"><div class="k">累積</div><p>最後一列是所有因素合計<br>第一次 44%，刪題後 13 題為 46%</p></div>
+      <div class="stat frag" style="margin-top:18px"><div class="k">判讀</div><p>社會科學常以 60% 左右為參考<br>沒有固定門檻，如實報告</p></div>
+    </div>
   </div>
   <div class="foot"><span class="lim multi">Hair, J. F., Black, W. C., Babin, B. J., &amp; Anderson, R. E. (2019). Multivariate data analysis (8th ed.). Cengage.<br>畫面為第一次分析（15 題）；未轉軸解與轉軸解的累積值相同；共同因素分析的數值通常低於主成分分析</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
 </section>
@@ -933,9 +937,9 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 步驟七</div>
   <h2 style="margin-bottom:18px">信度分析 → 古典 → 信度分析</h2>
-  <div class="shotrow" style="grid-template-columns:330px 560px 1fr">
-    <img class="shot" src="img/topic05/s14_rel_menu.jpg" style="max-height:400px;" alt="JASP 畫面">
-    <img class="shot" src="img/topic05/s15_rel_settings.jpg" style="max-height:700px;" alt="JASP 畫面">
+  <div class="shotrow" style="grid-template-columns:300px 560px 1fr;gap:30px">
+    <img class="shot" src="img/topic05/s14_rel_menu.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
+    <img class="shot" src="img/topic05/s15_rel_settings.jpg" style="max-height:720px;" alt="JASP 畫面">
     <div class="task" style="display:block;margin-top:0">
       <ol>
         <li class="frag">每個向度分別跑，只放保留的題目<span class="why">為什麼：α 假設題目測同一件事，要逐向度計算</span></li>
@@ -951,11 +955,13 @@ table.cmp th{font-size:28px;padding:12px 20px}
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">JASP 輸出</div>
   <h2 style="margin-bottom:18px">平復所需時間（A1–A4）：ω ＝ .808，α ＝ .805</h2>
-  <img class="shot" src="img/topic05/s16_rel_output.jpg" style="max-height:450px;" alt="JASP 畫面">
-  <div class="cards c3" style="margin-top:18px">
-    <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:23px"><b>頻率派量表信度統計量</b><br>估計值欄就是 ω 與 α</p></div>
-    <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:23px"><b>若刪除此題項</b><br>四題刪除後都低於 .805<br>每一題都有貢獻</p></div>
-    <div class="card frag" style="min-height:0;padding:18px 24px"><p style="font-size:23px"><b>此題項與其它所有題項之相關</b><br>即向度內的校正題總相關<br>.58 至 .68</p></div>
+  <div class="shotrow" style="grid-template-columns:1080px 1fr;align-items:center">
+    <img class="shot" src="img/topic05/s16_rel_output.jpg" style="width:100%!important;max-height:none" alt="JASP 畫面">
+    <div>
+      <div class="stat frag"><div class="k">頻率派量表信度統計量</div><p>估計值欄就是 ω 與 α</p></div>
+      <div class="stat frag" style="margin-top:18px"><div class="k">若刪除此題項</div><p>四題刪除後都低於 .805<br>每一題都有貢獻</p></div>
+      <div class="stat frag" style="margin-top:18px"><div class="k">此題項與其它所有題項之相關</div><p>即向度內的校正題總相關<br>.58 至 .68</p></div>
+    </div>
   </div>
   <div class="foot"><span class="lim">其他兩個向度依同樣步驟各跑一次；ω 採 JASP 預設的估計方法，數值可能與其他軟體在小數第三位略有差異</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
 </section>
