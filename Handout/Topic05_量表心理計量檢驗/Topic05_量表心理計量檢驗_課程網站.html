@@ -289,6 +289,14 @@ td.ans3.ok{color:#337052;font-weight:700}
 .steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
 .steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
 code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radius:4px;font-size:13.5px}
+.mt{width:100%;border-collapse:collapse;margin:10px 0}
+.mt td,.mt th{border:1px solid var(--line);padding:6px 10px;text-align:center;font-size:14.5px}
+.mt th{background:var(--lightblue);color:var(--navy)}
+.mt tr.hg td{background:#EAF4EE}
+.mt tr.lg td{background:#FBF2E1}
+.calcbox{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;padding:12px 18px;margin:12px 0;font-size:15px;line-height:1.9}
+.zh{color:#7A2033;font-weight:700}
+.glos td:first-child{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -310,184 +318,399 @@ code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radi
   </div>
   <nav id="nav">
     <a data-u="u0" class="active">本主題首頁</a>
-    <div class="grp">項目分析</div>
+    <div class="grp">第五章　心理計量檢驗</div>
     <a data-u="u1">單元一：項目分析</a>
-    <div class="grp">探索性因素分析</div>
-    <a data-u="u2">單元二：分析前的檢查</a>
-    <a data-u="u3">單元三：因素數目與轉軸</a>
-    <a data-u="u4">單元四：負荷量與刪題</a>
-    <div class="grp">效度與信度</div>
-    <a data-u="u5">單元五：構念效度與信度</a>
+    <a data-u="u2">單元二：因素分析前的準備</a>
+    <a data-u="u3">單元三：因素數目、萃取與轉軸</a>
+    <a data-u="u4">單元四：讀結果與刪題</a>
+    <a data-u="u5">單元五：信度與最終量表</a>
+    <div class="grp">企劃書其他章節與發表</div>
+    <a data-u="u6">單元六：與既有構念的對照</a>
+    <a data-u="u7">單元七：管理應用與期中發表</a>
+    <a data-u="u8">單元八：各章檢核與附錄</a>
     <div class="grp">實作</div>
-    <a data-u="u6">單元六：JASP 操作步驟</a>
-    <a data-u="u7">單元七：參考文獻</a>
+    <a data-u="u9">單元九：JASP 操作（中英對照）</a>
+    <a data-u="u10">單元十：參考文獻</a>
   </nav>
 </aside>
 <main>
 
 <section class="unit active" id="u0">
   <h1>量表心理計量檢驗</h1>
-  <div class="subtitle">員工意向調查課程．Topic 05．對應期中企劃書第五章</div>
-  <p>預試資料收回後，要決定哪些題目留下、量表有幾個向度、每個向度的信度是否足夠。本主題依分析順序說明每一步要看的指標與判讀方式，練習題使用「工作意義感」的示意資料；課堂上的玻璃心練習資料請見<a href="../../Slides/Topic05_課堂投影片.html" target="_blank" rel="noopener">Topic 05 課堂投影片</a>。</p>
+  <div class="subtitle">員工意向調查課程．Topic 05．對應期中企劃書第五、六、七章</div>
+  <p>各組已經寫好題目、發出預試問卷，也完成草率作答篩檢。接下來要用資料回答三個問題：</p>
+  <ol>
+    <li>哪些題目寫得好、哪些要刪除？（項目分析、因素分析）</li>
+    <li>題目背後有幾個向度，是否和事例歸納出來的向度一致？（因素分析）</li>
+    <li>每個向度的題目是否一致地測量同一件事？（信度）</li>
+  </ol>
+  <p>分析完成後，再和既有量表比較（第六章），說明這份量表在企業裡的用途（第七章），最後準備期中發表。本網站依這個順序說明，每個單元都對應 <a href="../../Assignments/期中作業_企劃書範本.docx" target="_blank" rel="noopener">Word 企劃書範本</a> 的章節。練習題使用「工作意義感」的示意資料；課堂示範使用玻璃心預試資料，見<a href="../../Slides/Topic05_課堂投影片.html" target="_blank" rel="noopener">Topic 05 課堂投影片</a>。</p>
   <div class="flow">
-    <div class="fbox q">草率作答篩檢與反向計分（Topic 04）</div><div class="farrow">↓</div>
-    <div class="fbox">項目分析：決斷值、校正題總相關（企劃書 5.1）</div><div class="farrow">↓</div>
-    <div class="fbox">探索性因素分析：因素數目、負荷量、刪題（企劃書 5.2）</div><div class="farrow">↓</div>
-    <div class="fbox">信度：各向度的 α 與 ω（企劃書 5.3）</div><div class="farrow">↓</div>
-    <div class="fbox leaf">最終量表（企劃書 5.4）</div>
+    <div class="fbox q">草率作答篩檢與反向計分（Topic 04，企劃書 4.4）</div><div class="farrow">↓</div>
+    <div class="fbox">單元一　項目分析（企劃書 5.1）</div><div class="farrow">↓</div>
+    <div class="fbox">單元二至四　探索性因素分析（企劃書 5.2）</div><div class="farrow">↓</div>
+    <div class="fbox">單元五　信度與最終量表（企劃書 5.3、5.4）</div><div class="farrow">↓</div>
+    <div class="fbox">單元六　與既有構念的對照（企劃書第六章）</div><div class="farrow">↓</div>
+    <div class="fbox">單元七　管理應用與期中發表（企劃書第七章、發表簡報）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">單元八　各章檢核與附錄（上傳前對照）</div>
   </div>
+  <h2>名詞對照</h2>
+  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>意思</th></tr><tr><td>項目分析</td><td>item analysis</td><td style='text-align:left'>逐題檢查題目品質的分析</td></tr><tr><td>決斷值</td><td>critical ratio，CR</td><td style='text-align:left'>高分組與低分組在一題上的平均數差異（t 值）</td></tr><tr><td>校正題總相關</td><td>corrected item-total correlation</td><td style='text-align:left'>一題與其他題目總分的相關</td></tr><tr><td>刪除後 α</td><td>alpha if item deleted</td><td style='text-align:left'>刪掉一題後，其餘題目的 α</td></tr><tr><td>因素</td><td>factor</td><td style='text-align:left'>造成一群題目一起變動的共同原因，對應構念的向度</td></tr><tr><td>負荷量</td><td>factor loading</td><td style='text-align:left'>一題與一個因素的關聯強度</td></tr><tr><td>共同性</td><td>communality</td><td style='text-align:left'>一題的變異中，由共同因素解釋的比例</td></tr><tr><td>特徵值</td><td>eigenvalue</td><td style='text-align:left'>一個因素能解釋多少題目的變異</td></tr><tr><td>轉軸</td><td>rotation</td><td style='text-align:left'>調整因素的方向，讓負荷量容易解讀</td></tr><tr><td>解釋變異量</td><td>variance explained</td><td style='text-align:left'>因素共同解釋了題目多少比例的變異</td></tr><tr><td>組合信度</td><td>composite reliability</td><td style='text-align:left'>JASP 中文介面中 ω 的名稱，標為 CR值</td></tr></table></div>
+  <h2>工具</h2>
   <table>
-    <tr><th style="width:28%">工具</th><th>用途</th></tr>
-    <tr><td><a href="../../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">項目分析 Excel 範本</a></td><td>貼上資料後自動計算決斷值與校正題總相關</td></tr>
-    <tr><td>JASP</td><td>探索性因素分析與信度；免費，<a href="https://jasp-stats.org/download/" target="_blank" rel="noopener">官網下載</a></td></tr>
+    <tr><th style="width:30%">工具</th><th>用途</th></tr>
+    <tr><td><a href="../../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">項目分析 Excel 範本</a></td><td>貼上資料後自動計算決斷值、校正題總相關、刪除後 α</td></tr>
+    <tr><td>JASP</td><td>探索性因素分析與信度；免費，<a href="https://jasp-stats.org/download/" target="_blank" rel="noopener">官網下載</a>；偏好設定可切換繁體中文介面</td></tr>
     <tr><td><a href="../../Assignments/期中作業_玻璃心預試練習資料.csv" target="_blank" rel="noopener">玻璃心預試練習資料</a></td><td>課堂練習用的 185 份模擬資料</td></tr>
   </table>
 </section>
 
 <section class="unit" id="u1">
   <h1>單元一：項目分析</h1>
-  <div class="subtitle">item analysis</div>
-  <h2>1.1 決斷值</h2>
-  <p>決斷值（critical ratio，CR）檢查一題能不能區分高分者與低分者。做法是把總分排序，前 27% 為高分組、後 27% 為低分組，比較兩組在這一題的平均數，算出 t 值（Kelley, 1939）。本課程以 t 值 3.00 以上為保留標準。</p>
-  <h2>1.2 校正題總相關</h2>
-  <p>校正題總相關（corrected item-total correlation）是這一題與「其他題目總分」的相關，總分不包含這一題本身。本課程以 .30 以上為保留標準。出現負相關時，多半是反向題沒有反向計分，詳見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u4" target="_blank" rel="noopener">測量基礎　單元四</a>。</p>
-  <h2>1.3 未達標準時的處理</h2>
+  <div class="subtitle">item analysis．企劃書 5.1</div>
+  <h2>1.1 為什麼要做項目分析</h2>
+  <p>題庫裡的每一題都是依事例寫出來的，但寫的時候無法確定填答者會怎麼理解。有些題目可能太籠統、有些和構念無關、有些反向題忘了反向計分。項目分析用預試資料逐題檢查，找出需要修改或刪除的題目。本課程看三個指標：決斷值、校正題總相關、刪除後 α。</p>
+  <div class="note"><span class="lb">分析前</span>先完成草率作答篩檢（<a href="../Topic6_草率作答偵測/草率作答快篩_簡易版.html" target="_blank" rel="noopener">草率作答快篩</a>），反向題也要先反向計分：六點量表以 7 減原始分數，五點量表以 6 減原始分數。</div>
+
+  <h2>1.2 決斷值是什麼</h2>
+  <p>一題好的題目，在構念程度高的人和程度低的人身上，應該會得到不同的分數。決斷值（critical ratio，CR）就是檢查這件事：先用總分把填答者分成高分組與低分組，再比較兩組在這一題的平均數差距有多大。差距越大、越穩定，這一題越能區分不同程度的人（Kelley, 1939）。</p>
+
+  <h2>1.3 決斷值怎麼算</h2>
+  <p>以下用 11 位填答者的示意資料，一步一步計算 M1 與 M3 兩題的決斷值。</p>
+  <h3>步驟一：算出每個人的總分，由高到低排序</h3>
+  <p>把每個人所有題目的分數加起來（反向題要先反向）。下表已依總分排序。</p>
+  <div class="scrollx"><table class="mt"><tr><th>填答者</th><th>總分</th><th>M1</th><th>M3</th><th>分組</th></tr><tr class="hg"><td>P01</td><td>42</td><td>6</td><td>4</td><td>高分組</td></tr><tr class="hg"><td>P02</td><td>40</td><td>5</td><td>3</td><td>高分組</td></tr><tr class="hg"><td>P03</td><td>39</td><td>6</td><td>4</td><td>高分組</td></tr><tr class=""><td>P04</td><td>37</td><td>5</td><td>3</td><td></td></tr><tr class=""><td>P05</td><td>35</td><td>4</td><td>4</td><td></td></tr><tr class=""><td>P06</td><td>33</td><td>4</td><td>3</td><td></td></tr><tr class=""><td>P07</td><td>31</td><td>4</td><td>3</td><td></td></tr><tr class=""><td>P08</td><td>29</td><td>3</td><td>4</td><td></td></tr><tr class="lg"><td>P09</td><td>27</td><td>2</td><td>3</td><td>低分組</td></tr><tr class="lg"><td>P10</td><td>25</td><td>3</td><td>4</td><td>低分組</td></tr><tr class="lg"><td>P11</td><td>22</td><td>2</td><td>3</td><td>低分組</td></tr></table></div>
+  <h3>步驟二：取前 27% 為高分組、後 27% 為低分組</h3>
+  <p>11 × 27% ≈ 3，所以總分最高的 3 人（綠底）為高分組，最低的 3 人（黃底）為低分組，中間 5 人不列入比較。實際資料中，切點上有同分的人都納入該組，所以人數會略多於 27%。只取兩端是為了讓高低兩組的差異明顯。</p>
+  <h3>步驟三：分別計算兩組在這一題的平均數與變異數</h3>
+  <div class="calcbox">
+    M1 高分組：6、5、6，平均數 ＝ 5.67，變異數 ＝ 0.33<br>
+    M1 低分組：2、3、2，平均數 ＝ 2.33，變異數 ＝ 0.33<br>
+    變異數的算法：每個分數減平均數後平方，加總，再除以人數減 1
+  </div>
+  <h3>步驟四：代入 t 值公式</h3>
+  <div class="calcbox">
+    t ＝（高分組平均數 − 低分組平均數）÷ √（高分組變異數 ÷ 高分組人數 ＋ 低分組變異數 ÷ 低分組人數）<br>
+    M1：t ＝（5.67 − 2.33）÷ √（0.33 ÷ 3 ＋ 0.33 ÷ 3）＝ 3.33 ÷ 0.47 ＝ <b>7.07</b><br>
+    M3：高分組 4、3、4，低分組 3、4、3；t ＝（3.67 − 3.33）÷ 0.47 ＝ <b>0.71</b>
+  </div>
+  <p>分子是兩組的平均數差距；分母是這個差距的抽樣誤差，也就是換一批人時差距可能變動的幅度。t 值越大，表示兩組差距相對於誤差越明顯。本課程以 t 值 3.00 以上為保留標準。M1 的 t 值 7.07，能區分高低分者；M3 只有 0.71，高分組和低分組在這一題的回答差不多，表示這一題無法區分構念程度不同的人。</p>
+  <p>實際資料有上百人，不需要手算：<a href="../../Assignments/期中作業_項目分析範本.xlsx" target="_blank" rel="noopener">項目分析 Excel 範本</a>會自動完成四個步驟。</p>
+
+  <h2>1.4 校正題總相關</h2>
+  <p>相關係數介於 −1 到 1，表示兩個分數一起變動的程度。正相關表示一個高、另一個也高；接近 0 表示兩者沒有關係；負相關表示一個高、另一個反而低。</p>
+  <p>校正題總相關（corrected item-total correlation）是這一題的分數與「其他題目加總」的相關。「校正」指總分不包含這一題本身，因為這一題本身也在總分裡，直接和總分算相關會高估。如果這一題和其他題目測的是同一個構念，填答者在這一題分數高，在其他題目通常也高，相關就會是中高的正值。本課程以 .30 以上為保留標準。出現負相關時，多半是反向題沒有反向計分，詳見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u4" target="_blank" rel="noopener">測量基礎　單元四</a>。</p>
+
+  <h2>1.5 刪除後 α</h2>
+  <p>Cronbach’s α 表示一組題目彼此一致的程度（<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a>）。刪除後 α（alpha if item deleted）是假設刪掉這一題，其餘題目的 α 會變成多少。如果刪除後 α 高於全量表 α，表示這一題拉低了題目之間的一致性。這個指標只用來輔助判斷：刪除後 α 只上升一點點時，題目內容如果重要，仍然可以保留。</p>
+
+  <h2>1.6 判讀與處理</h2>
+  <table>
+    <tr><th style="width:26%">指標</th><th style="width:22%">保留標準</th><th>未達標準時</th></tr>
+    <tr><td>決斷值</td><td>t ≥ 3.00</td><td>題目無法區分高低分者，檢查是否太容易同意或太籠統</td></tr>
+    <tr><td>校正題總相關</td><td>≥ .30</td><td>題目與其他題目方向不一致；負值時先檢查反向計分</td></tr>
+    <tr><td>刪除後 α</td><td>不高於全量表 α</td><td>這一題拉低一致性，對照題目內容判斷</td></tr>
+  </table>
   <ol>
-    <li>先看題目內容：是否與構念定義對應、用詞是否籠統</li>
+    <li>未達標準的題目，先回到題目內容：是否與構念定義對應、用詞是否籠統</li>
     <li>標記為「檢查」，進入因素分析後再決定是否刪除</li>
-    <li>刪除時在企劃書 5.1 寫出題號、數值與理由</li>
+    <li>刪除時在企劃書 5.1 的表格寫出題號、數值與理由</li>
   </ol>
-  <h2>1.4 練習：工作意義感 8 題</h2>
-  <p>下表為示意資料。依兩項標準判斷每一題要保留或檢查，按下按鈕後會顯示解析。</p>
+
+  <h2>1.7 Excel 範本操作</h2>
+  <ol class="steps">
+    <li>原始資料工作表：從 A1 貼上，第 1 列為欄位名稱（編號、題目代號），第 2 列起每列一位填答者；作答秒數、檢核題等非題目欄位先刪除</li>
+    <li>反向題設定工作表：B2 填量尺點數（六點量表填 6）；資料還沒反向的題目在 C 欄選「是」，已反向的不要再選</li>
+    <li>項目分析工作表：查看全量表 α，以及每一題的決斷值、校正題總相關、刪除後 α 與判定</li>
+    <li>把結果抄到企劃書 5.1 的表格，判定為「檢查」的題目寫出理由</li>
+  </ol>
+
+  <h2>1.8 練習：工作意義感 8 題</h2>
+  <p>下表為示意資料，全量表 α ＝ .86。依三項標準判斷每一題要保留或檢查，按下按鈕後會顯示解析。</p>
   <div class="scrollx"><table class="pt">
-    <tr><th>題號</th><th>題目</th><th>決斷值 t</th><th>校正題總相關</th><th>你的判斷</th><th>解析</th></tr>
-    <tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M1</td><td style="text-align:left">我的工作對他人有幫助</td><td>8.12</td><td>.58</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M2</td><td style="text-align:left">我認為自己的工作有價值</td><td>7.40</td><td>.52</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="兩項都未達標準；題目描述的是工作環境，與工作意義感無關"><td>M3</td><td style="text-align:left">我的辦公環境很舒適</td><td>2.41</td><td>.21</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M4</td><td style="text-align:left">我做的事情與公司目標有關</td><td>6.85</td><td>.47</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="負相關；這是反向題，先確認是否已反向計分，修正後重算"><td>M5</td><td style="text-align:left">我常懷疑這份工作有什麼意義</td><td>5.10</td><td>−.28</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M6</td><td style="text-align:left">工作讓我覺得人生更充實</td><td>9.03</td><td>.61</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="相關低於 .30；題目內容屬於同事關係，與構念的對應較弱"><td>M7</td><td style="text-align:left">我喜歡和同事一起吃午餐</td><td>4.62</td><td>.27</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="決斷值與相關都達標準"><td>M8</td><td style="text-align:left">我能說出自己的工作帶來哪些改變</td><td>7.77</td><td>.55</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr>
+    <tr><th>題號</th><th>題目</th><th>決斷值 t</th><th>校正題總相關</th><th>刪除後 α</th><th>你的判斷</th><th>解析</th></tr>
+    <tr data-ans="keep" data-why="三項都達標準"><td>M1</td><td style="text-align:left">我的工作對他人有幫助</td><td>8.12</td><td>.58</td><td>.84</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="三項都達標準"><td>M2</td><td style="text-align:left">我認為自己的工作有價值</td><td>7.40</td><td>.52</td><td>.85</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="決斷值與相關都未達標準，刪除後 α 上升；題目描述的是工作環境，與工作意義感無關"><td>M3</td><td style="text-align:left">我的辦公環境很舒適</td><td>2.41</td><td>.21</td><td>.88</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="三項都達標準"><td>M4</td><td style="text-align:left">我做的事情與公司目標有關</td><td>6.85</td><td>.47</td><td>.85</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="負相關；這是反向題，先確認是否已反向計分，修正後重算"><td>M5</td><td style="text-align:left">我常懷疑這份工作有什麼意義</td><td>5.10</td><td>−.28</td><td>.89</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="三項都達標準"><td>M6</td><td style="text-align:left">工作讓我覺得人生更充實</td><td>9.03</td><td>.61</td><td>.83</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="相關低於 .30，刪除後 α 上升；題目內容屬於同事關係"><td>M7</td><td style="text-align:left">我喜歡和同事一起吃午餐</td><td>4.62</td><td>.27</td><td>.87</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="三項都達標準"><td>M8</td><td style="text-align:left">我能說出自己的工作帶來哪些改變</td><td>7.77</td><td>.55</td><td>.84</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">檢查</button></div></td><td class="fb"></td></tr>
   </table></div>
-  <div class="key"><span class="lb">本單元要點</span>決斷值與校正題總相關要一起看；未達標準的題目先回到題目內容，刪題前再對照因素分析結果。</div>
+
+  <h2>1.9 寫入企劃書 5.1</h2>
+  <p>Word 範本 5.1 的表格欄位為：題號、決斷值（CR）、校正題總相關、刪除後 α、決定與理由。表格前先寫一段說明：有效樣本數、反向題處理、高低分組的切點與人數、三項標準與全量表 α。所有題目都要列出。</p>
+  <div class="key"><span class="lb">本單元要點</span>決斷值看能否區分高低分者，校正題總相關看方向是否一致，刪除後 α 看是否拉低一致性；未達標準的題目先回到題目內容，刪題前再對照因素分析。</div>
 </section>
 
 <section class="unit" id="u2">
-  <h1>單元二：分析前的檢查</h1>
-  <div class="subtitle">KMO and Bartlett's test</div>
-  <h2>2.1 KMO 取樣適切性量數</h2>
-  <p>KMO（Kaiser-Meyer-Olkin）檢查題目之間的相關是否足以抽出共同因素，數值介於 0 到 1（Kaiser, 1974）。</p>
+  <h1>單元二：因素分析前的準備</h1>
+  <div class="subtitle">exploratory factor analysis．企劃書 5.2</div>
+  <h2>2.1 探索性因素分析在做什麼</h2>
+  <p>假設工作意義感有兩個向度：「對他人的貢獻」與「工作帶來的改變」。同一個向度的題目測的是同一件事，所以填答者在這些題目上的分數會一起高、一起低，題目之間的相關較高；不同向度的題目之間，相關較低。探索性因素分析（exploratory factor analysis，EFA）從所有題目兩兩之間的相關，找出哪些題目會一起變動，把它們歸成同一個因素（factor）。每一個因素代表題目背後的一個共同原因，對應構念的一個向度。</p>
+  <p>「探索性」指分析時不事先告訴軟體哪一題屬於哪個向度，由資料決定。分析完成後，再對照事例歸納出來的向度，看兩者是否一致。</p>
+  <h2>2.2 KMO 取樣適切性量數</h2>
+  <p>如果題目之間幾乎沒有相關，就找不出共同的因素。KMO（Kaiser-Meyer-Olkin）檢查題目之間的相關是否足以抽出共同因素，數值介於 0 到 1，越接近 1 越適合（Kaiser, 1974）。JASP 輸出中的「Overall MSA（整體 MSA）」就是 KMO 值，每一題也有自己的 MSA。</p>
   <table>
     <tr><th style="width:30%">KMO</th><th>判讀</th></tr>
     <tr><td>.90 以上</td><td>極佳</td></tr>
     <tr><td>.80 至 .89</td><td>良好</td></tr>
     <tr><td>.70 至 .79</td><td>中等</td></tr>
     <tr><td>.60 至 .69</td><td>普通，可以進行</td></tr>
-    <tr><td>.60 以下</td><td>不適合進行因素分析，先檢查個別題目的 KMO</td></tr>
+    <tr><td>.60 以下</td><td>不適合進行因素分析；先找出 MSA 特別低的題目，考慮刪除後重跑</td></tr>
   </table>
-  <h2>2.2 Bartlett 球形檢定</h2>
-  <p>檢查題目之間是否彼此無關。p &lt; .05 表示題目之間存在相關，可以進行因素分析。樣本數較大時這項檢定幾乎都會顯著，因此以 KMO 為主要依據。</p>
-  <h2>2.3 樣本數</h2>
-  <p>預試人數至少為題數的 5 倍，且不低於 100 人（Topic 04）。篩檢後的有效樣本也要符合這個標準。</p>
+  <h2>2.3 Bartlett 球形檢定</h2>
+  <p>檢定的虛無假設是「所有題目之間的相關都是 0」。p &lt; .05 時拒絕虛無假設，表示題目之間存在相關，可以進行因素分析。樣本數較大時這項檢定幾乎都會顯著，因此以 KMO 為主要依據。企劃書要寫出 χ² 值、自由度與 p 值，例如 χ²(105) ＝ 779.88，p &lt; .001。</p>
+  <h2>2.4 樣本數</h2>
+  <p>預試有效樣本至少為題數的 5 倍，且不低於 100 人（Topic 04）。篩檢後的有效樣本也要符合這個標準；樣本太少時，因素結構不穩定，換一批人可能得到不同結果。</p>
   <div class="key"><span class="lb">本單元要點</span>KMO 達 .60 以上、Bartlett 檢定顯著、有效樣本足夠，再進行因素分析。</div>
 </section>
 
 <section class="unit" id="u3">
-  <h1>單元三：因素數目與轉軸</h1>
-  <div class="subtitle">number of factors and rotation</div>
-  <h2>3.1 決定因素數目</h2>
+  <h1>單元三：因素數目、萃取與轉軸</h1>
+  <div class="subtitle">number of factors, extraction, and rotation．企劃書 5.2</div>
+  <h2>3.1 特徵值</h2>
+  <p>每一題經過標準化後的變異都是 1，所以 8 題的總變異是 8。特徵值（eigenvalue）表示一個因素能解釋多少變異：特徵值 3.2 表示這個因素解釋了相當於 3.2 題的變異。第一個因素的特徵值最大，後面依序遞減。</p>
+  <h2>3.2 決定因素數目</h2>
   <table>
-    <tr><th style="width:24%">方法</th><th>做法</th><th style="width:30%">提醒</th></tr>
-    <tr><td>特徵值大於 1</td><td>保留特徵值大於 1 的因素</td><td>容易保留過多因素</td></tr>
-    <tr><td>陡坡圖</td><td>看特徵值曲線在哪裡轉為平緩</td><td>轉折點不明顯時難以判斷</td></tr>
-    <tr><td>平行分析</td><td>實際資料的特徵值高於隨機資料才保留</td><td>JASP 預設方法，建議優先使用</td></tr>
+    <tr><th style="width:22%">方法</th><th>做法</th><th style="width:30%">提醒</th></tr>
+    <tr><td>特徵值大於 1</td><td>保留特徵值大於 1 的因素，理由是一個因素至少要解釋一題的變異</td><td>容易保留過多因素</td></tr>
+    <tr><td>陡坡圖</td><td>把特徵值依序畫成折線，看曲線在哪裡由陡轉為平緩，保留轉折點之前的因素</td><td>轉折點不明顯時難以判斷</td></tr>
+    <tr><td>平行分析</td><td>產生和實際資料同樣人數、題數的隨機資料，計算隨機資料的特徵值；實際資料的特徵值高於隨機資料的才保留</td><td>JASP 預設方法，建議優先使用</td></tr>
   </table>
-  <p>平行分析的結果再對照理論上預設的向度數目（Hayton et al., 2004）。兩者不一致時，比較不同因素數目的結果，選擇題目歸屬清楚、能依內容命名的方案，並在企劃書說明理由。</p>
-  <h2>3.2 轉軸</h2>
-  <p>轉軸讓每一題盡量只落在一個因素，結果比較容易解讀。</p>
+  <p>平行分析的道理是：即使題目之間完全沒有關係，隨機資料算出來的前幾個特徵值也會略大於 1。只有高於隨機資料的特徵值，才代表資料中有真正的共同因素（Hayton et al., 2004）。</p>
+  <p>平行分析的結果要再對照事例歸納出來的向度數目。兩者不一致時，比較不同因素數目的結果，選擇題目歸屬清楚、每個因素都能依題目內容命名的方案，並在企劃書說明理由。</p>
+  <h2>3.3 萃取方法：主成分分析與共同因素分析</h2>
   <table>
-    <tr><th style="width:24%">轉軸</th><th>假設</th><th style="width:30%">例子</th></tr>
-    <tr><td>直交轉軸</td><td>因素之間不相關</td><td>varimax</td></tr>
-    <tr><td>斜交轉軸</td><td>允許因素之間相關，並輸出因素間相關</td><td>promax（JASP 預設）、oblimin</td></tr>
+    <tr><th style="width:22%"></th><th>主成分分析</th><th>共同因素分析</th></tr>
+    <tr><td>分析哪些變異</td><td>題目的全部變異，包含測量誤差</td><td>只分析題目之間共有的變異</td></tr>
+    <tr><td>目的</td><td>把多題濃縮成少數幾個分數</td><td>找出題目背後的構念</td></tr>
+    <tr><td>JASP 選單</td><td>Principal Component Analysis（主成分分析）</td><td>Exploratory Factor Analysis（探索性因素分析），萃取方法選最小殘差法</td></tr>
+    <tr><td>解釋變異量</td><td>較高，因為把誤差也算進去</td><td>較低</td></tr>
   </table>
-  <p>同一構念的向度通常彼此相關，本課程採用斜交轉軸（Fabrigar et al., 1999）。斜交轉軸時讀 JASP 預設輸出的負荷量表（pattern matrix）。</p>
-  <div class="key"><span class="lb">本單元要點</span>以平行分析決定因素數目並對照理論；採用斜交轉軸，報告因素間相關。</div>
+  <p>量表發展的目的是測量背後的構念，題目中的測量誤差不屬於構念，因此本課程使用共同因素分析，萃取方法採用 JASP 預設的最小殘差法（minimum residual）（Fabrigar et al., 1999）。另一個常見的共同因素萃取方法是主軸因素法（principal axis factoring），結果通常相近。</p>
+  <h2>3.4 轉軸</h2>
+  <p>電腦第一次算出的因素（未轉軸解）通常讓多數題目都落在第一個因素上，不容易看出結構。轉軸（rotation）是調整因素的方向，讓每一題盡量只在一個因素上有高負荷量，其他因素接近 0，結果比較容易解讀。轉軸不會改變所有因素合計解釋的變異量。</p>
+  <table>
+    <tr><th style="width:22%">轉軸</th><th>假設</th><th style="width:34%">例子</th></tr>
+    <tr><td>直交轉軸<br>orthogonal</td><td>因素之間不相關，因素間相關固定為 0</td><td>varimax</td></tr>
+    <tr><td>斜交轉軸<br>oblique</td><td>允許因素之間相關，另外輸出因素間相關</td><td>promax（JASP 預設）、oblimin</td></tr>
+  </table>
+  <p>同一構念的不同向度通常彼此相關，例如對他人的貢獻較高的人，通常也感覺工作帶來較多改變，因此本課程採用斜交轉軸（Fabrigar et al., 1999）。斜交轉軸會產生兩種負荷量表：JASP 預設輸出的負荷量表是樣式矩陣（pattern matrix），表示每個因素對題目的獨特影響，判讀與刪題都看這一張；另外可勾選的結構矩陣（structure matrix）是題目與因素的相關，不用於刪題。</p>
+  <div class="key"><span class="lb">本單元要點</span>以平行分析決定因素數目並對照事例歸納的向度；量表發展用共同因素分析（最小殘差法）；採用斜交轉軸，報告因素間相關。</div>
 </section>
 
 <section class="unit" id="u4">
-  <h1>單元四：負荷量與刪題</h1>
-  <div class="subtitle">factor loadings</div>
-  <h2>4.1 讀負荷量</h2>
-  <p>負荷量是題目與因素的關聯強度。每一題找出絕對值最高的負荷量，就是這一題所屬的因素；再對照這一題原本預設的向度。</p>
-  <h2>4.2 刪題規則</h2>
+  <h1>單元四：讀結果與刪題</h1>
+  <div class="subtitle">loadings, communality, and variance explained．企劃書 5.2</div>
+  <h2>4.1 讀負荷量表</h2>
+  <p>負荷量表的每一列是一題，每一欄是一個因素。負荷量（factor loading）表示這一題和這個因素的關聯強度，數值大致介於 −1 到 1，絕對值越大關聯越強。每一題找出絕對值最高的負荷量，就是這一題所屬的因素；再對照這一題原本預設的向度。</p>
+  <p>JASP 預設只顯示 .40 以上的負荷量，低於 .40 的格子會留白。建議把顯示門檻改成 0，才看得到每一題在所有因素上的負荷量，跨負荷的題目也才看得出來。</p>
+  <h2>4.2 共同性</h2>
+  <p>共同性（communality）是一題的變異中，可以由所有共同因素解釋的比例，介於 0 到 1。共同性 .60 表示這一題 60% 的變異和其他題目共有，其餘 40% 是這一題自己的變異（包含誤差），稱為獨特性。JASP 的負荷量表最右欄是 Uniqueness（獨特性），共同性 ＝ 1 − 獨特性，Word 範本 5.2 的負荷量表要填共同性。</p>
+  <p>共同性在 .40 到 .70 之間是常見的範圍；低於 .40 表示這一題和其他題目的共同部分少，可能與其他題目無關，也可能代表還有一個沒有抽出的因素（Costello &amp; Osborne, 2005）。共同性低的題目要搭配負荷量與題目內容判斷：負荷量也低，通常刪除；負荷量達標準、內容符合定義，可以保留並在企劃書說明。</p>
+  <h2>4.3 解釋變異量</h2>
+  <p>JASP 的 Factor Characteristics（因素特徵）表列出每個因素的負荷量平方和（SumSq. Loadings）、可解釋變異量之百分比（Proportion var.）與累積（Cumulative）。累積欄的最後一個數字，就是所有因素合計解釋了題目多少比例的變異，例如 46% 表示題目總變異中有 46% 由這幾個因素解釋。</p>
+  <p>解釋變異量沒有統一門檻。社會科學常以 60% 左右作為參考，也接受較低的數值（Hair et al., 2019）；共同因素分析只分析共有的變異，數值通常低於主成分分析。企劃書如實報告累積解釋變異量即可，數值偏低時說明可能的原因，例如題目內容較分散。表中有轉軸前與轉軸後兩組數值，累積值相同。</p>
+  <h2>4.4 刪題規則</h2>
   <ol>
     <li>最高的負荷量低於 .40，刪除（Hinkin, 1998）</li>
     <li>在第二個因素的負荷量也達 .32，屬於跨負荷，刪除（Costello &amp; Osborne, 2005）</li>
-    <li>一次刪一題，從問題最明顯的題目開始，刪完重跑</li>
+    <li>一次刪一題，從問題最明顯的題目開始，刪完重跑，再看下一題；刪一題之後，其他題目的負荷量也會改變</li>
     <li>刪題後每個向度至少保留 3 題，題目內容仍涵蓋構念定義</li>
   </ol>
-  <h2>4.3 因素命名</h2>
-  <p>依每個因素所包含的題目內容命名。與原本預設的向度一致時沿用原名；題目落在非預設的因素時，回頭檢查題目的寫法。</p>
-  <h2>4.4 練習：工作意義感兩個向度</h2>
-  <p>下表為示意資料，W1–W4 預設屬於「工作意義」，W5–W8 預設屬於「工作影響力」。依刪題規則判斷每一題要保留或刪除。</p>
+  <h2>4.5 結構和事例歸納的向度不一致時</h2>
+  <table>
+    <tr><th style="width:26%">情況</th><th style="width:30%">可能的原因</th><th>處理</th></tr>
+    <tr><td>兩個向度合併成一個因素</td><td>兩個向度在填答者心中是同一件事</td><td>檢查兩個向度的定義是否可以區分；合併後重新命名、修改定義</td></tr>
+    <tr><td>一個向度拆成兩個因素</td><td>向度內有兩種不同的行為或想法</td><td>依題目內容分成兩個向度，每個因素至少 3 題才保留</td></tr>
+    <tr><td>題目落在其他向度</td><td>題目寫法偏向另一個向度</td><td>檢查題目內容，改歸向度或刪除</td></tr>
+    <tr><td>反向題自成一個因素</td><td>措辭造成的方法因素</td><td>確認反向計分正確，檢討反向題寫法（<a href="../Topic4_題項與量表設計/Topic4_題項與量表設計_課程網站.html#u3" target="_blank" rel="noopener">題項與量表設計　單元三</a>）</td></tr>
+  </table>
+  <p>評分標準看的是解釋是否誠實。在企劃書 5.2 寫出與預設的差異、可能的原因與處理方式，不要為了和事例歸納的向度一致而強行對應。</p>
+  <h2>4.6 因素命名</h2>
+  <p>依每個因素所包含的題目內容命名。與原本預設的向度一致時沿用原名；內容改變時重新命名，並修改向度定義。</p>
+  <h2>4.7 練習：工作意義感兩個向度</h2>
+  <p>下表為示意資料，W1–W4 預設屬於「對他人的貢獻」，W5–W8 預設屬於「工作帶來的改變」。依刪題規則判斷每一題要保留或刪除。</p>
   <div class="scrollx"><table class="pt">
-    <tr><th>題號</th><th>因素一</th><th>因素二</th><th>你的判斷</th><th>解析</th></tr>
-    <tr data-ans="keep" data-why="只落在因素一"><td>W1</td><td class="hi">.75</td><td class="">.02</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素一"><td>W2</td><td class="hi">.69</td><td class="">.08</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="最高負荷量 .28，低於 .40"><td>W3</td><td class="">.28</td><td class="">.19</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素一"><td>W4</td><td class="hi">.71</td><td class="">−.05</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W5</td><td class="">.04</td><td class="hi">.77</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="因素二 .52、因素一 .36，第二個負荷量達 .32，屬於跨負荷"><td>W6</td><td class="">.36</td><td class="hi">.52</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W7</td><td class="">−.03</td><td class="hi">.70</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W8</td><td class="">.10</td><td class="hi">.66</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr>
+    <tr><th>題號</th><th>因素一</th><th>因素二</th><th>共同性</th><th>你的判斷</th><th>解析</th></tr>
+    <tr data-ans="keep" data-why="只落在因素一"><td>W1</td><td class="hi">.75</td><td class="">.02</td><td>.57</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素一"><td>W2</td><td class="hi">.69</td><td class="">.08</td><td>.49</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="最高負荷量 .28 低於 .40，共同性 .12 也很低"><td>W3</td><td class="">.28</td><td class="">.19</td><td>.12</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素一"><td>W4</td><td class="hi">.71</td><td class="">−.05</td><td>.50</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W5</td><td class="">.04</td><td class="hi">.77</td><td>.60</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="drop" data-why="因素二 .52、因素一 .36，第二個負荷量達 .32，屬於跨負荷"><td>W6</td><td class="">.36</td><td class="hi">.52</td><td>.45</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W7</td><td class="">−.03</td><td class="hi">.70</td><td>.48</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr><tr data-ans="keep" data-why="只落在因素二"><td>W8</td><td class="">.10</td><td class="hi">.66</td><td>.46</td><td><div class="pick"><button onclick="pick(this,'keep')">保留</button><button onclick="pick(this,'drop')">刪除</button></div></td><td class="fb"></td></tr>
   </table></div>
   <p class="adv">實際分析時一次只刪一題：先刪 W3，重跑後再確認 W6 是否仍然跨負荷。</p>
-  <div class="key"><span class="lb">本單元要點</span>負荷量低於 .40 或跨負荷的題目，一次刪一題並重跑；每次刪題的理由寫入企劃書 5.2。</div>
+  <h2>4.8 寫入企劃書 5.2</h2>
+  <p>Word 範本 5.2 有兩張表。第一張的項目為：KMO、Bartlett 球形檢定、抽取方法、轉軸方法、因素數的決定依據、負荷量門檻。第二張是最後一次分析的負荷量表，欄位為題號、各因素的負荷量與共同性。表格之外，再寫出刪題的順序與理由、累積解釋變異量、因素間相關，以及與事例歸納向度的比較。</p>
+  <div class="key"><span class="lb">本單元要點</span>每一題看最高負荷量與共同性；負荷量低於 .40 或跨負荷的題目一次刪一題並重跑；結構與預設不同時如實說明。</div>
 </section>
 
 <section class="unit" id="u5">
-  <h1>單元五：構念效度與信度</h1>
-  <div class="subtitle">construct validity and reliability</div>
-  <h2>5.1 因素結構是構念效度的一項證據</h2>
+  <h1>單元五：信度與最終量表</h1>
+  <div class="subtitle">reliability and final scale．企劃書 5.3、5.4</div>
+  <h2>5.1 為什麼逐向度計算信度</h2>
+  <p>Cronbach’s α 假設一組題目測的是同一件事（單一向度）。因素分析已經確認量表有幾個向度，所以信度要依因素分析的結果，每個向度分別計算，不計算整份量表的 α（<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a>）。</p>
+  <h2>5.2 α 與 ω</h2>
+  <p>α 假設每一題與構念的關聯強度都相同；實際上各題的負荷量通常不同，這時 α 會低估信度。McDonald’s ω 依各題的負荷量計算，不需要這個假設（McNeish, 2018）。企劃書兩者都報告，以 ω 為主。JASP 中文介面把 ω 標為「Coefficient ω(CR值)」，CR 指組合信度（composite reliability），與項目分析的決斷值 CR 是不同的指標。</p>
+  <h2>5.3 判讀</h2>
+  <ol>
+    <li>.70 為研究初期常用的門檻</li>
+    <li>題數越多 α 越高，報告時一併寫出題數</li>
+    <li>高於 .90 時，檢查題目內容是否重複，例如用不同字詞描述同一件事的題目（Streiner, 2003）</li>
+    <li>JASP 的「若刪除此題項」欄顯示刪除該題後的信度，可用來確認刪題的決定；只為了提高 α 而刪題，會讓題目內容變窄</li>
+  </ol>
+  <h2>5.4 構念效度</h2>
   <table>
     <tr><th style="width:26%">效度證據</th><th>回答的問題</th><th style="width:26%">企劃書的位置</th></tr>
     <tr><td>內容</td><td>題目是否涵蓋構念定義的各個面向</td><td>第三章、第四章</td></tr>
-    <tr><td>因素結構</td><td>題目是否形成預設的向度</td><td>第五章 EFA</td></tr>
+    <tr><td>因素結構</td><td>題目是否形成預設的向度</td><td>第五章</td></tr>
     <tr><td>與其他構念的關係</td><td>與相近構念相關但可以區別</td><td>第六章</td></tr>
   </table>
-  <p>構念效度的定義與三類效度證據，見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u3" target="_blank" rel="noopener">測量基礎　單元三</a>。</p>
-  <h2>5.2 信度的計算與判讀</h2>
+  <p>因素分析提供的是因素結構方面的證據；與相近構念的區別，要由第六章的對照補足。構念效度的定義見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u3" target="_blank" rel="noopener">測量基礎　單元三</a>。</p>
+  <h2>5.5 最終量表與計分方式</h2>
+  <p>企劃書 5.4 列出最終保留的題目、所屬向度與計分方式。計分方式要寫清楚三件事：</p>
   <ol>
-    <li>依因素分析的結果，每個向度分別計算 α 與 ω，不計算整份量表</li>
-    <li>.70 為研究初期常用的門檻</li>
-    <li>題數越多 α 越高，報告時一併寫出題數</li>
-    <li>高於 .90 時，檢查題目內容是否重複（Streiner, 2003）</li>
-    <li>α 假設每一題與構念的關聯強度相同，ω 不需要這個假設，兩者都報告（McNeish, 2018）</li>
+    <li>量尺：例如六點量表，1 非常不同意到 6 非常同意</li>
+    <li>反向題：列出題號，計分前以 7 減原始分數</li>
+    <li>向度分數：該向度題目的平均數，分數範圍與量尺相同，方便解讀</li>
   </ol>
-  <p>JASP 的「if item dropped」欄顯示刪除該題後的信度，可用來確認刪題的決定；只為了提高 α 而刪題，會讓題目內容變窄。α 的題數與維度陷阱，見<a href="../Topic3_測量基礎/Topic3_測量基礎_課程網站.html#u2" target="_blank" rel="noopener">測量基礎　單元二</a>。</p>
-  <div class="key"><span class="lb">本單元要點</span>EFA 支持向度結構，與相近構念的區別由第六章補足；信度逐向度報告 α 與 ω。</div>
+  <h2>5.6 寫入企劃書 5.3</h2>
+  <p>Word 範本 5.3 的表格欄位為：向度、題數、Cronbach’s α、McDonald’s ω。</p>
+  <div class="key"><span class="lb">本單元要點</span>依因素分析的結果逐向度報告 α 與 ω；最終量表寫出題目、向度與計分方式。</div>
 </section>
 
 <section class="unit" id="u6">
-  <h1>單元六：JASP 操作步驟</h1>
-  <div class="subtitle">JASP 0.95</div>
-  <h2>6.1 開啟資料</h2>
+  <h1>單元六：與既有構念的對照</h1>
+  <div class="subtitle">企劃書第六章</div>
+  <h2>6.1 為什麼要對照</h2>
+  <p>新的流行語不一定代表新的構念。這份量表可能只是用新名稱測量已經存在的構念，也可能真的找到既有量表沒有涵蓋的內容。第六章要回答：這份量表跟前人的研究差在哪裡。</p>
+  <h2>6.2 兩個層次與查閱時間</h2>
+  <table>
+    <tr><th style="width:18%">層次</th><th style="width:26%">什麼時候做</th><th>做什麼</th></tr>
+    <tr><td>概念層（6.1）</td><td>寫題目之前（第三章 3.5）</td><td>只讀相近構念的定義，寫出本構念的差別；第六章摘要當時的結果</td></tr>
+    <tr><td>實證層（6.2）</td><td>題庫定稿之後</td><td>查閱最接近的二到三份既有量表的題目與向度，做向度對應表</td></tr>
+  </table>
+  <p>既有量表的題目延後到題庫定稿之後才看，是為了讓題目來自事例，避免改寫現成量表。企劃書要寫出題庫定稿日期與既有量表題目的查閱日期，查閱日期早於定稿日期時，項目分析與題目篩選以不及格計算（<a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中作業說明頁</a>）。</p>
+  <h2>6.3 找出最接近的既有量表</h2>
   <ol class="steps">
-    <li>在 Excel 完成草率作答篩檢與反向計分，另存成 CSV</li>
-    <li>JASP 左上角選單 <code class="k">Open</code>，選擇 CSV 檔</li>
-    <li>確認題目欄位的圖示為尺規（Scale）</li>
+    <li>從第三章 3.5 的相近構念開始，找出這些構念的量表發展文章</li>
+    <li>用構念的英文名稱加上 scale、measure、development 搜尋 Google Scholar 或 APA PsycInfo</li>
+    <li>讀量表發展文章的向度定義與題目，挑出和本量表最接近的二到三份</li>
+    <li>記下量表名稱、作者、年份、向度名稱與定義，以及查閱日期</li>
   </ol>
-  <h2>6.2 探索性因素分析</h2>
-  <ol class="steps">
-    <li>上方選單 <code class="k">Factor</code> → <code class="k">Exploratory Factor Analysis</code></li>
-    <li>把所有題目放入 Variables</li>
-    <li>Number of Factors 維持 <code class="k">Parallel analysis</code></li>
-    <li>Analysis Options 維持 <code class="k">Oblique：promax</code> 與 <code class="k">Minimum residual</code></li>
-    <li>Output Options 的 <code class="k">Display loadings above</code> 改成 0</li>
-    <li>勾選 <code class="k">KMO test</code>、<code class="k">Bartlett's test</code>、<code class="k">Scree plot</code></li>
-    <li>刪題時把該題移出 Variables，結果會自動重算</li>
-  </ol>
-  <h2>6.3 信度</h2>
-  <ol class="steps">
-    <li>右上角 <code class="k">＋</code>，勾選 <code class="k">Reliability</code> 模組</li>
-    <li><code class="k">Reliability</code> → <code class="k">Unidimensional Reliability</code></li>
-    <li>每個向度分別放入保留下來的題目</li>
-    <li>勾選 <code class="k">Coefficient ω</code>、<code class="k">Coefficient α</code></li>
-    <li>Individual Item Statistics 勾選 if item dropped 與 <code class="k">Item-rest correlation</code></li>
-  </ol>
-  <div class="note"><span class="lb">提醒</span>選項名稱依 JASP 0.95 英文介面；版本不同時位置可能略有差異。</div>
+  <h2>6.4 向度對應表（示意）</h2>
+  <p>Word 範本 6.2 有兩張表。第一張列出查閱的既有量表；第二張逐一對照本量表的每個向度。以工作意義感的兩個向度為例：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>既有量表</th><th>作者與年份（APA）</th><th>向度</th></tr>
+    <tr><td>A 工作與意義量表</td><td>Steger et al.（2012）</td><td style="text-align:left">工作中的正向意義、透過工作建立意義、更大益處動機</td></tr>
+    <tr><td>B 心理賦能量表</td><td>Spreitzer（1995）</td><td style="text-align:left">意義、能力、自主、影響力</td></tr>
+  </table></div>
+  <div class="scrollx"><table class="mt">
+    <tr><th>本量表向度</th><th>既有量表 A 的對應向度</th><th>既有量表 B 的對應向度</th><th>對應程度與說明</th></tr>
+    <tr><td>對他人的貢獻</td><td>更大益處動機</td><td>無</td><td style="text-align:left">內容相同：都在問工作是否對他人或更大的群體有益</td></tr>
+    <tr><td>工作帶來的改變</td><td>無</td><td>影響力</td><td style="text-align:left">部分對應：影響力指能影響工作單位的決策與結果；本量表另外包含工作對個人生活的改變</td></tr>
+  </table></div>
+  <h2>6.5 判斷屬於哪一種結果</h2>
+  <p>Word 範本 6.3 的表格欄位為：結果類型、判定（勾選）、證據。三種結果的意思與示意判定如下：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>結果類型</th><th>意思</th><th>判定（勾選）</th><th>證據（示意）</th></tr>
+    <tr><td>名稱相同但內容不同<br>（jingle 謬誤）</td><td style="text-align:left">和既有構念用同一個名稱，測的卻是不同的東西</td><td>☐</td><td></td></tr>
+    <tr><td>名稱不同但內容相同<br>（jangle 謬誤）</td><td style="text-align:left">換了新名稱，測的是既有構念</td><td>☑ 對他人的貢獻</td><td style="text-align:left">與更大益處動機的定義與題目內容相同</td></tr>
+    <tr><td>有新向度</td><td style="text-align:left">既有量表沒有涵蓋的內容</td><td>☑ 工作帶來的改變（部分）</td><td style="text-align:left">對個人生活的改變，既有量表沒有對應的題目</td></tr>
+  </table></div>
+  <p>示意例子中，「對他人的貢獻」屬於名稱不同但內容相同；「工作帶來的改變」大部分與「影響力」相同，對個人生活的改變是新的部分。判定可以逐向度進行，並寫出證據：向度對應表、定義的比較、題目內容的比較。Word 範本 6.3 特別說明：誠實指出名稱不同但內容相同，也可以拿高分。</p>
+  <div class="key"><span class="lb">本單元要點</span>題庫定稿後才查既有量表的題目並記下日期；用向度對應表比較，逐向度判斷屬於哪一種結果並寫出證據。</div>
 </section>
 
 <section class="unit" id="u7">
-  <h1>單元七：參考文獻</h1>
-  <div class="refline">Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. <i>Practical Assessment, Research, and Evaluation, 10</i>, Article 7. <a href="https://doi.org/10.7275/jyj1-4868" target="_blank" rel="noopener">https://doi.org/10.7275/jyj1-4868</a></div><div class="refline">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. <i>Psychological Methods, 4</i>(3), 272–299. <a href="https://doi.org/10.1037/1082-989X.4.3.272" target="_blank" rel="noopener">https://doi.org/10.1037/1082-989X.4.3.272</a></div><div class="refline">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. <i>Organizational Research Methods, 7</i>(2), 191–205. <a href="https://doi.org/10.1177/1094428104263675" target="_blank" rel="noopener">https://doi.org/10.1177/1094428104263675</a></div><div class="refline">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. <i>Organizational Research Methods, 1</i>(1), 104–121. <a href="https://doi.org/10.1177/109442819800100106" target="_blank" rel="noopener">https://doi.org/10.1177/109442819800100106</a></div><div class="refline">JASP Team. (2025). <i>JASP</i> (Version 0.95) [Computer software]. <a href="https://jasp-stats.org" target="_blank" rel="noopener">https://jasp-stats.org</a></div><div class="refline">Kaiser, H. F. (1974). An index of factorial simplicity. <i>Psychometrika, 39</i>(1), 31–36. <a href="https://doi.org/10.1007/BF02291575" target="_blank" rel="noopener">https://doi.org/10.1007/BF02291575</a></div><div class="refline">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. <i>Journal of Educational Psychology, 30</i>(1), 17–24. <a href="https://doi.org/10.1037/h0057123" target="_blank" rel="noopener">https://doi.org/10.1037/h0057123</a></div><div class="refline">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. <i>Psychological Methods, 23</i>(3), 412–433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a></div><div class="refline">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. <i>Journal of Personality Assessment, 80</i>(1), 99–103. <a href="https://doi.org/10.1207/S15327752JPA8001_18" target="_blank" rel="noopener">https://doi.org/10.1207/S15327752JPA8001_18</a></div>
+  <h1>單元七：管理應用與期中發表</h1>
+  <div class="subtitle">企劃書第七章與發表簡報</div>
+  <h2>7.1 第七章要寫什麼</h2>
+  <p>量表完成後，要說明企業可以怎麼使用。Word 範本第七章要求回答四件事，以工作意義感為例：</p>
+  <table>
+    <tr><th style="width:18%">項目</th><th style="width:34%">要回答的問題</th><th>工作意義感的例子（示意）</th></tr>
+    <tr><td>診斷什麼</td><td>這份量表能看出組織的什麼問題</td><td>哪些部門的員工覺得工作對他人沒有貢獻</td></tr>
+    <tr><td>給誰看</td><td>結果交給誰，用什麼形式呈現</td><td>人資與部門主管；以部門平均呈現，少於 5 人的單位不單獨呈現（Topic 04）</td></tr>
+    <tr><td>看完做什麼</td><td>可以採取哪些管理行動</td><td>讓員工看到服務對象的回饋，主管說明工作與公司目標的關聯</td></tr>
+    <tr><td>使用限制</td><td>哪些情況不適合使用</td><td>自評可能高估；不用於個人考核，避免員工依期待作答</td></tr>
+  </table>
+  <p>範本特別提醒兩種限制：自評與主管評可能有差異；以流行語命名的構念若帶有貶義，要避免強化刻板印象，例如不用於招募篩選或個人評價。</p>
+  <h2>7.2 期中發表簡報</h2>
+  <p>每組 15 分鐘報告、5 分鐘答辯。發表要讓沒讀過企劃書的人聽懂：這個詞是什麼、事例長什麼樣、量表怎麼發展出來、跟前人差在哪裡。建議的時間分配：</p>
+  <table>
+    <tr><th style="width:26%">段落</th><th>內容</th><th style="width:14%">時間</th></tr>
+    <tr><td>流行語與定義</td><td>日常用法、媒體報導、定義與排除條件</td><td>2 分鐘</td></tr>
+    <tr><td>事例與分類</td><td>兩三則事例、編碼簿、Cohen’s κ</td><td>3 分鐘</td></tr>
+    <tr><td>題目與預試</td><td>題目範例、樣本、草率作答篩檢</td><td>2 分鐘</td></tr>
+    <tr><td>心理計量檢驗</td><td>項目分析、因素分析、信度、刪題理由</td><td>4 分鐘</td></tr>
+    <tr><td>與既有構念對照</td><td>向度對應表與判定結果</td><td>2 分鐘</td></tr>
+    <tr><td>管理應用</td><td>診斷什麼、給誰看、限制</td><td>2 分鐘</td></tr>
+  </table>
+  <ol>
+    <li>每頁一個重點，表格只放關鍵數字，完整報表留在企劃書</li>
+    <li>答辯時要能說明每個決定的理由：為什麼刪這一題、結構和預設不同時怎麼解釋、和既有構念差在哪裡</li>
+    <li>評分標準重視不迴避資料中不理想的結果</li>
+  </ol>
+  <p>企劃書與簡報各一份 PDF，10/29 23:59 前上傳 Google Classroom；檔名為「組別_構念名稱_期中企劃書.pdf」與「組別_構念名稱_期中簡報.pdf」（<a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中作業說明頁</a>）。</p>
+  <div class="key"><span class="lb">本單元要點</span>第七章寫出診斷什麼、給誰看、看完做什麼與使用限制；發表依六個段落分配 15 分鐘，答辯準備每個決定的理由。</div>
+</section>
+
+<section class="unit" id="u8">
+  <h1>單元八：各章檢核與附錄</h1>
+  <div class="subtitle">上傳前對照 Word 企劃書範本</div>
+  <h2>8.1 第一至四章</h2>
+  <p>第一至四章已在 Topic 03 與 Topic 04 說明，上傳前再對照一次下表。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>章節</th><th>必須出現的內容</th><th>對應教材</th></tr>
+    <tr><td>1.1 來源與日常用法</td><td style="text-align:left">何時、在哪裡開始流傳，上班族用它指什麼現象；只用大眾媒體與社群論述</td><td><a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">作業說明頁</a></td></tr>
+    <tr><td>1.2 媒體報導清單</td><td style="text-align:left">中英文商業媒體報導，不限篇數；列出來源與日期、標題、網址、如何描述這個現象</td><td><a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">作業說明頁</a></td></tr>
+    <tr><td>1.3 定義與排除條件</td><td style="text-align:left">中性學術名稱，不帶評價；一句話定義寫出屬性、對象與範圍；排除條件</td><td>Topic 03 投影片</td></tr>
+    <tr><td>2.1 收集方式與指導語</td><td style="text-align:left">問卷或訪談；指導語全文（目的、匿名、資料用途與刪除時間、預估時間、可隨時停止），不出現流行語本身</td><td>Topic 03 投影片</td></tr>
+    <tr><td>2.2 開放題或訪談大綱</td><td style="text-align:left">情境、行為、結果分三題問；限定最近三個月；每人一到三則</td><td>Topic 03 投影片</td></tr>
+    <tr><td>2.3 填答者背景</td><td style="text-align:left">二十位以上，涵蓋不同職級；不記姓名與公司</td><td>Topic 03 投影片</td></tr>
+    <tr><td>2.4 事例清單</td><td style="text-align:left">四十則以上；摘要總數、剔除數量與理由、幾則典型事例；完整清單放附錄 A</td><td><a href="../../Assignments/期中作業_事例分類與kappa範本.xlsx" target="_blank" rel="noopener">事例分類與 κ Excel 範本</a></td></tr>
+    <tr><td>3.1 編碼簿</td><td style="text-align:left">向度名稱、定義、納入條件、排除條件、典型事例編號；命名來自事例</td><td>Topic 03 投影片</td></tr>
+    <tr><td>3.2 至 3.4 分類與 κ</td><td style="text-align:left">兩人獨立分類；κ ≥ .61 通過，未通過時修訂編碼簿重新分類，兩次都列出；不一致事例的處理紀錄</td><td><a href="../Topic11_開放題分析的演進/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></td></tr>
+    <tr><td>3.5 定義區辨</td><td style="text-align:left">分類完成、寫題目之前，查二到三個相近構念的定義，寫出差別與查閱日期</td><td>Topic 03 投影片</td></tr>
+    <tr><td>4.1 題庫初稿</td><td style="text-align:left">題目來自事例，標出對應事例；每個向度最終約四到六題，初稿約兩倍；定稿日期</td><td><a href="../Topic4_題項與量表設計/Topic4_題項與量表設計_課程網站.html" target="_blank" rel="noopener">題項與量表設計</a></td></tr>
+    <tr><td>4.2 量尺與指導語</td><td style="text-align:left">量尺點數與標示、自評或主管評、參照期間、指導語全文</td><td><a href="../Topic4_題項與量表設計/Topic4_題項與量表設計_課程網站.html#u2" target="_blank" rel="noopener">題項與量表設計　單元二</a></td></tr>
+    <tr><td>4.3 預試樣本</td><td style="text-align:left">以在職者為主；題數五倍以上且不低於一百人；回收數與樣本特徵</td><td><a href="../Topic5_抽樣匿名與信任/Topic5_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">抽樣、匿名與信任</a></td></tr>
+    <tr><td>4.4 草率作答篩檢</td><td style="text-align:left">篩檢指標與標準、各指標剔除人數、有效樣本</td><td><a href="../Topic6_草率作答偵測/草率作答快篩_簡易版.html" target="_blank" rel="noopener">草率作答快篩</a></td></tr>
+  </table></div>
+  <h2>8.2 關鍵日期</h2>
+  <p>封面的關鍵日期是評分項目，先後順序必須是：相近構念的定義查閱日（3.5）→ 題庫初稿定稿日（4.1）→ 既有量表題目查閱日（6.2）。既有量表題目查閱日早於題庫定稿日時，項目分析與題目篩選以不及格計算；缺少定義區辨說明或對照章節時，探索性因素分析與構念效度以不及格計算。</p>
+  <h2>8.3 附錄</h2>
+  <table>
+    <tr><th style="width:28%">附錄</th><th>內容</th></tr>
+    <tr><td>A　事例清單與分類紀錄</td><td>填寫完成的事例分類與 κ Excel 範本，不記姓名與公司</td></tr>
+    <tr><td>B　預試原始資料與分析紀錄</td><td>去識別化的原始資料檔；項目分析 Excel 範本；JASP 分析檔（.jasp）或各步驟的操作截圖</td></tr>
+    <tr><td>C　組員分工表</td><td>姓名、負責工作、貢獻比例</td></tr>
+    <tr><td>D　AI 工具使用說明</td><td>表格欄位為工具、用途、使用範圍與人工查核方式。AI 工具可用於逐字稿整理、資料清理與分析程式撰寫；事例分類與向度命名必須由組員親自完成；用 AI 生成事例或代填預試問卷視同資料造假</td></tr>
+  </table>
+  <h2>8.4 格式與參考文獻</h2>
+  <ol>
+    <li>正文 20 頁以內，附錄不計；A4 直式；中文標楷體、英文 Times New Roman，12 pt</li>
+    <li>引用與參考文獻採 APA 第七版，依作者姓氏排序；期刊文章附 DOI；大眾媒體文章附網址與日期</li>
+    <li>範本中的灰色說明文字與「請填寫」字樣，完成後全部刪除；在目錄按右鍵選更新功能變數，產生頁碼</li>
+    <li>企劃書與簡報各存一份 PDF，10/29 23:59 前由組長上傳 Google Classroom</li>
+  </ol>
+  <div class="key"><span class="lb">本單元要點</span>上傳前逐章對照必須出現的內容，確認三個關鍵日期的先後順序與四個附錄都已附上。</div>
+</section>
+
+<section class="unit" id="u9">
+  <h1>單元九：JASP 操作（中英對照）</h1>
+  <div class="subtitle">JASP 0.95</div>
+  <p>JASP 可以在偏好設定（Preferences）中切換為繁體中文介面。下表的中文名稱取自 JASP 0.95 繁體中文介面；「轉軸」「萃取方法」「負荷量顯示門檻」等介面沒有中文名稱的選項，為本課程的翻譯。</p>
+  <h2>9.1 開啟資料</h2>
+  <ol class="steps">
+    <li>在 Excel 完成草率作答篩檢與反向計分，另存成 CSV</li>
+    <li>左上角選單 <code class="k">Open</code>（開啟），選擇 CSV 檔</li>
+    <li>確認題目欄位的圖示為尺規，代表 Scale（連續變項）；不是的話，點圖示改成 Scale</li>
+  </ol>
+  <h2>9.2 探索性因素分析的設定</h2>
+  <div class="scrollx"><table class="mt"><tr><th>英文介面</th><th>中文介面</th><th>設定</th></tr><tr><td style='text-align:left'>Factor</td><td style='text-align:left'>因素分析</td><td style='text-align:left'>上方選單</td></tr><tr><td style='text-align:left'>Exploratory Factor Analysis</td><td style='text-align:left'>探索性因素分析</td><td style='text-align:left'>點選進入</td></tr><tr><td style='text-align:left'>Variables</td><td style='text-align:left'>變項</td><td style='text-align:left'>放入所有題目</td></tr><tr><td style='text-align:left'>Number of Factors：Parallel analysis（Based on PC）</td><td style='text-align:left'>因素個數：平行分析法（主成分）</td><td style='text-align:left'>維持預設</td></tr><tr><td style='text-align:left'>Rotation：Oblique，promax</td><td style='text-align:left'>轉軸：斜交，promax</td><td style='text-align:left'>維持預設</td></tr><tr><td style='text-align:left'>Factoring method：Minimum residual</td><td style='text-align:left'>萃取方法：最小殘差法</td><td style='text-align:left'>維持預設</td></tr><tr><td style='text-align:left'>Output Options：Display loadings above</td><td style='text-align:left'>輸出選項：負荷量顯示門檻</td><td style='text-align:left'>從 0.4 改成 0</td></tr><tr><td style='text-align:left'>Assumption checks：KMO test、Bartlett's test</td><td style='text-align:left'>前提假設的檢驗：KMO 檢定、Bartlett's 球形檢定</td><td style='text-align:left'>勾選</td></tr><tr><td style='text-align:left'>Plots：Scree plot</td><td style='text-align:left'>圖形：陡坡圖</td><td style='text-align:left'>勾選</td></tr></table></div>
+  <p>刪題時，把該題從 Variables（變項）移出，結果會自動重算。</p>
+  <h2>9.3 探索性因素分析的輸出</h2>
+  <div class="scrollx"><table class="mt"><tr><th>英文介面</th><th>中文介面</th><th>用途</th></tr><tr><td style='text-align:left'>Kaiser-Meyer-Olkin Test：Overall MSA</td><td style='text-align:left'>KMO 檢驗：整體 MSA</td><td style='text-align:left'>KMO 值</td></tr><tr><td style='text-align:left'>Bartlett's Test</td><td style='text-align:left'>Bartlett's 球形檢定</td><td style='text-align:left'>χ²、自由度、p 值</td></tr><tr><td style='text-align:left'>Factor Loadings</td><td style='text-align:left'>因素負荷量</td><td style='text-align:left'>負荷量表</td></tr><tr><td style='text-align:left'>Uniqueness</td><td style='text-align:left'>獨特性</td><td style='text-align:left'>共同性 ＝ 1 − 獨特性</td></tr><tr><td style='text-align:left'>Factor Characteristics：SumSq. Loadings</td><td style='text-align:left'>因素特徵：負荷量平方和</td><td style='text-align:left'>每個因素解釋的變異</td></tr><tr><td style='text-align:left'>Proportion var.／Cumulative</td><td style='text-align:left'>可解釋變異量之百分比／累積</td><td style='text-align:left'>解釋變異量</td></tr><tr><td style='text-align:left'>Factor Correlations</td><td style='text-align:left'>因素相關</td><td style='text-align:left'>因素間相關</td></tr></table></div>
+  <h2>9.4 信度的設定</h2>
+  <div class="scrollx"><table class="mt"><tr><th>英文介面</th><th>中文介面</th><th>設定</th></tr><tr><td style='text-align:left'>＋（Modules）</td><td style='text-align:left'>＋（模組）</td><td style='text-align:left'>勾選 Reliability 加入選單</td></tr><tr><td style='text-align:left'>Reliability → Unidimensional Reliability</td><td style='text-align:left'>信度分析 → 單維信度</td><td style='text-align:left'>每個向度跑一次</td></tr><tr><td style='text-align:left'>Scale Statistics：Coefficient ω</td><td style='text-align:left'>量表統計量：Coefficient ω(CR值)</td><td style='text-align:left'>預設勾選</td></tr><tr><td style='text-align:left'>Scale Statistics：Coefficient α</td><td style='text-align:left'>量表統計量：Coefficient α (Cronbach's α)</td><td style='text-align:left'>勾選</td></tr><tr><td style='text-align:left'>Individual Item Statistics：Coefficient α (if item dropped)</td><td style='text-align:left'>個別題項統計量：Coefficient α (若刪除此題項)</td><td style='text-align:left'>勾選</td></tr><tr><td style='text-align:left'>Individual Item Statistics：Item-rest correlation</td><td style='text-align:left'>個別題項統計量：此題項與其它所有題項之相關</td><td style='text-align:left'>勾選</td></tr><tr><td style='text-align:left'>Reverse-Scaled Items</td><td style='text-align:left'>反向題</td><td style='text-align:left'>資料已反向時不用放</td></tr></table></div>
+  <div class="warn"><span class="lb">注意</span>中文介面的「CR值」指 ω 的組合信度，與項目分析的決斷值 CR 不同。</div>
+</section>
+
+<section class="unit" id="u10">
+  <h1>單元十：參考文獻</h1>
+  <div class="refline">Costello, A. B., &amp; Osborne, J. W. (2005). Best practices in exploratory factor analysis: Four recommendations for getting the most from your analysis. <i>Practical Assessment, Research, and Evaluation, 10</i>, Article 7. <a href="https://doi.org/10.7275/jyj1-4868" target="_blank" rel="noopener">https://doi.org/10.7275/jyj1-4868</a></div><div class="refline">Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. <i>Psychological Methods, 4</i>(3), 272–299. <a href="https://doi.org/10.1037/1082-989X.4.3.272" target="_blank" rel="noopener">https://doi.org/10.1037/1082-989X.4.3.272</a></div><div class="refline">Hair, J. F., Black, W. C., Babin, B. J., &amp; Anderson, R. E. (2019). <i>Multivariate data analysis</i> (8th ed.). Cengage.</div><div class="refline">Hayton, J. C., Allen, D. G., &amp; Scarpello, V. (2004). Factor retention decisions in exploratory factor analysis: A tutorial on parallel analysis. <i>Organizational Research Methods, 7</i>(2), 191–205. <a href="https://doi.org/10.1177/1094428104263675" target="_blank" rel="noopener">https://doi.org/10.1177/1094428104263675</a></div><div class="refline">Hinkin, T. R. (1998). A brief tutorial on the development of measures for use in survey questionnaires. <i>Organizational Research Methods, 1</i>(1), 104–121. <a href="https://doi.org/10.1177/109442819800100106" target="_blank" rel="noopener">https://doi.org/10.1177/109442819800100106</a></div><div class="refline">JASP Team. (2025). <i>JASP</i> (Version 0.95) [Computer software]. <a href="https://jasp-stats.org" target="_blank" rel="noopener">https://jasp-stats.org</a></div><div class="refline">Kaiser, H. F. (1974). An index of factorial simplicity. <i>Psychometrika, 39</i>(1), 31–36. <a href="https://doi.org/10.1007/BF02291575" target="_blank" rel="noopener">https://doi.org/10.1007/BF02291575</a></div><div class="refline">Kelley, T. L. (1939). The selection of upper and lower groups for the validation of test items. <i>Journal of Educational Psychology, 30</i>(1), 17–24. <a href="https://doi.org/10.1037/h0057123" target="_blank" rel="noopener">https://doi.org/10.1037/h0057123</a></div><div class="refline">McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. <i>Psychological Methods, 23</i>(3), 412–433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a></div><div class="refline">Spreitzer, G. M. (1995). Psychological empowerment in the workplace: Dimensions, measurement, and validation. <i>Academy of Management Journal, 38</i>(5), 1442–1465. <a href="https://doi.org/10.2307/256865" target="_blank" rel="noopener">https://doi.org/10.2307/256865</a></div><div class="refline">Steger, M. F., Dik, B. J., &amp; Duffy, R. D. (2012). Measuring meaningful work: The Work and Meaning Inventory (WAMI). <i>Journal of Career Assessment, 20</i>(3), 322–337. <a href="https://doi.org/10.1177/1069072711436160" target="_blank" rel="noopener">https://doi.org/10.1177/1069072711436160</a></div><div class="refline">Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. <i>Journal of Personality Assessment, 80</i>(1), 99–103. <a href="https://doi.org/10.1207/S15327752JPA8001_18" target="_blank" rel="noopener">https://doi.org/10.1207/S15327752JPA8001_18</a></div>
   <p style="margin-top:14px">作業說明：<a href="../../Assignments/期中團體作業_新概念量表設計.html" target="_blank" rel="noopener">期中團體作業　新概念量表設計</a></p>
 </section>
 
