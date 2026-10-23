@@ -209,7 +209,7 @@
   /* ---------- Week rows (editorial timeline) ---------- */
   .weeks{display:flex;flex-direction:column;}
   .week-row{
-    display:grid;grid-template-columns:110px 1fr 264px;gap:2rem;padding:1.9rem 0;
+    display:grid;grid-template-columns:128px 1fr 264px;gap:2rem;padding:1.9rem 0;
     border-top:1px solid var(--line);align-items:start;transition:background .3s var(--ease);
   }
   .weeks .week-row:last-child{border-bottom:1px solid var(--line);}
@@ -427,6 +427,10 @@
     white-space: normal;
     line-height: 1.5;
   }
+  .r-topic{display:inline-flex;align-items:center;gap:.6rem;}
+  .r-topic-letter{flex:none;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--accent-tint);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:.9375rem;}
+  .r-topic strong{display:block;font-size:.9375rem;color:var(--ink);font-weight:700;white-space:nowrap;}
+  .r-topic-en{display:block;font-size:.8125rem;color:var(--ink-3);white-space:nowrap;}
   .r-status {
     display: inline-block;
     background: rgba(184, 134, 11, 0.08);
@@ -578,6 +582,57 @@
     transition: all .2s;
   }
   .ref-btn-web:hover { background: var(--line-2); color: var(--ink)!important; }
+
+  /* ---------- QA 2026-10-23：尚未公告狀態、手機版導覽與細節 ---------- */
+  /* 尚未公告：所有按鈕統一為米色底、虛線框、深灰字，不再降低透明度 */
+  .is-pending,a.is-pending,.btn.is-pending,.btn-launch.is-pending,.link-pill.is-pending,.ref-btn-web.is-pending,.pending-pill{
+    background:var(--cream-2)!important;color:var(--ink-2)!important;border:1px dashed var(--line-2)!important;
+    box-shadow:none!important;filter:none;opacity:1;
+  }
+  .btn-launch.is-pending .icon-chip,.btn.is-pending .icon-chip{background:var(--line)!important;color:var(--ink-2)!important;}
+  a.is-pending::after,button.is-pending::after{color:var(--ink-3);font-weight:600;white-space:nowrap;}
+  .btn{white-space:nowrap;}
+
+  /* 課程地圖篩選列：桌機排成一行，手機改為橫向捲動 */
+  .tabs{flex-wrap:nowrap;}
+  .tab-btn{white-space:nowrap;padding:.55rem 1rem;flex:none;}
+  @media (max-width:1100px){
+    .tabs{overflow-x:auto;scrollbar-width:none;margin-right:-1.25rem;padding-right:1.25rem;-webkit-overflow-scrolling:touch;}
+    .tabs::-webkit-scrollbar{display:none;}
+  }
+
+  /* 評量作業卡片：標題保留兩行高度，截止時間對齊 */
+  /* 週次標籤不折行 */
+  .tag{white-space:nowrap;}
+  .assign-core{justify-content:flex-start;}
+  .assign-core .rubric{margin-top:auto;}
+  .assign-head{align-items:flex-start;}
+  .assign-head h4{min-height:2.8em;text-wrap:balance;}
+  .assign-weight{line-height:1.1;}
+
+  @media (max-width:860px){
+    /* 週次標頭排成一行 */
+    .week-meta{flex-direction:row;flex-wrap:wrap;align-items:center;gap:.35rem .6rem;}
+    .week-meta .tag{margin-top:0;}
+    .week-date{font-size:1.3rem;line-height:1;}
+  }
+
+  @media (max-width:640px){
+    /* 手機版導覽列：Classroom 按鈕改為圖示，系所名稱完整顯示 */
+    .nav-pill{padding:.5rem .5rem .5rem 1rem;}
+    .nav-links .btn-classroom{padding:.5rem;font-size:0;gap:0;}
+    .btn-classroom .icon-chip{width:32px;height:32px;font-size:1rem;background:rgba(255,255,255,.18);}
+    .brand-text span{overflow:hidden;text-overflow:ellipsis;}
+    /* 首頁按鈕撐滿寬度 */
+    .hero-actions .btn{width:100%;justify-content:flex-start;font-size:.9375rem;}
+    .hero-actions .btn .icon-chip{order:2;margin-left:auto;}
+    .hero-actions .btn{gap:.4rem;padding-left:1.1rem;}
+    .hero-actions .btn.is-pending::after{margin-left:0;font-size:.8125rem;}
+    /* 觸控目標至少 44px */
+    .ref-btn-pdf,.ref-btn-web{min-height:44px;padding:.35rem .75rem;}
+    .refs-toggle-btn{min-height:40px;}
+    .assign-head h4{min-height:0;}
+  }
 </style>
 </head>
 <body>
@@ -600,7 +655,7 @@
         <li><a href="#lab">互動實驗室</a></li>
         <li><a href="#assignments">評量作業</a></li>
         <li><a href="#groups">專案分組</a></li>
-        <li><a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy?cjc=2sx2t5mk" target="_blank" class="btn-classroom">Google Classroom<span class="icon-chip">→</span></a></li>
+        <li><a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy?cjc=2sx2t5mk" target="_blank" class="btn-classroom" aria-label="Google Classroom">Google Classroom<span class="icon-chip">→</span></a></li>
       </ul>
     </nav>
   </div>
@@ -619,7 +674,7 @@
             <span class="eyebrow">Fall 2026 碩士在職專班・48 小時</span>
             <h1 class="hero-title">員工意向調查</h1>
             <p class="hero-sub">Survey of Employees' Opinion —<br>Strategy, Psychometrics, AI Agent Analytics &amp; Action</p>
-            <p class="hero-lead">傳統一年一度的年度敬業度問卷之外，現代組織逐漸採用持續傾聽<span class="nowrap">（Continuous Listening）</span>的調查與行動流程。課程內容涵蓋心理計量量表編製、AI Agent 自主資料分析架構與說服性簡報心理學，處理資料到行動<span class="nowrap">落差（Data-to-Action Gap）</span>。</p>
+            <p class="hero-lead">傳統一年一度的年度敬業度問卷之外，現代組織逐漸採用<span class="nowrap">持續傾聽（Continuous</span> <span class="nowrap">Listening）的</span>調查與行動流程。課程內容涵蓋心理計量量表編製、AI Agent 自主資料分析架構與說服性簡報心理學，處理資料到<span class="nowrap">行動落差（Data-to-Action</span> <span class="nowrap">Gap）。</span></p>
             <div class="hero-actions">
               <a href="Fall 2026_員工意向調查 (高雄).pdf" target="_blank" class="btn btn-primary">檢視 / 下載完整課程大綱（PDF）<span class="icon-chip">↓</span></a>
               <a class="btn btn-ghost is-pending" aria-disabled="true">取得模擬資料集（學生版）<span class="icon-chip">↓</span></a>
@@ -682,10 +737,10 @@
 
       <div class="tabs">
         <button class="tab-btn active" onclick="filterWeeks('all',this)">全學期總覽</button>
-        <button class="tab-btn" onclick="filterWeeks('b1',this)">區塊一・傾聽典範（W01–W04）</button>
-        <button class="tab-btn" onclick="filterWeeks('b2',this)">區塊二・心理計量（W06–W08）</button>
-        <button class="tab-btn" onclick="filterWeeks('b3',this)">區塊三・AI Agent 分析（W09–W12）</button>
-        <button class="tab-btn" onclick="filterWeeks('b4',this)">區塊四・說服與落地（W13–W16）</button>
+        <button class="tab-btn" onclick="filterWeeks('b1',this)">區塊一・傾聽典範 W01–W04</button>
+        <button class="tab-btn" onclick="filterWeeks('b2',this)">區塊二・心理計量 W06–W08</button>
+        <button class="tab-btn" onclick="filterWeeks('b3',this)">區塊三・AI Agent 分析 W09–W12</button>
+        <button class="tab-btn" onclick="filterWeeks('b4',this)">區塊四・說服與落地 W13–W16</button>
       </div>
 
       <div class="weeks" id="weeksContainer">
@@ -949,6 +1004,77 @@
               <li>探索性因素分析（EFA）：KMO、Bartlett、轉軸與負荷量門檻</li>
               <li>量表信度檢定：Cronbach's α、McDonald's ω 與刪題診斷</li>
             </ul>
+            <details class="week-refs-accordion" id="videos-w07" data-label="影片">
+              <summary class="refs-summary">
+                <span class="refs-title">
+                  <span>🎬</span> 本週教學影片<span class="nowrap">（共 8 支，尚未公告）</span>
+                </span>
+                <span class="refs-toggle-btn">
+                  <span class="toggle-text">展開影片</span>
+                  <span class="toggle-arrow">▼</span>
+                </span>
+              </summary>
+              <div class="refs-body">
+                <ul class="refs-list">
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 1</strong>　資料準備
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 2</strong>　項目分析
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 3</strong>　因素分析的概念
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 4</strong>　JASP 因素分析操作
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 5</strong>　讀結果與刪題
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 6</strong>　信度
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 7</strong>　用 AI 跑 R 與結果比對
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                  <li class="ref-item">
+                    <span class="ref-dot">•</span>
+                    <strong>影片 8</strong>　企劃書第五到七章與期中發表
+                    <div class="ref-btn-row">
+                      <a class="ref-btn-web is-pending" aria-disabled="true">▶ YouTube 觀看</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </details>
           </div>
           <div class="week-actions">
             <a href="Handout/Topic05_量表心理計量檢驗/Topic05_量表心理計量檢驗_課程網站.html" target="_blank" rel="noopener" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">教材網站：量表心理計量檢驗<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
@@ -1146,7 +1272,7 @@
               <h4>量表信度與刪題診斷</h4>
               <p>貼上一個向度的題目資料，試算 Cronbach's α 與 McDonald's ω，逐題列出校正題總相關與刪除後的 α、ω，並附企劃書寫法。</p>
             </div>
-            <a class="btn-launch" href="Handout/Topic05_量表心理計量檢驗/量表信度試算器.html" target="_blank" rel="noopener">啟動<span class="icon-chip">↗</span></a>
+            <a class="btn-launch" href="Handout/Topic05_量表心理計量檢驗/量表信度試算器.html" target="_blank" rel="noopener">啟動試算器<span class="icon-chip">↗</span></a>
           </div></div>
         </div>
 
@@ -1158,7 +1284,7 @@
               <h4>效果量 Cohen's d / η²</h4>
               <p>突破大樣本顯著性迷思，精確換算實質管理顯著性之效果量大小。</p>
             </div>
-            <a class="btn-launch is-pending" aria-disabled="true">啟動<span class="icon-chip">↗</span></a>
+            <a class="btn-launch is-pending" aria-disabled="true">啟動試算器<span class="icon-chip">↗</span></a>
           </div></div>
         </div>
 
@@ -1170,7 +1296,7 @@
               <h4>專家分類一致性 Cohen's κ</h4>
               <p>用於關鍵事例法質化分類驗證，以及人工與 LLM Agent 編碼之一致性檢驗；支援兩到三位編碼者、最多十個類別。</p>
             </div>
-            <a class="btn-launch" href="Handout/Topic11_開放題分析的演進/編碼一致性計算器.html" target="_blank" rel="noopener">啟動<span class="icon-chip">↗</span></a>
+            <a class="btn-launch" href="Handout/Topic11_開放題分析的演進/編碼一致性計算器.html" target="_blank" rel="noopener">啟動試算器<span class="icon-chip">↗</span></a>
           </div></div>
         </div>
 
@@ -1256,7 +1382,7 @@
       <div class="roster-header reveal">
         <span class="eyebrow" style="font-size: .875rem; color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">Team Roster</span>
         <h3 style="font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--ink); margin: .2rem 0 .25rem;">學期研討與專案分組名單</h3>
-        <p style="font-size: .9375rem; color: var(--ink-3); margin: 0;">全班共 6 組（共 38 位學員），適用於期中新概念量表企劃與期末專題分析。</p>
+        <p style="font-size: .9375rem; color: var(--ink-3); margin: 0;">全班共 6 組（共 38 位學員），適用於期中新概念量表企劃與期末專題分析。期中題目依課堂抽籤結果，代號對應<a class="inline-link" href="Assignments/期中團體作業_新概念量表設計.html#topics" target="_blank" rel="noopener">作業說明頁</a>的六個候選題目。</p>
       </div>
 
       <div class="roster-table-card reveal">
@@ -1265,9 +1391,9 @@
             <thead>
               <tr>
                 <th style="width: 14%;">組別</th>
-                <th style="width: 16%;">組長</th>
-                <th style="width: 55%;">組員名單</th>
-                <th style="width: 15%; text-align: center;">研究構念</th>
+                <th style="width: 15%;">組長</th>
+                <th style="width: 47%;">組員名單</th>
+                <th style="width: 24%;">期中題目</th>
               </tr>
             </thead>
             <tbody>
@@ -1275,37 +1401,37 @@
                 <td><span class="r-badge">第一組</span><span class="r-count">7人</span></td>
                 <td><span class="r-leader"><span class="r-tag">組長</span>林幸慧</span></td>
                 <td class="r-members">吳詠如、章穎華、陳家儀、莊涵瑜、邱靖惠、謝佳君</td>
-                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+                <td class="r-topic-cell"><span class="r-topic"><span class="r-topic-letter">A</span><span><strong>桌邊轟炸</strong><span class="r-topic-en">Desk Bombing</span></span></span></td>
               </tr>
               <tr>
                 <td><span class="r-badge">第二組</span><span class="r-count">7人</span></td>
                 <td><span class="r-leader"><span class="r-tag">組長</span>黃鈺雯</span></td>
                 <td class="r-members">賴怡臻、宮啟翔、梁若涵、盧瀷文、王仁易、廖宸葳</td>
-                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+                <td class="r-topic-cell"><span class="r-topic"><span class="r-topic-letter">F</span><span><strong>安靜休假</strong><span class="r-topic-en">Quiet Vacationing</span></span></span></td>
               </tr>
               <tr>
                 <td><span class="r-badge">第三組</span><span class="r-count">6人</span></td>
                 <td><span class="r-leader"><span class="r-tag">組長</span>陳怡鳳</span></td>
                 <td class="r-members">沈芳宇、陳德家、陳雪齡、林竣強、吳婕湄</td>
-                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+                <td class="r-topic-cell"><span class="r-topic"><span class="r-topic-letter">B</span><span><strong>轉職休克</strong><span class="r-topic-en">Shift Shock</span></span></span></td>
               </tr>
               <tr>
                 <td><span class="r-badge">第四組</span><span class="r-count">6人</span></td>
                 <td><span class="r-leader"><span class="r-tag">組長</span>張伯瑜</span></td>
                 <td class="r-members">張嘉耘、黃愉惠、曾儀庭、楊筑媛、蘇怡瑄</td>
-                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+                <td class="r-topic-cell"><span class="r-topic"><span class="r-topic-letter">D</span><span><strong>憤怒求職</strong><span class="r-topic-en">Rage Applying</span></span></span></td>
               </tr>
               <tr>
                 <td><span class="r-badge">第五組</span><span class="r-count">7人</span></td>
                 <td><span class="r-leader"><span class="r-tag">組長</span>楊惠茹</span></td>
                 <td class="r-members">鄭喻庭、任茹憶、鄭博伊、潘筱暄、李昕庭、鄭佩韋</td>
-                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+                <td class="r-topic-cell"><span class="r-topic"><span class="r-topic-letter">C</span><span><strong>廁底放鬆</strong><span class="r-topic-en">Restroom Lurking</span></span></span></td>
               </tr>
               <tr>
                 <td><span class="r-badge">第六組</span><span class="r-count">5人</span></td>
                 <td><span class="r-leader"><span class="r-tag">組長</span>林欣怡</span></td>
                 <td class="r-members">高健中、陳佳𩓧、林婷妤、陳映竹</td>
-                <td style="text-align: center;"><span class="r-status">課堂公布</span></td>
+                <td class="r-topic-cell"><span class="r-topic"><span class="r-topic-letter">E</span><span><strong>咖啡打卡</strong><span class="r-topic-en">Coffee Badging</span></span></span></td>
               </tr>
             </tbody>
           </table>
@@ -1395,11 +1521,12 @@
     if (!acc) return;
     var textEl = acc.querySelector('.toggle-text');
     var arrowEl = acc.querySelector('.toggle-arrow');
+    var label = acc.getAttribute('data-label') || '文獻';
     if (acc.open) {
-      if (textEl) textEl.textContent = '收合文獻';
+      if (textEl) textEl.textContent = '收合' + label;
       if (arrowEl) arrowEl.textContent = '▲';
     } else {
-      if (textEl) textEl.textContent = '展開文獻';
+      if (textEl) textEl.textContent = '展開' + label;
       if (arrowEl) arrowEl.textContent = '▼';
     }
   }
