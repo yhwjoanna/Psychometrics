@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>量表信度試算器｜員工意向調查</title>
+<style>
+:root{--navy:#12335c; --blue:#2e5e8f; --bg:#f5f7fa; --card:#ffffff; --line:#e3e9f2; --muted:#6b7a90; --ink:#243447; --good:#337052; --warn:#8a6420; --badr:#b54a43; --badbg:#fbeceb; --warnbg:#faf4e8;}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.75; font-size:clamp(15px,1.05vw,17px);}
+.topbar{background:var(--navy); color:#fff; padding:14px clamp(16px,4vw,48px); display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline;}
+.topbar .t{font-size:clamp(18px,1.6vw,22px); font-weight:800;}
+.topbar .s{font-size:13px; opacity:.85;}
+.topbar .home{margin-left:auto;color:#fff;border:1px solid rgba(255,255,255,.45);border-radius:20px;padding:4px 14px;font-size:14px;font-weight:600;text-decoration:none}
+.topbar .home:active{transform:scale(.97)}
+main{max-width:1040px; margin:0 auto; padding:clamp(16px,3vw,36px);}
+h2{color:var(--navy); font-size:clamp(17px,1.3vw,20px); margin:26px 0 10px;}
+h3{color:var(--navy); font-size:16px; margin:16px 0 6px;}
+p{margin:0 0 12px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:clamp(14px,2vw,22px); margin-bottom:18px;}
+.step{display:inline-block; background:var(--navy); color:#fff; border-radius:14px; padding:0 12px; font-size:13px; margin-right:8px; vertical-align:2px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+label.fld{display:block; font-size:14px; color:var(--muted); font-weight:700;}
+input[type=number]{width:100%; padding:9px 10px; margin-top:4px; border:1px solid var(--line); border-radius:8px; font-size:16px; font-family:inherit; background:#fff; color:var(--ink);}
+input[type=range]{width:100%; margin-top:10px;}
+textarea{width:100%; min-height:140px; padding:10px; border:1px solid var(--line); border-radius:8px; font-family:Menlo,Consolas,monospace; font-size:13px; color:var(--ink); resize:vertical;}
+.btns{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0;}
+button,.filebtn{font-family:inherit; font-size:15px; padding:8px 16px; border-radius:8px; border:1px solid var(--blue); background:#fff; color:var(--blue); cursor:pointer; font-weight:700;}
+button.primary{background:var(--blue); color:#fff;}
+button:active,.filebtn:active{transform:scale(.97);}
+.filebtn input{display:none;}
+.msg{font-size:14px; color:var(--muted);}
+.msg.err{color:var(--badr); font-weight:700;}
+.res{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:6px;}
+.rbox{background:#eef2f8; border-radius:10px; padding:14px; text-align:center;}
+.rbox .n{font-size:clamp(26px,3vw,34px); font-weight:800; color:var(--navy); line-height:1.3;}
+.rbox .l{font-size:13px; color:var(--muted);}
+.rbox.main{background:#e3ebf6;}
+.note{background:#f2f6ee; border-left:4px solid var(--good); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.warnb{background:var(--warnbg); border-left:4px solid var(--warn); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.badb{background:var(--badbg); border-left:4px solid var(--badr); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.lb{font-weight:800; color:var(--navy); margin-right:6px;}
+.formula{background:#eef2f8; border-radius:10px; padding:12px 16px; text-align:center; font-size:15px; margin:12px 0; color:var(--navy); font-weight:700;}
+.tblwrap{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+table{border-collapse:collapse; margin:10px 0; font-size:14px; min-width:100%;}
+th,td{border:1px solid var(--line); padding:7px 10px; text-align:center; white-space:nowrap;}
+th{background:#eef2f8; color:var(--navy);}
+th .en{display:block; font-weight:400; font-size:12px; color:var(--muted);}
+td.name{text-align:left; font-weight:700;}
+td.bad{background:var(--badbg); color:var(--badr); font-weight:800;}
+td.warn{background:var(--warnbg); color:var(--warn); font-weight:800;}
+td.flag{text-align:left; white-space:normal; min-width:200px; font-size:13px;}
+tr.off td{color:#a9b3c1;}
+.report{background:#f8fafc; border:1px dashed var(--blue); border-radius:8px; padding:12px 14px; font-size:15px;}
+.big{font-size:clamp(30px,4vw,42px); font-weight:800; color:var(--navy); text-align:center; margin:8px 0;}
+.bar{height:14px; border-radius:7px; background:#e3e9f2; overflow:hidden; margin:6px 0 2px;}
+.bar>div{height:100%; background:var(--blue); transition:width .25s;}
+.interp{font-size:14px; color:var(--muted);}
+ol.plain{padding-left:1.4em; margin:6px 0 12px;} ol.plain li{margin:4px 0;}
+.ref{font-size:13px; color:var(--muted); margin-top:6px;}
+a{color:var(--blue);}
+footer{color:var(--muted); font-size:12px; text-align:center; padding:18px;}
+@media (max-width:600px){.grid{grid-template-columns:1fr;} .topbar .home{margin-left:0;}}
+@media print{.topbar{background:#fff; color:var(--navy); border-bottom:2px solid var(--navy);} .topbar .home{display:none} body{background:#fff;} .card{break-inside:avoid;} input[type=range],.btns,textarea{display:none;}}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="t">量表信度試算器</span><span class="s">員工意向調查課程．配合 Topic 05 使用．教學工具</span><a class="home" href="../../index.html" target="_blank" rel="noopener">⌂ 返回課程首頁</a></div>
+<main>
+
+<div class="card">
+  <h2 style="margin-top:0;">這個工具做什麼</h2>
+  <p>把一個向度的題目資料貼進來，工具會算出 Cronbach's α、McDonald's ω，並逐題列出校正題總相關、刪除該題後的 α 與 ω。一次只放<strong>同一個向度</strong>的題目，量表有三個向度就分三次算。</p>
+  <ol class="plain">
+    <li>貼上資料或選擇 CSV 檔，第一列放題目名稱，每一列是一位填答者</li>
+    <li>勾選要納入的題目，並勾選反向題</li>
+    <li>看結果與逐題診斷，把報告寫法複製到企劃書 5.3</li>
+  </ol>
+  <p class="msg">資料只在你的瀏覽器裡計算，不會上傳到任何地方。先按「載入範例資料」看一次完整流程。</p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;"><span class="step">步驟一</span>放入資料</h2>
+  <textarea id="inData" placeholder="從 Excel 複製含題目名稱的整塊資料後貼上，或用下方按鈕選擇 CSV 檔。&#10;例如：&#10;編號,Q1,Q2,Q3,Q4&#10;P001,5,4,5,2&#10;P002,3,3,4,4"></textarea>
+  <div class="btns">
+    <button class="primary" onclick="readData()">讀取資料</button>
+    <label class="filebtn">選擇 CSV 檔<input type="file" id="inFile" accept=".csv,.txt,.tsv" onchange="readFile(this)"></label>
+    <button onclick="loadExample()">載入範例資料</button>
+  </div>
+  <p class="msg" id="dataMsg">尚未讀取資料。</p>
+</div>
+
+<div class="card" id="selCard" style="display:none">
+  <h2 style="margin-top:0;"><span class="step">步驟二</span>選擇題目與反向題</h2>
+  <div class="grid" style="max-width:460px">
+    <label class="fld">量尺最小值<input type="number" id="inMin" value="1" oninput="compute()"></label>
+    <label class="fld">量尺最大值<input type="number" id="inMax" value="6" oninput="compute()"></label>
+  </div>
+  <p class="msg" style="margin-top:8px">反向題以「最小值＋最大值－原始分數」重新計分，六點量表即 7 減原始分數。編號、作答秒數、檢核題這類欄位不要勾選。</p>
+  <div class="tblwrap"><table id="selTbl"></table></div>
+</div>
+
+<div class="card" id="resCard" style="display:none">
+  <h2 style="margin-top:0;"><span class="step">步驟三</span>結果</h2>
+  <div class="res" id="resBoxes"></div>
+  <div id="resNote"></div>
+  <h3>逐題診斷</h3>
+  <div class="tblwrap"><table id="itemTbl"></table></div>
+  <p class="msg">紅色：校正題總相關低於 .30，或刪除該題後 α 反而上升；黃色：校正題總相關介於 .30 到 .40。標記只是提醒，刪不刪題還要看題目內容與因素分析的結果。</p>
+  <h3>企劃書寫法（可直接複製再修改）</h3>
+  <div class="report" id="reportTxt"></div>
+  <div class="btns"><button onclick="copyReport()">複製文字</button><span class="msg" id="copyMsg"></span></div>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">觀念試算：題數與題間相關如何推高 α</h2>
+  <p>α 由兩件事決定：題目彼此有多相關，以及題數有多少。拉動滑桿，觀察題間相關不高時，只要題數夠多，α 也能超過 .70。</p>
+  <div class="grid">
+    <label class="fld">題數 k：<strong id="kVal">6</strong> 題
+      <input type="range" id="inK" min="2" max="30" value="6" oninput="calcA()">
+    </label>
+    <label class="fld">平均題間相關 r̄：<strong id="rVal">.30</strong>
+      <input type="range" id="inR" min="5" max="80" value="30" oninput="calcA()">
+    </label>
+  </div>
+  <div class="big" id="outA">α = –</div>
+  <div class="bar"><div id="aBar" style="width:0%"></div></div>
+  <p class="interp" id="aNote"></p>
+  <h3>反算：要達到目標 α，需要幾題</h3>
+  <div class="grid">
+    <label class="fld">目標 α：<strong id="taVal">.80</strong>
+      <input type="range" id="inTA" min="60" max="95" value="80" oninput="calcK()">
+    </label>
+    <label class="fld">預期平均題間相關 r̄：<strong id="trVal">.30</strong>
+      <input type="range" id="inTR" min="5" max="80" value="30" oninput="calcK()">
+    </label>
+  </div>
+  <div class="big" id="outK">約 – 題</div>
+  <p class="interp" id="kNote"></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">計算依據與判讀</h2>
+  <h3>Cronbach's α</h3>
+  <div class="formula">α ＝ k ÷ (k − 1) × ［1 − 各題變異數加總 ÷ 總分變異數］</div>
+  <p>k 為題數。題目之間越一致，總分變異數相對於各題變異數加總就越大，α 越高。α 假設每一題和構念的關聯強度相同，這個假設不成立時，α 會低估信度。</p>
+  <h3>McDonald's ω</h3>
+  <div class="formula">ω ＝ (Σλ)² ÷ ［(Σλ)² ＋ Σθ］</div>
+  <p>λ 是單因素模型（最大概似法估計）的因素負荷量，θ 是各題的誤差變異數。ω 允許每一題的負荷量不同，假設比 α 少。本工具的算法和 JASP 預設相同，用未標準化的負荷量；表中的「因素負荷量」欄另外列出標準化數值，方便判讀。</p>
+  <h3>逐題診斷三個欄位</h3>
+  <ol class="plain">
+    <li><strong>校正題總相關</strong>（corrected item-total correlation）：這一題和其他題目加總的相關。低於 .30 表示這一題和其他題目測的東西不太一樣</li>
+    <li><strong>刪除後 α</strong>（α if item deleted）：拿掉這一題之後的 α。比目前的 α 高，表示這一題拉低了一致性</li>
+    <li><strong>刪除後 ω</strong>（ω if item deleted）：同上，改用 ω 計算</li>
+  </ol>
+  <div class="warnb"><span class="lb">判讀提醒</span>其一，.70 可接受、.80 良好是慣例門檻，不是統計檢定。其二，α 高不代表只有一個向度，向度要由因素分析回答，所以一次只放一個向度的題目。其三，α 高於 .90 時，檢查題目是否只是換句話說。其四，只為了提高 α 而刪題，會讓題目涵蓋的內容變窄。其五，忘了反向計分會讓 α 大幅下降，載入範例資料後取消 R3 的反向勾選就能看到。</div>
+  <p>對應的教材：<a href="Topic05_量表心理計量檢驗_課程網站.html#u5" target="_blank" rel="noopener">Topic 05 量表心理計量檢驗　單元五　信度與最終量表</a></p>
+  <p class="ref">Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297&#8211;334. <a href="https://doi.org/10.1007/BF02310555" target="_blank" rel="noopener">https://doi.org/10.1007/BF02310555</a><br>
+  Cortina, J. M. (1993). What is coefficient alpha? An examination of theory and applications. Journal of Applied Psychology, 78(1), 98&#8211;104. <a href="https://doi.org/10.1037/0021-9010.78.1.98" target="_blank" rel="noopener">https://doi.org/10.1037/0021-9010.78.1.98</a><br>
+  McDonald, R. P. (1999). Test theory: A unified treatment. Lawrence Erlbaum Associates.<br>
+  McNeish, D. (2018). Thanks coefficient alpha, we&#8217;ll take it from here. Psychological Methods, 23(3), 412&#8211;433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a><br>
+  Hayes, A. F., &amp; Coutts, J. J. (2020). Use omega rather than Cronbach&#8217;s alpha for estimating reliability. But&#8230;. Communication Methods and Measures, 14(1), 1&#8211;24. <a href="https://doi.org/10.1080/19312458.2020.1718629" target="_blank" rel="noopener">https://doi.org/10.1080/19312458.2020.1718629</a></p>
+</div>
+
+</main>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 05 量表心理計量檢驗使用。範例資料為虛構的「下班後放不下工作」六題，R3 為反向題。</footer>
+<script>
+var EXAMPLE = "編號,R1,R2,R3,R4,R5,R6\nE001,6,5,2,5,4,4\nE002,4,4,2,3,3,3\nE003,3,4,2,4,4,1\nE004,2,2,5,1,3,5\nE005,4,2,5,2,3,3\nE006,2,3,4,3,3,5\nE007,1,2,3,3,3,2\nE008,4,4,5,4,1,4\nE009,2,3,4,4,5,1\nE010,4,3,4,4,3,3\nE011,3,5,3,5,6,2\nE012,4,5,3,4,5,3\nE013,4,4,3,5,3,2\nE014,3,2,4,4,4,5\nE015,4,5,2,5,4,2\nE016,2,4,4,4,5,3\nE017,3,3,5,4,3,3\nE018,4,3,5,3,2,4\nE019,4,3,5,3,3,4\nE020,3,4,5,4,4,6\nE021,6,4,3,4,5,1\nE022,6,5,2,5,5,5\nE023,4,3,4,5,5,4\nE024,4,4,4,3,4,4\nE025,2,3,4,2,5,2\nE026,4,3,3,3,4,3\nE027,4,4,4,4,4,3\nE028,6,4,2,5,4,4\nE029,3,5,3,4,3,2\nE030,3,2,3,3,4,4\nE031,4,4,3,4,3,4\nE032,4,5,2,3,5,4\nE033,3,3,6,1,2,4\nE034,2,2,3,3,2,2\nE035,3,3,3,4,5,1\nE036,1,3,6,3,2,4\nE037,3,3,2,2,3,3\nE038,5,4,3,4,4,5\nE039,3,4,2,5,3,5\nE040,3,5,2,2,4,3\nE041,4,5,3,4,6,4\nE042,2,2,5,4,4,2\nE043,3,4,5,3,2,5\nE044,2,2,4,3,2,4\nE045,3,3,4,3,3,4\nE046,3,1,4,4,2,4\nE047,4,4,2,3,5,3\nE048,3,2,5,1,2,4\nE049,5,5,4,5,6,2\nE050,5,4,2,4,4,5\nE051,3,3,4,3,2,2\nE052,5,4,2,3,4,3\nE053,3,3,6,2,4,3\nE054,4,3,3,2,2,5\nE055,4,3,2,4,4,3\nE056,4,4,4,3,5,4\nE057,4,3,3,3,3,6\nE058,4,4,2,3,3,5\nE059,3,2,4,3,5,4\nE060,3,3,5,2,4,2\nE061,3,5,3,4,4,5\nE062,4,4,4,4,4,3\nE063,4,4,3,6,3,4\nE064,3,4,5,3,2,3\nE065,5,5,2,5,4,4\nE066,3,2,5,2,2,5\nE067,2,2,5,2,3,3\nE068,2,2,4,1,2,5\nE069,4,4,3,4,5,6\nE070,4,4,3,4,4,4\nE071,5,5,1,5,5,4\nE072,2,3,4,3,3,5\nE073,5,4,5,3,4,5\nE074,4,4,3,4,3,3\nE075,4,5,3,3,4,4\nE076,5,5,2,3,3,5\nE077,1,1,5,2,3,4\nE078,2,3,6,1,2,3\nE079,4,4,4,4,4,1\nE080,3,2,4,3,2,3";
+var D = null;          // {names:[], rows:[[...]]}
+var SKIP = /編號|^id$|代號|姓名|秒|時間|time|檢核|check|注意/i;
+
+function fmt(x, d){ if(!isFinite(x)) return '–'; var s=x.toFixed(d===undefined?3:d); return s.replace(/^(-?)0\./,'$1.'); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+function parse(text){
+  text = text.replace(/^﻿/,'').replace(/\r/g,'').trim();
+  if(!text) throw '沒有資料。';
+  var lines = text.split('\n').filter(function(l){return l.trim()!=='';});
+  var sep = lines[0].indexOf('\t')>=0 ? '\t' : (lines[0].indexOf(',')>=0 ? ',' : (lines[0].indexOf(';')>=0?';':/\s+/));
+  var cells = lines.map(function(l){ return l.split(sep).map(function(c){return c.trim().replace(/^"|"$/g,'');}); });
+  var head = cells[0], hasHead = head.some(function(c){ return c!=='' && isNaN(+c); });
+  var names = hasHead ? head : head.map(function(_,j){ return '第'+(j+1)+'欄'; });
+  var rows = hasHead ? cells.slice(1) : cells;
+  if(rows.length < 3) throw '資料少於三列，無法計算。';
+  return {names:names, rows:rows};
+}
+function numericCol(j){
+  var ok=0, tot=0;
+  D.rows.forEach(function(r){ var v=r[j]; if(v!==undefined && v!==''){ tot++; if(!isNaN(+v)) ok++; } });
+  return tot>0 && ok/tot>=0.9;
+}
+function setData(text){
+  var m = document.getElementById('dataMsg');
+  try{ D = parse(text); }catch(e){ m.textContent = e; m.className='msg err'; return; }
+  D.use = []; D.rev = [];
+  var lo=Infinity, hi=-Infinity;
+  D.names.forEach(function(n,j){
+    var num = numericCol(j);
+    D.use[j] = num && !SKIP.test(n);
+    D.rev[j] = false; D.num = D.num||[]; D.num[j]=num;
+    if(D.use[j]) D.rows.forEach(function(r){ var v=+r[j]; if(r[j]!=='' && !isNaN(v)){ lo=Math.min(lo,v); hi=Math.max(hi,v); } });
+  });
+  if(isFinite(lo)){ document.getElementById('inMin').value=lo; document.getElementById('inMax').value=hi; }
+  m.textContent = '已讀取 '+D.rows.length+' 列、'+D.names.length+' 個欄位。量尺範圍依資料自動判斷為 '+lo+' 到 '+hi+'，不正確請在步驟二修改。';
+  m.className='msg';
+  drawSel(); compute();
+  document.getElementById('selCard').style.display='';
+  document.getElementById('resCard').style.display='';
+}
+function readData(){ setData(document.getElementById('inData').value); }
+function readFile(inp){
+  var f = inp.files[0]; if(!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){ document.getElementById('inData').value = rd.result; setData(rd.result); };
+  rd.readAsText(f, 'UTF-8');
+}
+function loadExample(){
+  document.getElementById('inData').value = EXAMPLE;
+  setData(EXAMPLE);
+  var j = D.names.indexOf('R3'); if(j>=0){ D.rev[j]=true; drawSel(); compute(); }
+}
+function drawSel(){
+  var h = '<tr><th>納入</th><th>反向題</th><th>欄位名稱</th><th>有效人數</th><th>平均數</th></tr>';
+  D.names.forEach(function(n,j){
+    var vals = D.rows.map(function(r){return r[j];}).filter(function(v){return v!=='' && v!==undefined && !isNaN(+v);}).map(Number);
+    var mean = vals.length ? vals.reduce(function(a,b){return a+b;},0)/vals.length : NaN;
+    var dis = D.num[j] ? '' : ' disabled';
+    h += '<tr class="'+(D.use[j]?'':'off')+'"><td><input type="checkbox"'+(D.use[j]?' checked':'')+dis+' onchange="D.use['+j+']=this.checked;drawSel();compute()"></td>'+
+         '<td><input type="checkbox"'+(D.rev[j]?' checked':'')+(D.use[j]?'':' disabled')+' onchange="D.rev['+j+']=this.checked;compute()"></td>'+
+         '<td class="name">'+esc(n)+(D.num[j]?'':'（非數值）')+'</td><td>'+vals.length+'</td><td>'+(D.num[j]?fmt(mean,2).replace(/^\./,'0.'):'–')+'</td></tr>';
+  });
+  document.getElementById('selTbl').innerHTML = h;
+}
+
+/* ---------- 統計 ---------- */
+function covMat(X){
+  var n=X.length, k=X[0].length, m=[], S=[];
+  for(var j=0;j<k;j++){ var s=0; for(var i=0;i<n;i++) s+=X[i][j]; m[j]=s/n; }
+  for(var a=0;a<k;a++){ S[a]=[]; for(var b=0;b<k;b++){ var s=0; for(var i=0;i<n;i++) s+=(X[i][a]-m[a])*(X[i][b]-m[b]); S[a][b]=s/(n-1); } }
+  return {S:S, m:m};
+}
+function alphaS(S){
+  var k=S.length, tr=0, tot=0;
+  for(var a=0;a<k;a++){ tr+=S[a][a]; for(var b=0;b<k;b++) tot+=S[a][b]; }
+  return k/(k-1)*(1-tr/tot);
+}
+function topEig(A){                       // 對稱正定矩陣的最大特徵值與特徵向量（冪次法）
+  var k=A.length, v=[], lam=0;
+  for(var i=0;i<k;i++) v[i]=1/Math.sqrt(k);
+  for(var it=0; it<1000; it++){
+    var w=[], nrm=0;
+    for(var i=0;i<k;i++){ var s=0; for(var j=0;j<k;j++) s+=A[i][j]*v[j]; w[i]=s; nrm+=s*s; }
+    nrm=Math.sqrt(nrm); var diff=0;
+    for(var i=0;i<k;i++){ w[i]/=nrm; diff+=Math.abs(w[i]-v[i]); }
+    v=w; lam=nrm; if(diff<1e-12) break;
+  }
+  return {val:lam, vec:v};
+}
+function oneFactorML(S){                  // 單因素最大概似估計（交替更新負荷量與誤差變異數）
+  var k=S.length, psi=[], L=[];
+  for(var i=0;i<k;i++) psi[i]=S[i][i]*0.5;
+  for(var it=0; it<5000; it++){
+    var A=[], r=psi.map(Math.sqrt);
+    for(var i=0;i<k;i++){ A[i]=[]; for(var j=0;j<k;j++) A[i][j]=S[i][j]/(r[i]*r[j]); }
+    var e=topEig(A), f=Math.sqrt(Math.max(e.val-1,0)), ch=0;
+    var tot=0; for(var i=0;i<k;i++) tot+=e.vec[i];
+    var sg = tot<0 ? -1 : 1;
+    for(var i=0;i<k;i++){
+      L[i]=sg*r[i]*e.vec[i]*f;
+      var np=Math.max(S[i][i]-L[i]*L[i], 0.005*S[i][i]);
+      ch+=Math.abs(np-psi[i]); psi[i]=np;
+    }
+    if(ch<1e-10) break;
+  }
+  return {L:L, psi:psi};
+}
+function omegaS(S){
+  var fa=oneFactorML(S), sl=0, se=0;
+  for(var i=0;i<S.length;i++){ sl+=fa.L[i]; se+=fa.psi[i]; }
+  return {omega: sl*sl/(sl*sl+se), L:fa.L, psi:fa.psi};
+}
+function sub(S, drop){
+  var idx=[]; for(var i=0;i<S.length;i++) if(i!==drop) idx.push(i);
+  return idx.map(function(a){ return idx.map(function(b){ return S[a][b]; }); });
+}
+
+function compute(){
+  if(!D) return;
+  var lo=+document.getElementById('inMin').value, hi=+document.getElementById('inMax').value;
+  var cols=[]; D.use.forEach(function(u,j){ if(u) cols.push(j); });
+  var boxes=document.getElementById('resBoxes'), note=document.getElementById('resNote'), it=document.getElementById('itemTbl'), rep=document.getElementById('reportTxt');
+  if(cols.length<2){ boxes.innerHTML=''; it.innerHTML=''; rep.textContent=''; note.innerHTML='<div class="warnb">請在步驟二至少勾選兩題。</div>'; return; }
+  var X=[], dropped=0;
+  D.rows.forEach(function(r){
+    var row=[], ok=true;
+    cols.forEach(function(j){ var v=r[j]; if(v===undefined||v===''||isNaN(+v)) ok=false; else row.push(D.rev[j] ? lo+hi-(+v) : +v); });
+    if(ok) X.push(row); else dropped++;
+  });
+  var n=X.length, k=cols.length;
+  if(n<k+2){ note.innerHTML='<div class="badb">有效人數太少（'+n+' 人），無法估計。</div>'; boxes.innerHTML=''; it.innerHTML=''; return; }
+  var cm=covMat(X), S=cm.S;
+  var bad0 = S.map(function(r,i){return r[i];}).some(function(v){return v<=0;});
+  if(bad0){ note.innerHTML='<div class="badb">有題目所有人的分數都相同（變異數為 0），請取消勾選該題。</div>'; boxes.innerHTML=''; it.innerHTML=''; return; }
+  var a=alphaS(S), om=omegaS(S);
+  var sd=S.map(function(r,i){return Math.sqrt(r[i]);});
+  var rsum=0, rc=0; for(var p=0;p<k;p++) for(var q=p+1;q<k;q++){ rsum+=S[p][q]/(sd[p]*sd[q]); rc++; }
+  var rbar=rsum/rc;
+  boxes.innerHTML =
+    '<div class="rbox main"><div class="n">'+fmt(a)+'</div><div class="l">Cronbach\'s α</div></div>'+
+    '<div class="rbox main"><div class="n">'+fmt(om.omega)+'</div><div class="l">McDonald\'s ω</div></div>'+
+    '<div class="rbox"><div class="n">'+k+'</div><div class="l">題數</div></div>'+
+    '<div class="rbox"><div class="n">'+n+'</div><div class="l">有效人數'+(dropped?'（排除缺漏 '+dropped+' 人）':'')+'</div></div>'+
+    '<div class="rbox"><div class="n">'+fmt(rbar)+'</div><div class="l">平均題間相關</div></div>';
+  var rows='', flags=[];
+  var tot=X.map(function(r){return r.reduce(function(s,v){return s+v;},0);});
+  cols.forEach(function(j,p){
+    var rest=X.map(function(r,i){return tot[i]-r[p];});
+    var mr=0, mx=0; for(var i=0;i<n;i++){ mr+=rest[i]; mx+=X[i][p]; } mr/=n; mx/=n;
+    var sxy=0,sxx=0,syy=0; for(var i=0;i<n;i++){ var dx=X[i][p]-mx, dy=rest[i]-mr; sxy+=dx*dy; sxx+=dx*dx; syy+=dy*dy; }
+    var citc=sxy/Math.sqrt(sxx*syy);
+    var ad = k>2 ? alphaS(sub(S,p)) : NaN, od = k>2 ? omegaS(sub(S,p)).omega : NaN;
+    var std = om.L[p]/sd[p];
+    var f=[];
+    if(citc<-.10) f.push('與其他題呈負相關，先確認是否為反向題');
+    else if(citc<.30) f.push('校正題總相關低於 .30');
+    if(ad>a+0.001) f.push('刪除後 α 上升');
+    if(Math.abs(std)<.40) f.push('負荷量低於 .40');
+    if(f.length) flags.push(D.names[j]);
+    var cC = citc<.30?'bad':(citc<.40?'warn':''), cA = ad>a+0.001?'bad':'';
+    rows += '<tr><td class="name">'+esc(D.names[j])+(D.rev[j]?'（反向）':'')+'</td><td>'+fmt(cm.m[p],2).replace(/^\./,'0.')+'</td><td>'+fmt(sd[p],2).replace(/^\./,'0.')+'</td>'+
+      '<td class="'+cC+'">'+fmt(citc)+'</td><td class="'+cA+'">'+fmt(ad)+'</td><td>'+fmt(od)+'</td><td class="'+(Math.abs(std)<.40?'bad':'')+'">'+fmt(std)+'</td><td class="flag">'+(f.join('；')||'')+'</td></tr>';
+  });
+  it.innerHTML='<tr><th>題目</th><th>平均數</th><th>標準差</th><th>校正題總相關<span class="en">item-rest r</span></th><th>刪除後 α<span class="en">α if deleted</span></th><th>刪除後 ω<span class="en">ω if deleted</span></th><th>因素負荷量<span class="en">標準化</span></th><th>提醒</th></tr>'+rows;
+  var lvl = function(x){ return x>=.90?'很高，檢查題目是否重複':x>=.80?'良好':x>=.70?'可接受':'低於 .70 的慣例門檻'; };
+  var h = '<div class="'+(a<.70?'badb':'note')+'"><span class="lb">判讀</span>α = '+fmt(a)+'，'+lvl(a)+'；ω = '+fmt(om.omega)+'，'+lvl(om.omega)+'。';
+  if(k<=3) h+='題數只有 '+k+' 題，α 容易偏低，報告時寫出題數。';
+  h+='</div>';
+  if(flags.length) h+='<div class="warnb"><span class="lb">需要檢查的題目</span>'+flags.map(esc).join('、')+'。先讀題目內容：是否為反向題但忘了勾選、是否測到另一個概念，再對照因素分析的負荷量，決定是否刪題。刪題後重新計算一次。</div>';
+  note.innerHTML=h;
+  var names=cols.map(function(j){return D.names[j];});
+  rep.textContent = '本向度共 '+k+' 題（'+names.join('、')+'），有效樣本 '+n+' 人，Cronbach\'s α = '+fmt(a,2)+'，McDonald\'s ω = '+fmt(om.omega,2)+'。'+
+    (cols.some(function(j){return D.rev[j];}) ? '反向題（'+cols.filter(function(j){return D.rev[j];}).map(function(j){return D.names[j];}).join('、')+'）已先以 '+(lo+hi)+' 減原始分數重新計分。' : '')+
+    '各題校正題總相關介於 '+fmt(Math.min.apply(null,itCitc(X,tot,k)),2)+' 到 '+fmt(Math.max.apply(null,itCitc(X,tot,k)),2)+'。';
+}
+function itCitc(X,tot,k){
+  var out=[], n=X.length;
+  for(var p=0;p<k;p++){
+    var mx=0,mr=0; for(var i=0;i<n;i++){ mx+=X[i][p]; mr+=tot[i]-X[i][p]; } mx/=n; mr/=n;
+    var sxy=0,sxx=0,syy=0; for(var i=0;i<n;i++){ var dx=X[i][p]-mx, dy=tot[i]-X[i][p]-mr; sxy+=dx*dy; sxx+=dx*dx; syy+=dy*dy; }
+    out.push(sxy/Math.sqrt(sxx*syy));
+  }
+  return out;
+}
+function copyReport(){
+  var t=document.getElementById('reportTxt').textContent, m=document.getElementById('copyMsg');
+  try{ navigator.clipboard.writeText(t).then(function(){ m.textContent='已複製'; }, function(){ m.textContent='請手動選取文字複製'; }); }
+  catch(e){ m.textContent='請手動選取文字複製'; }
+}
+
+/* ---------- 觀念試算 ---------- */
+function alphaOf(k,r){return k*r/(1+(k-1)*r);}
+function calcA(){
+  var k=+document.getElementById('inK').value, r=+document.getElementById('inR').value/100;
+  document.getElementById('kVal').textContent=k;
+  document.getElementById('rVal').textContent=fmt(r,2);
+  var a=alphaOf(k,r);
+  document.getElementById('outA').textContent='α = '+fmt(a,2);
+  document.getElementById('aBar').style.width=(a*100).toFixed(0)+'%';
+  document.getElementById('aNote').textContent = a>=0.9?'α 很高，先確認不是題目重複或題數很多造成的。'
+    : a>=0.8?'良好水準。α 高不代表只有一個向度。'
+    : a>=0.7?'可接受水準（慣例門檻）。'
+    : '低於 .70 的慣例門檻，題目之間的相關偏低，或題數太少。';
+}
+function calcK(){
+  var a=+document.getElementById('inTA').value/100, r=+document.getElementById('inTR').value/100;
+  document.getElementById('taVal').textContent=fmt(a,2);
+  document.getElementById('trVal').textContent=fmt(r,2);
+  var k=a*(1-r)/(r*(1-a)), kc=Math.max(2,Math.ceil(k-1e-9));
+  document.getElementById('outK').textContent='約 '+kc+' 題';
+  document.getElementById('kNote').textContent='由公式反解 k = α(1 − r̄) ÷ ［r̄(1 − α)］ = '+k.toFixed(1)+'，無條件進位。題間相關越低，需要的題數越多，題數增加也會加重作答負擔。';
+}
+calcA(); calcK();
+</script>
+</body>
+</html>
