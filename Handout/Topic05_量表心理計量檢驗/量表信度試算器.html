@@ -302,7 +302,8 @@ function compute(){
   var cm=covMat(X), S=cm.S;
   var bad0 = S.map(function(r,i){return r[i];}).some(function(v){return v<=0;});
   if(bad0){ note.innerHTML='<div class="badb">有題目所有人的分數都相同（變異數為 0），請取消勾選該題。</div>'; boxes.innerHTML=''; it.innerHTML=''; return; }
-  var a=alphaS(S), om=omegaS(S);
+  var a=alphaS(S), canOm = k>=3;          // 單因素模型至少要 3 題才能識別
+  var om = canOm ? omegaS(S) : {omega:NaN, L:[]};
   var sd=S.map(function(r,i){return Math.sqrt(r[i]);});
   var rsum=0, rc=0; for(var p=0;p<k;p++) for(var q=p+1;q<k;q++){ rsum+=S[p][q]/(sd[p]*sd[q]); rc++; }
   var rbar=rsum/rc;
@@ -319,13 +320,13 @@ function compute(){
     var mr=0, mx=0; for(var i=0;i<n;i++){ mr+=rest[i]; mx+=X[i][p]; } mr/=n; mx/=n;
     var sxy=0,sxx=0,syy=0; for(var i=0;i<n;i++){ var dx=X[i][p]-mx, dy=rest[i]-mr; sxy+=dx*dy; sxx+=dx*dx; syy+=dy*dy; }
     var citc=sxy/Math.sqrt(sxx*syy);
-    var ad = k>2 ? alphaS(sub(S,p)) : NaN, od = k>2 ? omegaS(sub(S,p)).omega : NaN;
-    var std = om.L[p]/sd[p];
+    var ad = k>2 ? alphaS(sub(S,p)) : NaN, od = k>3 ? omegaS(sub(S,p)).omega : NaN;
+    var std = canOm ? om.L[p]/sd[p] : NaN;
     var f=[];
     if(citc<-.10) f.push('與其他題呈負相關，先確認是否為反向題');
     else if(citc<.30) f.push('校正題總相關低於 .30');
     if(ad>a+0.001) f.push('刪除後 α 上升');
-    if(Math.abs(std)<.40) f.push('負荷量低於 .40');
+    if(isFinite(std) && Math.abs(std)<.40) f.push('負荷量低於 .40');
     if(f.length) flags.push(D.names[j]);
     var cC = citc<.30?'bad':(citc<.40?'warn':''), cA = ad>a+0.001?'bad':'';
     rows += '<tr><td class="name">'+esc(D.names[j])+(D.rev[j]?'（反向）':'')+'</td><td>'+fmt(cm.m[p],2).replace(/^\./,'0.')+'</td><td>'+fmt(sd[p],2).replace(/^\./,'0.')+'</td>'+
@@ -333,13 +334,15 @@ function compute(){
   });
   it.innerHTML='<tr><th>題目</th><th>平均數</th><th>標準差</th><th>校正題總相關<span class="en">item-rest r</span></th><th>刪除後 α<span class="en">α if deleted</span></th><th>刪除後 ω<span class="en">ω if deleted</span></th><th>因素負荷量<span class="en">標準化</span></th><th>提醒</th></tr>'+rows;
   var lvl = function(x){ return x>=.90?'很高，檢查題目是否重複':x>=.80?'良好':x>=.70?'可接受':'低於 .70 的慣例門檻'; };
-  var h = '<div class="'+(a<.70?'badb':'note')+'"><span class="lb">判讀</span>α = '+fmt(a)+'，'+lvl(a)+'；ω = '+fmt(om.omega)+'，'+lvl(om.omega)+'。';
+  var h = '<div class="'+(a<.70?'badb':'note')+'"><span class="lb">判讀</span>α = '+fmt(a)+'，'+lvl(a)+(canOm ? '；ω = '+fmt(om.omega)+'，'+lvl(om.omega)+'。' : '。');
   if(k<=3) h+='題數只有 '+k+' 題，α 容易偏低，報告時寫出題數。';
   h+='</div>';
+  if(!canOm) h+='<div class="warnb"><span class="lb">ω 無法估計</span>ω 由單因素模型計算，至少要 3 題才能估計。只有 2 題時，ω、刪除後 ω 與因素負荷量都顯示「–」，報告時只寫 α。</div>';
+  else if(k===3) h+='<div class="note"><span class="lb">刪除後 ω</span>目前 3 題，刪除任何一題後只剩 2 題，無法估計 ω，所以「刪除後 ω」顯示「–」。</div>';
   if(flags.length) h+='<div class="warnb"><span class="lb">需要檢查的題目</span>'+flags.map(esc).join('、')+'。先讀題目內容：是否為反向題但忘了勾選、是否測到另一個概念，再對照因素分析的負荷量，決定是否刪題。刪題後重新計算一次。</div>';
   note.innerHTML=h;
   var names=cols.map(function(j){return D.names[j];});
-  rep.textContent = '本向度共 '+k+' 題（'+names.join('、')+'），有效樣本 '+n+' 人，Cronbach\'s α = '+fmt(a,2)+'，McDonald\'s ω = '+fmt(om.omega,2)+'。'+
+  rep.textContent = '本向度共 '+k+' 題（'+names.join('、')+'），有效樣本 '+n+' 人，Cronbach\'s α = '+fmt(a,2)+(canOm ? '，McDonald\'s ω = '+fmt(om.omega,2) : '（2 題無法估計 ω）')+'。'+
     (cols.some(function(j){return D.rev[j];}) ? '反向題（'+cols.filter(function(j){return D.rev[j];}).map(function(j){return D.names[j];}).join('、')+'）已先以 '+(lo+hi)+' 減原始分數重新計分。' : '')+
     '各題校正題總相關介於 '+fmt(Math.min.apply(null,itCitc(X,tot,k)),2)+' 到 '+fmt(Math.max.apply(null,itCitc(X,tot,k)),2)+'。';
 }
