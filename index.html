@@ -444,6 +444,20 @@
   @media (max-width: 768px) {
     .roster-table { min-width: 580px; }
   }
+  /* 手機：每組改為一張卡片，期中題目不必橫向滑動 */
+  @media (max-width: 640px) {
+    .roster-table { min-width: 0; white-space: normal; }
+    .roster-table thead { display: none; }
+    .roster-table, .roster-table tbody, .roster-table tr, .roster-table td { display: block; width: auto; }
+    .roster-table tbody tr {
+      display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .55rem .75rem;
+      padding: 1rem 1.1rem; border-bottom: 1px solid var(--line-2);
+    }
+    .roster-table tbody tr:last-child { border-bottom: none; }
+    .roster-table td { padding: 0; border-bottom: none; }
+    .roster-table td.r-members { grid-column: 1 / -1; color: var(--ink-2); }
+    .roster-table td.r-topic-cell { grid-column: 1 / -1; order: -1; }
+  }
 
   /* ---------- Footer ---------- */
   .site-footer{background:var(--ink);color:#C9C2B7;padding:4.5rem 0 2.25rem;margin-top:2rem;}
@@ -589,6 +603,8 @@
     background:var(--cream-2)!important;color:var(--ink-2)!important;border:1px dashed var(--line-2)!important;
     box-shadow:none!important;filter:none;opacity:1;
   }
+  .site-footer span.is-pending{background:none!important;border:none!important;color:#8A8277!important;padding:0;}
+  .site-footer span.is-pending::after{content:"（尚未公告）";margin-left:.4em;font-size:.875em;}
   .btn-launch.is-pending .icon-chip,.btn.is-pending .icon-chip{background:var(--line)!important;color:var(--ink-2)!important;}
   a.is-pending::after,button.is-pending::after{color:var(--ink-3);font-weight:600;white-space:nowrap;}
   .btn{white-space:nowrap;}
