@@ -162,7 +162,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
       <li>以 LLM Agent 輔助開放題編碼，並與人工編碼比較</li>
       <li>對 AI 產出的每一項結果進行人工查核，留下紀錄</li>
     </ol>
-    <p>可使用工具：ChatGPT、Claude、Claude Code、Google Antigravity、Excel、JASP、Python。可以混用，報告中須寫明每一個步驟使用的工具與版本或方案</p>
+    <p>可使用工具：ChatGPT/Codex、Claude/Claude Code、Gemini/Antigravity、Excel、JASP、Python。可以混用，報告中須寫明每一個步驟使用的工具與版本或方案</p>
   </div>
 </section>
 
@@ -219,8 +219,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <p>兩種形式擇一即可，同一份作業可以混用（例如網頁版用分享連結、Claude Code 用匯出）。各工具的介面名稱會隨版本更新而改變，下列步驟以功能描述為準</p>
 
   <div class="card">
-    <h3 style="margin-top:0">形式一：分享連結（ChatGPT、Claude 網頁版）</h3>
-    <p>ChatGPT 與 Claude 網頁版都可以替單一對話建立唯讀連結，取得連結的人可以檢視該對話</p>
+    <h3 style="margin-top:0">形式一：分享連結（ChatGPT、Claude、Gemini 網頁版）</h3>
+    <p>ChatGPT、Claude 與 Gemini 網頁版都可以替單一對話建立唯讀連結，取得連結的人可以檢視該對話</p>
     <ol class="plain">
       <li>開啟要繳交的那一個對話</li>
       <li>點選對話頁面上方的「分享」（Share）</li>
@@ -239,7 +239,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 
   <div class="card">
     <h3 style="margin-top:0">形式二：匯出紀錄（無法分享時）</h3>
-    <p>適用情形：組織帳號限制分享、專案設定不允許分享、Claude Code 或 Google Antigravity 等桌面與終端工具，以及無痕視窗無法開啟分享連結時</p>
+    <p>適用情形：組織帳號限制分享、專案設定不允許分享、Claude Code、Codex 或 Google Antigravity 等桌面與終端工具，以及無痕視窗無法開啟分享連結時</p>
     <p style="margin-top:12px"><strong>網頁版：列印為 PDF</strong></p>
     <ol class="plain">
       <li>開啟對話，捲動到最上方，確認整段對話都已載入</li>
@@ -252,6 +252,12 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
       <li>在該次工作階段結束前，於對話中輸入 <code>/export</code></li>
       <li>依畫面選項將對話存成文字檔（亦可在指令後加檔名，例如 <code>/export 學號_姓名_對話紀錄_01.txt</code>）</li>
       <li>開啟文字檔，確認提示詞、執行的指令與輸出都在檔案中</li>
+    </ol>
+    <p style="margin-top:12px"><strong>Codex：工作階段紀錄檔</strong></p>
+    <ol class="plain">
+      <li>Codex 會把每一次工作階段自動存成紀錄檔，位置在使用者資料夾的 <code>.codex/sessions/</code>，依年／月／日分資料夾，檔名為 <code>rollout-日期時間-代碼.jsonl</code></li>
+      <li>依分析日期找到對應的檔案，複製出來並改名，例如 <code>學號_姓名_對話紀錄_02.jsonl</code>，放入 ZIP</li>
+      <li>.jsonl 不易直接閱讀，另將 Codex 畫面上的完整對話複製到 Word 另存為 PDF，與 .jsonl 一起繳交</li>
     </ol>
     <p style="margin-top:12px"><strong>其他工具</strong></p>
     <p>工具有匯出功能時，使用該功能匯出單一對話；沒有匯出功能時，將完整對話複製到 Word，另存為 PDF</p>
@@ -330,8 +336,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <table>
     <tr><th style="width:30%">項目</th><th>連結</th></tr>
     <tr><td>Topic 07 教材網站</td><td><a href="../Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">AI 資料分析：清理與比較</a></td></tr>
-    <tr><td>Topic 08 教材網站</td><td>驅動因子與迴歸，將於課堂當週公告</td></tr>
-    <tr><td>Topic 09 教材網站</td><td>開放題分析，將於課堂當週公告</td></tr>
+    <tr><td>Topic 08 教材網站</td><td><a href="../Handout/Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html" target="_blank" rel="noopener">驅動因子與迴歸</a></td></tr>
+    <tr><td>Topic 09 教材網站</td><td><a href="../Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener">開放題分析</a></td></tr>
     <tr><td>分析檢核表</td><td><a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>（含「分析紀錄」工作表）</td></tr>
     <tr><td>AI 分析設定範本</td><td><a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a>（專案指示與分析規則）</td></tr>
     <tr><td>作業資料</td><td><a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></td></tr>
