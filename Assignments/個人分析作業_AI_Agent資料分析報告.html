@@ -140,8 +140,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 
 <main>
 <span class="eyebrow">INDIVIDUAL ANALYSIS PROJECT　25%</span>
-<h1>個人分析作業：AI Agent 模擬資料分析報告<br><span class="h1-sub">以作業版模擬資料完成可重現的量化與質化診斷</span></h1>
-<p class="lead">本作業以 Week 09 至 Week 11 的 AI Agent 資料分析架構（Topic 07 清理與群組比較、Topic 08 驅動因子與迴歸、Topic 09 開放題分析）分析作業版模擬資料，產出一份可重現的量化與質化診斷報告，並附上提示詞、程式碼、對話紀錄與人機雙重查核紀錄</p>
+<h1>個人分析作業：AI Agent 模擬資料分析報告<br><span class="h1-sub">以課程模擬資料完成可重現的量化與質化診斷</span></h1>
+<p class="lead">本作業以 Week 09 至 Week 11 的 AI Agent 資料分析架構（Topic 07 清理與群組比較、Topic 08 驅動因子與迴歸、Topic 09 開放題分析）分析課程的員工調查模擬資料，產出一份可重現的量化與質化診斷報告，並附上提示詞、程式碼、對話紀錄與人機雙重查核紀錄</p>
 
 <div class="facts">
   <div class="fact"><div class="k">比重</div><div class="v">25%<small>學期成績，個人獨立完成</small></div></div>
@@ -168,16 +168,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 
 <section id="data">
   <div class="sec-tag">02　作業資料</div>
-  <h2>作業版模擬資料</h2>
+  <h2>員工調查模擬資料</h2>
   <div class="card">
-    <p>資料檔：<a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></p>
+    <p>資料檔：<a href="Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic07_員工調查模擬資料.xlsx</a>（與 Topic 07 至 Topic 09 課堂練習使用同一份資料）</p>
     <table>
       <tr><th style="width:28%">工作表</th><th>內容</th></tr>
       <tr><td>原始資料</td><td>1,000 位員工、37 欄：員工編號、廠區、部門、職級、人員類別、年資，29 題李克特 6 點題目（ENG、SUP、REC、COM、RET、AIA 六個構面），兩題開放題</td></tr>
       <tr><td>題目對照表</td><td>變項代碼、構面、題目內容與計分方向</td></tr>
       <tr><td>構面與計分說明</td><td>量尺、構面題數、反向題處理與構面分數計算方式</td></tr>
     </table>
-    <p>作業版的題目與計分說明和課堂練習資料相同，但群組結構與分析結果不同，課堂練習的答案不適用於作業。資料中埋有資料品質問題，數量與位置不事先公布，判定方法與門檻須在報告中寫明</p>
+    <p>作業使用課堂練習的同一份資料，不另外提供作業資料。報告須寫明每一個清理步驟的判定方法與門檻，並以自己的程式與對話紀錄重現每一個數字</p>
   </div>
   <div class="warn">本作業只使用課程提供的模擬資料。任何真實員工資料、任職公司的調查資料或含個人資料的檔案，一律不得上傳至 AI 工具，也不得放入報告</div>
 </section>
@@ -208,7 +208,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <li><h4>提示詞</h4><p>每一輪貼給 AI 的提示詞全文，依使用順序編號；有使用專案指示、CLAUDE.md 或 Skill 時一併附上。以 <a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a> 為基礎修改者，附上修改後的版本</p><div class="out">檔案：.txt、.md 或 .docx</div></li>
     <li><h4>程式碼</h4><p>AI 執行的完整程式碼，整理成一份，從讀入資料到產出報告中的每一個數字都能依序重跑。以 Excel 或 JASP 完成的步驟，附上活頁簿或 .jasp 檔</p><div class="out">檔案：.py、.R、.ipynb，或貼在 Word 附錄</div></li>
     <li><h4>對話紀錄</h4><p>與 AI 的完整對話，以下列兩種形式之一提供，詳細步驟見下方說明。每一個分析階段使用一個對話即可，例如清理與比較、驅動因子、開放題各一個；所有對話依時間順序列在報告附錄的對話紀錄清單</p><div class="out">分享連結，或匯出的 PDF／文字檔</div></li>
-    <li><h4>分析檢核表</h4><p>使用 <a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>。「預期結果」欄為課堂練習資料的數值，作業版資料的結果不同；「我的結果」欄改填自己在作業版資料的結果，「一致？」欄記錄檢核者比對程式輸出後的判定。檢核者由另一位修課同學擔任，只負責比對「我的結果」與對話紀錄、程式輸出是否一致，不代為分析；檢核者在表頭與「檢核者」欄簽名</p><div class="out">檔案：學號_姓名_分析檢核表.xlsx</div></li>
+    <li><h4>分析檢核表</h4><p>使用 <a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>。「預期結果」欄為課程分析程式的參考數值；「我的結果」欄填自己分析得到的結果，「一致？」欄記錄檢核者比對程式輸出後的判定。檢核者由另一位修課同學擔任，只負責比對「我的結果」與對話紀錄、程式輸出是否一致，不代為分析；檢核者在表頭與「檢核者」欄簽名</p><div class="out">檔案：學號_姓名_分析檢核表.xlsx</div></li>
     <li><h4>分析紀錄</h4><p>檢核表中的「分析紀錄」工作表。每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人或 AI）、確認者。例如隨機亂填門檻、反向題是否轉換、問題單位如何界定、迴歸是否排除離群值、開放題類別如何合併</p><div class="out">與分析檢核表同一個檔案</div></li>
   </ol>
 </section>
@@ -340,7 +340,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <tr><td>Topic 09 教材網站</td><td><a href="../Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener">開放題分析</a></td></tr>
     <tr><td>分析檢核表</td><td><a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>（含「分析紀錄」工作表）</td></tr>
     <tr><td>AI 分析設定範本</td><td><a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a>（專案指示與分析規則）</td></tr>
-    <tr><td>作業資料</td><td><a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></td></tr>
+    <tr><td>作業資料</td><td><a href="Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic07_員工調查模擬資料.xlsx</a>（與課堂練習相同）</td></tr>
   </table>
   </div>
 </section>
