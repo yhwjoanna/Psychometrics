@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>效果量計算器｜員工意向調查</title>
+<style>
+:root{--navy:#12335c; --blue:#2e5e8f; --bg:#f5f7fa; --card:#ffffff; --line:#e3e9f2; --muted:#6b7a90; --ink:#243447; --good:#337052; --warn:#8a6420; --badr:#c0564f;}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.75; font-size:clamp(15px,1.05vw,17px);}
+.topbar{background:var(--navy); color:#fff; padding:14px clamp(16px,4vw,48px); display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline;}
+.topbar .t{font-size:clamp(18px,1.6vw,22px); font-weight:800;}
+.topbar .s{font-size:13px; opacity:.85;}
+main{max-width:980px; margin:0 auto; padding:clamp(16px,3vw,36px);}
+h2{color:var(--navy); font-size:clamp(17px,1.3vw,20px); margin:26px 0 10px;}
+p{margin:0 0 12px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:clamp(14px,2vw,22px); margin-bottom:18px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+label.fld{display:block; font-size:14px; color:var(--muted); font-weight:700;}
+input[type=number],select{width:100%; padding:9px 10px; margin-top:4px; border:1px solid var(--line); border-radius:8px; font-size:16px; font-family:inherit; background:#fff; color:var(--ink);}
+input[type=range]{width:100%; margin-top:10px;}
+.res{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin-top:16px;}
+.rbox{background:#eef2f8; border-radius:10px; padding:14px; text-align:center;}
+.rbox .n{font-size:clamp(24px,3vw,32px); font-weight:800; color:var(--navy);}
+.rbox .l{font-size:13px; color:var(--muted);}
+.bar{height:14px; border-radius:7px; background:#e3e9f2; overflow:hidden; margin:6px 0 2px;}
+.bar>div{height:100%; background:var(--blue); transition:width .25s;}
+.note{background:#f2f6ee; border-left:4px solid var(--good); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.warnb{background:#faf4e8; border-left:4px solid var(--warn); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.lb{font-weight:800; color:var(--navy); margin-right:6px;}
+.formula{background:#eef2f8; border-radius:10px; padding:12px 16px; text-align:center; font-size:15px; margin:12px 0; color:var(--navy); font-weight:700;}
+table{border-collapse:collapse; margin:10px 0; font-size:14px;}
+.tblwrap{width:100%; overflow-x:auto;}
+th,td{border:1px solid var(--line); padding:7px 10px; text-align:center; white-space:nowrap;}
+th{background:#eef2f8; color:var(--navy);}
+td input{width:70px; padding:6px; text-align:center; border:1px solid var(--line); border-radius:6px; font-size:15px;}
+.ref{font-size:13px; color:var(--muted); margin-top:6px;}
+a{color:var(--blue);}
+footer{color:var(--muted); font-size:12px; text-align:center; padding:18px;}
+.interp{font-size:14px; color:var(--muted);}
+.big{font-size:clamp(30px,4vw,42px); font-weight:800; color:var(--navy); text-align:center; margin:8px 0;}
+@media (max-width:600px){.grid{grid-template-columns:1fr;}}
+@media print{.topbar{background:#fff; color:var(--navy); border-bottom:2px solid var(--navy);} body{background:#fff;} .card{break-inside:avoid;} input[type=range]{display:none;}}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="t">效果量計算器</span><span class="s">員工意向調查課程．配合 Topic 07 使用．教學工具</span></div>
+<main>
+
+<div class="card">
+  <h2 style="margin-top:0;">輸入：兩組的描述統計</h2>
+  <div class="grid">
+    <div>
+      <p style="font-weight:800; color:var(--navy); margin-bottom:6px;">群組一（如某部門）</p>
+      <label class="fld">平均數 M₁<input type="number" id="m1" value="3.50" step="0.01" oninput="calc()"></label>
+      <label class="fld" style="margin-top:8px;">標準差 SD₁<input type="number" id="s1" value="0.80" step="0.01" min="0.01" oninput="calc()"></label>
+      <label class="fld" style="margin-top:8px;">人數 n₁<input type="number" id="n1" value="100" min="2" oninput="calc()"></label>
+    </div>
+    <div>
+      <p style="font-weight:800; color:var(--navy); margin-bottom:6px;">群組二（如全公司其他）</p>
+      <label class="fld">平均數 M₂<input type="number" id="m2" value="3.80" step="0.01" oninput="calc()"></label>
+      <label class="fld" style="margin-top:8px;">標準差 SD₂<input type="number" id="s2" value="0.85" step="0.01" min="0.01" oninput="calc()"></label>
+      <label class="fld" style="margin-top:8px;">人數 n₂<input type="number" id="n2" value="500" min="2" oninput="calc()"></label>
+    </div>
+  </div>
+  <div class="res">
+    <div class="rbox"><div class="n" id="outD">–</div><div class="l">Cohen&#8217;s d</div></div>
+    <div class="rbox"><div class="n" id="outT">–</div><div class="l">t 值</div></div>
+    <div class="rbox"><div class="n" id="outP">–</div><div class="l">雙尾 p（大樣本近似）</div></div>
+  </div>
+  <p id="dNote" style="margin-top:12px; font-weight:700; color:var(--navy);"></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">體驗：同樣的差距，樣本數如何推動 p 值</h2>
+  <p>固定上方兩組的平均數與標準差，拉動樣本倍率——看 d 不動、p 值卻一路變化。樣本數會改變顯著性，不會改變效果量（Topic 07 教材網站單元四）。</p>
+  <label class="fld">樣本倍率 ×<strong id="mulVal">1.0</strong>
+    <input type="range" id="inMul" min="2" max="100" value="10" oninput="calc()">
+  </label>
+  <div class="tblwrap"><table id="demoTab"></table></div>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">計算依據與判讀</h2>
+  <div class="formula">d　＝　(M₁ − M₂)　÷　合併標準差　　；　　合併標準差²　＝　［(n₁−1)SD₁²＋(n₂−1)SD₂²］÷（n₁＋n₂−2）</div>
+  <p>d 以標準差為單位表達差距，可跨構面、跨量尺比較。慣例判讀：0.2 小、0.5 中、0.8 大（Cohen, 1988，書籍）；慣例僅供參考，實務意義仍需對照情境。t 值由 d 與兩組人數換算，p 值採常態近似（兩組各 30 人以上時近似良好；小樣本請以統計軟體計算精確值）。</p>
+  <div class="warnb"><span class="lb">判讀提醒（Topic 07 教材網站單元四）</span>p 值只回答差距是不是抽樣雜訊，不衡量差距大小——報告請 d 與 p 並列。回收接近全員普查時，抽樣推論意義有限，判讀重心放在效果量與差距型態；群組比較另有測量不變性與聚合正當性兩個進階前提，本課不展開。</div>
+  <p class="ref">Cohen, J. (1988). Statistical power analysis for the behavioral sciences (2nd ed.). Lawrence Erlbaum.（書籍）<br>
+  Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose. The American Statistician, 70(2), 129&#8211;133. <a href="https://doi.org/10.1080/00031305.2016.1154108" target="_blank" rel="noopener">https://doi.org/10.1080/00031305.2016.1154108</a></p>
+</div>
+
+</main>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 07 群組比較使用。p 值為大樣本近似，正式報告請以統計軟體計算。</footer>
+<script>
+function normCdf(z){
+  var t=1/(1+0.2316419*Math.abs(z));
+  var dpdf=Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);
+  var p=dpdf*t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+  return z>=0?1-p:p;
+}
+function stats(m1,s1,n1,m2,s2,n2){
+  var sp=Math.sqrt(((n1-1)*s1*s1+(n2-1)*s2*s2)/(n1+n2-2));
+  var d=(m1-m2)/sp;
+  var t=(m1-m2)/(sp*Math.sqrt(1/n1+1/n2));
+  var p=2*(1-normCdf(Math.abs(t)));
+  return {d:d,t:t,p:p};
+}
+function fmtP(p){return p<0.001?'< .001':p.toFixed(3).replace(/^0\./,'.');}
+function calc(){
+  var m1=+document.getElementById('m1').value, s1=+document.getElementById('s1').value, n1=+document.getElementById('n1').value;
+  var m2=+document.getElementById('m2').value, s2=+document.getElementById('s2').value, n2=+document.getElementById('n2').value;
+  if(!(s1>0&&s2>0&&n1>1&&n2>1)){document.getElementById('outD').textContent='–';return;}
+  var r=stats(m1,s1,n1,m2,s2,n2);
+  document.getElementById('outD').textContent=r.d.toFixed(2);
+  document.getElementById('outT').textContent=r.t.toFixed(2);
+  document.getElementById('outP').textContent=fmtP(r.p);
+  var ad=Math.abs(r.d);
+  var band= ad>=0.8?'大效果（慣例 0.8 以上）——結構性落差，值得優先追查。'
+    : ad>=0.5?'中等效果（慣例 0.5 以上）。'
+    : ad>=0.2?'小效果（慣例 0.2 以上）——留意是否有實務意義。'
+    : '低於小效果慣例——即使 p 顯著，實務意義也有限。';
+  document.getElementById('dNote').textContent='d = '+r.d.toFixed(2)+'：'+band;
+  // 樣本倍率示範
+  var mul=+document.getElementById('inMul').value/10;
+  document.getElementById('mulVal').textContent=mul.toFixed(1);
+  var rows=[[1,''],[mul,'（滑桿設定）']];
+  var s='<tr><th>樣本倍率</th><th>n₁</th><th>n₂</th><th>d</th><th>t</th><th>p</th></tr>';
+  rows.forEach(function(rw){
+    var k=rw[0], nn1=Math.max(2,Math.round(n1*k)), nn2=Math.max(2,Math.round(n2*k));
+    var rr=stats(m1,s1,nn1,m2,s2,nn2);
+    s+='<tr><td>×'+k.toFixed(1)+rw[1]+'</td><td>'+nn1+'</td><td>'+nn2+'</td><td>'+rr.d.toFixed(2)+'</td><td>'+rr.t.toFixed(2)+'</td><td>'+fmtP(rr.p)+'</td></tr>';
+  });
+  document.getElementById('demoTab').innerHTML=s;
+}
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 07：AI Agent 資料分析（一）清理與比較｜員工意向調查</title>
+<style>
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+.mini{width:100%;border-collapse:collapse;margin:10px 0}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mini{min-width:760px}
+.mini td,.mini th{white-space:nowrap;border:1px solid var(--line);padding:6px 8px;text-align:center;font-size:14px}
+.mini th{background:var(--lightblue);color:var(--navy)}
+.mini td.flag{background:#fdecec;color:#a33a32;font-weight:700}
+.mini td.ok{color:#337052;font-weight:700}
+.reveal-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.reveal-btn:active{transform:scale(.97)}
+.hide{display:none}
+.calc label{display:inline-block;padding:4px 0;cursor:pointer}
+.calc input{margin-right:8px}
+td.ans3.flag{background:#fdecec;color:#a33a32;font-weight:700}
+td.ans3.ok{color:#337052;font-weight:700}
+.adv{font-size:14px;color:var(--muted)}
+
+.pt{width:100%;border-collapse:collapse;margin:10px 0}
+.pt td,.pt th{border:1px solid var(--line);padding:7px 10px;text-align:center;font-size:14.5px}
+.pt{min-width:680px}
+.pt th{background:var(--lightblue);color:var(--navy);white-space:nowrap}
+.pt td:first-child{font-weight:700}
+.pt td.hi{font-weight:700;color:var(--navy)}
+.pick{display:flex;gap:6px;justify-content:center}
+.pick button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.pick button.sel-ok{background:var(--palegreen);border-color:var(--green);color:var(--green);font-weight:700}
+.pick button.sel-bad{background:#fdecec;border-color:#c0564f;color:#8f3a34;font-weight:700}
+.pt td.fb{font-size:13.5px;text-align:left;min-width:220px}
+.pt td.fb.ok{color:var(--green)} .pt td.fb.bad{color:#8f3a34}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.steps{counter-reset:s;list-style:none;padding-left:0}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radius:4px;font-size:13.5px}
+.mt{width:100%;border-collapse:collapse;margin:10px 0}
+.mt td,.mt th{border:1px solid var(--line);padding:6px 10px;text-align:center;font-size:14.5px}
+.mt th{background:var(--lightblue);color:var(--navy)}
+.mt tr.hg td{background:#EAF4EE}
+.mt tr.lg td{background:#FBF2E1}
+.calcbox{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;padding:12px 18px;margin:12px 0;font-size:15px;line-height:1.9}
+.zh{color:#7A2033;font-weight:700}
+.glos td:first-child{white-space:nowrap}
+
+.prompt pre{white-space:pre-wrap;word-break:break-word;padding-top:40px}
+.round{border:1px solid var(--line);border-radius:12px;margin:22px 0;background:#fff;overflow:hidden}
+.round .rhead{background:var(--navy);color:#fff;padding:10px 18px;font-weight:700;font-size:15px}
+.round .rbody{padding:14px 20px 18px}
+.ansbtn{background:#fff;color:var(--blue);border:1px solid var(--blue);border-radius:8px;padding:7px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.ansbtn:hover{background:var(--paleblue)}
+.ansbtn[aria-expanded=true]{background:var(--blue);color:#fff}
+.ans{display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.ans.show{display:block}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff;cursor:pointer;font-size:15px}
+.chk input{margin-top:7px}
+.chk label.done{background:var(--palegreen);border-color:var(--green)}
+.num{font-weight:700;color:var(--navy)}
+td.lo{background:#fdecec !important;color:#8f3a34;font-weight:700}
+.calcbox .mut{color:var(--muted);font-size:13.5px}
+footer.site{max-width:1020px;margin:60px auto 0}
+h2[id],tr[id]{scroll-margin-top:84px}
+tr[id]:target td{background:var(--paleblue)}
+p.terms{font-size:13.5px;color:var(--muted);background:#fafbfd;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0 16px}
+p.terms .lb2{font-weight:700;color:var(--navy);margin-right:8px}
+.dtree,.chart{margin:16px auto 8px;max-width:560px}
+.chart{max-width:520px}
+.dtree svg,.chart svg{width:100%;height:auto;display:block}
+.dtree figcaption,.chart figcaption{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+.mut{color:var(--muted);font-size:12.5px;font-weight:400}
+table.wide{min-width:640px}
+tr.grp td{text-align:left !important;background:var(--paleblue) !important;color:var(--navy);font-weight:700;font-size:13.5px;padding:6px 12px}
+.stepcard{border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;margin:22px 0;background:#fff}
+.stepcard .sh{background:var(--lightblue);color:var(--navy);font-weight:700;padding:9px 18px;font-size:15px}
+.stepcard .sr{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line)}
+.stepcard .sk{padding:10px 14px 10px 18px;font-weight:700;color:var(--blue);font-size:14.5px;background:#fafbfd}
+.stepcard .sv{padding:10px 18px 4px 4px;font-size:15px}
+.stepcard .sv ul{margin:0 0 6px 20px}
+.stepcard .sv li{margin-bottom:4px}
+pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px}
+.modes .m{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px 16px;font-size:14.5px}
+.modes .m b{display:block;color:var(--navy);font-size:15.5px;margin-bottom:4px}
+@media (max-width:860px){.round .rbody{padding:12px 14px 16px}
+  .stepcard .sr{grid-template-columns:1fr}.stepcard .sk{padding:8px 14px 2px;background:#fff}.stepcard .sv{padding:2px 14px 4px}
+  .modes{grid-template-columns:1fr}}
+@media print{.ans{display:block !important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 07：AI Agent 資料分析（一）清理與比較</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 07<br>AI Agent 資料分析架構與量化實務（一）</div>
+    <div class="t2">清理與比較<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">資料與工具</div>
+    <a data-u="u1">單元一：資料結構與編碼簿</a>
+    <a data-u="u2">單元二：AI Agent 的運作與使用方法</a>
+    <div class="grp">清理</div>
+    <a data-u="u3">單元三：資料清理</a>
+    <a data-u="u4">單元四：檢查信度</a>
+    <div class="grp">比較</div>
+    <a data-u="u5">單元五：兩組比較與 Cohen’s d</a>
+    <a data-u="u6">單元六：多組比較與 η²</a>
+    <div class="grp">查核與實作</div>
+    <a data-u="u7">單元七：人機雙重查核與檢核表</a>
+    <a data-u="u8">單元八：實機練習</a>
+    <div class="grp">延伸與文獻</div>
+    <a data-u="u9">單元九：其他學習重點</a>
+    <a data-u="u10">單元十：參考文獻與名詞對照</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>AI Agent 資料分析架構與量化實務（一）：清理與比較</h1>
+  <div class="subtitle">員工意向調查課程．Topic 07．Week 09（2026/11/06）．適用對象：人管所碩士班</div>
+  <p>問卷回收之後的分析分為兩段：清理資料，以及比較不同群體的分數。本主題以 AI Agent 執行這兩段工作：分析者上傳 Excel 檔，AI 寫程式並執行，分析者負責下指令、做決定與查核結果。本主題不要求程式能力；統計概念在各單元中說明。</p>
+  <p>本主題的順序：資料的結構與編碼簿，AI Agent 的運作方式與三種使用方法，接著是資料清理、信度檢查、兩組比較與多組比較。單元五開頭的決策樹整理統計方法的選擇。每個分析步驟都附有「操作步驟」卡，列出目的、做法、要在 AI 回覆中檢查的項目與常見錯誤。單元七整理檢核表與互查機制，單元八用六輪提示詞實際操作一次。下週 Topic 08 接著做驅動因子與迴歸分析。</p>
+  <div class="warn"><span class="lb">資料說明</span>本網站所有數字都來自課程的員工調查模擬資料（三個廠區、1,000 人）。這是教學模擬資料，不是真實組織的調查結果。<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料（Excel）</a>，內含原始資料、題目對照表、構面與計分說明三個工作表。</div>
+  <h2>本主題單元</h2>
+  <div class="scrollx"><table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、資料結構與編碼簿</a></td><td>說明資料情境、三個工作表、欄位、人口變項、六個構面與計分方式，以及分析前的編碼簿檢查</td></tr>
+    <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、AI Agent 的運作與使用方法</a></td><td>說明任務規劃、工具調用與程式執行；用網頁版、專案、本機 Agent 三種方式分析；管理上下文記憶與資料隱私</td></tr>
+    <tr><td><a href="#u3" onclick="goUnit('u3');return false;">三、資料清理</a></td><td>依規則排除草率作答、轉換反向題、處理遺漏值，並說明整列刪除的問題</td></tr>
+    <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、檢查信度</a></td><td>比較構面分數之前確認每個構面的 <a href="#g-25">Cronbach’s α</a>（題目彼此一致的程度），並以<a href="#g-26">題目與總分相關</a>診斷異常題目</td></tr>
+    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、兩組比較與 Cohen’s d</a></td><td>統計方法選擇的決策樹；<a href="#g-27">抽樣誤差</a>、<a href="#g-29">p 值</a>、<a href="#g-32">t 值</a>與 <a href="#g-38">Cohen’s d</a> 的意義；判讀 <a href="#g-35">Welch t 檢定</a>結果表並寫成報告句</td></tr>
+    <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、多組比較與 η²</a></td><td>多次 t 檢定的誤判累積（<a href="#g-52">多重比較</a>）；<a href="#g-43">F 值</a>、ANOVA 摘要表、<a href="#g-44">η²</a> 與<a href="#g-48">事後比較</a>的判讀與報告</td></tr>
+    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、人機雙重查核與檢核表</a></td><td>用檢核表、同儕互查、獨立重跑與分析紀錄核對 AI 的分析</td></tr>
+    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>用六輪提示詞完成一次清理與比較，對照答案</td></tr>
+    <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、其他學習重點</a></td><td>資料隱私、AI 幻覺、可重現性、分析紀錄、管理語言、因果與匿名門檻</td></tr>
+    <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
+  </table></div>
+  <div class="flow">
+    <div class="fbox q">讀編碼簿：欄位、構面、計分方向、遺漏值（單元一）</div><div class="farrow">↓</div>
+    <div class="fbox">上傳資料，AI 列出分析計畫（單元二）</div><div class="farrow">↓</div>
+    <div class="fbox">清理：草率作答、反向題、遺漏值（單元三）</div><div class="farrow">↓</div>
+    <div class="fbox">檢查信度（單元四）</div><div class="farrow">↓</div>
+    <div class="fbox">兩組比較 t 檢定、多組比較 ANOVA，報告<a href="#g-37">效果量</a>（單元五、六）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">檢核表、互查與分析紀錄（單元七）</div>
+  </div>
+  <h2>工具與檔案</h2>
+  <div class="scrollx"><table>
+    <tr><th style="width:30%">工具</th><th>用途</th></tr>
+    <tr><td><a href="../../Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener">Topic 07 課堂投影片</a></td><td>課堂講解用投影片；投影片與本網站使用不同的分析例子</td></tr>
+    <tr><td><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic 07 員工調查模擬資料</a></td><td>課堂與練習用資料，1,000 人、29 題李克特 6 點量表、2 題開放題</td></tr>
+    <tr><td><a href="../../Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">AI 分析設定範本（txt）</a></td><td>「專案指示」與「分析規則」兩段文字，可貼進 ChatGPT／Claude 專案，或存成 CLAUDE.md 與 Skill（單元二）</td></tr>
+    <tr><td><a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 07 分析檢核表（Excel）</a></td><td>檢核表、分析紀錄、使用說明三個工作表；同儕互查與個人作業使用（單元七）</td></tr>
+    <tr><td>ChatGPT 或 Claude</td><td>網頁版或專案，需可上傳檔案並執行程式；分析結果需附程式碼與執行結果</td></tr>
+    <tr><td><a href="效果量計算器.html" target="_blank" rel="noopener">效果量計算器</a></td><td>輸入兩組平均數、標準差與人數，計算 Cohen’s d</td></tr>
+  </table></div>
+  <div class="note"><span class="lb">使用說明</span>左側導覽列可切換單元（手機版在頁面上方）。單元二至七的最後附兩階段自我檢測（單元五、六各兩題，其餘各一題）：先選答案並標示信心，答對後再確認理由。下方的作答校準面板只記錄每題第一次作答；重新整理頁面會清空紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>高信心但答錯的題目，表示該單元的理解與自我評估有落差；低信心但答對，表示理解比自我評估穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 編碼簿 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：資料結構與編碼簿</h1>
+  <div class="subtitle">資料情境、檔案結構、變項與計分方式．資料為教學模擬資料</div>
+  <h2 id="s1-1">1.1 資料情境</h2>
+  <p>本主題的資料模擬一家製造業公司的年度員工意見調查。公司有台南廠、台中廠、高雄廠三個廠區，共 12 個部門，1,000 位員工完成問卷。問卷有 29 題李克特題目與 2 題開放題，測量敬業度、主管支持、認可與回饋、組織承諾、留任意願、AI 導入態度六個構面。總經理想知道：哪些單位最需要優先處理。</p>
+  <div class="warn"><span class="lb">教學模擬資料</span>資料由課程依教學需要產生，員工編號、部門與作答都不對應真實的人或組織。題目為改編版本，僅供課堂分析練習使用。<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料（Excel）</a></div>
+
+  <h2 id="s1-2">1.2 檔案結構：三個工作表</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:18%">工作表</th><th>內容</th><th>分析時的用途</th></tr>
+    <tr><td>原始資料</td><td style="text-align:left">1,000 列 × 37 欄，每列一位員工</td><td style="text-align:left">分析的資料來源。不在這個工作表上直接修改；需要修改時另存一份</td></tr>
+    <tr><td>題目對照表</td><td style="text-align:left">每個變項一列：變項代碼、構面、題目內容、計分方向</td><td style="text-align:left">確認每一欄代表什麼、哪些題目要反向計分</td></tr>
+    <tr><td>構面與計分說明</td><td style="text-align:left">量尺、各構面題數、反向題處理、構面分數算法、遺漏值的表示方式</td><td style="text-align:left">訂定清理與計分規則的依據</td></tr>
+  </table></div>
+  <p>「題目對照表」與「構面與計分說明」合起來，就是這份資料的編碼簿（codebook）。編碼簿說明每一欄的意義與計分方式。分析者與 AI 都要先讀編碼簿，才知道哪些欄位可以平均、哪些題目要轉換、空白代表什麼。</p>
+
+  <h2 id="s1-3">1.3 一列一人：欄位清單</h2>
+  <p>原始資料的格式為一列一人、一欄一個變項。第 1 列是欄位名稱，第 2 列到第 1001 列是 1,000 位員工。每位員工只出現一次，員工編號不重複。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">Excel 欄</th><th style="width:34%">欄位</th><th>內容</th></tr>
+    <tr><td>A</td><td>員工編號</td><td style="text-align:left">E0001–E1000，每人一個，沒有實質意義</td></tr><tr><td>B–F</td><td>廠區、部門、職級、人員類別、年資</td><td style="text-align:left">人口變項（文字類別）</td></tr><tr><td>G–R</td><td>ENG01–ENG12</td><td style="text-align:left">敬業度 12 題（1–6 分）</td></tr><tr><td>S–V</td><td>SUP01–SUP04</td><td style="text-align:left">主管支持 4 題（1–6 分）</td></tr><tr><td>W–Y</td><td>REC01–REC03</td><td style="text-align:left">認可與回饋 3 題（1–6 分）</td></tr><tr><td>Z–AB</td><td>COM01–COM03</td><td style="text-align:left">組織承諾 3 題（1–6 分）</td></tr><tr><td>AC–AE</td><td>RET01–RET03</td><td style="text-align:left">留任意願 3 題（1–6 分）</td></tr><tr><td>AF–AI</td><td>AIA01–AIA04</td><td style="text-align:left">AI 導入態度 4 題（1–6 分）</td></tr><tr><td>AJ</td><td>OE1_最希望優先改善</td><td style="text-align:left">開放題（文字）</td></tr><tr><td>AK</td><td>OE2_被肯定的經驗</td><td style="text-align:left">開放題（文字）</td></tr>
+  </table></div>
+  <p>欄位代碼的前三個字母是構面縮寫，後兩位數字是題號。提示詞中以欄位代碼（例如 SUP01–SUP04）指定變項，比用 Excel 欄名不易出錯。</p>
+
+  <h2 id="s1-4">1.4 人口變項</h2>
+  <p>五個人口變項都是文字類別，用來把員工分組比較。括號內的數字是原始資料 1,000 人中各類別的人數。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">變項</th><th>類別與人數</th><th style="width:28%">說明</th></tr>
+    <tr><td>廠區<br><span class="mut">B 欄</span></td><td style="text-align:left">台南廠 347、台中廠 265、高雄廠 388</td><td style="text-align:left">三個廠區</td></tr><tr><td>部門<br><span class="mut">C 欄</span></td><td style="text-align:left">生產部 329、品保部 110、工程部 106、研發部 87、物料供應鏈部 85、業務部 64、行政管理部 53、資訊部 50、人資部 40、財務部 38、法務智財部 21、永續發展室 17</td><td style="text-align:left">12 個部門；各廠區不一定都有每個部門</td></tr><tr><td>職級<br><span class="mut">D 欄</span></td><td style="text-align:left">基層員工 775、基層主管 168、中階主管 57</td><td style="text-align:left">三個職級</td></tr><tr><td>人員類別<br><span class="mut">E 欄</span></td><td style="text-align:left">直接人員 557、間接人員 443</td><td style="text-align:left">直接人員為現場作業人員；間接人員為支援與管理職能</td></tr><tr><td>年資<br><span class="mut">F 欄</span></td><td style="text-align:left">未滿1年 127、1-3年 203、3-5年 181、5-10年 279、10年以上 210</td><td style="text-align:left">五組類別，不是連續的年數</td></tr>
+  </table></div>
+  <ul>
+    <li>年資是分成五組的類別。比較年資時用多組比較（單元六），各組的邊界（例如剛好滿 3 年歸在哪一組）以問卷原始選項為準。</li>
+    <li>部門與廠區交叉之後，有些單位的人數很少。分析前需計算廠區 × 部門的人數；少於 5 人的單位不單獨呈現（單元五、九）。</li>
+  </ul>
+
+  <h2 id="s1-5">1.5 六個構面</h2>
+  <p>構面是一組題目共同測量的概念。下表列出每個構面測量什麼、使用哪些題目，以及題目對照表上標示的計分方向。</p>
+  <div class="scrollx"><table class="mt wide">
+    <tr><th style="width:11%">構面</th><th style="width:7%">編碼</th><th style="width:14%">題號</th><th style="width:7%">題數</th><th>測量什麼</th><th style="width:19%">計分方向（題目對照表）</th></tr>
+    <tr><td>敬業度</td><td>ENG</td><td>ENG01–ENG12<br><span class="mut">G–R 欄</span></td><td>12</td><td style="text-align:left">員工知道工作期待、有完成工作的資源、意見受到重視、有學習成長機會，因而投入工作的程度。題目改編自員工敬業度的常見面向，是本調查的核心構面。</td><td style="text-align:left">全部正向</td></tr><tr><td>主管支持</td><td>SUP</td><td>SUP01–SUP04<br><span class="mut">S–V 欄</span></td><td>4</td><td style="text-align:left">員工感受到直屬主管傾聽想法、提供協助、公平對待成員、說明工作方向的程度。</td><td style="text-align:left">全部正向</td></tr><tr><td>認可與回饋</td><td>REC</td><td>REC01–REC03<br><span class="mut">W–Y 欄</span></td><td>3</td><td style="text-align:left">員工覺得自己的努力得到適當認可，並且知道自己表現好壞的程度。</td><td style="text-align:left">全部正向</td></tr><tr><td>組織承諾</td><td>COM</td><td>COM01–COM03<br><span class="mut">Z–AB 欄</span></td><td>3</td><td style="text-align:left">員工認同公司、以身為公司一員為榮，並願意為公司付出額外努力的程度。</td><td style="text-align:left">全部正向</td></tr><tr><td>留任意願</td><td>RET</td><td>RET01–RET03<br><span class="mut">AC–AE 欄</span></td><td>3</td><td style="text-align:left">員工打算繼續留在公司的程度。</td><td style="text-align:left">RET01 正向；RET02 正向；RET03 反向</td></tr><tr><td>AI 導入態度</td><td>AIA</td><td>AIA01–AIA04<br><span class="mut">AF–AI 欄</span></td><td>4</td><td style="text-align:left">員工對公司導入 AI 工具的看法，包括工具是否有幫助、是否願意學習，以及導入過程是否聽取員工意見。這是本調查新增的構面。</td><td style="text-align:left">四題皆標「正向」</td></tr>
+  </table></div>
+  <div class="note"><span class="lb">題目文字與計分方向</span>計分方向欄標示哪些題目要反向計分（以 7 減原始分數，見 <a href="#s1-7">1.7</a>）。分析之前需逐題閱讀各構面的題目文字，判斷同意該題的人在這個構面上應為高分或低分。題目文字的方向與對照表不一致時，記錄該題，向問卷負責人確認後再決定計分方式。</div>
+
+  <h2 id="s1-6">1.6 編碼簿</h2>
+  <p>下表依題目對照表整理全部 37 個變項。「計分方向」照錄題目對照表的內容。</p>
+  <div class="scrollx"><table class="mt wide">
+    <tr><th style="width:13%">變項代碼</th><th style="width:12%">構面</th><th style="width:7%">編碼</th><th>題目</th><th style="width:10%">計分方向</th><th style="width:8%">量尺</th></tr>
+    <tr class="grp"><td colspan="6">識別</td></tr><tr><td>員工編號</td><td>識別</td><td>—</td><td style="text-align:left">唯一識別碼，無實質意義</td><td>—</td><td>—</td></tr><tr class="grp"><td colspan="6">人口變項</td></tr><tr><td>廠區</td><td>人口變項</td><td>—</td><td style="text-align:left">台南廠／台中廠／高雄廠</td><td>—</td><td>類別</td></tr><tr><td>部門</td><td>人口變項</td><td>—</td><td style="text-align:left">所屬部門</td><td>—</td><td>類別</td></tr><tr><td>職級</td><td>人口變項</td><td>—</td><td style="text-align:left">基層員工／基層主管／中階主管</td><td>—</td><td>類別</td></tr><tr><td>人員類別</td><td>人口變項</td><td>—</td><td style="text-align:left">直接人員／間接人員</td><td>—</td><td>類別</td></tr><tr><td>年資</td><td>人口變項</td><td>—</td><td style="text-align:left">未滿1年／1-3年／3-5年／5-10年／10年以上</td><td>—</td><td>類別</td></tr><tr class="grp"><td colspan="6">敬業度</td></tr><tr><td>ENG01</td><td>敬業度</td><td>ENG</td><td style="text-align:left">我清楚知道公司對我的工作有哪些期待</td><td>正向</td><td>1–6</td></tr><tr><td>ENG02</td><td>敬業度</td><td>ENG</td><td style="text-align:left">我擁有完成工作所需的器材與資源</td><td>正向</td><td>1–6</td></tr><tr><td>ENG03</td><td>敬業度</td><td>ENG</td><td style="text-align:left">工作上我每天都有機會做我最擅長的事</td><td>正向</td><td>1–6</td></tr><tr><td>ENG04</td><td>敬業度</td><td>ENG</td><td style="text-align:left">過去一週內，我曾因工作表現得到肯定或讚賞</td><td>正向</td><td>1–6</td></tr><tr><td>ENG05</td><td>敬業度</td><td>ENG</td><td style="text-align:left">我的主管或同事把我當一個人來關心</td><td>正向</td><td>1–6</td></tr><tr><td>ENG06</td><td>敬業度</td><td>ENG</td><td style="text-align:left">工作上有人鼓勵我發展與成長</td><td>正向</td><td>1–6</td></tr><tr><td>ENG07</td><td>敬業度</td><td>ENG</td><td style="text-align:left">在工作中，我的意見受到重視</td><td>正向</td><td>1–6</td></tr><tr><td>ENG08</td><td>敬業度</td><td>ENG</td><td style="text-align:left">公司的使命讓我覺得自己的工作有意義</td><td>正向</td><td>1–6</td></tr><tr><td>ENG09</td><td>敬業度</td><td>ENG</td><td style="text-align:left">我的同事們都致力於把工作做好</td><td>正向</td><td>1–6</td></tr><tr><td>ENG10</td><td>敬業度</td><td>ENG</td><td style="text-align:left">我在公司裡有值得信賴的工作夥伴</td><td>正向</td><td>1–6</td></tr><tr><td>ENG11</td><td>敬業度</td><td>ENG</td><td style="text-align:left">過去半年內，有人和我談過我的工作進展</td><td>正向</td><td>1–6</td></tr><tr><td>ENG12</td><td>敬業度</td><td>ENG</td><td style="text-align:left">過去一年我在公司有學習與成長的機會</td><td>正向</td><td>1–6</td></tr><tr class="grp"><td colspan="6">主管支持</td></tr><tr><td>SUP01</td><td>主管支持</td><td>SUP</td><td style="text-align:left">我的直屬主管願意傾聽我的想法</td><td>正向</td><td>1–6</td></tr><tr><td>SUP02</td><td>主管支持</td><td>SUP</td><td style="text-align:left">遇到困難時，我的主管會提供必要的協助</td><td>正向</td><td>1–6</td></tr><tr><td>SUP03</td><td>主管支持</td><td>SUP</td><td style="text-align:left">我的主管公平對待團隊每一位成員</td><td>正向</td><td>1–6</td></tr><tr><td>SUP04</td><td>主管支持</td><td>SUP</td><td style="text-align:left">我的主管會清楚說明工作的方向與重點</td><td>正向</td><td>1–6</td></tr><tr class="grp"><td colspan="6">認可與回饋</td></tr><tr><td>REC01</td><td>認可與回饋</td><td>REC</td><td style="text-align:left">我的努力與貢獻能獲得適當的認可</td><td>正向</td><td>1–6</td></tr><tr><td>REC02</td><td>認可與回饋</td><td>REC</td><td style="text-align:left">公司有讓我了解自己表現好壞的回饋機制</td><td>正向</td><td>1–6</td></tr><tr><td>REC03</td><td>認可與回饋</td><td>REC</td><td style="text-align:left">表現優異的同仁能得到相對應的肯定</td><td>正向</td><td>1–6</td></tr><tr class="grp"><td colspan="6">組織承諾</td></tr><tr><td>COM01</td><td>組織承諾</td><td>COM</td><td style="text-align:left">我願意為公司的成功付出額外的努力</td><td>正向</td><td>1–6</td></tr><tr><td>COM02</td><td>組織承諾</td><td>COM</td><td style="text-align:left">我以身為這家公司的一員為榮</td><td>正向</td><td>1–6</td></tr><tr><td>COM03</td><td>組織承諾</td><td>COM</td><td style="text-align:left">公司的價值觀與我的個人價值觀相符</td><td>正向</td><td>1–6</td></tr><tr class="grp"><td colspan="6">留任意願</td></tr><tr><td>RET01</td><td>留任意願</td><td>RET</td><td style="text-align:left">未來一年我仍會繼續留在這家公司</td><td>正向</td><td>1–6</td></tr><tr><td>RET02</td><td>留任意願</td><td>RET</td><td style="text-align:left">若有朋友求職，我會推薦他來這家公司</td><td>正向</td><td>1–6</td></tr><tr><td>RET03</td><td>留任意願</td><td>RET</td><td style="text-align:left">我目前正在尋找其他的工作機會</td><td><b>反向 ★</b></td><td>1–6</td></tr><tr class="grp"><td colspan="6">AI 導入態度</td></tr><tr><td>AIA01</td><td>AI 導入態度</td><td>AIA</td><td style="text-align:left">公司導入 AI 工具對我的工作有幫助</td><td>正向</td><td>1–6</td></tr><tr><td>AIA02</td><td>AI 導入態度</td><td>AIA</td><td style="text-align:left">我願意學習使用公司新導入的 AI 工具</td><td>正向</td><td>1–6</td></tr><tr><td>AIA03</td><td>AI 導入態度</td><td>AIA</td><td style="text-align:left">公司在導入 AI 前有充分聽取員工意見</td><td>正向</td><td>1–6</td></tr><tr><td>AIA04</td><td>AI 導入態度</td><td>AIA</td><td style="text-align:left">我擔心 AI 會取代我目前的工作</td><td>正向</td><td>1–6</td></tr><tr class="grp"><td colspan="6">開放題</td></tr><tr><td>OE1_最希望優先改善</td><td>開放題</td><td>—</td><td style="text-align:left">您最希望公司優先改善的一件事是什麼？</td><td>文字</td><td>文字</td></tr><tr><td>OE2_被肯定的經驗</td><td>開放題</td><td>—</td><td style="text-align:left">請描述最近一次在工作上感到被肯定或有成就感的經驗</td><td>文字</td><td>文字</td></tr>
+  </table></div>
+
+  <h2 id="s1-7">1.7 量尺與構面分數</h2>
+  <p>29 題都使用 6 點量表：1 ＝ 非常不同意，6 ＝ 非常同意。量表沒有「普通」或「沒意見」的中間選項，填答者必須偏向同意或不同意，用意是避免集中選擇中間選項。量尺的中點是 3.5，構面平均高於 3.5 表示整體偏向同意。</p>
+  <ul>
+    <li>反向題轉換：標示反向的題目，計分前以 7 減原始分數，原本的 6 變成 1、1 變成 6。</li>
+    <li>構面分數：反向題轉換後，取該構面題目的平均數，範圍 1–6。用平均數而不用總分，題數不同的構面（例如 12 題的敬業度與 3 題的留任意願）才能放在同一個尺度上比較。</li>
+    <li>測量尺度：單一題目的 1 到 6 是有順序的選項，相鄰選項之間的距離不一定相等。多題平均成構面分數之後，組織研究通常把構面分數當作等距資料，計算平均數並進行 t 檢定與 ANOVA（Norman, 2010）。本課程採用這個做法，解讀時以構面分數為單位，不對單一題目的平均做過細的解讀。</li>
+  </ul>
+
+  <h2 id="s1-8">1.8 遺漏值的表示方式</h2>
+  <p>沒有作答的題目在原始資料中是空白格，不是 0，也沒有 99 之類的代碼。分析前需確認兩點。第一，AI 讀檔後，空白沒有被當成 0；0 不在 1–6 的量尺內，題目欄出現 0 就表示讀檔有誤。第二，「構面與計分說明」只寫「分析前需決定處理方式」，沒有指定做法，所以遺漏值的處理規則要由分析者決定並寫進分析紀錄（單元三）。</p>
+
+  <h2 id="s1-9">1.9 開放題</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:26%">變項</th><th>題目</th><th style="width:16%">作答人數</th></tr>
+    <tr><td>OE1_最希望優先改善<br><span class="mut">AJ 欄</span></td><td style="text-align:left">您最希望公司優先改善的一件事是什麼？</td><td>516 人</td></tr><tr><td>OE2_被肯定的經驗<br><span class="mut">AK 欄</span></td><td style="text-align:left">請描述最近一次在工作上感到被肯定或有成就感的經驗</td><td>310 人</td></tr>
+  </table></div>
+  <p>開放題為選填，很多人留白。這兩題留到 Topic 09 做開放題分析，本主題的清理與比較不使用。開放題的文字可能提到人名、單位或具體事件；分析真實資料時，交給 AI 之前要先刪除或遮蔽這些可辨識的內容（單元二）。</p>
+
+  <h2 id="s1-10">1.10 分析前的編碼簿檢查</h2>
+  <ol class="steps">
+    <li>列數與編號：資料的列數與欄數；每列是否為一位員工，員工編號是否重複</li>
+    <li>欄位對照：原始資料的每一欄在題目對照表中都有對應；各構面的題數與計分說明一致</li>
+    <li>量尺範圍：題目欄只應出現 1–6 與空白；出現 0、7 或文字時，需查明原因</li>
+    <li>計分方向：逐題對照題目文字與計分方向欄，列出需要反向計分的題目與有疑問的題目</li>
+    <li>遺漏值：確認表示方式，處理規則在計算之前訂定</li>
+    <li>變項類型：人口變項是類別、李克特題目是 1–6 分、開放題是文字，各用不同的分析方法</li>
+    <li>紀錄：讀編碼簿時的疑問與決定寫進分析紀錄（單元七），並註明確認者</li>
+  </ol>
+  <div class="key"><span class="lb">本單元要點</span>資料是一列一人、三個工作表；題目對照表與計分說明合起來是編碼簿。分析前需讀編碼簿，確認欄位、量尺、計分方向與遺漏值的表示方式，並逐題閱讀題目文字。資料為教學模擬資料。</div>
+</section>
+
+<!-- ==================== U2 AI Agent ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：AI Agent 的運作與使用方法</h1>
+  <div class="subtitle">planning、tool use 與 code execution、multi-agent；網頁版、專案、本機 Agent；上下文記憶與資料隱私．主要依據：Yao et al. (2023)；Schluntz &amp; Zhang (2024)</div>
+  <h2 id="s2-1">2.1 一般聊天與 AI Agent</h2>
+  <p>同樣是 ChatGPT 或 Claude，回答方式有兩種。一般聊天時，語言模型依據文字內容產生回答；問它一份資料的平均數，它可能給出一個看起來合理、但沒有實際計算過的數字。以 AI Agent 的方式工作時，AI 會讀取上傳的檔案、寫出程式、在程式執行環境中實際執行，再根據執行結果回答。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:22%">項目</th><th>一般聊天</th><th>AI Agent</th></tr>
+    <tr><td>數字來源</td><td style="text-align:left">語言模型依文字推測，可能與資料不符</td><td style="text-align:left">程式讀取資料後計算出來</td></tr>
+    <tr><td>處理檔案</td><td style="text-align:left">只能讀到貼進對話的文字</td><td style="text-align:left">可開啟 Excel、CSV，處理上千列資料</td></tr>
+    <tr><td>出錯時</td><td style="text-align:left">不會發現自己算錯</td><td style="text-align:left">讀取錯誤訊息，修改程式後重新執行</td></tr>
+    <tr><td>能否查核</td><td style="text-align:left">沒有過程可以對照</td><td style="text-align:left">可展開程式碼與執行結果，交給別人重跑</td></tr>
+  </table></div>
+  <p>AI 是否實際執行程式，可由回覆中是否出現可展開的程式碼區塊與執行結果判斷（ChatGPT 與 Claude 的介面標示略有不同）。沒有程式碼的數字不直接採用。</p>
+
+  <h2 id="s2-2">2.2 AI Agent 的三個組成</h2>
+  <h3>任務規劃（Planning）</h3>
+  <p>AI 把一個分析目標拆成有順序的步驟。例如「比較直接人員與間接人員的敬業度」會拆成：讀取三個工作表 → 排除草率作答 → 轉換反向題 → 計算構面分數 → 執行 t 檢定（比較兩組平均）→ 計算效果量（差距大小）→ 整理表格。AI 先列出計畫、暫不執行時，分析者可以在計算之前發現漏掉的步驟，例如沒有提到反向題或遺漏值。</p>
+  <h3>工具調用與程式自主執行（Tool Use／Code Execution）</h3>
+  <p>AI 依計畫呼叫工具：開啟檔案、寫 Python 程式、執行、讀取輸出。Yao 等人（2023）把這種做法稱為 ReAct，也就是推理（reasoning）與行動（acting）交替進行：AI 先推理下一步要做什麼，執行一個動作，觀察結果，再決定下一步。程式出錯時，AI 會讀取錯誤訊息，自行修改後重新執行，這一段通常不需要人介入。</p>
+  <h3>多 Agent 分工（Multi-agent）</h3>
+  <p>較複雜的任務可以交給多個 Agent 分工，例如一個負責規劃與分配工作，幾個負責執行，另一個負責檢查結果並提出修改意見（Schluntz &amp; Zhang, 2024）。網頁版可以用兩個對話模擬這種分工：第一個對話負責分析，第二個對話擔任查核者，拿同一份資料與第一個對話的程式碼獨立重算（見單元七）。</p>
+
+  <h2 id="s2-3">2.3 Agent 的執行循環</h2>
+  <div class="flow">
+    <div class="fbox q">分析者的指令：目標、規則、回報內容</div><div class="farrow">↓</div>
+    <div class="fbox">規劃：列出步驟，標出需要分析者確認的決定</div><div class="farrow">↓</div>
+    <div class="fbox">寫程式並執行</div><div class="farrow">↓</div>
+    <div class="fbox">讀取結果或錯誤訊息；有錯就修改程式，回到上一步</div><div class="farrow">↓</div>
+    <div class="fbox">回報：數字、表格、程式碼、每一步的人數</div><div class="farrow">↓</div>
+    <div class="fbox leaf">分析者查核，決定下一輪指令</div>
+  </div>
+  <p>這個循環中，AI 自行完成規劃到回報的四個步驟，人負責第一步與最後一步。提示詞寫得越具體，AI 自行決定的部分越少，查核也越容易。</p>
+
+  <h2 id="s2-4">2.4 由人負責的決定</h2>
+  <p>下列決定會改變結果，由人決定並寫進分析紀錄。沒有指定時，AI 會自行選擇做法，且不一定在回覆中說明。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:20%">決定</th><th>AI 可以協助</th><th>由人決定的理由</th></tr>
+    <tr><td>草率作答的規則</td><td style="text-align:left">計算每人的作答標準差、列出符合規則的人</td><td style="text-align:left">切點要在看到分析結果之前訂好，否則會變成依結果挑選樣本（DeSimone et al., 2015）</td></tr>
+    <tr><td>反向題</td><td style="text-align:left">依題目對照表轉換、提出可疑題目</td><td style="text-align:left">題目方向要對照題目文字確認，對照表也可能標錯</td></tr>
+    <tr><td>遺漏值</td><td style="text-align:left">統計遺漏格數、比較不同處理方式的人數</td><td style="text-align:left">程式常見的預設是整列刪除（只要缺一題就刪除整個人），會丟掉大量樣本</td></tr>
+    <tr><td>檢定方法</td><td style="text-align:left">執行 t 檢定、ANOVA（三組以上的平均比較）、事後比較（找出哪幾組不同）</td><td style="text-align:left">要指定 Welch t 檢定（不假設兩組變異數相等）與事後比較方法，結果才能和別人比對</td></tr>
+    <tr><td>解讀與呈現</td><td style="text-align:left">整理表格、草擬文字</td><td style="text-align:left">效果量（差距大小）的管理意義、匿名門檻、是否採取行動，屬於人資的專業判斷</td></tr>
+  </table></div>
+  <h2 id="s2-5">2.5 三種使用方式</h2>
+  <p>同樣的分析，可以用三種方式交給 AI Agent。三者的差別在於規則存放的位置，以及規則在多少對話中有效。</p>
+  <div class="modes">
+    <div class="m"><b>方式一：網頁版對話</b>ChatGPT 或 Claude 網頁版，上傳檔案、貼上提示詞。適合課堂練習與一次性的分析。規則每次貼在提示詞中，只在同一個對話中有效。</div>
+    <div class="m"><b>方式二：專案（Projects）</b>ChatGPT 與 Claude 的專案功能。規則寫在專案指示，專案內每個新對話都會套用。適合同一份資料要分幾次對話完成的分析，例如個人作業。</div>
+    <div class="m"><b>方式三：本機 Agent</b>Claude Code、Google Antigravity 在自己的電腦上執行。規則寫在資料夾中的 CLAUDE.md 與 Skill 檔，程式與結果存成檔案。適合期末專題與需要重跑的分析。</div>
+  </div>
+  <p>三種方式都可以使用 <a href="../../Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">AI 分析設定範本（txt）</a>。範本分成兩段：「一、專案指示」寫資料背景、讀者、匿名門檻與回報規則；「二、分析規則」寫清理、信度、群組比較與輸出要求。</p>
+  <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看範本內容</button>
+  <div class="ans"><div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>Topic 07　AI 分析設定範本
+把下面兩段貼進 AI 工具，之後每次對話都會套用同樣的背景與規則。
+
+────────────────────────────
+【使用方式】
+・ChatGPT：建立「專案」（Projects），把「一、專案指示」貼進專案的指示欄；「二、分析規則」上傳成專案檔案或一起貼進指示。
+・Claude 網頁版：建立「專案」（Projects），把兩段貼進「專案指示」（Project instructions）。
+・Claude Code：「一」存成資料夾裡的 CLAUDE.md；「二」存成 .claude/skills/survey-clean-compare/SKILL.md（第一行前加上名稱與說明，見課堂投影片）。
+・沒有專案功能時：每次開新對話，先貼這兩段，再上傳資料。
+・不要上傳真實員工的個人資料；練習一律用課堂模擬資料。
+
+────────────────────────────
+一、專案指示（背景與記憶）
+
+- 資料：製造業年度員工意見調查（教學模擬資料），三個廠區、十二個部門。
+- 讀者：人資長與廠長，不熟統計。結論先寫，數字附在後面。
+- 匿名門檻：任何群組人數少於 5 人，不單獨呈現結果。
+- 報告格式：APA 第七版，小數兩位，p 小於 .001 寫 &lt; .001；每個差異都附效果量。
+- 每一步都要報告處理了幾人；你自行決定的事項，列出來給我確認後才執行。
+
+────────────────────────────
+二、分析規則（Skill）
+
+清理（依序執行，每步報告剩餘人數）
+1. 直線作答：所有 Likert 題目標準差為 0 者刪除。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
+3. 反向題：讀「題目對照表」的計分方向欄，反向題改為 7 − 原始分數；也檢查題目文字，語意相反但標正向的題目先回報，不自行轉換。
+4. 遺漏值：不整列刪除。構面答一半以上題目者，取已答題目平均。
+
+信度
+各構面計算 Cronbach&#x27;s α；α &lt; .70 的構面列出題目與總分相關，回到題目文字說明可能原因。
+
+群組比較
+- 兩組：Welch t 檢定＋Cohen&#x27;s d。
+- 三組以上：單因子 ANOVA＋η²＋Levene；F 顯著時做事後比較並寫明方法。
+
+輸出
+- 完整程式碼。
+- 結果表與 APA 格式報告句。
+- 最後列出「我自行決定、需要人確認的事項」。
+</pre></div><p class="terms"><span class="lb2">名詞</span><a href="#g-16">直線作答</a>：所有題目都填同一個數字；<a href="#g-24">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-18">反向計分</a>：語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高；<a href="#g-25">Cronbach’s α</a>：一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念；<a href="#g-26">題目與總分相關</a>：某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤；<a href="#g-35">Welch t 檢定</a>：不假設兩組變異數相等的 t 檢定；本課程的預設；<a href="#g-38">Cohen’s d</a>：兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大；<a href="#g-40">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-44">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-46">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-48">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p></div>
+
+  <h2 id="s2-6">2.6 方式一：網頁版上傳檔案與提示詞</h2>
+  <ol class="steps">
+    <li>方案條件：需支援檔案上傳與程式執行；部分免費方案有使用次數或檔案大小的限制</li>
+    <li>新對話中上傳 Excel 檔</li>
+    <li>第一則提示詞只要求 AI 讀題目對照表與計分說明、列出分析計畫與待確認事項，暫不計算</li>
+    <li>計畫確認後，每一輪只做一件事：清理、信度、兩組比較、多組比較，依序貼上提示詞</li>
+    <li>每一輪檢視 AI 執行的程式碼與輸出（見下方說明）</li>
+    <li>需要用 Excel 核對時，要求 AI 把清理後的資料存成檔案供下載</li>
+    <li>最後要求 AI 把完整程式碼整理成一份，存成文字檔，並保存對話連結或匯出對話紀錄</li>
+  </ol>
+  <p><b>AI 執行程式的檢視方式。</b>ChatGPT 執行程式分析資料時，回覆中會出現可以展開的分析區塊，點開可以看到它寫的 Python 程式與執行結果。Claude 使用分析工具或程式執行功能時，回覆中同樣會出現可以展開的區塊，顯示執行的程式碼與輸出。兩個工具的介面會更新，按鈕名稱可能與本頁描述不同。找不到程式碼時，可在對話中要求 AI：「請顯示你執行的完整程式碼與輸出」。如果 AI 回答它沒有執行程式，這次回覆的數字不採用。</p>
+
+  <h2 id="s2-7">2.7 方式二：專案與專案指示</h2>
+  <p>專案（Projects）把相關的對話、檔案與指示放在一起。ChatGPT 與 Claude 都有專案功能。寫在專案指示中的內容，會套用到專案內的每一個新對話，不必每次重貼背景與規則。</p>
+  <ol class="steps">
+    <li>建立專案，例如命名為「Topic 07 員工調查分析」</li>
+    <li>在專案指示欄貼上範本的「一、專案指示」：資料背景、讀者、匿名門檻、報告格式、回報規則</li>
+    <li>把範本的「二、分析規則」一起貼進專案指示，或存成文字檔上傳到專案檔案</li>
+    <li>在對話中上傳 Excel 資料檔。若 AI 回覆找不到檔案或無法執行程式，在對話中重新上傳</li>
+    <li>每個分析階段開一個新對話（清理、信度、比較、查核），開頭貼上前一階段的摘要（見 <a href="#s2-9">2.9</a>）</li>
+  </ol>
+  <p>專案指示適合放「每次都一樣」的內容，例如清理規則、匿名門檻、報告格式。只用於某一次分析的要求，例如這次要比較哪兩組，寫在該次對話的提示詞中。</p>
+
+  <h2 id="s2-8">2.8 方式三：本機執行的 Claude Code 與 Google Antigravity</h2>
+  <p>Claude Code 與 Google Antigravity 是在自己電腦上執行的 AI Agent。使用者指定一個資料夾後，Agent 可以讀寫這個資料夾裡的檔案、執行 Python 程式，並把程式、結果表與清理後的資料存成檔案。分析過程留在檔案中，方便重跑與交給別人查核。執行指令或修改檔案之前，這類工具通常會詢問是否允許；同意前需確認指令與檔案內容。</p>
+  <h3>CLAUDE.md：專案記憶</h3>
+  <p>Claude Code 在一個資料夾啟動時，會先讀取該資料夾的 CLAUDE.md。把專案背景、讀者、匿名門檻與回報規則寫在這個檔案，每次開新對話都會套用，作用和網頁版的專案指示相同。</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre># 員工調查分析專案
+- 資料：data/員工調查模擬資料.xlsx（教學模擬資料，三個工作表）
+- 讀者：人資長與廠長，不熟統計。結論先寫，數字附在後面。
+- 匿名門檻：群組人數少於 5 人，不單獨呈現結果。
+- 每一步報告處理人數；自行決定的事項先列出，經我確認後才執行。
+- 程式存在 code/，結果表存在 output/；不修改 data/ 中的原始資料。</pre></div>
+  <h3>Skill：可重複使用的分析規則</h3>
+  <p>Skill 是一個資料夾，裡面的 SKILL.md 記錄某一類任務的做法，放在專案的 <code>.claude/skills/&lt;名稱&gt;/SKILL.md</code>。資料夾結構如下：</p>
+  <div class="codewrap"><pre class="tree">我的分析資料夾/
+├── CLAUDE.md                     專案記憶：每次啟動都會讀取
+├── data/
+│   └── 員工調查模擬資料.xlsx
+├── code/                         Agent 寫的程式
+├── output/                       結果表、清理後資料
+└── .claude/
+    └── skills/
+        └── survey-clean-compare/
+            └── SKILL.md          分析規則：任務符合說明時載入</pre></div>
+  <p>SKILL.md 的開頭是兩條「---」之間的區塊（front matter），寫 name（名稱）與 description（說明）；區塊下方寫規則。Agent 平時只讀取名稱與說明；交代的任務符合說明的描述時，例如「清理這份問卷資料，再比較三個廠區」，才載入整份規則並依規則執行。description 需寫明適用的任務，Agent 依這段文字判斷是否載入。</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>---
+name: survey-clean-compare
+description: 清理員工意見調查資料並做群組比較。使用者要求清理問卷資料、計算構面分數、做 t 檢定或 ANOVA 時使用。
+---
+# 員工調查：清理與群組比較
+
+## 清理（依序執行，每步報告剩餘人數）
+1. 直線作答：所有李克特題目標準差為 0 者刪除。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
+3. 反向題：依題目對照表以 7 − 原始分數轉換；語意相反但標正向的題目先回報，不自行轉換。
+4. 遺漏值：不整列刪除；構面答一半以上題目者，取已答題目平均。
+
+## 信度
+各構面計算 Cronbach&#x27;s α；α &lt; .70 的構面列出題目與總分相關。
+
+## 群組比較
+- 兩組：Welch t 檢定＋Cohen&#x27;s d。
+- 三組以上：單因子 ANOVA＋η²＋Levene；F 顯著才做事後比較，寫明方法。
+
+## 輸出
+- 完整程式碼、結果表、APA 格式報告句。
+- 列出自行決定、需要人確認的事項。</pre></div>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-24">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-18">反向計分</a>：語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高；<a href="#g-25">Cronbach’s α</a>：一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念；<a href="#g-26">題目與總分相關</a>：某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤；<a href="#g-35">Welch t 檢定</a>：不假設兩組變異數相等的 t 檢定；本課程的預設；<a href="#g-38">Cohen’s d</a>：兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大；<a href="#g-40">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-44">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-46">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-43">F 值</a>：組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1；<a href="#g-48">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p>
+  <p>CLAUDE.md 與 Skill 的分工：CLAUDE.md 放這個專案的背景，每次都讀取；Skill 放某一類任務的做法，需要時才載入，也可以複製到其他專案重複使用。Google Antigravity 也提供專案規則與可重複使用的設定，檔名與存放位置依該工具的說明文件，規則內容可以沿用上面的範本。</p>
+
+  <h2 id="s2-9">2.9 上下文記憶</h2>
+  <p>AI 在一個對話中能參考的內容稱為上下文（context），包括對話中貼過的提示詞、上傳的檔案、AI 自己的回覆與程式輸出。上下文有長度上限。對話很長時，較早的內容可能被壓縮或不再被完整讀取，AI 可能不再遵守前面講好的規則，例如「遺漏值不整列刪除」，或回頭使用舊版的資料。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:24%">記憶的範圍</th><th>內容</th><th style="width:34%">持續多久</th></tr>
+    <tr><td>對話內</td><td style="text-align:left">這個對話中的提示詞、檔案、回覆與程式輸出</td><td style="text-align:left">只在這個對話；開新對話就沒有</td></tr>
+    <tr><td>專案指示、CLAUDE.md</td><td style="text-align:left">背景、規則、報告格式</td><td style="text-align:left">專案或資料夾內的每個新對話都會讀取</td></tr>
+    <tr><td>Skill</td><td style="text-align:left">某一類任務的做法</td><td style="text-align:left">任務符合說明時載入</td></tr>
+  </table></div>
+  <p>部分工具另有跨對話的自動記憶功能，內容由工具自行整理，不容易查核。分析規則寫在專案指示、CLAUDE.md 或 Skill 中，不依賴自動記憶。</p>
+  <ol class="steps">
+    <li>每個分析階段開一個新對話：清理、信度、群組比較、查核</li>
+    <li>每階段結束時，要求 AI 寫一段摘要（下方提示詞）</li>
+    <li>下一個對話開頭貼上這段摘要，並重新上傳資料或上一階段輸出的清理後資料</li>
+    <li>發現 AI 違反前面講好的規則時，重貼規則；違反不只一次，開新對話重來</li>
+  </ol>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請整理這個階段的摘要，讓我貼到下一個新對話：
+1. 使用的資料檔與工作表。
+2. 依序做了哪些步驟，每一步處理了幾人、剩下幾人。
+3. 我確認過的決定（例如遺漏值的處理方式、反向題）。
+4. 還沒解決、需要我確認的問題。
+5. 這個階段的完整程式碼。</pre></div>
+
+  <h2 id="s2-10">2.10 分析用提示詞的寫法</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:18%">要素</th><th>內容</th><th style="width:40%">例子</th></tr>
+    <tr><td>資料說明</td><td style="text-align:left">檔案、工作表、變項代碼的意義</td><td style="text-align:left">「題目對照表說明每個代碼的題目與計分方向」</td></tr>
+    <tr><td>規則</td><td style="text-align:left">清理、反向題、遺漏值、檢定方法</td><td style="text-align:left">「用 Welch t 檢定，不假設變異數相等」</td></tr>
+    <tr><td>要求的輸出</td><td style="text-align:left">表格欄位、小數位數、報告句</td><td style="text-align:left">「列出各組人數、平均、標準差，小數兩位」</td></tr>
+    <tr><td>程式與人數</td><td style="text-align:left">附上程式碼、每一步的人數</td><td style="text-align:left">「每一步告訴我剩下幾人，最後附完整程式碼」</td></tr>
+    <tr><td>AI 自行決定的事項</td><td style="text-align:left">AI 自行決定、分析者沒有指定的事項</td><td style="text-align:left">「列出你自行決定、我沒有指定的事項」</td></tr>
+  </table></div>
+  <p>下面是一則完整的分析提示詞範例。提示詞越具體，AI 自行決定的事項越少，結果也越容易和別人比對。</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>資料：我上傳的員工調查 Excel。「題目對照表」說明每個變項代碼的題目與計分方向，「構面與計分說明」說明量尺與構面分數算法。
+任務：比較三個廠區的主管支持（SUP01–SUP04 的平均）。
+規則：
+1. 先清理：29 題全部相同者刪除；計算每人敬業度 ENG01–ENG12 的標準差，排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值；反向題依題目對照表以 7 減原始分數。
+2. 遺漏值不整列刪除；構面答了一半以上題目，取已作答題目的平均。
+3. 用單因子 ANOVA，報告 F、自由度、p、η² 與 Levene 檢定；F 顯著時做事後比較，寫明方法。
+輸出：
+1. 每一步剩下的人數。
+2. 各廠區人數、平均、標準差的表格，小數兩位。
+3. 一句 APA 格式的報告句。
+4. 你執行的完整程式碼。
+5. 你自行決定、我沒有指定的事項。</pre></div>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-24">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-40">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-43">F 值</a>：組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1；<a href="#g-33">自由度</a>：把 t 或 F 換算成 p 值時使用的數字，主要由人數與組數決定；<a href="#g-29">p 值</a>：假設虛無假設為真時，觀察到目前這麼大或更大差距的機率；不是差距大小，也不是結論為真的機率；<a href="#g-44">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-46">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-48">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p>
+  <p>各名詞的完整說明與計算見單元五、六。</p>
+
+  <h2 id="s2-11">2.11 資料隱私</h2>
+  <ul>
+    <li>可識別個人的真實員工資料不上傳，例如姓名、員工編號、電子郵件、身分證字號、主管姓名。</li>
+    <li>去識別化：刪除識別欄位，或改用與人事系統無關的流水號；人數很少的單位或少見的組合（例如某部門唯一的中階主管）合併成較大的類別。</li>
+    <li>開放題：刪除或遮蔽人名、單位名稱與具體事件。</li>
+    <li>AI 工具與帳號依公司的資訊安全與個資規定，使用公司核准者；使用前需確認服務是否以上傳內容訓練模型，以及資料保存期間。</li>
+    <li>本機 Agent 的檔案存在自己的電腦，但 Agent 讀取的內容仍會傳送給 AI 服務處理，上述規定同樣適用。</li>
+    <li>課堂練習一律使用模擬資料。匿名門檻與調查信任見 <a href="../Topic04_抽樣與資料品質/Topic04_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">Topic 04 抽樣、匿名與信任</a>。</li>
+  </ul>
+  <h3>去識別化的 Excel 步驟</h3>
+  <p>以下以練習資料的欄位為例；真實資料另有姓名、工號、Email 等欄位時，同樣適用。</p>
+  <ol class="steps">
+    <li>識別欄位：刪除姓名、工號、Email 等欄位。需要保留每人一列的編號時，新增一欄以 <code>=ROW()-1</code> 產生流水號，或以 <code>="E"&amp;TEXT(ROW()-1,"0000")</code> 產生 E0001 形式的編號（練習資料的員工編號即為此形式）。原工號與新編號的對照表另存一個檔案，不上傳</li>
+    <li>小群組：插入 → 樞紐分析表，列放廠區、部門、職級，值放員工編號的計數。練習資料的廠區 × 部門 × 職級共 92 個組合，其中 42 個少於 5 人；基層主管與中階主管合併為主管後，仍有 20 個組合少於 5 人，需再把人數少的部門合併為其他部門，或只呈現廠區 × 職級層級的結果</li>
+    <li>開放題：在 AJ、AK 欄以「尋找」逐筆檢查人名、單位名稱與具體事件，改寫為〔人名〕〔單位〕等標記</li>
+    <li>上傳前檢查：再看一次欄位清單，只保留分析需要的欄位；確認沒有識別欄位、小群組已合併、開放題已遮蔽</li>
+  </ol>
+
+  <h2 id="s2-12">2.12 使用原則</h2>
+  <ol class="steps">
+    <li>規劃與執行分開：第一輪只要求 AI 讀資料、列計畫與待確認事項</li>
+    <li>逐步回報人數：刪了幾人、剩幾人、每個構面有效人數</li>
+    <li>附上程式碼：最後一輪由 AI 把完整程式整理成一份，並列出它自行做的假設</li>
+  </ol>
+  <div class="key"><span class="lb">本單元要點</span>AI Agent 以「規劃 → 執行程式 → 讀結果 → 修正」的循環完成分析，數字來自實際執行的程式。清理規則、反向題、遺漏值、檢定方法與解讀由人決定。規則可以放在提示詞、專案指示，或 CLAUDE.md 與 Skill；長對話會遺失前面的內容，每個階段開新對話並貼上摘要。不上傳可識別個人的真實資料。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 1</div>
+    <div class="qbody">
+      <p>你請 AI「比較直接人員與間接人員的敬業度」，AI 立刻回覆一個平均數與 p 值，回覆中沒有程式碼，也沒有執行紀錄。最恰當的下一步是什麼？</p>
+      <label><input type="radio" name="q1" value="a"> 直接採用，AI 的計算能力比人好</label><label><input type="radio" name="q1" value="b"> 換另一個 AI 工具再問一次，兩個答案一樣就採用</label><label><input type="radio" name="q1" value="c"> 要求 AI 先列出分析計畫，再寫程式並執行，附上程式碼與每一步的人數</label><label><input type="radio" name="q1" value="d"> 把提示詞寫長一點，請 AI 更仔細回答</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q1r" value="a"> 沒有執行程式的數字，可能是語言模型依文字推測產生的，無法查核；有程式與執行結果，才能對照與重跑</label><label><input type="radio" name="q1r" value="b"> 程式碼寫得越長，結果越正確</label><label><input type="radio" name="q1r" value="c"> AI 只要附上程式碼，結果就不會出錯</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q1c" value="低"> 低</label><label><input type="radio" name="q1c" value="中"> 中</label><label><input type="radio" name="q1c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q1','c','a','正確。數字要來自實際執行的程式，才能查核與重現。','相關說明見 &lt;a href=&quot;#s2-1&quot;&gt;2.1&lt;/a&gt;：兩種回覆的數字分別從哪裡來？','提示：這個平均數如何產生？可以用什麼方式驗證？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 清理 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：資料清理</h1>
+  <div class="subtitle">草率作答、反向題、遺漏值．主要依據：Meade &amp; Craig (2012)；DeSimone et al. (2015)；Newman (2014)</div>
+  <h2 id="s3-1">3.1 清理的順序</h2>
+  <table>
+    <tr><th style="width:8%">步驟</th><th style="width:22%">動作</th><th>內容</th></tr>
+    <tr><td>1</td><td>排除草率作答</td><td>在原始作答上計算，依事前訂好的兩條規則刪除</td></tr>
+    <tr><td>2</td><td>轉換反向題</td><td>依題目對照表，以 7 減原始分數（6 點量表）</td></tr>
+    <tr><td>3</td><td>處理遺漏值</td><td>不整列刪除；構面答了一半以上題目就取已作答題目的平均</td></tr>
+    <tr><td>4</td><td>計算構面分數</td><td>得到六個構面分數，之後才進行信度檢查與比較</td></tr>
+  </table>
+  <p>清理之前，真實資料需先完成去識別化（步驟見 <a href="#s2-11">2.11</a>）。草率作答的規則要用未轉換的原始作答計算。反向題轉換之後，原本 29 題都填 6 的人，RET03 會變成 1，用全部相同的規則就無法檢出。</p>
+
+  <h2 id="s3-2">3.2 草率作答：兩條規則</h2>
+  <p>草率作答指填答者沒有認真讀題就作答（Meade &amp; Craig, 2012）。本課程使用兩條容易說明、也容易讓 AI 執行的規則，方法的完整說明見 <a href="../Topic04_抽樣與資料品質/草率作答快篩_簡易版.html" target="_blank" rel="noopener">Topic 04 草率作答快篩</a>。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>類型</th><th>規則</th><th>理由</th><th>本資料人數</th></tr>
+    <tr><td>直線作答</td><td style="text-align:left">29 題全部填同一個數字</td><td style="text-align:left">29 題包含不同構面與反向題，認真作答的人不會每題都一樣</td><td class="num">20 人</td></tr>
+    <tr><td>隨機亂填</td><td style="text-align:left">敬業度 ENG01–ENG12 的<a href="#g-24">標準差</a>高於全體平均＋3 個標準差（排除直線作答者後計算）</td><td style="text-align:left">這 12 題測同一個構念，認真作答的人分數會相近；標準差很大表示分數忽高忽低</td><td class="num">19 人</td></tr>
+  </table></div>
+  <h3>隨機亂填的門檻</h3>
+  <p>標準差描述一個人 12 題分數的分散程度（標準差的意義見 <a href="#s5-3">5.3</a>）。敬業度 12 題測量同一個構念，認真作答的人各題分數相近：排除直線作答者後的 980 人中，86% 的標準差介於 0.5 到 1.0。隨機亂填的人各題分數忽高忽低，標準差明顯較大。</p>
+  <p>門檻依資料分布計算：980 人標準差的平均為 0.69、標準差為 0.21，門檻 ＝ 0.69 ＋ 3 × 0.21 ＝ <span class="num">1.32</span>，高於門檻的 19 人判定為隨機亂填。平均＋3 個標準差的規則在看到任何群組比較結果之前訂定；實際算出的門檻值寫進分析紀錄（<a href="#s7-8">7.8</a>）。</p>
+  <figure class="chart"><svg viewBox="0 0 360 192" role="img" aria-labelledby="sdhT sdhD"><title id="sdhT">敬業度 12 題標準差的分布</title><desc id="sdhD">980 人（排除直線作答者）的標準差直方圖，組距 0.1。多數人介於 0.4 到 1.0；1.24 與 1.36 之間沒有人；門檻 1.32 以上有 19 人。</desc><g style="font-size:10.5px;fill:var(--muted)"><text x="34" y="154.0" text-anchor="end">0</text><line x1="40" x2="352" y1="150.0" y2="150.0" style="stroke:var(--line)"/><text x="34" y="120.5" text-anchor="end">100</text><line x1="40" x2="352" y1="116.5" y2="116.5" style="stroke:var(--line)"/><text x="34" y="87.0" text-anchor="end">200</text><line x1="40" x2="352" y1="83.0" y2="83.0" style="stroke:var(--line)"/><text x="34" y="53.5" text-anchor="end">300</text><line x1="40" x2="352" y1="49.5" y2="49.5" style="stroke:var(--line)"/><text x="40.0" y="165" text-anchor="middle">0.0</text><text x="114.3" y="165" text-anchor="middle">0.5</text><text x="188.6" y="165" text-anchor="middle">1.0</text><text x="262.9" y="165" text-anchor="middle">1.5</text><text x="337.1" y="165" text-anchor="middle">2.0</text><text x="196.0" y="188" text-anchor="middle">每人 ENG01–ENG12 的標準差</text><text x="8" y="12">人數</text></g><rect x="40.8" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="70.5" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="85.4" y="143.0" width="13.3" height="7.0" style="fill:var(--blue)"/><rect x="100.2" y="121.5" width="13.3" height="28.5" style="fill:var(--blue)"/><rect x="115.1" y="95.1" width="13.3" height="54.9" style="fill:var(--blue)"/><rect x="129.9" y="47.5" width="13.3" height="102.5" style="fill:var(--blue)"/><rect x="144.8" y="74.3" width="13.3" height="75.7" style="fill:var(--blue)"/><rect x="159.7" y="122.2" width="13.3" height="27.8" style="fill:var(--blue)"/><rect x="174.5" y="129.9" width="13.3" height="20.1" style="fill:var(--blue)"/><rect x="189.4" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="204.2" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="219.1" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="233.9" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="248.8" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="263.7" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="278.5" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="293.4" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="308.2" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="323.1" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="337.9" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><line x1="236.1" x2="236.1" y1="26" y2="150" style="stroke:#c0564f;stroke-width:1.5;stroke-dasharray:4 3"/><text x="240.1" y="38" style="font-size:11px;fill:#8f3a34;font-weight:700">門檻 1.32</text></svg><figcaption>紅色長條為高於門檻、判定為隨機亂填的作答（19 人）。</figcaption></figure>
+  <p>直方圖中，多數人的標準差集中在 0.4 到 1.0；1.24 與 1.36 之間沒有人，門檻 1.32 落在這段空白中。</p>
+  <p>Excel 的算法：</p>
+  <ol class="steps">
+    <li>原始資料工作表新增一欄，第 2 列輸入 <code>=STDEV.S(G2:R2)</code>（G 到 R 欄為 ENG01–ENG12），向下複製到第 1001 列</li>
+    <li>標記直線作答者（29 題全部相同，20 列），這些列不納入下一步的計算</li>
+    <li>其餘 980 列的標準差欄，分別以 <code>=AVERAGE()</code> 與 <code>=STDEV.S()</code> 計算，得到 0.69 與 0.21</li>
+    <li>門檻 ＝ 平均 ＋ 3 × 標準差；標準差高於門檻的列判定為隨機亂填</li>
+  </ol>
+  <p>排除的對象是直線作答者，不是所有標準差為 0 的列：另有 3 人敬業度 12 題相同、其他題目不同，標準差為 0 但不是直線作答者。這 3 人若一併排除，門檻會變成 1.31。</p>
+  <p>原始資料 1,000 人，刪除直線作答 20 人與隨機亂填 19 人後，剩下 <span class="num">961 人</span>。規則要在看到分析結果之前訂好，並寫進清理紀錄（DeSimone et al., 2015）。</p>
+
+  <h2 id="s3-3">3.3 反向題</h2>
+  <p>留任意願的 RET03「我目前正在尋找其他的工作機會」與另外兩題方向相反：留任意願高的人，這一題應該填低分。計分前以 7 減原始分數，原本的 6 變成 1、1 變成 6。</p>
+  <p>可以用相關係數確認轉換是否正確。RET01「未來一年我仍會繼續留在這家公司」與 RET03 的相關，轉換前是 <span class="num">−0.64</span>，轉換後是 <span class="num">0.64</span>。同一構面的題目轉換後應該是正相關。要求 AI 回報轉換前後的相關，可確認是否已轉換、是否轉換兩次。</p>
+  <div class="note"><span class="lb">對照表的標示錯誤</span>題目對照表只把 RET03 標為反向。AI 導入態度的 AIA04 語意也是反向，但對照表標「正向」。這項錯誤由信度檢查與題目文字發現，見單元四。</div>
+
+  <h2 id="s3-4">3.4 遺漏值</h2>
+  <p>原始資料中共有 <span class="num">696</span> 格空白，占所有作答格的 2.4%。比例不高，但分散在很多人身上：<span class="num">493 人</span>至少缺一題，每人最多缺 5 題。</p>
+  <p>整列刪除（listwise deletion）是只要缺一題就刪掉整個人。很多統計程式的預設就是整列刪除，AI 寫程式時也常這樣做。在本資料中，清理後的 961 人經過整列刪除，只剩 468 人，等於丟掉一半的樣本，而這些人只缺了少數幾題。如果遺漏與態度有關，例如不滿意的人比較常跳過主管題，整列刪除還會讓結果偏向某一群人（Newman, 2014）。</p>
+  <p>本課程的做法：計算構面分數時，該構面答了一半以上的題目，就取已作答題目的平均；不到一半，該構面記為遺漏。下方按鈕切換兩種做法下各構面的有效人數。</p>
+  <div class="calc">
+    <div class="pg-ctrl" id="mvBtns">
+      <button class="pg-btn" onclick="mvShow(0)">構面內取平均（本課程做法）</button>
+      <button class="pg-btn ghost" onclick="mvShow(1)">整列刪除</button>
+    </div>
+    <div id="mvOut" style="margin-top:12px;"></div>
+  </div>
+
+  <h2 id="s3-5">3.5 常態性</h2>
+  <p>t 檢定與 ANOVA 假設各組分數大致呈常態分布。各組有數十人以上時，這兩種檢定對偏離常態不敏感。AI 有時會自動執行常態性檢定（例如 Shapiro-Wilk，檢定分數是否偏離常態分布），樣本數上百人時，很小的偏離也會顯著（<a href="#g-29">p 值</a>小於 <a href="#g-30">.05</a>）。各組構面分數的直方圖（可要求 AI 繪製）比常態性檢定的 p 值有用：直方圖可顯示分布是否極度偏斜，或有兩個明顯的高峰。</p>
+
+  <h2 id="s3-6">3.6 清理紀錄</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>步驟</th><th>規則</th><th>處理人數</th><th>剩下人數</th></tr>
+    <tr><td>0 原始資料</td><td style="text-align:left">—</td><td>—</td><td>1,000</td></tr>
+    <tr><td>1a 直線作答</td><td style="text-align:left">29 題全部相同</td><td>刪除 20</td><td>980</td></tr>
+    <tr><td>1b 隨機亂填</td><td style="text-align:left">ENG 12 題標準差 &gt; 1.32（平均＋3 個標準差）</td><td>刪除 19</td><td>961</td></tr>
+    <tr><td>2 反向題</td><td style="text-align:left">RET03 以 7 減原始分數</td><td>全體轉換</td><td>961</td></tr>
+    <tr><td>3 遺漏值</td><td style="text-align:left">構面答一半以上取平均</td><td>不刪除</td><td>961（各構面 957–961）</td></tr>
+  </table></div>
+  <h2 id="s3-7">3.7 操作步驟與注意事項</h2>
+  <p>下面三張卡片整理清理的三個步驟。每張卡片列出目的、怎麼做、要在 AI 回覆中檢查的項目，以及常見錯誤。</p>
+  <div class="stepcard"><div class="sh">操作步驟：排除草率作答</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">排除沒有認真讀題的作答，避免雜訊稀釋群組之間的差距。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>在原始作答上計算（反向題轉換之前）</li><li>每人 29 題的標準差為 0，判定為直線作答</li><li>每人 ENG01–ENG12 的標準差高於全體平均＋3 個標準差（排除直線作答者後計算），判定為隨機亂填</li><li>依事前訂好的規則刪除，記下門檻值與被刪除的員工編號</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>刪除人數：直線作答 20 人、隨機亂填 19 人，剩下 961 人</li><li>AI 回報的門檻值：本資料為 1.32</li><li>程式中計算標準差的步驟排在反向題轉換之前</li><li>AI 有列出被刪除的員工編號，可以在 Excel 中抽查幾位</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>看到比較結果之後才調整門檻，等於依結果挑選樣本</li><li>先轉換反向題再找直線作答，會漏掉全部填同一個數字的人</li><li>平均＋3 個標準差是本課程採用的規則；實務上依量表與資料訂定，規則與算出的門檻值都寫進分析紀錄</li></ul></div></div>
+</div>
+  <div class="stepcard"><div class="sh">操作步驟：轉換反向題</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">讓同一構面的題目方向一致：每一題分數越高，都代表該構面的程度越高。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>依題目對照表的計分方向欄，找出標示反向的題目</li><li>以 7 減原始分數（6 點量表：6 變 1、1 變 6）</li><li>轉換一次，原始欄位另外保留</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>RET01 與 RET03 的相關由 −0.64 變成 0.64</li><li>程式中有「7 −」的運算</li><li>轉換後的分數仍在 1–6 之間</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>AI 沒有讀計分方向欄，直接把所有題目當正向</li><li>用 6 減原始分數，分數範圍變成 0–5</li><li>覆蓋原始欄位後重跑程式，同一題被轉換兩次，相關又回到負值</li></ul></div></div>
+</div>
+  <div class="stepcard"><div class="sh">操作步驟：處理遺漏值</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">保留大部分作答，同時避免用太少的題目計算構面分數。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>統計空白格數，以及有遺漏的人數</li><li>計算構面分數時，該構面答了一半以上題目，就取已作答題目的平均；不到一半，該構面記為遺漏</li><li>每個分析使用該構面的有效人數，並在表格中列出</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>空白 696 格、493 人至少缺一題</li><li>各構面有效人數 957–961</li><li>程式沒有對整份資料使用 dropna()；某個比較只剩 468 人左右，代表做了整列刪除</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>把空白補成 0 或量尺中點 3.5</li><li>整列刪除，丟掉一半樣本</li><li>遺漏比例高、或集中在某些群組時，需要多重插補（以統計模型多次估計遺漏的分數再合併結果）等較正式的方法（Newman, 2014）；本資料遺漏少且分散，用構面內平均即可</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>清理順序：在原始作答上排除草率作答、轉換反向題、處理遺漏值。隨機亂填的門檻由資料計算（平均＋3 個標準差），門檻值寫進分析紀錄。RET01 與 RET03 的相關可確認反向題是否轉換；遺漏值不整列刪除，AI 需回報各構面的有效人數。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 2</div>
+    <div class="qbody">
+      <p>清理後 961 人中，有不少人缺了一兩題。AI 用整列刪除處理遺漏值，只剩 468 人。下列何者最恰當？</p>
+      <label><input type="radio" name="q2" value="a"> 還有 468 人，樣本足夠，不需處理</label><label><input type="radio" name="q2" value="b"> 改用構面內平均：該構面答了一半以上的題目，就取已作答題目的平均，並報告各構面的有效人數</label><label><input type="radio" name="q2" value="c"> 把所有遺漏值補成 3.5（量尺中點）</label><label><input type="radio" name="q2" value="d"> 先刪掉遺漏最多的題目，再整列刪除</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q2r" value="a"> 每人最多只缺 5 題，整列刪除會丟掉這些人的其餘作答；若遺漏與態度有關，還會造成偏誤</label><label><input type="radio" name="q2r" value="b"> 遺漏值一律補成中點才公平</label><label><input type="radio" name="q2r" value="c"> 樣本越少，檢定越保守，結論越可靠</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q2c" value="低"> 低</label><label><input type="radio" name="q2c" value="中"> 中</label><label><input type="radio" name="q2c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q2','b','a','正確。構面內平均保留了大部分作答。','相關說明見 &lt;a href=&quot;#s3-4&quot;&gt;3.4&lt;/a&gt;：整列刪除丟掉的是什麼？','提示：一個人只缺一題時，整列刪除會刪掉他多少資料？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 信度 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：檢查信度</h1>
+  <div class="subtitle">Cronbach’s α 與題目與總分相關．主要依據：Cronbach (1951)；Topic 05</div>
+  <h2 id="s4-1">4.1 信度與構面分數的關係</h2>
+  <p>構面分數是幾題的平均。只有這幾題測的是同一件事，平均數才能代表這個構面。Cronbach’s α 表示一組題目彼此一致的程度，本課程以 .70 為最低標準（<a href="../Topic05_量表心理計量檢驗/Topic05_量表心理計量檢驗_課程網站.html" target="_blank" rel="noopener">Topic 05 量表心理計量檢驗</a>）。α 不足的構面，拿來做群組比較，得到的差距無法解讀。</p>
+  <h2 id="s4-2">4.2 六個構面的 α</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>構面</th><th>編碼</th><th>題數</th><th>α</th><th>判讀</th></tr>
+    <tr><td>敬業度</td><td>ENG</td><td>12</td><td class="num">.95</td><td style="text-align:left">達標準</td></tr><tr><td>主管支持</td><td>SUP</td><td>4</td><td class="num">.88</td><td style="text-align:left">達標準</td></tr><tr><td>認可與回饋</td><td>REC</td><td>3</td><td class="num">.87</td><td style="text-align:left">達標準</td></tr><tr><td>組織承諾</td><td>COM</td><td>3</td><td class="num">.87</td><td style="text-align:left">達標準</td></tr><tr><td>留任意願</td><td>RET</td><td>3</td><td class="num">.84</td><td style="text-align:left">達標準</td></tr><tr><td>AI 導入態度</td><td>AIA</td><td>4</td><td class="lo">−.11</td><td style="text-align:left">遠低於 .70，需檢查題目</td></tr>
+  </table></div>
+  <p>五個構面介於 .84 到 .95，可以使用。敬業度 .95 偏高，原因之一是題數有 12 題，α 會隨題數增加。AI 導入態度只有 −.11，需要檢查。</p>
+  <h2 id="s4-3">4.3 AIA 構面的診斷</h2>
+  <p>診斷的依據是每一題的題目與總分相關（扣除該題），也就是這一題與其他題目總分的相關。同一構面的題目，這個相關應該是正值。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>題號</th><th>題目</th><th>對照表方向</th><th>題目與總分相關</th></tr>
+    <tr><td>AIA01</td><td style="text-align:left">公司導入 AI 工具對我的工作有幫助</td><td>正向</td><td>.37</td></tr>
+    <tr><td>AIA02</td><td style="text-align:left">我願意學習使用公司新導入的 AI 工具</td><td>正向</td><td>.31</td></tr>
+    <tr><td>AIA03</td><td style="text-align:left">公司在導入 AI 前有充分聽取員工意見</td><td>正向</td><td>.35</td></tr>
+    <tr><td>AIA04</td><td style="text-align:left">我擔心 AI 會取代我目前的工作</td><td>正向</td><td class="lo">−.67</td></tr>
+  </table></div>
+  <p>AIA04 為負相關。從題目文字判斷，擔心被取代的人，對 AI 導入的態度通常較負面，所以這一題的語意與其他三題相反，對照表卻標為正向。這是對照表的錯誤，AI 依對照表轉換反向題時不會發現。</p>
+  <p>把 AIA04 轉換後重算，α 升到 <span class="num">.82</span>，四題的方向一致，構面可以使用。</p>
+  <div class="note"><span class="lb">本課程的處理</span>改分之前，向問卷設計者或題本負責人確認 AIA04 是對照表誤植，並把這項確認寫進分析紀錄；確認後轉換 AIA04，以四題計算 AIA 構面分數。AI 發現這類問題時，只能回報，不應自行改分。</div>
+  <h2 id="s4-4">4.4 人與 AI 的分工</h2>
+  <p>AI 可以在幾秒內算完六個構面的 α 與每一題的題目與總分相關。判斷負相關的原因，需要回到題目文字，這一步由人做。提示詞中可以要求 AI：「α 低於 .70 的構面，列出每題的題目與總分相關，並回到題目對照表看題目文字，說明可能原因。」</p>
+  <h2 id="s4-5">4.5 操作步驟與注意事項</h2>
+  <div class="stepcard"><div class="sh">操作步驟：檢查信度</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">確認構面內的題目測量同一件事，構面平均才能代表這個構面。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>反向題轉換後，計算每個構面的 Cronbach’s α</li><li>α 低於 .70 的構面，列出每題的題目與總分相關（扣除該題）</li><li>回到題目文字判斷原因，需要改分時先向問卷負責人確認</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>五個構面 α 介於 .84–.95；AIA α ＝ −.11，AIA04 題目與總分相關 −.67</li><li>α 是在反向題轉換之後計算</li><li>AI 有沒有自行轉換或刪除題目而沒有說明</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>只看 α 就刪掉整個構面，沒有先找原因</li><li>換一種信度係數，讓數字變好看</li><li>α 很高（例如 .95）也要留意：題數多或題目措辭太相似都會讓 α 偏高</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>比較構面分數之前需檢查 α。題目與總分相關為負時，優先檢查計分方向，對照表也可能標錯；計分修正後仍低於 .70，不以構面平均做比較，並在報告中說明。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 3</div>
+    <div class="qbody">
+      <p>AI 導入態度（AIA）構面的 α ＝ −.11，AIA04 的題目與總分相關為 −.67。最恰當的處理是什麼？</p>
+      <label><input type="radio" name="q3" value="a"> 照常計算四題平均，進行群組比較</label><label><input type="radio" name="q3" value="b"> 刪除 AIA 構面，報告中不提</label><label><input type="radio" name="q3" value="c"> 回到題目文字確認 AIA04 的方向，向題目負責人確認是對照表誤植後轉換、重算，並在報告中說明</label><label><input type="radio" name="q3" value="d"> 改算 McDonald’s ω，數字較高就採用</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q3r" value="a"> 負的題目與總分相關多半來自計分方向，要對照題目文字確認；不能由 AI 或分析者自行決定改分</label><label><input type="radio" name="q3r" value="b"> 換一種信度係數，就能解決題目本身的問題</label><label><input type="radio" name="q3r" value="c"> α 低於 .70 的構面一律刪除，不必說明</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q3c" value="低"> 低</label><label><input type="radio" name="q3c" value="中"> 中</label><label><input type="radio" name="q3c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q3','c','a','正確。先查計分方向，確認後再轉換，並寫進分析紀錄。','相關說明見 &lt;a href=&quot;#s4-3&quot;&gt;4.3&lt;/a&gt;：負相關最先要檢查什麼？要向誰確認？','提示：負的題目與總分相關通常代表什麼？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 t 檢定 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：兩組比較與 Cohen’s d</h1>
+  <div class="subtitle">統計方法的選擇；抽樣誤差、p 值、獨立樣本 t 檢定（Welch）與效果量．主要依據：Cohen (1988)；Delacre et al. (2017)；Lakens (2013)；Wasserstein &amp; Lazar (2016)</div>
+  <h2 id="s5-1">5.1 統計方法選擇的決策樹</h2>
+  <p>統計方法依兩個條件選擇：分析的問題類型，以及變項的類型（構面分數、類別、文字）。單元五、六處理決策樹第一個分支：比較群組平均。其他分支在其他主題處理，或本課不實作。</p>
+  <figure class="dtree"><svg viewBox="0 0 360 770" role="img" aria-labelledby="dtT" aria-describedby="dtList"><title id="dtT">統計方法選擇的決策樹</title><g style="font-size:12.5px"><path d="M15 34 V56 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V92 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 106 V136 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V180 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 194 V216 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M91 230 V268 H112" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V320 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 334 V356 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V392 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 406 V428 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V472 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 494 V516 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V560 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 582 V604 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V640 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 654 V676 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V712 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 726 V748 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><rect x="6" y="6" width="348" height="28" rx="6" style="fill:var(--navy);stroke:var(--navy);stroke-width:1.2"/><text x="15" y="24.5" style="fill:#fff;font-weight:700">分析的問題是什麼</text><rect x="22" y="42" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="60.5" style="fill:var(--navy);font-weight:400">比較群組平均（依變項為構面分數）</text><rect x="52" y="78" width="302" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="61" y="96.5" style="fill:var(--navy);font-weight:400">兩組</text><rect x="82" y="114" width="272" height="44" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="91" y="132.5" style="fill:var(--navy);font-weight:700">獨立樣本 t 檢定（Welch）</text><text x="91" y="148.5" style="fill:var(--navy);font-weight:700">＋ Cohen’s d（單元五）</text><rect x="52" y="166" width="302" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="61" y="184.5" style="fill:var(--navy);font-weight:400">三組以上</text><rect x="82" y="202" width="272" height="28" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="91" y="220.5" style="fill:var(--navy);font-weight:700">單因子 ANOVA ＋ η²（單元六）</text><rect x="112" y="238" width="242" height="60" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="121" y="256.5" style="fill:var(--navy);font-weight:700">F 顯著再做事後比較：</text><text x="121" y="272.5" style="fill:var(--navy);font-weight:700">變異數相近：Tukey</text><text x="121" y="288.5" style="fill:var(--navy);font-weight:700">不相近：Games-Howell</text><rect x="52" y="306" width="302" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="61" y="324.5" style="fill:var(--navy);font-weight:400">同一群人前後兩次</text><rect x="82" y="342" width="272" height="28" rx="6" style="fill:#f3f3f3;stroke:#9a9a9a;stroke-dasharray:4 3;stroke-width:1.2"/><text x="91" y="360.5" style="fill:var(--navy);font-weight:400">成對樣本 t 檢定（本課不實作）</text><rect x="22" y="378" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="396.5" style="fill:var(--navy);font-weight:400">兩個構面之間的關聯</text><rect x="52" y="414" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="432.5" style="fill:var(--navy);font-weight:400">相關係數 r（Topic 08）</text><rect x="22" y="450" width="332" height="44" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="468.5" style="fill:var(--navy);font-weight:400">多個構面預測一個結果</text><text x="31" y="484.5" style="fill:var(--navy);font-weight:400">（例：留任意願）</text><rect x="52" y="502" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="520.5" style="fill:var(--navy);font-weight:400">多元迴歸（Topic 08）</text><rect x="22" y="538" width="332" height="44" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="556.5" style="fill:var(--navy);font-weight:400">兩個類別變項的關係</text><text x="31" y="572.5" style="fill:var(--navy);font-weight:400">（例：廠區 × 是否填寫開放題）</text><rect x="52" y="590" width="302" height="28" rx="6" style="fill:#f3f3f3;stroke:#9a9a9a;stroke-dasharray:4 3;stroke-width:1.2"/><text x="61" y="608.5" style="fill:var(--navy);font-weight:400">交叉表與卡方檢定（本課不實作）</text><rect x="22" y="626" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="644.5" style="fill:var(--navy);font-weight:400">開放題文字</text><rect x="52" y="662" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="680.5" style="fill:var(--navy);font-weight:400">質性編碼與 κ（Topic 09）</text><rect x="22" y="698" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="716.5" style="fill:var(--navy);font-weight:400">構面是否成立</text><rect x="52" y="734" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="752.5" style="fill:var(--navy);font-weight:400">信度 α、EFA（Topic 05）</text></g></svg><figcaption>綠色：本主題實作；白色：後續主題；灰色虛線：本課不實作。文字版見下方。</figcaption></figure>
+  <h3>決策樹文字版</h3>
+  <ul id="dtList">
+    <li>比較群組平均（依變項為構面分數）
+      <ul><li>兩組：獨立樣本 t 檢定（Welch）＋ Cohen’s d（單元五）</li>
+          <li>三組以上：單因子 ANOVA ＋ η²（單元六）；F 顯著再做事後比較，變異數相近用 Tukey，不相近用 Games-Howell</li>
+          <li>同一群人前後兩次：成對樣本 t 檢定（本課不實作）</li></ul></li>
+    <li>兩個構面之間的關聯：相關係數 r（Topic 08）</li>
+    <li>多個構面預測一個結果（例：留任意願）：多元迴歸（Topic 08）</li>
+    <li>兩個類別變項的關係（例：廠區 × 是否填寫開放題）：交叉表與卡方檢定（本課不實作）</li>
+    <li>開放題文字：質性編碼與 κ（Topic 09）</li>
+    <li>構面是否成立：信度 α、EFA（Topic 05）</li>
+  </ul>
+  <p class="terms"><span class="lb2">名詞</span>成對樣本 t 檢定：同一群人兩次測量的平均比較；相關係數 r：兩個變項一起升降的程度，介於 −1 到 1；多元迴歸：以多個變項同時預測一個結果；交叉表與卡方檢定：檢查兩個類別變項的人數分布是否有關；κ：兩位編碼者扣除碰巧一致之後的一致程度；EFA（探索性因素分析）：檢查題目可以歸成幾個構面；Tukey、Games-Howell：<a href="#g-48">事後比較</a>的兩種方法（<a href="#s6-8">6.8</a>）；t 檢定與 ANOVA 的說明見 <a href="#s5-4">5.4</a> 至 <a href="#s6-5">6.5</a>。</p>
+  <h3>本資料的分析問題與方法</h3>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:46%">人資的問題</th><th>方法</th><th style="width:20%">說明位置</th></tr>
+    <tr><td style="text-align:left">直接人員與間接人員的敬業度是否不同</td><td style="text-align:left">Welch t 檢定＋Cohen’s d</td><td><a href="#s5-7">5.7</a></td></tr>
+    <tr><td style="text-align:left">高雄廠生產部與品保部的認可與回饋是否低於其他單位</td><td style="text-align:left">Welch t 檢定＋Cohen’s d</td><td><a href="#s5-8">5.8</a></td></tr>
+    <tr><td style="text-align:left">三個廠區的主管支持是否不同</td><td style="text-align:left">單因子 ANOVA＋η²＋事後比較</td><td><a href="#s6-6">6.6</a></td></tr>
+    <tr><td style="text-align:left">三個職級的主管支持是否不同</td><td style="text-align:left">單因子 ANOVA＋η²</td><td><a href="#s6-7">6.7</a></td></tr>
+    <tr><td style="text-align:left">主管支持較高的人，留任意願是否也較高</td><td style="text-align:left">相關係數 r</td><td>Topic 08</td></tr>
+    <tr><td style="text-align:left">敬業度、主管支持、認可與回饋之中，哪一項與留任意願的關聯最強</td><td style="text-align:left">多元迴歸</td><td>Topic 08</td></tr>
+    <tr><td style="text-align:left">各廠區填寫開放題的比例是否不同</td><td style="text-align:left">交叉表與卡方檢定</td><td>本課不實作</td></tr>
+    <tr><td style="text-align:left">員工最希望優先改善的事項（OE1）有哪些類別</td><td style="text-align:left">質性編碼與 κ</td><td>Topic 09</td></tr>
+    <tr><td style="text-align:left">AI 導入態度四題是否測量同一個構面</td><td style="text-align:left">信度 α、EFA</td><td><a href="#s4-3">4.3</a>；Topic 05</td></tr>
+    <tr><td style="text-align:left">同一群員工明年再調查一次，主管支持是否提升</td><td style="text-align:left">成對樣本 t 檢定</td><td>本課不實作</td></tr>
+  </table></div>
+
+  <h2 id="s5-2">5.2 抽樣誤差</h2>
+  <p>直接人員的敬業度平均 3.85，間接人員 3.95，差 0.09 分。這 961 人是某一次調查回收、清理後的作答。同一家公司若再調查一次，回收到的是部分不同的員工，或同一位員工的作答略有不同，兩組平均也會不同。只因為抽到哪些人而產生的變動，稱為抽樣誤差（sampling error）。</p>
+  <p>下面的示範從清理後的 961 人中有放回地重抽 961 人（同一人可能被抽到多次，用來模擬另一次調查），重複五次，每次計算直接人員減間接人員的敬業度平均差：</p>
+  <div class="scrollx"><table class="mt"><tr><th>重抽</th><th>第 1 次</th><th>第 2 次</th><th>第 3 次</th><th>第 4 次</th><th>第 5 次</th></tr>
+    <tr><td>平均差</td><td>−0.18</td><td>−0.15</td><td>−0.15</td><td>−0.24</td><td>−0.05</td></tr></table></div>
+  <p>五次結果介於 −0.24 到 −0.05，相差約 0.2 分。平均差本身會隨樣本變動，所以單看一個平均差，無法判斷它反映的是兩組母體真的不同，還是抽樣誤差。獨立樣本 t 檢定與 p 值處理這個判斷。</p>
+
+  <h2 id="s5-3">5.3 平均數與標準差</h2>
+  <div class="scrollx"><table class="mt"><tr><th>組別</th><th>人數 n</th><th>平均數 M</th><th>標準差 SD</th></tr>
+    <tr><td>直接人員</td><td>537</td><td>3.85</td><td>0.86</td></tr>
+    <tr><td>間接人員</td><td>424</td><td>3.95</td><td>0.80</td></tr></table></div>
+  <p class="mut" style="font-size:13.5px">敬業度構面分數，6 點量表</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">統計量</th><th>意義</th><th style="width:38%">本例的讀法</th></tr>
+    <tr><td>人數 n</td><td style="text-align:left">該組在這個構面有分數的人數</td><td style="text-align:left">537 ＋ 424 ＝ 961，等於敬業度的有效人數</td></tr>
+    <tr><td>平均數 M</td><td style="text-align:left">該組構面分數的平均，代表這一組的典型程度</td><td style="text-align:left">兩組都高於量尺中點 3.5，整體偏向同意；間接人員高 0.09 分</td></tr>
+    <tr><td>標準差 SD</td><td style="text-align:left">同一組內個人分數離平均的典型距離；分布接近常態時，約三分之二的人落在平均上下一個標準差之內</td><td style="text-align:left">直接人員多數介於 2.99 到 4.71</td></tr>
+  </table></div>
+  <p>兩組平均差 0.09 分，組內標準差約 0.8 分：同一組內員工之間的差異，比兩組平均的差距大得多。兩組的分布大部分重疊，這一點在 <a href="#s5-6">5.6</a> 的 d 中以數字表示。</p>
+
+  <h2 id="s5-4">5.4 虛無假設與 p 值</h2>
+  <p>t 檢定先設定一個假設：母體中兩組的平均相同，樣本中的差距完全來自抽樣誤差。這個假設稱為虛無假設（null hypothesis）。p 值是在虛無假設為真的前提下，抽到和目前一樣大或更大差距的機率。</p>
+  <p>這個機率可以用置換（permutation）示範。若人員類別與敬業度無關，把 961 人的直接／間接標籤隨機打亂後再算平均差，得到的是兩組沒有差異時可能出現的差距。打亂 10,000 次，平均差的絕對值大於或等於 0.094 的比例為 <span class="num">.079</span>，與 Welch t 檢定的 p ＝ .080 接近：即使兩類人員的敬業度沒有差別，約 8% 的抽樣會出現這麼大的差距。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:24%">p 值</th><th>判斷</th><th style="width:34%">本資料</th></tr>
+    <tr><td>p &lt; .05</td><td style="text-align:left">差異顯著：差距不太可能只是抽樣誤差（.05 為慣例門檻）</td><td style="text-align:left">問題單位的認可與回饋，p &lt; .001</td></tr>
+    <tr><td>p ≥ .05</td><td style="text-align:left">差異不顯著：資料不足以排除抽樣誤差</td><td style="text-align:left">直接與間接人員的敬業度，p ＝ .080</td></tr>
+  </table></div>
+  <p>p 值有兩個常見的誤讀（Wasserstein &amp; Lazar, 2016）：</p>
+  <ul>
+    <li>p 值不代表差距的大小。p 同時受差距大小與人數影響，人數越多，同樣的差距 p 越小。差距大小用 <a href="#s5-6">5.6</a> 的效果量描述。</li>
+    <li>p 值不是結論為真的機率。p ＝ .080 不表示兩組沒有差異的機率是 8%，也不表示有差異的機率是 92%；p 值是在假設兩組沒有差異的前提下計算的。</li>
+  </ul>
+
+  <h2 id="s5-5">5.5 t 值、自由度與 Welch t 檢定</h2>
+  <div class="formula">t　＝　平均差 ÷ 平均差的標準誤</div>
+  <p>標準誤（standard error）描述平均差的不確定性：重複抽樣時，平均差通常會變動多少。它由兩組的變異數（標準差的平方）與人數算出：</p>
+  <div class="formula">標準誤　＝　√（第一組變異數 ÷ 第一組人數 ＋ 第二組變異數 ÷ 第二組人數）</div>
+  <div class="calcbox">
+    敬業度（直接 vs 間接）：標準誤 ＝ √（0.741 ÷ 537 ＋ 0.648 ÷ 424）＝ 0.054<br>
+    t ＝ −0.094 ÷ 0.054 ＝ <b>−1.75</b><br>
+    <span class="mut">以未四捨五入的數值計算。<a href="#s5-4">5.4</a> 的置換示範中，10,000 個打亂後平均差的標準差也是 0.054。</span>
+  </div>
+  <p>t 的絕對值越大，差距相對於不確定性越大，越不像只是抽樣誤差。問題單位的認可與回饋：t ＝ −0.814 ÷ 0.086 ≈ −9.44，差距約為標準誤的 9 倍，p &lt; .001。直接與間接人員的 t ＝ −1.75，差距不到標準誤的兩倍，p ＝ .080。</p>
+  <p>自由度（df）決定以哪一條 t 分布把 t 換算成 p，主要由人數決定。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:20%">項目</th><th>Student t 檢定</th><th>Welch t 檢定</th></tr>
+    <tr><td>變異數假設</td><td style="text-align:left">兩組變異數相等</td><td style="text-align:left">不假設相等</td></tr>
+    <tr><td>自由度</td><td style="text-align:left">n₁ ＋ n₂ − 2（整數）</td><td style="text-align:left">依兩組變異數與人數調整，常有小數</td></tr>
+    <tr><td>適用</td><td style="text-align:left">兩組人數與變異數相近</td><td style="text-align:left">兩組人數或變異數不同；兩組相近時，結果與 Student 幾乎相同</td></tr>
+    <tr><td>本資料：問題單位的認可與回饋</td><td>t(956) ＝ −9.36</td><td>t(260.0) ＝ −9.44</td></tr>
+    <tr><td>本資料：直接 vs 間接的敬業度</td><td>t(959) ＝ −1.74，p ＝ .083</td><td>t(932.1) ＝ −1.75，p ＝ .080</td></tr>
+  </table></div>
+  <p>本課程預設 Welch t 檢定。兩組變異數相等時，Welch 與 Student 的結果幾乎相同；變異數不相等且兩組人數差距大時，Student t 檢定的 p 值可能失準，Welch 不受影響，因此建議作為預設（Delacre et al., 2017）。員工調查的群組人數常差很多，例如問題單位 175 人、其他單位 783 人。提示詞中要寫明「用 Welch t 檢定」，否則 AI 可能使用 Student t 檢定。</p>
+
+  <h2 id="s5-6">5.6 Cohen’s d</h2>
+  <div class="formula">d　＝　（第一組平均 − 第二組平均）÷ 合併標準差</div>
+  <div class="formula">合併標準差　＝　√｛［（n₁ − 1）× SD₁² ＋（n₂ − 1）× SD₂²］÷（n₁ ＋ n₂ − 2）｝</div>
+  <p>合併標準差是兩組標準差依人數加權合併的結果。d 以標準差為單位描述差距，所以不同構面、不同量尺之間可以比較。以問題單位的認可與回饋為例：</p>
+  <div class="calcbox">
+    步驟一　兩組變異數：問題單位 1.03² ≈ 1.059（n ＝ 175），其他單位 1.04² ≈ 1.087（n ＝ 783）<br>
+    步驟二　合併變異數：（174 × 1.059 ＋ 782 × 1.087）÷ 956 ＝ 1.082<br>
+    步驟三　合併標準差：√1.082 ＝ 1.040<br>
+    步驟四　d ＝ −0.814 ÷ 1.040 ＝ <b>−0.78</b>
+  </div>
+  <p>d ＝ −0.78 表示問題單位的認可與回饋平均，比其他單位低約 0.78 個標準差。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:22%">|d| 約為</th><th>慣例稱呼（Cohen, 1988）</th><th>本資料</th></tr>
+    <tr><td>0.2</td><td>小</td><td style="text-align:left">直接 vs 間接的敬業度 −0.11，小於 0.2</td></tr>
+    <tr><td>0.5</td><td>中</td><td style="text-align:left">問題單位的組織承諾 −0.48</td></tr>
+    <tr><td>0.8</td><td>大</td><td style="text-align:left">問題單位的認可與回饋 −0.78</td></tr>
+  </table></div>
+  <p>這組基準是 Cohen 在缺乏其他資訊時提出的參考值，不是判斷門檻。管理上是否重要，還要看構面的性質、改善的成本，以及可比較的基準，例如同一構面在去年調查或其他公司的差距（Lakens, 2013）。</p>
+  <p>d 的正負號由相減的順序決定：第一組減第二組。本網站的表格以直接人員或問題單位為第一組，d 為負表示第一組較低；順序對調時，d 的數值相同、正負號相反。<a href="效果量計算器.html" target="_blank" rel="noopener">效果量計算器</a>可以輸入兩組的平均數、標準差與人數計算 d。</p>
+
+  <h2 id="s5-7">5.7 例一：直接人員與間接人員</h2>
+  <p>比較直接人員（現場作業）與間接人員（支援、管理職能）的敬業度與留任意願。</p>
+  <div class="scrollx"><table class="mt"><tr><th>構面</th><th>編碼</th><th>直接 n</th><th>直接 M（SD）</th><th>間接 n</th><th>間接 M（SD）</th><th>差距</th><th>t</th><th>df</th><th>p</th><th>d</th></tr><tr><td>敬業度</td><td>ENG</td><td>537</td><td>3.85（0.86）</td><td>424</td><td>3.95（0.80）</td><td>−0.09</td><td>−1.75</td><td>932.1</td><td>.080</td><td class="num">−0.11</td></tr><tr><td>留任意願</td><td>RET</td><td>537</td><td>3.54（1.01）</td><td>422</td><td>3.65（0.95）</td><td>−0.11</td><td>−1.72</td><td>926.9</td><td>.085</td><td class="num">−0.11</td></tr></table></div>
+  <div class="calcbox">
+    敬業度：d ＝（3.85 − 3.95）÷ 0.84 ≈ −0.09 ÷ 0.84 ＝ <b>−0.11</b><br>
+    <span class="mut">兩組平均顯示到小數第二位；以未四捨五入的平均計算，差距為 −0.09</span>
+  </div>
+  <p>兩個構面的 p 都大於 .05（.080、.085），差距不顯著；d 都是 −0.11，小於 0.2。即使樣本更大、p 變得顯著，0.1 分左右的差距在管理上的意義也很有限。報告寫法見 <a href="#s5-10">5.10</a>。</p>
+
+  <h2 id="s5-8">5.8 例二：問題單位的下鑽與比較</h2>
+  <p>群組比較常用來找出需要優先關注的單位。做法是把構面分數依廠區 × 部門拆開，計算每個單位的平均，以及該單位與其他所有人相比的 d。下表是認可與回饋構面中，人數 5 人以上的 34 個單位裡，d 最低的五個：</p>
+  <div class="scrollx"><table class="mt"><tr><th>單位</th><th>n</th><th>認可與回饋平均</th><th>d（與其他所有人比較）</th></tr><tr><td>高雄廠生產部</td><td>133</td><td>2.79</td><td class="">−0.74</td></tr><tr><td>高雄廠品保部</td><td>42</td><td>2.81</td><td class="">−0.63</td></tr><tr><td>高雄廠法務智財部</td><td>7</td><td>2.88</td><td class="">−0.54</td></tr><tr><td>台中廠行政管理部</td><td>15</td><td>3.26</td><td class="">−0.19</td></tr><tr><td>台南廠品保部</td><td>35</td><td>3.31</td><td class="">−0.14</td></tr></table></div>
+  <p>高雄廠生產部與品保部的 d 都接近 −0.9，明顯低於其他單位；第三名之後差距縮小很多。下鑽時同時比較了 34 個單位，即使所有單位實際上都沒有差異，依每次 5% 的誤判率，至少一個單位看起來顯著的機率約為 83%（見 <a href="#s6-1">6.1</a>）。因此下鑽結果以效果量排序，作為追查順序的線索；選出的單位再以獨立的資料或訪談確認。以下把這兩個部門合為一組（175 人），與其他單位比較認可與回饋、組織承諾：</p>
+  <div class="scrollx"><table class="mt"><tr><th>構面</th><th>編碼</th><th>問題單位 n</th><th>問題單位 M（SD）</th><th>其他 n</th><th>其他 M（SD）</th><th>差距</th><th>t</th><th>df</th><th>p</th><th>d</th></tr><tr><td>認可與回饋</td><td>REC</td><td>175</td><td>2.80（1.03）</td><td>783</td><td>3.61（1.04）</td><td>−0.81</td><td>−9.44</td><td>260.0</td><td>&lt; .001</td><td class="num">−0.78</td></tr><tr><td>組織承諾</td><td>COM</td><td>174</td><td>3.15（1.08）</td><td>783</td><td>3.66（1.05）</td><td>−0.51</td><td>−5.66</td><td>251.6</td><td>&lt; .001</td><td class="num">−0.48</td></tr></table></div>
+  <div class="calcbox">
+    認可與回饋：d ≈ −0.81 ÷ 1.04 ＝ <b>−0.78</b>（計算過程見 <a href="#s5-6">5.6</a>）<br>
+    組織承諾：d ≈ −0.51 ÷ 1.06 ＝ <b>−0.48</b>
+  </div>
+  <p>兩個構面的 p 都小於 .001，只看 p 值會以為兩個構面的落差一樣大。效果量顯示差距大小不同：認可與回饋 d ＝ −0.78，屬於大差距；組織承諾 d ＝ −0.48，屬於中等。後續追查可以先從這兩個部門的表現回饋與肯定做法開始。群組差距只說明分數不同，不說明原因；原因要透過訪談或其他資料確認。</p>
+  <div class="warn"><span class="lb">匿名門檻</span>下鑽到部門層級時，需確認每個單位的人數。本資料中台中廠法務智財部 4 人、高雄廠永續發展室 3 人，低於 5 人的門檻，不單獨呈現結果（<a href="../Topic04_抽樣與資料品質/Topic04_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">Topic 04</a>）。</div>
+
+  <h2 id="s5-9">5.9 t 檢定結果表的欄位</h2>
+  <p>JASP、AI 或其他軟體輸出的 t 檢定結果，通常包含下列欄位。以問題單位與其他單位的認可與回饋為例：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:14%">欄位</th><th>意義</th><th style="width:40%">本例</th></tr>
+    <tr><td>n</td><td style="text-align:left">各組有效人數</td><td style="text-align:left">175 與 783；相加 958，等於認可與回饋的有效人數 958</td></tr>
+    <tr><td>M（SD）</td><td style="text-align:left">各組平均與標準差（<a href="#s5-3">5.3</a>）</td><td style="text-align:left">2.80（1.03）與 3.61（1.04）</td></tr>
+    <tr><td>差距</td><td style="text-align:left">第一組平均減第二組平均</td><td style="text-align:left">−0.81，負號表示第一組較低</td></tr>
+    <tr><td>t</td><td style="text-align:left">平均差 ÷ 標準誤（<a href="#s5-5">5.5</a>）</td><td style="text-align:left">−9.44</td></tr>
+    <tr><td>df</td><td style="text-align:left">自由度；有小數表示使用 Welch t 檢定</td><td style="text-align:left">260.0；Student t 檢定會是 956</td></tr>
+    <tr><td>p</td><td style="text-align:left">虛無假設為真時，得到這麼大或更大 |t| 的機率（<a href="#s5-4">5.4</a>）</td><td style="text-align:left">JASP 顯示 &lt; .001；Python 可能顯示 2.2 × 10<sup>−18</sup> 這類科學記號，報告時寫 p &lt; .001</td></tr>
+    <tr><td>d</td><td style="text-align:left">以合併標準差為單位的差距（<a href="#s5-6">5.6</a>）</td><td style="text-align:left">−0.78，大差距</td></tr>
+  </table></div>
+  <p>不同軟體算出的 d 可能在小數第二位不同，常見原因有兩個。第一是分母：本網站與多數 Python 範例用依人數加權的合併標準差；部分軟體在選擇 Welch t 檢定時，改以兩組變異數的平均開根號 √［（SD₁² ＋ SD₂²）÷ 2］為分母，不依人數加權。兩組人數相近時兩者幾乎相同，人數差距大時會出現差異。本例合併標準差 1.040，d ＝ −0.78；變異數平均開根號 1.036，d ＝ −0.79。第二是四捨五入：以已四捨五入的平均與標準差手算，結果可能與軟體差 .01。這類差異屬於可接受的範圍，報告時寫明軟體與 d 的算法（<a href="#s7-7">7.7</a>）。</p>
+
+  <h2 id="s5-10">5.10 報告句與管理語言</h2>
+  <p>同一個結果寫成兩個版本：APA 報告句供方法與結果段落使用，管理語言供主管閱讀（<a href="#s9-5">9.5</a>）。數字取小數兩位；p 小於 .001 寫成 p &lt; .001，其餘寫出確切的 p 值。</p>
+  <div class="scrollx"><table class="mt wide">
+    <tr><th style="width:14%">比較</th><th>APA 報告句</th><th style="width:34%">管理語言</th></tr>
+    <tr><td>直接 vs 間接的敬業度</td><td style="text-align:left">直接人員（n ＝ 537，M ＝ 3.85，SD ＝ 0.86）與間接人員（n ＝ 424，M ＝ 3.95，SD ＝ 0.80）的敬業度沒有顯著差異，Welch t(932.1) ＝ −1.75，p ＝ .080，d ＝ −0.11。</td><td style="text-align:left">兩類人員的敬業度相近，差距約 0.1 分；提升敬業度的方案不需要依人員類別分開設計。</td></tr>
+    <tr><td>問題單位的認可與回饋</td><td style="text-align:left">高雄廠生產部與品保部（n ＝ 175，M ＝ 2.80，SD ＝ 1.03）的認可與回饋低於其他單位（n ＝ 783，M ＝ 3.61，SD ＝ 1.04），Welch t(260.0) ＝ −9.44，p &lt; .001，d ＝ −0.78。</td><td style="text-align:left">這兩個部門的認可與回饋，平均比其他單位低約 0.8 分（6 點量表），差距大。</td></tr>
+    <tr><td>問題單位的組織承諾</td><td style="text-align:left">組織承諾同樣較低（M ＝ 3.15 vs 3.66），Welch t(251.6) ＝ −5.66，p &lt; .001，d ＝ −0.48。</td><td style="text-align:left">組織承諾低約 0.5 分，落差約為認可與回饋的一半；原因需以訪談或其他資料確認。</td></tr>
+  </table></div>
+
+  <h2 id="s5-11">5.11 常見誤解</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:32%">誤解</th><th>正確的理解</th></tr>
+    <tr><td style="text-align:left">p 不顯著，代表兩組沒有差異</td><td style="text-align:left">不顯著表示資料不足以排除抽樣誤差，不等於證明兩組相同。直接與間接人員 p ＝ .080，樣本中的差距仍是 −0.09 分；合適的寫法是差異不顯著、差距很小（d ＝ −0.11）。</td></tr>
+    <tr><td style="text-align:left">p ＝ .080 表示有差異的趨勢</td><td style="text-align:left">不顯著的結果不寫成趨勢；報告確切的 p 值與 d。</td></tr>
+    <tr><td style="text-align:left">樣本夠大，差異一定顯著</td><td style="text-align:left">樣本越大，越小的差距也可能顯著，但兩組母體平均相同時，大樣本也不會穩定得到顯著結果。顯著與否同時取決於差距、組內差異與人數；樣本大時更需要看 d。</td></tr>
+    <tr><td style="text-align:left">顯著代表重要</td><td style="text-align:left">顯著只表示差距不太像抽樣誤差。重要與否看 d 與管理情境：同樣 p &lt; .001，認可與回饋 d ＝ −0.78，組織承諾 d ＝ −0.48。</td></tr>
+    <tr><td style="text-align:left">兩組有差異，代表組別是原因</td><td style="text-align:left">t 檢定只比較分數，不檢驗原因。問題單位的認可與回饋較低，可能與主管做法、工作性質或人員組成有關（<a href="#s9-6">9.6</a>）。</td></tr>
+    <tr><td style="text-align:left">d 為負數，代表計算有錯</td><td style="text-align:left">正負號只表示哪一組較高，由相減的順序決定。</td></tr>
+  </table></div>
+
+  <h2 id="s5-12">5.12 操作步驟與注意事項</h2>
+  <div class="stepcard"><div class="sh">操作步驟：兩組比較（Welch t 檢定）</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">判斷兩組平均的差距是否超出抽樣雜訊，並用效果量描述差距大小。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>寫清楚兩組的定義：誰在第一組、誰在第二組</li><li>用 Welch t 檢定（不假設變異數相等）</li><li>計算 Cohen’s d，列出兩組人數、平均、標準差、t、df、p、d</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>程式有 equal_var=False，或結果寫明 Welch</li><li>自由度有小數；兩組人數相加等於該構面的有效人數</li><li>d 的正負號與平均差的方向一致</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>只報 p 值，不報 d</li><li>把 p &gt; .05 寫成「有趨勢」，或寫成「證明兩組相同」；不顯著表示證據不足，不等於沒有差異</li><li>常態性：各組有數十人以上時，t 檢定對偏離常態不敏感，不需要每次做常態性檢定；組別只有十幾人、分布又極度偏斜時才需要另外處理</li><li>構面分數當作等距資料處理（見 <a href="#s1-7">1.7</a>），解讀以構面分數為單位</li><li>同時比較很多個單位時，誤判會累積，見 <a href="#s6-1">6.1</a></li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>兩組平均會因抽樣而變動，t 檢定判斷差距是否可能只是抽樣誤差。p 值是在兩組沒有差異的前提下，抽到這麼大差距的機率，不是差距大小，也不是結論為真的機率。兩組比較預設用 Welch t 檢定，並報告 Cohen’s d：本資料同樣 p &lt; .001 的兩個比較，d 為 −0.78 與 −0.48。下鑽找問題單位時，同時注意誤判累積與匿名門檻。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 4</div>
+    <div class="qbody">
+      <p>直接人員的敬業度 3.85、間接人員 3.95，Welch t 檢定 p ＝ .080，d ＝ −0.11。主管問：「明年樣本加倍，如果 p 變成 .01，是不是就代表兩群人有重要差異？」最恰當的回答是什麼？</p>
+      <label><input type="radio" name="q4" value="a"> 是，p 小於 .05 就代表差異重要</label><label><input type="radio" name="q4" value="b"> 不會，p 值與樣本數無關</label><label><input type="radio" name="q4" value="c"> d 是負數，代表計算有錯</label><label><input type="radio" name="q4" value="d"> 樣本加倍時 p 可能變小，但 d 仍約 0.1，屬於很小的差距，管理上的意義不會因此改變</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q4r" value="a"> p 值是虛無假設為真的機率</label><label><input type="radio" name="q4r" value="b"> p 值受樣本數影響；效果量以標準差為單位描述差距大小，不會因樣本變多而變大</label><label><input type="radio" name="q4r" value="c"> d 越小，代表檢定越準確</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q4c" value="低"> 低</label><label><input type="radio" name="q4c" value="中"> 中</label><label><input type="radio" name="q4c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q4','d','b','正確。p 值判斷差距是否可能只是抽樣誤差，d 描述差距的大小。','相關說明見 &lt;a href=&quot;#s5-4&quot;&gt;5.4&lt;/a&gt; 與 &lt;a href=&quot;#s5-6&quot;&gt;5.6&lt;/a&gt;：哪一個數字會隨樣本數改變？','提示：樣本變多時，p 與 d 各會怎麼變？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 5-2</div>
+    <div class="qbody">
+      <p>AI 回報高雄廠生產部與品保部（問題單位）與其他單位的比較：組織承諾 Welch t(251.6) ＝ −5.66，p &lt; .001，d ＝ −0.48；認可與回饋 Welch t(260.0) ＝ −9.44，p &lt; .001，d ＝ −0.78。下列敘述何者正確？</p>
+      <label><input type="radio" name="q7" value="a"> 兩個構面的 p 都小於 .001，問題單位在兩個構面的落差一樣大</label><label><input type="radio" name="q7" value="b"> 認可與回饋的落差屬於大差距；組織承諾的落差約為其一半，屬於中等</label><label><input type="radio" name="q7" value="c"> d 為負數，表示 AI 把組別順序弄錯，結果不能使用</label><label><input type="radio" name="q7" value="d"> p 小於 .001，表示「問題單位較低」這個結論有 99.9% 的機率為真</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q7r" value="a"> p 值判斷差距是否可能只是抽樣誤差，也受人數影響；差距大小要用 d 比較</label><label><input type="radio" name="q7r" value="b"> p 越小，差距一定越大</label><label><input type="radio" name="q7r" value="c"> d 的正負號決定差距是否顯著</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q7c" value="低"> 低</label><label><input type="radio" name="q7c" value="中"> 中</label><label><input type="radio" name="q7c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q7','b','a','正確。比較差距大小看 d；d 為負表示第一組（問題單位）較低。','相關說明見 &lt;a href=&quot;#s5-4&quot;&gt;5.4&lt;/a&gt; 與 &lt;a href=&quot;#s5-6&quot;&gt;5.6&lt;/a&gt;：p 與 d 各回答什麼？','提示：兩個比較的 p 相同時，哪一個數字顯示差距大小不同？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U6 ANOVA ==================== -->
+<section class="unit" id="u6">
+  <h1>單元六：多組比較與 η²</h1>
+  <div class="subtitle">單因子變異數分析、效果量 η² 與事後比較．主要依據：Cohen (1988)；Lakens (2013)；Holm (1979)</div>
+  <h2 id="s6-1">6.1 多次 t 檢定的誤判累積</h2>
+  <p>比較三個廠區的主管支持，可以兩兩做 t 檢定：台南與台中、台南與高雄、台中與高雄，共三次。每次檢定以 .05 為門檻，表示兩組母體沒有差異時，仍有 5% 的機率判為顯著，稱為誤判。三次都不誤判的機率是 0.95 × 0.95 × 0.95 ＝ 0.95³ ≈ 0.86，至少誤判一次的機率是 1 − 0.95³ ≈ 14%。比較次數為 k 時，至少誤判一次的機率約為 1 − 0.95<sup>k</sup>：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:18%">比較次數 k</th><th style="width:26%">至少誤判一次的機率</th><th>情境</th></tr>
+    <tr><td>1</td><td>5%</td><td style="text-align:left">一次兩組比較</td></tr>
+    <tr><td>3</td><td>14%</td><td style="text-align:left">三組兩兩比較，例如三個廠區</td></tr>
+    <tr><td>10</td><td>40%</td><td style="text-align:left">五組兩兩比較</td></tr>
+    <tr><td>34</td><td>83%</td><td style="text-align:left"><a href="#s5-8">5.8</a> 的 34 個單位各與其他人比較</td></tr>
+  </table></div>
+  <p class="mut" style="font-size:13.5px">以各次檢定互相獨立估算；實際的比較之間有關聯，數值為近似。</p>
+  <p>單因子變異數分析（one-way ANOVA）用一次檢定回答各組平均是否全部相同，誤判機率維持在 5%；F 顯著之後，再用有校正的事後比較找出哪幾組不同。</p>
+
+  <h2 id="s6-2">6.2 F 值：組間差異與組內差異</h2>
+  <p>每個人的主管支持分數與全體平均（3.87）的差距，可以拆成兩部分：所屬廠區的平均與全體平均的差距，稱為組間；個人與所屬廠區平均的差距，稱為組內。例如高雄廠平均 3.61，比全體平均低 0.26 分，屬於組間；高雄廠一位分數 2.50 的員工，與高雄廠平均差 1.11 分，屬於組內。</p>
+  <p>每個人的這兩部分各自平方後加總，得到組間平方和與組內平方和；平方和除以自由度，得到均方（mean square）。F 值是兩個均方的比：</p>
+  <div class="formula">F　＝　組間均方 ÷ 組內均方</div>
+  <p>各組母體平均相同時，組間均方只反映抽樣誤差，大小與組內均方相近，F 約為 1。F 越大，組間差異相對於組內差異越大，越不像只是抽樣誤差。本資料廠區的 F ＝ 21.88，職級的 F ＝ 0.54。</p>
+
+  <h2 id="s6-3">6.3 ANOVA 摘要表的欄位</h2>
+  <p>廠區 → 主管支持的 ANOVA 摘要表：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>來源</th><th>平方和 SS</th><th>自由度 df</th><th>均方 MS</th><th>F</th><th>p</th></tr>
+    <tr><td>組間（廠區）</td><td>40.2</td><td>2</td><td>20.11</td><td class="num">21.88</td><td>&lt; .001</td></tr>
+    <tr><td>組內</td><td>880.3</td><td>958</td><td>0.919</td><td></td><td></td></tr>
+    <tr><td>總和</td><td>920.5</td><td>960</td><td></td><td></td><td></td></tr>
+  </table></div>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">欄位</th><th>意義</th><th style="width:40%">本例</th></tr>
+    <tr><td>平方和 SS</td><td style="text-align:left">差距平方後的加總；組間 ＋ 組內 ＝ 總和</td><td style="text-align:left">40.2 ＋ 880.3 ＝ 920.5</td></tr>
+    <tr><td>自由度 df</td><td style="text-align:left">組間 ＝ 組數 − 1；組內 ＝ 有效人數 − 組數</td><td style="text-align:left">3 − 1 ＝ 2；961 − 3 ＝ 958；寫成 F(2, 958)</td></tr>
+    <tr><td>均方 MS</td><td style="text-align:left">平方和 ÷ 自由度</td><td style="text-align:left">40.2 ÷ 2 ＝ 20.11；880.3 ÷ 958 ＝ 0.919</td></tr>
+    <tr><td>F</td><td style="text-align:left">組間均方 ÷ 組內均方</td><td style="text-align:left">20.11 ÷ 0.919 ＝ 21.88</td></tr>
+    <tr><td>p</td><td style="text-align:left">各組母體平均相同時，得到這麼大或更大 F 的機率</td><td style="text-align:left">5.1 × 10<sup>−10</sup>，寫成 p &lt; .001</td></tr>
+  </table></div>
+  <p>JASP 的 ANOVA 表另有 η² 與 ω² 欄位；AI 以 Python（statsmodels）輸出時，欄位常寫成 sum_sq、df、F、PR(&gt;F)，分別對應平方和、自由度、F 與 p。</p>
+
+  <h2 id="s6-4">6.4 η² 的計算與判讀</h2>
+  <div class="formula">η²　＝　組間平方和 ÷ 總平方和</div>
+  <div class="calcbox">
+    步驟一　組間平方和：40.2（摘要表第一列）<br>
+    步驟二　總平方和：920.5（摘要表最後一列）<br>
+    步驟三　η² ＝ 40.2 ÷ 920.5 ＝ <b>.044</b>
+  </div>
+  <p>η²（eta squared）是組別差異占全部個別差異的比例，介於 0 到 1。η² ＝ .044 表示廠區可以解釋主管支持個別差異的 4.4%，其餘 95.6% 來自同一廠區內員工之間的差異。慣例上 .01 為小、.06 為中、.14 為大（Cohen, 1988），.044 介於小與中之間；與 d 相同，這組基準是參考值。職級的 η² ＝ 1.0 ÷ 920.5 ＝ .001，職級幾乎無法解釋主管支持的差異。</p>
+  <p>η² 是樣本中的比例，會略為高估母體中的效果，組數多、樣本少時較明顯。ω²（omega squared）修正了這個偏誤，數值略小（Lakens, 2013）。本資料樣本近千人，兩者差距很小：廠區 → 主管支持的 η² ＝ .044，ω² ＝ .042。AI 有時會回報偏 η²（partial η²）；在單因子 ANOVA 中，偏 η² 與 η² 相同。報告時寫明使用哪一種。</p>
+
+  <h2 id="s6-5">6.5 Levene 檢定與 Welch ANOVA</h2>
+  <p>傳統 ANOVA 與 Student t 檢定相同，假設各組變異數相等。Levene 檢定的虛無假設是各組變異數相等：p ≥ .05 表示沒有證據顯示變異數不相等，以傳統 ANOVA 為準；p &lt; .05 時，改以 Welch ANOVA 為準，它不假設變異數相等。各組人數差距大時（例如職級 743、161、57 人），變異數不相等對傳統 ANOVA 的影響較大，一併報告 Welch ANOVA 可作為對照。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>比較</th><th>Levene p</th><th>傳統 ANOVA</th><th>Welch ANOVA</th></tr>
+    <tr><td>廠區 → 主管支持</td><td>.16</td><td>F ＝ 21.88，p &lt; .001</td><td>F ＝ 21.13，p &lt; .001</td></tr>
+    <tr><td>職級 → 主管支持</td><td>.33</td><td>F ＝ 0.54，p ＝ .59</td><td>F ＝ 0.57，p ＝ .57</td></tr>
+  </table></div>
+  <p>兩項 Levene 檢定都不顯著，Welch ANOVA 的結論與傳統 ANOVA 相同。</p>
+
+  <h2 id="s6-6">6.6 例一：廠區 → 主管支持</h2>
+  <div class="scrollx"><table class="mt"><tr><th>組別</th><th>n</th><th>平均數</th><th>標準差</th></tr><tr><td>台南廠</td><td>334</td><td>4.04</td><td>0.91</td></tr><tr><td>台中廠</td><td>253</td><td>4.02</td><td>0.95</td></tr><tr><td>高雄廠</td><td>374</td><td>3.61</td><td>1.01</td></tr></table></div>
+  <p>F(2, 958) ＝ 21.88，p &lt; .001，η² ＝ .044。F 顯著，接著做事後比較，找出哪幾個廠區之間有差異（方法見 <a href="#s6-8">6.8</a>）：</p>
+  <div class="scrollx"><table class="mt"><tr><th>比較</th><th>平均差</th><th>Holm 校正後 p</th><th>差異顯著</th></tr><tr><td>台南廠 − 台中廠</td><td>0.02</td><td>.76</td><td>否</td></tr><tr><td>台南廠 − 高雄廠</td><td>0.43</td><td>&lt; .001</td><td>是</td></tr><tr><td>台中廠 − 高雄廠</td><td>0.41</td><td>&lt; .001</td><td>是</td></tr></table></div>
+  <p>高雄廠的主管支持比台南廠、台中廠低約 0.4 分，台南廠與台中廠之間沒有差異。η² 為 .044，表示主管支持的個別差異大部分發生在同一廠區之內。下一步可以在高雄廠內再依部門下鑽，確認差距是全廠普遍偏低，還是集中在少數部門（做法同 <a href="#s5-8">5.8</a>）。</p>
+
+  <h2 id="s6-7">6.7 例二：職級 → 主管支持（沒有差異）</h2>
+  <div class="scrollx"><table class="mt"><tr><th>組別</th><th>n</th><th>平均數</th><th>標準差</th></tr><tr><td>基層員工</td><td>743</td><td>3.85</td><td>0.99</td></tr><tr><td>基層主管</td><td>161</td><td>3.93</td><td>0.91</td></tr><tr><td>中階主管</td><td>57</td><td>3.93</td><td>1.06</td></tr></table></div>
+  <p>F(2, 958) ＝ 0.54，p ＝ .59，η² ＝ .001。三個職級的主管支持平均相近，職級幾乎無法解釋主管支持的個別差異。F 不顯著，不需要做事後比較。</p>
+  <p>三組人數差距很大，Welch ANOVA 的結果相同（F ＝ 0.57，p ＝ .57）。這個結果同樣寫進報告：主管支持的高低與職級無關、與廠區有關，改善方案可以依廠區設計，不需要依職級區分。</p>
+
+  <h2 id="s6-8">6.8 事後比較的方法</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:24%">方法</th><th>做法</th><th style="width:28%">適用情況</th></tr>
+    <tr><td>Tukey HSD</td><td style="text-align:left">一次比較所有配對，把整組比較的誤判率控制在 5%；以各組共同的組內變異數計算</td><td style="text-align:left">各組變異數相近（Levene 不顯著）</td></tr>
+    <tr><td>Games-Howell</td><td style="text-align:left">目的與 Tukey 相同，但每一對使用該兩組各自的變異數與人數，概念上接近 Welch t 檢定</td><td style="text-align:left">各組變異數或人數差異大</td></tr>
+    <tr><td>Welch t 兩兩比較＋Holm 校正</td><td style="text-align:left">每一對做 Welch t 檢定，再依比較次數調整 p 值（Holm, 1979）</td><td style="text-align:left">本網站使用</td></tr>
+  </table></div>
+  <p>Holm 校正的做法：三個未校正的 p 由小到大排列，最小的乘以 3、第二小的乘以 2、最大的乘以 1；校正後的 p 若小於前一個，取前一個的值，超過 1 時記為 1。廠區的三組比較：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>比較</th><th>未校正 p</th><th>乘數</th><th>Holm 校正後 p</th></tr>
+    <tr><td>台南廠 − 高雄廠</td><td>4.1 × 10<sup>−9</sup></td><td>× 3</td><td>1.2 × 10<sup>−8</sup></td></tr><tr><td>台中廠 − 高雄廠</td><td>3.9 × 10<sup>−7</sup></td><td>× 2</td><td>7.8 × 10<sup>−7</sup></td></tr><tr><td>台南廠 − 台中廠</td><td>.76</td><td>× 1</td><td>.76</td></tr>
+  </table></div>
+  <p>在本資料中，三種方法的結論相同。AI 可能自行選用其中一種，提示詞中需要求它寫出使用的方法。</p>
+
+  <h2 id="s6-9">6.9 報告句與管理語言</h2>
+  <div class="scrollx"><table class="mt wide">
+    <tr><th style="width:14%">比較</th><th>APA 報告句</th><th style="width:34%">管理語言</th></tr>
+    <tr><td>廠區 → 主管支持</td><td style="text-align:left">三個廠區的主管支持有顯著差異，F(2, 958) ＝ 21.88，p &lt; .001，η² ＝ .044。事後比較（Welch t 檢定，Holm 校正）顯示，高雄廠（M ＝ 3.61）低於台南廠（M ＝ 4.04）與台中廠（M ＝ 4.02）。</td><td style="text-align:left">高雄廠的主管支持比另外兩個廠區低約 0.4 分；廠區只解釋主管支持差異的 4% 左右，同一廠區內員工之間的差異更大，改善方案需要再看部門與主管層級的資料。</td></tr>
+    <tr><td>職級 → 主管支持</td><td style="text-align:left">三個職級的主管支持沒有顯著差異，F(2, 958) ＝ 0.54，p ＝ .59，η² ＝ .001。</td><td style="text-align:left">基層員工、基層主管與中階主管對主管支持的評價相近，改善方案不需要依職級區分。</td></tr>
+  </table></div>
+
+  <h2 id="s6-10">6.10 常見誤解</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:32%">誤解</th><th>正確的理解</th></tr>
+    <tr><td style="text-align:left">F 顯著，代表每一組都不同</td><td style="text-align:left">F 顯著只表示至少有一組與其他組不同。廠區的事後比較中，台南廠與台中廠沒有差異。</td></tr>
+    <tr><td style="text-align:left">F 不顯著時，事後比較仍可以找出差異</td><td style="text-align:left">F 不顯著時不做事後比較。職級的三組比較，Holm 校正後 p 都在 .98 以上。</td></tr>
+    <tr><td style="text-align:left">三組以上用多次 t 檢定即可</td><td style="text-align:left">多次檢定的誤判會累積，三組約 14%（<a href="#s6-1">6.1</a>）。</td></tr>
+    <tr><td style="text-align:left">η² 小，代表分析沒有意義</td><td style="text-align:left">η² 描述組別解釋的比例。廠區 η² ＝ .044 表示高雄廠確實較低，但多數差異發生在廠區內，這也是改善方案需要的資訊。</td></tr>
+    <tr><td style="text-align:left">組別有差異，代表組別造成差異</td><td style="text-align:left">ANOVA 只比較分數，不檢驗原因（<a href="#s9-6">9.6</a>）。</td></tr>
+    <tr><td style="text-align:left">職級有高低順序，ANOVA 結果可以讀成趨勢</td><td style="text-align:left">單因子 ANOVA 不考慮組別的順序，只回答各組平均是否相同。</td></tr>
+  </table></div>
+
+  <h2 id="s6-11">6.11 操作步驟與注意事項</h2>
+  <div class="stepcard"><div class="sh">操作步驟：多組比較（單因子 ANOVA）</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">用一次檢定回答三組以上的平均是否全部相同，避免多次 t 檢定累積誤判。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>列出各組人數、平均、標準差</li><li>執行單因子 ANOVA，報告 F(df1, df2)、p、η²</li><li>同時做 Levene 檢定；顯著時以 Welch ANOVA 為準</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>df1 ＝ 組數 − 1，df2 ＝ 有效人數 − 組數（例如廠區：2 與 958）</li><li>各組人數相加等於有效人數</li><li>η² 介於 0 到 1，並與 F 的方向一致（F 很小時 η² 接近 0）</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>用多次 t 檢定取代 ANOVA</li><li>F 顯著就寫「各組都不同」；F 顯著只表示至少有一組與其他組不同</li><li>人數少於 5 人的組別仍單獨列出</li><li>把有順序的類別（例如職級）結果解讀成因果</li></ul></div></div>
+</div>
+  <div class="stepcard"><div class="sh">操作步驟：事後比較</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">F 顯著之後，找出哪幾組之間有差異，並控制多次比較的誤判。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>指定方法：Tukey HSD、Games-Howell，或 Welch t 兩兩比較加 Holm 校正</li><li>列出每一對的平均差與校正後 p</li><li>在報告中寫明方法名稱</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>比較次數 ＝ 組數 ×（組數 − 1）÷ 2（三組 3 次、五組 10 次）</li><li>表格中的 p 是校正後的值</li><li>AI 有寫出使用的方法</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>F 不顯著仍做事後比較，並報告其中一對顯著</li><li>沒有校正就逐對解讀</li><li>換了幾種方法，挑 p 最小的那一種報告</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>三組以上的比較以一次 ANOVA 取代多次 t 檢定，避免誤判累積。F 是組間均方相對於組內均方的比；η² 是組間平方和占總平方和的比例。Levene 檢定顯著時以 Welch ANOVA 為準。F 顯著時再做事後比較並寫出方法；F 不顯著時不做事後比較，結果同樣需要報告。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 5</div>
+    <div class="qbody">
+      <p>職級對主管支持的單因子 ANOVA：F(2, 958) ＝ 0.54，p ＝ .59，η² ＝ .001。下列何者正確？</p>
+      <label><input type="radio" name="q5" value="a"> 三個職級的主管支持平均相近，職級只解釋約 0.1% 的個別差異，不需要做事後比較</label><label><input type="radio" name="q5" value="b"> 仍應做事後比較，找出哪兩個職級不同</label><label><input type="radio" name="q5" value="c"> η² 太小，代表 ANOVA 算錯了</label><label><input type="radio" name="q5" value="d"> 中階主管只有 57 人，所以結果無效</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q5r" value="a"> F 不顯著時，一定是資料有錯</label><label><input type="radio" name="q5r" value="b"> 事後比較可以補救不顯著的 F</label><label><input type="radio" name="q5r" value="c"> η² 是組間差異占總變異的比例；F 不顯著時，沒有需要追查的組間差異</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q5c" value="低"> 低</label><label><input type="radio" name="q5c" value="中"> 中</label><label><input type="radio" name="q5c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q5','a','c','正確。F 不顯著的結果同樣寫進報告。','相關說明見 &lt;a href=&quot;#s6-4&quot;&gt;6.4&lt;/a&gt; 與 &lt;a href=&quot;#s6-7&quot;&gt;6.7&lt;/a&gt;：η² 的意思是什麼？','提示：F 不顯著時，還需要找哪兩組不同嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 6-2</div>
+    <div class="qbody">
+      <p>AI 回報三個廠區主管支持的 ANOVA：F(2, 958) ＝ 21.88，p &lt; .001，η² ＝ .044。一位主管據此認為：三個廠區的主管支持各不相同，而且廠區是主管支持高低的主要原因。下列何者最恰當？</p>
+      <label><input type="radio" name="q8" value="a"> 同意。F 顯著，代表三個廠區兩兩都不同</label><label><input type="radio" name="q8" value="b"> F 顯著只表示至少有一個廠區不同；事後比較顯示高雄廠低於另兩廠，台南廠與台中廠沒有差異；η² ＝ .044 表示廠區只解釋約 4% 的個別差異</label><label><input type="radio" name="q8" value="c"> η² 小於 .06，所以結果不顯著</label><label><input type="radio" name="q8" value="d"> 改做三次 t 檢定，結果比較精確</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q8r" value="a"> F 檢定的是各組平均是否全部相同；哪幾組不同看事後比較，差異大小看 η²</label><label><input type="radio" name="q8r" value="b"> η² 越小，p 一定越大</label><label><input type="radio" name="q8r" value="c"> 多次 t 檢定的誤判率與一次 ANOVA 相同</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q8c" value="低"> 低</label><label><input type="radio" name="q8c" value="中"> 中</label><label><input type="radio" name="q8c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q8','b','a','正確。F、事後比較與 η² 分別回答三個不同的問題；群組差異也不說明原因。','相關說明見 &lt;a href=&quot;#s6-4&quot;&gt;6.4&lt;/a&gt; 與 &lt;a href=&quot;#s6-8&quot;&gt;6.8&lt;/a&gt;：F 顯著之後，哪個結果說明哪幾組不同？','提示：F 顯著之後，還需要哪兩種資訊？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U7 查核 ==================== -->
+<section class="unit" id="u7">
+  <h1>單元七：人機雙重查核與檢核表</h1>
+  <div class="subtitle">human-in-the-loop verification；檢核表、同儕互查、獨立重跑、分析紀錄</div>
+  <h2 id="s7-1">7.1 查核的目的</h2>
+  <p>AI Agent 會實際執行程式，算術錯誤很少見。常見的問題是 AI 在沒有被指定的地方自行做了決定：整列刪除遺漏值、沒有發現對照表標錯的反向題、用了 Student t 檢定、做多次 t 檢定沒有校正，或把不顯著的結果寫成「有趨勢」。這些決定會改變結論，但回覆的語氣仍然很有把握。查核的目的是找出這些決定。</p>
+  <h2 id="s7-2">7.2 快速查核清單</h2>
+  <p>完成分析後逐項勾選。每一項都可以用數字核對，不依賴 AI 的自我陳述。</p>
+  <div class="chk"><label><input type="checkbox" onchange="chkCount()"> <span>人數：1,000 → 961，每一步刪除的人數與規則相符（直線作答 20 人、隨機亂填 19 人）</span></label><label><input type="checkbox" onchange="chkCount()"> <span>反向題：RET03 已轉換（RET01 與 RET03 的相關由負轉正）；AIA04 的方向有被發現並說明</span></label><label><input type="checkbox" onchange="chkCount()"> <span>遺漏值：沒有整列刪除；各構面有效人數接近 961，不是 468</span></label><label><input type="checkbox" onchange="chkCount()"> <span>信度：比較之前檢查 α；低於 .70 的構面不直接拿來比較</span></label><label><input type="checkbox" onchange="chkCount()"> <span>檢定選擇：兩組用 Welch t 檢定；三組以上用 ANOVA，並說明事後比較方法</span></label><label><input type="checkbox" onchange="chkCount()"> <span>效果量：每個比較都有 d 或 η²，判讀依效果量大小，不只看 p 值</span></label><label><input type="checkbox" onchange="chkCount()"> <span>匿名門檻：少於 5 人的單位不單獨呈現（本資料：台中廠法務智財部 4 人、高雄廠永續發展室 3 人）</span></label><label><input type="checkbox" onchange="chkCount()"> <span>自行重算一項：例如在 Excel 對原始資料題目欄（G2:AI1001）用 COUNTBLANK，應得 696 格空白</span></label></div>
+  <p id="chkNote" style="color:var(--muted);font-size:14px">已完成 0／8 項。</p>
+  <h2 id="s7-3">7.3 分析檢核表（Excel）</h2>
+  <p><a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 07 分析檢核表（Excel）</a>。上面的快速清單用於自我檢查；檢核表用於正式的互查與作業繳交，有三個工作表：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">工作表</th><th>內容</th><th style="width:30%">由誰填寫</th></tr>
+    <tr><td>檢核表</td><td style="text-align:left">19 個檢核項目，依步驟排列（0 規劃、1 清理、2 信度、3 t 檢定、4 ANOVA、5 查核）。每一項有「怎麼檢查」與「預期結果（課堂練習資料）」，例如清理後人數 961、AIA α −.11</td><td style="text-align:left">分析者填「我的結果」「一致？」；檢核者逐項確認並簽名；不一致時寫下原因與處理</td></tr>
+    <tr><td>分析紀錄</td><td style="text-align:left">每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人／AI）、確認者。已附兩列範例</td><td style="text-align:left">分析者在分析過程中隨時填寫</td></tr>
+    <tr><td>使用說明</td><td style="text-align:left">六個使用步驟，以及數字允許差異的規則（見 <a href="#s7-7">7.7</a>）</td><td style="text-align:left">分析者與檢核者開始前先讀</td></tr>
+  </table></div>
+
+  <h2 id="s7-4">7.4 審查機制：四道查核</h2>
+  <p>不同人用 AI 做同一份分析，可能得到不同的數字。下面四道查核依序進行，目的是讓每一份分析都經過分析者以外的人或對話核對。</p>
+  <div class="flow">
+    <div class="fbox q">1　自我查核：分析者對照檢核表的預期結果，填寫「我的結果」</div><div class="farrow">↓</div>
+    <div class="fbox">2　同儕互查：檢核者看分析者的對話紀錄與程式碼，逐項確認（<a href="#s7-5">7.5</a>）</div><div class="farrow">↓</div>
+    <div class="fbox">3　獨立重跑：用新對話或另一個 AI 工具重算關鍵數字（<a href="#s7-6">7.6</a>）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">4　差異處理與紀錄：依容許差異規則判斷，寫進分析紀錄（<a href="#s7-7">7.7</a>、<a href="#s7-8">7.8</a>）</div>
+  </div>
+
+  <h2 id="s7-5">7.5 同儕互查</h2>
+  <ol class="steps">
+    <li>A 完成分析，保存完整對話、程式碼，並填好檢核表的「我的結果」與分析紀錄</li>
+    <li>A 把對話連結或匯出的對話紀錄、程式碼、檢核表交給 B</li>
+    <li>B 依檢核表逐項確認：看 A 的對話中 AI 回報的人數與數字，並在程式碼中找關鍵的幾行，例如有沒有 dropna()、有沒有「7 −」、t 檢定有沒有 equal_var=False</li>
+    <li>B 在「檢核者」欄簽名；不一致的項目寫下原因，交回 A 修正</li>
+    <li>A 與 B 交換角色，B 的分析由 A 檢核</li>
+  </ol>
+  <p>檢核者只核對，不代替分析者重做分析，也不修改分析者的結果。檢核者看到的是對話與程式碼，所以分析者要保存完整的對話，不只保存最後的結果。</p>
+
+  <h2 id="s7-6">7.6 獨立重跑：另一個對話的查核</h2>
+  <p>獨立重跑的做法是開一個新對話（可以是另一個 AI 工具），上傳同一份資料與第一個對話整理出的程式碼，由它擔任查核者，依規則自行重算，再和程式的結果比對。新對話沒有第一個對話的上下文，不會沿用第一個對話中的假設。兩個對話的數字一致，可信度較高；不一致時，比較兩份程式，找出設定不同的地方。</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳兩個檔案：一份員工調查的 Excel 原始資料，以及另一個 AI 對話產生的分析程式碼。
+請你擔任查核者，不要直接沿用這份程式，依下列規則自己重算一次，再和程式的結果比對：
+1. 直線作答（29 題全部相同）與隨機亂填（計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者）各刪除幾人、剩下幾人，並回報實際門檻值。
+2. RET03 依題目對照表以 7 減原始分數轉換；計算構面分數時，該構面答了一半以上題目就取平均，不整列刪除。
+3. 直接人員與間接人員的敬業度：兩組人數、平均、Welch t、p、Cohen&#x27;s d。
+用表格列出「你的結果」與「程式的結果」，數字不同的地方請說明可能原因。</pre></div>
+
+  <h2 id="s7-7">7.7 數字允許的差異</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:30%">差異</th><th style="width:16%">判斷</th><th>處理方式</th></tr>
+    <tr><td style="text-align:left">小數第二位不同，例如 d ＝ .70 與 .71</td><td>可接受</td><td style="text-align:left">不同軟體（例如 JASP 與 Python）的計算方式與四捨五入可能不同（d 的例子見 <a href="#s5-9">5.9</a>），在報告中寫明使用的軟體與方法</td></tr>
+    <tr><td style="text-align:left">人數不同</td><td>必須說明</td><td style="text-align:left">檢查清理規則、遺漏值處理、分組定義</td></tr>
+    <tr><td style="text-align:left">正負號相反</td><td>必須說明</td><td style="text-align:left">檢查組別順序（第一組減第二組）與反向題轉換</td></tr>
+    <tr><td style="text-align:left">顯著與否不同</td><td>必須說明</td><td style="text-align:left">檢查檢定方法（Welch 或 Student）、事後比較的校正方法、人數</td></tr>
+  </table></div>
+  <p>「必須說明」的差異，找出原因後寫進檢核表的「不一致的原因與處理」欄，並把最後採用的做法寫進分析紀錄。</p>
+
+  <h2 id="s7-8">7.8 分析紀錄</h2>
+  <p>分析紀錄（decision log）記下每一個需要人決定的事項，以及誰提出、誰確認。之後有人問「為什麼刪掉這 39 人」或「AIA04 為什麼要轉換」，可以從紀錄中找到答案。下表是檢核表中「分析紀錄」工作表的欄位與範例：</p>
+  <div class="scrollx"><table class="mt"><tr><th>日期</th><th>步驟</th><th>決定的事項</th><th>選擇</th><th>理由</th><th>由誰提出（人／AI）</th><th>確認者</th></tr><tr><td style="text-align:left">2026/11/06</td><td style="text-align:left">清理</td><td style="text-align:left">隨機亂填門檻</td><td style="text-align:left">ENG 標準差 &gt; 平均＋3 個標準差（1.32）</td><td style="text-align:left">分析前訂定規則；門檻由資料分布計算</td><td style="text-align:left">人</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">2026/11/06</td><td style="text-align:left">信度</td><td style="text-align:left">AIA04 是否轉換</td><td style="text-align:left">轉換</td><td style="text-align:left">題目語意反向，題目負責人確認對照表誤植</td><td style="text-align:left">AI 提出，人確認</td><td style="text-align:left"></td></tr></table></div>
+  <p>需要寫進分析紀錄的事項包括：草率作答的規則與門檻、反向題（含對照表與題目文字不一致的題目）、遺漏值的處理方式、分組方式、檢定與事後比較方法、未單獨呈現的小群組。</p>
+
+  <h2 id="s7-9">7.9 AI 常見的做法與後果</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>AI 可能的做法</th><th>在本資料中的結果</th><th>查核方式</th></tr>
+    <tr><td style="text-align:left">整列刪除有遺漏的人</td><td style="text-align:left">只剩 468 人</td><td style="text-align:left">看各構面有效人數</td></tr>
+    <tr><td style="text-align:left">沒有轉換 RET03</td><td style="text-align:left">RET01 與 RET03 的相關為 −0.64</td><td style="text-align:left">要求 AI 回報轉換前後的相關</td></tr>
+    <tr><td style="text-align:left">沒發現 AIA04 方向</td><td style="text-align:left">AIA α ＝ −.11，照樣算構面分數</td><td style="text-align:left">比較前檢查 α 與題目與總分相關</td></tr>
+    <tr><td style="text-align:left">只報 p 值</td><td style="text-align:left">把 p ＝ .080 的直接／間接人員差距寫成「有趨勢」</td><td style="text-align:left">要求每個比較附 d 或 η²</td></tr>
+    <tr><td style="text-align:left">三組以上做多次 t 檢定</td><td style="text-align:left">誤判機率升高（三組約 14%）</td><td style="text-align:left">確認先做 ANOVA，事後比較有校正</td></tr>
+  </table></div>
+  <h2 id="s7-10">7.10 報告撰寫與 AI 使用的揭露</h2>
+  <p>報告的方法段落寫出：使用哪一個 AI 工具與日期、AI 執行了哪些步驟、哪些決定由人指定（清理規則、遺漏值、檢定方法）、用什麼方式查核（檢核表、同儕互查、第二個對話、Excel 重算）。附錄附上完整程式碼與對話紀錄，讓別人可以重現。</p>
+  <div class="stepcard"><div class="sh">操作步驟：撰寫報告</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">讓讀者知道結果是什麼、差距多大、怎麼算出來，以及能不能據以採取行動。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>結論先寫，數字附在後面（APA：t(df)、p、d；F(df1, df2)、p、η²）</li><li>寫明人數、清理規則與遺漏值處理方式</li><li>少於 5 人的群組不單獨呈現</li><li>方法段寫出 AI 工具與日期、由人做的決定、查核方式</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>報告中的每個數字都能在程式輸出中找到</li><li>小數兩位，p 小於 .001 寫成 p &lt; .001</li><li>每個差異都附效果量</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>把 AI 草擬的文字直接貼上，沒有逐句核對數字</li><li>把「顯著」寫成「重要」或「嚴重」</li><li>用因果語言，例如「廠區造成主管支持偏低」</li><li>報告中出現可以推知個人的小群組結果</li></ul></div></div>
+</div>
+  <h2 id="s7-11">7.11 個人分析作業</h2>
+  <p>個人分析作業（25%，2026/11/26 23:59 截止）的資料、報告架構、繳交項目與評分方式見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。</p>
+  <div class="key"><span class="lb">本單元要點</span>查核的對象是 AI 自行做的決定。分析者先對照檢核表自我查核，再由同學看對話與程式碼互查，並用新對話獨立重跑關鍵數字。小數第二位的差異寫明方法即可；人數、正負號、顯著與否不同，必須找出原因。每一個人做的決定都寫進分析紀錄。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 6</div>
+    <div class="qbody">
+      <p>AI 回報「已完成清理，有效樣本 961 人」。下列哪一項查核，最能確認 AI 計算構面分數時沒有整列刪除？</p>
+      <label><input type="radio" name="q6" value="a"> 問 AI：「你有沒有整列刪除？」</label><label><input type="radio" name="q6" value="b"> 確認 AI 回答的語氣是否有把握</label><label><input type="radio" name="q6" value="c"> 看每個構面的有效人數：應接近 961（例如認可與回饋 958 人）；若只有 468 人，代表做了整列刪除</label><label><input type="radio" name="q6" value="d"> 檢查 p 值是否都小於 .05</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q6r" value="a"> AI 不會說謊，所以問它就好</label><label><input type="radio" name="q6r" value="b"> 問 AI 得到的是它的自我陳述；人數是可以用資料核對的結果</label><label><input type="radio" name="q6r" value="c"> p 值顯著代表資料處理正確</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q6c" value="低"> 低</label><label><input type="radio" name="q6c" value="中"> 中</label><label><input type="radio" name="q6c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q6','c','b','正確。用可核對的數字查核，不依賴 AI 的自我陳述。','相關說明見 &lt;a href=&quot;#s7-2&quot;&gt;7.2&lt;/a&gt;：哪些項目可以用數字核對？','提示：哪一個數字會直接反映整列刪除？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U8 實機練習 ==================== -->
+<section class="unit" id="u8">
+  <h1>單元八：實機練習</h1>
+  <div class="subtitle">六輪提示詞與答案對照</div>
+  <ol class="steps">
+    <li><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料</a>，開啟 ChatGPT 或 Claude 網頁版的新對話，上傳 Excel 檔</li>
+    <li>在同一個對話中，依序貼上第 0 輪到第 5 輪的提示詞（按「複製」）</li>
+    <li>每一輪看完 AI 的結果，按「看答案」對照，數字對得上再貼下一輪</li>
+    <li>數字不同時，要求 AI 說明做法，對照單元三至六找出設定不同的地方</li>
+    <li>AI 不再遵守前面的規則時，要求它寫階段摘要，開新對話貼上摘要後繼續（<a href="#s2-9">2.9</a>）</li>
+    <li>完成後填寫<a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，再與同學交換互查（單元七）</li>
+  </ol>
+  <div class="note"><span class="lb">提醒</span>答案由課程的分析程式計算。AI 使用的方法不同時，小數第二位可能略有差異；人數、方向與結論應該一致。</div>
+  <div class="round">
+  <div class="rhead">第 0 輪：規劃（不執行）</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳一份員工意見調查的模擬資料（Excel，三個工作表）。請先讀完「題目對照表」與「構面與計分說明」，再看「原始資料」。
+這一輪先不要計算，請用條列回答：
+1. 資料有幾列、幾個題目、哪些是人口變項。
+2. 你打算怎麼清理資料（依序列出步驟）。
+3. 有哪些決定需要我確認後才能執行。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p><b>查核重點</b></p><ul>
+<li>AI 有沒有提到反向題 RET03、遺漏值、草率作答三件事。</li>
+<li>AI 是否主動詢問遺漏值要刪除還是保留。</li>
+<li>AI 是否遵守「這一輪先不要計算」。若 AI 已開始計算，要求它停止，計畫確認後再執行。</li></ul>
+<p>資料有 1,000 列、29 個李克特題目（6 點量表）與 2 題開放題；人口變項為廠區、部門、職級、人員類別、年資。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 1 輪：清理</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依下列規則清理資料，每一步都告訴我剩下幾人：
+1. 直線作答：29 題全部填同一個數字的人，刪除。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
+3. 反向題：依題目對照表，把標示「反向」的題目用 7 減原始分數轉換。
+4. 遺漏值：不要整列刪除。計算構面分數時，該構面答了一半以上題目，就取已作答題目的平均；不到一半則該構面記為遺漏。
+最後列出被刪除的員工編號，並說明每個規則各刪了幾人。
+清理後的資料請存成 CSV 讓我下載：保留人口變項與 29 題（反向題已轉換），加上六個構面分數，以及「單位分組」（高雄廠生產部與品保部／其他單位）與「年資組」（1 未滿1年、2 1-3年、3 3-5年、4 5-10年、5 10年以上）兩欄。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class="scrollx"><table class="mt"><tr><th>項目</th><th>正確答案</th></tr>
+<tr><td>原始人數</td><td>1,000</td></tr>
+<tr><td>直線作答</td><td>20 人</td></tr>
+<tr><td>隨機亂填（ENG 標準差高於平均＋3 個標準差）</td><td>19 人（門檻 ＝ 0.69 ＋ 3 × 0.21 ＝ 1.32）</td></tr>
+<tr><td>清理後人數</td><td>961</td></tr>
+<tr><td>遺漏格數</td><td>696 格（2.4%），493 人至少缺一題</td></tr>
+<tr><td>若整列刪除</td><td>只剩 468 人（清理後），樣本少一半</td></tr>
+<tr><td>RET01 與 RET03 相關</td><td>轉換前 −0.64，轉換後 0.64</td></tr>
+</table></div>
+<p>直線作答：E0020、E0042、E0047、E0152、E0167、E0223、E0233、E0265、E0348、E0360、E0373、E0399、E0508、E0745、E0810、E0826、E0840、E0843、E0870、E0899。</p><p>隨機亂填：E0012、E0038、E0286、E0356、E0382、E0384、E0389、E0453、E0476、E0550、E0604、E0618、E0647、E0650、E0676、E0679、E0830、E0848、E0992。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 2 輪：信度</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請計算六個構面的 Cronbach&#x27;s α（反向題已轉換）。
+如果有構面的 α 低於 .70，請列出該構面每一題的「題目與總分相關（扣除該題）」，並回到題目對照表看題目文字，說明可能的原因。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class='scrollx'><table class='mt'><tr><th>構面</th><th>編碼</th><th>α</th></tr><tr><td>敬業度</td><td>ENG</td><td>.95</td></tr><tr><td>主管支持</td><td>SUP</td><td>.88</td></tr><tr><td>認可與回饋</td><td>REC</td><td>.87</td></tr><tr><td>組織承諾</td><td>COM</td><td>.87</td></tr><tr><td>留任意願</td><td>RET</td><td>.84</td></tr><tr><td>AI 導入態度</td><td>AIA</td><td>−.11</td></tr></table></div><p>AIA 題目與總分相關：AIA01 .37、AIA02 .31、AIA03 .35、<b>AIA04 −.67</b>。AIA04「我擔心 AI 會取代我目前的工作」語意與其他三題相反，題目對照表卻標「正向」。確認為對照表誤植後，轉換 AIA04，α ＝ .82，構面以四題計算，並在報告中說明這項修正。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 3 輪：獨立樣本 t 檢定</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把「高雄廠的生產部與品保部」設為一組，其他所有人為另一組，比較兩組在敬業度、主管支持、認可與回饋、組織承諾、留任意願五個構面分數的差異。
+請用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d。用表格列出兩組人數、平均、標準差、t、p、d。
+接著用同樣方法比較「直接人員」與「間接人員」的敬業度與留任意願。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class='scrollx'><table class='mt'><tr><th>比較</th><th>構面</th><th>編碼</th><th>平均（組 1／組 2）</th><th>t</th><th>p</th><th>d</th></tr><tr><td>高雄廠生產部＋品保部（175）vs 其他（786）</td><td>敬業度</td><td>ENG</td><td>3.31／4.03</td><td>−10.26</td><td>&lt; .001</td><td>−0.91</td></tr><tr><td></td><td>主管支持</td><td>SUP</td><td>3.12／4.04</td><td>−12.03</td><td>&lt; .001</td><td>−1.00</td></tr><tr><td></td><td>認可與回饋</td><td>REC</td><td>2.80／3.61</td><td>−9.44</td><td>&lt; .001</td><td>−0.78</td></tr><tr><td></td><td>組織承諾</td><td>COM</td><td>3.15／3.66</td><td>−5.66</td><td>&lt; .001</td><td>−0.48</td></tr><tr><td></td><td>留任意願</td><td>RET</td><td>3.04／3.71</td><td>−8.21</td><td>&lt; .001</td><td>−0.71</td></tr><tr><td>直接人員（537）vs 間接人員（424）</td><td>敬業度</td><td>ENG</td><td>3.85／3.95</td><td>−1.75</td><td>.080</td><td>−0.11</td></tr><tr><td></td><td>留任意願</td><td>RET</td><td>3.54／3.65</td><td>−1.72</td><td>.085</td><td>−0.11</td></tr></table></div><p>各構面的人數因遺漏值略有不同（例如認可與回饋為 175 與 783 人）。p 值極小時寫成 p &lt; .001。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 4 輪：單因子 ANOVA</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請用單因子變異數分析比較：
+1. 不同年資（未滿1年、1-3年、3-5年、5-10年、10年以上）的留任意願。
+2. 不同廠區的主管支持。
+3. 不同職級的主管支持。
+每一項請報告各組人數與平均、F、p、η²，以及 Levene 檢定結果；若 F 顯著，再做事後比較（說明你用的方法），列出哪幾組有差異。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class='scrollx'><table class='mt'><tr><th>比較</th><th>各組平均</th><th>F</th><th>p</th><th>η²</th><th>事後比較</th></tr><tr><td>年資 → 留任意願</td><td style='text-align:left'>未滿1年 3.60、1-3年 3.18、3-5年 3.50、5-10年 3.79、10年以上 3.80</td><td>F(4, 954) ＝ 14.69</td><td>&lt; .001</td><td>.058</td><td style='text-align:left'>1–3 年低於其他各組；3–5 年低於 5 年以上兩組</td></tr><tr><td>廠區 → 主管支持</td><td style='text-align:left'>台南廠 4.04、台中廠 4.02、高雄廠 3.61</td><td>F(2, 958) ＝ 21.88</td><td>&lt; .001</td><td>.044</td><td style='text-align:left'>高雄廠低於台南廠、台中廠</td></tr><tr><td>職級 → 主管支持</td><td style='text-align:left'>基層員工 3.85、基層主管 3.93、中階主管 3.93</td><td>F(2, 958) ＝ 0.54</td><td>.59</td><td>.001</td><td style='text-align:left'>F 不顯著，不需事後比較</td></tr></table></div><p>Levene 檢定三項皆不顯著（p ＝ .87、.16、.33）。Welch ANOVA 的結論相同（F ＝ 15.46、21.13、0.57）。事後比較用 Welch t 兩兩比較加 Holm 校正；AI 若用 Tukey 或 Games-Howell，結論相同。</p><p>年資的事後比較（Holm 校正後 p）：</p><div class="scrollx"><table class="mt"><tr><th>比較</th><th>平均差</th><th>Holm 校正後 p</th><th>差異顯著</th></tr><tr><td>未滿1年 − 1-3年</td><td>0.42</td><td>.002</td><td>是</td></tr><tr><td>未滿1年 − 3-5年</td><td>0.11</td><td>.72</td><td>否</td></tr><tr><td>未滿1年 − 5-10年</td><td>−0.19</td><td>.32</td><td>否</td></tr><tr><td>未滿1年 − 10年以上</td><td>−0.20</td><td>.32</td><td>否</td></tr><tr><td>1-3年 − 3-5年</td><td>−0.32</td><td>.013</td><td>是</td></tr><tr><td>1-3年 − 5-10年</td><td>−0.61</td><td>&lt; .001</td><td>是</td></tr><tr><td>1-3年 − 10年以上</td><td>−0.62</td><td>&lt; .001</td><td>是</td></tr><tr><td>3-5年 − 5-10年</td><td>−0.30</td><td>.013</td><td>是</td></tr><tr><td>3-5年 − 10年以上</td><td>−0.30</td><td>.014</td><td>是</td></tr><tr><td>5-10年 − 10年以上</td><td>−0.01</td><td>.95</td><td>否</td></tr></table></div></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 5 輪：雙重查核</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把你這次對話用到的完整程式碼整理成一份，並用表格列出：每一步做了什麼、處理了幾人、做了哪些假設。
+最後請自我檢查：有沒有哪一步是你自行決定、但我沒有指定的？</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p><b>人工查核清單</b></p><ol>
+<li>人數：1,000 → 961，每個構面的有效人數對得上（敬業度 961、主管支持 961、認可與回饋 958、組織承諾 957、留任意願 959）。</li>
+<li>反向題：RET03 有轉換，AIA04 有被發現並說明。</li>
+<li>遺漏值：沒有整列刪除（若只剩 400 多人，代表 AI 做了整列刪除）。</li>
+<li>檢定選擇：t 檢定用 Welch；ANOVA 有報告 η² 與事後比較方法。</li>
+<li>效果量：只看 p 值，會把直接／間接人員約 0.1 分的差距說成「有差異趨勢」；d ＝ −0.11 屬於很小。</li>
+<li>小群組：台中廠法務智財部 4 人、高雄廠永續發展室 3 人，報告部門結果時不單獨呈現。</li>
+<li>以自己的工具重算一項：例如把 Excel 算出的平均與 AI 給的平均對照。</li></ol>
+<p><b>常見錯誤對照</b></p>
+<div class="scrollx"><table class="mt"><tr><th>AI 可能的做法</th><th>結果</th><th>錯誤原因</th></tr>
+<tr><td style="text-align:left">整列刪除有遺漏的人</td><td style="text-align:left">只剩 468 人</td><td style="text-align:left">每人最多只缺 5 題，刪掉一半樣本浪費資訊，也可能造成偏誤</td></tr>
+<tr><td style="text-align:left">沒轉換 RET03（同時未清理）</td><td style="text-align:left">問題單位與其他單位的留任落差，d 從 −0.71 縮小到 −0.42</td><td style="text-align:left">構面分數混入方向相反的題目</td></tr>
+<tr><td style="text-align:left">沒發現 AIA04</td><td style="text-align:left">AIA α ＝ −.11，卻照樣算構面分數</td><td style="text-align:left">信度不足的構面，平均數沒有意義</td></tr>
+<tr><td style="text-align:left">只報 p 值</td><td style="text-align:left">「直接人員敬業度較低（p ＝ .080）」</td><td style="text-align:left">p 不顯著，且 d ＝ −0.11，管理上沒有意義</td></tr>
+</table></div></div>
+  </div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>練習流程為規劃、執行、逐輪對照答案；數字對不上時，從 AI 自行做的決定找原因，再修改提示詞。</div>
+</section>
+
+<!-- ==================== U9 其他學習重點 ==================== -->
+<section class="unit" id="u9">
+  <h1>單元九：其他學習重點</h1>
+  <div class="subtitle">資料隱私、AI 幻覺、可重現性、分析紀錄、管理語言、因果推論、匿名門檻</div>
+  <h2 id="s9-1">9.1 資料隱私與去識別化</h2>
+  <p>員工調查的資料包含個人對主管與公司的看法，外流會傷害填答者，也會降低之後的回收率與作答誠實度。上傳到任何 AI 工具之前，先刪除姓名、員工編號等識別欄位，合併人數很少的單位，遮蔽開放題中的人名與事件，並使用公司核准的工具（做法見 <a href="#s2-11">2.11</a>）。</p>
+  <h2 id="s9-2">9.2 AI 幻覺與數字來源</h2>
+  <p>語言模型可能產生看起來合理、但沒有根據的內容，稱為幻覺（hallucination）。在資料分析中，常見的情況是：沒有執行程式就回報平均數或 p 值、聲稱做了某個步驟但程式中沒有、引用不存在的文獻。採用的規則：每個數字都要能在程式輸出中找到；AI 引用的文獻，查到 DOI 或原文再使用。</p>
+  <h2 id="s9-3">9.3 可重現性與分析檔案的保存</h2>
+  <p>同一則提示詞在不同時間、不同工具執行，AI 寫出的程式可能不同，例如選了不同的事後比較方法，或用了不同的遺漏值處理。因此每次分析保存四樣東西：資料檔的版本、最後整理的完整程式碼、使用的工具與日期、對話紀錄。用保存的程式碼重新執行，應得到相同的數字。不同軟體之間小數第二位的差異屬於正常（見 <a href="#s7-7">7.7</a>）。</p>
+  <h2 id="s9-4">9.4 分析紀錄</h2>
+  <p>分析紀錄記下每一個需要人決定的事項、理由與確認者（見 <a href="#s7-8">7.8</a>）。報告交出去幾個月後，主管或下一位承辦人問起「為什麼刪掉這些人」「這一題為什麼反向計分」，分析紀錄可以回答；沒有紀錄時，只能靠記憶，或重新分析一次。</p>
+  <h2 id="s9-5">9.5 統計結果的管理語言</h2>
+  <p>主管需要知道差距有多大、影響哪些人、下一步做什麼。報告先寫管理上的意思，統計數字放在後面或附錄。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:42%">統計結果</th><th>管理語言</th></tr>
+    <tr><td style="text-align:left">直接與間接人員的敬業度：p ＝ .080，d ＝ −0.11</td><td style="text-align:left">兩類人員的敬業度相近，提升敬業度的方案不需要依人員類別分開設計。</td></tr>
+    <tr><td style="text-align:left">高雄廠生產部與品保部的認可與回饋：d ＝ −0.78；組織承諾：d ＝ −0.48</td><td style="text-align:left">這兩個部門的認可與回饋明顯低於其他單位，平均約低 0.8 分（6 點量表）；組織承諾的落差約為一半。建議先了解這兩個部門表現回饋與肯定的做法。</td></tr>
+    <tr><td style="text-align:left">廠區 → 主管支持：η² ＝ .044，高雄廠較低</td><td style="text-align:left">高雄廠的主管支持低於另外兩個廠區約 0.4 分；同一廠區內個人之間的差異更大，改善方案要再看部門與主管層級的資料。</td></tr>
+    <tr><td style="text-align:left">職級 → 主管支持：p ＝ .59</td><td style="text-align:left">基層員工與主管對主管支持的評價相近，不需要依職級設計不同的方案。</td></tr>
+  </table></div>
+  <p>寫成管理語言時，保留不確定性：用「低於」「相近」描述差距，不用「造成」「導致」；說明結果適用的範圍（哪些單位、多少人）。</p>
+  <h2 id="s9-6">9.6 群組比較與因果推論</h2>
+  <p>t 檢定與 ANOVA 只說明各組分數不同，不說明為什麼不同。高雄廠的主管支持較低，可能和主管的做法有關，也可能和該廠的人員組成（例如人員類別、年資）或近期的組織調整有關。要接近原因，可以同時納入其他變項（下週 Topic 08 的迴歸分析）、比較不同年度的資料，或用訪談與開放題（Topic 09）了解員工的說法。</p>
+  <h2 id="s9-7">9.7 匿名門檻與小群組</h2>
+  <ul>
+    <li>人數少於 5 人的群組不單獨呈現結果（本資料：台中廠法務智財部 4 人、高雄廠永續發展室 3 人）。</li>
+    <li>交叉表要逐格確認：廠區、部門各自人數足夠，交叉之後仍可能少於 5 人。</li>
+    <li>避免推算：公布了全廠平均與其他部門平均時，剩下的小部門平均可以被推算出來。小部門併入「其他」，或只呈現更高一層的結果。</li>
+    <li>開放題的原文引用也可能透露身分，引用前刪除可辨識的細節。</li>
+  </ul>
+  <div class="key"><span class="lb">本單元要點</span>上傳前去識別化；沒有程式碼的數字不採用；保存程式碼、資料版本與對話，讓分析可以重現；每個人做的決定寫進分析紀錄；報告用管理語言並保留不確定性；群組差異不等於原因；少於 5 人的群組不呈現，也要防止被推算。</div>
+</section>
+
+<!-- ==================== U10 文獻 ==================== -->
+<section class="unit" id="u10">
+  <h1>單元十：參考文獻與名詞對照</h1>
+  <h2>參考文獻</h2>
+  <div class="refline">Cohen, J. (1988). <i>Statistical power analysis for the behavioral sciences</i> (2nd ed.). Lawrence Erlbaum Associates.</div><div class="refline">Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. <i>Psychometrika, 16</i>(3), 297–334. <a href="https://doi.org/10.1007/BF02310555" target="_blank" rel="noopener">https://doi.org/10.1007/BF02310555</a></div><div class="refline">Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch’s <i>t</i>-test instead of Student’s <i>t</i>-test. <i>International Review of Social Psychology, 30</i>(1), 92–101. <a href="https://doi.org/10.5334/irsp.82" target="_blank" rel="noopener">https://doi.org/10.5334/irsp.82</a></div><div class="refline">DeSimone, J. A., Harms, P. D., &amp; DeSimone, A. J. (2015). Best practice recommendations for data screening. <i>Journal of Organizational Behavior, 36</i>(2), 171–181. <a href="https://doi.org/10.1002/job.1962" target="_blank" rel="noopener">https://doi.org/10.1002/job.1962</a></div><div class="refline">Holm, S. (1979). A simple sequentially rejective multiple test procedure. <i>Scandinavian Journal of Statistics, 6</i>(2), 65–70.</div><div class="refline">Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for <i>t</i>-tests and ANOVAs. <i>Frontiers in Psychology, 4</i>, Article 863. <a href="https://doi.org/10.3389/fpsyg.2013.00863" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2013.00863</a></div><div class="refline">Meade, A. W., &amp; Craig, S. B. (2012). Identifying careless responses in survey data. <i>Psychological Methods, 17</i>(3), 437–455. <a href="https://doi.org/10.1037/a0028085" target="_blank" rel="noopener">https://doi.org/10.1037/a0028085</a></div><div class="refline">Newman, D. A. (2014). Missing data: Five practical guidelines. <i>Organizational Research Methods, 17</i>(4), 372–411. <a href="https://doi.org/10.1177/1094428114548590" target="_blank" rel="noopener">https://doi.org/10.1177/1094428114548590</a></div><div class="refline">Norman, G. (2010). Likert scales, levels of measurement and the “laws” of statistics. <i>Advances in Health Sciences Education, 15</i>(5), 625–632. <a href="https://doi.org/10.1007/s10459-010-9222-y" target="_blank" rel="noopener">https://doi.org/10.1007/s10459-010-9222-y</a></div><div class="refline">Schluntz, E., &amp; Zhang, B. (2024, December 19). <i>Building effective agents</i>. Anthropic. <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">https://www.anthropic.com/research/building-effective-agents</a></div><div class="refline">Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on <i>p</i>-values: Context, process, and purpose. <i>The American Statistician, 70</i>(2), 129–133. <a href="https://doi.org/10.1080/00031305.2016.1154108" target="_blank" rel="noopener">https://doi.org/10.1080/00031305.2016.1154108</a></div><div class="refline">Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., &amp; Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. In <i>Proceedings of the Eleventh International Conference on Learning Representations (ICLR 2023)</i>. <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">https://arxiv.org/abs/2210.03629</a></div>
+  <div class="note"><span class="lb">數字來源</span>本網站的數字全部計算自課程的員工調查模擬資料（教學模擬資料，非真實組織調查結果）。效果量的大小基準出自 Cohen（1988），為參考慣例，判讀時仍需考慮情境。</div>
+  <h2>專有名詞對照表</h2>
+  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>編碼簿</td><td>codebook</td><td style='text-align:left'>說明每個變項的代碼、題目、計分方向與遺漏值表示方式的文件；本資料為題目對照表與構面與計分說明</td></tr><tr id='g-2'><td>AI Agent</td><td>AI agent</td><td style='text-align:left'>能自行規劃步驟、呼叫工具（例如執行程式）、讀取結果並修正，直到完成任務的 AI 系統</td></tr><tr id='g-3'><td>任務規劃</td><td>planning</td><td style='text-align:left'>把一個分析目標拆成有順序的步驟</td></tr><tr id='g-4'><td>工具調用</td><td>tool use</td><td style='text-align:left'>AI 呼叫外部工具，例如程式執行環境、檔案讀取</td></tr><tr id='g-5'><td>程式執行</td><td>code execution</td><td style='text-align:left'>AI 寫出程式並在環境中實際執行，以執行結果回答</td></tr><tr id='g-6'><td>多 Agent 分工</td><td>multi-agent</td><td style='text-align:left'>由不同 Agent（或不同對話）分別負責規劃、執行與查核</td></tr><tr id='g-7'><td>上下文</td><td>context</td><td style='text-align:left'>AI 在一個對話中能參考的內容，包括提示詞、檔案、回覆與程式輸出；有長度上限</td></tr><tr id='g-8'><td>專案指示</td><td>project instructions</td><td style='text-align:left'>寫在 ChatGPT 或 Claude 專案中的背景與規則，專案內每個新對話都會套用</td></tr><tr id='g-9'><td>CLAUDE.md</td><td>CLAUDE.md</td><td style='text-align:left'>Claude Code 在資料夾啟動時讀取的專案記憶檔</td></tr><tr id='g-10'><td>Skill</td><td>skill</td><td style='text-align:left'>記錄某一類任務做法的檔案（SKILL.md），任務符合說明時由 Agent 載入</td></tr><tr id='g-11'><td>去識別化</td><td>de-identification</td><td style='text-align:left'>移除或改寫可辨識個人的資訊後再分析或分享資料：刪除識別欄位、重新編號、合併小群組、遮蔽開放題中的可辨識內容</td></tr><tr id='g-12'><td>幻覺</td><td>hallucination</td><td style='text-align:left'>語言模型產生看似合理但沒有根據的內容</td></tr><tr id='g-13'><td>可重現性</td><td>reproducibility</td><td style='text-align:left'>用相同的資料與程式重新執行，得到相同的結果</td></tr><tr id='g-14'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記錄分析中每一個由人決定的事項、理由與確認者</td></tr><tr id='g-15'><td>同儕互查</td><td>peer review</td><td style='text-align:left'>由另一位分析者依檢核表核對對話紀錄與程式碼</td></tr><tr id='g-16'><td>直線作答</td><td>straight-lining</td><td style='text-align:left'>所有題目都填同一個數字</td></tr><tr id='g-17'><td>隨機作答</td><td>random responding</td><td style='text-align:left'>不看題目隨意填答，同一構面的題目分數忽高忽低；本課程以敬業度 12 題的標準差高於全體平均＋3 個標準差判定</td></tr><tr id='g-18'><td>反向計分</td><td>reverse scoring</td><td style='text-align:left'>語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高</td></tr><tr id='g-19'><td>遺漏值</td><td>missing data</td><td style='text-align:left'>沒有作答的題目</td></tr><tr id='g-20'><td>整列刪除</td><td>listwise deletion</td><td style='text-align:left'>只要缺一題就刪除整個人</td></tr><tr id='g-21'><td>多重插補</td><td>multiple imputation</td><td style='text-align:left'>以統計模型多次估計遺漏的分數，分別分析後再合併結果；遺漏多或集中於某些群組時使用</td></tr><tr id='g-22'><td>構面分數</td><td>scale score</td><td style='text-align:left'>同一構面題目（反向題轉換後）的平均數</td></tr><tr id='g-23'><td>平均數</td><td>mean</td><td style='text-align:left'>全部分數加總後除以人數，代表一組的典型程度</td></tr><tr id='g-24'><td>標準差</td><td>standard deviation, SD</td><td style='text-align:left'>個人分數離平均的典型距離；數值越大，分數越分散</td></tr><tr id='g-25'><td>Cronbach’s α</td><td>Cronbach’s alpha</td><td style='text-align:left'>一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念</td></tr><tr id='g-26'><td>題目與總分相關</td><td>corrected item-total correlation</td><td style='text-align:left'>某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤</td></tr><tr id='g-27'><td>抽樣誤差</td><td>sampling error</td><td style='text-align:left'>只因抽到哪些人而產生的統計量變動</td></tr><tr id='g-28'><td>虛無假設</td><td>null hypothesis</td><td style='text-align:left'>假設母體中各組沒有差異，樣本中的差距完全來自抽樣誤差</td></tr><tr id='g-29'><td>p 值</td><td>p value</td><td style='text-align:left'>假設虛無假設為真時，觀察到目前這麼大或更大差距的機率；不是差距大小，也不是結論為真的機率</td></tr><tr id='g-30'><td>顯著水準</td><td>significance level</td><td style='text-align:left'>判斷顯著的門檻，慣例為 .05：p 小於 .05 稱為差異顯著</td></tr><tr id='g-31'><td>標準誤</td><td>standard error</td><td style='text-align:left'>平均差的不確定性：重複抽樣時，平均差通常變動的幅度</td></tr><tr id='g-32'><td>t 值</td><td>t statistic</td><td style='text-align:left'>平均差除以標準誤；絕對值越大，越不像只是抽樣誤差</td></tr><tr id='g-33'><td>自由度</td><td>degrees of freedom, df</td><td style='text-align:left'>把 t 或 F 換算成 p 值時使用的數字，主要由人數與組數決定</td></tr><tr id='g-34'><td>獨立樣本 t 檢定</td><td>independent-samples t test</td><td style='text-align:left'>比較兩個不同群體的平均數</td></tr><tr id='g-35'><td>Welch t 檢定</td><td>Welch’s t test</td><td style='text-align:left'>不假設兩組變異數相等的 t 檢定；本課程的預設</td></tr><tr id='g-36'><td>置換</td><td>permutation</td><td style='text-align:left'>隨機打亂組別標籤再計算差距，用來呈現兩組沒有差異時可能出現的差距</td></tr><tr id='g-37'><td>效果量</td><td>effect size</td><td style='text-align:left'>以標準化單位描述差距或關聯的大小，不隨樣本數變大而變大</td></tr><tr id='g-38'><td>Cohen’s d</td><td>Cohen’s d</td><td style='text-align:left'>兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大</td></tr><tr id='g-39'><td>合併標準差</td><td>pooled standard deviation</td><td style='text-align:left'>兩組標準差依人數加權合併的結果</td></tr><tr id='g-40'><td>單因子變異數分析</td><td>one-way ANOVA</td><td style='text-align:left'>以一次檢定比較三組以上的平均數是否全部相同</td></tr><tr id='g-41'><td>平方和</td><td>sum of squares, SS</td><td style='text-align:left'>差距平方後的加總；分為組間與組內</td></tr><tr id='g-42'><td>均方</td><td>mean square, MS</td><td style='text-align:left'>平方和除以自由度</td></tr><tr id='g-43'><td>F 值</td><td>F statistic</td><td style='text-align:left'>組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1</td></tr><tr id='g-44'><td>η²</td><td>eta squared</td><td style='text-align:left'>組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大</td></tr><tr id='g-45'><td>ω²</td><td>omega squared</td><td style='text-align:left'>修正 η² 高估傾向的效果量，數值略小於 η²</td></tr><tr id='g-46'><td>Levene 檢定</td><td>Levene’s test</td><td style='text-align:left'>檢定各組變異數是否相等；p 小於 .05 表示變異數不相等</td></tr><tr id='g-47'><td>Welch ANOVA</td><td>Welch’s ANOVA</td><td style='text-align:left'>不假設各組變異數相等的 ANOVA；Levene 檢定顯著時以它為準</td></tr><tr id='g-48'><td>事後比較</td><td>post hoc comparison</td><td style='text-align:left'>ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判</td></tr><tr id='g-49'><td>Tukey HSD</td><td>Tukey’s honestly significant difference</td><td style='text-align:left'>各組變異數相近時使用的事後比較，整組比較的誤判率控制在 5%</td></tr><tr id='g-50'><td>Games-Howell</td><td>Games-Howell test</td><td style='text-align:left'>各組變異數或人數差異大時使用的事後比較，每一對使用各自的變異數</td></tr><tr id='g-51'><td>Holm 校正</td><td>Holm correction</td><td style='text-align:left'>多次比較時調整 p 值：由小到大排列，依序乘以剩餘的比較次數</td></tr><tr id='g-52'><td>多重比較</td><td>multiple comparisons</td><td style='text-align:left'>同一份資料做多次檢定；次數越多，至少一次誤判的機率越高</td></tr><tr id='g-53'><td>族系錯誤率</td><td>familywise error rate</td><td style='text-align:left'>一組比較中至少出現一次誤判的機率</td></tr><tr id='g-54'><td>匿名門檻</td><td>anonymity threshold</td><td style='text-align:left'>群組人數少於門檻（本課程為 5 人）時不單獨呈現結果</td></tr></table></div>
+  <h2>相關主題</h2>
+  <ul>
+    <li><a href="../Topic03_測量基礎與題項設計/Topic03_測量基礎_課程網站.html" target="_blank" rel="noopener">Topic 03 測量基礎</a>：信度、反向題</li>
+    <li><a href="../Topic04_抽樣與資料品質/草率作答快篩_簡易版.html" target="_blank" rel="noopener">Topic 04 草率作答快篩</a>、<a href="../Topic04_抽樣與資料品質/Topic04_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">Topic 04 抽樣、匿名與信任</a>：草率作答規則、匿名門檻</li>
+    <li><a href="../Topic05_量表心理計量檢驗/Topic05_量表心理計量檢驗_課程網站.html" target="_blank" rel="noopener">Topic 05 量表心理計量檢驗</a>：α、題目與總分相關</li>
+    <li>Topic 08 驅動因子與迴歸（下週）：用清理後的構面分數找出影響留任意願的因素</li>
+    <li>Topic 09 開放題分析：本資料的兩題開放題（OE1、OE2）</li>
+    <li><a href="../../Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener">Topic 07 課堂投影片</a>、<a href="效果量計算器.html" target="_blank" rel="noopener">效果量計算器</a>、<a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>、<a href="../../Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">AI 分析設定範本</a></li>
+  </ul>
+</section>
+
+<footer class="site">本教學網站為單一 HTML 檔案。Topic 07：AI Agent 資料分析架構與量化實務（一）：清理與比較。所有數字計算自課程的教學模擬資料，非真實組織調查結果；文獻附 DOI 或網址（專書除外）。供教學使用。</footer>
+</main>
+</div>
+<script>
+window.QUIZ_TOTAL = 8;
+var MV = {"avail": {"ENG": 961, "SUP": 961, "REC": 958, "COM": 957, "RET": 959, "AIA": 961}, "lw": 468, "clean": 961}, DIMN = {"ENG": "敬業度", "SUP": "主管支持", "REC": "認可與回饋", "COM": "組織承諾", "RET": "留任意願", "AIA": "AI 導入態度"};
+function mvShow(i){
+  var btns=document.getElementById('mvBtns').getElementsByTagName('button');
+  for(var k=0;k<btns.length;k++){ btns[k].className=(k===i)?'pg-btn':'pg-btn ghost'; }
+  var s='<table class="mt" style="margin:0;"><tr><th>構面</th><th>編碼</th><th>有效人數</th><th>占清理後 '+MV.clean+' 人</th></tr>';
+  Object.keys(DIMN).forEach(function(k){
+    var n=(i===0)?MV.avail[k]:MV.lw;
+    s+='<tr><td>'+DIMN[k]+'</td><td>'+k+'</td><td style="font-weight:800;color:'+(i===0?'#337052':'#c0564f')+'">'+n+'</td><td>'+(n/MV.clean*100).toFixed(1)+'%</td></tr>';
+  });
+  s+='</table><p class="interp" style="margin-top:10px">'+(i===0
+    ?'構面答了一半以上題目就取平均：各構面幾乎保留全部樣本，只有少數人在某個構面缺題過多而記為遺漏。'
+    :'整列刪除：只要 29 題中缺一題就刪除整個人，每個構面都只剩 '+MV.lw+' 人。')+'</p>';
+  document.getElementById('mvOut').innerHTML=s;
+}
+function toggleAns(btn){
+  var box=btn.nextElementSibling, open=!box.classList.contains('show');
+  box.classList.toggle('show', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if(!btn.dataset.l) btn.dataset.l = btn.textContent;
+  btn.textContent = open ? (btn.dataset.l === '看答案' ? '收合答案' : '收合') : btn.dataset.l;
+}
+function chkCount(){
+  var all=document.querySelectorAll('.chk input'), n=0;
+  all.forEach(function(c){ c.closest('label').classList.toggle('done', c.checked); if(c.checked) n++; });
+  document.getElementById('chkNote').textContent='已完成 '+n+'／'+all.length+' 項。'+(n===all.length?'全部項目都已查核。':'');
+}
+
+/* ---- unit navigation ---- */
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+/* 小節連結：#s2-11 → 切換到所屬單元並捲到該節標題 */
+function goSec(id){
+  var el=document.getElementById(id); if(!el) return false;
+  var u=el.closest('.unit'); if(u && !u.classList.contains('active')) goUnit(u.id);
+  el.scrollIntoView({block:'start', behavior:'instant'});
+  if(history.replaceState) history.replaceState(null,'','#'+id);
+  return true;
+}
+document.addEventListener('click', function(e){
+  var a=e.target.closest && e.target.closest('a[href^="#s"],a[href^="#g-"]'); if(!a) return;
+  if(goSec(a.getAttribute('href').slice(1))) e.preventDefault();
+});
+/* 支援網址錨點深連結，例如 ...html#u3 切換到單元三、...html#s2-11 切換到 2.11 */
+if (location.hash) {
+  var hashTarget = document.querySelector('#nav a[data-u="' + location.hash.slice(1) + '"]');
+  if (hashTarget) hashTarget.click(); else goSec(location.hash.slice(1));
+}
+window.addEventListener('hashchange', function(){
+  var h=location.hash.slice(1), t=document.querySelector('#nav a[data-u="'+h+'"]');
+  if (t) t.click(); else goSec(h);
+});
+
+/* ---- two-stage two-tier calibration quiz ---- */
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標示信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板只記第一次作答，<a href="#u0" onclick="goUnit(\'u0\');return false;">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方確認理由。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，該單元說明理由的段落可再複習。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='這個理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板只記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+window.QUIZ_TOTAL+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未確認理由'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，對應單元可再複習。'; }
+  else if(n>0){ msg+='目前沒有高信心答錯的題目。'; }
+  noteEl.textContent=msg;
+}
+
+/* ---- copy prompt ---- */
+function copyCode(btn){
+  var txt=btn.parentElement.querySelector('pre').textContent;
+  function done(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); }
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ btn.textContent='請手動選取'; }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(txt).then(done, fallback); } else { fallback(); }
+}
+
+initQuizzes();
+mvShow(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 08：AI Agent 輔助量化實務（二）驅動因子與迴歸｜員工意向調查</title>
+<style>
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+.mini{width:100%;border-collapse:collapse;margin:10px 0}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mini{min-width:760px}
+.mini td,.mini th{white-space:nowrap;border:1px solid var(--line);padding:6px 8px;text-align:center;font-size:14px}
+.mini th{background:var(--lightblue);color:var(--navy)}
+.mini td.flag{background:#fdecec;color:#a33a32;font-weight:700}
+.mini td.ok{color:#337052;font-weight:700}
+.reveal-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.reveal-btn:active{transform:scale(.97)}
+.hide{display:none}
+.calc label{display:inline-block;padding:4px 0;cursor:pointer}
+.calc input{margin-right:8px}
+td.ans3.flag{background:#fdecec;color:#a33a32;font-weight:700}
+td.ans3.ok{color:#337052;font-weight:700}
+.adv{font-size:14px;color:var(--muted)}
+
+.pt{width:100%;border-collapse:collapse;margin:10px 0}
+.pt td,.pt th{border:1px solid var(--line);padding:7px 10px;text-align:center;font-size:14.5px}
+.pt{min-width:680px}
+.pt th{background:var(--lightblue);color:var(--navy);white-space:nowrap}
+.pt td:first-child{font-weight:700}
+.pt td.hi{font-weight:700;color:var(--navy)}
+.pick{display:flex;gap:6px;justify-content:center}
+.pick button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.pick button.sel-ok{background:var(--palegreen);border-color:var(--green);color:var(--green);font-weight:700}
+.pick button.sel-bad{background:#fdecec;border-color:#c0564f;color:#8f3a34;font-weight:700}
+.pt td.fb{font-size:13.5px;text-align:left;min-width:220px}
+.pt td.fb.ok{color:var(--green)} .pt td.fb.bad{color:#8f3a34}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.steps{counter-reset:s;list-style:none;padding-left:0}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radius:4px;font-size:13.5px}
+.mt{width:100%;border-collapse:collapse;margin:10px 0}
+.mt td,.mt th{border:1px solid var(--line);padding:6px 10px;text-align:center;font-size:14.5px}
+.mt th{background:var(--lightblue);color:var(--navy)}
+.mt tr.hg td{background:#EAF4EE}
+.mt tr.lg td{background:#FBF2E1}
+.calcbox{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;padding:12px 18px;margin:12px 0;font-size:15px;line-height:1.9}
+.zh{color:#7A2033;font-weight:700}
+.glos td:first-child{white-space:nowrap}
+
+.prompt pre{white-space:pre-wrap;word-break:break-word;padding-top:40px}
+.round{border:1px solid var(--line);border-radius:12px;margin:22px 0;background:#fff;overflow:hidden}
+.round .rhead{background:var(--navy);color:#fff;padding:10px 18px;font-weight:700;font-size:15px}
+.round .rbody{padding:14px 20px 18px}
+.ansbtn{background:#fff;color:var(--blue);border:1px solid var(--blue);border-radius:8px;padding:7px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.ansbtn:hover{background:var(--paleblue)}
+.ansbtn[aria-expanded=true]{background:var(--blue);color:#fff}
+.ans{display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.ans.show{display:block}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff;cursor:pointer;font-size:15px}
+.chk input{margin-top:7px}
+.chk label.done{background:var(--palegreen);border-color:var(--green)}
+.num{font-weight:700;color:var(--navy)}
+footer.site{max-width:1020px;margin:60px auto 0}
+h2[id],tr[id]{scroll-margin-top:84px}
+tr[id]:target td{background:var(--paleblue)}
+p.terms{font-size:13.5px;color:var(--muted);background:#fafbfd;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0 16px}
+p.terms .lb2{font-weight:700;color:var(--navy);margin-right:8px}
+.dtree{margin:16px auto 8px;max-width:560px}
+.dtree svg{width:100%;height:auto;display:block}
+.dtree figcaption{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+.mut{color:var(--muted);font-size:12.5px;font-weight:400}
+td.hi{background:var(--palegreen) !important;font-weight:700}
+.stepcard{border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;margin:22px 0;background:#fff}
+.stepcard .sh{background:var(--lightblue);color:var(--navy);font-weight:700;padding:9px 18px;font-size:15px}
+.stepcard .sr{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line)}
+.stepcard .sk{padding:10px 14px 10px 18px;font-weight:700;color:var(--blue);font-size:14.5px;background:#fafbfd}
+.stepcard .sv{padding:10px 18px 4px 4px;font-size:15px}
+.stepcard .sv ul{margin:0 0 6px 20px}
+.stepcard .sv li{margin-bottom:4px}
+@media (max-width:860px){.round .rbody{padding:12px 14px 16px}
+  .stepcard .sr{grid-template-columns:1fr}.stepcard .sk{padding:8px 14px 2px;background:#fff}.stepcard .sv{padding:2px 14px 4px}}
+@media print{.ans{display:block !important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 08：驅動因子與迴歸建模</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 08<br>AI Agent 輔助量化實務（二）</div>
+    <div class="t2">驅動因子與迴歸建模<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">問題與資料</div>
+    <a data-u="u1">單元一：驅動因子分析</a>
+    <a data-u="u2">單元二：構面分數與相關</a>
+    <div class="grp">迴歸</div>
+    <a data-u="u3">單元三：多重共線性與 VIF</a>
+    <a data-u="u4">單元四：多元迴歸</a>
+    <a data-u="u5">單元五：相對重要性與優先改善</a>
+    <a data-u="u6">單元六：殘差與假定查核</a>
+    <div class="grp">查核與實作</div>
+    <a data-u="u7">單元七：AI Agent 設定與 JASP 查核</a>
+    <a data-u="u8">單元八：人機雙重查核與檢核表</a>
+    <a data-u="u9">單元九：實機練習</a>
+    <div class="grp">文獻</div>
+    <a data-u="u10">單元十：參考文獻與名詞對照</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>AI Agent 輔助量化實務（二）：驅動因子與迴歸建模</h1>
+  <div class="subtitle">員工意向調查課程．Topic 08．Week 10（2026/11/13）．適用對象：人管所碩士班</div>
+  <p>Topic 07 用 t 檢定與 ANOVA 找出分數不同的單位。本主題處理另一類問題：哪些構面與某個結果（例如敬業度、留任意願）的關聯最強，人資應優先改善哪一項。分析方法是相關與多元迴歸，分析者以 AI Agent 寫程式並執行，負責指定規則、做決定與查核結果。本主題不要求程式能力；統計概念在各單元中從頭說明。</p>
+  <p>本網站的例子以敬業度為結果：主管支持、認可與回饋、組織承諾三個構面與敬業度的關聯。課堂投影片以留任意願為結果，使用不同的例子；單元九的實機練習與投影片相同，以留任意願為結果。</p>
+  <div class="warn"><span class="lb">資料說明</span>本網站所有數字都來自課程的員工調查模擬資料（三個廠區、1,000 人），與 Topic 07 為同一份檔案，從原始資料重新清理。這是教學模擬資料，不是真實組織的調查結果。<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料（Excel）</a></div>
+  <h2>本主題單元</h2>
+  <div class="scrollx"><table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、驅動因子分析</a></td><td>群組比較與驅動因子分析的差異；決策樹；開放題熱門抱怨與驅動因子的區別；資料與清理規則</td></tr>
+    <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、構面分數與相關</a></td><td>構面描述統計；<a href="#g-4">相關係數 r</a>與 <a href="#g-5">r²</a> 的讀法；相關矩陣</td></tr>
+    <tr><td><a href="#u3" onclick="goUnit('u3');return false;">三、多重共線性與 VIF</a></td><td><a href="#g-16">多重共線性</a>的意義；<a href="#g-17">VIF</a> 的計算與事先訂定的門檻</td></tr>
+    <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、多元迴歸</a></td><td><a href="#g-6">簡單迴歸</a>與<a href="#g-7">多元迴歸</a>；<a href="#g-9">迴歸係數 b</a>、<a href="#g-10">標準化係數 β</a>、<a href="#g-12">信賴區間</a>、<a href="#g-13">R²</a>；係數表判讀與報告句</td></tr>
+    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、相對重要性與優先改善</a></td><td>β 排序、<a href="#g-21">一般優勢權數</a>；<a href="#g-23">優先改善矩陣</a>的規則與限制</td></tr>
+    <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、殘差與假定查核</a></td><td><a href="#g-24">殘差</a>；四項假定；Q–Q 圖、Durbin–Watson、<a href="#g-31">Cook’s 距離</a></td></tr>
+    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、AI Agent 設定與 JASP 查核</a></td><td>迴歸用的專案記憶與 Skill；JASP 線性迴歸的操作與對照</td></tr>
+    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、人機雙重查核與檢核表</a></td><td>AI 統計幻覺查核清單、常見錯誤、檢核表與分析紀錄</td></tr>
+    <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、實機練習</a></td><td>六輪提示詞與答案對照</td></tr>
+    <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
+  </table></div>
+  <div class="flow">
+    <div class="fbox q">重做 Topic 07 的清理，計算構面分數（單元一）</div><div class="farrow">↓</div>
+    <div class="fbox">相關矩陣（單元二）與 VIF（單元三）</div><div class="farrow">↓</div>
+    <div class="fbox">多元迴歸：b、β、信賴區間、R²（單元四）</div><div class="farrow">↓</div>
+    <div class="fbox">相對重要性與優先改善矩陣（單元五）</div><div class="farrow">↓</div>
+    <div class="fbox">殘差與假定查核（單元六）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">JASP 對照、檢核表與分析紀錄（單元七、八）</div>
+  </div>
+  <h2>工具與檔案</h2>
+  <div class="scrollx"><table>
+    <tr><th style="width:30%">工具</th><th>用途</th></tr>
+    <tr><td><a href="../../Slides/Topic08_課堂投影片.html" target="_blank" rel="noopener">Topic 08 課堂投影片</a></td><td>課堂講解用投影片；投影片與本網站使用不同的分析例子</td></tr>
+    <tr><td><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">員工調查模擬資料（Excel）</a></td><td>與 Topic 07 相同；1,000 人、29 題李克特 6 點量表、2 題開放題</td></tr>
+    <tr><td><a href="../../Assignments/Topic08_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 08 分析檢核表（Excel）</a></td><td>檢核表、分析紀錄、使用說明三個工作表（單元八）</td></tr>
+    <tr><td><a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">Topic 07 教材網站</a></td><td>清理規則、t 檢定、ANOVA 與決策樹</td></tr>
+    <tr><td>ChatGPT 或 Claude</td><td>網頁版或專案，需可上傳檔案並執行程式</td></tr>
+    <tr><td>JASP</td><td>免費統計軟體，用來獨立重算相關與迴歸（單元七）</td></tr>
+  </table></div>
+  <div class="note"><span class="lb">使用說明</span>左側導覽列可切換單元（手機版在頁面上方）。單元一至八的最後各附一題兩階段自我檢測：先選答案並標示信心，答對後再確認理由。下方的作答校準面板只記錄每題第一次作答；重新整理頁面會清空紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>高信心但答錯的題目，表示該單元的理解與自我評估有落差；低信心但答對，表示理解比自我評估穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 驅動因子分析 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：驅動因子分析</h1>
+  <div class="subtitle">分析問題的類型、決策樹、熱門抱怨與驅動因子、資料與清理．主要依據：Johnson &amp; LeBreton (2004)</div>
+  <h2 id="s1-1">1.1 群組比較與驅動因子分析</h2>
+  <p>Topic 07 回答「哪些單位的分數不同」：以廠區、年資等類別分組，比較構面平均。本主題回答「哪些構面與結果的關聯最強」：預測變項是連續的構面分數，結果也是構面分數。人資實務稱這類分析為<a href="#g-1">驅動因子分析</a>（key driver analysis），常用的方法是多元迴歸。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:20%"></th><th>群組比較（Topic 07）</th><th>驅動因子分析（本主題）</th></tr>
+    <tr><td>回答的問題</td><td style="text-align:left">哪些單位的分數不同</td><td style="text-align:left">哪些構面與結果的關聯最強</td></tr>
+    <tr><td>預測變項</td><td style="text-align:left">類別：廠區、部門、年資</td><td style="text-align:left">連續：構面分數</td></tr>
+    <tr><td>方法</td><td style="text-align:left">t 檢定、ANOVA</td><td style="text-align:left">相關、多元迴歸</td></tr>
+    <tr><td>效果量</td><td style="text-align:left">d、η²</td><td style="text-align:left">r、β、R²</td></tr>
+    <tr><td>管理用途</td><td style="text-align:left">找出優先處理的單位</td><td style="text-align:left">找出優先改善的議題</td></tr>
+  </table></div>
+  <p>兩種分析可以接續使用：先用驅動因子分析找出全公司層次的議題順序，再用群組比較找出該議題分數最低的單位。Topic 07 發現高雄廠生產部與品保部的認可與回饋明顯偏低（平均 2.80，其他單位 3.61）；若認可與回饋與敬業度的關聯也強，這兩個部門就是改善的起點。</p>
+
+  <h2 id="s1-2">1.2 統計方法選擇的決策樹</h2>
+  <p>決策樹的結構與 <a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#s5-1" target="_blank" rel="noopener">Topic 07 網站 5.1</a> 相同。本主題處理第二與第三個分支：兩個構面之間的關聯（相關），以及多個構面預測一個結果（多元迴歸）。</p>
+  <figure class="dtree"><svg viewBox="0 0 360 490" role="img" aria-labelledby="dtT" aria-describedby="dtList"><title id="dtT">統計方法選擇的決策樹（Topic 08）</title><g style="font-size:12.5px"><path d="M15 34 V56 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V92 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V128 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V164 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 178 V200 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V236 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 250 V272 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 286 V316 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V360 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 374 V396 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V432 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 446 V468 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><rect x="6" y="6" width="348" height="28" rx="6" style="fill:var(--navy);stroke:var(--navy);stroke-width:1.2"/><text x="15" y="24.5" style="fill:#fff;font-weight:700">分析的問題是什麼</text><rect x="22" y="42" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="60.5" style="fill:var(--navy);font-weight:400">比較群組平均（依變項為構面分數）</text><rect x="52" y="78" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="96.5" style="fill:var(--navy);font-weight:400">兩組：Welch t 檢定（Topic 07）</text><rect x="52" y="114" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="132.5" style="fill:var(--navy);font-weight:400">三組以上：單因子 ANOVA（Topic 07）</text><rect x="22" y="150" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="168.5" style="fill:var(--navy);font-weight:400">兩個構面之間的關聯</text><rect x="52" y="186" width="302" height="28" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="61" y="204.5" style="fill:var(--navy);font-weight:700">相關係數 r（單元二）</text><rect x="22" y="222" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="240.5" style="fill:var(--navy);font-weight:400">多個構面預測一個結果</text><rect x="52" y="258" width="302" height="28" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="61" y="276.5" style="fill:var(--navy);font-weight:700">多元迴歸：b、β、R²（單元四）</text><rect x="82" y="294" width="272" height="44" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="91" y="312.5" style="fill:var(--navy);font-weight:700">迴歸前：VIF（單元三）</text><text x="91" y="328.5" style="fill:var(--navy);font-weight:700">迴歸後：殘差查核（單元六）</text><rect x="22" y="346" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="364.5" style="fill:var(--navy);font-weight:400">兩個類別變項的關係</text><rect x="52" y="382" width="302" height="28" rx="6" style="fill:#f3f3f3;stroke:#9a9a9a;stroke-dasharray:4 3;stroke-width:1.2"/><text x="61" y="400.5" style="fill:var(--navy);font-weight:400">交叉表與卡方檢定（本課不實作）</text><rect x="22" y="418" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="436.5" style="fill:var(--navy);font-weight:400">開放題文字</text><rect x="52" y="454" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="472.5" style="fill:var(--navy);font-weight:400">質性編碼與 κ（Topic 09）</text></g></svg><figcaption>綠色：本主題實作；白色：其他主題；灰色虛線：本課不實作。文字版見下方。</figcaption></figure>
+  <h3>決策樹文字版</h3>
+  <ul id="dtList">
+    <li>比較群組平均：兩組用 Welch t 檢定、三組以上用單因子 ANOVA（Topic 07）</li>
+    <li>兩個構面之間的關聯：相關係數 r（單元二）</li>
+    <li>多個構面預測一個結果：多元迴歸（單元四）；迴歸前檢查 VIF（單元三），迴歸後查核殘差（單元六）</li>
+    <li>兩個類別變項的關係：交叉表與卡方檢定（本課不實作）</li>
+    <li>開放題文字：質性編碼與 κ（Topic 09）</li>
+  </ul>
+
+  <h2 id="s1-3">1.3 本主題的分析問題</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:50%">人資的問題</th><th>方法</th><th style="width:18%">說明位置</th></tr>
+    <tr><td style="text-align:left">主管支持較高的員工，敬業度是否也較高</td><td style="text-align:left">相關係數 r</td><td><a href="#s2-3">2.3</a></td></tr>
+    <tr><td style="text-align:left">主管支持、認可與回饋、組織承諾的內容是否重疊</td><td style="text-align:left">相關矩陣、VIF</td><td><a href="#s2-4">2.4</a>、<a href="#s3-3">3.3</a></td></tr>
+    <tr><td style="text-align:left">三個構面同時考慮時，哪一個與敬業度的關聯最強</td><td style="text-align:left">多元迴歸、β</td><td><a href="#s4-6">4.6</a></td></tr>
+    <tr><td style="text-align:left">應該優先改善哪一個構面</td><td style="text-align:left">相對重要性、優先改善矩陣</td><td><a href="#s5-4">5.4</a></td></tr>
+    <tr><td style="text-align:left">迴歸結果是否可信</td><td style="text-align:left">殘差查核</td><td>單元六</td></tr>
+  </table></div>
+
+  <h2 id="s1-4">1.4 熱門抱怨與驅動因子</h2>
+  <p>開放題 OE1「最希望公司優先改善的事」，清理後有實質內容的回答 508 人。以關鍵字（薪、獎金、年終、福利、補助、津貼等）計算，提到薪資或福利的有 <span class="num">91 人（17.9%）</span>，是人數最多的主題。人資主管常把這類被提到最多的抱怨，當成最需要處理的問題。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:18%"></th><th>熱門抱怨</th><th>驅動因子</th></tr>
+    <tr><td>資料來源</td><td style="text-align:left">開放題文字</td><td style="text-align:left">李克特題目的構面分數</td></tr>
+    <tr><td>計算方式</td><td style="text-align:left">提到某主題的人數</td><td style="text-align:left">構面與結果的關聯強度（β、優勢權數）</td></tr>
+    <tr><td>代表誰</td><td style="text-align:left">願意寫開放題的人（約一半）</td><td style="text-align:left">所有作答者</td></tr>
+    <tr><td>限制</td><td style="text-align:left">容易說出口的議題（薪資、設備）被提到較多；提到不等於與留任或敬業有關</td><td style="text-align:left">只能比較有測量的構面；問卷沒有薪資福利的題目</td></tr>
+  </table></div>
+  <p>兩種資訊回答不同的問題，報告中分開呈現。薪資福利是否與留任意願有關，這份問卷無法回答，需要在下一次調查加入薪資福利的題目。關鍵字計數只是初步的整理，開放題的完整編碼在 Topic 09。</p>
+
+  <h2 id="s1-5">1.5 資料與清理</h2>
+  <p>本主題使用 Topic 07 的同一份原始資料，依相同規則重新清理，構面分數與 Topic 07 相同：</p>
+  <div class="stepcard"><div class="sh">操作步驟：清理與構面分數</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">迴歸使用的構面分數與 Topic 07 相同，兩週的結果可以互相對照。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>依 Topic 07 規則刪除直線作答與隨機亂填</li><li>RET03 與 AIA04 以 7 減原始分數轉換（AIA04 已確認為對照表誤植，要寫進提示詞）</li><li>構面答了一半以上題目，取已作答題目的平均；不整列刪除</li><li>清理後的構面分數存成 CSV，供 JASP 查核</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>清理後 961 人（直線作答 20、隨機亂填 19）</li><li>各構面有效人數 957–961</li><li>AIA 的 α 為正值（.82）</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>提示詞沒有寫 AIA04，AI 依對照表不轉換</li><li>整列刪除 29 題，只剩 468 人</li><li>把反向題轉換兩次（覆蓋原始欄位後重跑）</li></ul></div></div>
+</div>
+  <div class="scrollx"><table class="mt"><tr><th>構面</th><th>編碼</th><th>有效人數</th><th>平均</th><th>標準差</th><th>α</th></tr><tr><td>敬業度</td><td>ENG</td><td>961</td><td>3.90</td><td>0.84</td><td>.95</td></tr><tr><td>主管支持</td><td>SUP</td><td>961</td><td>3.87</td><td>0.98</td><td>.88</td></tr><tr><td>認可與回饋</td><td>REC</td><td>958</td><td>3.46</td><td>1.09</td><td>.87</td></tr><tr><td>組織承諾</td><td>COM</td><td>957</td><td>3.57</td><td>1.07</td><td>.87</td></tr><tr><td>留任意願</td><td>RET</td><td>959</td><td>3.59</td><td>0.98</td><td>.84</td></tr><tr><td>AI 導入態度</td><td>AIA</td><td>961</td><td>3.77</td><td>0.97</td><td>.82</td></tr></table></div>
+  <p class="mut" style="font-size:13.5px">清理後資料；六點量表，3.5 為中點</p>
+  <div class="key"><span class="lb">本單元要點</span>驅動因子分析比較構面與結果的關聯強弱，群組比較找出分數不同的單位。開放題被提到最多的議題，與關聯最強的構面是兩種資訊；沒有測量的議題不能放進迴歸。分析從原始資料開始，依 Topic 07 的規則清理。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 1</div>
+    <div class="qbody">
+      <p>開放題 OE1 中，91 人提到薪資或福利，是人數最多的主題。一位主管據此主張：「薪資福利是留任意願最重要的驅動因子。」下列何者最恰當？</p>
+      <label><input type="radio" name="q1" value="a"> 同意，被提到最多就代表最重要</label><label><input type="radio" name="q1" value="b"> 不同意，薪資福利一定不重要</label><label><input type="radio" name="q1" value="c"> 這份資料無法比較薪資福利與其他構面的關聯強弱；問卷沒有薪資福利的題目，需要另外測量</label><label><input type="radio" name="q1" value="d"> 把提到薪資的人數放進迴歸當作預測變項</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q1r" value="a"> 提及人數反映願意寫出這個議題的人有多少；驅動因子分析比較的是有測量的構面與結果的關聯</label><label><input type="radio" name="q1r" value="b"> 開放題的資料比李克特題目可靠</label><label><input type="radio" name="q1r" value="c"> 只要人數夠多，就可以推論因果</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q1c" value="低"> 低</label><label><input type="radio" name="q1c" value="中"> 中</label><label><input type="radio" name="q1c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q1','c','a','正確。熱門抱怨與驅動因子回答不同的問題，報告中分開呈現。','相關說明見 &lt;a href=&quot;#s1-4&quot;&gt;1.4&lt;/a&gt;：兩種資訊的來源與限制。','提示：迴歸能比較哪些變項？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U2 構面分數與相關 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：構面分數與相關</h1>
+  <div class="subtitle">構面平均的意義、相關係數 r、r²、相關矩陣．主要依據：Cohen et al. (2003)</div>
+  <h2 id="s2-1">2.1 構面分數</h2>
+  <p>每位員工在每個構面有一個分數：同一構面題目的平均（反向題轉換後）。迴歸使用構面分數，不使用個別題目，原因有二：構面分數比單一題目穩定（信度較高）；同一構面的題目彼此高度相關，個別放入迴歸會造成多重共線性（<a href="#s3-4">3.4</a>）。</p>
+  <h2 id="s2-2">2.2 平均與標準差</h2>
+  <p>構面平均描述「表現」：員工整體的評價高低。本資料平均最低的構面是認可與回饋（3.46），最高的是組織承諾（3.57）。平均高低不說明這個構面與敬業度的關聯強弱，關聯要用相關與迴歸判斷。標準差描述員工之間的差異：標準差越大，員工對這個構面的看法越分歧。</p>
+  <h2 id="s2-3">2.3 相關係數 r</h2>
+  <p><a href="#g-4">相關係數 r</a>描述兩個分數一起升降的程度：</p>
+  <ul>
+    <li>方向：r 為正，一個分數高的人，另一個分數也傾向高；r 為負，一個高另一個傾向低。</li>
+    <li>強度：r 介於 −1 到 1。絕對值約 .10 為小、.30 為中、.50 為大（Cohen 的慣例）。</li>
+    <li>r²：兩個變項共同變動的比例。</li>
+  </ul>
+  <div class="calcbox">主管支持與敬業度：r ＝ <b>.55</b>，r² ＝ .55² ≈ .30<br>主管支持與敬業度約有 30% 的變動是共同的；其餘 70% 與主管支持無關。</div>
+  <p>相關的三個限制：</p>
+  <ul>
+    <li>相關不說明原因。主管支持與敬業度相關，可能是主管支持讓員工更投入，也可能是投入的員工更容易得到主管支持，或兩者都受部門氣氛影響。</li>
+    <li>r 只描述直線關係。兩者呈曲線關係時，r 會低估關聯。</li>
+    <li>樣本大時，很小的 r 也會顯著。AI 導入態度與敬業度 r ＝ .07，p ＝ .02；判讀依 r 的大小，不依 p 值。</li>
+  </ul>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-5">r²</a>：兩個變項共同變動的比例，等於 r 的平方；<a href="#g-2">依變項</a>：要說明或預測的結果，例如敬業度；<a href="#g-3">預測變項</a>：用來預測依變項的變項，例如主管支持；JASP 稱為共變項。</p>
+
+  <h2 id="s2-4">2.4 相關矩陣</h2>
+  <p>相關矩陣列出每兩個構面之間的相關。下表為敬業度與三個預測構面：</p>
+  <div class="scrollx"><table class="mt"><tr><th></th><th>ENG</th><th>SUP</th><th>REC</th><th>COM</th></tr><tr><td>敬業度 ENG</td><td>—</td><td class="hi">.55</td><td class="hi">.47</td><td class="hi">.42</td></tr><tr><td>主管支持 SUP</td><td class="hi">.55</td><td>—</td><td class="">.45</td><td class="">.32</td></tr><tr><td>認可與回饋 REC</td><td class="hi">.47</td><td class="">.45</td><td>—</td><td class="">.26</td></tr><tr><td>組織承諾 COM</td><td class="hi">.42</td><td class="">.32</td><td class="">.26</td><td>—</td></tr></table></div>
+  <p class="mut" style="font-size:13.5px">清理後資料，成對刪除；綠色為與敬業度的相關；全部 p &lt; .001</p>
+  <p>讀相關矩陣的兩個重點：</p>
+  <ol class="steps">
+    <li>與結果（敬業度）的相關：主管支持 .55、組織承諾 .42、認可與回饋 .47，三者都屬於中到大的相關。</li>
+    <li>預測變項之間的相關：主管支持與認可與回饋 r ＝ .45，三個預測變項之間都有中度相關，但都低於 .80。預測變項之間有相關時，各自與敬業度的相關包含重疊的部分，需要用多元迴歸區分（單元四）。</li>
+  </ol>
+  <div class="stepcard"><div class="sh">操作步驟：相關矩陣</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">了解構面之間的關聯，並在迴歸前發現內容重疊的預測變項。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>以構面分數計算 Pearson 相關，標出 p &lt; .05</li><li>看結果變項那一欄：哪些構面與結果相關較高</li><li>看預測變項之間：有沒有 ≥ .80 的相關</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>對角線為 1，矩陣上下對稱</li><li>相關介於 −1 到 1</li><li>AI 算的是構面分數，不是 29 題的相關</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>把相關寫成因果</li><li>只報 p 值；樣本近千人時，r ＝ .07 也可能顯著</li><li>用題目而不是構面分數計算</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>構面平均描述表現，相關描述關聯。r 的方向看正負號，強度看絕對值，r² 是共同變動的比例。相關不說明原因；樣本大時依 r 的大小判讀。預測變項之間的相關，是下一單元多重共線性的線索。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 2</div>
+    <div class="qbody">
+      <p>主管支持與敬業度的相關 r ＝ .55。下列敘述何者正確？</p>
+      <label><input type="radio" name="q2" value="a"> 主管支持提高，會造成敬業度提高</label><label><input type="radio" name="q2" value="b"> 兩者同方向變動，主管支持可說明敬業度約 30% 的差異</label><label><input type="radio" name="q2" value="c"> r 為正，表示所有主管支持高的人敬業度都高</label><label><input type="radio" name="q2" value="d"> r 小於 .70，所以兩者無關</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q2r" value="a"> r² 是兩個變項共同變動的比例；相關只描述一起升降的程度，不說明原因</label><label><input type="radio" name="q2r" value="b"> r 越大，因果關係越確定</label><label><input type="radio" name="q2r" value="c"> r 只看正負號，大小沒有意義</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q2c" value="低"> 低</label><label><input type="radio" name="q2c" value="中"> 中</label><label><input type="radio" name="q2c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q2','b','a','正確。r 描述方向與強度，r² 是共同變動的比例。','相關說明見 &lt;a href=&quot;#s2-3&quot;&gt;2.3&lt;/a&gt;：r 與 r² 的讀法。','提示：r² 等於多少？相關能說明原因嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 多重共線性 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：多重共線性與 VIF</h1>
+  <div class="subtitle">預測變項內容重疊的問題、VIF 的計算與門檻．主要依據：O’Brien (2007)；Cohen et al. (2003)</div>
+  <h2 id="s3-1">3.1 多重共線性</h2>
+  <p><a href="#g-16">多重共線性</a>指預測變項彼此高度相關。兩個預測變項幾乎測量同一件事時，迴歸無法分辨與結果的關聯屬於哪一個，結果是：係數的標準誤變大、信賴區間變寬；資料稍有不同，係數就大幅改變；有時正負號會與相關相反。</p>
+  <h2 id="s3-2">3.2 VIF 的計算</h2>
+  <div class="formula">VIF　＝　1 ÷（1 − R²ⱼ）</div>
+  <p>R²ⱼ 是以其他預測變項預測第 j 個預測變項得到的 R²：這個預測變項有多少比例可以由其他預測變項說明。R²ⱼ 為 0 時 VIF ＝ 1，表示沒有重疊；R²ⱼ ＝ .80 時 VIF ＝ 5；R²ⱼ ＝ .90 時 VIF ＝ 10。<a href="#g-18">允差</a>（tolerance）＝ 1 − R²ⱼ ＝ 1 ÷ VIF。</p>
+  <div class="calcbox">主管支持：以認可與回饋、組織承諾預測主管支持，R²ⱼ ＝ .25<br>VIF ＝ 1 ÷（1 − .25）＝ <b>1.33</b>；允差 ＝ .75</div>
+  <h2 id="s3-3">3.3 門檻與本資料的結果</h2>
+  <p>門檻在看到結果之前寫進分析規則。本課程採用：VIF ≥ 5 需要處理，≥ 10 屬於嚴重；預測變項兩兩相關 ≥ .80 也要回報。這些門檻是常用的慣例；O’Brien（2007）提醒，VIF 偏高時仍要考慮樣本數與研究目的，不必機械式刪除變項。</p>
+  <div class="scrollx"><table class="mt"><tr><th>預測變項</th><th>R²ⱼ</th><th>VIF</th><th>允差</th></tr><tr><td>主管支持 SUP</td><td>.25</td><td>1.33</td><td>.75</td></tr><tr><td>認可與回饋 REC</td><td>.22</td><td>1.29</td><td>.78</td></tr><tr><td>組織承諾 COM</td><td>.12</td><td>1.13</td><td>.89</td></tr></table></div>
+  <p class="mut" style="font-size:13.5px">敬業度模型（ENG ~ SUP＋REC＋COM），n ＝ 954</p>
+  <p>三個 VIF 都低於 5，沒有需要處理的共線性。超過門檻時的處理方式：合併內容重疊的構面、刪除其中一個預測變項並說明理由，或分別建立模型。</p>
+  <h2 id="s3-4">3.4 題目分別放入迴歸的結果</h2>
+  <p>若把主管支持、認可與回饋、組織承諾的 10 個題目分別放入迴歸預測敬業度（題目完整者 n ＝ 729），VIF 介於 2.17 到 2.45，高於構面層次；10 題中只有 7 題的係數顯著。同一構面的題目彼此分攤與敬業度的關聯，個別題目不顯著，不代表這一題與敬業度無關。分析單位是構面分數；AI 若直接用 29 題做迴歸，結果無法解讀，也無法對應到管理上的議題。</p>
+  <div class="stepcard"><div class="sh">操作步驟：檢查多重共線性（VIF）</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">確認預測變項的內容沒有重疊到讓係數不穩定。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>分析前寫下門檻：VIF ≥ 5 需處理，≥ 10 屬於嚴重</li><li>以全部預測變項計算每個預測變項的 VIF（加常數項）</li><li>超過門檻時：合併構面、刪除重複的預測變項，或分開報告</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>每個預測變項都有 VIF</li><li>程式有加常數項（例如 sm.add_constant）</li><li>VIF ＝ 1 ÷ 允差；JASP 兩者都列出</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>未加常數項，VIF 偏高</li><li>看到 VIF 高就刪掉理論上重要的變項，沒有說明</li><li>把同一構面的題目分別放入迴歸</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>多重共線性讓係數不穩定。VIF ＝ 1 ÷（1 − R²ⱼ），門檻（5 與 10）在分析前訂定。本資料構面層次的 VIF 都低於 5；同一構面的題目要先平均成構面分數。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 3</div>
+    <div class="qbody">
+      <p>AI 把主管支持、認可與回饋、組織承諾的 10 個題目分別放入迴歸預測敬業度，報告「只有 7 題顯著，其餘題目與敬業度無關」。下列何者最恰當？</p>
+      <label><input type="radio" name="q3" value="a"> 接受結論，把不顯著的題目從問卷刪除</label><label><input type="radio" name="q3" value="b"> 改用逐步迴歸，讓程式挑出重要的題目</label><label><input type="radio" name="q3" value="c"> 同一構面的題目內容重疊，個別係數不穩定；先平均成構面分數，再檢查 VIF 後放入迴歸</label><label><input type="radio" name="q3" value="d"> 把顯著水準改成 .10</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q3r" value="a"> 共線性讓重疊的預測變項彼此分攤關聯，個別題目不顯著不代表與結果無關</label><label><input type="radio" name="q3r" value="b"> 題目越多，R² 越可信</label><label><input type="radio" name="q3r" value="c"> VIF 只在樣本少時才需要看</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q3c" value="低"> 低</label><label><input type="radio" name="q3c" value="中"> 中</label><label><input type="radio" name="q3c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q3','c','a','正確。題目層次的重疊屬於多重共線性；構面分數是本課程的分析單位。','相關說明見 &lt;a href=&quot;#s3-4&quot;&gt;3.4&lt;/a&gt;：題目分別放入迴歸的結果。','提示：同一構面的題目彼此相關高嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 多元迴歸 ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：多元迴歸</h1>
+  <div class="subtitle">簡單迴歸、多元迴歸、b 與 β、信賴區間、R²、報告句．主要依據：Cohen et al. (2003)</div>
+  <h2 id="s4-1">4.1 簡單迴歸</h2>
+  <p><a href="#g-6">簡單迴歸</a>用一個預測變項預測結果，畫出一條最接近所有資料點的直線：</p>
+  <div class="formula">預測的敬業度　＝　2.08　＋　0.47 × 主管支持</div>
+  <ul>
+    <li><a href="#g-9">迴歸係數 b</a> ＝ .47：主管支持多 1 分，敬業度預期多 0.47 分。主管支持 3 分者，預測敬業度 3.49；5 分者，預測 4.43。</li>
+    <li><a href="#g-8">截距</a> ＝ 2.08：主管支持為 0 時的預測值。六點量表沒有 0 分，截距只用來畫線，不單獨解讀。</li>
+    <li>R² ＝ .30：只有一個預測變項時，R² 等於 r 的平方（.55² ≈ .30）。</li>
+  </ul>
+  <h2 id="s4-2">4.2 多元迴歸</h2>
+  <p><a href="#g-7">多元迴歸</a>同時放入多個預測變項：</p>
+  <div class="formula">預測的敬業度　＝　a　＋　b₁ × 主管支持　＋　b₂ × 認可與回饋　＋　b₃ × 組織承諾</div>
+  <p>三個構面同時放入，由分析者事先指定（強迫進入法）。<a href="#g-19">逐步迴歸</a>由程式依 p 值挑選變項，結果會隨樣本變動，也無法說明「某個構面沒有關聯」（Whittingham et al., 2006），本課程不使用。</p>
+  <h2 id="s4-3">4.3 多元迴歸中 b 的意義</h2>
+  <p>多元迴歸的 b 有一個條件：<b>其他預測變項相同時</b>。主管支持的 b ＝ .31，表示在認可與回饋、組織承諾相同的條件下，主管支持多 1 分的員工，敬業度預期高 0.31 分。</p>
+  <p>簡單迴歸的 b（.47）比多元迴歸的 b（.31）大，原因是主管支持與認可與回饋、組織承諾相關：簡單迴歸的 b 包含與其他構面重疊的部分，多元迴歸只保留主管支持獨有的部分。</p>
+  <p>調查資料在同一時間測量所有構面，b 描述的是關聯，不是因果：不能寫成「提高主管支持 1 分，敬業度會提高 0.31 分」。</p>
+  <h2 id="s4-4">4.4 標準化係數 β</h2>
+  <p><a href="#g-10">標準化係數 β</a>是把所有變項換成標準分數（平均 0、標準差 1）後的 b：預測變項多 1 個標準差，結果預期多幾個標準差。b 的單位是各變項的原始分數，β 的單位一致，因此比較預測變項之間的關聯強弱時用 β。</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:20%"></th><th>b（未標準化）</th><th>β（標準化）</th></tr>
+    <tr><td>單位</td><td style="text-align:left">依變項的分數，每 1 分預測變項</td><td style="text-align:left">標準差，每 1 個標準差的預測變項</td></tr>
+    <tr><td>用途</td><td style="text-align:left">預測分數、說明實際差距</td><td style="text-align:left">比較預測變項之間的關聯強弱</td></tr>
+    <tr><td>量尺不同時</td><td style="text-align:left">不能直接比較，例如年資（年）與構面（1–6 分）</td><td style="text-align:left">可以比較</td></tr>
+  </table></div>
+  <p>本資料的構面都是 1–6 分，標準差相近，b 與 β 的排序相同；加入年資、薪資等不同量尺的變項時，排序以 β 為準。</p>
+  <h2 id="s4-5">4.5 信賴區間</h2>
+  <p><a href="#g-12">信賴區間</a>描述係數的不確定性。95% 信賴區間的意思是：用同樣方法重複抽樣，95% 的區間會包含母體的係數。讀法有三點：</p>
+  <ul>
+    <li>區間越窄，估計越精確；樣本越大，區間越窄。</li>
+    <li>區間包含 0：關聯可能為 0，與 p ≥ .05 的判斷一致。</li>
+    <li>兩個係數的區間大幅重疊時，兩者的大小可能沒有差別，排序要保守解讀。</li>
+  </ul>
+  <h2 id="s4-6">4.6 敬業度的多元迴歸結果</h2>
+  <div class="scrollx"><table class="mt"><tr><th>預測變項</th><th>b</th><th>SE</th><th>b 的 95% CI</th><th>β</th><th>β 的 95% CI</th><th>t</th><th>p</th></tr><tr><td>主管支持 SUP</td><td>.310</td><td>.025</td><td>[.26, .36]</td><td class="num">.36</td><td>[.31, .42]</td><td>12.65</td><td>&lt; .001</td></tr><tr><td>組織承諾 COM</td><td>.191</td><td>.021</td><td>[.15, .23]</td><td class="num">.24</td><td>[.19, .30]</td><td>9.27</td><td>&lt; .001</td></tr><tr><td>認可與回饋 REC</td><td>.187</td><td>.022</td><td>[.14, .23]</td><td class="num">.24</td><td>[.19, .30]</td><td>8.61</td><td>&lt; .001</td></tr></table></div>
+  <p class="mut" style="font-size:13.5px">ENG ~ SUP＋REC＋COM；清理後 961 人中構面無遺漏者 n ＝ 954；依 β 由大到小排列</p>
+  <p>模型摘要：R² ＝ .416，調整後 R² ＝ .414，F(3, 950) ＝ 225.66，p &lt; .001。</p>
+  <ul>
+    <li>三個構面的 β 都為正，信賴區間都不包含 0。</li>
+    <li>與敬業度關聯最強的是主管支持（β ＝ .36），其次是組織承諾（β ＝ .24）與認可與回饋（β ＝ .24）。</li>
+    <li>主管支持與組織承諾的 β 信賴區間（[.31, .42] 與 [.19, .30]）沒有重疊。</li>
+  </ul>
+  <h2 id="s4-7">4.7 R² 與調整後 R²</h2>
+  <p><a href="#g-13">R²</a> ＝ .416 表示三個構面合計說明約 42% 的敬業度個人差異；其餘差異來自問卷沒有測量的因素（工作內容、薪資、個人狀況等）與測量誤差。<a href="#g-14">調整後 R²</a>依預測變項個數調整，預測變項多、樣本少時兩者差距較大；本例樣本近千人，兩者幾乎相同。員工態度的迴歸，R² 常介於 .20 到 .50。AI 回報的 R² 接近 1 時，先檢查預測變項中是否混入依變項的題目。</p>
+  <h2 id="s4-8">4.8 報告句</h2>
+  <div class="calcbox">以主管支持、認可與回饋、組織承諾預測敬業度，模型說明 42% 的變異，R² ＝ .42，F(3, 950) ＝ 225.66，p &lt; .001。在其他構面相同的條件下，主管支持與敬業度的關聯最強，β ＝ .36，95% CI [.31, .42]；組織承諾次之，β ＝ .24，95% CI [.19, .30]。</div>
+  <div class="stepcard"><div class="sh">操作步驟：多元迴歸</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">在其他構面相同的條件下，比較各構面與結果的關聯。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>事先指定依變項與預測變項，全部同時放入（不用逐步迴歸）</li><li>報告模型人數、b、SE、b 的 95% CI、β、β 的 95% CI、t、p</li><li>報告 R²、調整後 R²、F 檢定</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>模型人數接近清理後人數</li><li>β 介於 −1 到 1 之間（構面相關不高時）</li><li>AI 的文字用「關聯」與「在其他構面相同的條件下」</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>用逐步迴歸讓程式挑變項</li><li>依 p 值排序重要性</li><li>把依變項的題目放進預測變項，R² 異常高</li><li>寫成「提高 X 會提高 Y」</li></ul></div></div>
+</div>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-11">標準誤</a>：係數的不確定性：重複抽樣時，係數通常變動的幅度；<a href="#g-15">F 檢定</a>：檢定模型的 R² 是否大於 0。</p>
+  <div class="key"><span class="lb">本單元要點</span>簡單迴歸的 b 是一個預測變項的斜率；多元迴歸的 b 是其他預測變項相同時的預期差距。β 的單位一致，用來比較關聯強弱。信賴區間包含 0 表示關聯不確定。R² 是模型說明的比例。所有係數都描述關聯，不描述因果。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 4</div>
+    <div class="qbody">
+      <p>敬業度的多元迴歸中，主管支持 b ＝ .31，β ＝ .36，95% CI [.26, .36]。下列哪一個寫法最恰當？</p>
+      <label><input type="radio" name="q4" value="a"> 提高主管支持 1 分，會讓敬業度提高 .31 分</label><label><input type="radio" name="q4" value="b"> 在認可與回饋、組織承諾相同的條件下，主管支持多 1 分的員工，敬業度預期高 .31 分</label><label><input type="radio" name="q4" value="c"> 主管支持有 95% 的機率是重要因素</label><label><input type="radio" name="q4" value="d"> 主管支持可以說明 31% 的敬業度</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q4r" value="a"> 多元迴歸的 b 是其他預測變項相同時的預期差距；調查資料只能說明關聯</label><label><input type="radio" name="q4r" value="b"> b 是 R² 的另一種寫法</label><label><input type="radio" name="q4r" value="c"> 信賴區間代表係數為真的機率</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q4c" value="低"> 低</label><label><input type="radio" name="q4c" value="中"> 中</label><label><input type="radio" name="q4c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q4','b','a','正確。寫出條件，並用關聯的語言。','相關說明見 &lt;a href=&quot;#s4-3&quot;&gt;4.3&lt;/a&gt; 與 &lt;a href=&quot;#s4-5&quot;&gt;4.5&lt;/a&gt;。','提示：b 的條件是什麼？這份資料能證明因果嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 相對重要性與優先改善 ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：相對重要性與優先改善</h1>
+  <div class="subtitle">β 排序、一般優勢權數、Pratt 指標、優先改善矩陣．主要依據：Azen &amp; Budescu (2003)；Johnson &amp; LeBreton (2004)；Martilla &amp; James (1977)</div>
+  <h2 id="s5-1">5.1 依 β 排序</h2>
+  <p>最直接的重要性排序是比較 β 的絕對值。p 值不能用來排序：p 同時受關聯大小與樣本數影響，本例三個構面的 p 都小於 .001，無法分出高低。</p>
+  <h2 id="s5-2">5.2 一般優勢權數與 Pratt 指標</h2>
+  <p>預測變項之間有相關時，β 只反映各自獨有的部分。<a href="#g-21">一般優勢權數</a>（Azen &amp; Budescu, 2003）的算法：把所有可能的子模型（只有主管支持、主管支持＋認可、……）都跑一次，計算加入某個構面後 R² 平均增加多少。各構面的權數加總等於整個模型的 R²，因此可以寫成「占可說明部分的比例」。<a href="#g-22">Pratt 指標</a>＝ β × r ÷ R²，加總為 1。</p>
+  <div class="scrollx"><table class="mt"><tr><th>預測變項</th><th>r（與敬業度）</th><th>β</th><th>一般優勢權數</th><th>占 R² 的比例</th><th>Pratt</th></tr><tr><td>主管支持 SUP</td><td>.55</td><td>.36</td><td>.189</td><td>45.4%</td><td>.48</td></tr><tr><td>認可與回饋 REC</td><td>.47</td><td>.24</td><td>.122</td><td>29.4%</td><td>.27</td></tr><tr><td>組織承諾 COM</td><td>.42</td><td>.24</td><td>.105</td><td>25.2%</td><td>.25</td></tr></table></div>
+  <p>三種指標都以主管支持最高。第二與第三名不一致：β 為組織承諾（.245）略高於認可與回饋（.242），一般優勢權數與 Pratt 則是認可與回饋較高（.122 對 .105）。兩者的 β 只差 .003，信賴區間大幅重疊，報告時可寫成兩者重要性相近。排序一致時，結論較穩健；不一致時，兩種指標都報告，並說明差異（Tonidandel &amp; LeBreton, 2011）。</p>
+  <h2 id="s5-3">5.3 優先改善矩陣的兩個軸</h2>
+  <p><a href="#g-23">優先改善矩陣</a>（importance–performance analysis；Martilla &amp; James, 1977）同時考慮兩個問題：這個構面與結果的關聯強不強（重要性），員工目前的評價高不高（表現）。</p>
+  <ul>
+    <li>重要性：β（或優勢權數）。</li>
+    <li>表現：構面平均。</li>
+    <li>分隔線：本課程在分析前訂定「各驅動因子重要性的平均」與「各構面平均的平均」。分隔線在看結果之前訂定；看完結果再移動分隔線，等於依結果挑選結論。</li>
+  </ul>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:24%">象限</th><th>重要性</th><th>表現</th><th style="text-align:left">管理意涵</th></tr>
+    <tr><td>優先改善</td><td>高</td><td>低</td><td style="text-align:left">與結果關聯強、目前偏低，優先投入</td></tr>
+    <tr><td>維持優勢</td><td>高</td><td>高</td><td style="text-align:left">與結果關聯強、目前較高，維持現有做法</td></tr>
+    <tr><td>次要觀察</td><td>低</td><td>低</td><td style="text-align:left">與結果關聯較弱，可能有其他理由需要改善</td></tr>
+    <tr><td>維持現狀</td><td>低</td><td>高</td><td style="text-align:left">與結果關聯較弱、目前較高，不增加投入</td></tr>
+  </table></div>
+  <h2 id="s5-4">5.4 敬業度的優先改善矩陣</h2>
+  <p>分隔線：β 平均 .283，構面平均的平均 3.63。</p>
+  <div class="scrollx"><table class="mt"><tr><th>構面</th><th>β（重要性）</th><th>平均（表現）</th><th>偏同意的比例</th><th>象限</th></tr><tr><td>主管支持</td><td>.36</td><td>3.87</td><td>30.4%</td><td>維持優勢</td></tr><tr><td>組織承諾</td><td>.24</td><td>3.57</td><td>20.1%</td><td>次要觀察</td></tr><tr><td>認可與回饋</td><td>.24</td><td>3.46</td><td>18.4%</td><td>次要觀察</td></tr></table></div>
+  <p class="mut" style="font-size:13.5px">偏同意的比例：構面分數 ≥ 4.5 的員工比例</p>
+  <p>主管支持落在「維持優勢」、組織承諾落在「次要觀察」、認可與回饋落在「次要觀察」。三個構面的平均最高與最低相差 0.41 分，β 相差 .120。認可與回饋的平均最低；在 Topic 07 的問題單位（高雄廠生產部與品保部）中，平均為 2.80，其他單位為 3.61，可依單位層次另行處理。</p>
+  <h2 id="s5-5">5.5 矩陣的限制</h2>
+  <ul>
+    <li>以平均切分時，一定有構面落在分隔線兩側。構面之間的差距很小時，象限的差異沒有實質意義，也容易因抽樣而改變。</li>
+    <li>只包含有測量的構面。薪資福利沒有題目，不會出現在矩陣中（<a href="#s1-4">1.4</a>）。</li>
+    <li>重要性只針對一個結果。以敬業度為結果與以留任意願為結果，排序可能不同；練習中的留任意願模型見單元九。</li>
+    <li>矩陣是排序工具。決策還要考慮改善的成本、可行性，以及各單位的分數（Topic 07 的群組比較）。</li>
+  </ul>
+  <div class="stepcard"><div class="sh">操作步驟：相對重要性與優先改善矩陣</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">把迴歸結果轉成管理上的優先順序。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>依 β 排序，另算一般優勢權數</li><li>事先訂定矩陣的分隔線（本課程：驅動因子 β 的平均與構面平均的平均）</li><li>列出每個構面的象限，並說明平均差距的大小</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>兩種重要性的排序是否一致</li><li>分隔線的數值與規則相符</li><li>優勢權數加總等於 R²</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>看完結果再移動分隔線</li><li>構面平均只差零點幾分，仍依象限下強烈結論</li><li>把沒有測量的議題（例如薪資福利）放進矩陣</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>重要性排序依 β 與一般優勢權數，不依 p 值。優先改善矩陣以重要性與表現分成四個象限，分隔線事先訂定。象限是排序的參考；差距小時、只含有測量的構面、只針對一個結果，都是報告中要寫明的限制。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 5</div>
+    <div class="qbody">
+      <p>以敬業度為結果的優先改善矩陣中，認可與回饋的平均最低（3.46），β 為 .24。下列敘述何者最恰當？</p>
+      <label><input type="radio" name="q5" value="a"> 平均最低，所以一定是最優先改善的項目</label><label><input type="radio" name="q5" value="b"> β 不是最高，所以不需要處理</label><label><input type="radio" name="q5" value="c"> 依事先訂的分隔線判斷象限（本例：次要觀察）；象限是排序參考，還要看平均差距大小、改善成本與其他結果</label><label><input type="radio" name="q5" value="d"> 把分隔線調整到讓認可與回饋落在優先改善象限</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q5r" value="a"> 矩陣同時考慮重要性與表現；分隔線要事先訂定，不依結果調整</label><label><input type="radio" name="q5r" value="b"> 表現最低的構面一定與結果關聯最強</label><label><input type="radio" name="q5r" value="c"> β 越小，表示該構面越需要改善</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q5c" value="低"> 低</label><label><input type="radio" name="q5c" value="中"> 中</label><label><input type="radio" name="q5c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q5','c','a','正確。分隔線依規則，象限只是排序的參考。','相關說明見 &lt;a href=&quot;#s5-4&quot;&gt;5.4&lt;/a&gt; 與 &lt;a href=&quot;#s5-5&quot;&gt;5.5&lt;/a&gt;。','提示：分隔線可以看完結果再調整嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U6 殘差與假定 ==================== -->
+<section class="unit" id="u6">
+  <h1>單元六：殘差與假定查核</h1>
+  <div class="subtitle">殘差、四項假定、殘差圖、Q–Q 圖、Durbin–Watson、Cook’s 距離．主要依據：Williams et al. (2013)；Cook (1977)</div>
+  <h2 id="s6-1">6.1 殘差</h2>
+  <p><a href="#g-24">殘差</a>＝ 實際分數 − <a href="#g-25">預測值</a>。一位員工的敬業度實際為 4.2、模型預測 3.8，殘差為 0.4：模型低估了這位員工。殘差是模型沒有說明的部分，迴歸的假定都透過殘差檢查。敬業度模型的殘差標準差為 0.64。</p>
+  <h2 id="s6-2">6.2 四項假定</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:14%">假定</th><th>意義</th><th>查核方式</th><th style="width:22%">敬業度模型</th></tr>
+    <tr><td>線性</td><td style="text-align:left">預測變項與結果為直線關係</td><td style="text-align:left">殘差對預測值圖：各段殘差平均接近 0，沒有曲線</td><td style="text-align:left">各段平均介於 −0.07 到 0.15</td></tr>
+    <tr><td>獨立</td><td style="text-align:left">每位員工的殘差互不相關</td><td style="text-align:left"><a href="#g-30">Durbin–Watson</a> 接近 2</td><td style="text-align:left">1.97</td></tr>
+    <tr><td>變異相等</td><td style="text-align:left">各段預測值的殘差分散程度相近</td><td style="text-align:left">殘差圖沒有喇叭形；<a href="#g-29">Breusch–Pagan 檢定</a></td><td style="text-align:left">p ＝ .08；各段標準差 0.55–0.76</td></tr>
+    <tr><td>殘差常態</td><td style="text-align:left">殘差大致呈常態分布</td><td style="text-align:left"><a href="#g-27">Q–Q 圖</a>；偏態與峰度接近 0</td><td style="text-align:left">偏態 0.01、峰度 −0.27</td></tr>
+  </table></div>
+  <p>常態假定針對殘差，不是針對原始分數；樣本數百人以上時，殘差輕微偏離常態對係數與信賴區間的影響不大（Williams et al., 2013）。獨立假定在員工調查中可能因同一主管帶領的員工彼此相似而不成立，資料依部門排序時 Durbin–Watson 才能反映這一點；多層次模型不在本課程範圍。</p>
+  <h2 id="s6-3">6.3 殘差對預測值圖</h2>
+  <p>橫軸為預測值，縱軸為殘差，每位員工一點。判讀方式：點在 0 的上下均勻分布，表示線性與變異相等大致成立；點呈曲線，表示關係不是直線；點的分散程度由左到右變大或變小（喇叭形），表示變異不相等。</p>
+  <p>下表把敬業度模型的預測值由低到高分成 10 段，列出每段殘差的平均與標準差，等同殘差圖的數字版本：</p>
+  <div class="scrollx"><table class="mt"><tr><th>段</th><th>預測值平均</th><th>殘差平均</th><th>殘差標準差</th></tr><tr><td>1</td><td>2.94</td><td>−0.05</td><td>0.65</td></tr><tr><td>2</td><td>3.33</td><td>0.01</td><td>0.76</td></tr><tr><td>3</td><td>3.52</td><td>−0.06</td><td>0.62</td></tr><tr><td>4</td><td>3.67</td><td>0.15</td><td>0.66</td></tr><tr><td>5</td><td>3.83</td><td>0.02</td><td>0.63</td></tr><tr><td>6</td><td>3.96</td><td>−0.01</td><td>0.71</td></tr><tr><td>7</td><td>4.12</td><td>0.01</td><td>0.62</td></tr><tr><td>8</td><td>4.29</td><td>0.02</td><td>0.57</td></tr><tr><td>9</td><td>4.49</td><td>−0.01</td><td>0.55</td></tr><tr><td>10</td><td>4.81</td><td>−0.07</td><td>0.62</td></tr></table></div>
+  <p>各段殘差平均接近 0，沒有由低到高的曲線型態；各段標準差相近，沒有喇叭形。構面分數是 1–6 分的平均，殘差圖上會看到斜向的條紋，這是分數有上下限造成的，不代表假定不成立。</p>
+  <h2 id="s6-4">6.4 Q–Q 圖</h2>
+  <p>Q–Q 圖把<a href="#g-26">標準化殘差</a>由小到大排列，與常態分布對應位置的數值（理論分位數）對照。點落在對角線上，表示殘差接近常態；兩端向外彎，表示極端殘差比常態多。下表為部分分位數：</p>
+  <div class="scrollx"><table class="mt"><tr><th>常態分布的理論分位數</th><th>標準化殘差的分位數</th></tr><tr><td>−2.33</td><td>−2.21</td></tr><tr><td>−1.11</td><td>−1.16</td></tr><tr><td>−0.66</td><td>−0.70</td></tr><tr><td>0.00</td><td>0.02</td></tr><tr><td>0.66</td><td>0.67</td></tr><tr><td>1.11</td><td>1.12</td></tr><tr><td>2.33</td><td>2.25</td></tr></table></div>
+  <p>兩欄數值接近，Q–Q 圖的點會貼近對角線。標準化殘差絕對值大於 3 的有 1 人。</p>
+  <h2 id="s6-5">6.5 Cook’s 距離</h2>
+  <p><a href="#g-31">Cook’s 距離</a>衡量刪除某一位員工後，所有預測值改變的程度（Cook, 1977）。大於 1 表示單一個案左右結果。敬業度模型的最大值為 .016，遠低於 1。</p>
+  <p><a href="#g-32">4/n 門檻</a>（本例 4 ÷ 954 ≈ .0042）是篩選慣例，用來標出值得查看的個案；n 越大門檻越低，常會標出約 5% 的人（本例 56 人）。被標出的個案逐一查看作答，例如是否有草率作答清理沒有抓到的情形；不因數字大就刪除。刪除個案要有事先訂好的規則，並報告刪除前後的結果。</p>
+  <div class="stepcard"><div class="sh">操作步驟：殘差查核</div>
+  <div class="sr"><div class="sk">目的</div><div class="sv">確認迴歸的假定大致成立，結果沒有被少數個案左右。</div></div>
+  <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>畫殘差對預測值圖與標準化殘差 Q–Q 圖</li><li>計算偏態、峰度、Durbin–Watson、Breusch–Pagan</li><li>計算 Cook’s 距離：最大值、超過 4/n 的人數；標準化殘差絕對值 &gt; 3 的人數</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>有圖，且有文字說明</li><li>被標出的個案沒有被自動刪除</li><li>結論是否改變有寫出</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>只做原始分數的常態性檢定（常態假定針對殘差）</li><li>刪除離群值後重跑，報告中沒有說明</li><li>把分數上下限造成的斜向條紋當成假定不成立</li></ul></div></div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>迴歸的假定透過殘差檢查：殘差對預測值圖看線性與變異相等，Q–Q 圖看常態，Durbin–Watson 看獨立，Cook’s 距離看是否有單一個案左右結果。本資料的四項假定大致成立；4/n 標出的個案要查看，不自動刪除。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 6</div>
+    <div class="qbody">
+      <p>敬業度模型的 Cook’s 距離最大為 .016，超過 4/n 的有 56 人。AI 建議刪除這 56 人再重跑。下列何者最恰當？</p>
+      <label><input type="radio" name="q6" value="a"> 照做，刪除後 R² 會比較高</label><label><input type="radio" name="q6" value="b"> 不刪除；4/n 只用來標出要查看的個案，最大值遠低於 1，沒有單一個案左右結果</label><label><input type="radio" name="q6" value="c"> 刪除 Cook’s 距離最大的那一位就好</label><label><input type="radio" name="q6" value="d"> 改用中位數迴歸</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q6r" value="a"> 刪除個案要有事先訂好的規則；依結果刪人會讓模型看起來更好，但不代表更正確</label><label><input type="radio" name="q6r" value="b"> Cook’s 距離超過 4/n 就一定是草率作答</label><label><input type="radio" name="q6r" value="c"> R² 提高代表模型更正確</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q6c" value="低"> 低</label><label><input type="radio" name="q6c" value="中"> 中</label><label><input type="radio" name="q6c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q6','b','a','正確。被標出的個案逐一查看，不自動刪除。','相關說明見 &lt;a href=&quot;#s6-5&quot;&gt;6.5&lt;/a&gt;。','提示：4/n 是什麼樣的門檻？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U7 AI Agent 設定與 JASP ==================== -->
+<section class="unit" id="u7">
+  <h1>單元七：AI Agent 設定與 JASP 查核</h1>
+  <div class="subtitle">迴歸用的專案記憶與 Skill；JASP 0.99 的相關與線性迴歸操作</div>
+  <h2 id="s7-1">7.1 專案記憶（CLAUDE.md 或專案指示）</h2>
+  <p>專案記憶沿用 Topic 07（<a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#u2" target="_blank" rel="noopener">Topic 07 網站單元二</a>），本主題新增兩條：係數附 95% 信賴區間；迴歸結果寫「關聯」，不寫「影響」「造成」。ChatGPT 或 Claude 網頁版可把這段貼進專案指示；Claude Code 存成資料夾中的 CLAUDE.md。</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre># 專案記憶：年度員工意見調查分析
+
+- 公司：製造業，三個廠區（台南、台中、高雄），十二個部門。資料為教學模擬資料。
+- 讀者：人資長與各廠廠長，不熟統計。結論先寫，數字附在後面。
+- 匿名門檻：任何群組人數少於 5 人，不單獨呈現結果。
+- 報告格式：APA 第七版，小數兩位，p 小於 .001 寫 &lt; .001；每個係數附 95% 信賴區間。
+- 每一步都要寫下處理了幾人；自行決定的事項要列出來給人確認。
+- 迴歸結果寫「關聯」，不寫「影響」「造成」；調查資料不能證明因果。</pre></div>
+  <h2 id="s7-2">7.2 迴歸規則（Skill）</h2>
+  <p>Skill 檔記錄迴歸的做法，包括事先訂定的門檻：VIF、預測變項的放入方式、重要性排序、殘差查核、優先改善矩陣的分隔線。Claude Code 存成 .claude/skills/survey-driver-regression/SKILL.md；網頁版把同樣的內容貼進專案指示。</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>---
+name: survey-driver-regression
+description: 員工調查的關鍵驅動因子分析。使用者要找出哪些構面與留任意願等結果關聯最強、做多元迴歸或優先改善矩陣時使用。
+---
+
+# 員工調查：關鍵驅動因子與迴歸
+
+## 資料準備（沿用 survey-clean-compare 的清理規則）
+1. 刪除直線作答（29 題標準差 0）與隨機亂填（ENG 12 題標準差 &gt; 平均＋3SD）。
+2. RET03、AIA04 以 7 − 原始分數轉換（AIA04 已確認為對照表誤植）。
+3. 構面分數：答一半以上題目者取平均；不整列刪除 29 題。
+
+## 迴歸前檢查
+- 相關矩陣：預測變項兩兩相關 ≥ .80 要回報。
+- VIF：≥ 5 需處理，≥ 10 屬嚴重；計算時要加常數項。
+
+## 迴歸
+- 所有預測變項同時放入，不用逐步迴歸。
+- 報告 b、SE、b 的 95% CI、β、β 的 95% CI、t、p、R²、調整後 R²、F、模型人數。
+- 重要性排序用 β 與一般優勢權數，不用 p 值。
+
+## 殘差查核
+殘差對預測值圖、Q–Q 圖、Durbin–Watson、Cook&#x27;s 距離（最大值與 &gt; 4/n 人數）、標準化殘差 |z| &gt; 3 人數。
+4/n 只用來標出要查看的個案，不自動刪除。
+
+## 優先改善矩陣
+重要性＝β，表現＝構面平均；分隔線＝驅動因子 β 的平均與構面平均的平均。
+
+## 輸出
+- 程式存成 analysis.py，圖存成 resid.png、qq.png，結果表存成 results.md。
+- 最後列出「我自行決定、需要人確認的事項」。</pre></div>
+  <h2 id="s7-3">7.3 JASP 的相關與線性迴歸</h2>
+  <p>JASP 是免費的統計軟體，介面可選繁體中文。查核時開啟 AI 在第 1 輪匯出的清理後 CSV（構面分數），不在 JASP 重做清理。以下以本網站的敬業度模型為例；練習時把依變項換成 RET、共變項換成五個構面。</p>
+  <ol class="steps">
+    <li>相關：迴歸分析 → 相關；變項放入 ENG、SUP、REC、COM；勾 Pearson’s r 與「顯示顯著性」。</li>
+    <li>線性迴歸：迴歸分析 → 線性迴歸；依變項放 ENG；共變項放 SUP、REC、COM；方法選「進入」。</li>
+    <li>統計量：勾「估計值」「信賴區間」（95%）「模型適配」「共線性診斷」；殘差區塊勾 Durbin–Watson 與「個案診斷」（Cook’s 距離）。</li>
+    <li>圖：勾「殘差 vs 預測值」與「Q-Q 圖（標準化殘差）」。</li>
+    <li>對照：模型摘要的 R²、係數表「標準化」欄的 β、共線性統計的 VIF，與 AI 的結果逐一比較。</li>
+  </ol>
+  <h2 id="s7-4">7.4 JASP 與 AI 結果的對照</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>項目</th><th>敬業度模型的預期結果</th><th>JASP 的位置</th></tr>
+    <tr><td>模型人數</td><td>954</td><td style="text-align:left">描述統計或係數表的 N</td></tr>
+    <tr><td>R²／調整後 R²</td><td>.416／.414</td><td style="text-align:left">模型摘要</td></tr>
+    <tr><td>β</td><td>SUP .362、COM .245、REC .242</td><td style="text-align:left">係數表「標準化」欄</td></tr>
+    <tr><td>VIF</td><td>SUP 1.33、REC 1.29、COM 1.13</td><td style="text-align:left">係數表的共線性統計</td></tr>
+    <tr><td>Durbin–Watson</td><td>1.97</td><td style="text-align:left">模型摘要</td></tr>
+  </table></div>
+  <p>小數第三位的差異來自四捨五入，可接受；模型人數或 β 的排序不同時，要找出原因（<a href="#s8-5">8.5</a>）。JASP 預設以整列刪除處理迴歸中的遺漏值，只排除該模型變項有遺漏的人，與構面分數層次的處理一致。</p>
+  <div class="key"><span class="lb">本單元要點</span>專案記憶寫背景與用語規則，Skill 寫迴歸的做法與門檻。JASP 用 AI 匯出的構面分數獨立重算，對照人數、R²、β 與 VIF。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 7</div>
+    <div class="qbody">
+      <p>你把同一份清理後 CSV 放進 JASP 做線性迴歸，β 與 AI 的結果差 .001，模型人數相同。下列何者正確？</p>
+      <label><input type="radio" name="q7" value="a"> 差異來自四捨五入，可接受，報告寫明使用的軟體</label><label><input type="radio" name="q7" value="b"> 兩個結果至少有一個錯，必須找出原因</label><label><input type="radio" name="q7" value="c"> 改用 AI 的數字，因為 Python 比較精確</label><label><input type="radio" name="q7" value="d"> 兩個數字取平均</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q7r" value="a"> 小數第三位的差異來自不同軟體的計算與四捨五入；人數、排序、顯著與否不同才要找原因</label><label><input type="radio" name="q7r" value="b"> 任何差異都代表資料錯誤</label><label><input type="radio" name="q7r" value="c"> JASP 不能計算標準化係數</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q7c" value="低"> 低</label><label><input type="radio" name="q7c" value="中"> 中</label><label><input type="radio" name="q7c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q7','a','a','正確。小數第三位差異可接受，人數與結論要一致。','相關說明見 &lt;a href=&quot;#s7-4&quot;&gt;7.4&lt;/a&gt; 與 &lt;a href=&quot;#s8-5&quot;&gt;8.5&lt;/a&gt;。','提示：哪一種差異需要找原因？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U8 查核 ==================== -->
+<section class="unit" id="u8">
+  <h1>單元八：人機雙重查核與檢核表</h1>
+  <div class="subtitle">AI 統計幻覺查核清單、常見錯誤、檢核表、獨立重跑與分析紀錄．主要依據：Ji et al. (2023)</div>
+  <h2 id="s8-1">8.1 迴歸分析的查核重點</h2>
+  <p>AI Agent 會實際執行程式，算術錯誤少見。迴歸分析中常見的問題，是 AI 在沒有被指定的地方自行做了決定：整列刪除題目、使用逐步迴歸、依 p 值排序重要性、刪除離群值後重跑，或在說明中使用因果語言。另一類問題是<a href="#g-33">統計幻覺</a>：沒有計算根據的數字，例如問卷沒有測量的變項出現係數，或沒有執行程式就回報 R²（Ji et al., 2023）。</p>
+  <h2 id="s8-2">8.2 快速查核清單</h2>
+  <p>完成分析後逐項勾選。每一項都可以用數字或程式碼核對，不依賴 AI 的自我陳述。</p>
+  <div class="chk"><label><input type="checkbox" onchange="chkCount()"> <span>人數：1,000 → 961 → 模型人數；模型只剩 400 多人代表整列刪除</span></label><label><input type="checkbox" onchange="chkCount()"> <span>反向題：RET03、AIA04 都已轉換（AIA 的 α 為正值）</span></label><label><input type="checkbox" onchange="chkCount()"> <span>預測變項：事先指定，全部同時放入；沒有逐步迴歸；預測變項中沒有依變項的題目</span></label><label><input type="checkbox" onchange="chkCount()"> <span>共線性：每個預測變項都有 VIF，並依事先的門檻（5）判斷</span></label><label><input type="checkbox" onchange="chkCount()"> <span>係數：同時報告 b、β 與 95% 信賴區間；重要性依 β 或優勢權數排序，不依 p 值</span></label><label><input type="checkbox" onchange="chkCount()"> <span>用語：用「關聯」「在其他構面相同的條件下」，沒有「影響」「造成」</span></label><label><input type="checkbox" onchange="chkCount()"> <span>殘差：有殘差對預測值圖、Q–Q 圖、Durbin–Watson、Cook’s 距離與文字說明；被標出的個案沒有被自動刪除</span></label><label><input type="checkbox" onchange="chkCount()"> <span>數字來源：每個數字都能在程式輸出中找到；沒有問卷未測量變項的係數</span></label><label><input type="checkbox" onchange="chkCount()"> <span>自行重算一項：用 JASP 重算 β 與 R²，或在 Excel 用 CORREL 重算一個相關</span></label></div>
+  <p id="chkNote" style="color:var(--muted);font-size:14px">已完成 0／9 項。</p>
+  <h2 id="s8-3">8.3 AI 常見的做法與後果</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>AI 可能的做法</th><th>在本資料的結果（敬業度模型）</th><th>查核方式</th></tr>
+    <tr><td style="text-align:left">整列刪除 29 題任一遺漏者</td><td style="text-align:left">模型只剩 468 人（正確為 954）</td><td style="text-align:left">看模型人數</td></tr>
+    <tr><td style="text-align:left">把題目分別放入迴歸</td><td style="text-align:left">10 題中只有 7 題顯著，被解讀成「其餘題目無關」</td><td style="text-align:left">確認分析單位是構面分數（<a href="#s3-4">3.4</a>）</td></tr>
+    <tr><td style="text-align:left">依 p 值排序重要性</td><td style="text-align:left">3 個構面的 p 都小於 .001，無法排序</td><td style="text-align:left">要求依 β 與優勢權數排序</td></tr>
+    <tr><td style="text-align:left">使用逐步迴歸</td><td style="text-align:left">變項由資料挑選，每次抽樣的結果可能不同</td><td style="text-align:left">提示詞寫明「全部同時放入」</td></tr>
+    <tr><td style="text-align:left">因果用語</td><td style="text-align:left">「主管支持每提高 1 分，敬業度提高 .31 分」</td><td style="text-align:left">改為「在其他構面相同的條件下」的關聯寫法</td></tr>
+    <tr><td style="text-align:left">列出未測量變項的係數</td><td style="text-align:left">例如「工作負荷 β」；問卷沒有這個構面</td><td style="text-align:left">每個數字都要在程式輸出中找到</td></tr>
+    <tr><td style="text-align:left">刪除離群值後重跑</td><td style="text-align:left">Cook’s 距離 &gt; 4/n 的 56 人被刪除，報告沒有說明</td><td style="text-align:left">檢查程式中有沒有依 Cook’s 距離篩選</td></tr>
+  </table></div>
+  <h2 id="s8-4">8.4 分析檢核表（Excel）</h2>
+  <p><a href="../../Assignments/Topic08_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 08 分析檢核表（Excel）</a>。格式與 Topic 07 相同，有三個工作表：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">工作表</th><th>內容</th><th style="width:30%">由誰填寫</th></tr>
+    <tr><td>檢核表</td><td style="text-align:left">依步驟排列的檢核項目（0 規劃、1 清理、2 相關與 VIF、3 迴歸與矩陣、4 殘差、5 查核），每一項有「怎麼檢查」與「預期結果（課堂練習資料）」</td><td style="text-align:left">分析者填「我的結果」「一致？」；檢核者逐項確認並簽名</td></tr>
+    <tr><td>分析紀錄</td><td style="text-align:left">每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出、確認者。附兩列範例（預測變項的放入方式、被標出個案的處理）</td><td style="text-align:left">分析者在分析過程中隨時填寫</td></tr>
+    <tr><td>使用說明</td><td style="text-align:left">使用步驟與數字允許差異的規則</td><td style="text-align:left">開始前先讀</td></tr>
+  </table></div>
+  <h2 id="s8-5">8.5 審查機制與數字允許的差異</h2>
+  <div class="flow">
+    <div class="fbox q">1　自我查核：分析者對照檢核表的預期結果</div><div class="farrow">↓</div>
+    <div class="fbox">2　同儕互查：檢核者看對話紀錄與程式碼，逐項確認</div><div class="farrow">↓</div>
+    <div class="fbox">3　獨立重算：用 JASP 或新對話重算 β、R²、VIF（單元七、8.6）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">4　差異處理與紀錄：依下表判斷，寫進檢核表與分析紀錄</div>
+  </div>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:34%">差異</th><th style="width:16%">判斷</th><th>處理方式</th></tr>
+    <tr><td style="text-align:left">小數第三位不同（β ＝ .341 與 .342）</td><td>可接受</td><td style="text-align:left">四捨五入造成，報告寫明使用的軟體</td></tr>
+    <tr><td style="text-align:left">模型人數不同</td><td>必須說明</td><td style="text-align:left">檢查遺漏值處理與清理規則</td></tr>
+    <tr><td style="text-align:left">β 的排序不同</td><td>必須說明</td><td style="text-align:left">檢查預測變項、反向題與資料版本</td></tr>
+    <tr><td style="text-align:left">信賴區間是否包含 0 的判斷不同</td><td>必須說明</td><td style="text-align:left">檢查人數、預測變項與標準誤的算法</td></tr>
+  </table></div>
+  <h2 id="s8-6">8.6 獨立重跑：另一個對話的查核</h2>
+  <p>開一個新對話（可以是另一個 AI 工具），上傳清理後的構面分數與第一個對話整理出的程式碼，由它依規則自行重算再比對。新對話沒有第一個對話的上下文，不會沿用其中的假設。下面的提示詞以本網站的敬業度模型為例：</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳兩個檔案：清理後的員工調查構面分數（CSV），以及另一個 AI 對話產生的迴歸程式碼。
+請你擔任查核者，不要直接沿用這份程式，依下列規則自己重算一次，再和程式的結果比對：
+1. 以敬業度 ENG 為依變項，主管支持 SUP、認可與回饋 REC、組織承諾 COM 為預測變項，三個變項同時放入；回報模型人數。
+2. 列出 b、β、β 的 95% 信賴區間、VIF、R²。
+3. 檢查程式中是否有逐步迴歸、整列刪除題目、刪除離群值的步驟。
+用表格列出「你的結果」與「程式的結果」，數字不同的地方請說明可能原因。</pre></div>
+  <h2 id="s8-7">8.7 分析紀錄與報告揭露</h2>
+  <p>需要寫進分析紀錄的事項：清理規則與 AIA04 的確認、預測變項的選擇與放入方式、VIF 門檻、優先改善矩陣的分隔線、被標出個案的處理、開放題關鍵字的定義。報告的方法段寫出：使用的 AI 工具與日期、AI 執行的步驟、由人指定的規則、查核方式（檢核表、同儕互查、JASP 重算）。附錄附上完整程式碼與對話紀錄。</p>
+  <h2 id="s8-8">8.8 個人分析作業</h2>
+  <p>個人分析作業（2026/11/26 23:59 截止）的資料、報告架構、繳交項目與評分方式見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。驅動因子分析可作為報告的一節，須附提示詞、程式碼與人機雙重查核紀錄。</p>
+  <div class="key"><span class="lb">本單元要點</span>迴歸的查核對象是 AI 自行做的決定與沒有計算根據的數字。查核清單的每一項都能用數字或程式碼核對。小數第三位的差異可接受；人數、排序與信賴區間的判斷不同時，要找出原因並寫進紀錄。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 8</div>
+    <div class="qbody">
+      <p>AI 的報告中出現「薪資滿意度 β ＝ .41，為留任意願最重要的驅動因子」。這份問卷沒有薪資滿意度的題目。最恰當的處理是什麼？</p>
+      <label><input type="radio" name="q8" value="a"> 採用，AI 可能從開放題推算出來</label><label><input type="radio" name="q8" value="b"> 要求 AI 附上程式碼與輸出；找不到計算來源的數字不採用，並在檢核表記錄</label><label><input type="radio" name="q8" value="c"> 把 β 改小一點再採用</label><label><input type="radio" name="q8" value="d"> 請 AI 再說明一次，語氣肯定就採用</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q8r" value="a"> 沒有測量的變項不可能有迴歸係數；數字要能在程式輸出中找到，屬於統計幻覺的查核</label><label><input type="radio" name="q8r" value="b"> AI 的語氣越肯定，數字越可靠</label><label><input type="radio" name="q8r" value="c"> 開放題的關鍵字計數可以直接換算成 β</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q8c" value="低"> 低</label><label><input type="radio" name="q8c" value="中"> 中</label><label><input type="radio" name="q8c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q8','b','a','正確。每個數字都要能回溯到程式輸出。','相關說明見 &lt;a href=&quot;#s8-2&quot;&gt;8.2&lt;/a&gt;。','提示：問卷沒有的變項，迴歸能算出係數嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U9 實機練習 ==================== -->
+<section class="unit" id="u9">
+  <h1>單元九：實機練習</h1>
+  <div class="subtitle">六輪提示詞與答案對照（留任意願模型）</div>
+  <ol class="steps">
+    <li><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料</a>，開啟 ChatGPT 或 Claude 網頁版的新對話，上傳 Excel 檔</li>
+    <li>在同一個對話中，依序貼上第 0 輪到第 5 輪的提示詞（按「複製」）</li>
+    <li>每一輪看完 AI 的結果，按「看答案」對照，數字對得上再貼下一輪</li>
+    <li>數字不同時，要求 AI 說明做法，對照單元二至六找出設定不同的地方</li>
+    <li>AI 不再遵守前面的規則時，要求它寫階段摘要，開新對話貼上摘要後繼續（<a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#s2-9" target="_blank" rel="noopener">Topic 07 網站 2.9</a>）</li>
+    <li>完成後用 JASP 重算 β 與 R²（單元七），填寫<a href="../../Assignments/Topic08_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，再與同學交換互查（單元八）</li>
+  </ol>
+  <div class="note"><span class="lb">提醒</span>答案由課程的分析程式計算。AI 使用的方法不同時，小數第三位可能略有差異；人數、方向、排序與結論應該一致。練習以留任意願為結果，與課堂投影片的例子相同。</div>
+  <div class="round">
+  <div class="rhead">第 0 輪：規劃（不執行）</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳一份員工意見調查的模擬資料（Excel，三個工作表）。這次的問題是：哪些因素與員工的留任意願關聯最強，人資應該優先改善什麼。
+請先讀完「題目對照表」與「構面與計分說明」，再看「原始資料」。這一輪先不要計算，請用條列回答：
+1. 你打算用什麼方法回答這個問題，依變項與預測變項各是什麼。
+2. 迴歸之前要先完成哪些清理與檢查（依序列出）。
+3. 有哪些決定需要我確認後才能執行。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p>查核重點：</p><ul><li>AI 是否提出多元迴歸，依變項 RET，預測變項為其他五個構面（AI 若把人口變項也放進去，要求它說明理由）。</li><li>是否提到迴歸之前的檢查：清理、反向題 RET03 與 AIA04、構面分數、相關矩陣、多重共線性（VIF）、殘差。</li><li>是否主動詢問：遺漏值怎麼處理、是否用逐步迴歸、要不要標準化係數。</li><li>是否遵守「這一輪先不要計算」。</li></ul></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 1 輪：清理與構面分數</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依下列規則清理資料，每一步都告訴我剩下幾人：
+1. 直線作答：29 題全部填同一個數字的人，刪除。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
+3. 反向題：RET03 依題目對照表以 7 減原始分數轉換；AIA04 語意與同構面其他題相反，已向題目負責人確認是對照表誤植，也以 7 減原始分數轉換。
+4. 構面分數：該構面答了一半以上題目，就取已作答題目的平均；不到一半則記為遺漏。不要整列刪除。
+請用表格列出六個構面的有效人數、平均數、標準差與 Cronbach&#x27;s α。
+清理後的構面分數請存成 CSV 讓我下載（保留員工編號與人口變項）。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class="scrollx"><table class="mt"><tr><th>項目</th><th>正確答案</th></tr><tr><td style="text-align:left">原始人數</td><td style="text-align:left">1,000</td></tr><tr><td style="text-align:left">直線作答</td><td style="text-align:left">20 人</td></tr><tr><td style="text-align:left">隨機亂填</td><td style="text-align:left">19 人（門檻 1.32）</td></tr><tr><td style="text-align:left">清理後人數</td><td style="text-align:left">961</td></tr></table></div><div class="scrollx"><table class="mt"><tr><th>構面</th><th>有效人數</th><th>平均數</th><th>標準差</th><th>α</th></tr><tr><td style="text-align:left">敬業度 ENG</td><td style="text-align:left">961</td><td style="text-align:left">3.90</td><td style="text-align:left">0.84</td><td style="text-align:left">.95</td></tr><tr><td style="text-align:left">主管支持 SUP</td><td style="text-align:left">961</td><td style="text-align:left">3.87</td><td style="text-align:left">0.98</td><td style="text-align:left">.88</td></tr><tr><td style="text-align:left">認可與回饋 REC</td><td style="text-align:left">958</td><td style="text-align:left">3.46</td><td style="text-align:left">1.09</td><td style="text-align:left">.87</td></tr><tr><td style="text-align:left">組織承諾 COM</td><td style="text-align:left">957</td><td style="text-align:left">3.57</td><td style="text-align:left">1.07</td><td style="text-align:left">.87</td></tr><tr><td style="text-align:left">留任意願 RET</td><td style="text-align:left">959</td><td style="text-align:left">3.59</td><td style="text-align:left">0.98</td><td style="text-align:left">.84</td></tr><tr><td style="text-align:left">AI 導入態度 AIA</td><td style="text-align:left">961</td><td style="text-align:left">3.77</td><td style="text-align:left">0.97</td><td style="text-align:left">.82</td></tr></table></div><p>構面平均最低的是認可與回饋（3.46），最高的是組織承諾（3.57）。AIA 的 α 若接近 0 或為負值，代表 AIA04 沒有轉換。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 2 輪：相關矩陣與 VIF</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請用清理後的六個構面分數：
+1. 計算構面之間的 Pearson 相關矩陣，標出 p &lt; .05 的相關。
+2. 以留任意願 RET 為依變項，敬業度 ENG、主管支持 SUP、認可與回饋 REC、組織承諾 COM、AI 導入態度 AIA 為預測變項，計算五個預測變項的 VIF（變異數膨脹因子）。
+3. 依事先訂好的規則判斷多重共線性：任一 VIF ≥ 5 需要處理，≥ 10 屬於嚴重；預測變項兩兩相關 ≥ .80 也要回報。
+請說明判斷結果，以及你用哪一個函式計算 VIF。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class="scrollx"><table class="mt"><tr><th></th><th>ENG</th><th>SUP</th><th>REC</th><th>COM</th><th>RET</th><th>AIA</th></tr><tr><td style="text-align:left">ENG</td><td style="text-align:left">—</td><td style="text-align:left">.55</td><td style="text-align:left">.47</td><td style="text-align:left">.42</td><td style="text-align:left">.53</td><td style="text-align:left">.07</td></tr><tr><td style="text-align:left">SUP</td><td style="text-align:left">.55</td><td style="text-align:left">—</td><td style="text-align:left">.45</td><td style="text-align:left">.32</td><td style="text-align:left">.43</td><td style="text-align:left">.03</td></tr><tr><td style="text-align:left">REC</td><td style="text-align:left">.47</td><td style="text-align:left">.45</td><td style="text-align:left">—</td><td style="text-align:left">.26</td><td style="text-align:left">.38</td><td style="text-align:left">−.02</td></tr><tr><td style="text-align:left">COM</td><td style="text-align:left">.42</td><td style="text-align:left">.32</td><td style="text-align:left">.26</td><td style="text-align:left">—</td><td style="text-align:left">.48</td><td style="text-align:left">.02</td></tr><tr><td style="text-align:left">RET</td><td style="text-align:left">.53</td><td style="text-align:left">.43</td><td style="text-align:left">.38</td><td style="text-align:left">.48</td><td style="text-align:left">—</td><td style="text-align:left">.03</td></tr><tr><td style="text-align:left">AIA</td><td style="text-align:left">.07</td><td style="text-align:left">.03</td><td style="text-align:left">−.02</td><td style="text-align:left">.02</td><td style="text-align:left">.03</td><td style="text-align:left">—</td></tr></table></div><ul><li>與留任意願相關最高：ENG（r = .53）與 COM（r = .48）；AIA 與 RET 幾乎無關（r = .03，p = .400）。</li><li>預測變項之間相關最高為 ENG 與 SUP（r = .55），低於 .80。</li><li>VIF：ENG 1.73、SUP 1.56、REC 1.39、COM 1.24、AIA 1.01，全部低於 5，沒有多重共線性問題。</li><li>常見計算方式：statsmodels 的 variance_inflation_factor；計算時要加常數項，否則 VIF 會偏高。</li></ul></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 3 輪：迴歸與 β</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請做多元迴歸：依變項 RET，預測變項 ENG、SUP、REC、COM、AIA，五個變項同時放入（不要用逐步迴歸）；任一變項遺漏者不納入這個模型，回報實際使用的人數。
+請用表格列出：每個預測變項的未標準化係數 b、標準誤、b 的 95% 信賴區間、標準化係數 β、β 的 95% 信賴區間、t、p；以及 R²、調整後 R²、F 檢定。
+接著：
+1. 依 β 的絕對值排序五個驅動因子，並另外計算相對重要性（一般優勢權數 dominance weights，或 Pratt 指標），說明兩種排序是否一致。
+2. 建立優先改善矩陣：重要性用 β，表現用構面平均；分隔線用五個驅動因子 β 的平均與構面平均的平均。列出每個構面落在哪一個象限。
+3. 計算開放題 OE1 中提到薪資或福利（例如：薪、獎金、年終、福利、補助、津貼）的人數與比例。說明薪資福利為什麼不在迴歸模型中。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p>模型人數 n = 952（清理後 961 人中，9 人有構面遺漏）。</p><div class="scrollx"><table class="mt"><tr><th>預測變項</th><th>b</th><th>SE</th><th>b 的 95% CI</th><th>β</th><th>β 的 95% CI</th><th>t</th><th>p</th></tr><tr><td style="text-align:left">敬業度 ENG</td><td style="text-align:left">.334</td><td style="text-align:left">.039</td><td style="text-align:left">[.26, .41]</td><td style="text-align:left">.28</td><td style="text-align:left">[.22, .35]</td><td style="text-align:left">8.54</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">主管支持 SUP</td><td style="text-align:left">.138</td><td style="text-align:left">.032</td><td style="text-align:left">[.08, .20]</td><td style="text-align:left">.14</td><td style="text-align:left">[.07, .20]</td><td style="text-align:left">4.33</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">認可與回饋 REC</td><td style="text-align:left">.098</td><td style="text-align:left">.027</td><td style="text-align:left">[.04, .15]</td><td style="text-align:left">.11</td><td style="text-align:left">[.05, .17]</td><td style="text-align:left">3.62</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">組織承諾 COM</td><td style="text-align:left">.261</td><td style="text-align:left">.026</td><td style="text-align:left">[.21, .31]</td><td style="text-align:left">.28</td><td style="text-align:left">[.23, .34]</td><td style="text-align:left">10.07</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">AI 導入態度 AIA</td><td style="text-align:left">.000</td><td style="text-align:left">.026</td><td style="text-align:left">[−.05, .05]</td><td style="text-align:left">.00</td><td style="text-align:left">[−.05, .05]</td><td style="text-align:left">-0.01</td><td style="text-align:left">.990</td></tr></table></div><p>R² = .39，調整後 R² = .39，F(5, 946) = 120.50，p &lt; .001。截距 = 0.48。</p><ul><li>β 排序：ENG（β = .28）、COM（β = .28）、SUP（β = .14）、REC（β = .11）、AIA（β = .00）。</li><li>一般優勢權數（占 R² 的比例）：ENG 35.2%、COM 31.9%、SUP 18.9%、REC 13.9%、AIA 0.1%；排序與 β 相同。</li><li>AIA 的信賴區間包含 0，與留任意願沒有關聯。</li></ul><p>優先改善矩陣（分隔線：β 平均 .163、構面平均的平均 3.71）：</p><div class="scrollx"><table class="mt"><tr><th>構面</th><th>β（重要性）</th><th>平均（表現）</th><th>象限</th></tr><tr><td style="text-align:left">敬業度 ENG</td><td style="text-align:left">.28</td><td style="text-align:left">3.90</td><td style="text-align:left">維持優勢</td></tr><tr><td style="text-align:left">主管支持 SUP</td><td style="text-align:left">.14</td><td style="text-align:left">3.87</td><td style="text-align:left">維持現狀</td></tr><tr><td style="text-align:left">認可與回饋 REC</td><td style="text-align:left">.11</td><td style="text-align:left">3.46</td><td style="text-align:left">次要觀察</td></tr><tr><td style="text-align:left">組織承諾 COM</td><td style="text-align:left">.28</td><td style="text-align:left">3.57</td><td style="text-align:left">優先改善</td></tr><tr><td style="text-align:left">AI 導入態度 AIA</td><td style="text-align:left">.00</td><td style="text-align:left">3.77</td><td style="text-align:left">維持現狀</td></tr></table></div><p>五個驅動因子的構面平均相差 0.44 分（最低 REC 3.46、最高 ENG 3.90）。</p><p>OE1：有實質內容的回答 508 人，提到薪資或福利的 91 人（17.9%），以關鍵字計算是人數最多的主題。問卷沒有測量薪資福利的題目，迴歸只能比較有測量的構面；被提到最多的抱怨，不一定是與留任意願關聯最強的因素。開放題的完整編碼在 Topic 09。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 4 輪：殘差與假定</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請檢查上一輪迴歸的假定，並把圖存成檔案讓我下載：
+1. 殘差對預測值的散布圖，加一條水平的 0 線；說明有沒有曲線型態或喇叭形（變異不相等）。
+2. 標準化殘差的常態 Q–Q 圖，並報告殘差的偏態與峰度。
+3. Durbin–Watson 值。
+4. Cook&#x27;s 距離的最大值、對應的員工編號，以及超過 4/n 的人數；標準化殘差絕對值大於 3 的人數。
+5. 依結果說明：哪些假定大致成立、哪些需要注意，以及這些結果會不會改變上一輪的結論。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class="scrollx"><table class="mt"><tr><th>查核項目</th><th>正確答案</th><th>判斷</th></tr><tr><td style="text-align:left">殘差對預測值</td><td style="text-align:left">各段預測值的殘差平均接近 0，沒有明顯曲線或喇叭形</td><td style="text-align:left">線性與變異相等大致成立</td></tr><tr><td style="text-align:left">殘差偏態／峰度</td><td style="text-align:left">−.04／−.08</td><td style="text-align:left">接近常態</td></tr><tr><td style="text-align:left">Breusch–Pagan 檢定</td><td style="text-align:left">p = .870</td><td style="text-align:left">變異相等</td></tr><tr><td style="text-align:left">Durbin–Watson</td><td style="text-align:left">2.12</td><td style="text-align:left">接近 2，殘差無自我相關</td></tr><tr><td style="text-align:left">Cook&#x27;s 距離最大值</td><td style="text-align:left">.015（E0501）</td><td style="text-align:left">遠低於 1，沒有單一個案左右結果</td></tr><tr><td style="text-align:left">Cook&#x27;s 距離 &gt; 4/n（.0042）</td><td style="text-align:left">54 人</td><td style="text-align:left">4/n 是篩選門檻，被標出的人逐一查看，不直接刪除</td></tr><tr><td style="text-align:left">標準化殘差絕對值 &gt; 3</td><td style="text-align:left">3 人</td><td style="text-align:left">數量少，屬於預期範圍</td></tr></table></div><p>留任意願是 1 到 6 分的構面平均，殘差圖上會看到斜向的條紋，這是分數有上下限造成的，不代表假定不成立。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 5 輪：雙重查核</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把這次對話用到的完整程式碼整理成一份，並用表格列出：每一步做了什麼、使用了幾人、做了哪些假設。
+接著請自我檢查下列事項，逐項回答「有／沒有」並附上證據（程式碼的行或輸出的數字）：
+1. 是否有整列刪除 29 題中任一題遺漏的人。
+2. 是否把 β 寫成「因果影響」或「每提高 1 分會讓留任提高」。
+3. 是否只用 p 值排序重要性。
+4. 是否有任何數字不是程式實際算出來的。
+最後列出你自行決定、我沒有指定的事項。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p>人工查核清單：</p><ol><li>人數：1,000 → 961 → 模型 952；若模型只有 468 人，代表做了整列刪除。</li><li>反向題：RET03、AIA04 都有轉換。RET03 沒轉換時，R² 從 .39 降到 .16。</li><li>共線性：VIF 全部低於 5。</li><li>係數解讀：用「關聯」「在其他構面相同的條件下」描述，不寫「影響」「造成」。</li><li>重要性排序依 β 或優勢權數，不依 p 值。</li><li>殘差：有殘差圖、Q–Q 圖與 Cook&#x27;s 距離，且有文字說明。</li><li>以自己的工具重算一項：例如 JASP 的 β 與 R²，或 Excel 的 CORREL。</li></ol><p><b>常見錯誤對照</b></p><div class="scrollx"><table class="mt"><tr><th>AI 可能的做法</th><th>結果</th><th>錯誤原因</th></tr><tr><td style="text-align:left">整列刪除 29 題中任一題遺漏的人</td><td style="text-align:left">模型只剩 468 人</td><td style="text-align:left">構面分數已處理遺漏值，整列刪除丟掉一半樣本</td></tr><tr><td style="text-align:left">沒轉換 RET03</td><td style="text-align:left">R² = .16</td><td style="text-align:left">依變項混入方向相反的題目</td></tr><tr><td style="text-align:left">用逐步迴歸挑變項</td><td style="text-align:left">每次結果可能不同，AIA 被刪掉後看不出「無關」也是結果</td><td style="text-align:left">變項由資料挑選，事先沒有訂規則</td></tr><tr><td style="text-align:left">用 p 值排序重要性</td><td style="text-align:left">五個 p 都很小時無法排序</td><td style="text-align:left">p 受樣本數影響，不代表關聯強度</td></tr><tr><td style="text-align:left">「主管支持每提高 1 分，留任意願提高 0.14 分」</td><td style="text-align:left">寫成因果</td><td style="text-align:left">橫斷面調查只能說明關聯；b 是其他構面相同時的預期差距</td></tr><tr><td style="text-align:left">把薪資福利放進驅動因子排序</td><td style="text-align:left">問卷沒有這個構面</td><td style="text-align:left">AI 可能依開放題或常識編出數字，屬於幻覺</td></tr></table></div></div>
+  </div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>練習流程為規劃、執行、逐輪對照答案；數字對不上時，從 AI 自行做的決定找原因，再修改提示詞。</div>
+</section>
+
+<!-- ==================== U10 文獻 ==================== -->
+<section class="unit" id="u10">
+  <h1>單元十：參考文獻與名詞對照</h1>
+  <h2>參考文獻</h2>
+  <div class="refline">Azen, R., &amp; Budescu, D. V. (2003). The dominance analysis approach for comparing predictors in multiple regression. <i>Psychological Methods, 8</i>(2), 129–148. <a href="https://doi.org/10.1037/1082-989X.8.2.129" target="_blank" rel="noopener">https://doi.org/10.1037/1082-989X.8.2.129</a></div><div class="refline">Cohen, J., Cohen, P., West, S. G., &amp; Aiken, L. S. (2003). <i>Applied multiple regression/correlation analysis for the behavioral sciences</i> (3rd ed.). Lawrence Erlbaum Associates.</div><div class="refline">Cook, R. D. (1977). Detection of influential observation in linear regression. <i>Technometrics, 19</i>(1), 15–18. <a href="https://doi.org/10.1080/00401706.1977.10489493" target="_blank" rel="noopener">https://doi.org/10.1080/00401706.1977.10489493</a></div><div class="refline">Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y. J., Madotto, A., &amp; Fung, P. (2023). Survey of hallucination in natural language generation. <i>ACM Computing Surveys, 55</i>(12), Article 248. <a href="https://doi.org/10.1145/3571730" target="_blank" rel="noopener">https://doi.org/10.1145/3571730</a></div><div class="refline">Johnson, J. W., &amp; LeBreton, J. M. (2004). History and use of relative importance indices in organizational research. <i>Organizational Research Methods, 7</i>(3), 238–257. <a href="https://doi.org/10.1177/1094428104266510" target="_blank" rel="noopener">https://doi.org/10.1177/1094428104266510</a></div><div class="refline">Martilla, J. A., &amp; James, J. C. (1977). Importance-performance analysis. <i>Journal of Marketing, 41</i>(1), 77–79. <a href="https://doi.org/10.1177/002224297704100112" target="_blank" rel="noopener">https://doi.org/10.1177/002224297704100112</a></div><div class="refline">O’Brien, R. M. (2007). A caution regarding rules of thumb for variance inflation factors. <i>Quality &amp; Quantity, 41</i>(5), 673–690. <a href="https://doi.org/10.1007/s11135-006-9018-6" target="_blank" rel="noopener">https://doi.org/10.1007/s11135-006-9018-6</a></div><div class="refline">Tonidandel, S., &amp; LeBreton, J. M. (2011). Relative importance analysis: A useful supplement to regression analysis. <i>Journal of Business and Psychology, 26</i>(1), 1–9. <a href="https://doi.org/10.1007/s10869-010-9204-3" target="_blank" rel="noopener">https://doi.org/10.1007/s10869-010-9204-3</a></div><div class="refline">Whittingham, M. J., Stephens, P. A., Bradbury, R. B., &amp; Freckleton, R. P. (2006). Why do we still use stepwise modelling in ecology and behaviour? <i>Journal of Animal Ecology, 75</i>(5), 1182–1189. <a href="https://doi.org/10.1111/j.1365-2656.2006.01141.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1365-2656.2006.01141.x</a></div><div class="refline">Williams, M. N., Grajales, C. A. G., &amp; Kurkiewicz, D. (2013). Assumptions of multiple regression: Correcting two misconceptions. <i>Practical Assessment, Research, and Evaluation, 18</i>, Article 11. <a href="https://doi.org/10.7275/55hn-wk47" target="_blank" rel="noopener">https://doi.org/10.7275/55hn-wk47</a></div>
+  <div class="note"><span class="lb">數字來源</span>本網站的數字全部計算自課程的員工調查模擬資料（教學模擬資料，非真實組織調查結果）。r 的大小基準為 Cohen 的慣例；VIF 門檻與 4/n 為常用慣例，判讀時仍需考慮情境。</div>
+  <h2>專有名詞對照表</h2>
+  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>驅動因子分析</td><td>key driver analysis</td><td style='text-align:left'>找出哪些構面與某個結果（例如留任意願、敬業度）關聯最強的分析，常用多元迴歸</td></tr><tr id='g-2'><td>依變項</td><td>dependent variable, outcome</td><td style='text-align:left'>要說明或預測的結果，例如敬業度</td></tr><tr id='g-3'><td>預測變項</td><td>predictor</td><td style='text-align:left'>用來預測依變項的變項，例如主管支持；JASP 稱為共變項</td></tr><tr id='g-4'><td>相關係數 r</td><td>Pearson correlation</td><td style='text-align:left'>兩個分數一起升降的程度，介於 −1 到 1；0 表示沒有直線關係</td></tr><tr id='g-5'><td>r²</td><td>coefficient of determination</td><td style='text-align:left'>兩個變項共同變動的比例，等於 r 的平方</td></tr><tr id='g-6'><td>簡單迴歸</td><td>simple regression</td><td style='text-align:left'>只有一個預測變項的迴歸</td></tr><tr id='g-7'><td>多元迴歸</td><td>multiple regression</td><td style='text-align:left'>同時放入多個預測變項的迴歸；每個係數是其他預測變項相同時的關聯</td></tr><tr id='g-8'><td>截距</td><td>intercept</td><td style='text-align:left'>所有預測變項為 0 時的預測值；六點量表沒有 0 分，不單獨解讀</td></tr><tr id='g-9'><td>迴歸係數 b</td><td>unstandardized coefficient</td><td style='text-align:left'>預測變項多 1 分，依變項預期多幾分（其他預測變項相同時）</td></tr><tr id='g-10'><td>標準化係數 β</td><td>standardized coefficient, beta</td><td style='text-align:left'>所有變項換成標準分數後的係數；單位一致，可比較預測變項之間的關聯強弱</td></tr><tr id='g-11'><td>標準誤</td><td>standard error, SE</td><td style='text-align:left'>係數的不確定性：重複抽樣時，係數通常變動的幅度</td></tr><tr id='g-12'><td>信賴區間</td><td>confidence interval, CI</td><td style='text-align:left'>係數可能落在的範圍；95% 指重複抽樣時，95% 的區間會包含母體的係數</td></tr><tr id='g-13'><td>R²</td><td>R squared</td><td style='text-align:left'>預測變項合計說明依變項差異的比例</td></tr><tr id='g-14'><td>調整後 R²</td><td>adjusted R squared</td><td style='text-align:left'>依預測變項個數與樣本數調整的 R²</td></tr><tr id='g-15'><td>F 檢定</td><td>F test</td><td style='text-align:left'>檢定模型的 R² 是否大於 0</td></tr><tr id='g-16'><td>多重共線性</td><td>multicollinearity</td><td style='text-align:left'>預測變項彼此高度相關，內容重疊，使係數不穩定</td></tr><tr id='g-17'><td>VIF</td><td>variance inflation factor</td><td style='text-align:left'>變異數膨脹因子：1 ÷（1 − 該預測變項被其他預測變項解釋的 R²）；本課程以 5 為處理門檻</td></tr><tr id='g-18'><td>允差</td><td>tolerance</td><td style='text-align:left'>1 ÷ VIF；JASP 共線性診斷同時列出</td></tr><tr id='g-19'><td>逐步迴歸</td><td>stepwise regression</td><td style='text-align:left'>由程式依 p 值逐一加入或刪除預測變項的方法；結果隨樣本變動，本課程不使用</td></tr><tr id='g-20'><td>相對重要性</td><td>relative importance</td><td style='text-align:left'>比較預測變項對 R² 的貢獻</td></tr><tr id='g-21'><td>一般優勢權數</td><td>general dominance weight</td><td style='text-align:left'>某個預測變項在所有子模型中平均增加的 R²；全部加總等於 R²</td></tr><tr id='g-22'><td>Pratt 指標</td><td>Pratt measure</td><td style='text-align:left'>β × r ÷ R²，另一種相對重要性指標</td></tr><tr id='g-23'><td>優先改善矩陣</td><td>importance–performance analysis</td><td style='text-align:left'>以重要性（β）與表現（構面平均）兩個軸，把構面分成四個象限</td></tr><tr id='g-24'><td>殘差</td><td>residual</td><td style='text-align:left'>實際分數減預測分數</td></tr><tr id='g-25'><td>預測值</td><td>fitted value</td><td style='text-align:left'>依迴歸式算出的分數</td></tr><tr id='g-26'><td>標準化殘差</td><td>standardized residual</td><td style='text-align:left'>殘差除以其標準差；絕對值大於 3 的個案較少見</td></tr><tr id='g-27'><td>Q–Q 圖</td><td>quantile–quantile plot</td><td style='text-align:left'>把殘差的分位數與常態分布的分位數對照；點貼近直線表示接近常態</td></tr><tr id='g-28'><td>變異相等</td><td>homoscedasticity</td><td style='text-align:left'>各段預測值的殘差分散程度相近</td></tr><tr id='g-29'><td>Breusch–Pagan 檢定</td><td>Breusch–Pagan test</td><td style='text-align:left'>檢定殘差的變異是否隨預測變項改變；p &lt; .05 表示變異不相等</td></tr><tr id='g-30'><td>Durbin–Watson</td><td>Durbin–Watson statistic</td><td style='text-align:left'>檢查相鄰殘差是否相關；接近 2 表示沒有自我相關</td></tr><tr id='g-31'><td>Cook’s 距離</td><td>Cook’s distance</td><td style='text-align:left'>刪除某一位後，所有預測值改變的程度；大於 1 表示單一個案左右結果</td></tr><tr id='g-32'><td>4/n 門檻</td><td>4/n cutoff</td><td style='text-align:left'>Cook’s 距離的篩選慣例，用來標出要查看的個案，不作為刪除規則</td></tr><tr id='g-33'><td>統計幻覺</td><td>statistical hallucination</td><td style='text-align:left'>AI 產生沒有計算根據的統計數字或結論，例如未測量變項的係數</td></tr><tr id='g-34'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記錄分析中每一個由人決定的事項、理由與確認者</td></tr></table></div>
+  <h2>相關主題</h2>
+  <ul>
+    <li><a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">Topic 07 教材網站</a>、<a href="../../Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener">Topic 07 課堂投影片</a>：清理規則、t 檢定、ANOVA、決策樹</li>
+    <li><a href="../../Slides/Topic08_課堂投影片.html" target="_blank" rel="noopener">Topic 08 課堂投影片</a>：留任意願的驅動因子分析</li>
+    <li>Topic 09 開放題分析（2026/11/20）：OE1、OE2 的主題編碼</li>
+    <li><a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業說明</a>、<a href="../../Assignments/Topic08_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 08 分析檢核表</a></li>
+  </ul>
+</section>
+
+<footer class="site">本教學網站為單一 HTML 檔案。Topic 08：AI Agent 輔助量化實務（二）：驅動因子與迴歸建模。所有數字計算自課程的教學模擬資料，非真實組織調查結果；文獻附 DOI（專書除外）。供教學使用。</footer>
+</main>
+</div>
+<script>
+window.QUIZ_TOTAL = 8;
+function toggleAns(btn){
+  var box=btn.nextElementSibling, open=!box.classList.contains('show');
+  box.classList.toggle('show', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.textContent = open ? '收合答案' : '看答案';
+}
+function chkCount(){
+  var all=document.querySelectorAll('.chk input'), n=0;
+  all.forEach(function(c){ c.closest('label').classList.toggle('done', c.checked); if(c.checked) n++; });
+  document.getElementById('chkNote').textContent='已完成 '+n+'／'+all.length+' 項。'+(n===all.length?'全部項目都已查核。':'');
+}
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+function goSec(id){
+  var el=document.getElementById(id); if(!el) return false;
+  var u=el.closest('.unit'); if(u && !u.classList.contains('active')) goUnit(u.id);
+  el.scrollIntoView({block:'start', behavior:'instant'});
+  if(history.replaceState) history.replaceState(null,'','#'+id);
+  return true;
+}
+document.addEventListener('click', function(e){
+  var a=e.target.closest && e.target.closest('a[href^="#s"],a[href^="#g-"]'); if(!a) return;
+  if(goSec(a.getAttribute('href').slice(1))) e.preventDefault();
+});
+if (location.hash) {
+  var hashTarget = document.querySelector('#nav a[data-u="' + location.hash.slice(1) + '"]');
+  if (hashTarget) hashTarget.click(); else goSec(location.hash.slice(1));
+}
+window.addEventListener('hashchange', function(){
+  var h=location.hash.slice(1), t=document.querySelector('#nav a[data-u="'+h+'"]');
+  if (t) t.click(); else goSec(h);
+});
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標示信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板只記第一次作答，<a href="#u0" onclick="goUnit(\'u0\');return false;">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方確認理由。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，該單元說明理由的段落可再複習。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='這個理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板只記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+window.QUIZ_TOTAL+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未確認理由'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，對應單元可再複習。'; }
+  else if(n>0){ msg+='目前沒有高信心答錯的題目。'; }
+  noteEl.textContent=msg;
+}
+function copyCode(btn){
+  var txt=btn.parentElement.querySelector('pre').textContent;
+  function done(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); }
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ btn.textContent='請手動選取'; }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(txt).then(done, fallback); } else { fallback(); }
+}
+initQuizzes();
+</script>
+</body>
+</html>

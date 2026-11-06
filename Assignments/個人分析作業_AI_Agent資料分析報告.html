@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>個人分析作業：AI Agent 模擬資料分析報告｜員工意向調查 HRM922</title>
+<link rel="icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --green:#337052;--palegreen:#EDF5F0;--amber:#8A6420;--paleamber:#FAF3E3;
+  --serif:'Newsreader','Noto Serif TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+em,i{font-style:normal}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink-2);background:var(--cream);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--accent-dark)}
+
+.topbar{position:sticky;top:0;z-index:50;background:rgba(251,248,242,.85);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px clamp(16px,3vw,40px);flex-wrap:wrap}
+.tb-left{display:flex;align-items:center;gap:12px;min-width:0}
+.tb-badge{background:var(--accent-tint);color:var(--accent);font-size:14px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:.06em;white-space:nowrap}
+.tb-course{font-weight:700;font-size:16px;color:var(--ink)}
+.tb-inst{font-size:14px;color:var(--ink-3)}
+.tb-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tb-topic{background:var(--accent);color:var(--cream);border-radius:999px;padding:6px 16px;font-size:14px;font-weight:700;white-space:nowrap}
+.btn-nav{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;text-decoration:none;background:var(--paper);border:1px solid var(--line-2);color:var(--ink-2);transition:transform .1s ease-out,background .2s var(--ease),border-color .2s var(--ease)}
+.btn-nav:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint)}
+.btn-nav:active{transform:scale(.97)}
+
+main{max-width:1040px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,3vw,36px) 80px}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line-2);padding:.4rem 1rem;border-radius:9999px;font-size:14px;font-weight:600;letter-spacing:.14em;color:var(--accent);background:var(--paper)}
+.h1-sub{display:block;font-size:.62em;font-weight:500;color:var(--ink-2);margin-top:.15em}
+h1{font-family:var(--serif);font-size:clamp(34px,4.4vw,52px);color:var(--ink);font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:18px 0 10px}
+.lead{font-size:19px;line-height:1.75;color:var(--ink-2);max-width:44em}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:30px 0 10px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.fact .k{font-size:14px;color:var(--ink-3);letter-spacing:.06em}
+.fact .v{font-family:var(--serif);font-size:26px;color:var(--ink);font-weight:600;line-height:1.3;margin-top:4px}
+.fact .v small{font-family:var(--sans);font-size:15px;color:var(--ink-2);font-weight:500;display:block;margin-top:2px}
+
+section{margin-top:56px}
+h2{font-family:var(--serif);font-size:30px;color:var(--ink);font-weight:600;line-height:1.3;letter-spacing:-.01em;margin-bottom:6px}
+.sec-tag{font-size:14px;letter-spacing:.14em;color:var(--accent);font-weight:700}
+h3{font-family:var(--serif);font-size:21px;color:var(--ink);font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:48em}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2.4vw,28px);margin:16px 0}
+.def{color:var(--accent);font-weight:700}
+.key{background:var(--accent-tint);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0;color:var(--ink)}
+.key strong{color:var(--accent)}
+.note{background:var(--palegreen);border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+.warn{background:var(--paleamber);border-left:4px solid var(--amber);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:18px}
+.topic{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:6px}
+.topic .no{font-family:var(--serif);font-size:15px;color:var(--accent);letter-spacing:.1em;font-weight:600}
+.topic h4{font-family:var(--serif);font-size:24px;color:var(--ink);font-weight:600;line-height:1.25}
+.topic .en{font-size:15px;color:var(--ink-3)}
+.topic p{font-size:15.5px;line-height:1.7;margin:8px 0 0;color:var(--ink-2)}
+.topic .src{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line-2);font-size:14.5px;color:var(--ink-3);line-height:1.6}
+.topic .src a{font-weight:600}
+
+.steps{counter-reset:s;list-style:none;margin-top:16px}
+.steps li{position:relative;padding:18px 20px 18px 74px;background:var(--paper);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:22px;top:16px;font-family:var(--serif);font-size:26px;color:var(--accent);font-weight:600;line-height:1}
+.steps h4{font-size:18px;color:var(--ink);font-weight:700;margin-bottom:4px}
+.steps .when{font-size:14px;color:var(--ink-3);letter-spacing:.04em;margin-bottom:6px}
+.steps p{font-size:15.5px;margin:0;max-width:none}
+.steps .out{margin-top:8px;font-size:15px;color:var(--ink);background:var(--cream-2);border-radius:8px;padding:8px 12px;display:inline-block}
+
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15.5px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.6}
+th{background:var(--cream-2);color:var(--ink);font-weight:700;font-size:15px}
+td.w{white-space:nowrap;font-family:var(--serif);font-size:20px;color:var(--accent);font-weight:600}
+tr:last-child td{border-bottom:none}
+.tblwrap{overflow-x:auto}
+
+.timeline{position:relative;margin:20px 0 0 8px;padding-left:28px;border-left:2px solid var(--line-2)}
+.tl{position:relative;padding:0 0 22px 8px}
+.tl::before{content:"";position:absolute;left:-36px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:3px solid var(--cream)}
+.tl.soft::before{background:var(--line-2)}
+.tl .d{font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:600}
+.tl .d span{font-family:var(--sans);font-size:14px;color:var(--ink-3);margin-left:10px;font-weight:500;letter-spacing:.04em}
+.tl p{margin:2px 0 0;font-size:15.5px}
+
+details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:0 18px}
+summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--ink);font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:var(--accent);font-weight:400}
+details[open] summary::after{content:"－"}
+details p{padding-bottom:14px;font-size:15.5px}
+
+.refs{font-size:14.5px;color:var(--ink-3);line-height:1.7}
+.refs div{padding-left:2em;text-indent:-2em;margin-bottom:6px}
+.refs .rnote{text-indent:0;margin:-2px 0 12px;color:var(--accent);font-size:14px}
+.rdesc{font-size:15px;color:var(--ink-3);margin:0 0 10px}
+footer{text-align:center;color:var(--ink-3);font-size:14px;padding:28px 16px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.topbar{position:static;background:#fff}body{background:#fff}details{break-inside:avoid}}
+.media{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin:10px 0 4px;padding:12px 16px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.media b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
+.media ul{margin:0;padding-left:1.2em;columns:2;column-gap:18px;font-size:14px;line-height:1.75}
+.media li{break-inside:avoid}
+.steps .media ul{list-style:disc;counter-reset:none}
+.steps .media li{all:unset;display:list-item;list-style:disc;font-size:14px;line-height:1.75;break-inside:avoid}
+.steps .media li::before,.steps .media li::after{content:none!important;display:none!important}
+.mnote{font-size:13.5px!important;color:var(--ink-2);margin:4px 0 8px!important}
+@media (max-width:640px){.media{grid-template-columns:1fr}.media ul{columns:1}}
+.plain{margin:0 0 14px;padding-left:1.6em;max-width:48em;line-height:1.85}
+.plain li{margin-bottom:4px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;background:var(--cream-2);padding:1px 6px;border-radius:5px;word-break:break-all}
+.fact .v{overflow-wrap:anywhere}
+@media (max-width:640px){th,td{padding:10px 10px}h2{font-size:26px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-badge">HRM922</span>
+    <div>
+      <div class="tb-course">員工意向調查</div>
+      <div class="tb-inst">國立中山大學人力資源管理研究所　王豫萱</div>
+    </div>
+  </div>
+  <div class="tb-right">
+    <span class="tb-topic">個人分析作業</span>
+    <a href="../index.html#assignments" class="btn-nav" target="_blank" rel="noopener">評量作業總覽</a>
+    <a href="../index.html" class="btn-nav" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+
+<main>
+<span class="eyebrow">INDIVIDUAL ANALYSIS PROJECT　25%</span>
+<h1>個人分析作業：AI Agent 模擬資料分析報告<br><span class="h1-sub">以作業版模擬資料完成可重現的量化與質化診斷</span></h1>
+<p class="lead">本作業以 Week 09 至 Week 11 的 AI Agent 資料分析架構（Topic 07 清理與群組比較、Topic 08 驅動因子與迴歸、Topic 09 開放題分析）分析作業版模擬資料，產出一份可重現的量化與質化診斷報告，並附上提示詞、程式碼、對話紀錄與人機雙重查核紀錄</p>
+
+<div class="facts">
+  <div class="fact"><div class="k">比重</div><div class="v">25%<small>學期成績，個人獨立完成</small></div></div>
+  <div class="fact"><div class="k">啟動</div><div class="v">2026/11/06<small>Week 09　Topic 07</small></div></div>
+  <div class="fact"><div class="k">繳交截止</div><div class="v">2026/11/26（四）23:59<small>上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 作業區</small></div></div>
+  <div class="fact"><div class="k">繳交檔案</div><div class="v">報告 PDF＋ZIP<small>ZIP 內含提示詞、程式碼、對話紀錄、檢核表與分析紀錄</small></div></div>
+</div>
+
+<section id="purpose">
+  <div class="sec-tag">01　作業目的</div>
+  <h2>作業目的與可使用工具</h2>
+  <div class="card">
+    <p>依課程大綱，本作業由學生個人獨立完成一份具可重現性的量化與質化分析診斷報告，檢驗下列能力：</p>
+    <ol class="plain">
+      <li>以 AI Agent 規劃與執行資料清理：草率作答（直線作答與隨機亂填）與開放題疑似 AI 代答的偵測、反向題轉換、遺漏值處理，每一步保留人數紀錄</li>
+      <li>以獨立樣本 t 檢定與單因子 ANOVA 比較廠區、部門與年資差異，找出核心問題單位並描述差距型態</li>
+      <li>以留任意願為依變數進行多元迴歸，報告標準化迴歸係數、VIF 與殘差檢查</li>
+      <li>以 LLM Agent 輔助開放題編碼，並與人工編碼比較</li>
+      <li>對 AI 產出的每一項結果進行人工查核，留下紀錄</li>
+    </ol>
+    <p>可使用工具：ChatGPT、Claude、Claude Code、Google Antigravity、Excel、JASP、Python。可以混用，報告中須寫明每一個步驟使用的工具與版本或方案</p>
+  </div>
+</section>
+
+<section id="data">
+  <div class="sec-tag">02　作業資料</div>
+  <h2>作業版模擬資料</h2>
+  <div class="card">
+    <p>資料檔：<a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></p>
+    <table>
+      <tr><th style="width:28%">工作表</th><th>內容</th></tr>
+      <tr><td>原始資料</td><td>1,000 位員工、37 欄：員工編號、廠區、部門、職級、人員類別、年資，29 題李克特 6 點題目（ENG、SUP、REC、COM、RET、AIA 六個構面），兩題開放題</td></tr>
+      <tr><td>題目對照表</td><td>變項代碼、構面、題目內容與計分方向</td></tr>
+      <tr><td>構面與計分說明</td><td>量尺、構面題數、反向題處理與構面分數計算方式</td></tr>
+    </table>
+    <p>作業版的題目與計分說明和課堂練習資料相同，但群組結構與分析結果不同，課堂練習的答案不適用於作業。資料中埋有資料品質問題，數量與位置不事先公布，判定方法與門檻須在報告中寫明</p>
+  </div>
+  <div class="warn">本作業只使用課程提供的模擬資料。任何真實員工資料、任職公司的調查資料或含個人資料的檔案，一律不得上傳至 AI 工具，也不得放入報告</div>
+</section>
+
+<section id="structure">
+  <div class="sec-tag">03　報告架構</div>
+  <h2>報告章節與必備內容</h2>
+  <p>下列為建議章節。章節名稱可調整，必備內容不可缺</p>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:30%">章節</th><th>必備內容</th></tr>
+    <tr><td>一、資料與清理</td><td>原始人數；每一個清理步驟的判定規則、門檻值與刪除人數，以及該步驟後的剩餘人數；反向題的判斷依據（題目對照表與題目文字是否一致）；遺漏值處理方式</td></tr>
+    <tr><td>二、信度</td><td>各構面 Cronbach's α；α 未達 .70 的構面列出題目與總分相關，回到題目文字說明原因與處理決定</td></tr>
+    <tr><td>三、群組比較：核心問題單位</td><td>廠區、部門與年資的比較；兩組用 Welch t 檢定並附 Cohen's d，三組以上用單因子 ANOVA 並附 η²、Levene 檢定與事後比較方法；核心問題單位的界定依據與差距型態；人數少於 5 人的群組不單獨呈現</td></tr>
+    <tr><td>四、驅動因子分析</td><td>構面相關矩陣；以留任意願（RET）為依變數，敬業度、主管支持、認可與回饋、組織承諾、AI 導入態度為自變數的多元迴歸；R²、標準化迴歸係數 β 與排序、VIF、殘差檢查（常態、變異數同質、離群與影響值）；相關與 β 排序不同時的說明</td></tr>
+    <tr><td>五、開放題分析</td><td>編碼簿（類別名稱、定義、納入與排除條件、例句）；雙人編碼一致性 Cohen's κ，或人工編碼與 LLM 編碼的比較與 κ；疑似 AI 代答的判定依據與件數；各類別在問題單位與其他單位的分布</td></tr>
+    <tr><td>六、結論與管理建議</td><td>結論寫在本章開頭，以人資長能直接使用的語言陳述問題單位、主要驅動因子與建議行動；每一項建議對應到前面章節的數字；分析限制（模擬資料、橫斷面、相關不等於因果）</td></tr>
+    <tr><td>附錄</td><td>對話紀錄清單、提示詞全文、程式碼、分析檢核表與分析紀錄（亦放入 ZIP）</td></tr>
+  </table>
+  </div>
+  <p>格式：A4 直式，中文標楷體、英文與數字 Times New Roman，12 pt；正文 12 頁以內，附錄不計；統計報告與參考文獻依 APA 第七版，小數兩位，p 小於 .001 寫為 p &lt; .001，每一個差異都附效果量</p>
+</section>
+
+<section id="submit">
+  <div class="sec-tag">04　繳交項目</div>
+  <h2>報告以外的五項附件</h2>
+  <ol class="steps">
+    <li><h4>提示詞</h4><p>每一輪貼給 AI 的提示詞全文，依使用順序編號；有使用專案指示、CLAUDE.md 或 Skill 時一併附上。以 <a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a> 為基礎修改者，附上修改後的版本</p><div class="out">檔案：.txt、.md 或 .docx</div></li>
+    <li><h4>程式碼</h4><p>AI 執行的完整程式碼，整理成一份，從讀入資料到產出報告中的每一個數字都能依序重跑。以 Excel 或 JASP 完成的步驟，附上活頁簿或 .jasp 檔</p><div class="out">檔案：.py、.R、.ipynb，或貼在 Word 附錄</div></li>
+    <li><h4>對話紀錄</h4><p>與 AI 的完整對話，以下列兩種形式之一提供，詳細步驟見下方說明。每一個分析階段使用一個對話即可，例如清理與比較、驅動因子、開放題各一個；所有對話依時間順序列在報告附錄的對話紀錄清單</p><div class="out">分享連結，或匯出的 PDF／文字檔</div></li>
+    <li><h4>分析檢核表</h4><p>使用 <a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>。「預期結果」欄為課堂練習資料的數值，作業版資料的結果不同；「我的結果」欄改填自己在作業版資料的結果，「一致？」欄記錄檢核者比對程式輸出後的判定。檢核者由另一位修課同學擔任，只負責比對「我的結果」與對話紀錄、程式輸出是否一致，不代為分析；檢核者在表頭與「檢核者」欄簽名</p><div class="out">檔案：學號_姓名_分析檢核表.xlsx</div></li>
+    <li><h4>分析紀錄</h4><p>檢核表中的「分析紀錄」工作表。每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人或 AI）、確認者。例如隨機亂填門檻、反向題是否轉換、問題單位如何界定、迴歸是否排除離群值、開放題類別如何合併</p><div class="out">與分析檢核表同一個檔案</div></li>
+  </ol>
+</section>
+
+<section id="transcript">
+  <div class="sec-tag">05　對話紀錄的提供方式</div>
+  <h2>分享連結與匯出紀錄</h2>
+  <p>兩種形式擇一即可，同一份作業可以混用（例如網頁版用分享連結、Claude Code 用匯出）。各工具的介面名稱會隨版本更新而改變，下列步驟以功能描述為準</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">形式一：分享連結（ChatGPT、Claude 網頁版）</h3>
+    <p>ChatGPT 與 Claude 網頁版都可以替單一對話建立唯讀連結，取得連結的人可以檢視該對話</p>
+    <ol class="plain">
+      <li>開啟要繳交的那一個對話</li>
+      <li>點選對話頁面上方的「分享」（Share）</li>
+      <li>建立連結並複製。Claude 的分享視窗若預設為以電子郵件邀請特定人員，改選以連結分享（任何持有連結者可檢視）；ChatGPT 若先前已替這個對話建立過連結，選擇更新連結</li>
+      <li>將連結貼到報告附錄的對話紀錄清單，並貼在 Google Classroom 繳交時的私人留言</li>
+      <li>以瀏覽器的無痕視窗（私密瀏覽）開啟連結，確認在未登入狀態下可以看到完整對話</li>
+    </ol>
+    <p style="margin-top:12px"><strong>分享連結的限制</strong></p>
+    <ul class="plain">
+      <li>連結內容是建立當下的對話內容。建立連結之後才送出的訊息不會出現，須重新建立或更新連結；繳交前最後一次更新連結，並再以無痕視窗確認一次</li>
+      <li>上傳的檔案通常不會出現在分享頁面（Claude 的分享不包含附加檔案；ChatGPT 依方案與功能而定），部分程式執行的過程與輸出也可能無法檢視。因此程式碼仍須依第 2 項另外繳交</li>
+      <li>連結須維持有效到學期成績公布。期間不刪除該對話、不取消分享；ChatGPT 可在「設定 → 資料控制 → 共用連結」檢視已建立的連結</li>
+      <li>學校或企業的組織帳號可能只允許分享給同一組織的成員（例如 Claude 的 Team 與 Enterprise 方案）。無痕視窗打不開時，改用形式二</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">形式二：匯出紀錄（無法分享時）</h3>
+    <p>適用情形：組織帳號限制分享、專案設定不允許分享、Claude Code 或 Google Antigravity 等桌面與終端工具，以及無痕視窗無法開啟分享連結時</p>
+    <p style="margin-top:12px"><strong>網頁版：列印為 PDF</strong></p>
+    <ol class="plain">
+      <li>開啟對話，捲動到最上方，確認整段對話都已載入</li>
+      <li>展開所有摺疊的程式碼區塊與執行結果（例如「顯示程式碼」「分析過程」等按鈕）</li>
+      <li>使用瀏覽器的「列印」，目的地選「另存為 PDF」</li>
+      <li>開啟存好的 PDF，確認第一則提示詞到最後一則回覆都在，程式碼與輸出沒有被截斷；有截斷時分段列印後合併</li>
+    </ol>
+    <p style="margin-top:12px"><strong>Claude Code：/export 指令</strong></p>
+    <ol class="plain">
+      <li>在該次工作階段結束前，於對話中輸入 <code>/export</code></li>
+      <li>依畫面選項將對話存成文字檔（亦可在指令後加檔名，例如 <code>/export 學號_姓名_對話紀錄_01.txt</code>）</li>
+      <li>開啟文字檔，確認提示詞、執行的指令與輸出都在檔案中</li>
+    </ol>
+    <p style="margin-top:12px"><strong>其他工具</strong></p>
+    <p>工具有匯出功能時，使用該功能匯出單一對話；沒有匯出功能時，將完整對話複製到 Word，另存為 PDF</p>
+    <p style="margin-top:12px"><strong>ChatGPT 帳號資料匯出</strong></p>
+    <p>ChatGPT 另有「設定 → 資料控制 → 匯出資料」，匯出檔包含帳號內所有對話，內容遠多於本作業所需。繳交時以單一對話列印為 PDF 為準，不繳交整個帳號的匯出檔</p>
+  </div>
+
+  <div class="key"><strong>檔名與清單</strong><br>
+    單一檔案：學號_姓名_對話紀錄.pdf（或 .txt）<br>
+    多個對話：學號_姓名_對話紀錄_01_清理與比較.pdf、學號_姓名_對話紀錄_02_驅動因子.pdf、學號_姓名_對話紀錄_03_開放題.pdf，依時間順序編號<br>
+    報告附錄的對話紀錄清單每一列包含：編號、分析階段、使用工具、日期、分享連結或檔名</div>
+  <div class="warn">分享或匯出前，檢查對話中是否含有個人資料，例如聯絡方式、帳號資訊、任職公司的資料；含有個人資料的訊息刪除或改寫後，再建立連結或匯出</div>
+</section>
+
+<section id="format">
+  <div class="sec-tag">06　繳交格式</div>
+  <h2>上傳檔案與檔名</h2>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:30%">檔案</th><th>內容與檔名</th></tr>
+    <tr><td>報告 PDF</td><td>學號_姓名_個人分析報告.pdf，A4 直式，正文 12 頁以內</td></tr>
+    <tr><td>附件 ZIP</td><td>學號_姓名_個人分析作業附件.zip，內含五個資料夾：<br>01_提示詞／02_程式碼／03_對話紀錄／04_分析檢核表（檢核表與分析紀錄同一個 .xlsx）／05_其他（Excel 活頁簿、.jasp 檔，有使用時）</td></tr>
+    <tr><td>私人留言</td><td>使用分享連結時，在 Google Classroom 繳交頁面的私人留言貼上所有連結，依編號排列</td></tr>
+  </table>
+  </div>
+  <p>兩個檔案在 2026/11/26（四）23:59 前上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 本作業的作業區，逾期由系統標示遲交</p>
+</section>
+
+<section id="ai">
+  <div class="sec-tag">07　AI 使用規範與學術倫理</div>
+  <h2>AI 使用範圍與數字查核</h2>
+  <div class="card">
+    <ul class="plain">
+      <li>AI 可以撰寫程式、執行分析與起草文字。報告的判斷、結論與管理建議由學生本人負責</li>
+      <li>報告中每一個數字都須能回溯到程式輸出或對話紀錄中的執行結果。檢核時以 ZIP 內的程式碼重跑，結果須與報告一致</li>
+      <li>依課程大綱學術倫理規範，由 AI 全文代寫且未經人工審核驗證者，該項成績以 0 分計。本作業中，捏造的數字，或無法回溯到程式輸出、未經查證的數字，所在章節以 0 分計</li>
+      <li>報告附錄須有 AI 使用聲明：使用的工具、用途（程式撰寫、分析執行、文字起草、開放題編碼）與人工查核方式</li>
+      <li>開放題的人工編碼由學生本人完成，再與 LLM 編碼比較</li>
+      <li>檢核者只做比對與確認，不代為分析</li>
+    </ul>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="sec-tag">08　時程</div>
+  <h2>三週課程與繳交期限</h2>
+  <div class="timeline">
+    <div class="tl"><div class="d">2026/11/06<span>WEEK 09　TOPIC 07</span></div><p>AI Agent 資料分析架構、資料清理與群組比較；作業啟動，課後可完成報告第一至三章</p></div>
+    <div class="tl"><div class="d">2026/11/13<span>WEEK 10　TOPIC 08</span></div><p>構面相關、多重共線性與關鍵驅動因子迴歸；課後可完成第四章</p></div>
+    <div class="tl"><div class="d">2026/11/20<span>WEEK 11　TOPIC 09</span></div><p>開放題編碼簿、Cohen's κ、LLM 輔助編碼與疑似 AI 代答偵測；課後可完成第五章</p></div>
+    <div class="tl"><div class="d">2026/11/26（四）23:59<span>繳交截止</span></div><p>報告 PDF 與附件 ZIP 上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 作業區</p></div>
+  </div>
+</section>
+
+<section id="rubric">
+  <div class="sec-tag">09　評分</div>
+  <h2>評分向度與比重</h2>
+  <p>依課程大綱，五項核心任務各占 20%，滿分 100 分</p>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:12%">比重</th><th style="width:30%">向度</th><th>評分重點</th></tr>
+    <tr><td class="w">20%</td><td>資料清理與代答快篩</td><td>草率作答與疑似 AI 代答的判定規則、門檻與每步人數；反向題與遺漏值處理的依據；清理流程可依程式碼重現</td></tr>
+    <tr><td class="w">20%</td><td>群組差異與核心問題單位</td><td>檢定方法與前提檢查是否正確；每一個差異附效果量；問題單位的界定依據與差距型態；小群組依匿名門檻處理</td></tr>
+    <tr><td class="w">20%</td><td>關鍵驅動因子迴歸分析</td><td>模型設定、標準化 β 與排序、VIF 與殘差檢查；相關與 β 排序不同時的解讀；未以相關資料做因果推論</td></tr>
+    <tr><td class="w">20%</td><td>開放題質化分析</td><td>編碼簿定義清楚；人工編碼與 LLM 編碼的比較與一致性；疑似 AI 代答的判定依據；質化結果與量化結果的對照</td></tr>
+    <tr><td class="w">20%</td><td>人機雙重查核紀錄</td><td>提示詞、程式碼與對話紀錄齊備且可開啟；檢核表與分析紀錄完整，檢核者已簽名；公式、效果量與推論方式的查核過程；發現 AI 錯誤時的修正紀錄</td></tr>
+  </table>
+  </div>
+  <p>結論與管理建議（第六章）、報告格式與 APA 引用列入各向度的報告品質一併評定</p>
+</section>
+
+<section id="materials">
+  <div class="sec-tag">10　教材與工具</div>
+  <h2>相關教材網站與範本</h2>
+  <div class="tblwrap">
+  <table>
+    <tr><th style="width:30%">項目</th><th>連結</th></tr>
+    <tr><td>Topic 07 教材網站</td><td><a href="../Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">AI 資料分析：清理與比較</a></td></tr>
+    <tr><td>Topic 08 教材網站</td><td>驅動因子與迴歸，將於課堂當週公告</td></tr>
+    <tr><td>Topic 09 教材網站</td><td>開放題分析，將於課堂當週公告</td></tr>
+    <tr><td>分析檢核表</td><td><a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>（含「分析紀錄」工作表）</td></tr>
+    <tr><td>AI 分析設定範本</td><td><a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a>（專案指示與分析規則）</td></tr>
+    <tr><td>作業資料</td><td><a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></td></tr>
+  </table>
+  </div>
+</section>
+</main>
+<footer>員工意向調查 HRM922　2026 Fall　國立中山大學人力資源管理研究所　王豫萱｜作業說明如有更新，以課程入口網與 Google Classroom 公告為準</footer>
+</body>
+</html>

@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Topic 09：開放題分析方法比較｜員工意向調查</title>
+<style>
+  :root{
+    --accent:#7A2033; --accent-tint:#F3E3E4;
+    --navy:#1c2f52; --blue:#33568e; --lightblue:#e3eaf4; --paleblue:#f2f5fa;
+    --ink:#24292f; --muted:#697180; --line:#dde1e8;
+    --green:#337052; --palegreen:#edf5f0;
+    --amber:#8a6420; --paleamber:#faf3e3;
+    --codebg:#20252f; --codetext:#e4e8f0;
+    --bg:#fbfbfa;
+    --serif:\'Newsreader\',Georgia,\'Noto Serif TC\',serif;
+    --sans:\'Plus Jakarta Sans\',\'Noto Sans TC\',\'PingFang TC\',\'Microsoft JhengHei\',sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  em,i{font-style:normal;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",Calibri,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.9; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- top banner (site level) ---------- */
+  .topbar{
+    background:#fff; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:14px clamp(16px, 3vw, 36px); flex-wrap:wrap;
+  }
+  .topbar .tb-course{font-weight:700; font-size:16.5px; color:var(--navy); letter-spacing:.3px;}
+  .topbar .tb-en{font-weight:400; font-size:13px; color:var(--muted); margin-left:10px; letter-spacing:.4px;}
+  .topbar .tb-inst{font-size:13px; color:var(--muted); margin-top:1px;}
+  .topbar .tb-topic{
+    background:var(--lightblue); color:var(--navy); border-radius:20px;
+    padding:5px 16px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  }
+  .tb-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .top-nav-btn{display:inline-flex; align-items:center; gap:5px; padding:5px 13px; border-radius:20px; font-size:13px; font-weight:600; text-decoration:none; transition:all .2s ease; white-space:nowrap;}
+  .nav-btn-home{background:#fff; border:1px solid #d0d7de; color:var(--ink-2);}
+  .nav-btn-home:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint);}
+  .nav-btn-home:active{transform:scale(.97);}
+  @media print{.top-nav-btn{display:none !important;}}
+  .layout{display:flex; min-height:100vh; align-items:stretch;}
+  /* ---------- sidebar ---------- */
+  aside{
+    width:270px; min-width:270px; background:var(--navy); color:#fff;
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 0 40px;
+  }
+  aside .brand{padding:0 22px 18px; border-bottom:1px solid rgba(255,255,255,.18); margin-bottom:14px;}
+  aside .brand .t1{font-size:19px; font-weight:700; letter-spacing:.5px;}
+  aside .brand .t2{font-size:12.5px; color:#b9c6de; margin-top:6px; line-height:1.6;}
+  aside nav a{
+    display:block; color:#cfd9ea; text-decoration:none; font-size:14.5px;
+    padding:9px 22px; border-left:4px solid transparent; cursor:pointer;
+  }
+  aside nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
+  aside nav a.active{background:rgba(255,255,255,.13); color:#fff; border-left-color:#7ea6e0; font-weight:700;}
+  aside nav .grp{font-size:11.5px; color:#8fa3c4; letter-spacing:1.5px; padding:16px 22px 6px; text-transform:uppercase;}
+  /* ---------- main ---------- */
+  main{flex:1; padding:56px clamp(24px, 4.5vw, 72px) 100px; min-width:0;}
+  .unit{display:none; max-width:1020px; margin:0 auto;}
+  .unit.active{display:block; animation:fade .3s ease;}
+  @media (prefers-reduced-motion: reduce){.unit.active{animation:none;}}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  h1{font-size:clamp(23px, 1.6vw + 14px, 28px); color:var(--navy); margin-bottom:8px; line-height:1.5; letter-spacing:.3px;}
+  .subtitle{color:var(--muted); font-size:14px; margin-bottom:36px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  h2{font-size:clamp(18px, 1vw + 12px, 21px); color:var(--navy); margin:44px 0 14px; letter-spacing:.3px;}
+  h3{font-size:16.5px; color:var(--blue); margin:28px 0 10px;}
+  p{margin-bottom:14px; text-align:justify;}
+  @media (min-width:1600px){
+    body{font-size:17px;}
+    .unit{max-width:1140px;}
+  }
+  strong{color:var(--navy);}
+  ul,ol{margin:0 0 14px 26px;}
+  li{margin-bottom:6px;}
+  a{color:var(--blue);}
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin:18px 0; background:#fff;}
+  .note{background:var(--paleblue); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .key{background:var(--palegreen); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .warn{background:var(--paleamber); border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:14px 20px; margin:18px 0;}
+  .note .lb,.key .lb,.warn .lb{font-weight:700; font-size:13px; letter-spacing:1px; display:block; margin-bottom:4px;}
+  .note .lb{color:var(--blue);} .key .lb{color:var(--green);} .warn .lb{color:var(--amber);}
+  table{border-collapse:collapse; width:100%; margin:16px 0 22px; font-size:14.5px;}
+  th{background:var(--lightblue); color:var(--navy); text-align:left; padding:9px 12px; border:1px solid var(--line);}
+  td{padding:9px 12px; border:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  /* sequence visualization */
+  .seq{display:flex; flex-wrap:wrap; gap:4px; margin:10px 0 16px;}
+  .seq span{
+    width:30px; height:30px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; font-size:14px; font-weight:700; color:#fff; background:var(--blue);
+  }
+  .seq span.v1{background:#88a8d8;} .seq span.v2{background:#6b93cd;} .seq span.v3{background:#4f7ec2;}
+  .seq span.v4{background:#3a67a8;} .seq span.v5{background:#274b80;}
+  .seqlabel{font-size:13.5px; color:var(--muted); margin-bottom:2px;}
+  /* code blocks */
+  .codewrap{position:relative; margin:16px 0 22px;}
+  pre{
+    background:var(--codebg); color:var(--codetext); border-radius:10px;
+    padding:18px 20px; overflow-x:auto; font-size:13.5px; line-height:1.7;
+    font-family:Consolas,"Courier New",monospace;
+  }
+  pre .cm{color:#7f8ea8;}
+  pre .fn{color:#8ec8f0;}
+  pre .st{color:#c9e4a5;}
+  .copybtn{
+    position:absolute; top:10px; right:10px; background:rgba(255,255,255,.12); color:#dbe2ee;
+    border:none; border-radius:6px; padding:4px 12px; font-size:12px; cursor:pointer;
+    font-family:inherit;
+  }
+  .copybtn:hover{background:rgba(255,255,255,.25);}
+  /* quiz */
+  .quiz{border:1px solid var(--line); border-radius:10px; margin:18px 0; overflow:hidden;}
+  .quiz .qhead{background:var(--lightblue); padding:10px 18px; font-weight:700; color:var(--navy); font-size:15px;}
+  .quiz .qbody{padding:16px 20px;}
+  .quiz label{display:block; padding:7px 12px; border:1px solid var(--line); border-radius:8px; margin-bottom:8px; cursor:pointer; font-size:15px;}
+  .quiz label:hover{background:var(--paleblue);}
+  .quiz label.correct{background:var(--palegreen); border-color:var(--green);}
+  .quiz label.wrong{background:#fdecec; border-color:#c0564f;}
+  .quiz button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 20px;
+    font-size:14px; cursor:pointer; font-family:inherit; margin-top:4px;
+  }
+  .quiz button:hover{background:var(--navy);}
+  .quiz .fb{margin-top:12px; font-size:14.5px; display:none; padding:12px 16px; border-radius:8px;}
+  .quiz .fb.ok{display:block; background:var(--palegreen); color:#1d5c3c;}
+  .quiz .fb.no{display:block; background:#fdecec; color:#8f3a34;}
+  /* calculator */
+  .calc{border:2px solid var(--blue); border-radius:12px; padding:24px 28px; margin:22px 0; background:var(--paleblue);}
+  .calc h3{margin-top:0;}
+  .calc input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; font-family:Consolas,monospace; margin:8px 0 12px;
+  }
+  .calc .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .calc button{
+    background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px;
+    font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  .calc button.preset{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .calc button:hover{opacity:.88;}
+  .calc .result{background:#fff; border-radius:10px; padding:16px 20px; display:none;}
+  .calc .score{font-size:30px; font-weight:800; color:var(--navy);}
+  .calc .interp{font-size:14.5px; margin-top:6px;}
+  .bar{height:14px; border-radius:7px; background:linear-gradient(90deg,#7fb28a,#e8c56b,#c0564f); position:relative; margin:12px 0 4px;}
+  .bar .marker{position:absolute; top:-5px; width:4px; height:24px; background:var(--navy); border-radius:2px;}
+  .barlab{display:flex; justify-content:space-between; font-size:12px; color:var(--muted);}
+  /* flowchart */
+  .flow{margin:20px 0;}
+  .fbox{border:2px solid var(--blue); border-radius:10px; padding:12px 18px; background:#fff; max-width:520px; margin:0 auto 4px; text-align:center; font-size:14.5px;}
+  .fbox.q{background:var(--lightblue); font-weight:700; color:var(--navy);}
+  .fbox.leaf{border-color:var(--green); background:var(--palegreen);}
+  .farrow{text-align:center; color:var(--blue); font-size:18px; line-height:1.2; margin:2px 0;}
+  .fsplit{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+  .fsplit > div{flex:1; min-width:260px; max-width:400px;}
+  .fsplit .tag{text-align:center; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  /* formula */
+  .formula{
+    background:#fafbfd; border:1px solid var(--line); border-radius:10px;
+    padding:16px 22px; margin:16px 0; font-size:16.5px; text-align:center;
+    font-family:"Cambria Math",Georgia,serif;
+  }
+  .formula sub,.formula sup{font-size:11px;}
+  .refline{padding:10px 0 10px 36px; text-indent:-36px; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .badge{display:inline-block; background:var(--lightblue); color:var(--navy); border-radius:20px; padding:1px 12px; font-size:12.5px; font-weight:700; margin-right:6px;}
+  .badge.g{background:var(--palegreen); color:var(--green);}
+  .badge.a{background:var(--paleamber); color:var(--amber);}
+  .badge.r{background:#fdecec; color:#8f3a34;}
+  /* two-tier quiz */
+  .quiz .tier{font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; margin:14px 0 6px;}
+  .quiz .conf{display:flex; gap:8px; margin:6px 0 4px; flex-wrap:wrap;}
+  .quiz .conf label{display:inline-flex; align-items:center; gap:6px; padding:5px 16px; margin:0; border-radius:20px; font-size:13.5px;}
+  .quiz .fb.mid{display:block; background:var(--paleamber); color:#6b4e18;}
+  .quiz .tier2wrap{border-top:1px dashed var(--line); margin-top:16px; padding-top:4px;}
+  /* prediction widget */
+  .pred{border:2px dashed var(--blue); border-radius:12px; padding:18px 22px; margin:20px 0; background:#fff;}
+  .pred .plabel{font-weight:700; font-size:13px; letter-spacing:1px; color:var(--blue); margin-bottom:8px;}
+  .pred input[type=range]{flex:1; min-width:160px; accent-color:var(--blue);}
+  .pred .pval{font-size:21px; font-weight:800; color:var(--navy); min-width:96px; display:inline-block; text-align:right;}
+  .pred .prow{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:8px 0;}
+  .pred button{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:7px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pred button:hover{background:var(--navy);}
+  .pred .preveal{display:none; margin-top:12px; padding:12px 16px; border-radius:8px; background:var(--paleblue); font-size:14.5px;}
+  /* decision case */
+  .dc{border:1px solid var(--line); border-radius:12px; margin:22px 0; overflow:hidden; background:#fff;}
+  .dc .dchead{background:var(--navy); color:#fff; padding:10px 18px; font-weight:700; font-size:15px;}
+  .dc .dcbody{padding:16px 20px;}
+  .dc .dcopt{display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-bottom:8px; font-size:14.5px; line-height:1.7; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .dc .dcopt:hover{background:var(--paleblue);}
+  .dc .dcopt.chosen{border-color:var(--blue); background:var(--lightblue); font-weight:700;}
+  .dc .dcopt:disabled{cursor:default;}
+  .dc .dcreveal{display:none; margin-top:10px; padding:12px 16px; border-radius:8px; font-size:14.5px;}
+  .dc .dcreveal.good{display:block; background:var(--palegreen);}
+  .dc .dcreveal.bad{display:block; background:#fdecec;}
+  .dc .dcreveal.mid{display:block; background:var(--paleamber);}
+  /* detection playground */
+  .pg-grid{display:flex; flex-wrap:wrap; gap:6px; margin:14px 0;}
+  .pg-chip{width:46px; height:34px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--ink);}
+  .pg-chip.flag{background:var(--lightblue); border-color:var(--blue); color:var(--navy);}
+  .pg-chip.sel{outline:3px solid var(--navy); outline-offset:1px;}
+  .pg-chip.hit{background:var(--palegreen); border-color:var(--green); color:var(--green);}
+  .pg-chip.fa{background:#fdecec; border-color:#c0564f; color:#8f3a34;}
+  .pg-chip.miss{background:var(--paleamber); border-color:var(--amber); color:var(--amber);}
+  .pg-panel{border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin:12px 0; background:#fff;}
+  .pg-ctrl{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin:10px 0;}
+  .pg-ctrl select{font-family:inherit; font-size:14px; padding:6px 10px; border:1px solid var(--line); border-radius:8px;}
+  .pg-ctrl input[type=range]{flex:1; min-width:150px; accent-color:var(--blue);}
+  .pg-btn{background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:14px; cursor:pointer; font-family:inherit;}
+  .pg-btn:hover{background:var(--navy);}
+  .pg-btn.ghost{background:#fff; color:var(--blue); border:1px solid var(--blue);}
+  .pg-legend{font-size:13px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:13px;}
+  @media (max-width:1100px){
+    aside{width:236px; min-width:236px;}
+    aside nav a{font-size:13.5px; padding:8px 18px;}
+  }
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    aside{width:100%; min-width:0; height:auto; position:static; padding:14px 0 6px;}
+    aside nav{display:flex; flex-wrap:wrap; gap:2px; padding:0 12px;}
+    aside nav a{border-left:none; border-radius:8px; padding:7px 12px; font-size:13px;}
+    aside nav .grp{width:100%; padding:10px 10px 4px;}
+    main{padding:28px 18px 70px;}
+    table{display:block; overflow-x:auto;}
+    .fsplit > div{min-width:0;}
+  }
+  svg text{paint-order:stroke; stroke:#fff; stroke-width:3px; stroke-linejoin:round;}
+
+  /* ---------- 列印 / 存 PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    @page{margin:14mm 12mm;}
+    body{background:#fff; font-size:10.8pt; line-height:1.55;}
+    .topbar{position:static; box-shadow:none; border-bottom:2px solid var(--navy); padding:6px 0 10px;}
+    .topbar .tb-topic{display:none;}
+    aside{display:none !important;}
+    .layout{display:block;}
+    main{padding:0; max-width:none;}
+    .unit{display:block !important; max-width:none !important; margin:0 0 6mm; animation:none !important; page-break-before:always;}
+    #u0{page-break-before:avoid;}
+    h1,h2,h3{break-after:avoid;}
+    p,li{orphans:3; widows:3;}
+    .card,.note,.key,.warn,.quiz,.calc,.pred,.dc,.formula,.refline,table,tr,img,svg{break-inside:avoid;}
+    /* 隱藏紙上無用的互動控制，保留題目與選項 */
+    button,.conf,.pg-ctrl,.preveal,.quiz .fb,.calib,#calibPanel,.no-print{display:none !important;}
+    a{color:#1a3a63; text-decoration:underline; word-break:break-all;}
+    .tier2wrap{display:block !important;}   /* 列印時顯示完整第二層理由 */
+    svg{max-width:150mm; height:auto;}
+    table{width:100%;}
+    footer{page-break-before:avoid; border-top:1px solid var(--line); margin-top:8mm;}
+  }
+
+.mini{width:100%;border-collapse:collapse;margin:10px 0}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mini{min-width:760px}
+.mini td,.mini th{white-space:nowrap;border:1px solid var(--line);padding:6px 8px;text-align:center;font-size:14px}
+.mini th{background:var(--lightblue);color:var(--navy)}
+.mini td.flag{background:#fdecec;color:#a33a32;font-weight:700}
+.mini td.ok{color:#337052;font-weight:700}
+.reveal-btn{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.reveal-btn:active{transform:scale(.97)}
+.hide{display:none}
+.calc label{display:inline-block;padding:4px 0;cursor:pointer}
+.calc input{margin-right:8px}
+td.ans3.flag{background:#fdecec;color:#a33a32;font-weight:700}
+td.ans3.ok{color:#337052;font-weight:700}
+.adv{font-size:14px;color:var(--muted)}
+
+.pt{width:100%;border-collapse:collapse;margin:10px 0}
+.pt td,.pt th{border:1px solid var(--line);padding:7px 10px;text-align:center;font-size:14.5px}
+.pt{min-width:680px}
+.pt th{background:var(--lightblue);color:var(--navy);white-space:nowrap}
+.pt td:first-child{font-weight:700}
+.pt td.hi{font-weight:700;color:var(--navy)}
+.pick{display:flex;gap:6px;justify-content:center}
+.pick button{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.pick button.sel-ok{background:var(--palegreen);border-color:var(--green);color:var(--green);font-weight:700}
+.pick button.sel-bad{background:#fdecec;border-color:#c0564f;color:#8f3a34;font-weight:700}
+.pt td.fb{font-size:13.5px;text-align:left;min-width:220px}
+.pt td.fb.ok{color:var(--green)} .pt td.fb.bad{color:#8f3a34}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.steps{counter-reset:s;list-style:none;padding-left:0}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+code.k{background:var(--lightblue);color:var(--navy);padding:1px 6px;border-radius:4px;font-size:13.5px}
+.mt{width:100%;border-collapse:collapse;margin:10px 0}
+.mt td,.mt th{border:1px solid var(--line);padding:6px 10px;text-align:center;font-size:14.5px}
+.mt th{background:var(--lightblue);color:var(--navy)}
+.mt tr.hg td{background:#EAF4EE}
+.mt tr.lg td{background:#FBF2E1}
+.calcbox{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;padding:12px 18px;margin:12px 0;font-size:15px;line-height:1.9}
+.zh{color:#7A2033;font-weight:700}
+.glos td:first-child{white-space:nowrap}
+
+.prompt pre{white-space:pre-wrap;word-break:break-word;padding-top:40px}
+.round{border:1px solid var(--line);border-radius:12px;margin:22px 0;background:#fff;overflow:hidden}
+.round .rhead{background:var(--navy);color:#fff;padding:10px 18px;font-weight:700;font-size:15px}
+.round .rbody{padding:14px 20px 18px}
+.ansbtn{background:#fff;color:var(--blue);border:1px solid var(--blue);border-radius:8px;padding:7px 18px;font-size:14px;cursor:pointer;font-family:inherit}
+.ansbtn:hover{background:var(--paleblue)}
+.ansbtn[aria-expanded=true]{background:var(--blue);color:#fff}
+.ans{display:none;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.ans.show{display:block}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff;cursor:pointer;font-size:15px}
+.chk input{margin-top:7px}
+.chk label.done{background:var(--palegreen);border-color:var(--green)}
+.num{font-weight:700;color:var(--navy)}
+td.lo{background:#fdecec !important;color:#8f3a34;font-weight:700}
+.calcbox .mut{color:var(--muted);font-size:13.5px}
+footer.site{max-width:1020px;margin:60px auto 0}
+h2[id],tr[id]{scroll-margin-top:84px}
+tr[id]:target td{background:var(--paleblue)}
+p.terms{font-size:13.5px;color:var(--muted);background:#fafbfd;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0 16px}
+p.terms .lb2{font-weight:700;color:var(--navy);margin-right:8px}
+.dtree,.chart{margin:16px auto 8px;max-width:560px}
+.chart{max-width:520px}
+.dtree svg,.chart svg{width:100%;height:auto;display:block}
+.dtree figcaption,.chart figcaption{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+.mut{color:var(--muted);font-size:12.5px;font-weight:400}
+table.wide{min-width:640px}
+tr.grp td{text-align:left !important;background:var(--paleblue) !important;color:var(--navy);font-weight:700;font-size:13.5px;padding:6px 12px}
+.stepcard{border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 10px 10px 0;margin:22px 0;background:#fff}
+.stepcard .sh{background:var(--lightblue);color:var(--navy);font-weight:700;padding:9px 18px;font-size:15px}
+.stepcard .sr{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line)}
+.stepcard .sk{padding:10px 14px 10px 18px;font-weight:700;color:var(--blue);font-size:14.5px;background:#fafbfd}
+.stepcard .sv{padding:10px 18px 4px 4px;font-size:15px}
+.stepcard .sv ul{margin:0 0 6px 20px}
+.stepcard .sv li{margin-bottom:4px}
+pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px}
+.modes .m{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px 16px;font-size:14.5px}
+.modes .m b{display:block;color:var(--navy);font-size:15.5px;margin-bottom:4px}
+@media (max-width:860px){.round .rbody{padding:12px 14px 16px}
+  .stepcard .sr{grid-template-columns:1fr}.stepcard .sk{padding:8px 14px 2px;background:#fff}.stepcard .sv{padding:2px 14px 4px}
+  .modes{grid-template-columns:1fr}}
+@media print{.ans{display:block !important}}
+
+.seg{font-family:Menlo,Consolas,monospace;color:#8f3a34;font-weight:700;font-size:14px}
+table.cbk td{text-align:left !important;vertical-align:top}
+.kbox{background:#fafbfd;border:1px solid var(--line);border-radius:10px;padding:12px 18px;margin:14px 0;font-size:15px;line-height:1.9}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="tb-course">員工意向調查<span class="tb-en">Survey of Employees&#8217; Opinion</span></div>
+    <div class="tb-inst">國立中山大學人力資源管理研究所．授課教師：王豫萱 教授</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-topic">Topic 09：開放題分析方法比較</div>
+    <a href="../../index.html" class="top-nav-btn nav-btn-home" target="_blank" rel="noopener">⌂ 返回課程首頁</a>
+  </div>
+</header>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="t1">Topic 09<br>開放題分析方法比較</div>
+    <div class="t2">文字雲與 LLM Agent 主題編碼<br>本主題教學單元導覽</div>
+  </div>
+  <nav id="nav">
+    <a data-u="u0" class="active">本主題首頁</a>
+    <div class="grp">資料與探索</div>
+    <a data-u="u1">單元一：開放題資料與三種分析方法</a>
+    <a data-u="u2">單元二：文字雲與詞頻的盲點</a>
+    <div class="grp">人工編碼</div>
+    <a data-u="u3">單元三：建立開放題編碼簿</a>
+    <a data-u="u4">單元四：兩人獨立編碼與 Cohen’s κ</a>
+    <div class="grp">LLM 與查核</div>
+    <a data-u="u5">單元五：LLM Agent 輔助主題編碼</a>
+    <a data-u="u6">單元六：人工與 LLM 編碼比對</a>
+    <a data-u="u7">單元七：疑似 AI 代答與倫理</a>
+    <div class="grp">實作與延伸</div>
+    <a data-u="u8">單元八：實機練習</a>
+    <a data-u="u9">單元九：查核、報告與連結 Topic 08</a>
+    <a data-u="u10">單元十：參考文獻與名詞對照</a>
+  </nav>
+</aside>
+<main>
+
+<!-- ==================== U0 首頁 ==================== -->
+<section class="unit active" id="u0">
+  <h1>開放題分析方法比較：文字雲與 LLM Agent 主題編碼</h1>
+  <div class="subtitle">員工意向調查課程．Topic 09．Week 11（2026/11/20）．適用對象：人管所碩士班</div>
+  <p>員工調查的開放題讓員工用自己的話說明想法，資料量一多，整理就成為問題。常見的做法有三種：用詞頻做文字雲、依編碼簿由人逐則編碼，以及把編碼簿交給 LLM（大型語言模型）編碼。本主題用同一份資料比較這三種做法，說明各自能回答什麼、會在哪裡出錯，以及怎麼用 <a href="#g-19">Cohen’s κ</a> 檢驗編碼的一致程度。本主題不要求程式能力。</p>
+  <p>本主題的順序：資料與方法概覽、文字雲的盲點、建立<a href="#g-10">編碼簿</a>、兩人獨立編碼與 κ、LLM 編碼、人工與 LLM 比對、<a href="#g-28">疑似 AI 代答</a>的偵測與倫理，最後用六輪提示詞實際操作一次。單元九說明查核、報告寫法，以及開放題結果與 Topic 08 驅動因子分析的關係。</p>
+  <div class="warn"><span class="lb">資料說明</span>本網站所有數字都來自課程的員工調查模擬資料（沿用 Topic 07 的 1,000 人資料）。這是教學模擬資料，不是真實組織的調查結果。<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料（Excel）</a>；<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">下載開放題編碼範本（Excel）</a>。</div>
+  <h2>本主題單元</h2>
+  <div class="scrollx"><table>
+    <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
+    <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、開放題資料與三種分析方法</a></td><td>說明兩題開放題的內容、三種分析方法的差別，以及開放題的去識別化</td></tr>
+    <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、文字雲與詞頻的盲點</a></td><td>說明<a href="#g-2">斷詞</a>、<a href="#g-4">停用詞</a>與<a href="#g-5">詞頻</a>的算法；以實例說明同義詞、否定、斷詞、多主題與長答案五個盲點</td></tr>
+    <tr><td><a href="#u3" onclick="goUnit('u3');return false;">三、建立開放題編碼簿</a></td><td>寫出主題的定義、<a href="#g-11">納入</a>、<a href="#g-12">排除</a>與例句；訂定主要主題規則；處理邊界案例</td></tr>
+    <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、兩人獨立編碼與 Cohen’s κ</a></td><td>計算<a href="#g-17">一致率</a>、<a href="#g-18">碰巧一致率</a>與 κ；區分編碼的<a href="#g-21">信度</a>與<a href="#g-22">效度</a>；使用編碼一致性計算器</td></tr>
+    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、LLM Agent 輔助主題編碼</a></td><td>依編碼簿寫 LLM 編碼提示詞；用網頁版、專案、Claude Code 三種方式設定；重跑與<a href="#g-26">信心標記</a>；摘要的查核</td></tr>
+    <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、人工與 LLM 編碼比對</a></td><td>解讀三個 κ 的組合、交叉表與不一致案例；LLM 編碼的常見差異</td></tr>
+    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、疑似 AI 代答與倫理</a></td><td>以長度、句式、用詞訂定標記規則；標記後的處理與倫理</td></tr>
+    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>六輪提示詞與答案對照</td></tr>
+    <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、查核、報告與連結 Topic 08</a></td><td>檢核表、分析紀錄、報告寫法；主題次數與留任意願</td></tr>
+    <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
+  </table></div>
+  <div class="flow">
+    <div class="fbox q">讀答案、做詞頻與文字雲：探索用（單元二）</div><div class="farrow">↓</div>
+    <div class="fbox">建立編碼簿：定義、納入、排除、例句（單元三）</div><div class="farrow">↓</div>
+    <div class="fbox">甲、乙各自編碼 100 則，計算 κ；未達 .61 修編碼簿重編（單元四）</div><div class="farrow">↓</div>
+    <div class="fbox">LLM 依同一份編碼簿編碼，與人工比對（單元五、六）</div><div class="farrow">↓</div>
+    <div class="fbox">標記疑似 AI 代答，主題次數含與不含各一份（單元七）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">檢核表、分析紀錄、報告（單元九）</div>
+  </div>
+  <h2>工具與檔案</h2>
+  <div class="scrollx"><table>
+    <tr><th style="width:30%">工具</th><th>用途</th></tr>
+    <tr><td><a href="../../Slides/Topic09_課堂投影片.html" target="_blank" rel="noopener">Topic 09 課堂投影片</a></td><td>課堂講解用投影片，含 Agent 示範影片；投影片與本網站使用不同的例子</td></tr>
+    <tr><td><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">員工調查模擬資料</a></td><td>沿用 Topic 07；本主題使用 OE1 與 OE2 兩題開放題</td></tr>
+    <tr><td><a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本（Excel）</a></td><td>編碼簿、100 則樣本、使用說明三個工作表（單元三、四）</td></tr>
+    <tr><td><a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></td><td>兩位或三位編碼者的 Cohen’s κ；Topic 03 已使用過</td></tr>
+    <tr><td><a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 09 分析檢核表（Excel）</a></td><td>檢核表、分析紀錄、使用說明三個工作表（單元九）</td></tr>
+    <tr><td>ChatGPT 或 Claude</td><td>網頁版或專案，需可上傳檔案並執行程式</td></tr>
+  </table></div>
+  <div class="note"><span class="lb">使用說明</span>左側導覽列可切換單元（手機版在頁面上方）。單元二至七與單元九的最後附兩階段自我檢測：先選答案並標示信心，答對後再確認理由。下方的作答校準面板只記錄每題第一次作答；重新整理頁面會清空紀錄。</div>
+  <h2 class="no-print">作答校準面板</h2>
+  <div class="card no-print">
+    <p>高信心但答錯的題目，表示該單元的理解與自我評估有落差；低信心但答對，表示理解比自我評估穩固。</p>
+    <table>
+      <tr><th style="width:28%">作答信心</th><th>答案與理由皆正確</th><th>答案對但理由錯</th><th>答案錯誤</th></tr>
+      <tr><td>高</td><td id="cal-h-2">0</td><td id="cal-h-1">0</td><td id="cal-h-0">0</td></tr>
+      <tr><td>中</td><td id="cal-m-2">0</td><td id="cal-m-1">0</td><td id="cal-m-0">0</td></tr>
+      <tr><td>低</td><td id="cal-l-2">0</td><td id="cal-l-1">0</td><td id="cal-l-0">0</td></tr>
+    </table>
+    <p id="calNote" style="margin-bottom:0; color:var(--muted); font-size:14px;">尚未作答任何檢測題。</p>
+  </div>
+</section>
+
+<!-- ==================== U1 資料與方法 ==================== -->
+<section class="unit" id="u1">
+  <h1>單元一：開放題資料與三種分析方法</h1>
+  <div class="subtitle">OE1、OE2 兩題開放題；文字雲、人工編碼、LLM 編碼的比較；去識別化</div>
+  <h2 id="s1-1">1.1 兩題開放題</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:24%">變項</th><th>題目</th><th style="width:16%">作答則數</th><th style="width:28%">本主題的用途</th></tr>
+    <tr><td>OE1_最希望優先改善</td><td style="text-align:left">您最希望公司優先改善的事項是什麼？</td><td>516 則</td><td style="text-align:left">詞頻、編碼、κ、疑似 AI 代答的練習</td></tr>
+    <tr><td>OE2_被肯定的經驗</td><td style="text-align:left">最近一次在工作上被肯定的經驗是什麼？</td><td>310 則</td><td style="text-align:left">投影片中 Agent 示範用（60 則）</td></tr>
+  </table></div>
+  <p>開放題為選填，1,000 人中約一半填寫 OE1。答案長度的中位數為 13 字，多數是一句話，例如「簽核流程太長」。516 則中有 512 則不重複，少數完全相同的答案是「無」「沒有」這類簡短回覆。</p>
+  <h2 id="s1-2">1.2 三種分析方法</h2>
+  <div class="scrollx"><table class="mt wide">
+    <tr><th style="width:16%">方法</th><th>做法</th><th style="width:26%">能回答</th><th style="width:26%">主要限制</th></tr>
+    <tr><td>詞頻與文字雲</td><td style="text-align:left">程式斷詞、刪停用詞、計算每個詞出現在幾則答案，依次數決定字級</td><td style="text-align:left">員工常用哪些詞；有沒有意料之外的用語</td><td style="text-align:left">計算的是詞不是主題；同義詞分散、否定消失、斷詞錯誤（單元二）</td></tr>
+    <tr><td>人工編碼</td><td style="text-align:left">依編碼簿逐則給主題代碼，兩人獨立編碼後計算 κ</td><td style="text-align:left">各主題被提到幾次；哪些答案難以歸類</td><td style="text-align:left">費時；編碼簿不清楚時兩人不一致（單元三、四）</td></tr>
+    <tr><td>LLM 編碼</td><td style="text-align:left">把編碼簿交給 LLM，由它逐則給代碼與信心</td><td style="text-align:left">與人工相同，速度快，可處理大量答案</td><td style="text-align:left">需與人工比對才能使用；可能自行新增代碼或用關鍵字代替判斷（單元五、六）</td></tr>
+  </table></div>
+  <p>三種方法不是互相取代：文字雲用於探索，人工編碼建立標準，LLM 在通過比對之後用來處理其餘答案。本主題的實機練習依這個順序進行。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-1">開放題</a>：讓填答者用自己的文字回答的題目；本資料 OE1 問最希望公司優先改善的事項；<a href="#g-6">文字雲</a>：依詞頻決定字級大小的圖；適合初步瀏覽，不適合決定主題排序；<a href="#g-9">編碼</a>：逐則閱讀答案，依編碼簿給每則一個主題代碼；<a href="#g-10">編碼簿</a>：列出每個主題的代碼、定義、納入、排除與例句的文件；<a href="#g-24">LLM</a>：大型語言模型，例如 ChatGPT、Claude 背後的模型。</p>
+  <h2 id="s1-3">1.3 100 則樣本</h2>
+  <p>人工編碼 516 則需要好幾個小時，課堂練習改用 100 則樣本。樣本以固定的隨機種子（20261120）從有內容的答案中分層抽出：每個主題依比例抽取，人數少的主題至少 2 則，因此各主題都會出現在樣本中。每組同學拿到同一份樣本，結果可以互相比對。樣本在<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>的「100 則樣本」工作表，只有編號與原文。</p>
+  <h2 id="s1-4">1.4 開放題的去識別化</h2>
+  <ul>
+    <li>開放題最容易透露身分：「上個月在品保課被課長罵」這類敘述，結合部門與職級就可能推知是誰。</li>
+    <li>交給任何 AI 工具之前，刪除或遮蔽人名、單位名稱、具體日期與事件；人數很少的單位不單獨呈現。</li>
+    <li>報告引用原文時，同樣先刪除可辨識的細節，必要時改寫成意思相同的句子並註明。</li>
+    <li>AI 工具與帳號依公司的資訊安全與個資規定使用；匿名門檻與信任見 <a href="../Topic04_抽樣與資料品質/Topic04_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">Topic 04 抽樣、匿名與信任</a>。</li>
+  </ul>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-31">去識別化</a>：分析或分享前，刪除或遮蔽可辨識個人的資訊，例如人名、單位、具體事件。</p>
+  <div class="key"><span class="lb">本單元要點</span>OE1 有 516 則答案，多數是一句話。文字雲用於探索，人工編碼建立標準，LLM 編碼需與人工比對後才使用。練習使用固定的 100 則樣本。開放題交給 AI 之前先去識別化。</div>
+</section>
+
+<!-- ==================== U2 文字雲 ==================== -->
+<section class="unit" id="u2">
+  <h1>單元二：文字雲與詞頻的盲點</h1>
+  <div class="subtitle">斷詞、停用詞、詞頻；同義詞、否定、斷詞錯誤、多主題、長答案．主要依據：Krippendorff (2018)</div>
+  <h2 id="s2-1">2.1 詞頻的計算步驟</h2>
+  <ol class="steps">
+    <li>斷詞：中文詞與詞之間沒有空格，需要斷詞工具把句子切成詞。本主題使用 Python 的 jieba 套件（版本 0.42.1，預設詞典）</li>
+    <li>刪除停用詞：「希望」「公司」「可以」幾乎每則都有，不帶內容，計算前刪除；單一字與標點也刪除</li>
+    <li>計數：計算每個詞出現在幾則答案中。一則答案出現兩次「加班」只算一次，避免一則長答案主導結果</li>
+    <li>畫文字雲：次數越多，字級越大</li>
+  </ol>
+  <p>每一步都是分析者的決定。換一個斷詞工具、多刪或少刪幾個停用詞，排名就會不同；報告中需寫明工具與停用詞清單。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-2">斷詞</a>：把中文句子切成一個個詞的步驟；中文詞與詞之間沒有空格，需要斷詞工具；<a href="#g-3">jieba</a>：Python 常用的中文斷詞套件；預設詞典以簡體中文為主，繁體中文的職稱與工廠用語容易斷錯；<a href="#g-4">停用詞</a>：計算詞頻前刪掉的詞，例如「希望」「公司」，這些詞幾乎每則都有，不帶內容；<a href="#g-5">詞頻</a>：一個詞出現的次數；本主題以「提到該詞的答案則數」計算，一則答案重複出現只算一次。</p>
+  <h2 id="s2-2">2.2 OE1 的詞頻結果</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th>排名</th><th>詞</th><th>答案則數</th><th>排名</th><th>詞</th><th>答案則數</th></tr>
+    <tr><td>1</td><td>主管</td><td>58</td><td>11</td><td>溝通</td><td>13</td></tr><tr><td>2</td><td>AI</td><td>19</td><td>12</td><td>時間</td><td>13</td></tr><tr><td>3</td><td>工作</td><td>18</td><td>13</td><td>知道</td><td>12</td></tr><tr><td>4</td><td>加班</td><td>17</td><td>14</td><td>標準</td><td>12</td></tr><tr><td>5</td><td>有助</td><td>16</td><td>15</td><td>流程</td><td>11</td></tr><tr><td>6</td><td>考績</td><td>16</td><td>16</td><td>補助</td><td>11</td></tr><tr><td>7</td><td>清楚</td><td>15</td><td>17</td><td>發展</td><td>10</td></tr><tr><td>8</td><td>升遷</td><td>15</td><td>18</td><td>現場</td><td>10</td></tr><tr><td>9</td><td>訓練</td><td>15</td><td>19</td><td>機會</td><td>10</td></tr><tr><td>10</td><td>員工</td><td>14</td><td>20</td><td>管理</td><td>10</td></tr>
+  </table></div>
+  <p>第一名「主管」58 則，遠高於其他詞。文字雲依這張表畫出，「主管」會是最大的字（投影片有圖）。下面五個小節說明，這張表為什麼不能直接讀成「員工最在意主管」。</p>
+  <h2 id="s2-3">2.3 盲點一：同義詞分散</h2>
+  <p>員工描述同一件事時用詞各不相同。以工作負荷為例，下表是八個相關詞各自出現的則數：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>加班</th><th>人力</th><th>排班</th><th>休假</th><th>夜班</th><th>工作量</th><th>工時</th><th>輪班</th><th>含任一詞</th></tr>
+    <tr><td>17</td><td>10</td><td>5</td><td>5</td><td>8</td><td>7</td><td>4</td><td>2</td><td class="num">53</td></tr>
+  </table></div>
+  <p>每個詞單獨看都不多，最多的「加班」17 則；合併後 53 則提到其中至少一個詞。人工編碼時，談到工作負荷的答案有 79 則，比 53 則還多，因為「一個人做兩個人的工作」「換線太頻繁，一天換三四次很累」這類答案沒有用到任何一個詞。文字雲把同一個主題拆成很多個小字，主題本身反而看不出來。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-7">同義詞</a>：意思相同或相近的不同詞，例如薪水、薪資、待遇；<a href="#g-8">主題</a>：一群答案共同談論的事項，例如薪資福利、主管領導。</p>
+  <h2 id="s2-4">2.4 盲點二：一個詞屬於不同主題</h2>
+  <p>「主管」出現在 58 則答案中。人工編碼後，其中 43 則主要在談主管領導；其餘 15 則談的是升遷（例如「外部找來的主管不了解現場，應該先從內部升」）、考核、人力或流程（例如「主管不在就沒人能簽，事情卡住」）。詞頻把這些答案都算進「主管」，無法區分。</p>
+  <h2 id="s2-5">2.5 盲點三：否定</h2>
+  <p>「不要」「沒有」常列為停用詞，刪除後否定的意思就消失了：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:46%">原文</th><th>進入詞頻的詞</th></tr>
+    <tr><td style='text-align:left'>技術職沒有升遷管道，只能轉管理職</td><td style='text-align:left' class='seg'>技術職、升遷、管道、只能、管理</td></tr><tr><td style='text-align:left'>工作量太大但考績沒有反映</td><td style='text-align:left' class='seg'>工作量、太大、考績、反映</td></tr><tr><td style='text-align:left'>主管不要只看結果，過程中也要支持</td><td style='text-align:left' class='seg'>主管、結果、過程、支持</td></tr>
+  </table></div>
+  <p>「技術職沒有升遷管道」與「升遷管道很多」在詞頻中都算一次「升遷」。不刪「沒有」「不要」也無法解決：它們會成為最大的詞之一，卻看不出否定的是什麼。</p>
+  <h2 id="s2-6">2.6 盲點四：斷詞錯誤</h2>
+  <p>jieba 的預設詞典以簡體中文為主，繁體中文與工廠用語容易斷錯：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:42%">原文</th><th>jieba 斷詞結果</th></tr>
+    <tr><td style='text-align:left'>新人招不到，老人快撐不住了</td><td style='text-align:left' class='seg'>新人／招／不到／，／老人／快撐／不住／了</td></tr><tr><td style='text-align:left'>夜班加給好幾年沒調了</td><td style='text-align:left' class='seg'>夜班／加給／好／幾年／沒調／了</td></tr><tr><td style='text-align:left'>考績輪流拿甲，跟表現無關</td><td style='text-align:left' class='seg'>考績／輪流／拿／甲／，／跟表現／無關</td></tr>
+  </table></div>
+  <p>「快撐不住」變成「快撐／不住」，「跟表現無關」變成「跟表現／無關」。可以加入自訂詞典修正，但需逐一檢查斷詞結果；職稱、設備名稱與縮寫特別容易斷錯。</p>
+  <h2 id="s2-7">2.7 盲點五：多主題與長答案</h2>
+  <ul>
+    <li>多主題：人工編碼時，有 43 則答案同時提到兩個主題，例如「廠房太熱又人力不足，夏天真的很辛苦」（設備與人力）、「教育訓練不足，升遷也沒有標準」（訓練與升遷）。文字雲只呈現詞，看不出兩件事在同一則答案中同時出現。</li>
+    <li>長答案：一則一百字的答案貢獻十幾個詞，一句話的答案只貢獻兩三個詞。詞頻表中「有助」16 則全部來自 16 則疑似 AI 代答（「有助於」被斷成「有助／於」），「員工」14 則中有 8 則來自同一批答案。少數長答案就能改變排名（單元七）。</li>
+  </ul>
+  <h2 id="s2-8">2.8 文字雲的適當用途</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:50%">適合</th><th>不適合</th></tr>
+    <tr><td style="text-align:left">第一次瀏覽資料，了解員工常用的說法</td><td style="text-align:left">決定「員工最在意什麼」的排序</td></tr>
+    <tr><td style="text-align:left">找出編碼簿可能遺漏的主題</td><td style="text-align:left">比較兩個部門或兩個年度的差異</td></tr>
+    <tr><td style="text-align:left">發現斷詞錯誤與異常的長答案</td><td style="text-align:left">作為報告中唯一的開放題結果</td></tr>
+  </table></div>
+  <div class="key"><span class="lb">本單元要點</span>詞頻計算的是詞，不是主題。同一主題的詞分散、同一個詞屬於不同主題、否定消失、斷詞錯誤、長答案主導排名，都會讓文字雲與實際的主題次數不同。文字雲適合探索，主題排序需要編碼。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 1</div>
+    <div class="qbody">
+      <p>人資專員把 OE1 做成文字雲，最大的詞是「主管」（58 則），他據此向總經理報告「員工最希望改善的是主管」。下列何者最恰當？</p>
+      <label><input type="radio" name="q1" value="a"> 同意，文字雲中最大的詞就是最多人在意的事</label><label><input type="radio" name="q1" value="b"> 改用另一個斷詞工具，最大的詞不變就可以報告</label><label><input type="radio" name="q1" value="c"> 先依編碼簿逐則編碼，計算各主題的則數，再判斷哪個事項最常被提到</label><label><input type="radio" name="q1" value="d"> 把停用詞再刪多一點，讓文字雲更清楚</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q1r" value="a"> 詞頻計算的是詞；同一主題的同義詞會分散，一個詞也可能出現在不同主題，主題次數需要編碼</label><label><input type="radio" name="q1r" value="b"> 斷詞工具越新，詞頻就越接近主題次數</label><label><input type="radio" name="q1r" value="c"> 文字雲的字級與答案長度無關</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q1c" value="低"> 低</label><label><input type="radio" name="q1c" value="中"> 中</label><label><input type="radio" name="q1c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q1','c','a','正確。主題排序來自編碼，不來自單一詞的次數。','相關說明見 &lt;a href=&quot;#s2-4&quot;&gt;2.4&lt;/a&gt; 與 &lt;a href=&quot;#s2-7&quot;&gt;2.7&lt;/a&gt;：「主管」出現在哪些主題的答案？','提示：薪資相關的詞為什麼在文字雲裡很小？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U3 編碼簿 ==================== -->
+<section class="unit" id="u3">
+  <h1>單元三：建立開放題編碼簿</h1>
+  <div class="subtitle">主題定義、納入與排除準則、例句、主要主題規則．主要依據：Braun &amp; Clarke (2006)；Krippendorff (2018)</div>
+  <h2 id="s3-1">3.1 編碼簿的用途</h2>
+  <p>編碼簿把「這則答案屬於哪個主題」的判斷寫成規則。兩位編碼者看同一份編碼簿，才有可能給出相同的代碼；LLM 編碼時，編碼簿就是提示詞的主體。編碼簿寫得越具體，人與人、人與 LLM 之間的一致程度越高。</p>
+  <h2 id="s3-2">3.2 四個欄位</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">欄位</th><th>寫什麼</th><th style="width:34%">寫法提醒</th></tr>
+    <tr><td>定義</td><td style="text-align:left">這個主題包含什麼，一句話說明</td><td style="text-align:left">用名詞片語，不用「等」帶過</td></tr>
+    <tr><td>納入</td><td style="text-align:left">屬於這個主題的具體內容</td><td style="text-align:left">列舉資料中實際出現的說法</td></tr>
+    <tr><td>排除</td><td style="text-align:left">容易混淆、但應歸到其他主題的內容</td><td style="text-align:left">寫出改歸的代碼，例如「→ REC」</td></tr>
+    <tr><td>例句</td><td style="text-align:left">取自資料的真實答案</td><td style="text-align:left">不取自要編碼的樣本，避免洩漏答案</td></tr>
+  </table></div>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-11">納入</a>：屬於某主題的具體內容；<a href="#g-12">排除</a>：容易混淆、但應歸到其他主題的內容，並寫出改歸的代碼。</p>
+  <h2 id="s3-3">3.3 OE1 的編碼簿</h2>
+  <p>下表與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">編碼範本</a>的「編碼簿」工作表相同。主題是先讀過一部分答案、歸納出常見事項之後定下來的（Braun &amp; Clarke, 2006）；VAGUE 與 OFF 讓每一則答案都有地方放。</p>
+  <div class="scrollx"><table class="mt wide cbk">
+    <tr><th style="width:13%">主題</th><th style="width:18%">定義</th><th>納入</th><th style="width:22%">排除</th><th style="width:20%">例句</th></tr>
+    <tr><td>薪資福利<br><span class='mut'>PAY</span></td><td>薪資、獎金、津貼、補助與福利制度的金額或給付方式</td><td>調薪、年終與各類獎金；夜班、交通、伙食等津貼與加給；加班費的計算與給付；保險、宿舍收費、員工旅遊補助</td><td>考績或表揚是否公平 → REC；加班時數太多 → WORKLOAD</td><td>希望調薪可以跟通膨連動<br>夜班餐點補貼</td></tr><tr><td>升遷與職涯發展<br><span class='mut'>PROMO</span></td><td>升遷管道、晉升標準與職涯路徑</td><td>升遷不透明、晉升條件、職等、雙軌制、內部轉調、職涯面談與規劃</td><td>上課與進修 → TRAIN；考績評分 → REC</td><td>升遷標準說清楚<br>希望有雙軌制，技術專家也能往上升</td></tr><tr><td>工作負荷與人力<br><span class='mut'>WORKLOAD</span></td><td>工作量、人力配置與工時安排</td><td>人力不足、加班太多、排班與輪班、休假難請、工時太長、工作與生活平衡</td><td>加班費金額 → PAY；新系統讓工作變多，主要主題 → AI</td><td>人走了都不補，說要精簡人力<br>排班常常臨時改，沒辦法安排私人的事</td></tr><tr><td>主管領導<br><span class='mut'>SUP</span></td><td>直屬主管或各級主管的態度、公平性、溝通、授權與管理能力</td><td>主管偏心、講話很兇、不授權、不傾聽、指令前後矛盾、很少給部屬回饋</td><td>公司層級的政策公告與跨部門協調 → COMM；考績制度本身 → REC</td><td>主管需要學會傾聽<br>主管講話很兇，常常在大家面前罵人</td></tr><tr><td>溝通與流程<br><span class='mut'>COMM</span></td><td>公司內部的資訊傳遞、跨部門協調、簽核與行政流程</td><td>政策沒公告、總部與廠區溝通落差、跨部門標準不一致、簽核太長、會議太多、表單重複</td><td>與直屬主管個人的互動 → SUP；系統不好用 → SYS</td><td>簽核流程太長<br>總部跟廠區溝通有落差</td></tr><tr><td>設備系統與工作環境<br><span class='mut'>SYS</span></td><td>既有的機台、電腦與資訊系統，以及廠房、宿舍、餐廳、停車等設施</td><td>設備老舊、ERP 難用、網路太慢、廠房太熱、廁所與休息室不足、餐廳與宿舍環境</td><td>新導入的 AI 或數位工具 → AI</td><td>網路太慢<br>機台太舊，常常故障，維修又要等很久</td></tr><tr><td>教育訓練<br><span class='mut'>TRAIN</span></td><td>課程、新人訓練、證照與進修，以及工作技能的教學</td><td>課程太基本、新人訓練太短、外訓與證照補助、師徒制缺乏系統、訓練時間安排</td><td>職涯路徑與升遷 → PROMO</td><td>新人訓練太短，直接丟到現場<br>希望公司補助考證照</td></tr><tr><td>考核與認可<br><span class='mut'>REC</span></td><td>績效考核的公平與透明，以及努力是否被看見與肯定</td><td>考績不公、強迫分配、考核標準不清、表揚與肯定太少、貢獻沒有反映在考績</td><td>獎金金額 → PAY；主管個人的態度 → SUP</td><td>考績強迫分配，部門裡一定要有人拿丙<br>希望努力可以被看見</td></tr><tr><td>AI 與數位工具導入<br><span class='mut'>AI</span></td><td>AI、自動化與新系統導入的過程、規範與影響</td><td>導入前沒問現場、沒有訓練、使用規範不清、擔心被取代、新工具一直換</td><td>既有系統難用 → SYS</td><td>導入AI工具要給訓練，不是丟給我們自己摸<br>擔心AI會取代我們的工作</td></tr><tr><td>籠統或無具體內容<br><span class='mut'>VAGUE</span></td><td>沒有指出任何具體的改善事項</td><td>「無」「沒有」「公司加油」「沒什麼特別的」「不知道要寫什麼」</td><td>答案很短但有具體事項（例如只寫「升遷」）→ 依事項歸類</td><td>希望公司越來越好<br>維持現狀就好</td></tr><tr><td>離題<br><span class='mut'>OFF</span></td><td>內容與公司需要改善的事項無關</td><td>私人近況、公共議題、對問卷本身的意見或疑問</td><td>抱怨調查沒有後續行動，但指出具體事項 → 依事項歸類</td><td>今年想去日本玩<br>希望台南捷運快點蓋好</td></tr>
+  </table></div>
+  <h2 id="s3-4">3.4 編碼規則</h2>
+  <ol class="steps">
+    <li>每則只填一個主要主題：答案中最先提到的改善事項</li><li>同時提到兩個事項時，第二個寫在「備註」欄，例如「次要：WORKLOAD」</li><li>代碼只用編碼簿的 11 個；不確定時填最接近的代碼，在備註寫出猶豫的兩個代碼</li><li>甲、乙兩人各自編碼，完成前不討論、不看對方的欄位</li>
+  </ol>
+  <p>規則 1 讓每則答案只有一個代碼，代碼才是名義類別，才能計算 Cohen’s κ。規則 2 讓兩人用同一個依據選主要主題，而不是各自判斷「哪件事比較重要」。規則 3 保留了多主題的資訊：需要時可以另外統計次要主題。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-13">主要主題</a>：每則答案的唯一代碼；本課程規則為答案中最先提到的改善事項；<a href="#g-14">次要主題</a>：同一則答案提到的第二個事項，寫在備註；<a href="#g-16">獨立編碼</a>：兩位編碼者完成編碼前不討論、不看對方結果。</p>
+  <h2 id="s3-5">3.5 邊界案例</h2>
+  <p>以下答案都不在 100 則樣本中，用來說明「排除」欄怎麼決定代碼：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:40%">答案</th><th style="width:18%">猶豫的代碼</th><th>依編碼簿</th></tr>
+    <tr><td style="text-align:left">主管只會挑錯，從來不講哪裡做得好</td><td>SUP／REC</td><td style="text-align:left">主管個人的做法 → SUP（REC 的排除欄）</td></tr>
+    <tr><td style="text-align:left">新的AI系統上線後工作量反而增加</td><td>AI／WORKLOAD</td><td style="text-align:left">先談新系統導入 → AI，次要 WORKLOAD</td></tr>
+    <tr><td style="text-align:left">上課都排下班後，又不算加班費</td><td>TRAIN／PAY</td><td style="text-align:left">最先提到上課安排 → TRAIN，次要 PAY</td></tr>
+    <tr><td style="text-align:left">問卷是匿名的嗎？</td><td>VAGUE／OFF</td><td style="text-align:left">對問卷本身的疑問 → OFF</td></tr>
+    <tr><td style="text-align:left">升遷</td><td>PROMO／VAGUE</td><td style="text-align:left">很短但有具體事項 → PROMO（VAGUE 的排除欄）</td></tr>
+  </table></div>
+  <h2 id="s3-6">3.6 編碼簿的修訂流程</h2>
+  <ol class="steps">
+    <li>兩人各自讀 30 則左右（不在樣本中的答案），試著編碼</li>
+    <li>比較兩人的代碼，找出不一致的答案與原因</li>
+    <li>修改定義、納入或排除的文字，必要時新增或合併主題</li>
+    <li>寫下修訂日期與內容，再各自編碼 100 則樣本</li>
+    <li>κ 未達 .61 時回到第 2 步；兩次的 κ 與修訂內容都寫進分析紀錄</li>
+  </ol>
+  <div class="key"><span class="lb">本單元要點</span>編碼簿有定義、納入、排除、例句四個欄位；排除欄寫出改歸的代碼，是一致性的關鍵欄位。每則一個主要主題（最先提到的事項），第二個事項寫在備註。邊界案例補進編碼簿並記錄修訂。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 2</div>
+    <div class="qbody">
+      <p>甲、乙兩人編碼後發現，「主管很少給回饋，不知道自己做得好不好」甲歸 SUP、乙歸 REC，類似的答案有十幾則。下一步最恰當的是什麼？</p>
+      <label><input type="radio" name="q2" value="a"> 兩人討論後把這些答案都改成一致，再計算 κ</label><label><input type="radio" name="q2" value="b"> 修訂編碼簿：在 SUP 與 REC 的排除欄寫清楚這類答案的去向，兩人再各自重新編碼</label><label><input type="radio" name="q2" value="c"> 刪除這些答案，不納入計算</label><label><input type="radio" name="q2" value="d"> 改由 LLM 編碼，LLM 不會猶豫</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q2r" value="a"> 不一致來自編碼簿的邊界不清；先討論再改，κ 會偏高，已經不是獨立判斷</label><label><input type="radio" name="q2r" value="b"> κ 只要計算出來就可以報告，不需要修編碼簿</label><label><input type="radio" name="q2r" value="c"> LLM 的判斷比人客觀，不需要編碼簿</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q2c" value="低"> 低</label><label><input type="radio" name="q2c" value="中"> 中</label><label><input type="radio" name="q2c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q2','b','a','正確。修編碼簿後重新獨立編碼，並記錄兩次的 κ。','相關說明見 &lt;a href=&quot;#s3-5&quot;&gt;3.5&lt;/a&gt; 與 &lt;a href=&quot;#s4-7&quot;&gt;4.7&lt;/a&gt;：κ 未通過時怎麼辦？','提示：先討論再改代碼，κ 還代表兩人的獨立判斷嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U4 κ ==================== -->
+<section class="unit" id="u4">
+  <h1>單元四：兩人獨立編碼與 Cohen’s κ</h1>
+  <div class="subtitle">一致率、碰巧一致率、κ；交叉表；信度與效度．主要依據：Cohen (1960)；Landis &amp; Koch (1977)；O’Connor &amp; Joffe (2020)</div>
+  <h2 id="s4-1">4.1 為什麼要兩人獨立編碼</h2>
+  <p>一個人編碼時，無法知道別人看同一則答案會不會給出相同的代碼。兩人在不討論的情況下各自編碼，再比較結果，可以檢驗編碼簿能否讓不同的人做出相同的判斷。Topic 03 的關鍵事例分類用的是同樣的做法。</p>
+  <h2 id="s4-2">4.2 一致率</h2>
+  <p>一致率是兩人給出相同代碼的比例：100 則中有 80 則相同，一致率 ＝ 80 ÷ 100 ＝ .80。一致率容易理解，但沒有考慮「碰巧相同」：即使兩人都隨意分類，也會有一部分答案剛好相同。</p>
+  <h2 id="s4-3">4.3 碰巧一致率與 κ</h2>
+  <p>碰巧一致率的算法：每個代碼，甲使用的比例乘以乙使用的比例，全部代碼加總。例如甲有 20% 的答案給 PAY、乙有 18%，兩人隨意分類時同時給 PAY 的機率是 .20 × .18 ＝ .036。</p>
+  <div class="kbox">Cohen’s κ ＝（一致率 − 碰巧一致率）÷（1 − 碰巧一致率）</div>
+  <p>分子是「超過碰巧的一致」，分母是「最多可能超過碰巧的部分」。κ ＝ 1 表示完全一致，κ ＝ 0 表示一致程度與碰巧相同。本課程以 .61 以上為通過（Topic 03；Landis &amp; Koch, 1977 的分級中 .61–.80 為高度一致）。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-17">一致率</a>：兩位編碼者給出相同代碼的比例；<a href="#g-18">碰巧一致率</a>：兩人依各自的代碼比例隨意分類時，也會相同的機率；<a href="#g-19">Cohen’s κ</a>：（一致率 − 碰巧一致率）÷（1 − 碰巧一致率）；本課程以 .61 以上為通過。</p>
+  <h2 id="s4-4">4.4 範例一：「主管領導」有沒有提到</h2>
+  <p>以全部 512 則有主題的答案，比較教師編碼與一條簡單的關鍵字規則（答案中有「主管」「課長」「副理」就判為有提到主管領導）：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th></th><th>規則：有</th><th>規則：沒有</th><th>合計</th></tr>
+    <tr><td>教師：有</td><td class="num">51</td><td>13</td><td>64</td></tr>
+    <tr><td>教師：沒有</td><td>14</td><td class="num">434</td><td>448</td></tr>
+    <tr><td>合計</td><td>65</td><td>447</td><td>512</td></tr>
+  </table></div>
+  <div class="kbox">
+    步驟一　一致率 ＝（51 ＋ 434）÷ 512 ＝ <b>.947</b><br>
+    步驟二　碰巧一致率 ＝ .125 × .127 ＋ .875 × .873 ＝ <b>.780</b><br>
+    步驟三　κ ＝（.947 − .780）÷（1 − .780）＝ <b>.76</b>
+  </div>
+  <p>一致率 .95 看起來很高，主要來自「兩邊都說沒有」的 434 則；扣除碰巧一致之後，κ ＝ .76，仍通過 .61。不一致的 27 則分成兩種：規則說有、教師說沒有（14 則，「主管」出現在談升遷或流程的答案中），以及規則說沒有、教師說有（13 則，例如「出問題都推給下面的人」「師傅帶人的方式太傳統，都用罵的」沒有出現「主管」二字）。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-20">交叉表</a>：列為一位編碼者、欄為另一位編碼者的次數表；對角線是兩人相同的則數；<a href="#g-23">關鍵字規則</a>：答案出現特定詞就歸到某主題的自動分類方法；不判斷語意與否定。</p>
+  <h2 id="s4-5">4.5 範例二：十一個主題的主要主題</h2>
+  <p>同樣的 512 則，用十一組關鍵字（每個主題一組，答案中最早出現的關鍵字決定代碼，沒有任何關鍵字就給 VAGUE）與教師編碼比較主要主題：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>主題</th><th>代碼</th><th>教師編碼則數</th><th>規則則數</th><th>兩者相同</th></tr>
+    <tr><td>薪資福利</td><td>PAY</td><td>84</td><td>69</td><td>64</td></tr><tr><td>升遷與職涯發展</td><td>PROMO</td><td>59</td><td>35</td><td>33</td></tr><tr><td>工作負荷與人力</td><td>WORKLOAD</td><td>68</td><td>47</td><td>37</td></tr><tr><td>主管領導</td><td>SUP</td><td>59</td><td>54</td><td>45</td></tr><tr><td>溝通與流程</td><td>COMM</td><td>55</td><td>42</td><td>33</td></tr><tr><td>設備系統與工作環境</td><td>SYS</td><td>48</td><td>33</td><td>29</td></tr><tr><td>教育訓練</td><td>TRAIN</td><td>38</td><td>25</td><td>24</td></tr><tr><td>考核與認可</td><td>REC</td><td>40</td><td>27</td><td>25</td></tr><tr><td>AI 與數位工具導入</td><td>AI</td><td>30</td><td>30</td><td>29</td></tr><tr><td>籠統或無具體內容</td><td>VAGUE</td><td>22</td><td>150</td><td>22</td></tr><tr><td>離題</td><td>OFF</td><td>9</td><td>0</td><td>0</td></tr>
+  </table></div>
+  <p>一致率 ＝ 341 ÷ 512 ＝ .666；碰巧一致率 ＝ .093（十一個代碼各自的比例相乘後加總）；κ ＝（.666 − .093）÷（1 − .093）＝ <b>.63</b>，達到 .61。代碼多、分布分散時，碰巧一致率低，κ 與一致率接近。</p>
+  <h2 id="s4-6">4.6 κ 通過之後：看交叉表與不一致案例</h2>
+  <p>範例二的 κ 通過，但「規則則數」一欄顯示兩個系統性的問題：規則把 150 則歸為 VAGUE（教師只有 22 則），因為答案沒有用到關鍵字就無處可放；離題的 9 則一則也沒有認出。κ 是整體一致程度的摘要，無法指出錯在哪一類，需要回到交叉表與原文。</p>
+  <h2 id="s4-7">4.7 信度與效度</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:14%"></th><th>問的問題</th><th style="width:36%">檢驗方式</th></tr>
+    <tr><td>信度</td><td style="text-align:left">不同編碼者，或同一編碼者重跑，是否給出相同代碼</td><td style="text-align:left">κ、一致率</td></tr>
+    <tr><td>效度</td><td style="text-align:left">代碼是否反映員工的原意；主題是否涵蓋重要內容</td><td style="text-align:left">回讀原文、不一致案例討論、主題定義是否合理</td></tr>
+  </table></div>
+  <p>關鍵字規則重跑一百次結果都一樣，信度完美，卻不懂否定與離題。兩位編碼者若都誤解同一條定義，κ 也會很高。κ 通過是必要條件，不是充分條件。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-21">信度</a>：編碼的一致程度：不同編碼者、或同一編碼者重跑，是否給出相同代碼；<a href="#g-22">效度</a>：代碼是否反映答案的原意，主題是否涵蓋重要的內容。</p>
+  <h2 id="s4-8">4.8 編碼一致性計算器的用法</h2>
+  <ol class="steps">
+    <li>開啟<a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></li>
+    <li>兩人時：選「兩位組員」，類別數最多 10 個；本主題有 11 個代碼，改用下一種方式</li>
+    <li>三人或代碼較多時：選「三位組員」，從編碼範本複製「編碼者甲」「編碼者乙」「LLM」三欄，分別貼到三個欄位；每欄 100 行，依編號排序</li>
+    <li>結果顯示甲與乙、甲與丙、乙與丙三個 Cohen’s κ（丙為 LLM），以及三人的 Fleiss’ κ</li>
+    <li>代碼寫法要完全一致（例如都寫 WORKLOAD），大小寫或空格不同會被當成不同類別</li>
+  </ol>
+  <h2 id="s4-9">4.9 κ 未通過時</h2>
+  <ul>
+    <li>找出不一致最多的兩三個主題配對（例如 SUP 與 REC），回到編碼簿修訂排除欄（<a href="#s3-6">3.6</a>）。</li>
+    <li>兩人各自重新編碼，不是討論後直接把代碼改成一致。</li>
+    <li>兩次的 κ、修訂內容與日期寫進分析紀錄。</li>
+    <li>κ 通過後，逐則討論仍不一致的答案，把結論填進「討論後定案」欄。</li>
+  </ul>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-27">定案</a>：兩位編碼者討論不一致的答案後決定的代碼。</p>
+  <div class="key"><span class="lb">本單元要點</span>κ 扣除碰巧一致，比一致率嚴格；本課程以 .61 為通過。κ 通過代表信度足夠，效度仍要看交叉表與不一致案例。三欄代碼用計算器的「三位組員」模式計算。κ 未通過時修編碼簿、重新獨立編碼。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 3</div>
+    <div class="qbody">
+      <p>關鍵字規則與教師編碼比對全部 512 則的主要主題，一致率 .67、κ ＝ .63，達到 .61。規則把 150 則歸為 VAGUE（教師只有 22 則），離題的 9 則一則也沒有認出。下列何者正確？</p>
+      <label><input type="radio" name="q3" value="a"> κ 通過，關鍵字規則可以取代人工編碼</label><label><input type="radio" name="q3" value="b"> κ 達 .61 代表信度足夠；VAGUE 與 OFF 的落差顯示規則在某些主題的判斷有誤，仍要看交叉表與不一致案例</label><label><input type="radio" name="q3" value="c"> 一致率比 κ 高，所以 κ 算錯了</label><label><input type="radio" name="q3" value="d"> VAGUE 太多是教師編碼的問題</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q3r" value="a"> κ 是整體一致程度的摘要，無法顯示哪個主題的判斷系統性地偏掉；效度要回到交叉表與原文</label><label><input type="radio" name="q3r" value="b"> κ 通過就表示每一個主題都編得正確</label><label><input type="radio" name="q3r" value="c"> 一致率一定等於 κ</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q3c" value="低"> 低</label><label><input type="radio" name="q3c" value="中"> 中</label><label><input type="radio" name="q3c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q3','b','a','正確。κ 回答一致程度，交叉表與不一致案例回答錯在哪裡。','相關說明見 &lt;a href=&quot;#s4-5&quot;&gt;4.5&lt;/a&gt; 與 &lt;a href=&quot;#s4-6&quot;&gt;4.6&lt;/a&gt;：規則的錯誤集中在哪一欄？','提示：κ 通過，代表每個主題都正確嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U5 LLM ==================== -->
+<section class="unit" id="u5">
+  <h1>單元五：LLM Agent 輔助主題編碼</h1>
+  <div class="subtitle">提示詞、三種使用方式、重跑與信心標記、摘要與效度檢驗．主要依據：Gilardi et al. (2023)；O’Connor &amp; Joffe (2020)</div>
+  <h2 id="s5-1">5.1 LLM 是第三位編碼者</h2>
+  <p>LLM 可以依編碼簿逐則給代碼，速度遠快於人工。Gilardi 等人（2023）發現，在部分文字標註任務中，ChatGPT 的表現接近或優於群眾標註者；不同任務、不同資料的表現差異很大，所以每次使用都要與人工編碼比對。本主題把 LLM 視為第三位編碼者：與甲、乙用同一份編碼簿，計算人與 LLM 的 κ，通過之後才把它用在其餘答案。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-15">編碼者</a>：負責編碼的人；LLM 也可視為一位編碼者；<a href="#g-25">LLM 編碼</a>：把編碼簿交給 LLM，由它逐則給代碼；使用前需與人工編碼比對。</p>
+  <h2 id="s5-2">5.2 編碼提示詞的五個要素</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:20%">要素</th><th>內容</th><th style="width:38%">例子</th></tr>
+    <tr><td>編碼簿</td><td style="text-align:left">完整的代碼、定義、納入、排除</td><td style="text-align:left">上傳編碼範本，或貼上全文</td></tr>
+    <tr><td>規則</td><td style="text-align:left">主要主題、次要主題、只用既有代碼</td><td style="text-align:left">「每則只給一個主要主題代碼」</td></tr>
+    <tr><td>做法</td><td style="text-align:left">逐則閱讀判斷</td><td style="text-align:left">「不要寫關鍵字程式自動分類」</td></tr>
+    <tr><td>信心</td><td style="text-align:left">每則標示高、中、低</td><td style="text-align:left">「信心低時寫出猶豫的兩個代碼」</td></tr>
+    <tr><td>輸出格式</td><td style="text-align:left">欄位、列數、排序、檔案</td><td style="text-align:left">「100 列，依編號排序，提供 CSV」</td></tr>
+  </table></div>
+  <p>「不要寫關鍵字程式」這一條是必要的：LLM 在可以執行程式的環境中，面對上百則答案時，有時會寫一段依關鍵字分類的程式代替閱讀，結果就變成單元四的關鍵字規則。</p>
+  <h2 id="s5-3">5.3 方式一：網頁版</h2>
+  <ol class="steps">
+    <li>新對話中上傳編碼範本，貼上實機練習第 3 輪的提示詞</li>
+    <li>檢查輸出：100 列、編號齊全、代碼只有 11 種、沒有分類程式</li>
+    <li>下載 CSV，依編號把主要代碼貼回範本的「LLM」欄</li>
+    <li>100 則一次輸出不完整時，分成 S001–S050 與 S051–S100 兩次</li>
+  </ol>
+  <h2 id="s5-4">5.4 方式二：專案</h2>
+  <p>ChatGPT 與 Claude 的專案（Projects）可以把編碼簿與規則寫在專案指示中，專案內每個新對話都會套用。之後要編碼新一批答案（例如明年的調查），只需在專案中開新對話、上傳答案。專案指示可以直接使用下方 SKILL.md 的內容。</p>
+  <h2 id="s5-5">5.5 方式三：Claude Code 的 CLAUDE.md 與 Skill</h2>
+  <p>在自己電腦執行的 Claude Code，會讀取資料夾中的 CLAUDE.md（專案記憶）與 <code>.claude/skills/&lt;名稱&gt;/SKILL.md</code>（技能）。資料夾結構與兩個檔案的內容如下（設定方式見 <a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#s2-8" target="_blank" rel="noopener">Topic 07 單元二</a>）：</p>
+  <div class="codewrap"><pre class="tree">開放題分析/
+├── CLAUDE.md                     專案記憶：讀者、隱私、標記原則
+├── data/
+│   ├── 員工調查模擬資料.xlsx
+│   └── Topic09_開放題編碼範本.xlsx
+├── output/                       LLM 編碼結果、κ、主題次數
+└── .claude/
+    └── skills/
+        └── oe-theme-coding/
+            └── SKILL.md          編碼簿與編碼規則</pre></div>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre># 專案記憶：年度員工意見調查　開放題分析
+
+- 公司：製造業，三個廠區，十二個部門。資料為教學模擬資料。
+- 讀者：人資長，不熟統計。結論先寫，數字附在後面。
+- 開放題原文可能含人名或單位，引用前遮蔽可辨識的內容；群組少於 5 人不單獨呈現。
+- 編碼依 skill 的編碼簿；編碼簿沒有的主題不自行新增，列入待確認事項。
+- 自行決定的事項列出來給人確認；疑似 AI 代答只標記，不刪除。</pre></div>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>---
+name: oe-theme-coding
+description: 依編碼簿為員工調查開放題做主題編碼。使用者要求為開放題答案分類、編碼、計算編碼一致性時使用。
+---
+# 開放題主題編碼（OE1：最希望公司優先改善的事項）
+
+## 編碼簿
+- PAY（薪資福利）：薪資、獎金、津貼、補助與福利制度的金額或給付方式。納入：調薪、年終與各類獎金；夜班、交通、伙食等津貼與加給；加班費的計算與給付；保險、宿舍收費、員工旅遊補助。排除：考績或表揚是否公平 → REC；加班時數太多 → WORKLOAD。
+- PROMO（升遷與職涯發展）：升遷管道、晉升標準與職涯路徑。納入：升遷不透明、晉升條件、職等、雙軌制、內部轉調、職涯面談與規劃。排除：上課與進修 → TRAIN；考績評分 → REC。
+- WORKLOAD（工作負荷與人力）：工作量、人力配置與工時安排。納入：人力不足、加班太多、排班與輪班、休假難請、工時太長、工作與生活平衡。排除：加班費金額 → PAY；新系統讓工作變多，主要主題 → AI。
+- SUP（主管領導）：直屬主管或各級主管的態度、公平性、溝通、授權與管理能力。納入：主管偏心、講話很兇、不授權、不傾聽、指令前後矛盾、很少給部屬回饋。排除：公司層級的政策公告與跨部門協調 → COMM；考績制度本身 → REC。
+- COMM（溝通與流程）：公司內部的資訊傳遞、跨部門協調、簽核與行政流程。納入：政策沒公告、總部與廠區溝通落差、跨部門標準不一致、簽核太長、會議太多、表單重複。排除：與直屬主管個人的互動 → SUP；系統不好用 → SYS。
+- SYS（設備系統與工作環境）：既有的機台、電腦與資訊系統，以及廠房、宿舍、餐廳、停車等設施。納入：設備老舊、ERP 難用、網路太慢、廠房太熱、廁所與休息室不足、餐廳與宿舍環境。排除：新導入的 AI 或數位工具 → AI。
+- TRAIN（教育訓練）：課程、新人訓練、證照與進修，以及工作技能的教學。納入：課程太基本、新人訓練太短、外訓與證照補助、師徒制缺乏系統、訓練時間安排。排除：職涯路徑與升遷 → PROMO。
+- REC（考核與認可）：績效考核的公平與透明，以及努力是否被看見與肯定。納入：考績不公、強迫分配、考核標準不清、表揚與肯定太少、貢獻沒有反映在考績。排除：獎金金額 → PAY；主管個人的態度 → SUP。
+- AI（AI 與數位工具導入）：AI、自動化與新系統導入的過程、規範與影響。納入：導入前沒問現場、沒有訓練、使用規範不清、擔心被取代、新工具一直換。排除：既有系統難用 → SYS。
+- VAGUE（籠統或無具體內容）：沒有指出任何具體的改善事項。納入：「無」「沒有」「公司加油」「沒什麼特別的」「不知道要寫什麼」。排除：答案很短但有具體事項（例如只寫「升遷」）→ 依事項歸類。
+- OFF（離題）：內容與公司需要改善的事項無關。納入：私人近況、公共議題、對問卷本身的意見或疑問。排除：抱怨調查沒有後續行動，但指出具體事項 → 依事項歸類。
+
+## 規則
+1. 每則只填一個主要主題：答案中最先提到的改善事項
+2. 同時提到兩個事項時，第二個寫在「備註」欄，例如「次要：WORKLOAD」
+3. 代碼只用編碼簿的 11 個；不確定時填最接近的代碼，在備註寫出猶豫的兩個代碼
+4. 逐則閱讀後判斷，不寫關鍵字程式自動分類。
+5. 每則附信心（高／中／低）；低信心寫出猶豫的兩個代碼。
+6. 輸出 CSV：編號,主要代碼,次要代碼,信心,理由。</pre></div>
+  <p>投影片的示範把同樣的做法用在 OE2「被肯定的經驗」60 則：兩個子代理各自依 SKILL.md 編碼，再由 Agent 計算兩次結果的 κ，並列出信心為「低」的答案交由人裁決。</p>
+  <h2 id="s5-6">5.6 重跑一致與信心標記</h2>
+  <p>同一個 LLM、同一份編碼簿，重跑兩次的結果常常非常接近。投影片的 OE2 示範中，兩次獨立編碼 60 則的代碼完全相同（κ ＝ 1.00）。重跑一致說明結果穩定，屬於信度；它不說明代碼正確，因為同一個模型可能兩次都犯同樣的錯。代碼是否正確，仍要與人工編碼比對。</p>
+  <p>信心標記讓人把力氣用在最需要的地方：信心為「低」的答案，多半是編碼簿的邊界案例，交給人裁決，也可以據此修訂編碼簿。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-26">信心標記</a>：LLM 對每則代碼標示高、中、低把握；低信心的答案交由人裁決。</p>
+  <h2 id="s5-7">5.7 摘要與情緒極性</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">用途</th><th>做法</th><th style="width:38%">查核方式</th></tr>
+    <tr><td>主題摘要</td><td style="text-align:left">每個主題寫兩三句重點</td><td style="text-align:left">每句附例句編號，回到原文核對；沒有例句支持的句子刪除</td></tr>
+    <tr><td>情緒極性</td><td style="text-align:left">把答案分成正向、中性、負向</td><td style="text-align:left">抽樣人工判讀；OE1 問改善事項，答案幾乎都是負向，用途有限</td></tr>
+  </table></div>
+  <p>摘要提示詞範例（附例句編號，方便核對）：</p>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把這份編碼結果整理成給人資長的摘要：
+1. 依「討論後定案」的主題次數，列出前五個主題與則數。
+2. 每個主題寫兩句重點，每句後面附兩則例句的編號（例如 S014、S052），不要寫例句以外的推測。
+3. 列出含與不含疑似 AI 代答兩個版本的前五名，說明排序是否改變。
+4. 引用的原文刪除人名、單位與具體事件。</pre></div>
+  <div class="key"><span class="lb">本單元要點</span>LLM 是第三位編碼者，用同一份編碼簿，與人工比對後才使用。提示詞要有編碼簿、規則、「不寫關鍵字程式」、信心與輸出格式。重跑一致屬於信度，不代表正確。摘要每句附例句編號，才能回到原文核對。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 4</div>
+    <div class="qbody">
+      <p>同一份編碼簿請 LLM 編碼兩次，兩次結果完全相同（κ ＝ 1.00）。主管說：「重跑都一樣，可以直接用 LLM 的結果了。」最恰當的回應是什麼？</p>
+      <label><input type="radio" name="q4" value="a"> 同意，κ ＝ 1.00 是最高的一致</label><label><input type="radio" name="q4" value="b"> 改用另一個 LLM 再跑一次，三次都一樣就採用</label><label><input type="radio" name="q4" value="c"> 兩次相同只代表重跑穩定；仍要與兩位人工編碼者比對，計算人與 LLM 的 κ，並檢查不一致案例</label><label><input type="radio" name="q4" value="d"> LLM 的結果不能用，一律人工編碼</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q4r" value="a"> 重跑一致屬於信度；同一個模型可能每次都犯同樣的錯，代碼是否正確要和人工比對</label><label><input type="radio" name="q4r" value="b"> κ 越高，效度也一定越高</label><label><input type="radio" name="q4r" value="c"> LLM 不會犯錯，只會不一致</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q4c" value="低"> 低</label><label><input type="radio" name="q4c" value="中"> 中</label><label><input type="radio" name="q4c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q4','c','a','正確。重跑穩定是信度，與人工比對才能檢驗效度。','相關說明見 &lt;a href=&quot;#s5-6&quot;&gt;5.6&lt;/a&gt;：重跑一致回答的是哪一個問題？','提示：兩次犯同樣的錯，κ 會是多少？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U6 比對 ==================== -->
+<section class="unit" id="u6">
+  <h1>單元六：人工與 LLM 編碼比對</h1>
+  <div class="subtitle">三個 κ 的組合、交叉表、不一致案例、LLM 的常見差異</div>
+  <h2 id="s6-1">6.1 三個 κ 的組合</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:16%">甲乙 κ</th><th style="width:20%">人與 LLM 的 κ</th><th>代表什麼、下一步</th></tr>
+    <tr><td>≥ .61</td><td>≥ .61</td><td style="text-align:left">編碼簿清楚，LLM 也能依循；可用 LLM 編其餘答案，並定期抽樣人工複核</td></tr>
+    <tr><td>≥ .61</td><td>&lt; .61</td><td style="text-align:left">人能一致、LLM 不能：檢查提示詞是否貼了完整編碼簿、LLM 是否新增代碼或寫了分類程式</td></tr>
+    <tr><td>&lt; .61</td><td>任何值</td><td style="text-align:left">編碼簿本身不清楚：修訂後兩人重新編碼；此時人與 LLM 的 κ 沒有比較基準</td></tr>
+  </table></div>
+  <h2 id="s6-2">6.2 交叉表的讀法</h2>
+  <p>請 AI 列出「甲 × LLM」的交叉表：列為甲的代碼，欄為 LLM 的代碼。對角線是兩者相同的則數；對角線以外的格子顯示錯在哪裡。讀法：</p>
+  <ol class="steps">
+    <li>先看每一列：甲給 SUP 的答案，LLM 主要給了什麼？集中在某一欄，代表系統性的差異</li>
+    <li>再看每一欄：LLM 給 VAGUE 的答案，甲原本給了什麼？</li>
+    <li>挑出數字最大的兩三個非對角線格子，逐則回讀原文</li>
+  </ol>
+  <h2 id="s6-3">6.3 不一致的五種原因</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:18%">原因</th><th style="width:40%">例子（樣本以外）</th><th>處理</th></tr>
+    <tr><td>定義邊界不清</td><td style="text-align:left">主管只會挑錯，從來不講哪裡做得好</td><td style="text-align:left">補寫排除欄</td></tr>
+    <tr><td>多主題</td><td style="text-align:left">升遷不透明，主管也從不跟我們溝通</td><td style="text-align:left">重申「最先提到」規則</td></tr>
+    <tr><td>否定</td><td style="text-align:left">主管不要只看結果，過程中也要支持</td><td style="text-align:left">回讀全文判斷，不依關鍵字</td></tr>
+    <tr><td>籠統或離題</td><td style="text-align:left">填這個有用嗎，去年寫的也沒改</td><td style="text-align:left">VAGUE、OFF 各寫清楚的例句</td></tr>
+    <tr><td>長答案多事項</td><td style="text-align:left">疑似 AI 代答一次列出三個面向</td><td style="text-align:left">依最先提到的事項；備註標記</td></tr>
+  </table></div>
+  <h2 id="s6-4">6.4 LLM 編碼的常見差異</h2>
+  <p>以下為可預期的差異，各組實際情況不同，以自己的交叉表為準：</p>
+  <ul>
+    <li>「無」「沒什麼特別的」被歸到某個主題，或 VAGUE 與 OFF 混用。</li>
+    <li>見到「主管」就歸 SUP，即使答案談的是升遷或考核。</li>
+    <li>自行新增代碼（例如「工作環境」）或在一格中填兩個代碼。</li>
+    <li>寫關鍵字程式代替判斷，結果與單元四的關鍵字規則相似：VAGUE 偏多、OFF 認不出。</li>
+    <li>長而工整的答案（疑似 AI 代答）提到多個面向，主要代碼與人工不同。</li>
+  </ul>
+  <h2 id="s6-5">6.5 主題次數與報告</h2>
+  <ul>
+    <li>主題次數以「討論後定案」欄計算（範本的「使用說明」工作表已有 COUNTIF 公式），不以 LLM 欄計算。</li>
+    <li>報告同時寫出甲乙、甲與 LLM、乙與 LLM 三個 κ 與一致率，以及編碼簿修訂的次數。</li>
+    <li>100 則樣本的主題次數只代表樣本；推論到全部答案時，要寫明是樣本結果，或在 LLM 通過比對後編碼全部答案。</li>
+  </ul>
+  <div class="key"><span class="lb">本單元要點</span>先看甲乙 κ 確認編碼簿可用，再看人與 LLM 的 κ。交叉表指出錯在哪裡，不一致案例歸類後回頭修訂編碼簿或提示詞。主題次數以討論後定案計算。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 5</div>
+    <div class="qbody">
+      <p>某組的甲乙 κ ＝ .74，甲與 LLM ＝ .52，乙與 LLM ＝ .55。下列判斷何者最恰當？</p>
+      <label><input type="radio" name="q5" value="a"> 編碼簿有問題，要重寫</label><label><input type="radio" name="q5" value="b"> 人與人能依編碼簿一致，LLM 沒有；先檢查提示詞是否貼了完整編碼簿、LLM 是否新增代碼或寫了關鍵字程式</label><label><input type="radio" name="q5" value="c"> LLM 比人更客觀，以 LLM 的結果為準</label><label><input type="radio" name="q5" value="d"> 三個 κ 平均 .60，接近 .61，可以通過</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q5r" value="a"> 甲乙一致表示編碼簿可以被依循；人與 LLM 不一致，問題多半在 LLM 的使用方式</label><label><input type="radio" name="q5r" value="b"> 三個 κ 平均起來就是整體的信度</label><label><input type="radio" name="q5r" value="c"> κ 低於 .61 時一律重寫編碼簿</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q5c" value="低"> 低</label><label><input type="radio" name="q5c" value="中"> 中</label><label><input type="radio" name="q5c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q5','b','a','正確。先確認人與人，再評估 LLM。','相關說明見 &lt;a href=&quot;#s6-1&quot;&gt;6.1&lt;/a&gt;：三個 κ 的組合代表什麼？','提示：甲乙 κ 通過，代表編碼簿本身清楚嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U7 AI 代答 ==================== -->
+<section class="unit" id="u7">
+  <h1>單元七：疑似 AI 代答與倫理</h1>
+  <div class="subtitle">長度、句式、用詞；規則與門檻；標記後的處理．主要依據：Speer et al. (2026)</div>
+  <h2 id="s7-1">7.1 AI 代答的現象</h2>
+  <p>填答者把開放題丟給 AI 工具，再把產生的文字貼回問卷，稱為 AI 代答。這類答案通常較長、句式工整、用詞正面而籠統。Topic 04 以人眼辨識；本主題把觀察到的特徵寫成可以重複執行的規則，再討論規則的限制。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-28">疑似 AI 代答</a>：由 AI 工具代寫的開放題答案；規則只能標記疑似，無法證明；<a href="#g-29">模板詞</a>：在 AI 代寫文字中反覆出現的連接詞組，例如「不僅…進而」。</p>
+  <h2 id="s7-2">7.2 三個特徵</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:18%">特徵</th><th>被標記的 16 則</th><th>其餘答案</th></tr>
+    <tr><td>長度</td><td>92–114 字</td><td>中位數 12 字，最長 25 字</td></tr>
+    <tr><td>句式（逗號數）</td><td>平均 4.6 個</td><td>平均 0.4 個</td></tr>
+    <tr><td>用詞</td><td>「不僅」「進而」「有助於」16 則全部出現</td><td>0 則</td></tr>
+  </table></div>
+  <p>這 16 則的結構相同：開場語（例如「綜合而言」「在職涯發展方面」）、建議公司從幾個層面著手、再以「不僅…也有助於…進而…」收尾。</p>
+  <h2 id="s7-3">7.3 兩項規則與 Excel 做法</h2>
+  <ol class="steps">
+    <li>原始資料新增一欄字數：<code>=IF(AJ2="","",LEN(AJ2))</code>（AJ 欄為 OE1），向下複製</li>
+    <li>字數欄的平均與標準差：<code>=AVERAGE()</code> 與 <code>=STDEV.S()</code>，得到 14.4 與 15.6（516 則）</li>
+    <li>門檻 ＝ 平均＋3 × 標準差 ＝ 14.4 ＋ 3 × 15.6 ＝ <span class="num">61.3</span> 字；高於門檻標記，共 16 則</li>
+    <li>模板詞欄：<code>=AND(ISNUMBER(SEARCH("不僅",AJ2)),ISNUMBER(SEARCH("進而",AJ2)))</code>，TRUE 共 16 則</li>
+    <li>兩欄都符合：16 則</li>
+  </ol>
+  <p>「平均＋3 個標準差」與 Topic 07 判定隨機亂填的規則相同：規則在看資料之前訂定，實際門檻由資料計算，寫進分析紀錄。</p>
+  <h2 id="s7-4">7.4 規則的限制</h2>
+  <ul>
+    <li>本資料的 16 則來自同一個模板，兩項規則的結果完全相同。真實資料中，AI 代答的長度與句式變化較多，簡單規則會漏掉一部分，也會誤標認真寫長答案的員工。</li>
+    <li>Speer 等人（2026）發現，針對特定題目訓練的偵測模型可以近乎完美地區分人類與 AI 代寫的文字，偽陽性率約 1%；這類模型需要專門的訓練資料，本主題的簡單規則沒有這種精確度。</li>
+    <li>規則只能標記「疑似」，無法證明答案是 AI 寫的。</li>
+  </ul>
+  <h2 id="s7-5">7.5 標記之後的處理</h2>
+  <ol class="steps">
+    <li>保留答案，在編碼範本的備註欄標記「疑似 AI 代答」</li>
+    <li>照常編碼；主題次數含與不含標記答案各算一次</li>
+    <li>比較兩個版本的主題排序，結論改變時在報告中說明</li>
+    <li>方法說明寫出規則、門檻、標記則數與處理方式</li>
+  </ol>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-30">敏感度分析</a>：改變一個分析決定（例如含或不含疑似 AI 代答），看結論是否改變。</p>
+  <h2 id="s7-6">7.6 倫理</h2>
+  <ul>
+    <li>匿名調查不以標記結果回推填答者身分，也不據此懲處個人。</li>
+    <li>報告中寫「疑似」，不寫「有 16 人用 AI 代答」。</li>
+    <li>從設計端預防：題目問具體的經驗與事件，說明開放題的用途與後續行動，讓填答者願意自己寫。</li>
+    <li>AI 代答的內容仍可能反映填答者真正在意的事（例如選擇了「薪酬福利」作為主題），刪除等於丟掉這個訊號。</li>
+  </ul>
+  <div class="key"><span class="lb">本單元要點</span>疑似 AI 代答較長、逗號多、出現固定的模板詞。用「平均＋3 個標準差」與模板詞兩項規則標記，門檻由資料計算。規則只能標記疑似：保留答案、做含與不含兩個版本、寫進方法說明，不回推身分。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 6</div>
+    <div class="qbody">
+      <p>依「字數高於平均＋3 個標準差」的規則，OE1 有 16 則被標記為疑似 AI 代答。下列處理何者最恰當？</p>
+      <label><input type="radio" name="q6" value="a"> 全部刪除，避免影響主題次數</label><label><input type="radio" name="q6" value="b"> 依員工編號找出填答者，提醒不要使用 AI</label><label><input type="radio" name="q6" value="c"> 保留答案並標記，主題次數含與不含各算一次，在方法說明中寫出規則與標記則數</label><label><input type="radio" name="q6" value="d"> 規則抓到的就是 AI 寫的，報告中直接說明有 16 人用 AI 代答</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q6r" value="a"> 規則只能標記疑似，無法證明；保留並做敏感度分析，結論才不會因為一個無法驗證的判斷而改變</label><label><input type="radio" name="q6r" value="b"> 匿名調查可以為了資料品質回推身分</label><label><input type="radio" name="q6r" value="c"> 字數長的答案一定是 AI 寫的</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q6c" value="低"> 低</label><label><input type="radio" name="q6c" value="中"> 中</label><label><input type="radio" name="q6c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q6','c','a','正確。標記、不刪除、做兩個版本、寫進方法說明。','相關說明見 &lt;a href=&quot;#s7-5&quot;&gt;7.5&lt;/a&gt; 與 &lt;a href=&quot;#s7-6&quot;&gt;7.6&lt;/a&gt;：規則能證明什麼？','提示：認真寫長答案的員工會被規則標記嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U8 實機練習 ==================== -->
+<section class="unit" id="u8">
+  <h1>單元八：實機練習</h1>
+  <div class="subtitle">六輪提示詞與答案對照</div>
+  <ol class="steps">
+    <li>下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料</a>與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>，開啟 ChatGPT 或 Claude 網頁版的新對話，上傳兩個檔案</li>
+    <li>在同一個對話中，依序貼上第 0 輪到第 5 輪的提示詞（按「複製」）</li>
+    <li>每一輪看完 AI 的結果，按「看答案」對照；可由程式算出的數字附正確答案，編碼與 κ 依各組結果而定，只列判斷原則</li>
+    <li>第 3 輪之前，甲、乙先各自完成 100 則編碼（範本 C、D 欄），避免看到 LLM 的結果後受影響</li>
+    <li>第 4 輪上傳填好的範本；三個 κ 再用<a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>重算一次</li>
+    <li>完成後填寫<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，與同學交換互查（單元九）</li>
+  </ol>
+  <div class="note"><span class="lb">提醒</span>答案由課程的分析程式計算。詞頻排名依斷詞工具與停用詞不同而略有差異；則數、門檻與標記則數用同一份資料應完全相同。</div>
+  <div class="round">
+  <div class="rhead">第 0 輪：規劃（不執行）</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳兩個檔案：員工意見調查的模擬資料（Excel，原始資料工作表有開放題 OE1_最希望優先改善），以及開放題編碼範本（編碼簿、100 則樣本、使用說明三個工作表）。
+這一輪先不要計算，請用條列回答：
+1. OE1 這一題大約有多少人作答，答案的長度大概如何。
+2. 你打算怎麼分析這一題：詞頻、依編碼簿編碼、比對一致性、檢查疑似 AI 代答，依序列出步驟。
+3. 有哪些決定需要我確認後才能執行。
+4. 真實資料交給 AI 之前，需要先做哪些去識別化處理。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p><b>查核重點</b></p><ul>
+<li>AI 是否列出詞頻、編碼、比對、疑似 AI 代答四段，順序合理。</li>
+<li>是否提到斷詞工具與停用詞需要決定，且會影響排名。</li>
+<li>是否提到疑似 AI 代答「先標記、不刪除」，由人決定處理方式。</li>
+<li>去識別化是否提到人名、單位名稱與具體事件。</li>
+<li>AI 是否遵守「這一輪先不要計算」；若已開始計算，要求它停止。</li></ul></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 1 輪：讀資料與詞頻</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請只用「原始資料」工作表的 OE1_最希望優先改善：
+1. 回報非空白答案的則數，以及不重複答案的則數。
+2. 用 jieba 斷詞（若無法使用 jieba，請說明改用的方法）；刪除單字詞、標點與下列停用詞：希望、可以、公司、沒有、不要、一直、真的、什麼、我們、大家。以「提到該詞的答案則數」計算詞頻，列出前 20 名，並畫一張文字雲。
+3. 計算含有「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數，並列出這十個詞各自的則數。
+4. 從資料中各找兩則例子，說明文字雲的四個盲點：同義詞分散、否定詞被刪掉、斷詞錯誤、一則答案提到兩個主題。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class="scrollx"><table class="mt"><tr><th>項目</th><th>正確答案</th></tr><tr><td style="text-align:left">非空白答案</td><td style="text-align:left">516 則</td></tr><tr><td style="text-align:left">不重複答案</td><td style="text-align:left">512 則</td></tr><tr><td style="text-align:left">詞頻前幾名（jieba）</td><td style="text-align:left">主管 58、AI 19、工作 18、加班 17、不僅 16、建議 16、有助 16、考績 16（停用詞或斷詞工具不同，排名會略有不同）</td></tr><tr><td style="text-align:left">薪資福利相關詞（任一詞）</td><td style="text-align:left">67 則</td></tr><tr><td style="text-align:left">十個詞各自的則數</td><td style="text-align:left">獎金 11、補助 11、薪資 9、薪水 8、調薪 7、年終 6、津貼 6、加給 6、加薪 3、福利 3</td></tr></table></div><p>文字雲中最大的「主管」，單一詞 58 則；薪資福利拆成十個詞，每個詞最多 11 則。「不僅」「有助」各 16 則，全部來自疑似 AI 代答。斷詞錯誤、否定、多主題的例子見單元二。</p></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 2 輪：建立編碼簿</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請讀「Topic09_開放題編碼範本.xlsx」的「編碼簿」工作表（11 個主題，每個主題有定義、納入、排除、例句）。
+1. 從原始資料 OE1 中，找出 10 則用這份編碼簿不容易判斷的答案（不要從「100 則樣本」工作表挑），每則說明猶豫的兩個代碼。
+2. 針對這 10 則，建議要修改哪些主題的「納入」或「排除」文字，寫出修改前與修改後。
+3. 不要新增主題；如果你認為需要新增，列在最後並說明理由，由我決定。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p><b>查核重點</b></p><ul>
+<li>AI 挑出的案例多半落在 SUP 與 REC、PAY 與 WORKLOAD、AI 與 SYS、VAGUE 與 OFF 之間。</li>
+<li>修改建議要寫成可以判斷的規則，例如「新導入的系統歸 AI，既有系統歸 SYS」，不是「視情況判斷」。</li>
+<li>AI 有沒有遵守「不從 100 則樣本挑」與「不新增主題」。是否新增主題由組員決定，寫進分析紀錄。</li></ul></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 3 輪：LLM 依編碼簿編碼 100 則</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「編碼簿」工作表與下方規則，為「100 則樣本」工作表的 100 則答案編碼：
+1. 每則只給一個主要主題代碼（答案中最先提到的改善事項），只能用編碼簿的 11 個代碼。
+2. 同時提到第二個事項時，另列「次要代碼」；沒有就留空。
+3. 每則附「信心」（高／中／低）；信心低時，寫出猶豫的兩個代碼。
+4. 逐則閱讀後判斷，不要寫關鍵字程式自動分類。
+輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列，依編號排序；並提供 CSV 讓我下載。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p><b>查核重點</b></p><ul>
+<li>100 列、編號 S001–S100 齊全；代碼只有編碼簿的 11 種。</li>
+<li>回覆中沒有依關鍵字分類的程式。若有，要求 AI 刪除程式、逐則判斷後重新輸出。</li>
+<li>主要代碼依編號貼回範本的「LLM」欄。</li></ul>
+<p><b>可預期的差異（各組情況不同，請以自己的結果為準）</b></p><ul>
+<li>「無」「沒什麼特別的」這類答案被歸到某個主題，或 VAGUE 與 OFF 混用。</li>
+<li>樣本中有 3 則疑似 AI 代答，一次提到兩三個事項，主要代碼容易與人工不同。</li>
+<li>含「主管」一詞但談升遷或考核的答案，被一律歸為 SUP。</li></ul></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 4 輪：與人工編碼比對、算 κ</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳填好的編碼範本：「編碼者甲」「編碼者乙」是兩位組員各自的編碼，「LLM」是上一輪你的主要代碼。
+1. 計算三組的一致率與 Cohen&#x27;s κ：甲與乙、甲與 LLM、乙與 LLM。寫出 κ 的計算過程（觀察一致率、碰巧一致率）。
+2. 列出甲與 LLM 的交叉表（列為甲，欄為 LLM）。
+3. 列出甲、乙一致但 LLM 不同的答案，每則說明可能原因：定義不清、多主題、否定、籠統答案，或其他。
+4. 附上完整程式碼。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><p>κ 依各組編碼而定，沒有標準答案。判斷原則：</p><ol>
+<li>用編碼一致性計算器的「三位組員」模式貼上甲、乙、LLM 三欄，兩兩 κ 應與 AI 回報的相同（小數第二位）。不同時，檢查貼上的順序與代碼寫法。</li>
+<li>κ 一定低於一致率；只報一致率會高估一致性。</li>
+<li>甲乙 κ 未達 .61：修編碼簿，兩人各自重新編碼；不要直接討論後改成一致。</li>
+<li>甲乙 κ 達標、人與 LLM 的 κ 偏低：問題在提示詞或 LLM 的理解（單元六）。</li>
+<li>主題次數以「討論後定案」計算，不以 LLM 欄計算。</li></ol></div>
+  </div>
+</div><div class="round">
+  <div class="rhead">第 5 輪：疑似 AI 代答與雙重查核</div>
+  <div class="rbody">
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回到原始資料的全部 OE1 答案：
+1. 計算每則答案的字數；以全部答案字數的平均＋3 個標準差為門檻，回報平均、標準差、門檻與超過門檻的則數。
+2. 計算同時含「不僅」與「進而」的答案則數，以及與第 1 點重疊的則數。
+3. 比較被標記與未標記答案的平均字數與平均逗號數，並列出被標記答案的開頭五個字。
+4. 被標記的答案不要刪除。請說明：這些規則能確定答案是 AI 寫的嗎？標記之後要怎麼處理？
+5. 最後把這次對話用到的完整程式碼整理成一份，並列出你自行決定、我沒有指定的事項。</pre></div>
+    <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
+    <div class="ans"><div class="scrollx"><table class="mt"><tr><th>項目</th><th>正確答案</th></tr><tr><td style="text-align:left">字數平均、標準差</td><td style="text-align:left">14.4、15.6（516 則）</td></tr><tr><td style="text-align:left">門檻（平均＋3 個標準差）</td><td style="text-align:left">61.3 字，超過門檻 16 則</td></tr><tr><td style="text-align:left">同時含「不僅」「進而」</td><td style="text-align:left">16 則，與長度規則重疊 16 則</td></tr><tr><td style="text-align:left">字數範圍</td><td style="text-align:left">被標記 92–114 字；其餘答案最長 25 字</td></tr><tr><td style="text-align:left">平均逗號數</td><td style="text-align:left">被標記 4.6 個；其餘 0.4 個</td></tr><tr><td style="text-align:left">100 則樣本中的被標記答案</td><td style="text-align:left">3 則</td></tr></table></div><p>規則只能標記「疑似」。本資料的 16 則來自同一個模板，兩條規則結果相同；真實資料的 AI 代答句式較多變。處理方式：保留答案、主題次數報告含與不含兩個版本、檢查結論是否改變；不追查填答者，不以此懲處個人。</p></div>
+  </div>
+</div>
+  <div class="key"><span class="lb">本單元要點</span>練習順序為詞頻、編碼簿、人工編碼、LLM 編碼、比對、AI 代答檢查。人工編碼在 LLM 之前完成；κ 用計算器重算；疑似 AI 代答只標記不刪除。</div>
+</section>
+
+<!-- ==================== U9 查核與延伸 ==================== -->
+<section class="unit" id="u9">
+  <h1>單元九：查核、報告與連結 Topic 08</h1>
+  <div class="subtitle">快速查核清單、分析檢核表、分析紀錄、報告寫法、主題次數與留任意願、方法選擇</div>
+  <h2 id="s9-1">9.1 快速查核清單</h2>
+  <p>完成分析後逐項勾選。</p>
+  <div class="chk"><label><input type="checkbox" onchange="chkCount()"> <span>則數：OE1 非空白 516 則，樣本 100 則，LLM 輸出 100 列</span></label><label><input type="checkbox" onchange="chkCount()"> <span>斷詞：寫明斷詞工具與停用詞；文字雲只作為探索</span></label><label><input type="checkbox" onchange="chkCount()"> <span>編碼簿：11 個主題都有定義、納入、排除與例句；修訂有紀錄</span></label><label><input type="checkbox" onchange="chkCount()"> <span>獨立編碼：甲乙編碼完成前沒有討論</span></label><label><input type="checkbox" onchange="chkCount()"> <span>κ：甲乙、甲與 LLM、乙與 LLM 三個值都用計算器重算過，並與一致率並列</span></label><label><input type="checkbox" onchange="chkCount()"> <span>不一致案例：至少 5 則寫出原因與定案</span></label><label><input type="checkbox" onchange="chkCount()"> <span>疑似 AI 代答：門檻 61.3 字、標記 16 則；未刪除，主題次數含與不含各一份</span></label><label><input type="checkbox" onchange="chkCount()"> <span>引用原文：刪除可辨識的人名、單位與事件</span></label></div>
+  <p id="chkNote" style="color:var(--muted);font-size:14px">已完成 0／8 項。</p>
+  <h2 id="s9-2">9.2 分析檢核表（Excel）</h2>
+  <p><a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 09 分析檢核表（Excel）</a>。三個工作表與 Topic 07 相同：「檢核表」有 19 個項目，依實機練習的輪次排列；分析者先填「我的結果」，檢核者看對話、編碼範本與程式碼逐項確認並簽名。檢核項目如下：</p>
+  <div class="scrollx"><table class="mt"><tr><th>步驟</th><th>檢核項目</th><th>怎麼檢查</th><th>預期結果</th></tr><tr><td style="text-align:left">0 規劃</td><td style="text-align:left">AI 列出的計畫包含六個步驟</td><td style="text-align:left">看第 0 輪回答：讀資料、詞頻、編碼簿、編碼、比對、AI 代答檢查</td><td style="text-align:left">六項都有；並主動提到去識別化</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">OE1 作答則數</td><td style="text-align:left">要求 AI 回報非空白答案的則數與不重複則數</td><td style="text-align:left">516 則；不重複 512 則</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">斷詞工具與停用詞已說明</td><td style="text-align:left">AI 寫出用的斷詞工具（例如 jieba）與刪掉哪些詞</td><td style="text-align:left">有說明；詞頻排名依工具而異，用 jieba 時第一名為「主管」</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">薪資福利相關詞的分散</td><td style="text-align:left">請 AI 計算含「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數</td><td style="text-align:left">67 則；單一詞最多 11 則</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">指出文字雲的盲點</td><td style="text-align:left">同義詞、否定、斷詞錯誤、多主題四項</td><td style="text-align:left">四項都有實例</td></tr><tr><td style="text-align:left">2 編碼簿</td><td style="text-align:left">11 個主題各有定義、納入、排除、例句</td><td style="text-align:left">對照範本的編碼簿工作表</td><td style="text-align:left">是；例句不取自 100 則樣本</td></tr><tr><td style="text-align:left">2 編碼簿</td><td style="text-align:left">有主要主題的判定規則</td><td style="text-align:left">最先提到的改善事項為主要主題</td><td style="text-align:left">是</td></tr><tr><td style="text-align:left">3 LLM 編碼</td><td style="text-align:left">100 則都有代碼</td><td style="text-align:left">LLM 輸出的列數與編號</td><td style="text-align:left">100 列，編號 S001–S100</td></tr><tr><td style="text-align:left">3 LLM 編碼</td><td style="text-align:left">只用編碼簿的 11 個代碼</td><td style="text-align:left">檢查是否出現新代碼或兩個代碼擠在同一格</td><td style="text-align:left">是；新增的主題列入待確認</td></tr><tr><td style="text-align:left">3 LLM 編碼</td><td style="text-align:left">LLM 沒有寫關鍵字程式代替判斷</td><td style="text-align:left">看回覆中是否出現依關鍵字分類的程式</td><td style="text-align:left">沒有</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">甲乙 Cohen’s κ</td><td style="text-align:left">計算器三位組員模式</td><td style="text-align:left">≥ .61；未達時修編碼簿重編，兩次都記錄</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">甲與 LLM、乙與 LLM 的 κ</td><td style="text-align:left">計算器三位組員模式</td><td style="text-align:left">寫出數值；與甲乙 κ 比較高低</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">一致率與 κ 並列</td><td style="text-align:left">報告同時寫兩個數字</td><td style="text-align:left">是；κ 低於一致率</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">不一致案例討論</td><td style="text-align:left">挑 5 則以上 LLM 與定案不同的答案，寫原因</td><td style="text-align:left">原因歸類：定義不清、多主題、否定、籠統答案等</td></tr><tr><td style="text-align:left">5 AI 代答</td><td style="text-align:left">長度規則的門檻</td><td style="text-align:left">全部答案長度的平均＋3 個標準差</td><td style="text-align:left">14.4 ＋ 3 × 15.6 ＝ 61.3 字，標記 16 則</td></tr><tr><td style="text-align:left">5 AI 代答</td><td style="text-align:left">模板詞規則</td><td style="text-align:left">同時含「不僅」與「進而」</td><td style="text-align:left">標記 16 則，與長度規則重疊 16 則</td></tr><tr><td style="text-align:left">5 AI 代答</td><td style="text-align:left">疑似 AI 代答只標記、不刪除</td><td style="text-align:left">主題次數含與不含標記答案各算一次</td><td style="text-align:left">兩種結果都列出，排序是否改變</td></tr><tr><td style="text-align:left">5 查核</td><td style="text-align:left">AI 自行決定的事項已列出並確認</td><td style="text-align:left">第 5 輪回答＋分析紀錄</td><td style="text-align:left">每一項都有確認者</td></tr><tr><td style="text-align:left">5 查核</td><td style="text-align:left">自己重算一項</td><td style="text-align:left">在 Excel 用 COUNTIF 算一個主題次數或一致率，與 AI 對照</td><td style="text-align:left">一致</td></tr></table></div>
+  <h2 id="s9-3">9.3 分析紀錄</h2>
+  <p>每一個需要人決定的事項寫一列：編碼簿的修訂、邊界案例的歸類、疑似 AI 代答的處理、是否新增主題。下表是「分析紀錄」工作表的欄位與範例：</p>
+  <div class="scrollx"><table class="mt"><tr><th>日期</th><th>步驟</th><th>決定的事項</th><th>選擇</th><th>理由</th><th>由誰提出（人／AI）</th><th>確認者</th></tr><tr><td style="text-align:left">2026/11/20</td><td style="text-align:left">編碼簿</td><td style="text-align:left">「新系統讓工作量變多」歸哪個主題</td><td style="text-align:left">主要主題 AI，次要 WORKLOAD</td><td style="text-align:left">最先提到的是新系統導入</td><td style="text-align:left">人</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">2026/11/20</td><td style="text-align:left">AI 代答</td><td style="text-align:left">16 則疑似 AI 代答如何處理</td><td style="text-align:left">保留，標記後做含／不含兩種主題次數</td><td style="text-align:left">規則只能標記，無法確認是否為 AI 代答</td><td style="text-align:left">AI 提出，人確認</td><td style="text-align:left"></td></tr></table></div>
+  <h2 id="s9-4">9.4 主題次數與留任意願</h2>
+  <p>開放題的主題次數回答「員工最常提到什麼」。哪些因素和留任意願的關係最大，是另一個問題（Topic 08 的驅動因子分析）。以清理後資料中有填 OE1 的 512 人為例，比較提到某主題的人與沒提到的人，留任意願的差距（d）：</p>
+  <div class="scrollx"><table class="mt">
+    <tr><th>主題</th><th>提到的人數</th><th>提到者的留任意願</th><th>未提到者</th><th>d</th></tr>
+    <tr><td>薪資福利</td><td>88</td><td>3.41</td><td>3.63</td><td class='num'>−.22</td></tr><tr><td>工作負荷與人力</td><td>79</td><td>3.82</td><td>3.55</td><td class='num'>.27</td></tr><tr><td>升遷與職涯發展</td><td>65</td><td>3.31</td><td>3.63</td><td class='num'>−.32</td></tr><tr><td>主管領導</td><td>64</td><td>3.32</td><td>3.63</td><td class='num'>−.31</td></tr><tr><td>考核與認可</td><td>44</td><td>3.45</td><td>3.60</td><td class='num'>−.15</td></tr>
+  </table></div>
+  <p>薪資福利是被提到最多的主題，但提到升遷（d ＝ −.32）或主管（−.31）的人，留任意願的落差比提到薪資福利的人（−.22）大；提到工作負荷的人，留任意願反而略高於其他人。這張表是相關，不是因果，也沒有控制其他變項；問卷沒有薪資構面，無法直接放進 Topic 08 的迴歸。改善的優先順序，同時參考主題次數、驅動因子分析與可行性。次數最多的抱怨，不一定是留任的驅動因子。</p>
+  <h2 id="s9-5">9.5 報告寫法</h2>
+  <ul>
+    <li>結論先寫：前幾個主題與則數（以討論後定案計算），每個主題附一兩則去識別化的原文。</li>
+    <li>方法：樣本如何抽出、編碼簿（附錄）、編碼者人數、三個 κ 與一致率、編碼簿修訂次數。</li>
+    <li>LLM：使用的工具與日期、提示詞（附錄）、人與 LLM 的 κ、LLM 結果是否用於其餘答案。</li>
+    <li>疑似 AI 代答：規則、門檻、標記則數、含與不含兩個版本的結果。</li>
+    <li>文字雲若出現在報告中，註明「探索用」，不作為主題排序的依據。</li>
+  </ul>
+  <h2 id="s9-6">9.6 方法選擇</h2>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:36%">分析的問題</th><th>方法</th><th style="width:20%">主題</th></tr>
+    <tr><td style="text-align:left">比較群組平均（兩組、三組以上）</td><td style="text-align:left">t 檢定、ANOVA</td><td>Topic 07</td></tr>
+    <tr><td style="text-align:left">多個構面預測留任意願</td><td style="text-align:left">多元迴歸、驅動因子</td><td>Topic 08</td></tr>
+    <tr><td style="text-align:left">開放題：員工常用哪些詞</td><td style="text-align:left">詞頻與文字雲（探索）</td><td>本主題</td></tr>
+    <tr><td style="text-align:left">開放題：各主題被提到幾次</td><td style="text-align:left">編碼簿＋兩人獨立編碼＋κ</td><td>本主題</td></tr>
+    <tr><td style="text-align:left">開放題：大量答案的主題</td><td style="text-align:left">LLM 依編碼簿編碼，與人工比對 κ</td><td>本主題</td></tr>
+    <tr><td style="text-align:left">構面是否成立</td><td style="text-align:left">信度 α、EFA</td><td>Topic 05</td></tr>
+  </table></div>
+  <h2 id="s9-7">9.7 個人分析作業</h2>
+  <p>個人分析作業（25%，2026/11/26 23:59 截止）的資料、報告架構、繳交項目與評分方式見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-32">分析紀錄</a>：記錄分析中每一個由人決定的事項、理由與確認者。</p>
+  <div class="key"><span class="lb">本單元要點</span>用檢核表互查，把每個由人做的決定寫進分析紀錄。報告寫出樣本、編碼簿、三個 κ、LLM 的使用方式與疑似 AI 代答的處理。主題次數與留任意願是兩個問題，優先順序同時參考兩者。</div>
+  <div class="quiz">
+    <div class="qhead">自我檢測 7</div>
+    <div class="qbody">
+      <p>OE1 中薪資福利是被提到最多的主題。主管據此決定把明年的改善預算全部用在調薪。依本主題與 Topic 08，下列何者最恰當？</p>
+      <label><input type="radio" name="q7" value="a"> 同意，提到最多就是影響最大</label><label><input type="radio" name="q7" value="b"> 次數回答「員工最常說什麼」；與留任意願的關係需另外檢驗：本資料提到升遷（d ＝ −.32）與主管（−.31）的人，留任落差大於提到薪資福利的人（−.22）</label><label><input type="radio" name="q7" value="c"> 開放題不能用來做決策</label><label><input type="radio" name="q7" value="d"> 改看文字雲，最大的詞是主管，所以改善主管</label>
+      <div class="tier">第二層：選出支持答案的理由</div>
+      <label><input type="radio" name="q7r" value="a"> 主題次數與驅動因子回答不同的問題；優先順序要同時參考次數、驅動因子分析與可行性</label><label><input type="radio" name="q7r" value="b"> 次數多的主題一定是驅動因子</label><label><input type="radio" name="q7r" value="c"> d 為負數代表計算錯誤</label>
+      <div class="tier">作答信心</div>
+      <div class="conf"><label><input type="radio" name="q7c" value="低"> 低</label><label><input type="radio" name="q7c" value="中"> 中</label><label><input type="radio" name="q7c" value="高"> 高</label></div>
+      <button onclick="checkQuiz2(this,'q7','b','a','正確。次數與影響是兩個問題。','相關說明見 &lt;a href=&quot;#s9-4&quot;&gt;9.4&lt;/a&gt;：次數與留任意願的關係。','提示：「最常抱怨」與「最影響留任」是同一個問題嗎？')">檢查答案</button>
+      <div class="fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== U10 文獻 ==================== -->
+<section class="unit" id="u10">
+  <h1>單元十：參考文獻與名詞對照</h1>
+  <h2>參考文獻</h2>
+  <div class="refline">Braun, V., &amp; Clarke, V. (2006). Using thematic analysis in psychology. <i>Qualitative Research in Psychology, 3</i>(2), 77–101. <a href="https://doi.org/10.1191/1478088706qp063oa" target="_blank" rel="noopener">https://doi.org/10.1191/1478088706qp063oa</a></div><div class="refline">Cohen, J. (1960). A coefficient of agreement for nominal scales. <i>Educational and Psychological Measurement, 20</i>(1), 37–46. <a href="https://doi.org/10.1177/001316446002000104" target="_blank" rel="noopener">https://doi.org/10.1177/001316446002000104</a></div><div class="refline">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. <i>Proceedings of the National Academy of Sciences, 120</i>(30), Article e2305016120. <a href="https://doi.org/10.1073/pnas.2305016120" target="_blank" rel="noopener">https://doi.org/10.1073/pnas.2305016120</a></div><div class="refline">Krippendorff, K. (2018). <i>Content analysis: An introduction to its methodology</i> (4th ed.). SAGE.</div><div class="refline">Landis, J. R., &amp; Koch, G. G. (1977). The measurement of observer agreement for categorical data. <i>Biometrics, 33</i>(1), 159–174. <a href="https://doi.org/10.2307/2529310" target="_blank" rel="noopener">https://doi.org/10.2307/2529310</a></div><div class="refline">O’Connor, C., &amp; Joffe, H. (2020). Intercoder reliability in qualitative research: Debates and practical guidelines. <i>International Journal of Qualitative Methods, 19</i>, 1–13. <a href="https://doi.org/10.1177/1609406919899220" target="_blank" rel="noopener">https://doi.org/10.1177/1609406919899220</a></div><div class="refline">Speer, A. B., Chawota, T. A., Rudolph, C., &amp; Qaqish, A. (2026). The impact of impression management on writing tendencies: Investigating faking susceptibility of open-ended personality assessments. <i>Journal of Applied Psychology</i>. Advance online publication. <a href="https://doi.org/10.1037/apl0001397" target="_blank" rel="noopener">https://doi.org/10.1037/apl0001397</a></div>
+  <div class="note"><span class="lb">數字來源</span>本網站的數字全部計算自課程的員工調查模擬資料（教學模擬資料，非真實組織調查結果）。詞頻使用 jieba 0.42.1 預設詞典；κ 的通過標準 .61 沿用 Topic 03。</div>
+  <h2>專有名詞對照表</h2>
+  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>開放題</td><td>open-ended question</td><td style='text-align:left'>讓填答者用自己的文字回答的題目；本資料 OE1 問最希望公司優先改善的事項</td></tr><tr id='g-2'><td>斷詞</td><td>word segmentation</td><td style='text-align:left'>把中文句子切成一個個詞的步驟；中文詞與詞之間沒有空格，需要斷詞工具</td></tr><tr id='g-3'><td>jieba</td><td>jieba</td><td style='text-align:left'>Python 常用的中文斷詞套件；預設詞典以簡體中文為主，繁體中文的職稱與工廠用語容易斷錯</td></tr><tr id='g-4'><td>停用詞</td><td>stop words</td><td style='text-align:left'>計算詞頻前刪掉的詞，例如「希望」「公司」，這些詞幾乎每則都有，不帶內容</td></tr><tr id='g-5'><td>詞頻</td><td>word frequency</td><td style='text-align:left'>一個詞出現的次數；本主題以「提到該詞的答案則數」計算，一則答案重複出現只算一次</td></tr><tr id='g-6'><td>文字雲</td><td>word cloud</td><td style='text-align:left'>依詞頻決定字級大小的圖；適合初步瀏覽，不適合決定主題排序</td></tr><tr id='g-7'><td>同義詞</td><td>synonym</td><td style='text-align:left'>意思相同或相近的不同詞，例如薪水、薪資、待遇</td></tr><tr id='g-8'><td>主題</td><td>theme</td><td style='text-align:left'>一群答案共同談論的事項，例如薪資福利、主管領導</td></tr><tr id='g-9'><td>編碼</td><td>coding</td><td style='text-align:left'>逐則閱讀答案，依編碼簿給每則一個主題代碼</td></tr><tr id='g-10'><td>編碼簿</td><td>codebook</td><td style='text-align:left'>列出每個主題的代碼、定義、納入、排除與例句的文件</td></tr><tr id='g-11'><td>納入</td><td>inclusion criteria</td><td style='text-align:left'>屬於某主題的具體內容</td></tr><tr id='g-12'><td>排除</td><td>exclusion criteria</td><td style='text-align:left'>容易混淆、但應歸到其他主題的內容，並寫出改歸的代碼</td></tr><tr id='g-13'><td>主要主題</td><td>primary theme</td><td style='text-align:left'>每則答案的唯一代碼；本課程規則為答案中最先提到的改善事項</td></tr><tr id='g-14'><td>次要主題</td><td>secondary theme</td><td style='text-align:left'>同一則答案提到的第二個事項，寫在備註</td></tr><tr id='g-15'><td>編碼者</td><td>coder</td><td style='text-align:left'>負責編碼的人；LLM 也可視為一位編碼者</td></tr><tr id='g-16'><td>獨立編碼</td><td>independent coding</td><td style='text-align:left'>兩位編碼者完成編碼前不討論、不看對方結果</td></tr><tr id='g-17'><td>一致率</td><td>percent agreement</td><td style='text-align:left'>兩位編碼者給出相同代碼的比例</td></tr><tr id='g-18'><td>碰巧一致率</td><td>chance agreement</td><td style='text-align:left'>兩人依各自的代碼比例隨意分類時，也會相同的機率</td></tr><tr id='g-19'><td>Cohen’s κ</td><td>Cohen’s kappa</td><td style='text-align:left'>（一致率 − 碰巧一致率）÷（1 − 碰巧一致率）；本課程以 .61 以上為通過</td></tr><tr id='g-20'><td>交叉表</td><td>contingency table</td><td style='text-align:left'>列為一位編碼者、欄為另一位編碼者的次數表；對角線是兩人相同的則數</td></tr><tr id='g-21'><td>信度</td><td>reliability</td><td style='text-align:left'>編碼的一致程度：不同編碼者、或同一編碼者重跑，是否給出相同代碼</td></tr><tr id='g-22'><td>效度</td><td>validity</td><td style='text-align:left'>代碼是否反映答案的原意，主題是否涵蓋重要的內容</td></tr><tr id='g-23'><td>關鍵字規則</td><td>keyword rule</td><td style='text-align:left'>答案出現特定詞就歸到某主題的自動分類方法；不判斷語意與否定</td></tr><tr id='g-24'><td>LLM</td><td>large language model</td><td style='text-align:left'>大型語言模型，例如 ChatGPT、Claude 背後的模型</td></tr><tr id='g-25'><td>LLM 編碼</td><td>LLM-assisted coding</td><td style='text-align:left'>把編碼簿交給 LLM，由它逐則給代碼；使用前需與人工編碼比對</td></tr><tr id='g-26'><td>信心標記</td><td>confidence rating</td><td style='text-align:left'>LLM 對每則代碼標示高、中、低把握；低信心的答案交由人裁決</td></tr><tr id='g-27'><td>定案</td><td>adjudication</td><td style='text-align:left'>兩位編碼者討論不一致的答案後決定的代碼</td></tr><tr id='g-28'><td>疑似 AI 代答</td><td>suspected AI-generated response</td><td style='text-align:left'>由 AI 工具代寫的開放題答案；規則只能標記疑似，無法證明</td></tr><tr id='g-29'><td>模板詞</td><td>template phrases</td><td style='text-align:left'>在 AI 代寫文字中反覆出現的連接詞組，例如「不僅…進而」</td></tr><tr id='g-30'><td>敏感度分析</td><td>sensitivity analysis</td><td style='text-align:left'>改變一個分析決定（例如含或不含疑似 AI 代答），看結論是否改變</td></tr><tr id='g-31'><td>去識別化</td><td>de-identification</td><td style='text-align:left'>分析或分享前，刪除或遮蔽可辨識個人的資訊，例如人名、單位、具體事件</td></tr><tr id='g-32'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記錄分析中每一個由人決定的事項、理由與確認者</td></tr></table></div>
+  <h2>相關主題</h2>
+  <ul>
+    <li><a href="../Topic03_測量基礎與題項設計/Topic03_測量基礎_課程網站.html" target="_blank" rel="noopener">Topic 03 測量基礎</a>：關鍵事例分類與 Cohen’s κ</li>
+    <li><a href="../Topic04_抽樣與資料品質/Topic04_抽樣匿名與信任_課程網站.html" target="_blank" rel="noopener">Topic 04 抽樣、匿名與信任</a>：匿名門檻；以人眼辨識 AI 代答</li>
+    <li><a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">Topic 07 AI 資料分析：清理與比較</a>：AI Agent 的使用方式、CLAUDE.md 與 Skill、平均＋3 個標準差規則</li>
+    <li><a href="../Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html" target="_blank" rel="noopener">Topic 08 驅動因子與迴歸</a>：影響留任意願的因素</li>
+    <li><a href="../../Slides/Topic09_課堂投影片.html" target="_blank" rel="noopener">Topic 09 課堂投影片</a>、<a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>、<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>、<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a></li>
+  </ul>
+</section>
+
+<footer class="site">本教學網站為單一 HTML 檔案。Topic 09：開放題分析方法比較：文字雲與 LLM Agent 主題編碼。所有數字計算自課程的教學模擬資料，非真實組織調查結果；文獻附 DOI（專書除外）。供教學使用。</footer>
+</main>
+</div>
+<script>
+window.QUIZ_TOTAL = 7;
+function toggleAns(btn){
+  var box=btn.nextElementSibling, open=!box.classList.contains('show');
+  box.classList.toggle('show', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if(!btn.dataset.l) btn.dataset.l = btn.textContent;
+  btn.textContent = open ? (btn.dataset.l === '看答案' ? '收合答案' : '收合') : btn.dataset.l;
+}
+function chkCount(){
+  var all=document.querySelectorAll('.chk input'), n=0;
+  all.forEach(function(c){ c.closest('label').classList.toggle('done', c.checked); if(c.checked) n++; });
+  document.getElementById('chkNote').textContent='已完成 '+n+'／'+all.length+' 項。'+(n===all.length?'全部項目都已查核。':'');
+}
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.querySelectorAll('#nav a').forEach(function(x){x.classList.remove('active');});
+    a.classList.add('active');
+    document.querySelectorAll('.unit').forEach(function(u){u.classList.remove('active');});
+    document.getElementById(a.dataset.u).classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+  });
+});
+function goUnit(u){ var a=document.querySelector('#nav a[data-u="'+u+'"]'); if(a) a.click(); }
+function goSec(id){
+  var el=document.getElementById(id); if(!el) return false;
+  var u=el.closest('.unit'); if(u && !u.classList.contains('active')) goUnit(u.id);
+  el.scrollIntoView({block:'start', behavior:'instant'});
+  if(history.replaceState) history.replaceState(null,'','#'+id);
+  return true;
+}
+document.addEventListener('click', function(e){
+  var a=e.target.closest && e.target.closest('a[href^="#s"],a[href^="#g-"]'); if(!a) return;
+  if(goSec(a.getAttribute('href').slice(1))) e.preventDefault();
+});
+if (location.hash) {
+  var hashTarget = document.querySelector('#nav a[data-u="' + location.hash.slice(1) + '"]');
+  if (hashTarget) hashTarget.click(); else goSec(location.hash.slice(1));
+}
+window.addEventListener('hashchange', function(){
+  var h=location.hash.slice(1), t=document.querySelector('#nav a[data-u="'+h+'"]');
+  if (t) t.click(); else goSec(h);
+});
+var quizLog={}, quizMeta={};
+function initQuizzes(){
+  document.querySelectorAll('.quiz .qbody').forEach(function(box){
+    var reasonTier=null, confTier=null;
+    box.querySelectorAll('.tier').forEach(function(t){
+      if(t.textContent.indexOf('第二層')===0) reasonTier=t;
+      else if(t.textContent.indexOf('作答信心')===0) confTier=t;
+    });
+    if(!reasonTier||!confTier) return;
+    var reasonEls=[], el=reasonTier.nextElementSibling;
+    while(el&&el!==confTier){ reasonEls.push(el); el=el.nextElementSibling; }
+    confTier.textContent='作答信心（高＝有把握到願意為答案辯護；中＝傾向正確但不確定；低＝接近猜測）';
+    var wrap=document.createElement('div'); wrap.className='tier2wrap'; wrap.style.display='none';
+    wrap.appendChild(reasonTier); reasonEls.forEach(function(e){wrap.appendChild(e);});
+    var btn2=document.createElement('button'); btn2.type='button'; btn2.textContent='確認理由';
+    var fb2=document.createElement('div'); fb2.className='fb';
+    wrap.appendChild(btn2); wrap.appendChild(fb2); box.appendChild(wrap);
+    btn2.addEventListener('click', function(){ checkReason(box, fb2); });
+  });
+}
+function checkQuiz2(btn,name,corrA,corrR,okMsg,reasonMsg,noMsg){
+  var box=btn.closest('.qbody'); box.dataset.qname=name;
+  quizMeta[name]={corrA:corrA,corrR:corrR,okMsg:okMsg,reasonMsg:reasonMsg};
+  var fb=box.querySelector('.fb');
+  var ans=box.querySelector('input[name="'+name+'"]:checked');
+  var conf=box.querySelector('input[name="'+name+'c"]:checked');
+  box.querySelectorAll('label').forEach(function(l){ if(!l.closest('.tier2wrap')&&!l.closest('.conf')) l.classList.remove('correct','wrong'); });
+  if(!ans||!conf){ fb.className='fb no'; fb.textContent='請先選擇答案並標示信心。'; return; }
+  var right=(ans.value===corrA);
+  if(!(name in quizLog)){ quizLog[name]={conf:conf.value,ansFirst:right,level:right?undefined:0}; renderCalib(); }
+  var first=quizLog[name], note='';
+  if(first.level===0&&first.conf==='高'){ note=' 首次作答為高信心但答錯，已記入校準面板。'; }
+  else if(first.ansFirst&&first.conf==='低'){ note=' 首次作答信心低但答對，理解可能比自己以為的更穩固。'; }
+  var link='（校準面板只記第一次作答，<a href="#u0" onclick="goUnit(\'u0\');return false;">前往檢視</a>）';
+  if(right){
+    ans.closest('label').classList.add('correct'); fb.className='fb ok';
+    fb.innerHTML='答案正確。請在下方確認理由。'+note+link;
+    var w=box.querySelector('.tier2wrap'); if(w) w.style.display='block';
+  } else {
+    ans.closest('label').classList.add('wrong'); fb.className='fb no';
+    fb.innerHTML=noMsg+' 可重新作答。'+note+link;
+  }
+}
+function checkReason(box,fb2){
+  var name=box.dataset.qname, meta=quizMeta[name]; if(!meta) return;
+  var rea=box.querySelector('input[name="'+name+'r"]:checked');
+  box.querySelectorAll('.tier2wrap label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+  if(!rea){ fb2.className='fb no'; fb2.textContent='請先選擇一個理由。'; return; }
+  var right=(rea.value===meta.corrR), log=quizLog[name], note='';
+  if(log&&log.level===undefined){
+    log.level=right?2:1;
+    if(!right&&log.conf==='高'){ note=' 首次理由確認未通過且信心為高，該單元說明理由的段落可再複習。'; }
+    renderCalib();
+  }
+  if(right){ rea.closest('label').classList.add('correct'); fb2.className='fb ok'; fb2.innerHTML=meta.okMsg+note; }
+  else { rea.closest('label').classList.add('wrong'); fb2.className='fb mid'; fb2.innerHTML='這個理由不成立。'+meta.reasonMsg+' 可重新選擇（校準面板只記第一次）。'+note; }
+}
+function renderCalib(){
+  var counts={'高':[0,0,0],'中':[0,0,0],'低':[0,0,0]}, n=0, over=0, pending=0;
+  for(var k in quizLog){ var q=quizLog[k]; if(q.level===undefined){pending++;continue;} counts[q.conf][q.level]++; n++; if(q.conf==='高'&&q.level<2) over++; }
+  var map={'高':'h','中':'m','低':'l'};
+  for(var c in counts){ for(var i=0;i<3;i++){ var el=document.getElementById('cal-'+map[c]+'-'+i); if(el) el.textContent=counts[c][i]; } }
+  var noteEl=document.getElementById('calNote'); if(!noteEl) return;
+  if(n===0&&pending===0){ noteEl.textContent='尚未作答任何檢測題。'; return; }
+  var msg='已完整記錄 '+n+' 題（全站共 '+window.QUIZ_TOTAL+' 題）';
+  if(pending>0){ msg+='，另有 '+pending+' 題答對但尚未確認理由'; }
+  msg+='。';
+  if(over>0){ msg+='有 '+over+' 題屬高信心但未完全答對，對應單元可再複習。'; }
+  else if(n>0){ msg+='目前沒有高信心答錯的題目。'; }
+  noteEl.textContent=msg;
+}
+function copyCode(btn){
+  var txt=btn.parentElement.querySelector('pre').textContent;
+  function done(){ btn.textContent='已複製'; setTimeout(function(){btn.textContent='複製';},1600); }
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ btn.textContent='請手動選取'; }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(txt).then(done, fallback); } else { fallback(); }
+}
+initQuizzes();
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>信度試算器｜員工意向調查</title>
+<style>
+:root{--navy:#12335c; --blue:#2e5e8f; --bg:#f5f7fa; --card:#ffffff; --line:#e3e9f2; --muted:#6b7a90; --ink:#243447; --good:#337052; --warn:#8a6420; --badr:#c0564f;}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.75; font-size:clamp(15px,1.05vw,17px);}
+.topbar{background:var(--navy); color:#fff; padding:14px clamp(16px,4vw,48px); display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline;}
+.topbar .t{font-size:clamp(18px,1.6vw,22px); font-weight:800;}
+.topbar .s{font-size:13px; opacity:.85;}
+main{max-width:980px; margin:0 auto; padding:clamp(16px,3vw,36px);}
+h2{color:var(--navy); font-size:clamp(17px,1.3vw,20px); margin:26px 0 10px;}
+p{margin:0 0 12px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:clamp(14px,2vw,22px); margin-bottom:18px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+label.fld{display:block; font-size:14px; color:var(--muted); font-weight:700;}
+input[type=number],select{width:100%; padding:9px 10px; margin-top:4px; border:1px solid var(--line); border-radius:8px; font-size:16px; font-family:inherit; background:#fff; color:var(--ink);}
+input[type=range]{width:100%; margin-top:10px;}
+.res{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin-top:16px;}
+.rbox{background:#eef2f8; border-radius:10px; padding:14px; text-align:center;}
+.rbox .n{font-size:clamp(24px,3vw,32px); font-weight:800; color:var(--navy);}
+.rbox .l{font-size:13px; color:var(--muted);}
+.bar{height:14px; border-radius:7px; background:#e3e9f2; overflow:hidden; margin:6px 0 2px;}
+.bar>div{height:100%; background:var(--blue); transition:width .25s;}
+.note{background:#f2f6ee; border-left:4px solid var(--good); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.warnb{background:#faf4e8; border-left:4px solid var(--warn); border-radius:8px; padding:12px 14px; margin:12px 0; font-size:15px;}
+.lb{font-weight:800; color:var(--navy); margin-right:6px;}
+.formula{background:#eef2f8; border-radius:10px; padding:12px 16px; text-align:center; font-size:15px; margin:12px 0; color:var(--navy); font-weight:700;}
+table{border-collapse:collapse; margin:10px 0; font-size:14px;}
+.tblwrap{width:100%; overflow-x:auto;}
+th,td{border:1px solid var(--line); padding:7px 10px; text-align:center; white-space:nowrap;}
+th{background:#eef2f8; color:var(--navy);}
+td input{width:70px; padding:6px; text-align:center; border:1px solid var(--line); border-radius:6px; font-size:15px;}
+.ref{font-size:13px; color:var(--muted); margin-top:6px;}
+a{color:var(--blue);}
+footer{color:var(--muted); font-size:12px; text-align:center; padding:18px;}
+.interp{font-size:14px; color:var(--muted);}
+.big{font-size:clamp(30px,4vw,42px); font-weight:800; color:var(--navy); text-align:center; margin:8px 0;}
+@media (max-width:600px){.grid{grid-template-columns:1fr;}}
+@media print{.topbar{background:#fff; color:var(--navy); border-bottom:2px solid var(--navy);} body{background:#fff;} .card{break-inside:avoid;} input[type=range]{display:none;}}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="t">信度試算器</span><span class="s">員工意向調查課程．配合 Topic 3 使用．教學工具</span></div>
+<main>
+
+<div class="card">
+  <h2 style="margin-top:0;">正算：題數與題間相關 → α</h2>
+  <div class="grid">
+    <label class="fld">題數 k：<strong id="kVal">6</strong> 題
+      <input type="range" id="inK" min="2" max="30" value="6" oninput="calcA()">
+    </label>
+    <label class="fld">平均題間相關 r̄：<strong id="rVal">.30</strong>
+      <input type="range" id="inR" min="5" max="80" value="30" oninput="calcA()">
+    </label>
+  </div>
+  <div class="big" id="outA">α = –</div>
+  <div class="bar"><div id="aBar" style="width:0%"></div></div>
+  <p class="interp" id="aNote"></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">反算：目標 α 與題間相關 → 需要幾題</h2>
+  <div class="grid">
+    <label class="fld">目標 α：<strong id="taVal">.80</strong>
+      <input type="range" id="inTA" min="60" max="95" value="80" oninput="calcK()">
+    </label>
+    <label class="fld">預期平均題間相關 r̄：<strong id="trVal">.30</strong>
+      <input type="range" id="inTR" min="5" max="80" value="30" oninput="calcK()">
+    </label>
+  </div>
+  <div class="big" id="outK">約 – 題</div>
+  <p class="interp" id="kNote"></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0;">計算依據與正確判讀</h2>
+  <div class="formula">α　＝　k·r̄　÷　［1　＋　(k−1)·r̄］</div>
+  <p>k 為題數、r̄ 為平均題間相關（Cronbach, 1951 的標準化形式）。兩個滑桿正好對應 α 的兩個推手：題目彼此越相關、題數越多，α 越高。</p>
+  <div class="warnb"><span class="lb">三個判讀提醒（Topic 3 的課程重點）</span>其一，α 會被題數灌高：題間相關僅 .15 的十五題量表也能把 α 推過 .7——高 α 不等於題目品質好（Cortina, 1993）。其二，α 高不代表單一構面：兩個構面混在一起也可能算出高 α，向度問題要靠因素分析回答。其三，α 假設各題與構念的關聯等強（tau 等值），實務常不成立；嚴謹報告可改用 ω 等替代指標（McNeish, 2018）。</div>
+  <div class="note"><span class="lb">實務慣例</span>α 的常見門檻：.70 可接受、.80 良好、.90 以上注意題目是否過度重複。門檻僅供參考，判讀應結合題數、題間相關與構面單一性。</div>
+  <p class="ref">Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. Psychometrika, 16(3), 297&#8211;334. <a href="https://doi.org/10.1007/BF02310555" target="_blank" rel="noopener">https://doi.org/10.1007/BF02310555</a><br>
+  Cortina, J. M. (1993). What is coefficient alpha? An examination of theory and applications. Journal of Applied Psychology, 78(1), 98&#8211;104. <a href="https://doi.org/10.1037/0021-9010.78.1.98" target="_blank" rel="noopener">https://doi.org/10.1037/0021-9010.78.1.98</a><br>
+  McNeish, D. (2018). Thanks coefficient alpha, we&#8217;ll take it from here. Psychological Methods, 23(3), 412&#8211;433. <a href="https://doi.org/10.1037/met0000144" target="_blank" rel="noopener">https://doi.org/10.1037/met0000144</a></p>
+</div>
+
+</main>
+<footer>本工具為單一 HTML 檔案，離線可用。員工意向調查課程教學工具，配合 Topic 3 測量基礎使用。α 為標準化公式之教學試算，實際分析請以統計軟體對資料計算。</footer>
+<script>
+function alphaOf(k,r){return k*r/(1+(k-1)*r);}
+function calcA(){
+  var k=+document.getElementById('inK').value, r=+document.getElementById('inR').value/100;
+  document.getElementById('kVal').textContent=k;
+  document.getElementById('rVal').textContent=r.toFixed(2).replace(/^0/,'');
+  var a=alphaOf(k,r);
+  document.getElementById('outA').textContent='α = '+a.toFixed(2).replace(/^0/,'');
+  document.getElementById('aBar').style.width=(a*100).toFixed(0)+'%';
+  var note = a>=0.9?'α 很高——先確認不是題目過度重複或題數灌高的結果。'
+    : a>=0.8?'良好水準。留意：高 α 不保證單一構面。'
+    : a>=0.7?'可接受水準（實務慣例門檻）。'
+    : '低於 .70 慣例門檻——檢查題間相關（題目是否測同一件事）或以逐題診斷找出壞題（Topic 9 單元三）。';
+  document.getElementById('aNote').textContent=note;
+}
+function calcK(){
+  var a=+document.getElementById('inTA').value/100, r=+document.getElementById('inTR').value/100;
+  document.getElementById('taVal').textContent=a.toFixed(2).replace(/^0/,'');
+  document.getElementById('trVal').textContent=r.toFixed(2).replace(/^0/,'');
+  var k=a*(1-r)/(r*(1-a));
+  var kc=Math.max(2,Math.ceil(k-1e-9));
+  document.getElementById('outK').textContent='約 '+kc+' 題';
+  document.getElementById('kNote').textContent='公式反解 k = α(1−r̄) ÷ [r̄(1−α)] = '+k.toFixed(1)+'，無條件進位。題間相關越低，達標所需題數越多——用題數換信度是有代價的（作答負擔與草率風險，Topic 4、6）。';
+}
+calcA(); calcK();
+</script>
+</body>
+</html>

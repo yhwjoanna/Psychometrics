@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>員工意向調查｜Topic 09 課堂投影片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF8F2;--cream-2:#F4EEE1;--paper:#FFFEFB;--ink:#1C1815;--ink-2:#44403A;--ink-3:#7A736A;
+  --line:#E6DECE;--line-2:#D9CFB9;--accent:#7A2033;--accent-dark:#5B1424;--accent-tint:#F3E3E4;
+  --a1:#EAD3D6;--a2:#C98F98;--a3:#A25462;--a4:#7A2033;--ok:#4B6B4F;--warn:#8A5A1E;
+  --serif:'Newsreader','Noto Serif TC','Songti TC',Georgia,serif;
+  --sans:'Plus Jakarta Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei UI',sans-serif;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0F0D0B;font-family:var(--sans);color:var(--ink-2);-webkit-font-smoothing:antialiased}
+button{font:inherit}
+
+/* ---------- 外殼：固定畫布縮放 ---------- */
+#stage{position:fixed;inset:0;overflow:hidden}
+#deck{width:1920px;height:1080px;position:absolute;left:0;top:0;transform-origin:0 0;
+  transform:translate(var(--tx,0px),var(--ty,0px)) scale(var(--s,1))}
+.slide{position:absolute;inset:0;background:var(--cream);padding:110px 140px 130px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
+.slide.dark{background:var(--ink);color:#D9D2C6}
+.slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--cream)}
+
+/* 控制列 */
+#bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);z-index:20}
+#bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .32s var(--ease)}
+#nav{position:fixed;right:18px;bottom:16px;display:flex;gap:8px;z-index:20;transition:opacity .32s var(--ease)}
+#nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(28,24,21,.72);
+  color:#EDE6D8;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:transform .1s ease-out,background .2s var(--ease);backdrop-filter:blur(10px)}
+#nav button:active{transform:scale(.94)}
+#nav button:hover{background:rgba(122,32,51,.85)}
+#pg{position:fixed;left:20px;bottom:16px;font-size:13px;color:rgba(237,230,216,.6);z-index:20;font-variant-numeric:tabular-nums;transition:opacity .32s var(--ease)}
+body.fs.idle #nav,body.fs.idle #pg{opacity:0;pointer-events:none}
+body.fs.idle{cursor:none}
+
+/* ---------- 字級階梯（1920 畫布）---------- */
+h1,h2,h3{font-family:var(--serif);color:var(--ink);font-weight:600;letter-spacing:-.015em}
+h1{font-size:96px;line-height:1.08}
+h2{font-size:58px;line-height:1.3}
+h3{font-size:36px;line-height:1.35}
+p,li,td,th{font-size:30px;line-height:1.6}
+.kicker{position:absolute;top:100px;left:140px;display:flex;align-items:center;gap:18px;font-size:26px;font-weight:700;letter-spacing:.16em;color:var(--ink);margin:0}
+.slide{padding-top:170px}
+.dark .kicker{color:var(--a2)}
+.kicker .sup{letter-spacing:.04em;font-weight:600;font-size:18px;color:var(--cream);background:var(--accent);padding:5px 12px;border-radius:6px}
+.dark .kicker .sup{background:var(--a2);color:var(--ink)}
+.foot{position:absolute;left:140px;right:140px;bottom:52px;display:flex;justify-content:space-between;gap:40px;
+  font-size:20px;line-height:1.45;color:var(--ink-2);border-top:1px solid var(--line-2);padding-top:16px}
+.dark .foot{color:#8F877B;border-top-color:#33302B}
+.foot .lim{max-width:900px}
+.foot .mid{white-space:nowrap}
+.foot .multi{font-size:13px;line-height:1.35;max-width:1050px}
+.foot>span:last-child{min-width:40px;text-align:right}
+.foot-fig{left:60px;right:60px;bottom:14px;padding-top:10px;align-items:flex-end}
+.foot-fig .ref{font-size:12px!important;line-height:1.35;max-width:1300px}
+.lead{font-size:34px;line-height:1.65;color:var(--ink-2);max-width:32em}
+.dark .lead{color:#D9D2C6}
+.muted{color:var(--ink-2)}
+.acc{color:var(--accent)}
+.def{color:var(--accent);font-weight:600}
+.num{font-family:var(--serif);font-weight:600;letter-spacing:-.04em;color:var(--accent);line-height:.9}
+.dark .num{color:#E3B7BE}
+
+/* 分段揭露 */
+.frag{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.frag.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .slide,.frag{transition:opacity .2s ease}
+  .frag{transform:none}
+}
+
+/* ---------- 版型 ---------- */
+/* 封面 */
+.cover{display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.cover .sub{font-family:var(--serif);font-size:40px;color:var(--ink-2);margin-top:28px;line-height:1.45}
+.cover .meta{margin-top:56px;font-size:24px;color:var(--ink-2);display:flex;gap:40px}
+
+/* 情境頁 */
+.scene{display:flex;flex-direction:column;justify-content:center;height:100%}
+.scene .who{font-size:24px;letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:34px}
+.scene p{font-family:var(--serif);font-size:52px;line-height:1.5;max-width:26em;color:var(--ink)}
+.scene .q{margin-top:44px;font-family:var(--sans);font-size:34px;color:var(--accent);font-weight:600}
+
+/* 大字頁 */
+.big{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:60px;height:100%}
+.big .num{font-size:360px}
+.big .num small{font-size:140px;letter-spacing:0}
+.big h2{margin-bottom:26px}
+.big p{max-width:22em}
+
+/* 三數並列 */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.trio .cell{border-top:3px solid var(--line-2);padding-top:26px}
+.trio .cell.hi{border-top-color:var(--accent)}
+.trio .num{font-size:150px;margin-bottom:14px}
+.trio p{font-size:27px;line-height:1.5;color:var(--ink)}
+
+/* 表格 */
+table{border-collapse:collapse;width:100%}
+th{font-family:var(--serif);font-weight:600;font-size:32px;text-align:left;padding:18px 24px;color:var(--ink);border-bottom:2px solid var(--ink)}
+td{padding:20px 24px;border-top:1px solid var(--line-2);vertical-align:top;font-size:27px;line-height:1.5}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.hi-col{background:var(--paper)}
+th.hi-col{color:var(--accent)}
+table.tight td,table.tight th{padding:13px 20px;font-size:24px}
+table.tight th{font-size:26px;line-height:1.3}
+
+/* 圖文兩欄 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;height:100%}
+.split h2{margin-bottom:26px}
+
+/* 卡片列 */
+.cards{display:grid;gap:26px;margin-top:20px;align-items:start}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+.cards.c5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:30px 34px}
+.card .n{font-family:var(--serif);font-size:44px;color:var(--accent);font-weight:600;line-height:1;margin-bottom:16px}
+.card h3{font-size:30px;margin-bottom:12px}
+.card p{font-size:24px;line-height:1.55;color:var(--ink)}
+.card.dark{background:var(--ink);border-color:var(--ink);color:#D9D2C6}
+.card.dark h3{color:var(--cream)}
+.card.dark p{color:#C9C2B7}
+.card.dark .n{color:#E3B7BE}
+
+/* 橫向卡片列 */
+.rows{display:flex;flex-direction:column;gap:18px}
+.rows .row{display:grid;grid-template-columns:110px 300px 1fr;align-items:center;gap:30px;background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 40px}
+.rows .n{font-family:var(--serif);font-size:48px;color:var(--accent);font-weight:600;line-height:1}
+.rows .tt{font-family:var(--serif);font-size:34px;color:var(--ink);font-weight:600}
+.rows .dd{font-size:25px;line-height:1.55;color:var(--ink)}
+.rd{display:flex;gap:14px;align-items:flex-start}
+.rd+.rd{margin-top:10px}
+.rd-no{flex:0 0 34px;width:34px;height:34px;line-height:34px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700;margin-top:3px}
+.lnk{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:6px}
+.tp-grid{gap:24px;margin-top:30px}
+.card.tp{padding:28px 32px 24px}
+.tp-no{font-family:var(--serif);font-size:18px;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-bottom:6px}
+.card.tp h3{font-size:36px;margin-bottom:14px;line-height:1.2}
+.tp-en{display:block;font-family:var(--sans);font-size:20px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card.tp{display:flex;flex-direction:column}
+.card.tp p{font-size:23px;line-height:1.5}
+.tp-links{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line-2);font-size:19px;color:var(--ink-3)}
+.tp-links .lnk{font-size:19px}
+.cards.eq{align-items:stretch}
+.cards.eq>.card{height:100%}
+.pdf-link{position:absolute;top:100px;right:140px;font-size:20px;color:var(--ink-2);border:1px solid var(--line-2);padding:8px 18px;border-radius:999px;background:var(--paper);text-decoration:none;transition:transform .1s ease-out,border-color .2s var(--ease)}
+.pdf-link:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-link:active{transform:scale(.97)}
+
+/* 光譜 */
+.spec .bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.spec .st{padding:40px 34px;border-radius:8px;min-height:330px;color:var(--cream)}
+.spec .st b{display:block;font-family:var(--serif);font-size:42px;font-weight:600;margin-bottom:16px}
+.spec .st span{font-size:26px;line-height:1.55;display:block}
+.s1{background:var(--a1);color:var(--ink)!important}.s2{background:var(--a2);color:var(--ink)!important}.s3{background:var(--a3)}.s4{background:var(--a4)}
+.spec .pct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;font-size:24px;color:var(--ink-2)}
+.spec .pct b{color:var(--ink);font-family:var(--serif);font-size:34px;margin-right:8px;font-weight:600}
+
+/* 互動提示頁 */
+.ask{display:flex;flex-direction:column;justify-content:center;height:100%}
+.ask h2{max-width:28em;margin-bottom:56px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1500px;align-items:start}
+.opt{border:1px solid var(--line-2);background:var(--paper);border-radius:14px;padding:16px 30px;font-size:32px;line-height:1.4;display:flex;align-items:center;gap:22px}
+.opt b{font-weight:600;font-family:var(--serif);color:var(--accent);font-size:34px;font-weight:600}
+
+/* 算式 */
+.calc{display:flex;flex-direction:column;gap:22px;margin-top:30px}
+.calc .row{display:grid;grid-template-columns:1fr 360px;align-items:baseline;gap:40px;border-top:1px solid var(--line-2);padding-top:22px}
+.calc .row .lbl{font-size:30px;color:var(--ink-2)}
+.calc .row .val{font-family:var(--serif);font-size:56px;color:var(--ink);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.calc .row.total .val{color:var(--accent);font-size:72px}
+.calc .row.total .lbl{font-weight:700;color:var(--ink)}
+
+/* 提醒帶 */
+.warnline{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:20px 26px;border-left:4px solid var(--warn);background:var(--cream-2);border-radius:0 12px 12px 0;font-size:24px;line-height:1.55;color:var(--ink-2)}
+
+/* 補充頁角標 */
+.plus{position:absolute;top:110px;right:140px;font-size:19px;letter-spacing:.14em;color:var(--ink);border:1px solid var(--line-2);padding:8px 16px;border-radius:999px;background:var(--paper)}
+.dark .plus{color:#B9AFA2;border-color:#3A3631;background:transparent}
+
+/* 章節幕 */
+.act{display:flex;flex-direction:column;justify-content:center;height:100%}
+.act .no{font-family:var(--serif);font-size:200px;color:var(--a1);line-height:1;letter-spacing:-.04em}
+.act h1{margin-top:10px}
+.act .refs{margin-top:34px;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:1500px}
+.act .refs li{font-size:21px;line-height:1.5;color:var(--ink-2);padding-left:2em;text-indent:-2em}
+.act .lead-in{margin-top:30px;font-size:30px;color:var(--ink-2);max-width:28em;line-height:1.6}
+.slide.act-page,.slide.light-scene{background:var(--accent);color:var(--cream)}
+.slide.act-page h1,.slide.act-page h2,.slide.light-scene h1,.slide.light-scene h2,.slide.light-scene p,.slide.light-scene .scene p{color:var(--cream)}
+.slide.act-page .kicker,.slide.light-scene .kicker,.slide.act-page .foot,.slide.light-scene .foot,.slide.act-page .foot span,.slide.light-scene .foot span{color:var(--cream)}
+.slide.act-page .foot,.slide.light-scene .foot{border-top-color:rgba(251,248,242,.35)}
+.slide.act-page .act .no{color:rgba(251,248,242,.28)}
+.act-en{font-size:52px;color:rgba(251,248,242,.8);font-weight:500}
+.slide.act-page .act .refs li,.slide.act-page .act .lead-in{color:rgba(251,248,242,.85)}
+.slide.light-scene .scene .who{color:rgba(251,248,242,.75)}
+.slide.light-scene .scene .q{color:#F6D9DC}
+.slide.light-scene .cover .sub,.slide.light-scene .cover .meta{color:rgba(251,248,242,.85)}
+.slide.light-scene .pdf-link{color:var(--cream);border-color:rgba(251,248,242,.5);background:transparent}
+.slide.light-scene .pdf-link:hover{background:rgba(251,248,242,.12)}
+
+/* ---------- 手機：長頁文件 ---------- */
+@media (max-width:900px){
+  html,body{height:auto;overflow:auto;background:var(--cream)}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:auto;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;transform-origin:0 0;opacity:1;visibility:visible;margin:0 0 var(--mgap,12px);transition:none}
+  .frag{opacity:1;transform:none}
+  #nav,#bar,#pg{display:none}
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:var(--cream);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #stage{position:static;overflow:visible}
+  #deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;inset:auto;width:1920px;height:1080px;opacity:1!important;visibility:visible!important;transition:none;page-break-after:always;break-after:page}
+  .frag{opacity:1!important;transform:none!important}
+  #nav,#bar,#pg,.pdf-link{display:none!important}
+}
+
+/* Topic 03 補充樣式 */
+/* Topic 03 字級放大：1920 畫布的閱讀距離 */
+.card{padding:40px 44px}
+.card .n{font-size:54px;margin-bottom:18px}
+.card h3{font-size:36px;margin-bottom:14px}
+.card p{font-size:29px;line-height:1.6}
+.card .en{font-size:22px}
+.card .rel{font-size:26px;margin-top:18px;padding-top:16px}
+.card.defc h3{font-size:38px}
+.card.defc p{font-size:28px}
+.cards{gap:32px}
+table.tight td{font-size:29px;padding:20px 22px}
+table.tight th{font-size:31px;padding:16px 22px}
+td{font-size:30px}
+td .en,th .en{font-size:21px}
+.warnline{font-size:28px;padding:24px 30px;margin-top:36px}
+.calc{gap:30px}
+.calc .row .lbl{font-size:34px}
+.calc .row .val{font-size:64px}
+.calc .row.total .val{font-size:84px}
+.rows .dd{font-size:30px}
+.rows .tt{font-size:36px}
+.opt{font-size:36px;padding:26px 34px}
+.opt b{font-size:40px}
+.ask h2{margin-bottom:64px}
+h2{font-size:62px}
+.cards.eq>.card{min-height:300px}
+.card.defc{min-height:430px;display:flex;flex-direction:column}
+.card.defc p{font-size:31px;line-height:1.6}
+.card.defc h3{font-size:42px}
+.card.defc .rel{margin-top:auto;font-size:28px}
+.calc .row{padding-top:30px}
+.calc{gap:40px;margin-top:44px}
+
+.task{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:start;margin-top:44px}
+.task ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:28px}
+.task ol li{counter-increment:t;position:relative;padding-left:72px;font-size:34px;line-height:1.5;color:var(--ink)}
+.task ol li::before{content:counter(t);position:absolute;left:0;top:4px;width:48px;height:48px;line-height:48px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:25px;font-weight:700}
+.sheet{background:var(--paper);border:1px dashed var(--a2);border-radius:16px;padding:36px 42px}
+.sheet h3{font-size:36px;margin-bottom:16px;color:var(--accent)}
+.sheet .ln{border-bottom:1px solid var(--line-2);padding:18px 0;font-size:30px;color:var(--ink-2)}
+.timebox{position:absolute;top:96px;right:140px;font-size:22px;font-weight:700;color:var(--cream);background:var(--accent);padding:8px 20px;border-radius:999px;letter-spacing:.06em}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.card .en{display:block;font-family:var(--sans);font-size:19px;font-weight:500;color:var(--ink-3);margin-top:4px}
+.card .rel{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-2);font-size:21px;color:var(--accent);font-weight:600}
+.card.defc h3{font-size:30px;margin-bottom:10px;line-height:1.25}
+.card.defc p{font-size:22px}
+td .en,th .en{display:block;font-family:var(--sans);font-size:18px;font-weight:500;color:var(--ink-3)}
+.bad{color:var(--warn)}
+
+.xt2 tr.r1 td{background:var(--accent-tint)}
+.xt2 tr.r2 td{background:#F6EBDD}
+.xt td{min-width:150px;height:96px;font-size:34px;vertical-align:middle}
+.xt th{font-size:32px;text-align:center}
+.mk{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:700;font-size:28px}
+.mk1{background:var(--accent);color:#fff}
+.mk2{background:var(--warn);color:#fff}
+.big-x td{font-size:44px;height:120px}
+.big-x td.sm{color:var(--ink-3);font-size:34px}
+.kbar{display:flex;flex-direction:column;gap:34px;margin-top:30px}
+.kb-row{display:grid;grid-template-columns:330px 1fr 150px;align-items:center;gap:30px}
+.kb-lb{font-size:34px;font-weight:700;color:var(--ink);line-height:1.3}
+.kb-lb small{font-size:22px;font-weight:500;color:var(--ink-3)}
+.kb-track{position:relative;height:64px;background:var(--cream-2);border-radius:10px;overflow:hidden;display:flex}
+.kb-fill{height:100%;background:var(--ink-2)}
+.kb-fill.chance{background:#C9BFAF}
+.kb-fill.kap{background:var(--accent)}
+.kb-gap{position:absolute;top:0;height:100%;border:3px dashed var(--accent);border-radius:0 10px 10px 0;box-sizing:border-box}
+.kb-v{font-family:var(--serif);font-size:64px;font-weight:600;color:var(--ink);text-align:right}
+.kb-v.acc{color:var(--accent);font-size:80px}
+.kscale .card{min-height:380px}
+.kscale .n{font-size:48px}
+.kscale h3{font-size:44px}
+.kscale p{font-size:30px}
+.ks-pass{border-top:10px solid #2f6b4c}.ks-pass .n,.ks-pass h3{color:#2f6b4c}
+.ks-amber{border-top:10px solid #8a5a12}.ks-amber .n,.ks-amber h3{color:#8a5a12}
+.ks-fail{border-top:10px solid #a33a32}.ks-fail .n,.ks-fail h3{color:#a33a32}
+.ks-severe{background:#8f2a24!important;border-color:#8f2a24!important;border-top:10px solid #5e1915!important}.ks-severe .n,.ks-severe h3,.ks-severe p{color:#fff!important}
+
+/* 問卷模擬畫面 */
+.mockwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:start;margin-top:10px}
+.mock{background:#fff;border:1px solid var(--line-2);border-radius:16px;box-shadow:0 18px 40px rgba(28,24,21,.10);overflow:hidden}
+.mock-bar{height:44px;background:var(--cream-2);border-bottom:1px solid var(--line-2);display:flex;align-items:center;gap:10px;padding:0 18px}
+.mock-bar i{width:13px;height:13px;border-radius:50%;background:#D9CFB9;display:block}
+.mock-bar span{margin-left:16px;font-size:18px;color:var(--ink-3);background:#fff;border-radius:6px;padding:3px 14px}
+.mock-body{padding:30px 40px 34px}
+.mock-title{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--ink);border-top:8px solid var(--accent);margin:-30px -40px 22px;padding:24px 40px 0}
+.mock-body p{font-size:21px;line-height:1.55;color:var(--ink-2);margin-bottom:9px}
+.mock-q{border:1px solid var(--line);border-radius:10px;padding:10px 20px;margin-top:10px}
+.mock-q b{display:block;font-size:24px;color:var(--ink);margin-bottom:8px}
+.mock-q .hint{font-size:19px;color:var(--ink-3);margin-bottom:2px}
+.mock-in{height:36px;border-bottom:2px solid var(--line-2);font-size:19px;color:#B5AC9E;padding-top:10px}
+.mock-chk{font-size:22px;color:var(--ink);margin-top:10px}
+.mock-chk::before{content:"";display:inline-block;width:22px;height:22px;border:2px solid var(--ink-3);border-radius:4px;vertical-align:-4px;margin-right:12px}
+.notes{display:flex;flex-direction:column;gap:20px}
+.nt{border-left:5px solid var(--accent);background:var(--paper);border-radius:0 12px 12px 0;padding:18px 24px;font-size:26px;line-height:1.5;color:var(--ink)}
+.nt b{display:block;color:var(--accent);font-size:27px;margin-bottom:4px}
+.mock2 .mock-body{padding:18px 34px 20px}
+.mock2 .mock-q{padding:6px 18px;margin-top:7px}
+.mock2 .mock-q b{font-size:22px;margin-bottom:2px}
+.mock2 .mock-q .hint{font-size:17px}
+.mock2 .mock-in{height:26px;padding-top:2px;font-size:17px}
+.mock2 h2{margin-bottom:12px!important}
+.dec td{font-size:27px!important;line-height:1.5;vertical-align:middle}
+.dec td:first-child{font-weight:500;color:var(--ink)}
+.dec td.keep{color:var(--ok);font-weight:700}
+.dec td.drop{color:var(--warn);text-decoration:line-through;text-decoration-thickness:2px}
+.cbx td{font-size:25px!important;vertical-align:top}
+.card .cite{font-size:21px;color:var(--ink-3);margin:2px 0 4px;font-family:var(--sans)}
+.flow td{font-size:25px!important;vertical-align:top}
+.flow td:first-child{font-family:var(--serif);color:var(--accent);font-size:34px!important}
+.flow .rule{display:inline-block;margin-top:6px;font-size:19px;font-weight:700;color:#fff;background:var(--accent);padding:2px 10px;border-radius:6px}
+.xtabs{display:flex;gap:4px;margin:0 0 6px;border-bottom:2px solid var(--line-2)}
+.xtabs span{font-size:19px;padding:6px 16px;border:1px solid var(--line-2);border-bottom:0;border-radius:8px 8px 0 0;background:var(--cream-2);color:var(--ink-2)}
+.xtabs span.on{background:#fff;color:var(--accent);font-weight:700;border-color:var(--accent)}
+.xlt td{font-size:26px!important}
+.xsheet{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:16px 18px;font-size:22px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.xs-h,.xs-r{display:grid;grid-template-columns:70px 1fr 220px;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line)}
+.xs-h{font-weight:700;color:#fff;background:#1C2F52;border-radius:6px}
+.xs-r .dd{background:#FFF4C2;border:1px solid #D9CFB9;border-radius:4px;padding:0 8px}
+.xs-r .dd.open{outline:2px solid var(--accent)}
+.xs-menu{margin:4px 0 0 auto;width:240px;display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:6px;background:#fff}
+.xs-menu span{padding:6px 12px;border-bottom:1px solid var(--line)}
+.xs-menu span.u{color:var(--ink-3)}
+.xsheet.lab .xs-h,.xsheet.lab .xs-r{grid-template-columns:1fr 110px 160px}
+.xs-kv{display:grid;grid-template-columns:220px 1fr;padding:10px 8px;border-bottom:1px solid var(--line);align-items:center}
+.xs-kv b{font-size:26px}
+.xs-kv.pass{background:#EAF4EE;color:#2f6b4c}
+/* 稀疏頁放大 */
+.cards.eq>.card.defc{min-height:470px;padding:42px 44px}
+.card.defc h3{font-size:46px}
+.card.defc .en{font-size:24px;margin-top:8px}
+.card.defc p{font-size:33px;margin-top:10px}
+.card.defc .rel{font-size:30px}
+.xl .card{min-height:400px}
+.xl .card p{font-size:34px}
+.xl .card .n{font-size:64px}
+.xl h2{font-size:72px}
+.xl .lead{font-size:38px}
+.xl .warnline{font-size:32px}
+.xl .task ol li{font-size:37px}
+.xl .sheet p{font-size:32px!important}
+.xl .opt{font-size:40px;padding:36px 40px}
+.xl .opts{gap:36px;max-width:none}
+.xl .calc .row .lbl{font-size:40px}
+.xl .calc .row .val{font-size:84px}
+.xl .calc .row.total .val{font-size:100px}
+.xl .calc .row{padding-top:40px}
+
+.big-t td{font-size:34px;padding:34px 26px}
+table.cmp td{font-size:27px;padding:12px 20px}
+table.cmp th{font-size:28px;padding:12px 20px}
+.card.tp p{font-size:22px}
+.card.tp h3{font-size:36px}
+.big-t th{font-size:34px}
+.xt td,.xt th{text-align:center}
+.xt td:first-child,.xt th:first-child{text-align:left}
+.xt td.dg{background:var(--accent-tint);color:var(--accent);font-weight:700}
+.good{color:var(--ok)}
+
+.t4 td{font-size:27px!important;vertical-align:top}
+.t4 td:first-child{white-space:normal}
+.ico{vertical-align:middle!important;padding:6px 10px!important}
+.nt td{vertical-align:middle;font-size:27px!important;padding:13px 18px!important}
+.nt th{font-size:26px!important}
+.nt td.req{font-weight:700;color:var(--accent)}
+.nt tr.floor td{background:#FBF2E1}
+.t4s td{font-size:24px!important;padding:14px 16px!important}
+.t4s th{font-size:26px!important}
+.wpage{background:#fff;border:1px solid #D9CFB9;box-shadow:0 14px 34px rgba(28,24,21,.12);padding:34px 46px;font-family:"BiauKai","DFKai-SB","標楷體",var(--serif);position:relative}
+.wpage .wh{font-size:34px;font-weight:700;color:#1C2F52;margin-bottom:12px}
+.wpage p{font-size:27px;line-height:1.7;color:#1C1815;margin-bottom:8px}
+.wpage table td,.wpage table th{font-size:26px!important;padding:11px 14px!important;border:1px solid #BFB6A6!important;font-family:inherit;vertical-align:top}
+.wpage table th{background:#E3EAF4;color:#1C2F52;font-weight:700}
+.wpage table td:first-child{font-weight:400;white-space:normal}
+.wstamp{position:absolute;top:18px;right:22px;font-family:var(--sans);font-size:18px;font-weight:700;color:var(--accent);border:2px solid var(--accent);border-radius:6px;padding:2px 10px}
+.wpage table.wsm td,.wpage table.wsm th{font-size:20px!important;padding:7px 10px!important}
+.wpage td.hl{background:#F3E3E4;color:#7A2033;font-weight:700}
+.dmock td.hl2{background:#F3E3E4;color:#7A2033;font-weight:700}
+.xlist table td,.xlist table th{text-align:left!important}
+.xlist td.hl2{text-align:center!important}
+.xcap{font-size:19px;font-weight:700;color:#1C2F52;padding:2px 4px 6px}
+.dmock{background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:10px 14px;box-shadow:0 10px 26px rgba(28,24,21,.08)}
+.dmock table td,.dmock table th{font-size:22px!important;padding:8px 10px!important;text-align:center;border-top:1px solid var(--line)}
+.dmock table th{background:#1C2F52;color:#fff;font-family:var(--sans);font-size:20px!important}
+.dmock td.flag{background:#FBECEB;color:#A33A32;font-weight:700}
+.dmock td.ok{color:#2f6b4c;font-weight:700}
+
+.lt td,.lt th{font-size:22px!important;padding:6px 14px!important;text-align:center;font-family:var(--sans)}
+.lt th{background:#1C2F52;color:#fff;font-size:20px!important}
+.lt td:first-child{text-align:left;font-weight:700}
+.lt td.pm{font-weight:700;color:#1C2F52}
+.lt td.bad{background:#FBECEB;color:#A33A32;font-weight:700}
+.lt tr.del td{background:#FBECEB}
+.lt tr.gap td{border-top:3px solid #1C2F52}
+.itms td{font-size:22px!important;padding:7px 12px!important}
+.itms th{font-size:22px!important}
+.jm{background:#fff;border:1px solid #CFC6B4;border-radius:12px;box-shadow:0 12px 30px rgba(28,24,21,.10);overflow:hidden;font-family:var(--sans)}
+.jm .jbar{background:#EDEFF3;border-bottom:1px solid #CFC6B4;padding:10px 18px;font-size:19px;color:#33568E;display:flex;gap:18px;flex-wrap:nowrap;white-space:nowrap}
+.jm .jbar b{color:#1C2F52}
+.jm .jbody{padding:16px 22px;font-size:21px;line-height:1.55}
+.jm .jsec{font-weight:700;color:#1C2F52;margin-top:10px}
+.jm .jopt{display:flex;gap:10px;align-items:center;padding:2px 0}
+.jm .box{display:inline-block;width:18px;height:18px;border:2px solid #33568E;border-radius:3px;position:relative;flex:none}
+.jm .box.on::after{content:"";position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #33568E;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.jm .rad{display:inline-block;width:18px;height:18px;border:2px solid #33568E;border-radius:50%;position:relative;flex:none}
+.jm .rad.on::after{content:"";position:absolute;left:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#33568E}
+.jm .chg{background:#F3E3E4;color:#7A2033;font-weight:700;border-radius:4px;padding:0 6px}
+.jm .def{color:#5F6E84;font-size:18px}
+.jm .zh{color:#7A2033;font-weight:700;margin-left:8px}
+.jm .jbar span small{color:#7A2033}
+.lt td.h2{color:#5F6E84}
+.lt.cmp td{padding:3px 12px!important;font-size:21px!important}
+.lt.cmp th{padding:5px 12px!important}
+.lt td.lowh{color:#8a5a12;font-weight:700}
+.shot{display:block;width:auto!important;height:auto;margin:0 auto;border:1px solid #CFC6B4;border-radius:10px;box-shadow:0 12px 30px rgba(28,24,21,.12);max-width:100%;object-fit:contain;background:#fff}
+.shotrow{display:grid;gap:36px;align-items:start}
+.t4s td{font-size:28px!important;padding:18px 22px!important;line-height:1.5}
+.t4s th{font-size:28px!important;padding:16px 22px!important}
+.t4s .en{font-size:20px!important}
+.why{display:block;color:#7A2033;font-size:.82em;line-height:1.45;margin-top:4px}
+.task ol li .why{font-weight:500}
+.code{font-family:Menlo,Consolas,monospace;font-size:19px;background:#1F2328;color:#ECE8E1;border-radius:10px;padding:18px 24px;white-space:pre;line-height:1.42;overflow:hidden}
+.code b{color:#F2C46D;font-weight:600}
+.prompt{font-size:22px;line-height:1.6;background:#fff;border:1px solid var(--line-2);border-left:6px solid var(--accent);border-radius:10px;padding:20px 28px}
+.prompt li{margin-bottom:4px}
+.kv2{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:10px}
+.stat{background:var(--paper);border:1px solid var(--line-2);border-radius:16px;padding:26px 30px}
+.stat .v{font-family:var(--serif);font-size:64px;color:var(--accent);font-weight:600;line-height:1.1}
+.stat .k{font-size:26px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.stat p{font-size:24px;line-height:1.55;color:var(--ink-2)}
+
+.loop{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:30px}
+.loop .st{background:var(--paper);border:2px solid var(--line-2);border-radius:16px;padding:20px 22px;width:270px;text-align:center}
+.loop .st b{display:block;font-size:30px;color:var(--accent);margin-bottom:6px}
+.loop .st span{font-size:21px;color:var(--ink-2);line-height:1.45;display:block}
+.loop .ar{font-size:40px;color:var(--line-2)}
+.lt td.ok{color:#1C2F52;font-weight:700}
+.seg{font-family:Menlo,"Noto Sans TC",monospace;color:#7A2033;font-weight:700}
+.cb td{text-align:left}
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="deck">
+
+<section class="slide light-scene" data-layout="cover" data-density="1">
+  <div class="cover">
+    <div class="kicker">員工意向調查　HRM922　碩士在職專班</div>
+    <a class="pdf-link" href="#" onclick="event.preventDefault();window.print();" title="開啟瀏覽器列印，目的地選擇另存為 PDF">另存 PDF</a>
+    <h1>開放題分析方法比較<br>文字雲與 LLM Agent 主題編碼</h1>
+    <div class="sub">Topic 09　詞頻、編碼簿、κ 與疑似 AI 代答<br>案例：五百則「最希望公司優先改善的事項」</div>
+    <div class="meta"><span>國立中山大學 人力資源管理研究所</span><span>王豫萱</span><span>2026 Fall</span></div>
+  </div>
+</section>
+
+<section class="slide light-scene" data-layout="scene" data-density="2">
+  <div class="kicker">開場</div>
+  <div class="scene">
+    <div class="who">年度調查的開放題整理好了</div>
+    <p>516 則「最希望公司優先改善的事項」<br>人資專員交出一張文字雲，最大的詞是「主管」</p>
+    <p class="q frag">員工最在意的事項，能否從文字雲讀出來<br>本週比較文字雲、人工編碼與 LLM 編碼三種做法</p>
+  </div>
+  <div class="foot"><span class="lim">Topic 09</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>01</span></div>
+</section>
+
+<section class="slide" data-layout="map" data-density="3">
+  <div class="kicker">本週流程</div>
+  <h2>本週流程</h2>
+  <div class="rows" style="margin-top:20px;gap:10px">
+    <div class="row frag" style="padding:12px 40px"><div class="n">一</div><div class="tt">文字雲與詞頻</div><div class="dd">同義詞、否定、斷詞、多主題的盲點</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">二</div><div class="tt">建立編碼簿</div><div class="dd">主題定義、納入與排除、例句</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">三</div><div class="tt">兩人獨立編碼</div><div class="dd">一致率與 Cohen’s κ</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">四</div><div class="tt">LLM Agent 編碼</div><div class="dd">依編碼簿編碼、重跑與信心標記</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">五</div><div class="tt">人工與 LLM 比對</div><div class="dd">三個 κ 與不一致案例</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">六</div><div class="tt">疑似 AI 代答</div><div class="dd">長度、句式、用詞與倫理</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">七</div><div class="tt">實機練習</div><div class="dd">六輪提示詞與編碼範本</div></div>
+  </div>
+  <div class="foot"><span class="lim">Topic 09</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">課堂練習資料</div>
+  <h2 style="margin-bottom:22px">沿用 Topic 07 的員工調查模擬資料</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:320px">項目</th><th>內容</th></tr>
+    <tr class="frag"><td>OE1 開放題</td><td>「最希望公司優先改善的事項」：516 則，不重複 512 則</td></tr>
+    <tr class="frag"><td>OE2 開放題</td><td>「最近一次在工作上被肯定的經驗」：310 則，本週用於 Agent 示範</td></tr>
+    <tr class="frag"><td>答案長度</td><td>中位數 13 字；多數是一句話</td></tr>
+    <tr class="frag"><td>編碼範本</td><td>編碼簿、100 則樣本、使用說明三個工作表</td></tr>
+    <tr class="frag"><td>100 則樣本</td><td>以固定隨機種子分層抽出，各組使用同一份</td></tr>
+  </table>
+  <div class="foot"><span class="lim">教學模擬資料，非真實組織；下載　<a class="lnk" href="../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic07_員工調查模擬資料.xlsx</a>　、<a class="lnk" href="../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">Topic09_開放題編碼範本.xlsx</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>03</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">01</div><h1>文字雲與詞頻的盲點<br><span class=act-en>Word Frequency and Word Clouds</span></h1><ul class="refs"><li>Krippendorff, K. (2018). Content analysis: An introduction to its methodology (4th ed.). SAGE.</li></ul></div>
+  <div class="foot"><span class="lim">第一部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>04</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="3">
+  <div class="kicker">文字雲</div>
+  <h2 style="margin-bottom:12px">OE1 516 則答案的文字雲</h2>
+  <img class="shot" src="img/topic09/wordcloud.png" style="max-height:600px;display:block;margin:0 auto;max-width:1300px" alt="畫面截圖">
+  <p class="lead frag" style="font-size:25px;margin-top:14px;text-align:center;max-width:none">最大的詞是「主管」（58 則），薪資相關的詞散在角落</p>
+  <div class="foot"><span class="lim">jieba 斷詞，去除停用詞後取前 45 個詞；字級與提到該詞的答案則數成正比</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>05</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="3">
+  <div class="kicker">詞頻的算法</div>
+  <h2 style="margin-bottom:10px">詞頻的計算步驟</h2>
+  <div class="loop">
+    <div class="st frag"><b>斷詞</b><span>把句子切成詞<br>中文需要斷詞工具</span></div><div class="ar frag">→</div>
+    <div class="st frag"><b>停用詞</b><span>刪掉「希望」「公司」<br>等沒有內容的詞</span></div><div class="ar frag">→</div>
+    <div class="st frag"><b>計數</b><span>每個詞出現在<br>幾則答案中</span></div><div class="ar frag">→</div>
+    <div class="st frag"><b>文字雲</b><span>次數越多<br>字級越大</span></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:40px;text-align:center;max-width:none">每一步都由分析者決定，換一個斷詞工具或停用詞，排名就會改變<br>詞頻計算的是「詞」，不是「主題」</p>
+  <div class="foot"><span class="lim">本週使用 jieba（Python 的中文斷詞套件）；預設詞典以簡體中文為主</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>06</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">盲點一　同義詞</div>
+  <h2 style="margin-bottom:8px">薪資福利被拆成十個詞</h2>
+  <svg viewBox="0 0 1500 490" width="1500" height="490" font-family="Noto Sans TC, sans-serif"><line x1="60" y1="380.0" x2="1490" y2="380.0" stroke="#E6DECE"/><text x="50" y="387.0" font-size="20" text-anchor="end" fill="#5F6E84">0</text><line x1="60" y1="297.5" x2="1490" y2="297.5" stroke="#E6DECE"/><text x="50" y="304.5" font-size="20" text-anchor="end" fill="#5F6E84">25</text><line x1="60" y1="215.0" x2="1490" y2="215.0" stroke="#E6DECE"/><text x="50" y="222.0" font-size="20" text-anchor="end" fill="#5F6E84">50</text><line x1="60" y1="132.5" x2="1490" y2="132.5" stroke="#E6DECE"/><text x="50" y="139.5" font-size="20" text-anchor="end" fill="#5F6E84">75</text><line x1="60" y1="50.0" x2="1490" y2="50.0" stroke="#E6DECE"/><text x="50" y="57.0" font-size="20" text-anchor="end" fill="#5F6E84">100</text><rect x="80" y="343.7" width="104" height="36.3" rx="4" fill="#9AA6B8"/><text x="132.0" y="333.7" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">11</text><text x="132.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">獎金</text><rect x="200" y="343.7" width="104" height="36.3" rx="4" fill="#9AA6B8"/><text x="252.0" y="333.7" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">11</text><text x="252.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">補助</text><rect x="320" y="350.3" width="104" height="29.7" rx="4" fill="#9AA6B8"/><text x="372.0" y="340.3" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">9</text><text x="372.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">薪資</text><rect x="440" y="353.6" width="104" height="26.400000000000002" rx="4" fill="#9AA6B8"/><text x="492.0" y="343.6" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">8</text><text x="492.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">薪水</text><rect x="560" y="356.9" width="104" height="23.1" rx="4" fill="#9AA6B8"/><text x="612.0" y="346.9" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">7</text><text x="612.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">調薪</text><rect x="680" y="360.2" width="104" height="19.8" rx="4" fill="#9AA6B8"/><text x="732.0" y="350.2" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">6</text><text x="732.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">年終</text><rect x="800" y="360.2" width="104" height="19.8" rx="4" fill="#9AA6B8"/><text x="852.0" y="350.2" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">6</text><text x="852.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">津貼</text><rect x="920" y="360.2" width="104" height="19.8" rx="4" fill="#9AA6B8"/><text x="972.0" y="350.2" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">6</text><text x="972.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">加給</text><rect x="1040" y="370.1" width="104" height="9.9" rx="4" fill="#9AA6B8"/><text x="1092.0" y="360.1" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">3</text><text x="1092.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">加薪</text><rect x="1160" y="370.1" width="104" height="9.9" rx="4" fill="#9AA6B8"/><text x="1212.0" y="360.1" font-size="25" font-weight="700" text-anchor="middle" fill="#9AA6B8">3</text><text x="1212.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">福利</text><rect x="1280" y="158.89999999999998" width="104" height="221.10000000000002" rx="4" fill="#2E5E8F"/><text x="1332.0" y="148.89999999999998" font-size="25" font-weight="700" text-anchor="middle" fill="#2E5E8F">67</text><text x="1332.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">任一詞</text><rect x="1400" y="89.60000000000002" width="104" height="290.4" rx="4" fill="#7A2033"/><text x="1452.0" y="79.60000000000002" font-size="25" font-weight="700" text-anchor="middle" fill="#7A2033">88</text><text x="1452.0" y="414" font-size="23" text-anchor="middle" fill="#44403A">主題次數</text><text x="680" y="454" font-size="22" text-anchor="middle" fill="#5F6E84">文字雲中的十個詞（提到該詞的答案則數）</text></svg>
+  <div class="foot"><span class="lim">灰色：單一詞的則數；藍色：含任一詞的答案；紅色：人工編碼後提到薪資福利的則數，為十一個主題中最多</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>07</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">盲點二　否定</div>
+  <h2 style="margin-bottom:22px">刪除停用詞後，否定的意思消失</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:640px">原文</th><th>進入詞頻的詞</th></tr>
+    <tr class="frag"><td>有給加班費但人真的很累，寧願不要加班</td><td class="seg">有給、加班、費但、很累、寧願、加班</td></tr><tr class="frag"><td>希望升遷不要只看年資</td><td class="seg">升遷、年資</td></tr><tr class="frag"><td>希望週六不要常態性加班</td><td class="seg">週六、常態性、加班</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">「不要加班」與「加班」都計入「加班」<br>文字雲無法區分員工希望增加或減少某件事</p>
+  <div class="foot"><span class="lim">「不要」「沒有」常被列為停用詞；保留時又會成為最大的詞之一</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>08</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">盲點三　斷詞</div>
+  <h2 style="margin-bottom:22px">繁體中文的斷詞錯誤</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:600px">原文</th><th>jieba 斷詞結果</th></tr>
+    <tr class="frag"><td>品保也要輪班，但沒有生產部那種輪班津貼</td><td class="seg">品保／也／要／輪班／，／但／沒／有生／產部／那種／輪班津／貼</td></tr><tr class="frag"><td>有給加班費但人真的很累，寧願不要加班</td><td class="seg">有給／加班／費但／人／真的／很累／，／寧願／不要／加班</td></tr><tr class="frag"><td>外訓申請流程太麻煩，乾脆不申請了</td><td class="seg">外訓／申請／流程／太麻煩／，／乾脆／不申／請／了</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">「輪班津貼」變成「輪班津／貼」，「不申請」變成「不申／請」<br>錯誤的詞直接進入詞頻與文字雲</p>
+  <div class="foot"><span class="lim">可加入自訂詞典修正，但需逐一檢查；工廠用語、職稱與縮寫特別容易斷錯</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>09</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">盲點四　多主題與一詞多義</div>
+  <h2 style="margin-bottom:22px">一則答案可能有兩個主題，一個詞可能屬於不同主題</h2>
+  <div class="kv2">
+    <div class="stat frag"><div class="k">一則兩個主題</div><p>「薪水太低又一直加班」<br>「升遷不透明，主管也從不跟我們溝通」<br>文字雲只看到詞，看不出兩件事同時發生</p></div>
+    <div class="stat frag"><div class="k">「主管」出現在 58 則</div><div class="v">43 則</div><p>主要在談主管領導<br>其餘 15 則談升遷、考核、人力與流程</p></div>
+  </div>
+  <div class="foot"><span class="lim">人工編碼的結果：OE1 有 43 則答案同時提到兩個主題</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>10</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">盲點五　疑似 AI 代答</div>
+  <h2 style="margin-bottom:22px">十六則長答案改變了詞頻排名</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+    <div class="stat frag"><div class="k">有助</div><div class="v">16 則</div><p>全部來自疑似 AI 代答<br>「有助於」被斷成「有助／於」</p></div>
+    <div class="stat frag"><div class="k">員工</div><div class="v">8 則</div><p>「員工」共 14 則<br>超過一半來自同一批答案</p></div>
+    <div class="stat frag"><div class="k">發展</div><div class="v">6 則</div><p>「發展」共 10 則<br>多數來自同一批答案</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">一則長答案貢獻十幾個詞，一句話的答案只貢獻兩三個詞<br>疑似 AI 代答的檢查見第六部分</p>
+  <div class="foot"><span class="lim">數字為提到該詞的答案中，屬於 16 則疑似 AI 代答的則數</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>11</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">文字雲的用途</div>
+  <h2 style="margin-bottom:22px">文字雲適合與不適合的用途</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:640px">適合</th><th>不適合</th></tr>
+    <tr class="frag"><td>第一次瀏覽資料，找出常見用語</td><td>決定「員工最在意什麼」的排序</td></tr>
+    <tr class="frag"><td>找出編碼簿可能遺漏的主題</td><td>比較兩個部門或兩年的差異</td></tr>
+    <tr class="frag"><td>發現斷詞錯誤、異常的長答案</td><td>作為報告中唯一的開放題結果</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">主題的排序來自編碼：逐則讀答案，依編碼簿歸類，再計算次數</p>
+  <div class="foot"><span class="lim">詞頻屬於探索步驟；結論需要編碼與一致性檢驗</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>12</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">02</div><h1>建立開放題編碼簿<br><span class=act-en>Building a Codebook</span></h1><ul class="refs"><li>Braun, V., &amp; Clarke, V. (2006). Using thematic analysis in psychology. Qualitative Research in Psychology, 3(2), 77–101. https://doi.org/10.1191/1478088706qp063oa</li><li>Krippendorff, K. (2018). Content analysis: An introduction to its methodology (4th ed.). SAGE.</li></ul></div>
+  <div class="foot"><span class="lim">第二部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>13</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">編碼簿</div>
+  <h2 style="margin-bottom:22px">編碼簿的四個欄位</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div class="stat frag"><div class="k">定義</div><p>這個主題包含什麼，一句話說明</p></div>
+    <div class="stat frag"><div class="k">納入</div><p>列舉屬於這個主題的具體內容</p></div>
+    <div class="stat frag"><div class="k">排除</div><p>容易混淆時歸到哪個主題，寫出去向</p></div>
+    <div class="stat frag"><div class="k">例句</div><p>取自資料的真實答案，不取自要編碼的樣本</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">兩位編碼者能否一致，取決於「排除」欄<br>沒寫清楚的邊界，會成為不一致的來源</p>
+  <div class="foot"><span class="lim">主題從資料中歸納，先讀一部分答案，再定稿編碼簿（Braun &amp; Clarke, 2006）</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>14</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">本週編碼簿</div>
+  <h2 style="margin-bottom:16px">OE1 的十一個主題</h2>
+  <table class="tight t4 cb" style="font-size:21px">
+    <tr><th style="width:330px;padding:6px 14px">主題</th><th style="width:170px;padding:6px 14px">代碼</th><th style="padding:6px 14px">定義</th></tr>
+    <tr class="frag"><td style="padding:5px 14px;white-space:nowrap">薪資福利</td><td style="padding:5px 14px">PAY</td><td style="padding:5px 14px">薪資、獎金、津貼、補助與福利制度的金額或給付方式</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">升遷與職涯發展</td><td style="padding:5px 14px">PROMO</td><td style="padding:5px 14px">升遷管道、晉升標準與職涯路徑</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">工作負荷與人力</td><td style="padding:5px 14px">WORKLOAD</td><td style="padding:5px 14px">工作量、人力配置與工時安排</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">主管領導</td><td style="padding:5px 14px">SUP</td><td style="padding:5px 14px">直屬主管或各級主管的態度、公平性、溝通、授權與管理能力</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">溝通與流程</td><td style="padding:5px 14px">COMM</td><td style="padding:5px 14px">公司內部的資訊傳遞、跨部門協調、簽核與行政流程</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">設備系統與工作環境</td><td style="padding:5px 14px">SYS</td><td style="padding:5px 14px">既有的機台、電腦與資訊系統，以及廠房、宿舍、餐廳、停車等設施</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">教育訓練</td><td style="padding:5px 14px">TRAIN</td><td style="padding:5px 14px">課程、新人訓練、證照與進修，以及工作技能的教學</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">考核與認可</td><td style="padding:5px 14px">REC</td><td style="padding:5px 14px">績效考核的公平與透明，以及努力是否被看見與肯定</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">AI 與數位工具導入</td><td style="padding:5px 14px">AI</td><td style="padding:5px 14px">AI、自動化與新系統導入的過程、規範與影響</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">籠統或無具體內容</td><td style="padding:5px 14px">VAGUE</td><td style="padding:5px 14px">沒有指出任何具體的改善事項</td></tr><tr class="frag"><td style="padding:5px 14px;white-space:nowrap">離題</td><td style="padding:5px 14px">OFF</td><td style="padding:5px 14px">內容與公司需要改善的事項無關</td></tr>
+  </table>
+  <div class="foot"><span class="lim">納入、排除與例句見編碼範本的「編碼簿」工作表</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>15</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Excel 步驟一　編碼簿</div>
+  <h2 style="margin-bottom:18px">編碼範本的「編碼簿」工作表</h2>
+  <div class="shotrow" style="grid-template-columns:1000px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/x_codebook.jpg" style="max-height:620px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">A、B 欄：主題名稱與代碼<span class="why">為什麼：只填代碼，各組寫法一致</span></li><li class="frag">D、E 欄：納入與排除<span class="why">為什麼：排除欄寫出應改歸的代碼</span></li><li class="frag">F 欄：例句<span class="why">為什麼：例句取自樣本以外</span></li><li class="frag">下方：四條編碼規則<span class="why">為什麼：主要、次要與不確定的處理</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">下載　<a class="lnk" href="../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">Topic09_開放題編碼範本.xlsx</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>16</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">編碼規則</div>
+  <h2 style="margin-bottom:22px">四條編碼規則</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:120px"></th><th style="width:520px">規則</th><th>理由</th></tr>
+    <tr class="frag"><td>1</td><td>每則一個主要主題</td><td>名義類別才能計算 Cohen’s κ</td></tr>
+    <tr class="frag"><td>2</td><td>主要主題＝最先提到的事項</td><td>兩人依同一個規則選，不依個人判斷「哪個比較重要」</td></tr>
+    <tr class="frag"><td>3</td><td>第二個事項寫在備註</td><td>保留多主題的資訊，計算次數時可以另外統計</td></tr>
+    <tr class="frag"><td>4</td><td>兩人各自編碼，完成前不討論</td><td>先討論再編碼，κ 會偏高，已不是獨立判斷</td></tr>
+  </table>
+  <div class="foot"><span class="lim">不確定時填最接近的代碼，在備註寫出猶豫的兩個代碼</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>17</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">歸類困難的答案</div>
+  <h2 style="margin-bottom:22px">需要靠「排除」欄判斷的答案</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:620px">答案</th><th style="width:250px">猶豫的代碼</th><th>依編碼簿</th></tr>
+    <tr class="frag"><td>主管很少給回饋，不知道自己做得好不好</td><td>SUP／REC</td><td>主管個人的做法 → SUP</td></tr>
+    <tr class="frag"><td>公司說要用AI，但連ERP都還沒弄好</td><td>AI／SYS</td><td>先談 AI 導入 → AI，次要 SYS</td></tr>
+    <tr class="frag"><td>薪水太低又一直加班</td><td>PAY／WORKLOAD</td><td>最先提到 → PAY，次要 WORKLOAD</td></tr>
+    <tr class="frag"><td>填這個有用嗎，去年寫的也沒改</td><td>VAGUE／OFF</td><td>評論問卷本身 → OFF</td></tr>
+  </table>
+  <div class="foot"><span class="lim">編碼過程中遇到新的邊界案例，補進編碼簿並記錄修訂日期</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>18</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">03</div><h1>兩人獨立編碼與 Cohen’s κ<br><span class=act-en>Intercoder Reliability</span></h1><ul class="refs"><li>Cohen, J. (1960). A coefficient of agreement for nominal scales. Educational and Psychological Measurement, 20(1), 37–46. https://doi.org/10.1177/001316446002000104</li><li>Landis, J. R., &amp; Koch, G. G. (1977). The measurement of observer agreement for categorical data. Biometrics, 33(1), 159–174. https://doi.org/10.2307/2529310</li><li>O’Connor, C., &amp; Joffe, H. (2020). Intercoder reliability in qualitative research: Debates and practical guidelines. International Journal of Qualitative Methods, 19, 1–13. https://doi.org/10.1177/1609406919899220</li></ul></div>
+  <div class="foot"><span class="lim">第三部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>19</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Excel 步驟二　編碼</div>
+  <h2 style="margin-bottom:18px">「100 則樣本」工作表的編碼方式</h2>
+  <div class="shotrow" style="grid-template-columns:1000px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/x_sample.jpg" style="max-height:520px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">甲、乙各自在 C、D 欄選代碼<span class="why">為什麼：下拉選單限定 11 個代碼</span></li><li class="frag">E 欄貼上 LLM 的代碼<span class="why">為什麼：與人工放在同一張表比對</span></li><li class="frag">F 欄自動顯示甲乙是否一致<span class="why">為什麼：不一致的格子變紅色，方便討論</span></li><li class="frag">G 欄填討論後定案<span class="why">為什麼：主題次數以定案欄計算</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">樣本 100 則以隨機種子 20261120 分層抽出；各組使用同一份</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>20</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">一致率與 κ</div>
+  <h2 style="margin-bottom:22px">一致率與 Cohen’s κ 的差別</h2>
+  <div class="kv2">
+    <div class="stat frag"><div class="k">一致率</div><div class="v">兩人相同的比例</div><p>100 則中有 90 則相同，一致率 ＝ .90<br>沒有扣除碰巧相同的部分</p></div>
+    <div class="stat frag"><div class="k">Cohen’s κ</div><div class="v">扣除碰巧一致</div><p>κ ＝（一致率 − 碰巧一致率）÷（1 − 碰巧一致率）<br>本課程以 .61 以上為通過（Topic 03）</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">某個主題很少出現時，兩人都填「沒有」就會大量一致<br>這時一致率很高，κ 可能仍未通過</p>
+  <div class="foot"><span class="lim">碰巧一致率：兩人依各自的類別比例隨意分類時，也會相同的機率</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>21</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">範例</div>
+  <h2 style="margin-bottom:16px">「工作負荷」有沒有提到：教師編碼與關鍵字規則</h2>
+  <div style="display:grid;grid-template-columns:760px 1fr;gap:40px;align-items:center">
+    <table class="lt" style="width:760px">
+      <tr><th></th><th>規則：有</th><th>規則：沒有</th><th>合計</th></tr>
+      <tr><td>教師：有</td><td class="ok">8</td><td>7</td><td>15</td></tr>
+      <tr><td>教師：沒有</td><td>2</td><td class="ok">83</td><td>85</td></tr>
+      <tr><td>合計</td><td>10</td><td>90</td><td>100</td></tr>
+    </table>
+    <div>
+      <div class="stat frag"><div class="k">一致率</div><p>（8 ＋ 83）÷ 100 ＝ <b>.91</b></p></div>
+      <div class="stat frag" style="margin-top:16px"><div class="k">碰巧一致率</div><p>.15 × .10 ＋ .85 × .90 ＝ <b>.78</b></p></div>
+      <div class="stat frag" style="margin-top:16px"><div class="k">κ</div><p>（.91 − .78）÷（1 − .78）＝ <b class="bad">.59</b>，未達 .61</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">100 則樣本；關鍵字規則：含「加班、人力、排班、休假、夜班、工時」等詞即判為有。規則漏掉「一個人做兩個人的工作」這類沒有關鍵字的答案</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">計算器步驟　三位組員</div>
+  <h2 style="margin-bottom:18px">編碼一致性計算器：貼上三欄算兩兩 κ</h2>
+  <div class="shotrow" style="grid-template-columns:760px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/c_calc3.jpg" style="max-height:640px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">選「三位組員」<span class="why">為什麼：甲、乙、LLM 視為三位編碼者</span></li><li class="frag">從 Excel 複製 C、D、E 欄，分別貼上<span class="why">為什麼：每欄 100 行，依編號排序</span></li><li class="frag">看甲與乙、甲與丙、乙與丙的 κ<span class="why">為什麼：丙為 LLM：可比較人與人、人與 LLM</span></li><li class="frag">甲乙 κ 未達 .61：修編碼簿，兩人重編<span class="why">為什麼：先確認人與人之間能一致</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">預設畫面為計算器的 12 則練習資料；<a class="lnk" href="../Handout/Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">開啟編碼一致性計算器</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">信度與效度</div>
+  <h2 style="margin-bottom:22px">編碼的信度與效度</h2>
+  <div class="kv2">
+    <div class="stat frag"><div class="k">信度</div><div class="v">兩人是否一致</div><p>不同編碼者、或同一人隔一段時間<br>對同一則答案給出相同代碼<br>以 κ 檢驗</p></div>
+    <div class="stat frag"><div class="k">效度</div><div class="v">代碼是否正確</div><p>代碼是否反映員工的原意<br>主題是否涵蓋重要的內容<br>以回讀原文、不一致案例討論檢驗</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">兩人用同一個錯誤規則，κ 可以很高；κ 通過是必要條件，不是充分條件</p>
+  <div class="foot"><span class="lim">關鍵字規則重跑一百次結果都相同，信度完美，效度仍有問題</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>24</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>LLM Agent 輔助主題編碼<br><span class=act-en>LLM-Assisted Coding, Summaries and Validity Checks</span></h1><ul class="refs"><li>Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. Proceedings of the National Academy of Sciences, 120(30), e2305016120. https://doi.org/10.1073/pnas.2305016120</li><li>O’Connor, C., &amp; Joffe, H. (2020). Intercoder reliability in qualitative research: Debates and practical guidelines. International Journal of Qualitative Methods, 19, 1–13. https://doi.org/10.1177/1609406919899220</li></ul></div>
+  <div class="foot"><span class="lim">第四部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>25</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="3">
+  <div class="kicker">LLM 編碼流程</div>
+  <h2 style="margin-bottom:10px">LLM 依編碼簿編碼的流程</h2>
+  <div class="loop">
+    <div class="st frag"><b>編碼簿</b><span>與人工使用<br>同一份</span></div><div class="ar frag">→</div>
+    <div class="st frag"><b>逐則判斷</b><span>不寫關鍵字程式<br>每則一個代碼</span></div><div class="ar frag">→</div>
+    <div class="st frag"><b>信心標記</b><span>低信心的答案<br>交給人裁決</span></div><div class="ar frag">→</div>
+    <div class="st frag"><b>人工比對</b><span>計算人與 LLM<br>的 κ</span></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:40px;text-align:center;max-width:none">LLM 是第三位編碼者，與兩位人工編碼者比對後才使用<br>比對通過，才把同一份編碼簿用在其餘答案</p>
+  <div class="foot"><span class="lim">Gilardi et al.（2023）發現 LLM 在部分標註任務的表現接近或優於群眾標註者；不同任務與資料需各自檢驗</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">LLM 的三種用途</div>
+  <h2 style="margin-bottom:22px">主題編碼、摘要與情緒極性的查核方式</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:280px">用途</th><th style="width:600px">做法</th><th>查核方式</th></tr>
+    <tr class="frag"><td>主題編碼</td><td>依編碼簿為每則答案給代碼</td><td>與人工編碼計算 κ</td></tr>
+    <tr class="frag"><td>摘要</td><td>每個主題寫兩三句重點</td><td>每句附例句編號，回到原文核對</td></tr>
+    <tr class="frag"><td>情緒極性</td><td>正向、中性、負向</td><td>抽樣人工判讀；改善建議題多為負向，用途有限</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">摘要沒有附例句編號時，無法分辨是資料中的內容還是 LLM 的推測</p>
+  <div class="foot"><span class="lim">引用原文前刪除可辨識的人名、單位與事件</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>27</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">實機練習第 3 輪</div>
+  <h2 style="margin-bottom:22px">LLM 編碼的提示詞</h2>
+  <div class="prompt">請依「編碼簿」工作表與下方規則，為「100 則樣本」工作表的 100 則答案編碼：<ol style="margin:10px 0 0 28px"><li>每則只給一個主要主題代碼（答案中最先提到的改善事項），只能用編碼簿的 11 個代碼。</li><li>同時提到第二個事項時，另列「次要代碼」。</li><li>每則附「信心」（高／中／低）；信心低時，寫出猶豫的兩個代碼。</li><li>逐則閱讀後判斷，不要寫關鍵字程式自動分類。</li></ol>輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列。</div>
+  <div class="foot"><span class="lim">上傳編碼範本；輸出的主要代碼依編號貼回「LLM」欄</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Agent 步驟一　設定技能</div>
+  <h2 style="margin-bottom:18px">技能檔 SKILL.md：OE2 編碼簿與規則</h2>
+  <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/a_skill.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">示範改用 OE2「被肯定的經驗」60 則<span class="why">為什麼：與實機練習的 OE1 不同，答案不重複</span></li><li class="frag">表格寫代碼、定義與納入、排除<span class="why">為什麼：與 Excel 編碼簿相同的四個要素</span></li><li class="frag">規則：逐則判斷，不寫關鍵字程式<span class="why">為什麼：避免 Agent 用程式取代閱讀</span></li><li class="frag">無法判斷時信心標「低」<span class="why">為什麼：低信心的答案交給人裁決</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">技能檔放在 .claude/skills/oe-theme-coding/SKILL.md；網頁版可貼進專案指示</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Agent 步驟二　設定記憶</div>
+  <h2 style="margin-bottom:18px">專案記憶 CLAUDE.md：讀者、隱私與標記原則</h2>
+  <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/a_memory.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">引用原文前遮蔽可辨識內容<span class="why">為什麼：開放題最容易透露身分</span></li><li class="frag">編碼簿沒有的主題不自行新增<span class="why">為什麼：新增的代碼無法與人工比對</span></li><li class="frag">疑似 AI 代答只標記，不刪除<span class="why">為什麼：刪除與否由人決定並記錄</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">專案記憶在每次開新對話時讀取</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Agent 步驟三　編碼</div>
+  <h2 style="margin-bottom:18px">子代理 A 依 SKILL.md 編碼 60 則</h2>
+  <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/a_code.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">Agent 讀取 60 則答案<span class="why">為什麼：確認則數與欄位</span></li><li class="frag">交給子代理逐則判斷<span class="why">為什麼：每則代碼附信心與理由</span></li><li class="frag">輸出 codes_A.csv<span class="why">為什麼：代碼存成檔案，才能比對與重算</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">編碼為 Claude 子代理實際輸出；畫面依 Claude Code 樣式重現</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>31</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="3">
+  <div class="kicker">示範影片</div>
+  <h2 style="margin-bottom:12px">Agent 從編碼、重跑到標記疑似 AI 代答的過程</h2>
+  <video src="img/topic09/agent_demo.mp4" controls preload="metadata" style="display:block;margin:0 auto;max-height:760px;max-width:100%;border-radius:12px;box-shadow:0 12px 30px rgba(28,24,21,.18)"></video>
+  <div class="foot"><span class="lim">模擬畫面：編碼為兩個 Claude 子代理各自依 SKILL.md 的實際輸出，數字為 analysis.py 的執行結果；約 70 秒</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Agent 步驟四　重跑</div>
+  <h2 style="margin-bottom:18px">兩次獨立編碼：κ ＝ 1.00</h2>
+  <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/a_kappa.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">子代理 B 不看 A 的結果，重編一次<span class="why">為什麼：檢查同一份編碼簿的結果是否穩定</span></li><li class="frag">七個代碼的次數兩次完全相同<span class="why">為什麼：重跑穩定，屬於信度</span></li><li class="frag">κ ＝ 1.00 不代表代碼正確<span class="why">為什麼：兩次可能犯同樣的錯，需與人工比對</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">同一個模型重跑，常比兩位人工編碼者更一致；人與 LLM 的比對仍不可省略</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Agent 步驟五　人工確認</div>
+  <h2 style="margin-bottom:18px">低信心答案與疑似 AI 代答的標記</h2>
+  <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/a_review.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">3 則信心為「低」<span class="why">為什麼：Agent 寫出猶豫的兩個代碼，由人裁決</span></li><li class="frag">OE1 長度與模板詞兩項規則<span class="why">為什麼：門檻由資料計算：平均＋3 個標準差</span></li><li class="frag">16 則標記，不刪除<span class="why">為什麼：依專案記憶的規則，處理方式由人決定</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">第六部分說明兩項規則與限制</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>34</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">Agent 步驟六　回報</div>
+  <h2 style="margin-bottom:18px">Agent 的最終回報與待確認事項</h2>
+  <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
+    <img class="shot" src="img/topic09/a_final.jpg" style="max-height:640px;width:100%!important" alt="畫面截圖">
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">結論先寫，數字在後<span class="why">為什麼：讀者是人資長</span></li><li class="frag">寫明 κ ＝ 1.00 只代表重跑穩定<span class="why">為什麼：避免讀者把信度當成效度</span></li><li class="frag">三項待確認事項<span class="why">為什麼：裁決、人工比對、兩個版本</span></li></ol></div>
+  </div>
+  <div class="foot"><span class="lim multi">Agent 自行決定的事項列出來，由人確認後寫進分析紀錄</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>35</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">05</div><h1>人工與 LLM 編碼比對<br><span class=act-en>Human–LLM Agreement and Disagreement Cases</span></h1><ul class="refs"><li>O’Connor, C., &amp; Joffe, H. (2020). Intercoder reliability in qualitative research: Debates and practical guidelines. International Journal of Qualitative Methods, 19, 1–13. https://doi.org/10.1177/1609406919899220</li></ul></div>
+  <div class="foot"><span class="lim">第五部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>36</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">三個 κ 的解讀</div>
+  <h2 style="margin-bottom:22px">甲乙、甲與 LLM、乙與 LLM 三個 κ 的組合</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:300px">甲乙 κ</th><th style="width:330px">人與 LLM 的 κ</th><th>代表什麼、下一步</th></tr>
+    <tr class="frag"><td>≥ .61</td><td>≥ .61</td><td>編碼簿清楚，LLM 也能依循；可用 LLM 編其餘答案，定期抽查</td></tr>
+    <tr class="frag"><td>≥ .61</td><td>&lt; .61</td><td>問題在 LLM：檢查提示詞、是否貼了完整編碼簿、是否寫了程式</td></tr>
+    <tr class="frag"><td>&lt; .61</td><td>任何值</td><td>問題在編碼簿：修訂定義與排除，兩人重新各自編碼</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">先確認人與人之間能一致，再評估 LLM</p>
+  <div class="foot"><span class="lim">κ 的通過標準 .61 沿用 Topic 03；三個 κ 都寫進報告</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>37</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">不一致案例</div>
+  <h2 style="margin-bottom:22px">不一致案例的五種原因</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:300px">原因</th><th style="width:640px">例子</th><th>處理</th></tr>
+    <tr class="frag"><td>定義邊界不清</td><td>主管很少給回饋：SUP 或 REC</td><td>補寫排除欄</td></tr>
+    <tr class="frag"><td>多主題</td><td>薪水太低又一直加班</td><td>重申「最先提到」規則</td></tr>
+    <tr class="frag"><td>否定與反諷</td><td>有給加班費但人真的很累，寧願不要加班</td><td>回讀全文判斷</td></tr>
+    <tr class="frag"><td>籠統或離題</td><td>填這個有用嗎，去年寫的也沒改</td><td>VAGUE、OFF 各寫例句</td></tr>
+    <tr class="frag"><td>長答案多事項</td><td>疑似 AI 代答一次列出三個面向</td><td>依最先提到的事項；在備註標記</td></tr>
+  </table>
+  <div class="foot"><span class="lim">每一類挑一兩則寫進分析紀錄：答案、各方代碼、討論結果與理由</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">LLM 的常見傾向</div>
+  <h2 style="margin-bottom:22px">與人工比對時可預期的差異</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:620px">傾向</th><th>查核方式</th></tr>
+    <tr class="frag"><td>「無」「沒什麼特別的」被歸到某個主題</td><td>交叉表中 VAGUE 那一列</td></tr>
+    <tr class="frag"><td>VAGUE 與 OFF 混用</td><td>兩個代碼的例句是否清楚</td></tr>
+    <tr class="frag"><td>見到「主管」就歸 SUP</td><td>含「主管」的答案逐則回讀</td></tr>
+    <tr class="frag"><td>自行新增代碼或合併兩個代碼</td><td>輸出的代碼種類是否只有 11 種</td></tr>
+    <tr class="frag"><td>寫關鍵字程式代替判斷</td><td>回覆中是否出現分類程式</td></tr>
+  </table>
+  <div class="foot"><span class="lim">各組結果不同；以自己的交叉表與不一致案例為準</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>39</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">06</div><h1>疑似 AI 代答的偵測與倫理<br><span class=act-en>Detecting AI-Generated Open-Ended Responses</span></h1><ul class="refs"><li>Speer, A. B., Chawota, T. A., Rudolph, C., &amp; Qaqish, A. (2026). The impact of impression management on writing tendencies: Investigating faking susceptibility of open-ended personality assessments. Journal of Applied Psychology. Advance online publication. https://doi.org/10.1037/apl0001397</li></ul></div>
+  <div class="foot"><span class="lim">第六部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>40</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">三個特徵</div>
+  <h2 style="margin-bottom:22px">疑似 AI 代答的長度、句式與用詞</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+    <div class="stat frag"><div class="k">長度</div><div class="v">92–114 字</div><p>其餘答案中位數 12 字<br>最長 25 字</p></div>
+    <div class="stat frag"><div class="k">句式</div><div class="v">逗號 4.6 個</div><p>其餘答案平均 0.4 個<br>「建議公司從三個層面著手」</p></div>
+    <div class="stat frag"><div class="k">用詞</div><div class="v">不僅…進而</div><p>16 則全部出現<br>其餘答案 0 則</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">十六則的結構相同：開場語、建議、「不僅…也有助於…進而…」<br>Topic 04 以人眼辨識，本週改用可重複執行的規則</p>
+  <div class="foot"><span class="lim">數字為 OE1 全部 516 則；16 則疑似 AI 代答為教學資料中植入的答案</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>41</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">規則與門檻</div>
+  <h2 style="margin-bottom:22px">兩項規則的標記結果</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:480px">規則</th><th>門檻</th><th style="width:220px">標記則數</th></tr>
+    <tr class="frag"><td>長度高於平均＋3 個標準差</td><td>14.4 ＋ 3 × 15.6 ＝ 61.3 字</td><td>16</td></tr>
+    <tr class="frag"><td>同時含「不僅」與「進而」</td><td>出現即標記</td><td>16</td></tr>
+    <tr class="frag"><td>兩項都符合</td><td></td><td>16</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">門檻規則在看資料前訂定，實際門檻由資料計算<br>本資料的植入答案句式一致，真實資料的 AI 代答變化較多</p>
+  <div class="foot"><span class="lim">「平均＋3 個標準差」與 Topic 07 隨機亂填的規則相同</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>42</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">倫理與處理</div>
+  <h2 style="margin-bottom:22px">標記之後的處理原則</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:400px">原則</th><th>做法</th></tr>
+    <tr class="frag"><td>規則只能標記「疑似」</td><td>長而工整的答案也可能是員工認真寫的</td></tr>
+    <tr class="frag"><td>不刪除，做兩個版本</td><td>主題次數含與不含標記答案各算一次，看結論是否改變</td></tr>
+    <tr class="frag"><td>不追查填答者</td><td>匿名調查不以此回推身分，也不懲處個人</td></tr>
+    <tr class="frag"><td>寫進方法說明</td><td>規則、門檻、標記則數與處理方式</td></tr>
+    <tr class="frag"><td>從設計端預防</td><td>題目問具體經驗，說明開放題的用途</td></tr>
+  </table>
+  <div class="foot"><span class="lim">Speer et al.（2026）：針對特定題目訓練的偵測模型可區分人類與 AI 代寫，偽陽性率約 1%；本週的簡單規則沒有這種精確度</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>43</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">連結 Topic 08</div>
+  <h2 style="margin-bottom:8px">提到最多的主題，與留任意願的關係不一定最大</h2>
+  <svg viewBox="0 0 1500 530" width="1500" height="530" font-family="Noto Sans TC, sans-serif"><text x="314" y="66" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="700">薪資福利</text><rect x="330" y="46" width="457.6" height="30" rx="4" fill="#7A2033"/><text x="797.6" y="69" font-size="22" fill="#7A2033" font-weight="700">88</text><rect x="1068.3280844697413" y="46" width="131.67191553025873" height="30" rx="4" fill="#2E5E8F"/><text x="1056.3280844697413" y="69" font-size="22" text-anchor="end" fill="#1C2F52">−.22</text><text x="314" y="116" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="400">工作負荷與人力</text><rect x="330" y="96" width="410.79999999999995" height="30" rx="4" fill="#9AA6B8"/><text x="750.8" y="119" font-size="22" fill="#9AA6B8" font-weight="700">79</text><rect x="1200" y="96" width="164.0205141550191" height="30" rx="4" fill="#C8CFDA"/><text x="1376.020514155019" y="119" font-size="22" text-anchor="start" fill="#1C2F52">.27</text><text x="314" y="166" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="700">升遷與職涯發展</text><rect x="330" y="146" width="338.0" height="30" rx="4" fill="#7A2033"/><text x="678.0" y="169" font-size="22" fill="#7A2033" font-weight="700">65</text><rect x="1010.1477552630469" y="146" width="189.85224473695314" height="30" rx="4" fill="#2E5E8F"/><text x="998.1477552630469" y="169" font-size="22" text-anchor="end" fill="#1C2F52">−.32</text><text x="314" y="216" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="700">主管領導</text><rect x="330" y="196" width="332.79999999999995" height="30" rx="4" fill="#7A2033"/><text x="672.8" y="219" font-size="22" fill="#7A2033" font-weight="700">64</text><rect x="1013.9169983138844" y="196" width="186.0830016861156" height="30" rx="4" fill="#2E5E8F"/><text x="1001.9169983138844" y="219" font-size="22" text-anchor="end" fill="#1C2F52">−.31</text><text x="314" y="266" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="400">溝通與流程</text><rect x="330" y="246" width="301.6" height="30" rx="4" fill="#9AA6B8"/><text x="641.6" y="269" font-size="22" fill="#9AA6B8" font-weight="700">58</text><rect x="1200" y="246" width="59.32058047676355" height="30" rx="4" fill="#C8CFDA"/><text x="1271.3205804767636" y="269" font-size="22" text-anchor="start" fill="#1C2F52">.10</text><text x="314" y="316" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="400">設備系統與工作環境</text><rect x="330" y="296" width="265.20000000000005" height="30" rx="4" fill="#9AA6B8"/><text x="605.2" y="319" font-size="22" fill="#9AA6B8" font-weight="700">51</text><rect x="1200" y="296" width="108.91849247911045" height="30" rx="4" fill="#C8CFDA"/><text x="1320.9184924791105" y="319" font-size="22" text-anchor="start" fill="#1C2F52">.18</text><text x="314" y="366" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="400">教育訓練</text><rect x="330" y="346" width="234.0" height="30" rx="4" fill="#9AA6B8"/><text x="574.0" y="369" font-size="22" fill="#9AA6B8" font-weight="700">45</text><rect x="1200" y="346" width="139.27872529339038" height="30" rx="4" fill="#C8CFDA"/><text x="1351.2787252933904" y="369" font-size="22" text-anchor="start" fill="#1C2F52">.23</text><text x="314" y="416" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="400">考核與認可</text><rect x="330" y="396" width="228.79999999999995" height="30" rx="4" fill="#9AA6B8"/><text x="568.8" y="419" font-size="22" fill="#9AA6B8" font-weight="700">44</text><rect x="1112.8786017251412" y="396" width="87.12139827485885" height="30" rx="4" fill="#2E5E8F"/><text x="1100.8786017251412" y="419" font-size="22" text-anchor="end" fill="#1C2F52">−.15</text><text x="314" y="466" font-size="24" text-anchor="end" fill="#1C2F52" font-weight="400">AI 與數位工具導入</text><rect x="330" y="446" width="156.0" height="30" rx="4" fill="#9AA6B8"/><text x="496.0" y="469" font-size="22" fill="#9AA6B8" font-weight="700">30</text><rect x="1200" y="446" width="41.66279392454612" height="30" rx="4" fill="#C8CFDA"/><text x="1253.6627939245461" y="469" font-size="22" text-anchor="start" fill="#1C2F52">.07</text><line x1="1200" y1="36" x2="1200" y2="490" stroke="#1C2F52" stroke-width="2"/><text x="560" y="512" font-size="22" text-anchor="middle" fill="#5F6E84">提到該主題的人數</text><text x="1200" y="512" font-size="22" text-anchor="middle" fill="#5F6E84">留任意願：提到者 − 未提到者（d）</text></svg>
+  <div class="foot"><span class="lim">清理後資料中有填 OE1 的 512 人；d 為提到該主題者與未提到者的留任意願差距。開放題次數描述「說了什麼」，影響留任的因素需用 Topic 08 的迴歸分析</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>44</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">管理意涵</div>
+  <h2 style="margin-bottom:22px">次數與影響的差別</h2>
+  <div class="kv2">
+    <div class="stat frag"><div class="k">開放題次數</div><p>薪資福利被提到 88 次，最多<br>回答「員工最常抱怨什麼」</p></div>
+    <div class="stat frag"><div class="k">與留任的關係</div><p>提到升遷（d ＝ −.32）與主管（−.31）的人<br>留任落差大於薪資福利（−.22）</p></div>
+  </div>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">改善的優先順序，同時參考次數、驅動因子分析與可行性<br>次數最多的抱怨，不一定是留任的驅動因子</p>
+  <div class="foot"><span class="lim">本頁為相關，不是因果；問卷沒有薪資構面，無法直接放進 Topic 08 的迴歸</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>45</span></div>
+</section>
+
+<section class="slide" data-layout="figure" data-density="4">
+  <div class="kicker">統計方法的選擇</div>
+  <h2 style="margin-bottom:10px">方法決策樹：開放題的位置</h2>
+  <svg viewBox="0 0 1650 680" width="1650" height="680" font-family="Noto Sans TC, sans-serif"><rect x="20" y="300" width="230" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="135.0" y="343" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">分析的問題</text><path d="M250,335 C290.0,335 290.0,110.0 330,110.0" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="330" y="75.0" width="340" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="500.0" y="105.0" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">比較群組平均</text><text x="500.0" y="131.0" font-size="18" text-anchor="middle" fill="#1C2F52">依變項為構面分數</text><path d="M670,110.0 C710.0,110.0 710.0,65 750,65" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="30" width="460" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="980.0" y="60" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">兩組：t 檢定</text><text x="980.0" y="86" font-size="18" text-anchor="middle" fill="#1C2F52">Topic 07</text><path d="M670,110.0 C710.0,110.0 710.0,155 750,155" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="120" width="460" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="980.0" y="150" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">三組以上：ANOVA</text><text x="980.0" y="176" font-size="18" text-anchor="middle" fill="#1C2F52">Topic 07</text><path d="M250,335 C290.0,335 290.0,245.0 330,245.0" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="330" y="210.0" width="340" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="500.0" y="240.0" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">多個構面預測一個結果</text><text x="500.0" y="266.0" font-size="18" text-anchor="middle" fill="#1C2F52">例：留任意願</text><path d="M670,245.0 C710.0,245.0 710.0,245 750,245" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="210" width="460" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="980.0" y="240" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">多元迴歸、驅動因子</text><text x="980.0" y="266" font-size="18" text-anchor="middle" fill="#1C2F52">Topic 08</text><path d="M250,335 C290.0,335 290.0,425.0 330,425.0" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="330" y="390.0" width="340" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="500.0" y="433.0" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">開放題文字</text><path d="M670,425.0 C710.0,425.0 710.0,335 750,335" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="300" width="460" height="70" rx="10" fill="#F4F1EA" stroke="#CFC6B4" stroke-width="2"/><text x="980.0" y="330" font-size="23" font-weight="700" text-anchor="middle" fill="#8A8478">詞頻與文字雲</text><text x="980.0" y="356" font-size="18" text-anchor="middle" fill="#8A8478">探索用，不決定主題排序</text><path d="M670,425.0 C710.0,425.0 710.0,425 750,425" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="390" width="460" height="70" rx="10" fill="#F3E3E4" stroke="#7A2033" stroke-width="3"/><text x="980.0" y="420" font-size="23" font-weight="700" text-anchor="middle" fill="#7A2033">編碼簿＋兩人編碼＋κ</text><text x="980.0" y="446" font-size="18" text-anchor="middle" fill="#7A2033">本週</text><path d="M670,425.0 C710.0,425.0 710.0,515 750,515" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="480" width="460" height="70" rx="10" fill="#F3E3E4" stroke="#7A2033" stroke-width="3"/><text x="980.0" y="510" font-size="23" font-weight="700" text-anchor="middle" fill="#7A2033">LLM 依編碼簿編碼</text><text x="980.0" y="536" font-size="18" text-anchor="middle" fill="#7A2033">本週：與人工比對 κ</text><path d="M250,335 C290.0,335 290.0,605.0 330,605.0" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="330" y="570.0" width="340" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="500.0" y="613.0" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">構面是否成立</text><path d="M670,605.0 C710.0,605.0 710.0,605 750,605" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="750" y="570" width="460" height="70" rx="10" fill="#fff" stroke="#1C2F52" stroke-width="2"/><text x="980.0" y="600" font-size="23" font-weight="700" text-anchor="middle" fill="#1C2F52">信度 α、EFA</text><text x="980.0" y="626" font-size="18" text-anchor="middle" fill="#1C2F52">Topic 05</text><path d="M1210,425 C1245.0,425 1245.0,425 1280,425" fill="none" stroke="#B9AE9A" stroke-width="2.5"/><rect x="1280" y="390" width="350" height="70" rx="10" fill="#F3E3E4" stroke="#7A2033" stroke-width="3"/><text x="1455.0" y="420" font-size="23" font-weight="700" text-anchor="middle" fill="#7A2033">κ ≥ .61 才定案</text><text x="1455.0" y="446" font-size="18" text-anchor="middle" fill="#7A2033">未達：修編碼簿重編</text></svg>
+  <div class="foot"><span class="lim">紅色框為本週實作；詞頻只用於探索</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>46</span></div>
+</section>
+
+<section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">07</div><h1>實機練習<br><span class=act-en>Hands-on with ChatGPT or Claude</span></h1><ul class="refs"></ul></div>
+  <div class="foot"><span class="lim">第七部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>47</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">練習流程</div>
+  <h2 style="margin-bottom:22px">六輪提示詞的練習流程</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:160px">輪次</th><th style="width:340px">任務</th><th>每輪結束後確認</th></tr>
+    <tr class="frag"><td>第 0 輪</td><td>規劃，不執行</td><td>四段分析、去識別化</td></tr>
+    <tr class="frag"><td>第 1 輪</td><td>讀資料與詞頻</td><td>516 則、512 則；薪資相關詞 67 則</td></tr>
+    <tr class="frag"><td>第 2 輪</td><td>建立編碼簿</td><td>修訂建議寫成可判斷的規則</td></tr>
+    <tr class="frag"><td>第 3 輪</td><td>LLM 編碼 100 則</td><td>100 列、11 個代碼、沒有關鍵字程式</td></tr>
+    <tr class="frag"><td>第 4 輪</td><td>與人工比對、算 κ</td><td>用計算器重算三個 κ</td></tr>
+    <tr class="frag"><td>第 5 輪</td><td>疑似 AI 代答與雙重查核</td><td>門檻 61.3 字、標記 16 則、不刪除</td></tr>
+  </table>
+  <div class="foot"><span class="lim">提示詞全文與答案在　<a class="lnk" href="../Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html#u8" target="_blank" rel="noopener">教材網站　實機練習</a>　，可直接複製</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>48</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">分工</div>
+  <h2 style="margin-bottom:22px">兩人一組的編碼與檢核</h2>
+  <table class="tight t4 t4s">
+    <tr><th style="width:120px"></th><th style="width:300px">誰</th><th>做什麼</th></tr>
+    <tr class="frag"><td>1</td><td>甲、乙</td><td>各自編碼 100 則，不討論</td></tr>
+    <tr class="frag"><td>2</td><td>甲</td><td>跑第 3 輪，把 LLM 代碼貼回範本</td></tr>
+    <tr class="frag"><td>3</td><td>甲、乙</td><td>計算器算三個 κ；甲乙未達 .61 時修編碼簿重編</td></tr>
+    <tr class="frag"><td>4</td><td>甲、乙</td><td>討論不一致的答案，填定案欄與理由</td></tr>
+    <tr class="frag"><td>5</td><td>乙</td><td>依檢核表核對甲的對話與程式碼，簽名</td></tr>
+  </table>
+  <div class="foot"><span class="lim">檢核表　<a class="lnk" href="../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">Topic09_分析檢核表.xlsx</a>　；編碼範本　<a class="lnk" href="../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">Topic09_開放題編碼範本.xlsx</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>49</span></div>
+</section>
+
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">名詞</div>
+  <h2 style="margin-bottom:18px">本週名詞</h2>
+  <table class="tight t4" style="font-size:24px">
+    <tr><th style="width:250px">名詞</th><th>意義</th></tr>
+    <tr class="frag"><td>詞頻</td><td>一個詞出現在幾則答案中；本週以答案則數計算</td></tr>
+    <tr class="frag"><td>斷詞</td><td>把中文句子切成詞的步驟；工具與詞典不同，結果不同</td></tr>
+    <tr class="frag"><td>編碼簿</td><td>每個主題的代碼、定義、納入、排除與例句</td></tr>
+    <tr class="frag"><td>主題</td><td>一組意思相近的答案共同談論的事項，例如薪資福利</td></tr>
+    <tr class="frag"><td>一致率</td><td>兩位編碼者給出相同代碼的比例</td></tr>
+    <tr class="frag"><td>Cohen’s κ</td><td>扣除碰巧一致後的一致程度；本課程 .61 以上通過</td></tr>
+    <tr class="frag"><td>信度與效度</td><td>信度：不同編碼者是否一致；效度：代碼是否反映原意</td></tr>
+  </table>
+  <div class="foot"><span class="lim">完整名詞對照見教材網站單元十</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>50</span></div>
+</section>
+
+<section class="slide xl" data-layout="task" data-density="3">
+  <div class="kicker">本週工作</div>
+  <h2>課後作業</h2>
+  <div class="task">
+    <ol>
+      <li class="frag">與組員各自編碼 100 則<br>算出三個 κ</li>
+      <li class="frag">挑五則不一致的答案<br>寫下原因與定案</li>
+      <li class="frag">讀教材網站<br>填寫分析檢核表</li>
+    </ol>
+    <div class="sheet">
+      <h3>個人量化分析作業</h3>
+      <p style="font-size:28px;line-height:1.65">同一份模擬資料<br>2026/11/26 23:59 截止<br>佔學期成績 25%</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lim">作業須附提示詞、程式碼與人機雙重查核紀錄；<a class="lnk" href="../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>51</span></div>
+</section>
+
+<section class="slide" data-layout="next" data-density="3">
+  <div class="kicker">下一步</div>
+  <h2>下次上課　2026/11/27 Topic 10</h2>
+  <div class="rows" style="margin-top:32px">
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">主題</div><div class="dd">資料視覺化與 AI Agent 決策分析整合</div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">課後閱讀</div><div class="dd"><a class="lnk" href="../Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener">課堂互動教材網站　開放題分析</a></div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">小工具</div><div class="dd"><a class="lnk" href="../Handout/Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></div></div>
+    <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">前一週</div><div class="dd"><a class="lnk" href="Topic07_課堂投影片.html" target="_blank" rel="noopener">Topic 07 課堂投影片</a></div></div>
+  </div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>52</span></div>
+</section>
+
+
+
+
+
+
+
+</div></div>
+
+<div id="bar"><i></i></div>
+<div id="pg">1 / 53</div>
+<div id="nav">
+  <button id="prev" aria-label="上一頁">←</button>
+  <button id="next" aria-label="下一頁">→</button>
+  <button id="fs" aria-label="全螢幕">⛶</button>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var mobile=function(){return innerWidth<=900;};
+
+  function fit(){
+    if(mobile()){
+      var s=innerWidth/1920;
+      slides.forEach(function(sl){sl.style.transform='scale('+s+')';sl.style.marginBottom=(-1080*(1-s)+12)+'px';});
+      return;
+    }
+    slides.forEach(function(sl){sl.style.transform='';sl.style.marginBottom='';});
+    var s=Math.min(innerWidth/1920, innerHeight/1080);
+    deck.style.setProperty('--s',s);
+    deck.style.setProperty('--tx',((innerWidth-1920*s)/2)+'px');
+    deck.style.setProperty('--ty',((innerHeight-1080*s)/2)+'px');
+  }
+  function frags(i){return Array.prototype.slice.call(slides[i].querySelectorAll('.frag'));}
+  function show(i,revealAll){
+    i=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+    frags(i).forEach(function(f){f.classList.toggle('in',!!revealAll);});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+N;
+    document.querySelector('#bar i').style.width=((i+1)/N*100)+'%';
+    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){
+    var f=frags(cur).filter(function(x){return !x.classList.contains('in');});
+    if(f.length){f[0].classList.add('in');return;}
+    if(cur<N-1) show(cur+1,false);
+  }
+  function prev(){
+    var f=frags(cur).filter(function(x){return x.classList.contains('in');});
+    if(f.length){f[f.length-1].classList.remove('in');return;}
+    if(cur>0) show(cur-1,true);
+  }
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    if(mobile()) return;
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0,false);}
+    else if(e.key==='End'){show(N-1,true);}
+    else if(e.key==='f'||e.key==='F'){toggleFS();}
+  });
+  var wheelT=0;
+  addEventListener('wheel',function(e){
+    if(mobile()) return;
+    var t=Date.now(); if(t-wheelT<420) return; wheelT=t;
+    if(e.deltaY>10) next(); else if(e.deltaY<-10) prev();
+  },{passive:true});
+  var tx=null;
+  addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){
+    if(mobile()||tx===null) return;
+    var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(dx<-40) next(); else if(dx>40) prev();
+  },{passive:true});
+
+  function toggleFS(){
+    if(document.fullscreenElement){document.exitFullscreen();}
+    else{var el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);}
+  }
+  document.getElementById('fs').addEventListener('click',toggleFS);
+  document.addEventListener('fullscreenchange',function(){
+    document.body.classList.toggle('fs',!!document.fullscreenElement);
+    setTimeout(fit,60);
+  });
+  var idleT=null;
+  function wake(){
+    if(!document.body.classList.contains('fs')) return;
+    document.body.classList.remove('idle'); clearTimeout(idleT);
+    idleT=setTimeout(function(){document.body.classList.add('idle');},2200);
+  }
+  ['mousemove','mousedown','touchstart','pointerdown'].forEach(function(ev){addEventListener(ev,wake,{passive:true});});
+
+  addEventListener('resize',fit);
+  fit();
+  var h=parseInt((location.hash||'#1').slice(1),10);
+  show(isNaN(h)?0:h-1,false);
+  if(mobile()){slides.forEach(function(s){s.classList.add('on');});}
+})();
+</script>
+</body>
+</html>
