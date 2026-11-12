@@ -655,6 +655,13 @@
     .refs-toggle-btn{min-height:40px;}
     .assign-head h4{min-height:0;}
   }
+  /* 2026-11-12：AI Agent 實機週的三步驟 */
+  .wk-steps{margin-top:.7rem;border:1px solid var(--line,#e5ded3);border-radius:10px;padding:.55rem .8rem;background:var(--paper,#fff);}
+  .wk-steps .st{display:flex;flex-wrap:wrap;gap:.35rem .5rem;align-items:center;padding:.35rem 0;}
+  .wk-steps .st+.st{border-top:1px dashed var(--line,#e5ded3);}
+  .wk-steps .tg{font-weight:700;font-size:.85rem;color:var(--accent);min-width:3.2em;}
+  .wk-steps .ds{font-size:.85rem;color:var(--ink-2);flex-basis:100%;margin-left:3.7em;margin-top:-.2rem;}
+  @media (max-width:640px){.wk-steps .ds{margin-left:0}}
 </style>
 </head>
 <body>
@@ -1149,12 +1156,15 @@
               <li>反向題轉換、遺漏值處理與常態性檢驗</li>
               <li>獨立樣本 t 檢定、單因子 ANOVA 與效果量（Cohen's d、η²）</li>
             </ul>
-            <div style="margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center"><span style="font-size:.85rem;color:var(--ink-2);flex-basis:100%;">💻 實機練習（帶筆電，用 ChatGPT 或 Claude）</span><a class="ref-btn-web" href="Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">⬇ 練習資料：員工調查模擬資料 Excel</a><a class="ref-btn-web" href="Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">⬇ 分析檢核表 Excel</a><a class="ref-btn-web" href="Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">⬇ AI 分析設定範本</a></div>
+            <div class="wk-steps">
+              <div class="st"><span class="tg">① 課前</span><a class="ref-btn-web" href="Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">教材網站 ↗</a><span class="ds">讀單元一、二，約 30 分鐘</span></div>
+              <div class="st"><span class="tg">② 課堂</span><a class="ref-btn-web" href="Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener">課堂投影片 ▶</a><a class="ref-btn-web" href="Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">⬇ 練習資料（Topic 07–09 共用）</a><a class="ref-btn-web" href="Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">⬇ AI 分析設定範本</a><span class="ds">帶筆電，用 ChatGPT 或 Claude 跟著投影片與教材網站的實機練習操作</span></div>
+              <div class="st"><span class="tg">③ 課後</span><a class="ref-btn-web" href="Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">⬇ 分析檢核表</a><a class="ref-btn-web" href="Assignments/個人分析作業_AI_Agent資料分析報告.html#schedule" target="_blank" rel="noopener">個人分析作業進度 ↗</a><span class="ds">核對練習結果；個人作業完成報告第一至三章（使用作業版資料）</span></div>
+            </div>
           </div>
           <div class="week-actions">
             <a href="Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">教材網站：AI 資料分析<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
             <a href="Handout/Topic07_AI資料分析_清理與比較/效果量計算器.html" target="_blank" rel="noopener" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">效果量計算小工具<span class="icon-chip" style="margin-left:.4rem;">🧮</span></a>
-            <a href="Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">課堂投影片 Topic 07<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
           </div>
         </div>
 
@@ -1168,11 +1178,14 @@
               <li>關鍵驅動因子分析（KDA）：多元線性迴歸模型與 Beta 排序</li>
               <li>殘差假設查核與防範 AI 統計幻覺之查核清單</li>
             </ul>
-            <div style="margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center"><span style="font-size:.85rem;color:var(--ink-2);flex-basis:100%;">💻 實機練習（帶筆電，用 ChatGPT 或 Claude）</span><a class="ref-btn-web" href="Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">⬇ 練習資料：員工調查模擬資料 Excel</a><a class="ref-btn-web" href="Assignments/Topic08_分析檢核表.xlsx" target="_blank" rel="noopener">⬇ 分析檢核表 Excel</a></div>
+            <div class="wk-steps">
+              <div class="st"><span class="tg">① 課前</span><a class="ref-btn-web" href="Handout/Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html" target="_blank" rel="noopener">教材網站 ↗</a><span class="ds">讀單元一、二，約 30 分鐘</span></div>
+              <div class="st"><span class="tg">② 課堂</span><a class="ref-btn-web" href="Slides/Topic08_課堂投影片.html" target="_blank" rel="noopener">課堂投影片 ▶</a><a class="ref-btn-web" href="Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">⬇ 練習資料（Topic 07–09 共用）</a><span class="ds">帶筆電，用 ChatGPT 或 Claude 跟著投影片與教材網站的實機練習操作</span></div>
+              <div class="st"><span class="tg">③ 課後</span><a class="ref-btn-web" href="Assignments/Topic08_分析檢核表.xlsx" target="_blank" rel="noopener">⬇ 分析檢核表</a><a class="ref-btn-web" href="Assignments/個人分析作業_AI_Agent資料分析報告.html#schedule" target="_blank" rel="noopener">個人分析作業進度 ↗</a><span class="ds">核對練習結果；個人作業完成報告第四章（使用作業版資料）</span></div>
+            </div>
           </div>
           <div class="week-actions">
             <a href="Handout/Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html" target="_blank" rel="noopener" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">教材網站：驅動因子與迴歸<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
-            <a href="Slides/Topic08_課堂投影片.html" target="_blank" rel="noopener" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">課堂投影片 Topic 08<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
           </div>
         </div>
 
@@ -1186,11 +1199,14 @@
               <li>LLM Agent 輔助主題編碼、情緒極性分析與摘要生成</li>
               <li>人工編碼與 LLM 編碼一致性檢驗（Cohen's κ）</li>
             </ul>
-            <div style="margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center"><span style="font-size:.85rem;color:var(--ink-2);flex-basis:100%;">💻 實機練習（帶筆電，用 ChatGPT 或 Claude）</span><a class="ref-btn-web" href="Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">⬇ 練習資料：員工調查模擬資料 Excel</a><a class="ref-btn-web" href="Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">⬇ 開放題編碼範本 Excel</a><a class="ref-btn-web" href="Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">⬇ 分析檢核表 Excel</a></div>
+            <div class="wk-steps">
+              <div class="st"><span class="tg">① 課前</span><a class="ref-btn-web" href="Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener">教材網站 ↗</a><span class="ds">讀單元一、二，約 30 分鐘</span></div>
+              <div class="st"><span class="tg">② 課堂</span><a class="ref-btn-web" href="Slides/Topic09_課堂投影片.html" target="_blank" rel="noopener">課堂投影片 ▶</a><a class="ref-btn-web" href="Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">⬇ 練習資料（Topic 07–09 共用）</a><a class="ref-btn-web" href="Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">⬇ 開放題編碼範本</a><span class="ds">帶筆電，用 ChatGPT 或 Claude 跟著投影片與教材網站的實機練習操作</span></div>
+              <div class="st"><span class="tg">③ 課後</span><a class="ref-btn-web" href="Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">⬇ 分析檢核表</a><a class="ref-btn-web" href="Assignments/個人分析作業_AI_Agent資料分析報告.html#schedule" target="_blank" rel="noopener">個人分析作業進度 ↗</a><span class="ds">核對練習結果；個人作業完成報告第五章（使用作業版資料）</span></div>
+            </div>
           </div>
           <div class="week-actions">
             <a href="Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener" class="link-pill" style="background:var(--accent-tint);border-color:var(--accent);color:var(--accent)!important;font-weight:700;">教材網站：開放題分析<span class="icon-chip" style="margin-left:.4rem;">↗</span></a>
-            <a href="Slides/Topic09_課堂投影片.html" target="_blank" rel="noopener" class="link-pill" style="font-size:.875rem;color:var(--ink-2)!important;">課堂投影片 Topic 09<span class="icon-chip" style="margin-left:.4rem;">▶</span></a>
             <a href="Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener" class="due-chip due-link" style="text-decoration:none;display:block;">個人作業截止 ↗<br>2026/11/26 23:59</a>
           </div>
         </div>
