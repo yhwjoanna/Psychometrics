@@ -140,8 +140,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 
 <main>
 <span class="eyebrow">INDIVIDUAL ANALYSIS PROJECT　25%</span>
-<h1>個人分析作業：AI Agent 模擬資料分析報告<br><span class="h1-sub">以課程模擬資料完成可重現的量化與質化診斷</span></h1>
-<p class="lead">本作業以 Week 09 至 Week 11 的 AI Agent 資料分析架構（Topic 07 清理與群組比較、Topic 08 驅動因子與迴歸、Topic 09 開放題分析）分析課程的員工調查模擬資料，產出一份可重現的量化與質化診斷報告，並附上提示詞、程式碼、對話紀錄與人機雙重查核紀錄</p>
+<h1>個人分析作業：AI Agent 模擬資料分析報告<br><span class="h1-sub">以作業版模擬資料完成可重現的量化與質化診斷</span></h1>
+<p class="lead">本作業以 Week 09 至 Week 11 的 AI Agent 資料分析架構（Topic 07 清理與群組比較、Topic 08 驅動因子與迴歸、Topic 09 開放題分析）分析作業版模擬資料，產出一份可重現的量化與質化診斷報告，並附上提示詞、程式碼、對話紀錄與人機雙重查核紀錄</p>
 
 <div class="facts">
   <div class="fact"><div class="k">比重</div><div class="v">25%<small>學期成績，個人獨立完成</small></div></div>
@@ -158,8 +158,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <ol class="plain">
       <li>以 AI Agent 規劃與執行資料清理：草率作答（直線作答與隨機亂填）與開放題疑似 AI 代答的偵測、反向題轉換、遺漏值處理，每一步保留人數紀錄</li>
       <li>以獨立樣本 t 檢定與單因子 ANOVA 比較廠區、部門與年資差異，找出核心問題單位並描述差距型態</li>
-      <li>以留任意願為依變數進行多元迴歸，報告標準化迴歸係數、VIF 與殘差檢查；全公司之外，另以指定廠區重做一次並比較</li>
-      <li>以 LLM Agent 輔助開放題 OE2 的編碼，並與自己的人工編碼比較</li>
+      <li>以留任意願為依變數進行多元迴歸，報告標準化迴歸係數、VIF 與殘差檢查</li>
+      <li>以 LLM Agent 輔助開放題編碼，並與人工編碼比較</li>
       <li>對 AI 產出的每一項結果進行人工查核，留下紀錄</li>
     </ol>
     <p>可使用工具：ChatGPT/Codex、Claude/Claude Code、Gemini/Antigravity、Excel、JASP、Python。可以混用，報告中須寫明每一個步驟使用的工具與版本或方案</p>
@@ -168,28 +168,21 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 
 <section id="data">
   <div class="sec-tag">02　作業資料</div>
-  <h2>員工調查模擬資料</h2>
+  <h2>作業版模擬資料</h2>
   <div class="card">
-    <p>資料檔：<a href="Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic07_員工調查模擬資料.xlsx</a>（與 Topic 07 至 Topic 09 課堂練習使用同一份資料）</p>
+    <p>資料檔：<a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></p>
     <table>
       <tr><th style="width:28%">工作表</th><th>內容</th></tr>
       <tr><td>原始資料</td><td>1,000 位員工、37 欄：員工編號、廠區、部門、職級、人員類別、年資，29 題李克特 6 點題目（ENG、SUP、REC、COM、RET、AIA 六個構面），兩題開放題</td></tr>
       <tr><td>題目對照表</td><td>變項代碼、構面、題目內容與計分方向</td></tr>
       <tr><td>構面與計分說明</td><td>量尺、構面題數、反向題處理與構面分數計算方式</td></tr>
     </table>
-    <p>作業使用課堂練習的同一份資料，不另外提供作業資料。報告須寫明每一個清理步驟的判定方法與門檻，並以自己的程式與對話紀錄重現每一個數字</p>
-  </div>
-  <h3 style="margin-top:22px">作業的兩個部分</h3>
-  <div class="tblwrap">
-  <table>
-    <tr><th style="width:18%">部分</th><th style="width:38%">內容</th><th>答案</th></tr>
-    <tr><td>A　重做課堂分析</td><td>第一章清理、第二章信度、第三章群組比較、第四章的全公司迴歸</td><td>課堂已公布，見教材網站與分析檢核表「預期結果」欄；用來確認自己的程式與數字正確</td></tr>
-    <tr><td>B　自己完成</td><td>第四章的指定廠區驅動因子分析，並以 JASP 重算迴歸；第五章指定廠區的 OE2 開放題編碼</td><td>不公布；每個廠區的結果不同，人工編碼由本人完成</td></tr>
-  </table>
-  </div>
-  <div class="card">
-    <p><strong>指定廠區</strong>：依學號最後一碼決定。0–3 為台南廠、4–6 為台中廠、7–9 為高雄廠。報告封面寫明學號與指定廠區；B 部分以指定廠區的結果評分</p>
-    <p><strong>OE2</strong>：「請描述最近一次在工作上感到被肯定或有成就感的經驗」。課堂實機練習使用 OE1。Topic 09 的 Agent 示範用過一份 OE2 編碼簿，可以作為起點，但須依指定廠區的回答檢查與修訂，並在報告中寫明修改了哪些類別與理由；人工編碼由本人完成</p>
+    <p>作業版的題目與計分說明和課堂練習資料相同，但群組結構與分析結果不同，課堂練習的答案不適用於作業。資料中埋有資料品質問題，數量與位置不事先公布，判定方法與門檻須在報告中寫明</p>
+    <table style="margin-top:14px">
+      <tr><th style="width:24%">資料</th><th>用途</th><th style="width:36%">答案</th></tr>
+      <tr><td>課堂練習資料<br><a href="Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic07_員工調查模擬資料.xlsx</a></td><td>Topic 07 至 Topic 09 課堂實機練習</td><td>已公布在教材網站與分析檢核表「預期結果」欄</td></tr>
+      <tr><td>作業資料<br><a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></td><td>個人分析作業；報告中的數字都來自這份資料</td><td>不公布；分析步驟和課堂相同，結果不同</td></tr>
+    </table>
   </div>
   <div class="warn">本作業只使用課程提供的模擬資料。任何真實員工資料、任職公司的調查資料或含個人資料的檔案，一律不得上傳至 AI 工具，也不得放入報告</div>
 </section>
@@ -201,25 +194,14 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <div class="tblwrap">
   <table>
     <tr><th style="width:30%">章節</th><th>必備內容</th></tr>
-    <tr><td>一、資料與清理</td><td>原始人數；每一個清理步驟的判定規則、門檻值與刪除人數，以及該步驟後的剩餘人數；OE1 疑似 AI 代答的判定規則與件數；反向題的判斷依據（題目對照表與題目文字是否一致）；遺漏值處理方式</td></tr>
+    <tr><td>一、資料與清理</td><td>原始人數；每一個清理步驟的判定規則、門檻值與刪除人數，以及該步驟後的剩餘人數；反向題的判斷依據（題目對照表與題目文字是否一致）；遺漏值處理方式</td></tr>
     <tr><td>二、信度</td><td>各構面 Cronbach's α；α 未達 .70 的構面列出題目與總分相關，回到題目文字說明原因與處理決定</td></tr>
     <tr><td>三、群組比較：核心問題單位</td><td>廠區、部門與年資的比較；兩組用 Welch t 檢定並附 Cohen's d，三組以上用單因子 ANOVA 並附 η²、Levene 檢定與事後比較方法；核心問題單位的界定依據與差距型態；人數少於 5 人的群組不單獨呈現</td></tr>
-    <tr><td>四、驅動因子分析</td><td>（一）全公司（A 部分）：構面相關矩陣；以留任意願（RET）為依變數，敬業度、主管支持、認可與回饋、組織承諾、AI 導入態度為自變數的多元迴歸；R²、標準化迴歸係數 β 與排序、VIF、殘差檢查（常態、變異數同質、離群與影響值）；相關與 β 排序不同時的說明<br>（二）指定廠區（B 部分）：只取指定廠區的清理後資料，重做相關、迴歸、VIF、殘差檢查與優先改善矩陣，分隔線規則與課堂相同（該廠區驅動因子 β 的平均、構面平均的平均）；與全公司比較 β 排序與象限的異同，並說明可能原因<br>（三）JASP 重算（B 部分）：指定廠區的迴歸在 JASP 重做一次，附錄放 JASP 截圖與對照表，做法見下方說明</td></tr>
-    <tr><td>五、開放題分析（B 部分）</td><td>對象為指定廠區、清理後保留員工的 OE2 全部非空白回答。編碼簿（類別名稱、定義、納入與排除條件、例句）；本人人工編碼全部回答；LLM 依同一份編碼簿編碼；人工與 LLM 的一致率與 Cohen's κ，列出不一致的例子與定案理由；各類別的次數與比例；比較各類別回答者的認可與回饋（REC）構面平均，說明質化與量化結果是否一致</td></tr>
-    <tr><td>六、結論與管理建議</td><td>結論寫在本章開頭，以人資長能直接使用的語言陳述問題單位、主要驅動因子、指定廠區與全公司的差異，以及建議行動；每一項建議對應到前面章節的數字；分析限制（模擬資料、橫斷面、相關不等於因果）</td></tr>
+    <tr><td>四、驅動因子分析</td><td>構面相關矩陣；以留任意願（RET）為依變數，敬業度、主管支持、認可與回饋、組織承諾、AI 導入態度為自變數的多元迴歸；R²、標準化迴歸係數 β 與排序、VIF、殘差檢查（常態、變異數同質、離群與影響值）；相關與 β 排序不同時的說明</td></tr>
+    <tr><td>五、開放題分析</td><td>編碼簿（類別名稱、定義、納入與排除條件、例句）；雙人編碼一致性 Cohen's κ，或人工編碼與 LLM 編碼的比較與 κ；疑似 AI 代答的判定依據與件數；各類別在問題單位與其他單位的分布</td></tr>
+    <tr><td>六、結論與管理建議</td><td>結論寫在本章開頭，以人資長能直接使用的語言陳述問題單位、主要驅動因子與建議行動；每一項建議對應到前面章節的數字；分析限制（模擬資料、橫斷面、相關不等於因果）</td></tr>
     <tr><td>附錄</td><td>對話紀錄清單、提示詞全文、程式碼、分析檢核表與分析紀錄（亦放入 ZIP）</td></tr>
   </table>
-  </div>
-  <div class="card" style="margin-top:18px">
-    <h3 style="margin-top:0">JASP 重算指定廠區迴歸（第四章（三））</h3>
-    <ol class="plain">
-      <li>在 JASP 開啟 AI 匯出的清理後 CSV（構面分數已算好、反向題已轉換）</li>
-      <li>以 JASP 的篩選功能只保留指定廠區，確認資料列數與 AI 回報的人數相同</li>
-      <li>迴歸分析 → 線性迴歸：依變項 RET；預測變項 ENG、SUP、REC、COM、AIA 同時放入，方法為「納入」</li>
-      <li>統計量勾選估計值、信賴區間、允差值與 VIF、Durbin–Watson；圖勾選殘差 vs. 預測值、標準化殘差的 Q–Q 圖。設定方式與 <a href="../Slides/Topic08_課堂投影片.html" target="_blank" rel="noopener">Topic 08 投影片</a>的 JASP 步驟相同</li>
-      <li>附錄放三張截圖：迴歸設定畫面、模型摘要與係數表、殘差圖；另列對照表，逐項比較 JASP 與 AI 的 n、R²、各構面 β 與 VIF。小數第三位的差異可接受；人數、β 排序或顯著與否不同時，找出原因並寫進分析紀錄</li>
-      <li>存檔為 學號_姓名_指定廠區迴歸.jasp，放入 ZIP 的 05 資料夾</li>
-    </ol>
   </div>
   <p>格式：A4 直式，中文標楷體、英文與數字 Times New Roman，12 pt；正文 12 頁以內，附錄不計；統計報告與參考文獻依 APA 第七版，小數兩位，p 小於 .001 寫為 p &lt; .001，每一個差異都附效果量</p>
 </section>
@@ -229,9 +211,9 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <h2>報告以外的五項附件</h2>
   <ol class="steps">
     <li><h4>提示詞</h4><p>每一輪貼給 AI 的提示詞全文，依使用順序編號；有使用專案指示、CLAUDE.md 或 Skill 時一併附上。以 <a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a> 為基礎修改者，附上修改後的版本</p><div class="out">檔案：.txt、.md 或 .docx</div></li>
-    <li><h4>程式碼</h4><p>AI 執行的完整程式碼，整理成一份，從讀入資料到產出報告中的每一個數字都能依序重跑。以 Excel 完成的步驟附上活頁簿；指定廠區迴歸的 .jasp 檔必繳</p><div class="out">檔案：.py、.R、.ipynb，或貼在 Word 附錄</div></li>
+    <li><h4>程式碼</h4><p>AI 執行的完整程式碼，整理成一份，從讀入資料到產出報告中的每一個數字都能依序重跑。以 Excel 或 JASP 完成的步驟，附上活頁簿或 .jasp 檔</p><div class="out">檔案：.py、.R、.ipynb，或貼在 Word 附錄</div></li>
     <li><h4>對話紀錄</h4><p>與 AI 的完整對話，以下列兩種形式之一提供，詳細步驟見下方說明。每一個分析階段使用一個對話即可，例如清理與比較、驅動因子、開放題各一個；所有對話依時間順序列在報告附錄的對話紀錄清單</p><div class="out">分享連結，或匯出的 PDF／文字檔</div></li>
-    <li><h4>分析檢核表</h4><p>使用 <a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>。「預期結果」欄為課程分析程式的參考數值（A 部分）；「我的結果」欄填自己分析得到的結果；B 部分沒有預期結果，在表末自行新增列，填入指定廠區的結果，「一致？」欄記錄檢核者比對程式輸出後的判定。檢核者由另一位修課同學擔任，只負責比對「我的結果」與對話紀錄、程式輸出是否一致，不代為分析；檢核者在表頭與「檢核者」欄簽名</p><div class="out">檔案：學號_姓名_分析檢核表.xlsx</div></li>
+    <li><h4>分析檢核表</h4><p>使用 <a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>。「預期結果」欄為課堂練習資料的數值，作業版資料的結果不同；「我的結果」欄改填自己在作業版資料的結果，「一致？」欄記錄檢核者比對程式輸出後的判定。檢核者由另一位修課同學擔任，只負責比對「我的結果」與對話紀錄、程式輸出是否一致，不代為分析；檢核者在表頭與「檢核者」欄簽名</p><div class="out">檔案：學號_姓名_分析檢核表.xlsx</div></li>
     <li><h4>分析紀錄</h4><p>檢核表中的「分析紀錄」工作表。每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人或 AI）、確認者。例如隨機亂填門檻、反向題是否轉換、問題單位如何界定、迴歸是否排除離群值、開放題類別如何合併</p><div class="out">與分析檢核表同一個檔案</div></li>
   </ol>
 </section>
@@ -302,7 +284,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <table>
     <tr><th style="width:30%">檔案</th><th>內容與檔名</th></tr>
     <tr><td>報告 PDF</td><td>學號_姓名_個人分析報告.pdf，A4 直式，正文 12 頁以內</td></tr>
-    <tr><td>附件 ZIP</td><td>學號_姓名_個人分析作業附件.zip，內含五個資料夾：<br>01_提示詞／02_程式碼／03_對話紀錄／04_分析檢核表（檢核表與分析紀錄同一個 .xlsx）／05_JASP 與其他（指定廠區迴歸的 .jasp 檔必繳；Excel 活頁簿有使用時附上）</td></tr>
+    <tr><td>附件 ZIP</td><td>學號_姓名_個人分析作業附件.zip，內含五個資料夾：<br>01_提示詞／02_程式碼／03_對話紀錄／04_分析檢核表（檢核表與分析紀錄同一個 .xlsx）／05_其他（Excel 活頁簿、.jasp 檔，有使用時）</td></tr>
     <tr><td>私人留言</td><td>使用分享連結時，在 Google Classroom 繳交頁面的私人留言貼上所有連結，依編號排列</td></tr>
   </table>
   </div>
@@ -329,8 +311,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <h2>三週課程與繳交期限</h2>
   <div class="timeline">
     <div class="tl"><div class="d">2026/11/06<span>WEEK 09　TOPIC 07</span></div><p>AI Agent 資料分析架構、資料清理與群組比較；作業啟動，課後可完成報告第一至三章</p></div>
-    <div class="tl"><div class="d">2026/11/13<span>WEEK 10　TOPIC 08</span></div><p>構面相關、多重共線性與關鍵驅動因子迴歸；課後可完成第四章（全公司、指定廠區與 JASP 重算）</p></div>
-    <div class="tl"><div class="d">2026/11/20<span>WEEK 11　TOPIC 09</span></div><p>開放題編碼簿、Cohen's κ、LLM 輔助編碼與疑似 AI 代答偵測；課後可完成第五章（指定廠區的 OE2）</p></div>
+    <div class="tl"><div class="d">2026/11/13<span>WEEK 10　TOPIC 08</span></div><p>構面相關、多重共線性與關鍵驅動因子迴歸；課後可完成第四章</p></div>
+    <div class="tl"><div class="d">2026/11/20<span>WEEK 11　TOPIC 09</span></div><p>開放題編碼簿、Cohen's κ、LLM 輔助編碼與疑似 AI 代答偵測；課後可完成第五章</p></div>
     <div class="tl"><div class="d">2026/11/26（四）23:59<span>繳交截止</span></div><p>報告 PDF 與附件 ZIP 上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 作業區</p></div>
   </div>
 </section>
@@ -342,11 +324,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <div class="tblwrap">
   <table>
     <tr><th style="width:12%">比重</th><th style="width:30%">向度</th><th>評分重點</th></tr>
-    <tr><td class="w">20%</td><td>資料清理與代答快篩</td><td>草率作答與 OE1 疑似 AI 代答的判定規則、門檻與每步人數；反向題與遺漏值處理的依據；清理流程可依程式碼重現</td></tr>
+    <tr><td class="w">20%</td><td>資料清理與代答快篩</td><td>草率作答與疑似 AI 代答的判定規則、門檻與每步人數；反向題與遺漏值處理的依據；清理流程可依程式碼重現</td></tr>
     <tr><td class="w">20%</td><td>群組差異與核心問題單位</td><td>檢定方法與前提檢查是否正確；每一個差異附效果量；問題單位的界定依據與差距型態；小群組依匿名門檻處理</td></tr>
-    <tr><td class="w">20%</td><td>關鍵驅動因子迴歸分析</td><td>模型設定、標準化 β 與排序、VIF 與殘差檢查；相關與 β 排序不同時的解讀；指定廠區與全公司的比較；未以相關資料做因果推論</td></tr>
-    <tr><td class="w">20%</td><td>開放題質化分析</td><td>OE2 編碼簿定義清楚；本人人工編碼與 LLM 編碼的比較與 κ；不一致例子的定案理由；質化結果與量化結果的對照</td></tr>
-    <tr><td class="w">20%</td><td>人機雙重查核紀錄</td><td>提示詞、程式碼與對話紀錄齊備且可開啟；檢核表與分析紀錄完整，檢核者已簽名；公式、效果量與推論方式的查核過程；指定廠區迴歸的 JASP 截圖、.jasp 檔與對照表；發現 AI 錯誤時的修正紀錄</td></tr>
+    <tr><td class="w">20%</td><td>關鍵驅動因子迴歸分析</td><td>模型設定、標準化 β 與排序、VIF 與殘差檢查；相關與 β 排序不同時的解讀；未以相關資料做因果推論</td></tr>
+    <tr><td class="w">20%</td><td>開放題質化分析</td><td>編碼簿定義清楚；人工編碼與 LLM 編碼的比較與一致性；疑似 AI 代答的判定依據；質化結果與量化結果的對照</td></tr>
+    <tr><td class="w">20%</td><td>人機雙重查核紀錄</td><td>提示詞、程式碼與對話紀錄齊備且可開啟；檢核表與分析紀錄完整，檢核者已簽名；公式、效果量與推論方式的查核過程；發現 AI 錯誤時的修正紀錄</td></tr>
   </table>
   </div>
   <p>結論與管理建議（第六章）、報告格式與 APA 引用列入各向度的報告品質一併評定</p>
@@ -363,7 +345,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <tr><td>Topic 09 教材網站</td><td><a href="../Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener">開放題分析</a></td></tr>
     <tr><td>分析檢核表</td><td><a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>（含「分析紀錄」工作表）</td></tr>
     <tr><td>AI 分析設定範本</td><td><a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a>（專案指示與分析規則）</td></tr>
-    <tr><td>作業資料</td><td><a href="Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic07_員工調查模擬資料.xlsx</a>（與課堂練習相同）</td></tr>
+    <tr><td>作業資料</td><td><a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></td></tr>
   </table>
   </div>
 </section>
