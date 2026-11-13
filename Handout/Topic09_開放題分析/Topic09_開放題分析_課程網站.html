@@ -533,8 +533,8 @@ table.cbk td{text-align:left !important;vertical-align:top}
   </table></div>
   <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 1 輪的提示詞。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請只用「原始資料」工作表的 OE1_最希望優先改善：
 1. 回報非空白答案的則數，以及不重複答案的則數。
-2. 用 jieba 斷詞（若無法使用 jieba，請說明改用的方法）；刪除單字詞、標點與下列停用詞：希望、可以、公司、沒有、不要、一直、真的、什麼、我們、大家。以「提到該詞的答案則數」計算詞頻，列出前 20 名，並畫一張文字雲。
-3. 計算含有「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數，並列出這十個詞各自的則數。
+2. 用 jieba 斷詞（預設設定；若無法使用 jieba，請說明改用的方法）；刪除單字詞、標點與下列停用詞：希望、可以、公司、沒有、不要、一直、真的、什麼、我們、大家。以「提到該詞的答案則數」計算詞頻，列出前 20 名，並畫一張文字雲。
+3. 這一項不必斷詞，直接看答案文字是否包含這些字串：計算含有「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數，並列出這十個詞各自的則數。
 4. 從資料中各找兩則例子，說明文字雲的四個盲點：同義詞分散、否定詞被刪掉、斷詞錯誤、一則答案提到兩個主題。</pre></div></div>
   <div class="key"><span class="lb">本單元要點</span>詞頻計算的是詞，不是主題。同一主題的詞分散、同一個詞屬於不同主題、否定消失、斷詞錯誤、長答案主導排名，都會讓文字雲與實際的主題次數不同。文字雲適合探索，主題排序需要編碼。</div>
   <div class="quiz">
@@ -784,12 +784,12 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 2. 每個主題寫兩句重點，每句後面附兩則例句的編號（例如 S014、S052），不要寫例句以外的推測。
 3. 列出含與不含疑似 AI 代答兩個版本的前五名，說明排序是否改變。
 4. 引用的原文刪除人名、單位與具體事件。</pre></div>
-  <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 3 輪的提示詞。上傳的編碼範本「編碼者甲」「編碼者乙」兩欄要是空白的，LLM 才不會看到人工的代碼；AI 中途停止時，請它從停下的編號接著做。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「編碼簿」工作表與下方規則，為「100 則樣本」工作表的 100 則答案編碼：
+  <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 3 輪的提示詞。上傳的編碼範本「編碼者甲」「編碼者乙」兩欄要是空白的，LLM 才不會看到人工的代碼；AI 中途停止時，請它從停下的編號接著做。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「編碼簿」工作表與下方規則，為「100 則樣本」工作表的 100 則答案編碼。請使用工作表上的編碼簿，不要用你在上一輪建議的修改；不要參考「編碼者甲」「編碼者乙」兩欄：
 1. 每則只給一個主要主題代碼（答案中最先提到的改善事項），只能用編碼簿的 11 個代碼。
 2. 同時提到第二個事項時，另列「次要代碼」；沒有就留空。
 3. 每則附「信心」（高／中／低）；信心低時，寫出猶豫的兩個代碼。
 4. 逐則閱讀後判斷，不要寫關鍵字程式自動分類。
-輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列，依編號排序；並提供 CSV 讓我下載。</pre></div></div>
+輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列全部列出、不得省略，依編號排序；並提供 Excel 檔讓我下載。如果中途停下，我會說「繼續」，請從下一個編號接著做。</pre></div></div>
   <div class="key"><span class="lb">本單元要點</span>LLM 是第三位編碼者，用同一份編碼簿，與人工比對後才使用。提示詞要有編碼簿、規則、「不寫關鍵字程式」、信心與輸出格式。重跑一致屬於信度，不代表正確。摘要每句附例句編號，才能回到原文核對。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 4</div>
@@ -848,10 +848,10 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
     <li>報告同時寫出甲乙、甲與 LLM、乙與 LLM 三個 κ 與一致率，以及編碼簿修訂的次數。</li>
     <li>100 則樣本的主題次數只代表樣本；推論到全部答案時，要寫明是樣本結果，或在 LLM 通過比對後編碼全部答案。</li>
   </ul>
-  <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 4 輪的提示詞。這一輪才上傳填好甲、乙、LLM 三欄的範本。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳填好的編碼範本：「編碼者甲」「編碼者乙」是兩位組員各自的編碼，「LLM」是上一輪你的主要代碼。
-1. 計算三組的一致率與 Cohen&#x27;s κ：甲與乙、甲與 LLM、乙與 LLM。寫出 κ 的計算過程（觀察一致率、碰巧一致率）。
+  <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 4 輪的提示詞。這一輪才上傳填好甲、乙、LLM 三欄的範本。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳填好的編碼範本：「編碼者甲」「編碼者乙」是兩位組員各自的編碼，「LLM」是上一輪你的主要代碼。請只讀「100 則樣本」工作表第 2 到 101 列的 C、D、E 欄。
+1. 分別計算三對的一致率與 Cohen&#x27;s κ：甲與乙、甲與 LLM、乙與 LLM。寫出 κ 的計算過程（觀察一致率、碰巧一致率）。
 2. 列出甲與 LLM 的交叉表（列為甲，欄為 LLM）。
-3. 列出甲、乙一致但 LLM 不同的答案，每則說明可能原因：定義不清、多主題、否定、籠統答案，或其他。
+3. 列出甲、乙一致但 LLM 不同的答案，每則說明可能原因：定義不清、多主題、否定、籠統答案，或其他；沒有這種答案時，請寫 0 則，並改列甲、乙不一致的答案。
 4. 附上完整程式碼。</pre></div></div>
   <div class="key"><span class="lb">本單元要點</span>先看甲乙 κ 確認編碼簿可用，再看人與 LLM 的 κ。交叉表指出錯在哪裡，不一致案例歸類後回頭修訂編碼簿或提示詞。主題次數以討論後定案計算。</div>
   <div class="quiz">
@@ -914,10 +914,10 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
     <li>從設計端預防：題目問具體的經驗與事件，說明開放題的用途與後續行動，讓填答者願意自己寫。</li>
     <li>AI 代答的內容仍可能反映填答者真正在意的事（例如選擇了「薪酬福利」作為主題），刪除等於丟掉這個訊號。</li>
   </ul>
-  <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 5 輪的提示詞。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回到原始資料的全部 OE1 答案：
+  <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 5 輪的提示詞。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回到原始資料的 OE1，只看非空白的答案（空白不計）：
 1. 計算每則答案的字數（含標點的字元數，等同 Excel 的 LEN）；以全部答案字數的平均＋3 個標準差（樣本標準差）為門檻，回報平均、標準差、門檻與超過門檻的則數。
 2. 計算同時含「不僅」與「進而」的答案則數，以及與第 1 點重疊的則數。
-3. 比較被標記與未標記答案的平均字數與平均逗號數，並列出被標記答案的開頭五個字。
+3. 比較被標記與未標記答案的平均字數、最短與最長字數、平均逗號數，並列出被標記答案的開頭五個字，以及其中有幾則在「100 則樣本」工作表裡（列出編號）。
 4. 被標記的答案不要刪除。請說明：這些規則能確定答案是 AI 寫的嗎？標記之後要怎麼處理？
 5. 最後把這次對話用到的完整程式碼整理成一份，並列出你自行決定、我沒有指定的事項。</pre></div></div>
   <div class="key"><span class="lb">本單元要點</span>疑似 AI 代答較長、逗號多、出現固定的模板詞。用「平均＋3 個標準差」與模板詞兩項規則標記，門檻由資料計算。規則只能標記疑似：保留答案、做含與不含兩個版本、寫進方法說明，不回推身分。</div>
@@ -941,21 +941,25 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
   <h1>單元八：實機練習</h1>
   <div class="subtitle">六輪提示詞與答案對照</div>
   <ol class="steps">
-    <li>下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料</a>與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>，開啟 ChatGPT 或 Claude 網頁版的新對話，上傳兩個檔案</li>
-    <li>在同一個對話中，依序貼上第 0 輪到第 5 輪的提示詞（按「複製」）</li>
-    <li>每一輪看完 AI 的結果，按「看答案」對照；可由程式算出的數字附正確答案，編碼與 κ 依各組結果而定，只列判斷原則</li>
-    <li>第 3 輪之前，甲、乙先各自完成 100 則編碼（範本 C、D 欄），避免看到 LLM 的結果後受影響</li>
-    <li>第 4 輪上傳填好的範本；三個 κ 再用<a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>重算一次</li>
-    <li>完成後填寫<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，與同學交換互查（單元九）</li>
+    <li>下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料</a>與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>。兩人一組：甲、乙各自存一份範本</li>
+    <li>開啟 ChatGPT 或 Claude 網頁版的新對話，上傳練習資料與空白的範本，依序貼上第 0、1、2 輪的提示詞（按「複製」），每一輪按「看答案」對照</li>
+    <li>人工編碼：甲只填自己那份範本的「編碼者甲」欄，乙只填自己那份的「編碼者乙」欄，各 100 則；編完之前不互傳檔案、不討論，也先不要跑第 3 輪</li>
+    <li>兩人都編完後，乙把「編碼者乙」欄 100 格複製，貼進甲的範本，之後用甲這一份</li>
+    <li>第 3 輪：在同一個對話貼上提示詞，AI 讀的是先前上傳的空白範本，看不到人工代碼。把 AI 輸出的「主要代碼」100 格貼進範本的「LLM」欄；次要代碼寫在備註欄</li>
+    <li>第 4 輪：上傳填好甲、乙、LLM 三欄的範本，貼上提示詞；三個 κ 再用<a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>重算一次（選「三位組員」，只看兩兩 κ）</li>
+    <li>討論甲、乙不一致的答案，把結論填進「討論後定案」欄；甲乙一致的列，定案欄填同一個代碼</li>
+    <li>第 5 輪：貼上提示詞，標記疑似 AI 代答</li>
+    <li>填寫<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，與同學交換互查（單元九）</li>
   </ol>
+  <div class="note"><span class="lb">課堂與課後</span>課堂時間不夠編完 100 則時，課堂先做第 0、1、2、5 輪並開始人工編碼；人工編碼、第 3 輪與第 4 輪課後完成。AI 的環境沒有 jieba 或中文字型時，詞頻排名會不同、文字雲可能顯示成方框，對照「主管 58 則」與薪資十詞的則數即可。</div>
   <div class="note"><span class="lb">提醒</span>答案由課程的分析程式計算。詞頻排名依斷詞工具與停用詞不同而略有差異；則數、門檻與標記則數用同一份資料應完全相同。</div>
   <div class="round">
   <div class="rhead">第 0 輪：規劃（不執行）</div>
   <div class="rbody">
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳兩個檔案：員工意見調查的模擬資料（Excel，原始資料工作表有開放題 OE1_最希望優先改善），以及開放題編碼範本（編碼簿、100 則樣本、使用說明三個工作表）。
-這一輪先不要計算，請用條列回答：
+這一輪可以先打開檔案看欄位與筆數，但先不要做任何分析。請用條列回答：
 1. OE1 這一題大約有多少人作答，答案的長度大概如何。
-2. 你打算怎麼分析這一題：詞頻、依編碼簿編碼、比對一致性、檢查疑似 AI 代答，依序列出步驟。
+2. 你打算怎麼分析這一題，依序列出六個步驟：讀資料、詞頻、檢視編碼簿、LLM 依編碼簿編碼、與人工編碼比對一致性、檢查疑似 AI 代答。
 3. 有哪些決定需要我確認後才能執行。
 4. 真實資料交給 AI 之前，需要先做哪些去識別化處理。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
@@ -971,8 +975,8 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
   <div class="rbody">
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請只用「原始資料」工作表的 OE1_最希望優先改善：
 1. 回報非空白答案的則數，以及不重複答案的則數。
-2. 用 jieba 斷詞（若無法使用 jieba，請說明改用的方法）；刪除單字詞、標點與下列停用詞：希望、可以、公司、沒有、不要、一直、真的、什麼、我們、大家。以「提到該詞的答案則數」計算詞頻，列出前 20 名，並畫一張文字雲。
-3. 計算含有「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數，並列出這十個詞各自的則數。
+2. 用 jieba 斷詞（預設設定；若無法使用 jieba，請說明改用的方法）；刪除單字詞、標點與下列停用詞：希望、可以、公司、沒有、不要、一直、真的、什麼、我們、大家。以「提到該詞的答案則數」計算詞頻，列出前 20 名，並畫一張文字雲。
+3. 這一項不必斷詞，直接看答案文字是否包含這些字串：計算含有「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數，並列出這十個詞各自的則數。
 4. 從資料中各找兩則例子，說明文字雲的四個盲點：同義詞分散、否定詞被刪掉、斷詞錯誤、一則答案提到兩個主題。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><div class="scrollx"><table class="mt"><tr><th>項目</th><th>正確答案</th></tr><tr><td style="text-align:left">非空白答案</td><td style="text-align:left">516 則</td></tr><tr><td style="text-align:left">不重複答案</td><td style="text-align:left">512 則</td></tr><tr><td style="text-align:left">詞頻前幾名（jieba）</td><td style="text-align:left">主管 58、AI 19、工作 18、加班 17、不僅 16、建議 16、有助 16、考績 16（停用詞或斷詞工具不同，排名會略有不同）</td></tr><tr><td style="text-align:left">薪資福利相關詞（任一詞）</td><td style="text-align:left">67 則</td></tr><tr><td style="text-align:left">十個詞各自的則數</td><td style="text-align:left">獎金 11、補助 11、薪資 9、薪水 8、調薪 7、年終 6、津貼 6、加給 6、加薪 3、福利 3</td></tr></table></div><p>文字雲中最大的「主管」，單一詞 58 則；薪資福利拆成十個詞，每個詞最多 11 則。「不僅」「有助」各 16 則，全部來自疑似 AI 代答。斷詞錯誤、否定、多主題的例子見單元二。</p></div>
@@ -993,12 +997,12 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 </div><div class="round">
   <div class="rhead">第 3 輪：LLM 依編碼簿編碼 100 則</div>
   <div class="rbody">
-    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「編碼簿」工作表與下方規則，為「100 則樣本」工作表的 100 則答案編碼：
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「編碼簿」工作表與下方規則，為「100 則樣本」工作表的 100 則答案編碼。請使用工作表上的編碼簿，不要用你在上一輪建議的修改；不要參考「編碼者甲」「編碼者乙」兩欄：
 1. 每則只給一個主要主題代碼（答案中最先提到的改善事項），只能用編碼簿的 11 個代碼。
 2. 同時提到第二個事項時，另列「次要代碼」；沒有就留空。
 3. 每則附「信心」（高／中／低）；信心低時，寫出猶豫的兩個代碼。
 4. 逐則閱讀後判斷，不要寫關鍵字程式自動分類。
-輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列，依編號排序；並提供 CSV 讓我下載。</pre></div>
+輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列全部列出、不得省略，依編號排序；並提供 Excel 檔讓我下載。如果中途停下，我會說「繼續」，請從下一個編號接著做。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><p><b>查核重點</b></p><ul>
 <li>100 列、編號 S001–S100 齊全；代碼只有編碼簿的 11 種。</li>
@@ -1012,10 +1016,10 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 </div><div class="round">
   <div class="rhead">第 4 輪：與人工編碼比對、算 κ</div>
   <div class="rbody">
-    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳填好的編碼範本：「編碼者甲」「編碼者乙」是兩位組員各自的編碼，「LLM」是上一輪你的主要代碼。
-1. 計算三組的一致率與 Cohen&#x27;s κ：甲與乙、甲與 LLM、乙與 LLM。寫出 κ 的計算過程（觀察一致率、碰巧一致率）。
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳填好的編碼範本：「編碼者甲」「編碼者乙」是兩位組員各自的編碼，「LLM」是上一輪你的主要代碼。請只讀「100 則樣本」工作表第 2 到 101 列的 C、D、E 欄。
+1. 分別計算三對的一致率與 Cohen&#x27;s κ：甲與乙、甲與 LLM、乙與 LLM。寫出 κ 的計算過程（觀察一致率、碰巧一致率）。
 2. 列出甲與 LLM 的交叉表（列為甲，欄為 LLM）。
-3. 列出甲、乙一致但 LLM 不同的答案，每則說明可能原因：定義不清、多主題、否定、籠統答案，或其他。
+3. 列出甲、乙一致但 LLM 不同的答案，每則說明可能原因：定義不清、多主題、否定、籠統答案，或其他；沒有這種答案時，請寫 0 則，並改列甲、乙不一致的答案。
 4. 附上完整程式碼。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><p>κ 依各組編碼而定，沒有標準答案。判斷原則：</p><ol>
@@ -1028,17 +1032,17 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 </div><div class="round">
   <div class="rhead">第 5 輪：疑似 AI 代答與雙重查核</div>
   <div class="rbody">
-    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回到原始資料的全部 OE1 答案：
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回到原始資料的 OE1，只看非空白的答案（空白不計）：
 1. 計算每則答案的字數（含標點的字元數，等同 Excel 的 LEN）；以全部答案字數的平均＋3 個標準差（樣本標準差）為門檻，回報平均、標準差、門檻與超過門檻的則數。
 2. 計算同時含「不僅」與「進而」的答案則數，以及與第 1 點重疊的則數。
-3. 比較被標記與未標記答案的平均字數與平均逗號數，並列出被標記答案的開頭五個字。
+3. 比較被標記與未標記答案的平均字數、最短與最長字數、平均逗號數，並列出被標記答案的開頭五個字，以及其中有幾則在「100 則樣本」工作表裡（列出編號）。
 4. 被標記的答案不要刪除。請說明：這些規則能確定答案是 AI 寫的嗎？標記之後要怎麼處理？
 5. 最後把這次對話用到的完整程式碼整理成一份，並列出你自行決定、我沒有指定的事項。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><div class="scrollx"><table class="mt"><tr><th>項目</th><th>正確答案</th></tr><tr><td style="text-align:left">字數平均、標準差</td><td style="text-align:left">14.4、15.6（516 則）</td></tr><tr><td style="text-align:left">門檻（平均＋3 個標準差）</td><td style="text-align:left">61.3 字，超過門檻 16 則</td></tr><tr><td style="text-align:left">同時含「不僅」「進而」</td><td style="text-align:left">16 則，與長度規則重疊 16 則</td></tr><tr><td style="text-align:left">字數範圍</td><td style="text-align:left">被標記 92–114 字；其餘答案最長 25 字</td></tr><tr><td style="text-align:left">平均逗號數</td><td style="text-align:left">被標記 4.6 個；其餘 0.4 個</td></tr><tr><td style="text-align:left">100 則樣本中的被標記答案</td><td style="text-align:left">3 則</td></tr></table></div><p>規則只能標記「疑似」。本資料的 16 則來自同一個模板，兩條規則結果相同；真實資料的 AI 代答句式較多變。處理方式：保留答案、主題次數報告含與不含兩個版本、檢查結論是否改變；不追查填答者，不以此懲處個人。</p></div>
   </div>
 </div>
-  <div class="key"><span class="lb">本單元要點</span>練習順序為詞頻、編碼簿、人工編碼、LLM 編碼、比對、AI 代答檢查。人工編碼在 LLM 之前完成；κ 用計算器重算；疑似 AI 代答只標記不刪除。</div>
+  <div class="key"><span class="lb">本單元要點</span>練習順序為詞頻、編碼簿、人工編碼、LLM 編碼、比對、AI 代答檢查。人工編碼在第 3 輪之前完成；κ 用計算器重算；疑似 AI 代答只標記不刪除。</div>
 </section>
 
 <!-- ==================== U9 查核與延伸 ==================== -->

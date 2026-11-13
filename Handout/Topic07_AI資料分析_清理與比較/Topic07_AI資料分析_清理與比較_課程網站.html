@@ -600,7 +600,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
 
 清理（依序執行，每步報告剩餘人數）
 1. 直線作答：所有 Likert 題目標準差為 0 者刪除。
-2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差（樣本標準差）；先排除直線作答者，再用其餘的人算出平均與標準差，高於「平均＋3 個標準差」者刪除，並回報實際門檻值。
 3. 反向題：讀「題目對照表」的計分方向欄，反向題改為 7 − 原始分數；也檢查題目文字，語意相反但標正向的題目先回報，不自行轉換。
 4. 遺漏值：不整列刪除。構面答一半以上題目者，取已答題目平均。
 
@@ -845,17 +845,17 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：排除草率作答</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">排除沒有認真讀題的作答，避免雜訊稀釋群組之間的差距。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>在原始作答上計算（反向題轉換之前）</li><li>每人 29 題的標準差為 0，判定為直線作答</li><li>每人 ENG01–ENG12 的標準差高於全體平均＋3 個標準差（排除直線作答者後計算），判定為隨機亂填</li><li>依事前訂好的規則刪除，記下門檻值與被刪除的員工編號</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依下列規則找出草率作答，先不要刪除，回報每條規則的人數與員工編號：
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依下列規則找出草率作答，回報每條規則的人數與員工編號：
 1. 直線作答：29 題李克特題目全部填同一個數字（每人 29 題的標準差為 0）。
 2. 隨機亂填：計算每人 ENG01–ENG12 的標準差（樣本標準差；有空白時以已作答題目計算）。先排除直線作答者，再用其餘的人算出這個標準差的平均與標準差，高於「平均＋3 個標準差」的人判定為隨機亂填，並回報門檻值。
-以上都用原始作答計算（反向題轉換之前）。我確認後再刪除，刪除後告訴我剩下幾人。</pre></div></div></div>
+以上都用原始作答計算（反向題轉換之前）。回報後請刪除這些人，告訴我剩下幾人；之後的分析都用刪除後的資料。</pre></div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>刪除人數：直線作答 20 人、隨機亂填 19 人，剩下 961 人</li><li>AI 回報的門檻值：本資料為 1.32</li><li>程式中計算標準差的步驟排在反向題轉換之前</li><li>AI 有列出被刪除的員工編號，可以在 Excel 中抽查幾位</li></ul></div></div>
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>看到比較結果之後才調整門檻，等於依結果挑選樣本</li><li>先轉換反向題再找直線作答，會漏掉全部填同一個數字的人</li><li>平均＋3 個標準差是本課程採用的規則；實務上依量表與資料訂定，規則與算出的門檻值都寫進分析紀錄</li></ul></div></div>
 </div>
   <div class="stepcard"><div class="sh">操作步驟：轉換反向題</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">讓同一構面的題目方向一致：每一題分數越高，都代表該構面的程度越高。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>依題目對照表的計分方向欄，找出標示反向的題目</li><li>以 7 減原始分數（6 點量表：6 變 1、1 變 6）</li><li>轉換一次，原始欄位另外保留</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「題目對照表」的計分方向欄，把標示反向的題目以 7 減原始分數轉換，原始欄位另外保留。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依「題目對照表」的計分方向欄，把標示反向的題目以 7 減原始分數轉換，原始欄位另外保留。
 轉換後回報：轉換了哪幾題、RET01 與 RET03 在轉換前後的相關、轉換後的分數是否仍在 1 到 6 之間。
 另外請逐題閱讀題目文字：如果有題目的語意和同構面其他題相反，但對照表標為正向，請列出來讓我確認，先不要自行轉換。</pre></div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>RET01 與 RET03 的相關由 −0.64 變成 0.64</li><li>程式中有「7 −」的運算</li><li>轉換後的分數仍在 1–6 之間</li></ul></div></div>
@@ -864,7 +864,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：處理遺漏值</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">保留大部分作答，同時避免用太少的題目計算構面分數。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>統計空白格數，以及有遺漏的人數</li><li>計算構面分數時，該構面答了一半以上題目，就取已作答題目的平均；不到一半，該構面記為遺漏</li><li>每個分析使用該構面的有效人數，並在表格中列出</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回報遺漏值的情況：29 題共有幾個空白格、多少人至少缺一題、每人最多缺幾題、如果把有空白的人整列刪除會剩幾人。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回報遺漏值的情況：29 題共有幾個空白格、多少人至少缺一題、每人最多缺幾題、如果把有空白的人整列刪除會剩幾人。
 接著計算六個構面分數：該構面至少答了一半題目（含一半），就取已作答題目的平均；不到一半，該構面記為遺漏。不要整列刪除，也不要補值。
 請列出六個構面的有效人數與平均。</pre></div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>空白 696 格、493 人至少缺一題</li><li>各構面有效人數 957–961</li><li>程式沒有對整份資料使用 dropna()；某個比較只剩 468 人左右，代表做了整列刪除</li></ul></div></div>
@@ -916,9 +916,9 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：檢查信度</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">確認構面內的題目測量同一件事，構面平均才能代表這個構面。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>反向題轉換後，計算每個構面的 Cronbach’s α</li><li>α 低於 .70 的構面，列出每題的題目與總分相關（扣除該題）</li><li>回到題目文字判斷原因，需要改分時先向問卷負責人確認</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請計算六個構面的 Cronbach&#x27;s α（反向題已轉換）。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請計算六個構面的 Cronbach&#x27;s α（反向題已轉換）。計算時只用該構面每一題都有作答的人，並回報各構面使用的人數。
 α 低於 .70 的構面，請列出每一題的「題目與總分相關（扣除該題）」，並回到題目對照表看題目文字，說明可能的原因。
-先不要更動資料，等我確認後再處理。</pre></div></div></div>
+先不要更動資料，等我確認後再處理。</pre></div><div style="font-size:.9em;margin-top:6px">AI 指出 AIA04 的方向有問題後，回覆這一句：「我已確認 AIA04 是題目對照表誤植，請以 7 減原始分數轉換，重新計算 AIA 的 α 與構面分數。」課堂上由教師擔任題目負責人。</div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>五個構面 α 介於 .84–.95；AIA α ＝ −.11，AIA04 題目與總分相關 −.67</li><li>α 是在反向題轉換之後計算</li><li>AI 有沒有自行轉換或刪除題目而沒有說明</li></ul></div></div>
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>只看 α 就刪掉整個構面，沒有先找原因</li><li>換一種信度係數，讓數字變好看</li><li>α 很高（例如 .95）也要留意：題數多或題目措辭太相似都會讓 α 偏高</li></ul></div></div>
 </div>
@@ -1107,8 +1107,8 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：兩組比較（Welch t 檢定）</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">判斷兩組平均的差距是否超出抽樣雜訊，並用效果量描述差距大小。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>寫清楚兩組的定義：誰在第一組、誰在第二組</li><li>用 Welch t 檢定（不假設變異數相等）</li><li>計算 Cohen’s d，列出兩組人數、平均、標準差、t、df、p、d</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請比較兩組的構面分數：第一組是高雄廠的生產部與品保部，第二組是其他所有人。
-用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請比較兩組的構面分數：第一組是高雄廠的生產部與品保部，第二組是其他所有人。
+用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d（以合併標準差計算，方向為第一組減第二組）。
 用表格列出敬業度、主管支持、認可與回饋、組織承諾、留任意願五個構面的：兩組人數、平均、標準差、t、自由度、p、d。最後用一句話說明哪個構面的差距最大。</pre></div><div style="font-size:.9em;margin-top:6px">這是練習資料的例子。作業版資料的問題單位不同，要先比較各廠區與部門、自己找出分數偏低的單位，再把第一組換成那個單位。</div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>程式有 equal_var=False，或結果寫明 Welch</li><li>自由度有小數；兩組人數相加等於該構面的有效人數</li><li>d 的正負號與平均差的方向一致</li></ul></div></div>
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>只報 p 值，不報 d</li><li>把 p &gt; .05 寫成「有趨勢」，或寫成「證明兩組相同」；不顯著表示證據不足，不等於沒有差異</li><li>常態性：各組有數十人以上時，t 檢定對偏離常態不敏感，不需要每次做常態性檢定；組別只有十幾人、分布又極度偏斜時才需要另外處理</li><li>構面分數當作等距資料處理（見 <a href="#s1-7">1.7</a>），解讀以構面分數為單位</li><li>同時比較很多個單位時，誤判會累積，見 <a href="#s6-1">6.1</a></li></ul></div></div>
@@ -1248,7 +1248,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：多組比較（單因子 ANOVA）</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">用一次檢定回答三組以上的平均是否全部相同，避免多次 t 檢定累積誤判。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>列出各組人數、平均、標準差</li><li>執行單因子 ANOVA，報告 F(df1, df2)、p、η²</li><li>同時做 Levene 檢定；顯著時以 Welch ANOVA 為準</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請用單因子變異數分析比較不同年資（未滿1年、1-3年、3-5年、5-10年、10年以上）的留任意願。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請用單因子變異數分析比較不同年資（未滿1年、1-3年、3-5年、5-10年、10年以上）的留任意願。
 報告各組人數、平均、標準差、F(df1, df2)、p、η²，以及 Levene 檢定（以平均數為中心）的結果；Levene 顯著時另外報告 Welch ANOVA。
 人數少於 5 人的組別請標出來，不要單獨解讀。</pre></div><div style="font-size:.9em;margin-top:6px">作業或其他資料：把群組、構面換成自己要分析的內容，其餘規則不變。</div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>df1 ＝ 組數 − 1，df2 ＝ 有效人數 − 組數（例如廠區：2 與 958）</li><li>各組人數相加等於有效人數</li><li>η² 介於 0 到 1，並與 F 的方向一致（F 很小時 η² 接近 0）</li></ul></div></div>
@@ -1257,7 +1257,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：事後比較</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">F 顯著之後，找出哪幾組之間有差異，並控制多次比較的誤判。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>指定方法：Tukey HSD、Games-Howell，或 Welch t 兩兩比較加 Holm 校正</li><li>列出每一對的平均差與校正後 p</li><li>在報告中寫明方法名稱</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>上一個 ANOVA 的 F 顯著，請做事後比較：用 Welch t 兩兩比較加 Holm 校正（若改用 Tukey HSD 請寫明）。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>上一個 ANOVA 的 F 顯著，請做事後比較：用 Welch t 兩兩比較加 Holm 校正（若改用 Tukey HSD 請寫明）。
 列出每一對的平均差與校正後的 p，並用文字說明哪幾組之間有差異。F 不顯著的分析不要做事後比較。</pre></div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>比較次數 ＝ 組數 ×（組數 − 1）÷ 2（三組 3 次、五組 10 次）</li><li>表格中的 p 是校正後的值</li><li>AI 有寫出使用的方法</li></ul></div></div>
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>F 不顯著仍做事後比較，並報告其中一對顯著</li><li>沒有校正就逐對解讀</li><li>換了幾種方法，挑 p 最小的那一種報告</li></ul></div></div>
@@ -1367,7 +1367,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="stepcard"><div class="sh">操作步驟：撰寫報告</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">讓讀者知道結果是什麼、差距多大、怎麼算出來，以及能不能據以採取行動。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>結論先寫，數字附在後面（APA：t(df)、p、d；F(df1, df2)、p、η²）</li><li>寫明人數、清理規則與遺漏值處理方式</li><li>少於 5 人的群組不單獨呈現</li><li>方法段寫出 AI 工具與日期、由人做的決定、查核方式</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把以上結果寫成給人資長看的報告草稿：
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把以上結果寫成給人資長看的報告草稿：
 1. 結論先寫，數字附在後面。
 2. 統計依 APA 第七版：t(df)、p、d；F(df1, df2)、p、η²；小數兩位，p 小於 .001 寫成 p &lt; .001；每個差異都附效果量。
 3. 人數少於 5 人的群組不單獨呈現。
@@ -1439,9 +1439,9 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="rbody">
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依下列規則清理資料，每一步都告訴我剩下幾人：
 1. 直線作答：29 題全部填同一個數字的人，刪除。
-2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
-3. 反向題：依題目對照表，把標示「反向」的題目用 7 減原始分數轉換。
-4. 遺漏值：不要整列刪除。計算構面分數時，該構面答了一半以上題目，就取已作答題目的平均；不到一半則該構面記為遺漏。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差（樣本標準差；有空白時以已作答題目計算）。先排除直線作答者，再用其餘的人算出這個標準差的平均與標準差，高於「平均＋3 個標準差」者刪除，並回報實際門檻值。
+3. 反向題：依題目對照表，把標示「反向」的題目用 7 減原始分數轉換，並回報 RET01 與 RET03 在轉換前後的相關（以清理後的人計算）。
+4. 遺漏值：先回報 29 題共有幾個空白格、占多少比例、多少人至少缺一題，以及如果整列刪除會剩幾人（只回報，不要執行）。不要整列刪除。計算構面分數時，該構面至少答了一半題目（含一半），就取已作答題目的平均；不到一半則該構面記為遺漏。請列出六個構面的有效人數。
 最後列出被刪除的員工編號，並說明每個規則各刪了幾人。
 清理後的資料請存成 CSV 讓我下載：保留人口變項與 29 題（反向題已轉換），加上六個構面分數，以及「單位分組」（高雄廠生產部與品保部／其他單位）與「年資組」（1 未滿1年、2 1-3年、3 3-5年、4 5-10年、5 10年以上）兩欄。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
@@ -1459,7 +1459,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 </div><div class="round">
   <div class="rhead">第 2 輪：信度</div>
   <div class="rbody">
-    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請計算六個構面的 Cronbach&#x27;s α（反向題已轉換）。
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請計算六個構面的 Cronbach&#x27;s α（反向題已轉換）。計算 α 與題目與總分相關時，只用該構面每一題都有作答的人，並回報各構面使用的人數。
 如果有構面的 α 低於 .70，請列出該構面每一題的「題目與總分相關（扣除該題）」，並回到題目對照表看題目文字，說明可能的原因。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><div class='scrollx'><table class='mt'><tr><th>構面</th><th>編碼</th><th>α</th></tr><tr><td>敬業度</td><td>ENG</td><td>.95</td></tr><tr><td>主管支持</td><td>SUP</td><td>.88</td></tr><tr><td>認可與回饋</td><td>REC</td><td>.87</td></tr><tr><td>組織承諾</td><td>COM</td><td>.87</td></tr><tr><td>留任意願</td><td>RET</td><td>.84</td></tr><tr><td>AI 導入態度</td><td>AIA</td><td>−.11</td></tr></table></div><p>AIA 題目與總分相關：AIA01 .37、AIA02 .31、AIA03 .35、<b>AIA04 −.67</b>。AIA04「我擔心 AI 會取代我目前的工作」語意與其他三題相反，題目對照表卻標「正向」。確認為對照表誤植後，轉換 AIA04，α ＝ .82，構面以四題計算，並在報告中說明這項修正。</p></div>
@@ -1467,8 +1467,9 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 </div><div class="round">
   <div class="rhead">第 3 輪：獨立樣本 t 檢定</div>
   <div class="rbody">
-    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把「高雄廠的生產部與品保部」設為一組，其他所有人為另一組，比較兩組在敬業度、主管支持、認可與回饋、組織承諾、留任意願五個構面分數的差異。
-請用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d。用表格列出兩組人數、平均、標準差、t、p、d。
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我已確認 AIA04 是題目對照表誤植，請以 7 減原始分數轉換，重新計算 AIA 的 α 與構面分數，並更新 CSV。
+接著請把「高雄廠的生產部與品保部」設為一組，其他所有人為另一組，比較兩組在敬業度、主管支持、認可與回饋、組織承諾、留任意願五個構面分數的差異。
+請用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d（以合併標準差計算，方向為第一組減第二組）。用表格列出兩組人數、平均、標準差、t、自由度、p、d。
 接著用同樣方法比較「直接人員」與「間接人員」的敬業度與留任意願。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><div class='scrollx'><table class='mt'><tr><th>比較</th><th>構面</th><th>編碼</th><th>平均（組 1／組 2）</th><th>t</th><th>p</th><th>d</th></tr><tr><td>高雄廠生產部＋品保部（175）vs 其他（786）</td><td>敬業度</td><td>ENG</td><td>3.31／4.03</td><td>−10.26</td><td>&lt; .001</td><td>−0.91</td></tr><tr><td></td><td>主管支持</td><td>SUP</td><td>3.12／4.04</td><td>−12.03</td><td>&lt; .001</td><td>−1.00</td></tr><tr><td></td><td>認可與回饋</td><td>REC</td><td>2.80／3.61</td><td>−9.44</td><td>&lt; .001</td><td>−0.78</td></tr><tr><td></td><td>組織承諾</td><td>COM</td><td>3.15／3.66</td><td>−5.66</td><td>&lt; .001</td><td>−0.48</td></tr><tr><td></td><td>留任意願</td><td>RET</td><td>3.04／3.71</td><td>−8.21</td><td>&lt; .001</td><td>−0.71</td></tr><tr><td>直接人員（537）vs 間接人員（424）</td><td>敬業度</td><td>ENG</td><td>3.85／3.95</td><td>−1.75</td><td>.080</td><td>−0.11</td></tr><tr><td></td><td>留任意願</td><td>RET</td><td>3.54／3.65</td><td>−1.72</td><td>.085</td><td>−0.11</td></tr></table></div><p>各構面的人數因遺漏值略有不同（例如認可與回饋為 175 與 783 人）。p 值極小時寫成 p &lt; .001。</p></div>
@@ -1480,7 +1481,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 1. 不同年資（未滿1年、1-3年、3-5年、5-10年、10年以上）的留任意願。
 2. 不同廠區的主管支持。
 3. 不同職級的主管支持。
-每一項請報告各組人數與平均、F、p、η²，以及 Levene 檢定結果；若 F 顯著，再做事後比較（說明你用的方法），列出哪幾組有差異。</pre></div>
+每一項請報告各組人數與平均、F、p、η²，以及 Levene 檢定（以平均數為中心）的結果；若 F 顯著，再做事後比較（Welch t 兩兩比較加 Holm 校正），列出哪幾組有差異。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><div class='scrollx'><table class='mt'><tr><th>比較</th><th>各組平均</th><th>F</th><th>p</th><th>η²</th><th>事後比較</th></tr><tr><td>年資 → 留任意願</td><td style='text-align:left'>未滿1年 3.60、1-3年 3.18、3-5年 3.50、5-10年 3.79、10年以上 3.80</td><td>F(4, 954) ＝ 14.69</td><td>&lt; .001</td><td>.058</td><td style='text-align:left'>1–3 年低於其他各組；3–5 年低於 5 年以上兩組</td></tr><tr><td>廠區 → 主管支持</td><td style='text-align:left'>台南廠 4.04、台中廠 4.02、高雄廠 3.61</td><td>F(2, 958) ＝ 21.88</td><td>&lt; .001</td><td>.044</td><td style='text-align:left'>高雄廠低於台南廠、台中廠</td></tr><tr><td>職級 → 主管支持</td><td style='text-align:left'>基層員工 3.85、基層主管 3.93、中階主管 3.93</td><td>F(2, 958) ＝ 0.54</td><td>.59</td><td>.001</td><td style='text-align:left'>F 不顯著，不需事後比較</td></tr></table></div><p>Levene 檢定三項皆不顯著（p ＝ .87、.16、.33）。Welch ANOVA 的結論相同（F ＝ 15.46、21.13、0.57）。事後比較用 Welch t 兩兩比較加 Holm 校正；AI 若用 Tukey 或 Games-Howell，結論相同。</p><p>年資的事後比較（Holm 校正後 p）：</p><div class="scrollx"><table class="mt"><tr><th>比較</th><th>平均差</th><th>Holm 校正後 p</th><th>差異顯著</th></tr><tr><td>未滿1年 − 1-3年</td><td>0.42</td><td>.002</td><td>是</td></tr><tr><td>未滿1年 − 3-5年</td><td>0.11</td><td>.72</td><td>否</td></tr><tr><td>未滿1年 − 5-10年</td><td>−0.19</td><td>.32</td><td>否</td></tr><tr><td>未滿1年 − 10年以上</td><td>−0.20</td><td>.32</td><td>否</td></tr><tr><td>1-3年 − 3-5年</td><td>−0.32</td><td>.013</td><td>是</td></tr><tr><td>1-3年 − 5-10年</td><td>−0.61</td><td>&lt; .001</td><td>是</td></tr><tr><td>1-3年 − 10年以上</td><td>−0.62</td><td>&lt; .001</td><td>是</td></tr><tr><td>3-5年 − 5-10年</td><td>−0.30</td><td>.013</td><td>是</td></tr><tr><td>3-5年 − 10年以上</td><td>−0.30</td><td>.014</td><td>是</td></tr><tr><td>5-10年 − 10年以上</td><td>−0.01</td><td>.95</td><td>否</td></tr></table></div></div>
   </div>
@@ -1488,6 +1489,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="rhead">第 5 輪：雙重查核</div>
   <div class="rbody">
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請把你這次對話用到的完整程式碼整理成一份，並用表格列出：每一步做了什麼、處理了幾人、做了哪些假設。
+另外請列出人數少於 5 人的廠區 × 部門組合。
 最後請自我檢查：有沒有哪一步是你自行決定、但我沒有指定的？</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><p><b>人工查核清單</b></p><ol>
