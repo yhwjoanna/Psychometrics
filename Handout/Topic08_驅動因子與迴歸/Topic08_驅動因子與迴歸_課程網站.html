@@ -486,7 +486,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
   <div class="stepcard"><div class="sh">操作步驟：清理與構面分數</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">迴歸使用的構面分數與 Topic 07 相同，兩週的結果可以互相對照。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>依 Topic 07 規則刪除直線作答與隨機亂填</li><li>RET03 與 AIA04 以 7 減原始分數轉換（AIA04 已確認為對照表誤植，要寫進提示詞）</li><li>構面答了一半以上題目，取已作答題目的平均；不整列刪除</li><li>清理後的構面分數存成 CSV，供 JASP 查核</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳的是員工調查的原始資料（Excel，三個工作表）。請先依下列規則清理並計算構面分數，每一步告訴我剩下幾人：
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳的是員工調查的原始資料（Excel，三個工作表）。請先依下列規則清理並計算構面分數，每一步告訴我剩下幾人：
 1. 刪除直線作答（29 題全部填同一個數字）。
 2. 刪除隨機亂填：每人 ENG01–ENG12 的標準差，高於「排除直線作答者後的平均＋3 個標準差」者，並回報門檻值。
 3. RET03 以 7 減原始分數轉換；AIA04 經確認為對照表誤植，也以 7 減原始分數轉換。
@@ -550,7 +550,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
   <div class="stepcard"><div class="sh">操作步驟：相關矩陣</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">了解各構面與結果的關聯，以及構面彼此之間的關聯。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>以構面分數計算 Pearson 相關，標出 p &lt; .05</li><li>看結果變項那一欄：哪些構面與結果相關較高</li><li>看預測變項之間：彼此的相關有多高</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請以構面分數計算 ENG、SUP、REC、COM 四個構面兩兩的 Pearson 相關（成對刪除），用矩陣列出 r 與 p。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請以構面分數計算 ENG、SUP、REC、COM 四個構面兩兩的 Pearson 相關（成對刪除），用矩陣列出 r 與 p。
 請說明：哪個構面與敬業度 ENG 的相關最高；預測變項 SUP、REC、COM 彼此的相關各是多少。
 請確認計算用的是構面分數，不是 29 題。</pre></div><div style="font-size:.9em;margin-top:6px">本單元的例子以敬業度 ENG 為結果。實機練習與作業以留任意願為結果：把依變項改為 RET，預測變項改為 ENG、SUP、REC、COM、AIA。</div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>對角線為 1，矩陣上下對稱</li><li>相關介於 −1 到 1</li><li>AI 算的是構面分數，不是 29 題的相關</li></ul></div></div>
@@ -624,7 +624,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
   <div class="stepcard"><div class="sh">操作步驟：多元迴歸</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">在其他構面相同的條件下，比較各構面與結果的關聯。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>事先指定依變項與預測變項，全部同時放入（不用逐步迴歸）</li><li>預測變項用構面分數，不用個別題目</li><li>報告模型人數、b、SE、b 的 95% CI、β、β 的 95% CI、t、p</li><li>報告 R²、調整後 R²、F 檢定</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請做多元迴歸：依變項 ENG，預測變項 SUP、REC、COM（都用構面分數，不用個別題目），三個同時放入，不要用逐步迴歸；任一變項遺漏的人不納入這個模型，請回報模型人數。
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請做多元迴歸：依變項 ENG，預測變項 SUP、REC、COM（都用構面分數，不用個別題目），三個同時放入，不要用逐步迴歸；任一變項遺漏的人不納入這個模型，請回報模型人數。
 用表格列出每個預測變項的 b、標準誤、b 的 95% 信賴區間、標準化係數 β、β 的 95% 信賴區間、t、p，以及 R²、調整後 R²、F 檢定。
 解讀時用「關聯」與「在其他構面相同的條件下」，不要寫「影響」或「造成」。</pre></div><div style="font-size:.9em;margin-top:6px">本單元的例子以敬業度 ENG 為結果。實機練習與作業以留任意願為結果：把依變項改為 RET，預測變項改為 ENG、SUP、REC、COM、AIA。</div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>模型人數接近清理後人數</li><li>β 介於 −1 到 1 之間（構面相關不高時）</li><li>AI 的文字用「關聯」與「在其他構面相同的條件下」</li></ul></div></div>
@@ -686,7 +686,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
   <div class="stepcard"><div class="sh">操作步驟：相對重要性與優先改善矩陣</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">把迴歸結果轉成管理上的優先順序。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>依 β 排序，另算一般優勢權數</li><li>事先訂定矩陣的分隔線（本課程：驅動因子 β 的平均與構面平均的平均）</li><li>列出每個構面的象限，並說明平均差距的大小</li></ul></div></div>
-  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，把下面這段貼給 AI（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依上一個迴歸的結果：
+  <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依上一個迴歸的結果：
 1. 依 β 的絕對值排序預測變項；β 相差不到 .01 的視為並列。
 2. 計算一般優勢權數（dominance weights），列出各構面占 R² 的比例，說明排序是否與 β 相同。
 3. 建立優先改善矩陣：重要性用 β，表現用構面平均；分隔線事先訂為「預測變項 β 的平均」與「這些構面平均的平均」。列出每個構面落在哪個象限，並說明構面平均最高與最低相差幾分。</pre></div></div></div>
@@ -873,7 +873,7 @@ description: 員工調查的關鍵驅動因子分析。使用者要找出哪些�
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳一份員工意見調查的模擬資料（Excel，三個工作表）。這次的問題是：哪些因素與員工的留任意願關聯最強，人資應該優先改善什麼。
 請先讀完「題目對照表」與「構面與計分說明」，再看「原始資料」。這一輪先不要計算，請用條列回答：
 1. 你打算用什麼方法回答這個問題，依變項與預測變項各是什麼。
-2. 迴歸之前要先完成哪些清理與檢查（依序列出）。
+2. 迴歸之前要先完成哪些資料清理與準備步驟（依序列出）。
 3. 有哪些決定需要我確認後才能執行。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><p>查核重點：</p><ul><li>AI 是否提出多元迴歸，依變項 RET，預測變項為其他五個構面（AI 若把人口變項也放進去，要求它說明理由）。</li><li>是否提到迴歸之前的準備：清理、反向題 RET03 與 AIA04、構面分數、相關矩陣。</li><li>是否主動詢問：遺漏值怎麼處理、是否用逐步迴歸、要不要標準化係數。</li><li>是否遵守「這一輪先不要計算」。</li></ul></div>
@@ -883,7 +883,7 @@ description: 員工調查的關鍵驅動因子分析。使用者要找出哪些�
   <div class="rbody">
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請依下列規則清理資料，每一步都告訴我剩下幾人：
 1. 直線作答：29 題全部填同一個數字的人，刪除。
-2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差；排除直線作答者後，高於全體平均＋3 個標準差者刪除，並回報實際門檻值。
+2. 隨機亂填：計算每人敬業度 ENG01–ENG12 的標準差（樣本標準差）；先排除直線作答者，再用其餘的人算出平均與標準差，高於「平均＋3 個標準差」者刪除，並回報實際門檻值。
 3. 反向題：RET03 依題目對照表以 7 減原始分數轉換；AIA04 語意與同構面其他題相反，已向題目負責人確認是對照表誤植，也以 7 減原始分數轉換。
 4. 構面分數：該構面答了一半以上題目，就取已作答題目的平均；不到一半則記為遺漏。不要整列刪除。
 請用表格列出六個構面的有效人數、平均數、標準差與 Cronbach&#x27;s α。
@@ -907,9 +907,9 @@ description: 員工調查的關鍵驅動因子分析。使用者要找出哪些�
     <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請做多元迴歸：依變項 RET，預測變項 ENG、SUP、REC、COM、AIA，五個變項同時放入（不要用逐步迴歸）；任一變項遺漏者不納入這個模型，回報實際使用的人數。
 請用表格列出：每個預測變項的未標準化係數 b、標準誤、b 的 95% 信賴區間、標準化係數 β、β 的 95% 信賴區間、t、p；以及 R²、調整後 R²、F 檢定。
 接著：
-1. 依 β 的絕對值排序五個驅動因子，並另外計算相對重要性（一般優勢權數 dominance weights，列出各構面占 R² 的比例），說明兩種排序是否一致；β 相差不到 .01 的構面視為並列。
-2. 建立優先改善矩陣：重要性用 β，表現用構面平均；分隔線用五個驅動因子 β 的平均與構面平均的平均。列出每個構面落在哪一個象限。
-3. 計算開放題 OE1 中提到薪資或福利的人數與比例：只看清理後保留的人；空白、「無」「沒有」「沒意見」「無意見」「沒什麼好說的」不算有實質內容的回答；回答中出現下列任一個詞就算提到：薪、加給、獎金、年終、福利、福委、待遇、津貼、加班費、分紅、禮券、禮品、禮金、調資、補助、補貼、現金、持股、折現、退休金、保險、團保、貸款、借款、多發。回報有實質內容的回答人數、提到的人數與比例，並說明薪資福利為什麼不在迴歸模型中。</pre></div>
+1. 依 β 的絕對值排序五個驅動因子，並另外計算相對重要性（一般優勢權數 dominance weights：所有可能的子模型都跑一次，用同一批模型人數，取各構面平均增加的 R²，加總要等於 R²；列出各構面占 R² 的比例），β 請列到小數三位，說明兩種排序是否一致；β 相差不到 .01 的構面視為並列。
+2. 建立優先改善矩陣：重要性用 β，表現用構面平均；分隔線用五個驅動因子 β 的平均與構面平均的平均（構面平均用清理後全體的平均）。列出每個構面落在哪一個象限，象限名稱：重要性高、表現低＝優先改善；兩者都高＝維持優勢；兩者都低＝次要觀察；重要性低、表現高＝維持現狀。不必畫圖；若畫圖，標籤用英文代碼。
+3. 計算開放題 OE1 中提到薪資或福利的人數與比例：只看清理後保留的人；空白、「無」「沒有」「沒意見」「無意見」「沒什麼好說的」不算有實質內容的回答，其他回答一律算；回答中出現下列任一個詞就算提到：薪、加給、獎金、年終、福利、福委、待遇、津貼、加班費、分紅、禮券、禮品、禮金、調資、補助、補貼、現金、持股、折現、退休金、保險、團保、貸款、借款、多發。回報有實質內容的回答人數、提到的人數與比例，並說明薪資福利為什麼不在迴歸模型中。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><p>模型人數 n = 952（清理後 961 人中，9 人有構面遺漏）。</p><div class="scrollx"><table class="mt"><tr><th>預測變項</th><th>b</th><th>SE</th><th>b 的 95% CI</th><th>β</th><th>β 的 95% CI</th><th>t</th><th>p</th></tr><tr><td style="text-align:left">敬業度 ENG</td><td style="text-align:left">.334</td><td style="text-align:left">.039</td><td style="text-align:left">[.26, .41]</td><td style="text-align:left">.28</td><td style="text-align:left">[.22, .35]</td><td style="text-align:left">8.54</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">主管支持 SUP</td><td style="text-align:left">.138</td><td style="text-align:left">.032</td><td style="text-align:left">[.08, .20]</td><td style="text-align:left">.14</td><td style="text-align:left">[.07, .20]</td><td style="text-align:left">4.33</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">認可與回饋 REC</td><td style="text-align:left">.098</td><td style="text-align:left">.027</td><td style="text-align:left">[.04, .15]</td><td style="text-align:left">.11</td><td style="text-align:left">[.05, .17]</td><td style="text-align:left">3.62</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">組織承諾 COM</td><td style="text-align:left">.261</td><td style="text-align:left">.026</td><td style="text-align:left">[.21, .31]</td><td style="text-align:left">.28</td><td style="text-align:left">[.23, .34]</td><td style="text-align:left">10.07</td><td style="text-align:left">&lt; .001</td></tr><tr><td style="text-align:left">AI 導入態度 AIA</td><td style="text-align:left">.000</td><td style="text-align:left">.026</td><td style="text-align:left">[−.05, .05]</td><td style="text-align:left">.00</td><td style="text-align:left">[−.05, .05]</td><td style="text-align:left">-0.01</td><td style="text-align:left">.990</td></tr></table></div><p>R² = .39，調整後 R² = .39，F(5, 946) = 120.50，p &lt; .001。截距 = 0.48。</p><ul><li>β 排序：ENG（β = .28）、COM（β = .28）、SUP（β = .14）、REC（β = .11）、AIA（β = .00）。ENG 與 COM 的 β 只差不到 .001，屬於並列，AI 把哪一個排在前面都算一致。</li><li>一般優勢權數（占 R² 的比例）：ENG 35.2%、COM 31.9%、SUP 18.9%、REC 13.9%、AIA 0.1%；排序與 β 相同。</li><li>AIA 的信賴區間包含 0，與留任意願沒有關聯。</li></ul><p>優先改善矩陣（分隔線：β 平均 .163、構面平均的平均 3.71）：</p><div class="scrollx"><table class="mt"><tr><th>構面</th><th>β（重要性）</th><th>平均（表現）</th><th>象限</th></tr><tr><td style="text-align:left">敬業度 ENG</td><td style="text-align:left">.28</td><td style="text-align:left">3.90</td><td style="text-align:left">維持優勢</td></tr><tr><td style="text-align:left">主管支持 SUP</td><td style="text-align:left">.14</td><td style="text-align:left">3.87</td><td style="text-align:left">維持現狀</td></tr><tr><td style="text-align:left">認可與回饋 REC</td><td style="text-align:left">.11</td><td style="text-align:left">3.46</td><td style="text-align:left">次要觀察</td></tr><tr><td style="text-align:left">組織承諾 COM</td><td style="text-align:left">.28</td><td style="text-align:left">3.57</td><td style="text-align:left">優先改善</td></tr><tr><td style="text-align:left">AI 導入態度 AIA</td><td style="text-align:left">.00</td><td style="text-align:left">3.77</td><td style="text-align:left">維持現狀</td></tr></table></div><p>五個驅動因子的構面平均相差 0.44 分（最低 REC 3.46、最高 ENG 3.90）。</p><p>OE1：有實質內容的回答 508 人，提到薪資或福利的 91 人（17.9%），以關鍵字計算是人數最多的主題。問卷沒有測量薪資福利的題目，迴歸只能比較有測量的構面；被提到最多的抱怨，不一定是與留任意願關聯最強的因素。開放題的完整編碼在 Topic 09。</p></div>
   </div>
