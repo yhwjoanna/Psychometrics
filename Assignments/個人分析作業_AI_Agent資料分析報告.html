@@ -157,7 +157,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <table>
     <tr><th style="width:22%">時間</th><th style="width:34%">課堂內容</th><th>課後完成（使用作業版資料）</th></tr>
     <tr><td>2026/11/06 後<br>Week 09　Topic 07</td><td>資料清理、信度、t 檢定與 ANOVA</td><td>下載<a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">作業版資料</a>；照課堂流程完成<a href="#structure">報告</a>第一至三章；分析檢核表填第一至三章</td></tr>
-    <tr><td>2026/11/13 後<br>Week 10　Topic 08</td><td>相關、VIF、多元迴歸、殘差</td><td>報告第四章；檢核表填第四章</td></tr>
+    <tr><td>2026/11/13 後<br>Week 10　Topic 08</td><td>相關、多元迴歸、相對重要性與優先改善矩陣</td><td>報告第四章；檢核表填第四章</td></tr>
     <tr><td>2026/11/20 後<br>Week 11　Topic 09</td><td>開放題編碼簿、κ、LLM 編碼</td><td>報告第五章；檢核表填第五章</td></tr>
     <tr><td>2026/11/27 後<br>Week 12　Topic 10</td><td>資料視覺化</td><td>整理前五章的圖表；補做前面未完成的章節</td></tr>
     <tr><td><span style="color:#C62828;font-weight:700">2026/12/03（四）23:59 前<br>延後一週</span></td><td>—</td><td>第六章結論與管理建議；請同學擔任檢核者並簽名；整理 ZIP（提示詞、程式碼、對話紀錄、檢核表）；報告 PDF 與 ZIP 上傳 Google Classroom</td></tr>
@@ -186,7 +186,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <ol class="plain">
       <li>以 AI Agent 規劃與執行資料清理：草率作答（直線作答與隨機亂填）與開放題疑似 AI 代答的偵測、反向題轉換、遺漏值處理，每一步保留人數紀錄</li>
       <li>以獨立樣本 t 檢定與單因子 ANOVA 比較廠區、部門與年資差異，找出核心問題單位並描述差距型態</li>
-      <li>以留任意願為依變數進行多元迴歸，報告標準化迴歸係數、VIF 與殘差檢查</li>
+      <li>以留任意願為依變數進行多元迴歸，報告 R²、標準化迴歸係數 β 與排序，並建立優先改善矩陣</li>
       <li>以 LLM Agent 輔助開放題編碼，並與人工編碼比較</li>
       <li>對 AI 產出的每一項結果進行人工查核，留下紀錄</li>
     </ol>
@@ -225,7 +225,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <tr><td>一、資料與清理</td><td>原始人數；每一個清理步驟的判定規則、門檻值與刪除人數，以及該步驟後的剩餘人數；反向題的判斷依據（題目對照表與題目文字是否一致）；遺漏值處理方式</td></tr>
     <tr><td>二、信度</td><td>各構面 Cronbach's α；α 未達 .70 的構面列出題目與總分相關，回到題目文字說明原因與處理決定</td></tr>
     <tr><td>三、群組比較：核心問題單位</td><td>廠區、部門與年資的比較；兩組用 Welch t 檢定並附 Cohen's d，三組以上用單因子 ANOVA 並附 η²、Levene 檢定與事後比較方法；核心問題單位的界定依據與差距型態；人數少於 5 人的群組不單獨呈現</td></tr>
-    <tr><td>四、驅動因子分析</td><td>構面相關矩陣；以留任意願（RET）為依變數，敬業度、主管支持、認可與回饋、組織承諾、AI 導入態度為自變數的多元迴歸；R²、標準化迴歸係數 β 與排序、VIF、殘差檢查（常態、變異數同質、離群與影響值）；相關與 β 排序不同時的說明</td></tr>
+    <tr><td>四、驅動因子分析</td><td>構面相關矩陣；以留任意願（RET）為依變數，敬業度、主管支持、認可與回饋、組織承諾、AI 導入態度為自變數的多元迴歸；R²、標準化迴歸係數 β 與排序；相對重要性與優先改善矩陣；相關與 β 排序不同時的說明；結果以關聯描述，不做因果推論</td></tr>
     <tr><td>五、開放題分析</td><td>編碼簿（類別名稱、定義、納入與排除條件、例句）；雙人編碼一致性 Cohen's κ，或人工編碼與 LLM 編碼的比較與 κ；疑似 AI 代答的判定依據與件數；各類別在問題單位與其他單位的分布</td></tr>
     <tr><td>六、結論與管理建議</td><td>結論寫在本章開頭，以人資長能直接使用的語言陳述問題單位、主要驅動因子與建議行動；每一項建議對應到前面章節的數字；分析限制（模擬資料、橫斷面、相關不等於因果）</td></tr>
     <tr><td>附錄</td><td>對話紀錄清單、提示詞全文、程式碼、分析檢核表與分析紀錄（亦放入 ZIP）</td></tr>
@@ -242,7 +242,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <li><h4>程式碼</h4><p>AI 執行的完整程式碼，整理成一份，從讀入資料到產出報告中的每一個數字都能依序重跑。以 Excel 或 JASP 完成的步驟，附上活頁簿或 .jasp 檔</p><div class="out">檔案：.py、.R、.ipynb，或貼在 Word 附錄</div></li>
     <li><h4>對話紀錄</h4><p>與 AI 的完整對話，以下列兩種形式之一提供，詳細步驟見下方說明。每一個分析階段使用一個對話即可，例如清理與比較、驅動因子、開放題各一個；所有對話依時間順序列在報告附錄的對話紀錄清單</p><div class="out">分享連結，或匯出的 PDF／文字檔</div></li>
     <li><h4>分析檢核表</h4><p>使用 <a href="Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>。「預期結果」欄為課堂練習資料的數值，作業版資料的結果不同；「我的結果」欄改填自己在作業版資料的結果，「一致？」欄記錄檢核者比對程式輸出後的判定。檢核者由另一位修課同學擔任，只負責比對「我的結果」與對話紀錄、程式輸出是否一致，不代為分析；檢核者在表頭與「檢核者」欄簽名</p><div class="out">檔案：學號_姓名_分析檢核表.xlsx</div></li>
-    <li><h4>分析紀錄</h4><p>檢核表中的「分析紀錄」工作表。每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人或 AI）、確認者。例如隨機亂填門檻、反向題是否轉換、問題單位如何界定、迴歸是否排除離群值、開放題類別如何合併</p><div class="out">與分析檢核表同一個檔案</div></li>
+    <li><h4>分析紀錄</h4><p>檢核表中的「分析紀錄」工作表。每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人或 AI）、確認者。例如隨機亂填門檻、反向題是否轉換、問題單位如何界定、迴歸放入哪些預測變項、優先改善矩陣的分隔線如何訂定、開放題類別如何合併</p><div class="out">與分析檢核表同一個檔案</div></li>
   </ol>
 </section>
 
@@ -339,7 +339,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   <h2>三週課程與繳交期限</h2>
   <div class="timeline">
     <div class="tl"><div class="d">2026/11/06<span>WEEK 09　TOPIC 07</span></div><p>AI Agent 資料分析架構、資料清理與群組比較；作業啟動，課後可完成報告第一至三章</p></div>
-    <div class="tl"><div class="d">2026/11/13<span>WEEK 10　TOPIC 08</span></div><p>構面相關、多重共線性與關鍵驅動因子迴歸；課後可完成第四章</p></div>
+    <div class="tl"><div class="d">2026/11/13<span>WEEK 10　TOPIC 08</span></div><p>構面相關、關鍵驅動因子迴歸與優先改善矩陣；課後可完成第四章</p></div>
     <div class="tl"><div class="d">2026/11/20<span>WEEK 11　TOPIC 09</span></div><p>開放題編碼簿、Cohen's κ、LLM 輔助編碼與疑似 AI 代答偵測；課後可完成第五章</p></div>
     <div class="tl"><div class="d">2026/12/03（四）23:59<span>繳交截止</span></div><p>報告 PDF 與附件 ZIP 上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 作業區</p></div>
   </div>
@@ -354,7 +354,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
     <tr><th style="width:12%">比重</th><th style="width:30%">向度</th><th>評分重點</th></tr>
     <tr><td class="w">20%</td><td>資料清理與代答快篩</td><td>草率作答與疑似 AI 代答的判定規則、門檻與每步人數；反向題與遺漏值處理的依據；清理流程可依程式碼重現</td></tr>
     <tr><td class="w">20%</td><td>群組差異與核心問題單位</td><td>檢定方法與前提檢查是否正確；每一個差異附效果量；問題單位的界定依據與差距型態；小群組依匿名門檻處理</td></tr>
-    <tr><td class="w">20%</td><td>關鍵驅動因子迴歸分析</td><td>模型設定、標準化 β 與排序、VIF 與殘差檢查；相關與 β 排序不同時的解讀；未以相關資料做因果推論</td></tr>
+    <tr><td class="w">20%</td><td>關鍵驅動因子迴歸分析</td><td>模型設定、R²、標準化 β 與排序；相對重要性與優先改善矩陣；相關與 β 排序不同時的解讀；未以相關資料做因果推論</td></tr>
     <tr><td class="w">20%</td><td>開放題質化分析</td><td>編碼簿定義清楚；人工編碼與 LLM 編碼的比較與一致性；疑似 AI 代答的判定依據；質化結果與量化結果的對照</td></tr>
     <tr><td class="w">20%</td><td>人機雙重查核紀錄</td><td>提示詞、程式碼與對話紀錄齊備且可開啟；檢核表與分析紀錄完整，檢核者已簽名；公式、效果量與推論方式的查核過程；發現 AI 錯誤時的修正紀錄</td></tr>
   </table>
