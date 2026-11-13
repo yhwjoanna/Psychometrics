@@ -736,12 +736,12 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="foot"><span class="lim multi">Claude for Excel 增益集；畫面為課堂練習資料的副本</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
 </section>
 
-<section class="slide" data-layout="figure" data-density="4">
+<section class="slide" data-layout="figure" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">進階示範｜Claude in Excel 步驟二　回覆決定</div>
   <h2 style="margin-bottom:18px">需要人確認的三項決定</h2>
   <div class="shotrow" style="grid-template-columns:470px 1fr;align-items:center">
     <img class="shot" src="img/topic07/x_plan2c.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
-    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">AIA04：Claude 依題目文字與負相關提出疑問<span class="why">為什麼：對照表標正向，題目語意相反</span></li><li class="frag">遺漏值：整列刪除只剩 507 人<span class="why">為什麼：Claude 建議以構面內已答題目計分</span></li><li class="frag">逐項回覆決定，寫明規則與門檻計算方式<span class="why">為什麼：決定由人做，並寫進分析紀錄</span></li></ol></div>
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">AIA04：Claude 依題目文字與負相關提出疑問<span class="why">為什麼：對照表標正向，題目語意相反</span></li><li class="frag">遺漏值：整列刪除只剩 507 人<span class="why">為什麼：Claude 建議以構面內已答題目計分</span></li><li class="frag">逐項回覆決定，寫明規則與門檻計算方式<span class="why">為什麼：決定由人做，並記下來</span></li></ol></div>
   </div>
   <div class="foot"><span class="lim multi">回覆內容與第 1 輪提示詞的規則相同</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>23</span></div>
 </section>
@@ -772,7 +772,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="stat frag"><div class="k">直線作答　20 人</div><div class="v">標準差 ＝ 0</div><p>29 題全部同一個數字<br>包含反向題也填一樣，前後矛盾<span class="why">Excel：=STDEV.S(G2:AI2)，結果為 0</span></p></div>
     <div class="stat frag"><div class="k">隨機亂填　19 人</div><div class="v">平均＋3SD</div><p>敬業度 12 題測同一件事，認真作答者分數接近<br>全體標準差平均 0.69，門檻 1.32<span class="why">Excel：每列 =STDEV.S(G2:R2)；門檻 ＝ 該欄平均＋3 × 該欄標準差</span></p></div>
   </div>
-  <div class="foot"><span class="lim">門檻規則在看結果之前訂定；平均＋3 個標準差由資料計算，不需事先知道數值；實際門檻寫入分析紀錄</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
+  <div class="foot"><span class="lim">門檻規則在看結果之前訂定；平均＋3 個標準差由資料計算，不需事先知道數值；實際門檻寫進報告</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>26</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -800,16 +800,16 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="foot"><span class="lim">整列刪除會浪費資訊，遺漏若與特定群組有關也會造成偏誤（Newman, 2014）</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>28</span></div>
 </section>
 
-<section class="slide" data-layout="figure" data-density="4">
+<section class="slide" data-layout="figure" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">看程式碼</div>
   <h2 style="margin-bottom:22px">整列刪除的程式寫法 dropna()</h2>
   <div class="code">df = pd.read_excel("員工調查.xlsx")
 df = df<b>.dropna()</b>          # 刪除任何一格空白的列
 print(len(df))           # 507</div>
-  <p class="lead frag" style="font-size:26px;margin-top:22px"><b>dropna()</b> 為整列刪除：缺任一題即刪除該員工<br>回報人數減少近一半時，應檢查此行程式</p>
+  <p class="lead frag" style="font-size:26px;margin-top:22px"><b>dropna()</b> 為整列刪除：缺任一題即刪除該員工<br>不必看懂程式：回報人數減少近一半，就代表 AI 做了整列刪除</p>
   <div class="code frag" style="margin-top:20px">eng = df[ENG題目]
 df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 題答 6 題以上才計分</div>
-  <div class="foot"><span class="lim">不熟悉程式時，可檢查三項：每一步的剩餘人數、是否有 7 − 分數、是否有 dropna</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
+  <div class="foot"><span class="lim">不熟悉程式時，看 AI 回報的數字即可：每一步的剩餘人數、各構面的有效人數</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>29</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 新增</div>
@@ -872,7 +872,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
     <img class="shot" src="img/topic07/j_reliability_rev.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
     <div class="task" style="display:block;margin-top:0"><ol><li class="frag">向題目負責人確認對照表誤植<span class="why">為什麼：改分屬於研究決定，須由人確認</span></li><li class="frag">反向題 → 把 AIA04 移到右側<span class="why">為什麼：JASP 自動以 7 − 分數計算</span></li><li class="frag">α 由 −.11 升到 .82<span class="why">為什麼：四題方向一致，構面可以使用</span></li></ol></div>
   </div>
-  <div class="foot"><span class="lim multi">確認者與日期寫進分析紀錄</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>36</span></div>
+  <div class="foot"><span class="lim multi">確認的結果記下來，寫進報告</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>36</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -1071,12 +1071,12 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="foot"><span class="lim">第六部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>56</span></div>
 </section>
 
-<section class="slide" data-layout="figure" data-density="4">
+<section class="slide" data-layout="figure" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">進階示範｜Agent 步驟五　回報</div>
   <h2 style="margin-bottom:18px">Agent 的最終回報</h2>
   <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
     <img class="shot" src="img/topic07/a_final.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
-    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">先讀結論，再對照數字<span class="why">為什麼：記憶要求結論先寫，讀者是主管</span></li><li class="frag">逐項處理「需要你確認的事項」<span class="why">為什麼：Agent 自行決定的事，要由人確認</span></li><li class="frag">確認結果寫進分析紀錄<span class="why">為什麼：後續分析者可追溯決策理由</span></li></ol></div>
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">先讀結論，再對照數字<span class="why">為什麼：記憶要求結論先寫，讀者是主管</span></li><li class="frag">逐項處理「需要你確認的事項」<span class="why">為什麼：Agent 自行決定的事，要由人確認</span></li><li class="frag">確認結果記下來，寫進報告<span class="why">為什麼：之後可以說明每個決定的理由</span></li></ol></div>
   </div>
   <div class="foot"><span class="lim multi">專案記憶要求「結論先寫」「自行決定的事項列出來」，Agent 照做</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>57</span></div>
 </section>
@@ -1097,12 +1097,12 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="foot"><span class="lim">請 AI 輸出完整程式碼並說明「哪些步驟是它自行決定的」</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>58</span></div>
 </section>
 
-<section class="slide" data-layout="table" data-density="4">
+<section class="slide" data-layout="table" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">常見錯誤</div>
   <h2 style="margin-bottom:22px">常見錯誤結果與可能原因</h2>
   <table class="tight t4 t4s">
     <tr><th style="width:600px">AI 的結果</th><th>可能原因</th></tr>
-    <tr class="frag"><td>樣本只剩 507 或 468 人</td><td>用了 dropna() 整列刪除</td></tr>
+    <tr class="frag"><td>樣本只剩 507 或 468 人</td><td>AI 做了整列刪除：缺一題就刪掉整個人</td></tr>
     <tr class="frag"><td>留任意願的組間落差變小</td><td>RET03 沒有轉換</td></tr>
     <tr class="frag"><td>AI 導入態度照樣比較各廠區</td><td>沒有先看信度，α ＝ −.11</td></tr>
     <tr class="frag"><td>「直接人員敬業度較低，p ＝ .08」</td><td>不顯著且 d ＝ −.11，管理上沒有意義</td></tr>
@@ -1111,18 +1111,17 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="foot"><span class="lim">匿名門檻見 Topic 04</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>59</span></div>
 </section>
 
-<section class="slide" data-layout="table" data-density="4">
-  <div class="kicker">檢核機制</div>
-  <h2 style="margin-bottom:22px">兩人一組的分析與檢核流程</h2>
+<section class="slide" data-layout="table" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 新增</div>
+  <div class="kicker">檢核表</div>
+  <h2 style="margin-bottom:22px">一頁檢核表的使用方式</h2>
   <table class="tight t4 t4s">
-    <tr><th style="width:120px"></th><th style="width:360px">誰</th><th>做什麼</th></tr>
-    <tr class="frag"><td>1</td><td>分析者</td><td>依提示詞完成分析，保留對話與程式碼，自己先填檢核表</td></tr>
-    <tr class="frag"><td>2</td><td>檢核者</td><td>看分析者的對話與程式碼，逐項對照預期結果，簽名</td></tr>
-    <tr class="frag"><td>3</td><td>兩人</td><td>不一致的項目找出原因，改提示詞重跑，寫進檢核表</td></tr>
-    <tr class="frag"><td>4</td><td>兩人</td><td>需要人決定的事項寫進「分析紀錄」，註明確認者</td></tr>
-    <tr class="frag"><td>5</td><td>交換</td><td>角色互換，再做一次</td></tr>
+    <tr><th style="width:120px"></th><th style="width:360px">時間點</th><th>做法</th></tr>
+    <tr class="frag"><td>1</td><td>每一輪做完</td><td>把自己的結果寫在正確答案旁邊</td></tr>
+    <tr class="frag"><td>2</td><td>結果相同</td><td>「一致」欄選 ✓；小數第二位的差異算一致</td></tr>
+    <tr class="frag"><td>3</td><td>結果不同</td><td>先比人數，再比門檻與反向題，最後比統計結果；修改提示詞重跑</td></tr>
+    <tr class="frag"><td>4</td><td>全部完成</td><td>自己抽查兩三個數字：Excel 的 COUNTBLANK、效果量計算器</td></tr>
   </table>
-  <div class="foot"><span class="lim">檢核表　<a class="lnk" href="../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>　含預期結果、分析紀錄與使用說明</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>60</span></div>
+  <div class="foot"><span class="lim">檢核表　<a class="lnk" href="../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic07_分析檢核表.xlsx</a>　一頁，只用於課堂練習；與同學交換對照為選做</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>60</span></div>
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
@@ -1140,7 +1139,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="foot"><span class="lim">另開一個新對話，把第一個對話的程式碼交給它檢查，也是一種獨立查核</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>61</span></div>
 </section>
 
-<section class="slide" data-layout="table" data-density="4">
+<section class="slide" data-layout="table" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">其他學習重點</div>
   <h2 style="margin-bottom:22px">以 AI 分析員工資料的其他注意事項</h2>
   <table class="tight t4 t4s">
@@ -1148,7 +1147,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
     <tr class="frag"><td>資料隱私</td><td>不上傳可辨識個人的資料；先去識別化，並確認公司政策</td></tr>
     <tr class="frag"><td>AI 幻覺</td><td>沒有程式碼與執行結果的數字不採用</td></tr>
     <tr class="frag"><td>可重現性</td><td>同樣的提示詞，AI 每次寫的程式可能不同；保存程式碼與對話</td></tr>
-    <tr class="frag"><td>分析紀錄</td><td>每個需要人決定的事項，寫下選擇、理由與確認者</td></tr>
+    <tr class="frag"><td>由人做的決定</td><td>記下選擇與理由，寫進報告的方法段</td></tr>
     <tr class="frag"><td>差異不等於原因</td><td>群組比較告訴你「哪裡」不同，原因要再訪談或分析</td></tr>
     <tr class="frag"><td>翻譯成管理語言</td><td>先寫結論與建議，統計數字放在後面</td></tr>
   </table>
@@ -1159,7 +1158,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="foot"><span class="lim">第七部分</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>63</span></div>
 </section>
 
-<section class="slide" data-layout="table" data-density="4">
+<section class="slide" data-layout="table" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">練習流程</div>
   <h2 style="margin-bottom:22px">六輪提示詞的練習流程</h2>
   <table class="tight t4 t4s">
@@ -1170,7 +1169,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
     <tr class="frag"><td>第 3 輪</td><td>t 檢定</td><td>d 的大小與方向</td></tr>
     <tr class="frag"><td>第 4 輪</td><td>ANOVA</td><td>η² 與事後比較方法</td></tr>
     <tr class="frag"><td>第 5 輪</td><td>雙重查核</td><td>程式碼、AI 自行決定的步驟</td></tr>
-    <tr class="frag"><td>交換</td><td>同學檢核</td><td>用檢核表逐項對照、簽名</td></tr>
+    <tr class="frag"><td>每一輪</td><td>對照答案</td><td>把自己的結果填進一頁的檢核表</td></tr>
   </table>
   <div class="foot"><span class="lim">提示詞全文與答案在課堂互動教材網站　<a class="lnk" href="../Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#u8" target="_blank" rel="noopener">AI 資料分析：清理與比較　實機練習</a>　，可直接複製</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>64</span></div>
 </section>
@@ -1190,7 +1189,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="foot"><span class="lim">第 2 到 5 輪的提示詞見教材網站；每輪先對照答案再貼下一輪</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>66</span></div>
 </section>
 
-<section class="slide" data-layout="table" data-density="4">
+<section class="slide" data-layout="table" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
   <div class="kicker">對照答案</div>
   <h2 style="margin-bottom:22px">第 1 至 4 輪的答案對照</h2>
   <table class="tight t4 t4s">
@@ -1200,7 +1199,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
     <tr class="frag"><td>t 檢定</td><td>主管支持 d ＝ −1.00、留任意願 d ＝ −.71</td></tr>
     <tr class="frag"><td>ANOVA</td><td>年資 → 留任意願 F ＝ 14.69，η² ＝ .058</td></tr>
   </table>
-  <p class="lead frag" style="font-size:26px;margin-top:18px">數字不同時，可依序檢查人數、反向題、遺漏值與檢定方法<br>原因寫入查核紀錄</p>
+  <p class="lead frag" style="font-size:26px;margin-top:18px">數字不同時，可依序檢查人數、反向題、遺漏值與檢定方法<br>找到原因後修改提示詞重跑</p>
   <div class="foot"><span class="lim">其餘比較的答案在教材網站各輪的「看答案」</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>67</span></div>
 </section>
 
@@ -1211,7 +1210,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
     <ol>
       <li class="frag">課堂沒跑完的輪次，回家跑完<br>每輪對照答案</li>
       <li class="frag">保留對話紀錄與程式碼<br>寫下數字不一致的原因</li>
-      <li class="frag">讀教材網站，下載檢核表<br>和同學互相檢核一次</li>
+      <li class="frag">下載一頁的檢核表，填上自己的結果<br>自己抽查兩三個數字</li>
     </ol>
     <div class="sheet">
       <h3>個人分析作業</h3>

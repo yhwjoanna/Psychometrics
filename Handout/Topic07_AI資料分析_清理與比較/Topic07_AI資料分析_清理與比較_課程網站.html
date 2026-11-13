@@ -385,12 +385,12 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
   <h1>AI Agent 資料分析架構與量化實務（一）：清理與比較</h1>
   <div class="subtitle">員工意向調查課程．Topic 07．Week 09（2026/11/06）．適用對象：人管所碩士班</div>
   <p>問卷回收之後的分析分為兩段：清理資料，以及比較不同群體的分數。本主題以 AI Agent 執行這兩段工作：分析者上傳 Excel 檔，AI 寫程式並執行，分析者負責下指令、做決定與查核結果。本主題不要求程式能力；統計概念在各單元中說明。</p>
-  <p>本主題的順序：資料的結構與編碼簿，AI Agent 的運作方式與三種使用方法，接著是資料清理、信度檢查、兩組比較與多組比較。單元五開頭的決策樹整理統計方法的選擇。每個分析步驟都附有「操作步驟」卡，列出目的、做法、要在 AI 回覆中檢查的項目與常見錯誤。單元七整理檢核表與互查機制，單元八用六輪提示詞實際操作一次。下週 Topic 08 接著做驅動因子與迴歸分析。</p>
+  <p>本主題的順序：資料的結構與編碼簿，AI Agent 的運作方式與三種使用方法，接著是資料清理、信度檢查、兩組比較與多組比較。單元五開頭的決策樹整理統計方法的選擇。每個分析步驟都附有「操作步驟」卡，列出目的、做法、要在 AI 回覆中檢查的項目與常見錯誤。單元七說明如何查核 AI 的結果，單元八用六輪提示詞實際操作一次，每一輪用一頁的檢核表對照答案。下週 Topic 08 接著做驅動因子與迴歸分析。</p>
   <div class="key"><span class="lb">這週怎麼用</span>
     <ol style="margin:4px 0 6px 22px">
       <li><b>課前</b>：讀<a href="#u1" onclick="goUnit('u1');return false;">單元一 資料結構</a>與<a href="#u2" onclick="goUnit('u2');return false;">單元二 AI Agent 的使用方法</a>，約 30 分鐘</li>
       <li><b>課堂</b>：開<a href="../../Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener">課堂投影片</a>，下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料（Topic 07–09 共用）</a>，依<a href="#u8" onclick="goUnit('u8');return false;">單元八 實機練習</a>的提示詞操作；統計名詞看不懂時，回到單元三至六</li>
-      <li><b>課後</b>：用<a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>與<a href="#u7" onclick="goUnit('u7');return false;">單元七</a>核對結果；<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業</a>完成報告第一至三章（使用作業版資料）</li>
+      <li><b>課後</b>：用<a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表（一頁）</a>對照每一輪的答案，自己再抽查幾個數字（<a href="#u7" onclick="goUnit('u7');return false;">單元七</a>）；<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業</a>完成報告第一至三章（使用作業版資料）</li>
     </ol>
     延伸閱讀（需要時再看）：<a href="#u9" onclick="goUnit('u9');return false;">單元九 其他學習重點</a>、<a href="#u10" onclick="goUnit('u10');return false;">單元十 參考文獻與名詞對照</a></div>
   <div class="warn"><span class="lb">資料說明</span>本網站所有數字都來自課程的員工調查模擬資料（三個廠區、1,000 人）。這是教學模擬資料，不是真實組織的調查結果。<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料（Excel）</a>，內含原始資料、題目對照表、構面與計分說明三個工作表。個人分析作業使用另一份作業版資料，分析步驟與課堂相同、結果不同，資料與要求見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業說明</a>。</div>
@@ -400,10 +400,10 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
     <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、資料結構與編碼簿</a></td><td>說明資料情境、三個工作表、欄位、人口變項、六個構面與計分方式，以及分析前的編碼簿檢查</td></tr>
     <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、AI Agent 的運作與使用方法</a></td><td>說明任務規劃、工具調用與程式執行；用網頁版、專案、本機 Agent 三種方式分析；管理上下文記憶與資料隱私</td></tr>
     <tr><td><a href="#u3" onclick="goUnit('u3');return false;">三、資料清理</a></td><td>依規則排除草率作答、轉換反向題、處理遺漏值，並說明整列刪除的問題</td></tr>
-    <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、檢查信度</a></td><td>比較構面分數之前確認每個構面的 <a href="#g-25">Cronbach’s α</a>（題目彼此一致的程度），並以<a href="#g-26">題目與總分相關</a>診斷異常題目</td></tr>
-    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、兩組比較與 Cohen’s d</a></td><td>統計方法選擇的決策樹；<a href="#g-27">抽樣誤差</a>、<a href="#g-29">p 值</a>、<a href="#g-32">t 值</a>與 <a href="#g-38">Cohen’s d</a> 的意義；判讀 <a href="#g-35">Welch t 檢定</a>結果表並寫成報告句</td></tr>
-    <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、多組比較與 η²</a></td><td>多次 t 檢定的誤判累積（<a href="#g-52">多重比較</a>）；<a href="#g-43">F 值</a>、ANOVA 摘要表、<a href="#g-44">η²</a> 與<a href="#g-48">事後比較</a>的判讀與報告</td></tr>
-    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、人機雙重查核與檢核表</a></td><td>用檢核表、同儕互查、獨立重跑與分析紀錄核對 AI 的分析</td></tr>
+    <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、檢查信度</a></td><td>比較構面分數之前確認每個構面的 <a href="#g-24">Cronbach’s α</a>（題目彼此一致的程度），並以<a href="#g-25">題目與總分相關</a>診斷異常題目</td></tr>
+    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、兩組比較與 Cohen’s d</a></td><td>統計方法選擇的決策樹；<a href="#g-26">抽樣誤差</a>、<a href="#g-28">p 值</a>、<a href="#g-31">t 值</a>與 <a href="#g-37">Cohen’s d</a> 的意義；判讀 <a href="#g-34">Welch t 檢定</a>結果表並寫成報告句</td></tr>
+    <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、多組比較與 η²</a></td><td>多次 t 檢定的誤判累積（<a href="#g-51">多重比較</a>）；<a href="#g-42">F 值</a>、ANOVA 摘要表、<a href="#g-43">η²</a> 與<a href="#g-47">事後比較</a>的判讀與報告</td></tr>
+    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、人機雙重查核與檢核表</a></td><td>AI 常見的錯誤；用一頁的檢核表對照每一輪的答案，自己抽查幾個數字</td></tr>
     <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>用六輪提示詞完成一次清理與比較，對照答案</td></tr>
     <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、其他學習重點</a></td><td>資料隱私、AI 幻覺、可重現性、分析紀錄、管理語言、因果與匿名門檻</td></tr>
     <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
@@ -413,8 +413,8 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
     <div class="fbox">上傳資料，AI 列出分析計畫（單元二）</div><div class="farrow">↓</div>
     <div class="fbox">清理：草率作答、反向題、遺漏值（單元三）</div><div class="farrow">↓</div>
     <div class="fbox">檢查信度（單元四）</div><div class="farrow">↓</div>
-    <div class="fbox">兩組比較 t 檢定、多組比較 ANOVA，報告<a href="#g-37">效果量</a>（單元五、六）</div><div class="farrow">↓</div>
-    <div class="fbox leaf">檢核表、互查與分析紀錄（單元七）</div>
+    <div class="fbox">兩組比較 t 檢定、多組比較 ANOVA，報告<a href="#g-36">效果量</a>（單元五、六）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">對照答案、抽查數字（單元七）</div>
   </div>
   <h2>工具與檔案</h2>
   <div class="scrollx"><table>
@@ -422,7 +422,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
     <tr><td><a href="../../Slides/Topic07_課堂投影片.html" target="_blank" rel="noopener">Topic 07 課堂投影片</a></td><td>課堂講解用投影片；投影片與本網站使用不同的分析例子</td></tr>
     <tr><td><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">Topic 07 員工調查模擬資料</a></td><td>課堂與練習用資料，1,000 人、29 題李克特 6 點量表、2 題開放題</td></tr>
     <tr><td><a href="../../Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">AI 分析設定範本（txt）</a></td><td>「專案指示」與「分析規則」兩段文字，可貼進 ChatGPT／Claude 專案，或存成 CLAUDE.md 與 Skill（單元二）</td></tr>
-    <tr><td><a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 07 分析檢核表（Excel）</a></td><td>檢核表、分析紀錄、使用說明三個工作表；同儕互查與個人作業使用（單元七）</td></tr>
+    <tr><td><a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 07 分析檢核表（Excel）</a></td><td>一頁：每一輪要對照的項目與正確答案，旁邊填自己的結果；只用於課堂練習（單元七）</td></tr>
     <tr><td>ChatGPT 或 Claude</td><td>網頁版或專案，需可上傳檔案並執行程式；分析結果需附程式碼與執行結果</td></tr>
     <tr><td><a href="效果量計算器.html" target="_blank" rel="noopener">效果量計算器</a></td><td>輸入兩組平均數、標準差與人數，計算 Cohen’s d</td></tr>
   </table></div>
@@ -500,7 +500,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
   </ul>
 
   <h2 id="s1-8">1.8 遺漏值的表示方式</h2>
-  <p>沒有作答的題目在原始資料中是空白格，不是 0，也沒有 99 之類的代碼。分析前需確認兩點。第一，AI 讀檔後，空白沒有被當成 0；0 不在 1–6 的量尺內，題目欄出現 0 就表示讀檔有誤。第二，「構面與計分說明」只寫「分析前需決定處理方式」，沒有指定做法，所以遺漏值的處理規則要由分析者決定並寫進分析紀錄（單元三）。</p>
+  <p>沒有作答的題目在原始資料中是空白格，不是 0，也沒有 99 之類的代碼。分析前需確認兩點。第一，AI 讀檔後，空白沒有被當成 0；0 不在 1–6 的量尺內，題目欄出現 0 就表示讀檔有誤。第二，「構面與計分說明」只寫「分析前需決定處理方式」，沒有指定做法，所以遺漏值的處理規則要由分析者決定並記下來（單元三）。</p>
 
   <h2 id="s1-9">1.9 開放題</h2>
   <div class="scrollx"><table class="mt">
@@ -517,7 +517,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
     <li>計分方向：逐題對照題目文字與計分方向欄，列出需要反向計分的題目與有疑問的題目</li>
     <li>遺漏值：確認表示方式，處理規則在計算之前訂定</li>
     <li>變項類型：人口變項是類別、李克特題目是 1–6 分、開放題是文字，各用不同的分析方法</li>
-    <li>紀錄：讀編碼簿時的疑問與決定寫進分析紀錄（單元七），並註明確認者</li>
+    <li>紀錄：讀編碼簿時的疑問與決定記下來，寫報告時會用到（單元七）</li>
   </ol>
   <div class="key"><span class="lb">本單元要點</span>資料是一列一人、三個工作表；題目對照表與計分說明合起來是編碼簿。分析前需讀編碼簿，確認欄位、量尺、計分方向與遺漏值的表示方式，並逐題閱讀題目文字。資料為教學模擬資料。</div>
 </section>
@@ -557,7 +557,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
   <p>這個循環中，AI 自行完成規劃到回報的四個步驟，人負責第一步與最後一步。提示詞寫得越具體，AI 自行決定的部分越少，查核也越容易。</p>
 
   <h2 id="s2-4">2.4 由人負責的決定</h2>
-  <p>下列決定會改變結果，由人決定並寫進分析紀錄。沒有指定時，AI 會自行選擇做法，且不一定在回覆中說明。</p>
+  <p>下列決定會改變結果，由人決定並記下來，寫進報告。沒有指定時，AI 會自行選擇做法，且不一定在回覆中說明。</p>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:20%">決定</th><th>AI 可以協助</th><th>由人決定的理由</th></tr>
     <tr><td>草率作答的規則</td><td style="text-align:left">計算每人的作答標準差、列出符合規則的人</td><td style="text-align:left">切點要在看到分析結果之前訂好，否則會變成依結果挑選樣本（DeSimone et al., 2015）</td></tr>
@@ -615,7 +615,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
 - 完整程式碼。
 - 結果表與 APA 格式報告句。
 - 最後列出「我自行決定、需要人確認的事項」。
-</pre></div><p class="terms"><span class="lb2">名詞</span><a href="#g-16">直線作答</a>：所有題目都填同一個數字；<a href="#g-24">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-18">反向計分</a>：語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高；<a href="#g-25">Cronbach’s α</a>：一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念；<a href="#g-26">題目與總分相關</a>：某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤；<a href="#g-35">Welch t 檢定</a>：不假設兩組變異數相等的 t 檢定；本課程的預設；<a href="#g-38">Cohen’s d</a>：兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大；<a href="#g-40">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-44">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-46">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-48">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p></div>
+</pre></div><p class="terms"><span class="lb2">名詞</span><a href="#g-15">直線作答</a>：所有題目都填同一個數字；<a href="#g-23">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-17">反向計分</a>：語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高；<a href="#g-24">Cronbach’s α</a>：一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念；<a href="#g-25">題目與總分相關</a>：某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤；<a href="#g-34">Welch t 檢定</a>：不假設兩組變異數相等的 t 檢定；本課程的預設；<a href="#g-37">Cohen’s d</a>：兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大；<a href="#g-39">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-43">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-45">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-47">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p></div>
 
   <h2 id="s2-6">2.6 方式一：網頁版上傳檔案與提示詞</h2>
   <ol class="steps">
@@ -685,7 +685,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 ## 輸出
 - 完整程式碼、結果表、APA 格式報告句。
 - 列出自行決定、需要人確認的事項。</pre></div>
-  <p class="terms"><span class="lb2">名詞</span><a href="#g-24">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-18">反向計分</a>：語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高；<a href="#g-25">Cronbach’s α</a>：一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念；<a href="#g-26">題目與總分相關</a>：某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤；<a href="#g-35">Welch t 檢定</a>：不假設兩組變異數相等的 t 檢定；本課程的預設；<a href="#g-38">Cohen’s d</a>：兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大；<a href="#g-40">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-44">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-46">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-43">F 值</a>：組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1；<a href="#g-48">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-23">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-17">反向計分</a>：語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高；<a href="#g-24">Cronbach’s α</a>：一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念；<a href="#g-25">題目與總分相關</a>：某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤；<a href="#g-34">Welch t 檢定</a>：不假設兩組變異數相等的 t 檢定；本課程的預設；<a href="#g-37">Cohen’s d</a>：兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大；<a href="#g-39">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-43">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-45">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-42">F 值</a>：組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1；<a href="#g-47">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p>
   <p>CLAUDE.md 與 Skill 的分工：CLAUDE.md 放這個專案的背景，每次都讀取；Skill 放某一類任務的做法，需要時才載入，也可以複製到其他專案重複使用。Google Antigravity 也提供專案規則與可重複使用的設定，檔名與存放位置依該工具的說明文件，規則內容可以沿用上面的範本。</p>
 
   <h2 id="s2-9">2.9 上下文記憶</h2>
@@ -732,7 +732,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 3. 一句 APA 格式的報告句。
 4. 你執行的完整程式碼。
 5. 你自行決定、我沒有指定的事項。</pre></div>
-  <p class="terms"><span class="lb2">名詞</span><a href="#g-24">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-40">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-43">F 值</a>：組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1；<a href="#g-33">自由度</a>：把 t 或 F 換算成 p 值時使用的數字，主要由人數與組數決定；<a href="#g-29">p 值</a>：假設虛無假設為真時，觀察到目前這麼大或更大差距的機率；不是差距大小，也不是結論為真的機率；<a href="#g-44">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-46">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-48">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-23">標準差</a>：個人分數離平均的典型距離；數值越大，分數越分散；<a href="#g-39">單因子變異數分析</a>：以一次檢定比較三組以上的平均數是否全部相同；<a href="#g-42">F 值</a>：組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1；<a href="#g-32">自由度</a>：把 t 或 F 換算成 p 值時使用的數字，主要由人數與組數決定；<a href="#g-28">p 值</a>：假設虛無假設為真時，觀察到目前這麼大或更大差距的機率；不是差距大小，也不是結論為真的機率；<a href="#g-43">η²</a>：組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大；<a href="#g-45">Levene 檢定</a>：檢定各組變異數是否相等；p 小於 .05 表示變異數不相等；<a href="#g-47">事後比較</a>：ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判。</p>
   <p>各名詞的完整說明與計算見單元五、六。</p>
 
   <h2 id="s2-11">2.11 資料隱私</h2>
@@ -794,11 +794,11 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="scrollx"><table class="mt">
     <tr><th>類型</th><th>規則</th><th>理由</th><th>本資料人數</th></tr>
     <tr><td>直線作答</td><td style="text-align:left">29 題全部填同一個數字</td><td style="text-align:left">29 題包含不同構面與反向題，認真作答的人不會每題都一樣</td><td class="num">20 人</td></tr>
-    <tr><td>隨機亂填</td><td style="text-align:left">敬業度 ENG01–ENG12 的<a href="#g-24">標準差</a>高於全體平均＋3 個標準差（排除直線作答者後計算）</td><td style="text-align:left">這 12 題測同一個構念，認真作答的人分數會相近；標準差很大表示分數忽高忽低</td><td class="num">19 人</td></tr>
+    <tr><td>隨機亂填</td><td style="text-align:left">敬業度 ENG01–ENG12 的<a href="#g-23">標準差</a>高於全體平均＋3 個標準差（排除直線作答者後計算）</td><td style="text-align:left">這 12 題測同一個構念，認真作答的人分數會相近；標準差很大表示分數忽高忽低</td><td class="num">19 人</td></tr>
   </table></div>
   <h3>隨機亂填的門檻</h3>
   <p>標準差描述一個人 12 題分數的分散程度（標準差的意義見 <a href="#s5-3">5.3</a>）。敬業度 12 題測量同一個構念，認真作答的人各題分數相近：排除直線作答者後的 980 人中，86% 的標準差介於 0.5 到 1.0。隨機亂填的人各題分數忽高忽低，標準差明顯較大。</p>
-  <p>門檻依資料分布計算：980 人標準差的平均為 0.69、標準差為 0.21，門檻 ＝ 0.69 ＋ 3 × 0.21 ＝ <span class="num">1.32</span>，高於門檻的 19 人判定為隨機亂填。平均＋3 個標準差的規則在看到任何群組比較結果之前訂定；實際算出的門檻值寫進分析紀錄（<a href="#s7-8">7.8</a>）。</p>
+  <p>門檻依資料分布計算：980 人標準差的平均為 0.69、標準差為 0.21，門檻 ＝ 0.69 ＋ 3 × 0.21 ＝ <span class="num">1.32</span>，高於門檻的 19 人判定為隨機亂填。平均＋3 個標準差的規則在看到任何群組比較結果之前訂定；實際算出的門檻值記下來，寫進報告（<a href="#s7-8">7.8</a>）。</p>
   <figure class="chart"><svg viewBox="0 0 360 192" role="img" aria-labelledby="sdhT sdhD"><title id="sdhT">敬業度 12 題標準差的分布</title><desc id="sdhD">980 人（排除直線作答者）的標準差直方圖，組距 0.1。多數人介於 0.4 到 1.0；1.24 與 1.36 之間沒有人；門檻 1.32 以上有 19 人。</desc><g style="font-size:10.5px;fill:var(--muted)"><text x="34" y="154.0" text-anchor="end">0</text><line x1="40" x2="352" y1="150.0" y2="150.0" style="stroke:var(--line)"/><text x="34" y="120.5" text-anchor="end">100</text><line x1="40" x2="352" y1="116.5" y2="116.5" style="stroke:var(--line)"/><text x="34" y="87.0" text-anchor="end">200</text><line x1="40" x2="352" y1="83.0" y2="83.0" style="stroke:var(--line)"/><text x="34" y="53.5" text-anchor="end">300</text><line x1="40" x2="352" y1="49.5" y2="49.5" style="stroke:var(--line)"/><text x="40.0" y="165" text-anchor="middle">0.0</text><text x="114.3" y="165" text-anchor="middle">0.5</text><text x="188.6" y="165" text-anchor="middle">1.0</text><text x="262.9" y="165" text-anchor="middle">1.5</text><text x="337.1" y="165" text-anchor="middle">2.0</text><text x="196.0" y="188" text-anchor="middle">每人 ENG01–ENG12 的標準差</text><text x="8" y="12">人數</text></g><rect x="40.8" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="70.5" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="85.4" y="143.0" width="13.3" height="7.0" style="fill:var(--blue)"/><rect x="100.2" y="121.5" width="13.3" height="28.5" style="fill:var(--blue)"/><rect x="115.1" y="95.1" width="13.3" height="54.9" style="fill:var(--blue)"/><rect x="129.9" y="47.5" width="13.3" height="102.5" style="fill:var(--blue)"/><rect x="144.8" y="74.3" width="13.3" height="75.7" style="fill:var(--blue)"/><rect x="159.7" y="122.2" width="13.3" height="27.8" style="fill:var(--blue)"/><rect x="174.5" y="129.9" width="13.3" height="20.1" style="fill:var(--blue)"/><rect x="189.4" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="204.2" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="219.1" y="147.0" width="13.3" height="3.0" style="fill:var(--blue)"/><rect x="233.9" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="248.8" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="263.7" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="278.5" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="293.4" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="308.2" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="323.1" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><rect x="337.9" y="147.0" width="13.3" height="3.0" style="fill:#c0564f"/><line x1="236.1" x2="236.1" y1="26" y2="150" style="stroke:#c0564f;stroke-width:1.5;stroke-dasharray:4 3"/><text x="240.1" y="38" style="font-size:11px;fill:#8f3a34;font-weight:700">門檻 1.32</text></svg><figcaption>紅色長條為高於門檻、判定為隨機亂填的作答（19 人）。</figcaption></figure>
   <p>直方圖中，多數人的標準差集中在 0.4 到 1.0；1.24 與 1.36 之間沒有人，門檻 1.32 落在這段空白中。</p>
   <p>Excel 的算法：</p>
@@ -829,7 +829,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   </div>
 
   <h2 id="s3-5">3.5 常態性</h2>
-  <p>t 檢定與 ANOVA 假設各組分數大致呈常態分布。各組有數十人以上時，這兩種檢定對偏離常態不敏感。AI 有時會自動執行常態性檢定（例如 Shapiro-Wilk，檢定分數是否偏離常態分布），樣本數上百人時，很小的偏離也會顯著（<a href="#g-29">p 值</a>小於 <a href="#g-30">.05</a>）。各組構面分數的直方圖（可要求 AI 繪製）比常態性檢定的 p 值有用：直方圖可顯示分布是否極度偏斜，或有兩個明顯的高峰。</p>
+  <p>t 檢定與 ANOVA 假設各組分數大致呈常態分布。各組有數十人以上時，這兩種檢定對偏離常態不敏感。AI 有時會自動執行常態性檢定（例如 Shapiro-Wilk，檢定分數是否偏離常態分布），樣本數上百人時，很小的偏離也會顯著（<a href="#g-28">p 值</a>小於 <a href="#g-29">.05</a>）。各組構面分數的直方圖（可要求 AI 繪製）比常態性檢定的 p 值有用：直方圖可顯示分布是否極度偏斜，或有兩個明顯的高峰。</p>
 
   <h2 id="s3-6">3.6 清理紀錄</h2>
   <div class="scrollx"><table class="mt">
@@ -850,7 +850,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 2. 隨機亂填：計算每人 ENG01–ENG12 的標準差（樣本標準差；有空白時以已作答題目計算）。先排除直線作答者，再用其餘的人算出這個標準差的平均與標準差，高於「平均＋3 個標準差」的人判定為隨機亂填，並回報門檻值。
 以上都用原始作答計算（反向題轉換之前）。回報後請刪除這些人，告訴我剩下幾人；之後的分析都用刪除後的資料。</pre></div></div></div>
   <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>刪除人數：直線作答 20 人、隨機亂填 19 人，剩下 961 人</li><li>AI 回報的門檻值：本資料為 1.32</li><li>程式中計算標準差的步驟排在反向題轉換之前</li><li>AI 有列出被刪除的員工編號，可以在 Excel 中抽查幾位</li></ul></div></div>
-  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>看到比較結果之後才調整門檻，等於依結果挑選樣本</li><li>先轉換反向題再找直線作答，會漏掉全部填同一個數字的人</li><li>平均＋3 個標準差是本課程採用的規則；實務上依量表與資料訂定，規則與算出的門檻值都寫進分析紀錄</li></ul></div></div>
+  <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>看到比較結果之後才調整門檻，等於依結果挑選樣本</li><li>先轉換反向題再找直線作答，會漏掉全部填同一個數字的人</li><li>平均＋3 個標準差是本課程採用的規則；實務上依量表與資料訂定，規則與算出的門檻值都記下來，寫進報告</li></ul></div></div>
 </div>
   <div class="stepcard"><div class="sh">操作步驟：轉換反向題</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">讓同一構面的題目方向一致：每一題分數越高，都代表該構面的程度越高。</div></div>
@@ -867,10 +867,10 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請回報遺漏值的情況：29 題共有幾個空白格、多少人至少缺一題、每人最多缺幾題、如果把有空白的人整列刪除會剩幾人。
 接著計算六個構面分數：該構面至少答了一半題目（含一半），就取已作答題目的平均；不到一半，該構面記為遺漏。不要整列刪除，也不要補值。
 請列出六個構面的有效人數與平均。</pre></div></div></div>
-  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>空白 696 格、493 人至少缺一題</li><li>各構面有效人數 957–961</li><li>程式沒有對整份資料使用 dropna()；某個比較只剩 468 人左右，代表做了整列刪除</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>空白 696 格、493 人至少缺一題</li><li>各構面有效人數 957–961</li><li>某個比較只剩 468 人左右，代表 AI 做了整列刪除（缺一題就刪掉整個人）</li></ul></div></div>
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>把空白補成 0 或量尺中點 3.5</li><li>整列刪除，丟掉一半樣本</li><li>遺漏比例高、或集中在某些群組時，需要多重插補（以統計模型多次估計遺漏的分數再合併結果）等較正式的方法（Newman, 2014）；本資料遺漏少且分散，用構面內平均即可</li></ul></div></div>
 </div>
-  <div class="key"><span class="lb">本單元要點</span>清理順序：在原始作答上排除草率作答、轉換反向題、處理遺漏值。隨機亂填的門檻由資料計算（平均＋3 個標準差），門檻值寫進分析紀錄。RET01 與 RET03 的相關可確認反向題是否轉換；遺漏值不整列刪除，AI 需回報各構面的有效人數。</div>
+  <div class="key"><span class="lb">本單元要點</span>清理順序：在原始作答上排除草率作答、轉換反向題、處理遺漏值。隨機亂填的門檻由資料計算（平均＋3 個標準差），門檻值記下來，寫進報告。RET01 與 RET03 的相關可確認反向題是否轉換；遺漏值不整列刪除，AI 需回報各構面的有效人數。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 2</div>
     <div class="qbody">
@@ -909,7 +909,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   </table></div>
   <p>AIA04 為負相關。從題目文字判斷，擔心被取代的人，對 AI 導入的態度通常較負面，所以這一題的語意與其他三題相反，對照表卻標為正向。這是對照表的錯誤，AI 依對照表轉換反向題時不會發現。</p>
   <p>把 AIA04 轉換後重算，α 升到 <span class="num">.82</span>，四題的方向一致，構面可以使用。</p>
-  <div class="note"><span class="lb">本課程的處理</span>改分之前，向問卷設計者或題本負責人確認 AIA04 是對照表誤植，並把這項確認寫進分析紀錄；確認後轉換 AIA04，以四題計算 AIA 構面分數。AI 發現這類問題時，只能回報，不應自行改分。</div>
+  <div class="note"><span class="lb">本課程的處理</span>改分之前，向問卷設計者或題本負責人確認 AIA04 是對照表誤植，並把這項確認記下來，寫進報告；確認後轉換 AIA04，以四題計算 AIA 構面分數。AI 發現這類問題時，只能回報，不應自行改分。</div>
   <h2 id="s4-4">4.4 人與 AI 的分工</h2>
   <p>AI 可以在幾秒內算完六個構面的 α 與每一題的題目與總分相關。判斷負相關的原因，需要回到題目文字，這一步由人做。提示詞中可以要求 AI：「α 低於 .70 的構面，列出每題的題目與總分相關，並回到題目對照表看題目文字，說明可能原因。」</p>
   <h2 id="s4-5">4.5 操作步驟與注意事項</h2>
@@ -932,7 +932,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
       <label><input type="radio" name="q3r" value="a"> 負的題目與總分相關多半來自計分方向，要對照題目文字確認；不能由 AI 或分析者自行決定改分</label><label><input type="radio" name="q3r" value="b"> 換一種信度係數，就能解決題目本身的問題</label><label><input type="radio" name="q3r" value="c"> α 低於 .70 的構面一律刪除，不必說明</label>
       <div class="tier">作答信心</div>
       <div class="conf"><label><input type="radio" name="q3c" value="低"> 低</label><label><input type="radio" name="q3c" value="中"> 中</label><label><input type="radio" name="q3c" value="高"> 高</label></div>
-      <button onclick="checkQuiz2(this,'q3','c','a','正確。先查計分方向，確認後再轉換，並寫進分析紀錄。','相關說明見 &lt;a href=&quot;#s4-3&quot;&gt;4.3&lt;/a&gt;：負相關最先要檢查什麼？要向誰確認？','提示：負的題目與總分相關通常代表什麼？')">檢查答案</button>
+      <button onclick="checkQuiz2(this,'q3','c','a','正確。先查計分方向，確認後再轉換，並在報告中說明。','相關說明見 &lt;a href=&quot;#s4-3&quot;&gt;4.3&lt;/a&gt;：負相關最先要檢查什麼？要向誰確認？','提示：負的題目與總分相關通常代表什麼？')">檢查答案</button>
       <div class="fb"></div>
     </div>
   </div>
@@ -957,7 +957,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <li>開放題文字：質性編碼與 κ（Topic 09）</li>
     <li>構面是否成立：信度 α、EFA（Topic 05）</li>
   </ul>
-  <p class="terms"><span class="lb2">名詞</span>成對樣本 t 檢定：同一群人兩次測量的平均比較；相關係數 r：兩個變項一起升降的程度，介於 −1 到 1；多元迴歸：以多個變項同時預測一個結果；交叉表與卡方檢定：檢查兩個類別變項的人數分布是否有關；κ：兩位編碼者扣除碰巧一致之後的一致程度；EFA（探索性因素分析）：檢查題目可以歸成幾個構面；Tukey、Games-Howell：<a href="#g-48">事後比較</a>的兩種方法（<a href="#s6-8">6.8</a>）；t 檢定與 ANOVA 的說明見 <a href="#s5-4">5.4</a> 至 <a href="#s6-5">6.5</a>。</p>
+  <p class="terms"><span class="lb2">名詞</span>成對樣本 t 檢定：同一群人兩次測量的平均比較；相關係數 r：兩個變項一起升降的程度，介於 −1 到 1；多元迴歸：以多個變項同時預測一個結果；交叉表與卡方檢定：檢查兩個類別變項的人數分布是否有關；κ：兩位編碼者扣除碰巧一致之後的一致程度；EFA（探索性因素分析）：檢查題目可以歸成幾個構面；Tukey、Games-Howell：<a href="#g-47">事後比較</a>的兩種方法（<a href="#s6-8">6.8</a>）；t 檢定與 ANOVA 的說明見 <a href="#s5-4">5.4</a> 至 <a href="#s6-5">6.5</a>。</p>
   <h3>本資料的分析問題與方法</h3>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:46%">人資的問題</th><th>方法</th><th style="width:20%">說明位置</th></tr>
@@ -1110,7 +1110,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="sr"><div class="sk">提示詞範例</div><div class="sv">上傳資料後，在同一個對話依序貼上各步驟的提示詞（按「複製」）<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請比較兩組的構面分數：第一組是高雄廠的生產部與品保部，第二組是其他所有人。
 用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d（以合併標準差計算，方向為第一組減第二組）。
 用表格列出敬業度、主管支持、認可與回饋、組織承諾、留任意願五個構面的：兩組人數、平均、標準差、t、自由度、p、d。最後用一句話說明哪個構面的差距最大。</pre></div><div style="font-size:.9em;margin-top:6px">這是練習資料的例子。作業版資料的問題單位不同，要先比較各廠區與部門、自己找出分數偏低的單位，再把第一組換成那個單位。</div></div></div>
-  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>程式有 equal_var=False，或結果寫明 Welch</li><li>自由度有小數；兩組人數相加等於該構面的有效人數</li><li>d 的正負號與平均差的方向一致</li></ul></div></div>
+  <div class="sr"><div class="sk">在 AI 回覆中檢查</div><div class="sv"><ul><li>AI 的回覆寫明使用 Welch t 檢定</li><li>自由度有小數；兩組人數相加等於該構面的有效人數</li><li>d 的正負號與平均差的方向一致</li></ul></div></div>
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>只報 p 值，不報 d</li><li>把 p &gt; .05 寫成「有趨勢」，或寫成「證明兩組相同」；不顯著表示證據不足，不等於沒有差異</li><li>常態性：各組有數十人以上時，t 檢定對偏離常態不敏感，不需要每次做常態性檢定；組別只有十幾人、分布又極度偏斜時才需要另外處理</li><li>構面分數當作等距資料處理（見 <a href="#s1-7">1.7</a>），解讀以構面分數為單位</li><li>同時比較很多個單位時，誤判會累積，見 <a href="#s6-1">6.1</a></li></ul></div></div>
 </div>
   <div class="key"><span class="lb">本單元要點</span>兩組平均會因抽樣而變動，t 檢定判斷差距是否可能只是抽樣誤差。p 值是在兩組沒有差異的前提下，抽到這麼大差距的機率，不是差距大小，也不是結論為真的機率。兩組比較預設用 Welch t 檢定，並報告 Cohen’s d：本資料同樣 p &lt; .001 的兩個比較，d 為 −0.78 與 −0.48。下鑽找問題單位時，同時注意誤判累積與匿名門檻。</div>
@@ -1294,42 +1294,37 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 <!-- ==================== U7 查核 ==================== -->
 <section class="unit" id="u7">
   <h1>單元七：人機雙重查核與檢核表</h1>
-  <div class="subtitle">human-in-the-loop verification；檢核表、同儕互查、獨立重跑、分析紀錄</div>
+  <div class="subtitle">human-in-the-loop verification；AI 常見的錯誤、一頁檢核表、自行抽查、數字允許的差異</div>
   <h2 id="s7-1">7.1 查核的目的</h2>
   <p>AI Agent 會實際執行程式，算術錯誤很少見。常見的問題是 AI 在沒有被指定的地方自行做了決定：整列刪除遺漏值、沒有發現對照表標錯的反向題、用了 Student t 檢定、做多次 t 檢定沒有校正，或把不顯著的結果寫成「有趨勢」。這些決定會改變結論，但回覆的語氣仍然很有把握。查核的目的是找出這些決定。</p>
   <h2 id="s7-2">7.2 快速查核清單</h2>
   <p>完成分析後逐項勾選。每一項都可以用數字核對，不依賴 AI 的自我陳述。</p>
   <div class="chk"><label><input type="checkbox" onchange="chkCount()"> <span>人數：1,000 → 961，每一步刪除的人數與規則相符（直線作答 20 人、隨機亂填 19 人）</span></label><label><input type="checkbox" onchange="chkCount()"> <span>反向題：RET03 已轉換（RET01 與 RET03 的相關由負轉正）；AIA04 的方向有被發現並說明</span></label><label><input type="checkbox" onchange="chkCount()"> <span>遺漏值：沒有整列刪除；各構面有效人數接近 961，不是 468</span></label><label><input type="checkbox" onchange="chkCount()"> <span>信度：比較之前檢查 α；低於 .70 的構面不直接拿來比較</span></label><label><input type="checkbox" onchange="chkCount()"> <span>檢定選擇：兩組用 Welch t 檢定；三組以上用 ANOVA，並說明事後比較方法</span></label><label><input type="checkbox" onchange="chkCount()"> <span>效果量：每個比較都有 d 或 η²，判讀依效果量大小，不只看 p 值</span></label><label><input type="checkbox" onchange="chkCount()"> <span>匿名門檻：少於 5 人的單位不單獨呈現（本資料：台中廠法務智財部 4 人、高雄廠永續發展室 3 人）</span></label><label><input type="checkbox" onchange="chkCount()"> <span>自行重算一項：例如在 Excel 對原始資料題目欄（G2:AI1001）用 COUNTBLANK，應得 696 格空白</span></label></div>
   <p id="chkNote" style="color:var(--muted);font-size:14px">已完成 0／8 項。</p>
-  <h2 id="s7-3">7.3 分析檢核表（Excel）</h2>
-  <p><a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 07 分析檢核表（Excel）</a>。上面的快速清單用於自我檢查；檢核表用於正式的互查與作業繳交，有三個工作表：</p>
+  <h2 id="s7-3">7.3 分析檢核表（一頁）</h2>
+  <p><a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 07 分析檢核表（Excel，一頁）</a>。檢核表只有一個工作表，列出實機練習各輪要對照的 10 個項目與正確答案。每做完一輪，把自己的結果寫在正確答案旁邊，相同就在「一致」欄選「✓」；小數第二位的差異算一致。結果不同時，依<a href="#u8" onclick="goUnit('u8');return false;">單元八</a>「卡住時的處理方式」找原因。檢核表可以印成一頁橫式 A4。</p>
+  <div class="scrollx"><table class="mt"><tr><th style="width:18%">輪次</th><th>項目</th><th style="width:36%">正確答案（課堂練習資料）</th></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">直線作答刪除的人數</td><td style="text-align:left">20 人</td></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">隨機亂填刪除的人數與門檻</td><td style="text-align:left">19 人（門檻 1.32）</td></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">清理後人數</td><td style="text-align:left">961 人</td></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">29 題的空白格數</td><td style="text-align:left">696 格</td></tr><tr><td style="text-align:left">第 2 輪 信度</td><td style="text-align:left">α 最低的構面</td><td style="text-align:left">AI 導入態度 AIA（α ＝ −.11）</td></tr><tr><td style="text-align:left">第 3 輪 t 檢定</td><td style="text-align:left">主管支持的平均：高雄廠生產部與品保部／其他單位</td><td style="text-align:left">3.12／4.04</td></tr><tr><td style="text-align:left">第 3 輪 t 檢定</td><td style="text-align:left">上面這個比較的 d</td><td style="text-align:left">−1.00</td></tr><tr><td style="text-align:left">第 4 輪 ANOVA</td><td style="text-align:left">年資與留任意願的 F</td><td style="text-align:left">F(4, 954) ＝ 14.69</td></tr><tr><td style="text-align:left">第 4 輪 ANOVA</td><td style="text-align:left">年資與留任意願的 η²</td><td style="text-align:left">.058</td></tr><tr><td style="text-align:left">第 5 輪 查核</td><td style="text-align:left">人數少於 5 人的廠區 × 部門</td><td style="text-align:left">台中廠法務智財部 4 人、高雄廠永續發展室 3 人</td></tr></table></div>
+  <p>檢核表的答案來自課堂練習資料。個人作業使用作業版資料，答案不同，另有一頁的自我檢查表，見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。</p>
+
+  <h2 id="s7-4">7.4 查核的做法</h2>
+  <p>不同人用 AI 做同一份分析，可能得到不同的數字。課堂練習的查核只有兩件事，都由分析者自己完成；第三項為選做。</p>
+  <div class="flow">
+    <div class="fbox q">1　對照答案：每一輪的結果與檢核表的正確答案比對（<a href="#s7-3">7.3</a>）</div><div class="farrow">↓</div>
+    <div class="fbox">2　自行抽查：挑兩三個數字，用 Excel 或計算器自己算一次（<a href="#s7-5">7.5</a>）</div><div class="farrow">↓</div>
+    <div class="fbox leaf">3　選做：用新對話獨立重跑關鍵數字（<a href="#s7-6">7.6</a>）</div>
+  </div>
+  <p>結果有差異時，依 <a href="#s7-7">7.7</a> 判斷是否需要找原因。時間允許時，也可以和同學交換檢核表互相對照（選做）。</p>
+
+  <h2 id="s7-5">7.5 自行抽查的數字</h2>
+  <p>抽查的目的是確認 AI 回報的數字來自資料，不依賴 AI 的自我陳述。下列三項都可以在幾分鐘內完成，挑其中兩三項即可。</p>
   <div class="scrollx"><table class="mt">
-    <tr><th style="width:16%">工作表</th><th>內容</th><th style="width:30%">由誰填寫</th></tr>
-    <tr><td>檢核表</td><td style="text-align:left">19 個檢核項目，依步驟排列（0 規劃、1 清理、2 信度、3 t 檢定、4 ANOVA、5 查核）。每一項有「怎麼檢查」與「預期結果（課堂練習資料）」，例如清理後人數 961、AIA α −.11</td><td style="text-align:left">分析者填「我的結果」「一致？」；檢核者逐項確認並簽名；不一致時寫下原因與處理</td></tr>
-    <tr><td>分析紀錄</td><td style="text-align:left">每一個需要人決定的事項寫一列：日期、步驟、決定的事項、選擇、理由、由誰提出（人／AI）、確認者。已附兩列範例</td><td style="text-align:left">分析者在分析過程中隨時填寫</td></tr>
-    <tr><td>使用說明</td><td style="text-align:left">六個使用步驟，以及數字允許差異的規則（見 <a href="#s7-7">7.7</a>）</td><td style="text-align:left">分析者與檢核者開始前先讀</td></tr>
+    <tr><th style="width:24%">抽查項目</th><th>做法</th><th style="width:26%">應得到的結果</th></tr>
+    <tr><td style="text-align:left">空白格數</td><td style="text-align:left">在 Excel 開啟原始資料，對 29 題的範圍（G2:AI1001）使用 COUNTBLANK</td><td style="text-align:left">696 格</td></tr>
+    <tr><td style="text-align:left">各構面的有效人數</td><td style="text-align:left">看 AI 回覆中各構面的人數是否接近清理後人數</td><td style="text-align:left">957–961 人；只剩 468 人代表 AI 做了整列刪除</td></tr>
+    <tr><td style="text-align:left">效果量 d</td><td style="text-align:left">把 AI 回報的兩組平均、標準差與人數輸入<a href="效果量計算器.html" target="_blank" rel="noopener">效果量計算器</a></td><td style="text-align:left">與 AI 回報的 d 相同（小數第二位可略有差異）</td></tr>
   </table></div>
 
-  <h2 id="s7-4">7.4 審查機制：四道查核</h2>
-  <p>不同人用 AI 做同一份分析，可能得到不同的數字。下面四道查核依序進行，目的是讓每一份分析都經過分析者以外的人或對話核對。</p>
-  <div class="flow">
-    <div class="fbox q">1　自我查核：分析者對照檢核表的預期結果，填寫「我的結果」</div><div class="farrow">↓</div>
-    <div class="fbox">2　同儕互查：檢核者看分析者的對話紀錄與程式碼，逐項確認（<a href="#s7-5">7.5</a>）</div><div class="farrow">↓</div>
-    <div class="fbox">3　獨立重跑：用新對話或另一個 AI 工具重算關鍵數字（<a href="#s7-6">7.6</a>）</div><div class="farrow">↓</div>
-    <div class="fbox leaf">4　差異處理與紀錄：依容許差異規則判斷，寫進分析紀錄（<a href="#s7-7">7.7</a>、<a href="#s7-8">7.8</a>）</div>
-  </div>
-
-  <h2 id="s7-5">7.5 同儕互查</h2>
-  <ol class="steps">
-    <li>A 完成分析，保存完整對話、程式碼，並填好檢核表的「我的結果」與分析紀錄</li>
-    <li>A 把對話連結或匯出的對話紀錄、程式碼、檢核表交給 B</li>
-    <li>B 依檢核表逐項確認：看 A 的對話中 AI 回報的人數與數字，並在程式碼中找關鍵的幾行，例如有沒有 dropna()、有沒有「7 −」、t 檢定有沒有 equal_var=False</li>
-    <li>B 在「檢核者」欄簽名；不一致的項目寫下原因，交回 A 修正</li>
-    <li>A 與 B 交換角色，B 的分析由 A 檢核</li>
-  </ol>
-  <p>檢核者只核對，不代替分析者重做分析，也不修改分析者的結果。檢核者看到的是對話與程式碼，所以分析者要保存完整的對話，不只保存最後的結果。</p>
-
-  <h2 id="s7-6">7.6 獨立重跑：另一個對話的查核</h2>
+  <h2 id="s7-6">7.6 獨立重跑：另一個對話的查核（選做）</h2>
   <p>獨立重跑的做法是開一個新對話（可以是另一個 AI 工具），上傳同一份資料與第一個對話整理出的程式碼，由它擔任查核者，依規則自行重算，再和程式的結果比對。新對話沒有第一個對話的上下文，不會沿用第一個對話中的假設。兩個對話的數字一致，可信度較高；不一致時，比較兩份程式，找出設定不同的地方。</p>
   <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我上傳兩個檔案：一份員工調查的 Excel 原始資料，以及另一個 AI 對話產生的分析程式碼。
 請你擔任查核者，不要直接沿用這份程式，依下列規則自己重算一次，再和程式的結果比對：
@@ -1346,12 +1341,10 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <tr><td style="text-align:left">正負號相反</td><td>必須說明</td><td style="text-align:left">檢查組別順序（第一組減第二組）與反向題轉換</td></tr>
     <tr><td style="text-align:left">顯著與否不同</td><td>必須說明</td><td style="text-align:left">檢查檢定方法（Welch 或 Student）、事後比較的校正方法、人數</td></tr>
   </table></div>
-  <p>「必須說明」的差異，找出原因後寫進檢核表的「不一致的原因與處理」欄，並把最後採用的做法寫進分析紀錄。</p>
+  <p>「必須說明」的差異，找出原因並修改提示詞重跑；最後採用的做法記下來，寫報告時會用到（<a href="#s7-8">7.8</a>）。</p>
 
-  <h2 id="s7-8">7.8 分析紀錄</h2>
-  <p>分析紀錄（decision log）記下每一個需要人決定的事項，以及誰提出、誰確認。之後有人問「為什麼刪掉這 39 人」或「AIA04 為什麼要轉換」，可以從紀錄中找到答案。下表是檢核表中「分析紀錄」工作表的欄位與範例：</p>
-  <div class="scrollx"><table class="mt"><tr><th>日期</th><th>步驟</th><th>決定的事項</th><th>選擇</th><th>理由</th><th>由誰提出（人／AI）</th><th>確認者</th></tr><tr><td style="text-align:left">2026/11/06</td><td style="text-align:left">清理</td><td style="text-align:left">隨機亂填門檻</td><td style="text-align:left">ENG 標準差 &gt; 平均＋3 個標準差（1.32）</td><td style="text-align:left">分析前訂定規則；門檻由資料分布計算</td><td style="text-align:left">人</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">2026/11/06</td><td style="text-align:left">信度</td><td style="text-align:left">AIA04 是否轉換</td><td style="text-align:left">轉換</td><td style="text-align:left">題目語意反向，題目負責人確認對照表誤植</td><td style="text-align:left">AI 提出，人確認</td><td style="text-align:left"></td></tr></table></div>
-  <p>需要寫進分析紀錄的事項包括：草率作答的規則與門檻、反向題（含對照表與題目文字不一致的題目）、遺漏值的處理方式、分組方式、檢定與事後比較方法、未單獨呈現的小群組。</p>
+  <h2 id="s7-8">7.8 由人做的決定與紀錄</h2>
+  <p>分析中有些事項需要人決定：草率作答的規則與門檻、反向題（含對照表與題目文字不一致的題目）、遺漏值的處理方式、分組方式、檢定與事後比較方法、未單獨呈現的小群組。這些決定與理由在分析過程中隨手記下來，稱為分析紀錄（decision log），形式不拘，寫在筆記或文件中都可以。之後有人問「為什麼刪掉這 39 人」或「AIA04 為什麼要轉換」，可以從紀錄中找到答案；個人作業的報告也要寫出這些決定。</p>
 
   <h2 id="s7-9">7.9 AI 常見的做法與後果</h2>
   <div class="scrollx"><table class="mt">
@@ -1363,7 +1356,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <tr><td style="text-align:left">三組以上做多次 t 檢定</td><td style="text-align:left">誤判機率升高（三組約 14%）</td><td style="text-align:left">確認先做 ANOVA，事後比較有校正</td></tr>
   </table></div>
   <h2 id="s7-10">7.10 報告撰寫與 AI 使用的揭露</h2>
-  <p>報告的方法段落寫出：使用哪一個 AI 工具與日期、AI 執行了哪些步驟、哪些決定由人指定（清理規則、遺漏值、檢定方法）、用什麼方式查核（檢核表、同儕互查、第二個對話、Excel 重算）。附錄附上完整程式碼與對話紀錄，讓別人可以重現。</p>
+  <p>報告的方法段落寫出：使用哪一個 AI 工具與日期、AI 執行了哪些步驟、哪些決定由人指定（清理規則、遺漏值、檢定方法）、用什麼方式查核（對照答案、Excel 或計算器重算、第二個對話）。附錄附上完整程式碼與對話紀錄，讓別人可以重現。</p>
   <div class="stepcard"><div class="sh">操作步驟：撰寫報告</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">讓讀者知道結果是什麼、差距多大、怎麼算出來，以及能不能據以採取行動。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>結論先寫，數字附在後面（APA：t(df)、p、d；F(df1, df2)、p、η²）</li><li>寫明人數、清理規則與遺漏值處理方式</li><li>少於 5 人的群組不單獨呈現</li><li>方法段寫出 AI 工具與日期、由人做的決定、查核方式</li></ul></div></div>
@@ -1378,7 +1371,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 </div>
   <h2 id="s7-11">7.11 個人分析作業</h2>
   <p>個人分析作業（25%，<span style="color:#C62828;font-weight:700">延後一週，2026/12/03 23:59 截止</span>）的資料、報告架構、繳交項目與評分方式見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。作業使用另一份作業版資料（個人作業_員工調查模擬資料_作業版.xlsx），分析步驟與課堂相同，結果不同。</p>
-  <div class="key"><span class="lb">本單元要點</span>查核的對象是 AI 自行做的決定。分析者先對照檢核表自我查核，再由同學看對話與程式碼互查，並用新對話獨立重跑關鍵數字。小數第二位的差異寫明方法即可；人數、正負號、顯著與否不同，必須找出原因。每一個人做的決定都寫進分析紀錄。</div>
+  <div class="key"><span class="lb">本單元要點</span>查核的對象是 AI 自行做的決定。課堂練習的查核是用一頁的檢核表對照每一輪的答案，再自己抽查兩三個數字；新對話獨立重跑為選做。小數第二位的差異寫明方法即可；人數、正負號、顯著與否不同，必須找出原因。由人做的決定記下來，寫進報告。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 6</div>
     <div class="qbody">
@@ -1404,7 +1397,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <li>每一輪看完 AI 的結果，按「看答案」對照，數字對得上再貼下一輪</li>
     <li>數字不同時，要求 AI 說明做法，對照單元三至六找出設定不同的地方</li>
     <li>AI 不再遵守前面的規則時，要求它寫階段摘要，開新對話貼上摘要後繼續（<a href="#s2-9">2.9</a>）</li>
-    <li>完成後填寫<a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，再與同學交換互查（單元七）</li>
+    <li>每一輪對照後，把自己的結果填進<a href="../../Assignments/Topic07_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表（一頁）</a>；全部完成後自己抽查兩三個數字（<a href="#s7-5">7.5</a>）</li>
   </ol>
   <h2 id="s8-0">8.0 卡住時的處理方式</h2>
   <table class="mt">
@@ -1413,7 +1406,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <tr><td style="text-align:left">AI 只說明步驟、沒有計算</td><td style="text-align:left">回覆「請實際執行程式，列出結果表」</td></tr>
     <tr><td style="text-align:left">數字和答案不同</td><td style="text-align:left">先比人數（清理後 961 人），再比門檻與反向題，最後才比統計結果</td></tr>
     <tr><td style="text-align:left">對話太長，AI 忘了前面的規則</td><td style="text-align:left">請 AI 寫階段摘要，開新對話、重新上傳資料，貼上摘要再繼續</td></tr>
-    <tr><td style="text-align:left">免費版次數用完</td><td style="text-align:left">換另一個工具，或與同學兩人一組</td></tr>
+    <tr><td style="text-align:left">免費版次數用完</td><td style="text-align:left">換另一個工具，或與同學兩人一組操作</td></tr>
     <tr><td style="text-align:left">回覆變成英文</td><td style="text-align:left">加一句「請用繁體中文回答」</td></tr>
   </table>
   <p>課堂與作業只需要網頁版。單元二介紹的專案功能、Claude Code、SKILL.md 與 CLAUDE.md 是進階做法，不會操作不影響練習與作業。每一輪結束檢查三件事：人數是否正確、AI 自行決定了哪些事、對話與程式碼是否已保存。</p>
@@ -1428,7 +1421,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 2. 你打算怎麼清理資料（依序列出步驟）。
 3. 有哪些決定需要我確認後才能執行。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
-    <div class="ans"><p><b>查核重點</b></p><ul>
+    <div class="ans"><p><b>對照重點</b>（這一輪沒有數字答案）</p><ul>
 <li>AI 有沒有提到反向題 RET03、遺漏值、草率作答三件事。</li>
 <li>AI 是否主動詢問遺漏值要刪除還是保留。</li>
 <li>AI 是否遵守「這一輪先不要計算」。若 AI 已開始計算，要求它停止，計畫確認後再執行。</li></ul>
@@ -1492,7 +1485,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 另外請列出人數少於 5 人的廠區 × 部門組合。
 最後請自我檢查：有沒有哪一步是你自行決定、但我沒有指定的？</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
-    <div class="ans"><p><b>人工查核清單</b></p><ol>
+    <div class="ans"><p>這一輪填進檢核表的是小群組：台中廠法務智財部 4 人、高雄廠永續發展室 3 人。下列各項供自行抽查時參考，挑兩三項即可。</p><p><b>自行抽查的重點</b></p><ol>
 <li>人數：1,000 → 961，每個構面的有效人數對得上（敬業度 961、主管支持 961、認可與回饋 958、組織承諾 957、留任意願 959）。</li>
 <li>反向題：RET03 有轉換，AIA04 有被發現並說明。</li>
 <li>遺漏值：沒有整列刪除（若只剩 400 多人，代表 AI 做了整列刪除）。</li>
@@ -1523,7 +1516,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <h2 id="s9-3">9.3 可重現性與分析檔案的保存</h2>
   <p>同一則提示詞在不同時間、不同工具執行，AI 寫出的程式可能不同，例如選了不同的事後比較方法，或用了不同的遺漏值處理。因此每次分析保存四樣東西：資料檔的版本、最後整理的完整程式碼、使用的工具與日期、對話紀錄。用保存的程式碼重新執行，應得到相同的數字。不同軟體之間小數第二位的差異屬於正常（見 <a href="#s7-7">7.7</a>）。</p>
   <h2 id="s9-4">9.4 分析紀錄</h2>
-  <p>分析紀錄記下每一個需要人決定的事項、理由與確認者（見 <a href="#s7-8">7.8</a>）。報告交出去幾個月後，主管或下一位承辦人問起「為什麼刪掉這些人」「這一題為什麼反向計分」，分析紀錄可以回答；沒有紀錄時，只能靠記憶，或重新分析一次。</p>
+  <p>分析紀錄記下每一個需要人決定的事項與理由（見 <a href="#s7-8">7.8</a>），形式不拘。報告交出去幾個月後，主管或下一位承辦人問起「為什麼刪掉這些人」「這一題為什麼反向計分」，分析紀錄可以回答；沒有紀錄時，只能靠記憶，或重新分析一次。</p>
   <h2 id="s9-5">9.5 統計結果的管理語言</h2>
   <p>主管需要知道差距有多大、影響哪些人、下一步做什麼。報告先寫管理上的意思，統計數字放在後面或附錄。</p>
   <div class="scrollx"><table class="mt">
@@ -1543,7 +1536,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <li>避免推算：公布了全廠平均與其他部門平均時，剩下的小部門平均可以被推算出來。小部門併入「其他」，或只呈現更高一層的結果。</li>
     <li>開放題的原文引用也可能透露身分，引用前刪除可辨識的細節。</li>
   </ul>
-  <div class="key"><span class="lb">本單元要點</span>上傳前去識別化；沒有程式碼的數字不採用；保存程式碼、資料版本與對話，讓分析可以重現；每個人做的決定寫進分析紀錄；報告用管理語言並保留不確定性；群組差異不等於原因；少於 5 人的群組不呈現，也要防止被推算。</div>
+  <div class="key"><span class="lb">本單元要點</span>上傳前去識別化；沒有程式碼的數字不採用；保存程式碼、資料版本與對話，讓分析可以重現；由人做的決定記下來，寫進報告；報告用管理語言並保留不確定性；群組差異不等於原因；少於 5 人的群組不呈現，也要防止被推算。</div>
 </section>
 
 <!-- ==================== U10 文獻 ==================== -->
@@ -1553,7 +1546,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="refline">Cohen, J. (1988). <i>Statistical power analysis for the behavioral sciences</i> (2nd ed.). Lawrence Erlbaum Associates.</div><div class="refline">Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. <i>Psychometrika, 16</i>(3), 297–334. <a href="https://doi.org/10.1007/BF02310555" target="_blank" rel="noopener">https://doi.org/10.1007/BF02310555</a></div><div class="refline">Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch’s <i>t</i>-test instead of Student’s <i>t</i>-test. <i>International Review of Social Psychology, 30</i>(1), 92–101. <a href="https://doi.org/10.5334/irsp.82" target="_blank" rel="noopener">https://doi.org/10.5334/irsp.82</a></div><div class="refline">DeSimone, J. A., Harms, P. D., &amp; DeSimone, A. J. (2015). Best practice recommendations for data screening. <i>Journal of Organizational Behavior, 36</i>(2), 171–181. <a href="https://doi.org/10.1002/job.1962" target="_blank" rel="noopener">https://doi.org/10.1002/job.1962</a></div><div class="refline">Holm, S. (1979). A simple sequentially rejective multiple test procedure. <i>Scandinavian Journal of Statistics, 6</i>(2), 65–70.</div><div class="refline">Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for <i>t</i>-tests and ANOVAs. <i>Frontiers in Psychology, 4</i>, Article 863. <a href="https://doi.org/10.3389/fpsyg.2013.00863" target="_blank" rel="noopener">https://doi.org/10.3389/fpsyg.2013.00863</a></div><div class="refline">Meade, A. W., &amp; Craig, S. B. (2012). Identifying careless responses in survey data. <i>Psychological Methods, 17</i>(3), 437–455. <a href="https://doi.org/10.1037/a0028085" target="_blank" rel="noopener">https://doi.org/10.1037/a0028085</a></div><div class="refline">Newman, D. A. (2014). Missing data: Five practical guidelines. <i>Organizational Research Methods, 17</i>(4), 372–411. <a href="https://doi.org/10.1177/1094428114548590" target="_blank" rel="noopener">https://doi.org/10.1177/1094428114548590</a></div><div class="refline">Norman, G. (2010). Likert scales, levels of measurement and the “laws” of statistics. <i>Advances in Health Sciences Education, 15</i>(5), 625–632. <a href="https://doi.org/10.1007/s10459-010-9222-y" target="_blank" rel="noopener">https://doi.org/10.1007/s10459-010-9222-y</a></div><div class="refline">Schluntz, E., &amp; Zhang, B. (2024, December 19). <i>Building effective agents</i>. Anthropic. <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">https://www.anthropic.com/research/building-effective-agents</a></div><div class="refline">Wasserstein, R. L., &amp; Lazar, N. A. (2016). The ASA statement on <i>p</i>-values: Context, process, and purpose. <i>The American Statistician, 70</i>(2), 129–133. <a href="https://doi.org/10.1080/00031305.2016.1154108" target="_blank" rel="noopener">https://doi.org/10.1080/00031305.2016.1154108</a></div><div class="refline">Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., &amp; Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. In <i>Proceedings of the Eleventh International Conference on Learning Representations (ICLR 2023)</i>. <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">https://arxiv.org/abs/2210.03629</a></div>
   <div class="note"><span class="lb">數字來源</span>本網站的數字全部計算自課程的員工調查模擬資料（教學模擬資料，非真實組織調查結果）。效果量的大小基準出自 Cohen（1988），為參考慣例，判讀時仍需考慮情境。</div>
   <h2>專有名詞對照表</h2>
-  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>編碼簿</td><td>codebook</td><td style='text-align:left'>說明每個變項的代碼、題目、計分方向與遺漏值表示方式的文件；本資料為題目對照表與構面與計分說明</td></tr><tr id='g-2'><td>AI Agent</td><td>AI agent</td><td style='text-align:left'>能自行規劃步驟、呼叫工具（例如執行程式）、讀取結果並修正，直到完成任務的 AI 系統</td></tr><tr id='g-3'><td>任務規劃</td><td>planning</td><td style='text-align:left'>把一個分析目標拆成有順序的步驟</td></tr><tr id='g-4'><td>工具調用</td><td>tool use</td><td style='text-align:left'>AI 呼叫外部工具，例如程式執行環境、檔案讀取</td></tr><tr id='g-5'><td>程式執行</td><td>code execution</td><td style='text-align:left'>AI 寫出程式並在環境中實際執行，以執行結果回答</td></tr><tr id='g-6'><td>多 Agent 分工</td><td>multi-agent</td><td style='text-align:left'>由不同 Agent（或不同對話）分別負責規劃、執行與查核</td></tr><tr id='g-7'><td>上下文</td><td>context</td><td style='text-align:left'>AI 在一個對話中能參考的內容，包括提示詞、檔案、回覆與程式輸出；有長度上限</td></tr><tr id='g-8'><td>專案指示</td><td>project instructions</td><td style='text-align:left'>寫在 ChatGPT 或 Claude 專案中的背景與規則，專案內每個新對話都會套用</td></tr><tr id='g-9'><td>CLAUDE.md</td><td>CLAUDE.md</td><td style='text-align:left'>Claude Code 在資料夾啟動時讀取的專案記憶檔</td></tr><tr id='g-10'><td>Skill</td><td>skill</td><td style='text-align:left'>記錄某一類任務做法的檔案（SKILL.md），任務符合說明時由 Agent 載入</td></tr><tr id='g-11'><td>去識別化</td><td>de-identification</td><td style='text-align:left'>移除或改寫可辨識個人的資訊後再分析或分享資料：刪除識別欄位、重新編號、合併小群組、遮蔽開放題中的可辨識內容</td></tr><tr id='g-12'><td>幻覺</td><td>hallucination</td><td style='text-align:left'>語言模型產生看似合理但沒有根據的內容</td></tr><tr id='g-13'><td>可重現性</td><td>reproducibility</td><td style='text-align:left'>用相同的資料與程式重新執行，得到相同的結果</td></tr><tr id='g-14'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記錄分析中每一個由人決定的事項、理由與確認者</td></tr><tr id='g-15'><td>同儕互查</td><td>peer review</td><td style='text-align:left'>由另一位分析者依檢核表核對對話紀錄與程式碼</td></tr><tr id='g-16'><td>直線作答</td><td>straight-lining</td><td style='text-align:left'>所有題目都填同一個數字</td></tr><tr id='g-17'><td>隨機作答</td><td>random responding</td><td style='text-align:left'>不看題目隨意填答，同一構面的題目分數忽高忽低；本課程以敬業度 12 題的標準差高於全體平均＋3 個標準差判定</td></tr><tr id='g-18'><td>反向計分</td><td>reverse scoring</td><td style='text-align:left'>語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高</td></tr><tr id='g-19'><td>遺漏值</td><td>missing data</td><td style='text-align:left'>沒有作答的題目</td></tr><tr id='g-20'><td>整列刪除</td><td>listwise deletion</td><td style='text-align:left'>只要缺一題就刪除整個人</td></tr><tr id='g-21'><td>多重插補</td><td>multiple imputation</td><td style='text-align:left'>以統計模型多次估計遺漏的分數，分別分析後再合併結果；遺漏多或集中於某些群組時使用</td></tr><tr id='g-22'><td>構面分數</td><td>scale score</td><td style='text-align:left'>同一構面題目（反向題轉換後）的平均數</td></tr><tr id='g-23'><td>平均數</td><td>mean</td><td style='text-align:left'>全部分數加總後除以人數，代表一組的典型程度</td></tr><tr id='g-24'><td>標準差</td><td>standard deviation, SD</td><td style='text-align:left'>個人分數離平均的典型距離；數值越大，分數越分散</td></tr><tr id='g-25'><td>Cronbach’s α</td><td>Cronbach’s alpha</td><td style='text-align:left'>一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念</td></tr><tr id='g-26'><td>題目與總分相關</td><td>corrected item-total correlation</td><td style='text-align:left'>某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤</td></tr><tr id='g-27'><td>抽樣誤差</td><td>sampling error</td><td style='text-align:left'>只因抽到哪些人而產生的統計量變動</td></tr><tr id='g-28'><td>虛無假設</td><td>null hypothesis</td><td style='text-align:left'>假設母體中各組沒有差異，樣本中的差距完全來自抽樣誤差</td></tr><tr id='g-29'><td>p 值</td><td>p value</td><td style='text-align:left'>假設虛無假設為真時，觀察到目前這麼大或更大差距的機率；不是差距大小，也不是結論為真的機率</td></tr><tr id='g-30'><td>顯著水準</td><td>significance level</td><td style='text-align:left'>判斷顯著的門檻，慣例為 .05：p 小於 .05 稱為差異顯著</td></tr><tr id='g-31'><td>標準誤</td><td>standard error</td><td style='text-align:left'>平均差的不確定性：重複抽樣時，平均差通常變動的幅度</td></tr><tr id='g-32'><td>t 值</td><td>t statistic</td><td style='text-align:left'>平均差除以標準誤；絕對值越大，越不像只是抽樣誤差</td></tr><tr id='g-33'><td>自由度</td><td>degrees of freedom, df</td><td style='text-align:left'>把 t 或 F 換算成 p 值時使用的數字，主要由人數與組數決定</td></tr><tr id='g-34'><td>獨立樣本 t 檢定</td><td>independent-samples t test</td><td style='text-align:left'>比較兩個不同群體的平均數</td></tr><tr id='g-35'><td>Welch t 檢定</td><td>Welch’s t test</td><td style='text-align:left'>不假設兩組變異數相等的 t 檢定；本課程的預設</td></tr><tr id='g-36'><td>置換</td><td>permutation</td><td style='text-align:left'>隨機打亂組別標籤再計算差距，用來呈現兩組沒有差異時可能出現的差距</td></tr><tr id='g-37'><td>效果量</td><td>effect size</td><td style='text-align:left'>以標準化單位描述差距或關聯的大小，不隨樣本數變大而變大</td></tr><tr id='g-38'><td>Cohen’s d</td><td>Cohen’s d</td><td style='text-align:left'>兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大</td></tr><tr id='g-39'><td>合併標準差</td><td>pooled standard deviation</td><td style='text-align:left'>兩組標準差依人數加權合併的結果</td></tr><tr id='g-40'><td>單因子變異數分析</td><td>one-way ANOVA</td><td style='text-align:left'>以一次檢定比較三組以上的平均數是否全部相同</td></tr><tr id='g-41'><td>平方和</td><td>sum of squares, SS</td><td style='text-align:left'>差距平方後的加總；分為組間與組內</td></tr><tr id='g-42'><td>均方</td><td>mean square, MS</td><td style='text-align:left'>平方和除以自由度</td></tr><tr id='g-43'><td>F 值</td><td>F statistic</td><td style='text-align:left'>組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1</td></tr><tr id='g-44'><td>η²</td><td>eta squared</td><td style='text-align:left'>組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大</td></tr><tr id='g-45'><td>ω²</td><td>omega squared</td><td style='text-align:left'>修正 η² 高估傾向的效果量，數值略小於 η²</td></tr><tr id='g-46'><td>Levene 檢定</td><td>Levene’s test</td><td style='text-align:left'>檢定各組變異數是否相等；p 小於 .05 表示變異數不相等</td></tr><tr id='g-47'><td>Welch ANOVA</td><td>Welch’s ANOVA</td><td style='text-align:left'>不假設各組變異數相等的 ANOVA；Levene 檢定顯著時以它為準</td></tr><tr id='g-48'><td>事後比較</td><td>post hoc comparison</td><td style='text-align:left'>ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判</td></tr><tr id='g-49'><td>Tukey HSD</td><td>Tukey’s honestly significant difference</td><td style='text-align:left'>各組變異數相近時使用的事後比較，整組比較的誤判率控制在 5%</td></tr><tr id='g-50'><td>Games-Howell</td><td>Games-Howell test</td><td style='text-align:left'>各組變異數或人數差異大時使用的事後比較，每一對使用各自的變異數</td></tr><tr id='g-51'><td>Holm 校正</td><td>Holm correction</td><td style='text-align:left'>多次比較時調整 p 值：由小到大排列，依序乘以剩餘的比較次數</td></tr><tr id='g-52'><td>多重比較</td><td>multiple comparisons</td><td style='text-align:left'>同一份資料做多次檢定；次數越多，至少一次誤判的機率越高</td></tr><tr id='g-53'><td>族系錯誤率</td><td>familywise error rate</td><td style='text-align:left'>一組比較中至少出現一次誤判的機率</td></tr><tr id='g-54'><td>匿名門檻</td><td>anonymity threshold</td><td style='text-align:left'>群組人數少於門檻（本課程為 5 人）時不單獨呈現結果</td></tr></table></div>
+  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>編碼簿</td><td>codebook</td><td style='text-align:left'>說明每個變項的代碼、題目、計分方向與遺漏值表示方式的文件；本資料為題目對照表與構面與計分說明</td></tr><tr id='g-2'><td>AI Agent</td><td>AI agent</td><td style='text-align:left'>能自行規劃步驟、呼叫工具（例如執行程式）、讀取結果並修正，直到完成任務的 AI 系統</td></tr><tr id='g-3'><td>任務規劃</td><td>planning</td><td style='text-align:left'>把一個分析目標拆成有順序的步驟</td></tr><tr id='g-4'><td>工具調用</td><td>tool use</td><td style='text-align:left'>AI 呼叫外部工具，例如程式執行環境、檔案讀取</td></tr><tr id='g-5'><td>程式執行</td><td>code execution</td><td style='text-align:left'>AI 寫出程式並在環境中實際執行，以執行結果回答</td></tr><tr id='g-6'><td>多 Agent 分工</td><td>multi-agent</td><td style='text-align:left'>由不同 Agent（或不同對話）分別負責規劃、執行與查核</td></tr><tr id='g-7'><td>上下文</td><td>context</td><td style='text-align:left'>AI 在一個對話中能參考的內容，包括提示詞、檔案、回覆與程式輸出；有長度上限</td></tr><tr id='g-8'><td>專案指示</td><td>project instructions</td><td style='text-align:left'>寫在 ChatGPT 或 Claude 專案中的背景與規則，專案內每個新對話都會套用</td></tr><tr id='g-9'><td>CLAUDE.md</td><td>CLAUDE.md</td><td style='text-align:left'>Claude Code 在資料夾啟動時讀取的專案記憶檔</td></tr><tr id='g-10'><td>Skill</td><td>skill</td><td style='text-align:left'>記錄某一類任務做法的檔案（SKILL.md），任務符合說明時由 Agent 載入</td></tr><tr id='g-11'><td>去識別化</td><td>de-identification</td><td style='text-align:left'>移除或改寫可辨識個人的資訊後再分析或分享資料：刪除識別欄位、重新編號、合併小群組、遮蔽開放題中的可辨識內容</td></tr><tr id='g-12'><td>幻覺</td><td>hallucination</td><td style='text-align:left'>語言模型產生看似合理但沒有根據的內容</td></tr><tr id='g-13'><td>可重現性</td><td>reproducibility</td><td style='text-align:left'>用相同的資料與程式重新執行，得到相同的結果</td></tr><tr id='g-14'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記下分析中每一個由人決定的事項與理由，供撰寫報告的方法段使用</td></tr><tr id='g-15'><td>直線作答</td><td>straight-lining</td><td style='text-align:left'>所有題目都填同一個數字</td></tr><tr id='g-16'><td>隨機作答</td><td>random responding</td><td style='text-align:left'>不看題目隨意填答，同一構面的題目分數忽高忽低；本課程以敬業度 12 題的標準差高於全體平均＋3 個標準差判定</td></tr><tr id='g-17'><td>反向計分</td><td>reverse scoring</td><td style='text-align:left'>語意方向與構面相反的題目（反向題），計分前以 7 減原始分數，讓分數越高都代表構面程度越高</td></tr><tr id='g-18'><td>遺漏值</td><td>missing data</td><td style='text-align:left'>沒有作答的題目</td></tr><tr id='g-19'><td>整列刪除</td><td>listwise deletion</td><td style='text-align:left'>只要缺一題就刪除整個人</td></tr><tr id='g-20'><td>多重插補</td><td>multiple imputation</td><td style='text-align:left'>以統計模型多次估計遺漏的分數，分別分析後再合併結果；遺漏多或集中於某些群組時使用</td></tr><tr id='g-21'><td>構面分數</td><td>scale score</td><td style='text-align:left'>同一構面題目（反向題轉換後）的平均數</td></tr><tr id='g-22'><td>平均數</td><td>mean</td><td style='text-align:left'>全部分數加總後除以人數，代表一組的典型程度</td></tr><tr id='g-23'><td>標準差</td><td>standard deviation, SD</td><td style='text-align:left'>個人分數離平均的典型距離；數值越大，分數越分散</td></tr><tr id='g-24'><td>Cronbach’s α</td><td>Cronbach’s alpha</td><td style='text-align:left'>一組題目彼此一致的程度，通常介於 0 到 1；本課程以 .70 為最低標準。與顯著水準的 α 是不同的概念</td></tr><tr id='g-25'><td>題目與總分相關</td><td>corrected item-total correlation</td><td style='text-align:left'>某一題與同構面其他題目總分的相關；負值通常表示計分方向有誤</td></tr><tr id='g-26'><td>抽樣誤差</td><td>sampling error</td><td style='text-align:left'>只因抽到哪些人而產生的統計量變動</td></tr><tr id='g-27'><td>虛無假設</td><td>null hypothesis</td><td style='text-align:left'>假設母體中各組沒有差異，樣本中的差距完全來自抽樣誤差</td></tr><tr id='g-28'><td>p 值</td><td>p value</td><td style='text-align:left'>假設虛無假設為真時，觀察到目前這麼大或更大差距的機率；不是差距大小，也不是結論為真的機率</td></tr><tr id='g-29'><td>顯著水準</td><td>significance level</td><td style='text-align:left'>判斷顯著的門檻，慣例為 .05：p 小於 .05 稱為差異顯著</td></tr><tr id='g-30'><td>標準誤</td><td>standard error</td><td style='text-align:left'>平均差的不確定性：重複抽樣時，平均差通常變動的幅度</td></tr><tr id='g-31'><td>t 值</td><td>t statistic</td><td style='text-align:left'>平均差除以標準誤；絕對值越大，越不像只是抽樣誤差</td></tr><tr id='g-32'><td>自由度</td><td>degrees of freedom, df</td><td style='text-align:left'>把 t 或 F 換算成 p 值時使用的數字，主要由人數與組數決定</td></tr><tr id='g-33'><td>獨立樣本 t 檢定</td><td>independent-samples t test</td><td style='text-align:left'>比較兩個不同群體的平均數</td></tr><tr id='g-34'><td>Welch t 檢定</td><td>Welch’s t test</td><td style='text-align:left'>不假設兩組變異數相等的 t 檢定；本課程的預設</td></tr><tr id='g-35'><td>置換</td><td>permutation</td><td style='text-align:left'>隨機打亂組別標籤再計算差距，用來呈現兩組沒有差異時可能出現的差距</td></tr><tr id='g-36'><td>效果量</td><td>effect size</td><td style='text-align:left'>以標準化單位描述差距或關聯的大小，不隨樣本數變大而變大</td></tr><tr id='g-37'><td>Cohen’s d</td><td>Cohen’s d</td><td style='text-align:left'>兩組平均數差距除以合併標準差；約 0.2 為小、0.5 為中、0.8 為大</td></tr><tr id='g-38'><td>合併標準差</td><td>pooled standard deviation</td><td style='text-align:left'>兩組標準差依人數加權合併的結果</td></tr><tr id='g-39'><td>單因子變異數分析</td><td>one-way ANOVA</td><td style='text-align:left'>以一次檢定比較三組以上的平均數是否全部相同</td></tr><tr id='g-40'><td>平方和</td><td>sum of squares, SS</td><td style='text-align:left'>差距平方後的加總；分為組間與組內</td></tr><tr id='g-41'><td>均方</td><td>mean square, MS</td><td style='text-align:left'>平方和除以自由度</td></tr><tr id='g-42'><td>F 值</td><td>F statistic</td><td style='text-align:left'>組間均方除以組內均方，也就是組間差異相對於組內差異的大小；各組沒有差異時約為 1</td></tr><tr id='g-43'><td>η²</td><td>eta squared</td><td style='text-align:left'>組間平方和占總平方和的比例，也就是組別解釋了多少個別差異；約 .01 為小、.06 為中、.14 為大</td></tr><tr id='g-44'><td>ω²</td><td>omega squared</td><td style='text-align:left'>修正 η² 高估傾向的效果量，數值略小於 η²</td></tr><tr id='g-45'><td>Levene 檢定</td><td>Levene’s test</td><td style='text-align:left'>檢定各組變異數是否相等；p 小於 .05 表示變異數不相等</td></tr><tr id='g-46'><td>Welch ANOVA</td><td>Welch’s ANOVA</td><td style='text-align:left'>不假設各組變異數相等的 ANOVA；Levene 檢定顯著時以它為準</td></tr><tr id='g-47'><td>事後比較</td><td>post hoc comparison</td><td style='text-align:left'>ANOVA 顯著後，找出哪幾組之間有差異，並控制多次比較的誤判</td></tr><tr id='g-48'><td>Tukey HSD</td><td>Tukey’s honestly significant difference</td><td style='text-align:left'>各組變異數相近時使用的事後比較，整組比較的誤判率控制在 5%</td></tr><tr id='g-49'><td>Games-Howell</td><td>Games-Howell test</td><td style='text-align:left'>各組變異數或人數差異大時使用的事後比較，每一對使用各自的變異數</td></tr><tr id='g-50'><td>Holm 校正</td><td>Holm correction</td><td style='text-align:left'>多次比較時調整 p 值：由小到大排列，依序乘以剩餘的比較次數</td></tr><tr id='g-51'><td>多重比較</td><td>multiple comparisons</td><td style='text-align:left'>同一份資料做多次檢定；次數越多，至少一次誤判的機率越高</td></tr><tr id='g-52'><td>族系錯誤率</td><td>familywise error rate</td><td style='text-align:left'>一組比較中至少出現一次誤判的機率</td></tr><tr id='g-53'><td>匿名門檻</td><td>anonymity threshold</td><td style='text-align:left'>群組人數少於門檻（本課程為 5 人）時不單獨呈現結果</td></tr></table></div>
   <h2>相關主題</h2>
   <ul>
     <li><a href="../Topic03_測量基礎與題項設計/Topic03_測量基礎_課程網站.html" target="_blank" rel="noopener">Topic 03 測量基礎</a>：信度、反向題</li>

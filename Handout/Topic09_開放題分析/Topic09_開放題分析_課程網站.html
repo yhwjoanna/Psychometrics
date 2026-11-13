@@ -388,12 +388,12 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <h1>開放題分析方法比較：文字雲與 LLM Agent 主題編碼</h1>
   <div class="subtitle">員工意向調查課程．Topic 09．Week 11（2026/11/20）．適用對象：人管所碩士班</div>
   <p>員工調查的開放題讓員工用自己的話說明想法，資料量一多，整理就成為問題。常見的做法有三種：用詞頻做文字雲、依編碼簿由人逐則編碼，以及把編碼簿交給 LLM（大型語言模型）編碼。本主題用同一份資料比較這三種做法，說明各自能回答什麼、會在哪裡出錯，以及怎麼用 <a href="#g-19">Cohen’s κ</a> 檢驗編碼的一致程度。本主題不要求程式能力。</p>
-  <p>本主題的順序：資料與方法概覽、文字雲的盲點、建立<a href="#g-10">編碼簿</a>、兩人獨立編碼與 κ、LLM 編碼、人工與 LLM 比對、<a href="#g-28">疑似 AI 代答</a>的偵測與倫理，最後用六輪提示詞實際操作一次。單元九說明查核、報告寫法，以及開放題結果與 Topic 08 驅動因子分析的關係。</p>
+  <p>本主題的順序：資料與方法概覽、文字雲的盲點、建立<a href="#g-10">編碼簿</a>、兩人獨立編碼與 κ、LLM 編碼、人工與 LLM 比對、<a href="#g-28">疑似 AI 代答</a>的偵測與倫理，最後用六輪提示詞實際操作一次。單元九說明對照答案用的一頁檢核表、報告寫法，以及開放題結果與 Topic 08 驅動因子分析的關係。</p>
   <div class="key"><span class="lb">這週怎麼用</span>
     <ol style="margin:4px 0 6px 22px">
       <li><b>課前</b>：讀<a href="#u1" onclick="goUnit('u1');return false;">單元一 開放題資料與三種分析方法</a>與<a href="#u2" onclick="goUnit('u2');return false;">單元二 文字雲與詞頻的盲點</a>，約 30 分鐘</li>
       <li><b>課堂</b>：開<a href="../../Slides/Topic09_課堂投影片.html" target="_blank" rel="noopener">課堂投影片</a>，下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料（Topic 07–09 共用）</a>與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>，依<a href="#u8" onclick="goUnit('u8');return false;">單元八 實機練習</a>的提示詞操作；編碼簿與 κ 的做法在單元三至六</li>
-      <li><b>課後</b>：用<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>與<a href="#u9" onclick="goUnit('u9');return false;">單元九</a>核對結果；<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業</a>完成報告第五章（使用作業版資料），疑似 AI 代答的判定見<a href="#u7" onclick="goUnit('u7');return false;">單元七</a></li>
+      <li><b>課後</b>：用<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表（一頁）</a>對照每一輪的答案，並寫下自己的三個 κ（<a href="#u9" onclick="goUnit('u9');return false;">單元九</a>）；<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業</a>完成報告第五章（使用作業版資料），疑似 AI 代答的判定見<a href="#u7" onclick="goUnit('u7');return false;">單元七</a></li>
     </ol>
     延伸閱讀（需要時再看）：<a href="#u10" onclick="goUnit('u10');return false;">單元十 參考文獻與名詞對照</a></div>
   <div class="warn"><span class="lb">資料說明</span>本網站所有數字都來自課程的員工調查模擬資料（沿用 Topic 07 的 1,000 人資料）。這是教學模擬資料，不是真實組織的調查結果。<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料（Excel）</a>；<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">下載開放題編碼範本（Excel）</a>。個人分析作業使用另一份作業版資料，分析步驟與課堂相同、結果不同，資料與要求見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業說明</a>。</div>
@@ -408,7 +408,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
     <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、人工與 LLM 編碼比對</a></td><td>解讀三個 κ 的組合、交叉表與不一致案例；LLM 編碼的常見差異</td></tr>
     <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、疑似 AI 代答與倫理</a></td><td>以長度、句式、用詞訂定標記規則；標記後的處理與倫理</td></tr>
     <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>六輪提示詞與答案對照</td></tr>
-    <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、查核、報告與連結 Topic 08</a></td><td>檢核表、分析紀錄、報告寫法；主題次數與留任意願</td></tr>
+    <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、查核、報告與連結 Topic 08</a></td><td>一頁檢核表、報告寫法；主題次數與留任意願</td></tr>
     <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
   </table></div>
   <div class="flow">
@@ -417,7 +417,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
     <div class="fbox">甲、乙各自編碼 100 則，計算 κ；未達 .61 修編碼簿重編（單元四）</div><div class="farrow">↓</div>
     <div class="fbox">LLM 依同一份編碼簿編碼，與人工比對（單元五、六）</div><div class="farrow">↓</div>
     <div class="fbox">標記疑似 AI 代答，主題次數含與不含各一份（單元七）</div><div class="farrow">↓</div>
-    <div class="fbox leaf">檢核表、分析紀錄、報告（單元九）</div>
+    <div class="fbox leaf">對照答案、撰寫報告（單元九）</div>
   </div>
   <h2>工具與檔案</h2>
   <div class="scrollx"><table>
@@ -426,7 +426,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
     <tr><td><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">員工調查模擬資料</a></td><td>沿用 Topic 07；本主題使用 OE1 與 OE2 兩題開放題</td></tr>
     <tr><td><a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本（Excel）</a></td><td>編碼簿、100 則樣本、使用說明三個工作表（單元三、四）</td></tr>
     <tr><td><a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></td><td>兩位或三位編碼者的 Cohen’s κ；Topic 03 已使用過</td></tr>
-    <tr><td><a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 09 分析檢核表（Excel）</a></td><td>檢核表、分析紀錄、使用說明三個工作表（單元九）</td></tr>
+    <tr><td><a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">Topic 09 分析檢核表（Excel）</a></td><td>一頁：每一輪要對照的項目與正確答案，旁邊填自己的結果與三個 κ；只用於課堂練習（單元九）</td></tr>
     <tr><td>ChatGPT 或 Claude</td><td>網頁版或專案，需可上傳檔案並執行程式</td></tr>
   </table></div>
   <div class="note"><span class="lb">使用說明</span>左側導覽列可切換單元（手機版在頁面上方）。單元二至七與單元九的最後附兩階段自我檢測：先選答案並標示信心，答對後再確認理由。下方的作答校準面板只記錄每題第一次作答；重新整理頁面會清空紀錄。</div>
@@ -595,7 +595,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
     <li>比較兩人的代碼，找出不一致的答案與原因</li>
     <li>修改定義、納入或排除的文字，必要時新增或合併主題</li>
     <li>寫下修訂日期與內容，再各自編碼 100 則樣本</li>
-    <li>κ 未達 .61 時回到第 2 步；兩次的 κ 與修訂內容都寫進分析紀錄</li>
+    <li>κ 未達 .61 時回到第 2 步；兩次的 κ 與修訂內容都記下來，寫進報告</li>
   </ol>
   <div class="note"><span class="lb">提示詞範例</span>上傳資料後，把下面這段貼給 AI（按「複製」）。這是實機練習第 2 輪的提示詞。採納的修訂要寫回編碼範本的「編碼簿」工作表，人工與 LLM 都用修訂後的同一版。<div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>請讀「Topic09_開放題編碼範本.xlsx」的「編碼簿」工作表（11 個主題，每個主題有定義、納入、排除、例句）。
 1. 從原始資料 OE1 中，找出 10 則用這份編碼簿不容易判斷的答案（不要從「100 則樣本」工作表挑），每則說明猶豫的兩個代碼。
@@ -674,7 +674,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <ul>
     <li>找出不一致最多的兩三個主題配對（例如 SUP 與 REC），回到編碼簿修訂排除欄（<a href="#s3-6">3.6</a>）。</li>
     <li>兩人各自重新編碼，不是討論後直接把代碼改成一致。</li>
-    <li>兩次的 κ、修訂內容與日期寫進分析紀錄。</li>
+    <li>兩次的 κ、修訂內容與日期記下來，寫進報告。</li>
     <li>κ 通過後，逐則討論仍不一致的答案，把結論填進「討論後定案」欄。</li>
   </ul>
   <p class="terms"><span class="lb2">名詞</span><a href="#g-27">定案</a>：兩位編碼者討論不一致的答案後決定的代碼。</p>
@@ -892,7 +892,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
     <li>模板詞欄：<code>=AND(ISNUMBER(SEARCH("不僅",AJ2)),ISNUMBER(SEARCH("進而",AJ2)))</code>，TRUE 共 16 則</li>
     <li>兩欄都符合：16 則</li>
   </ol>
-  <p>「平均＋3 個標準差」與 Topic 07 判定隨機亂填的規則相同：規則在看資料之前訂定，實際門檻由資料計算，寫進分析紀錄。</p>
+  <p>「平均＋3 個標準差」與 Topic 07 判定隨機亂填的規則相同：規則在看資料之前訂定，實際門檻由資料計算，記下來，寫進報告。</p>
   <h2 id="s7-4">7.4 規則的限制</h2>
   <ul>
     <li>本資料的 16 則來自同一個模板，兩項規則的結果完全相同。真實資料中，AI 代答的長度與句式變化較多，簡單規則會漏掉一部分，也會誤標認真寫長答案的員工。</li>
@@ -949,7 +949,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
     <li>第 4 輪：上傳填好甲、乙、LLM 三欄的範本，貼上提示詞；三個 κ 再用<a href="../Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>重算一次（選「三位組員」，只看兩兩 κ）</li>
     <li>討論甲、乙不一致的答案，把結論填進「討論後定案」欄；甲乙一致的列，定案欄填同一個代碼</li>
     <li>第 5 輪：貼上提示詞，標記疑似 AI 代答</li>
-    <li>填寫<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表</a>，與同學交換互查（單元九）</li>
+    <li>每一輪對照後，把自己的結果與三個 κ 填進<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表（一頁）</a>（單元九）</li>
   </ol>
   <div class="note"><span class="lb">課堂與課後</span>課堂時間不夠編完 100 則時，課堂先做第 0、1、2、5 輪並開始人工編碼；人工編碼、第 3 輪與第 4 輪課後完成。AI 的環境沒有 jieba 或中文字型時，詞頻排名會不同、文字雲可能顯示成方框，對照「主管 58 則」與薪資十詞的則數即可。</div>
   <div class="note"><span class="lb">提醒</span>答案由課程的分析程式計算。詞頻排名依斷詞工具與停用詞不同而略有差異；則數、門檻與標記則數用同一份資料應完全相同。</div>
@@ -963,7 +963,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 3. 有哪些決定需要我確認後才能執行。
 4. 真實資料交給 AI 之前，需要先做哪些去識別化處理。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
-    <div class="ans"><p><b>查核重點</b></p><ul>
+    <div class="ans"><p><b>對照重點</b>（這一輪沒有數字答案）</p><ul>
 <li>AI 是否列出詞頻、編碼、比對、疑似 AI 代答四段，順序合理。</li>
 <li>是否提到斷詞工具與停用詞需要決定，且會影響排名。</li>
 <li>是否提到疑似 AI 代答「先標記、不刪除」，由人決定處理方式。</li>
@@ -989,10 +989,10 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 2. 針對這 10 則，建議要修改哪些主題的「納入」或「排除」文字，寫出修改前與修改後。
 3. 不要新增主題；如果你認為需要新增，列在最後並說明理由，由我決定。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
-    <div class="ans"><p><b>查核重點</b></p><ul>
+    <div class="ans"><p><b>對照重點</b>（這一輪沒有數字答案）</p><ul>
 <li>AI 挑出的案例多半落在 SUP 與 REC、PAY 與 WORKLOAD、AI 與 SYS、VAGUE 與 OFF 之間。</li>
 <li>修改建議要寫成可以判斷的規則，例如「新導入的系統歸 AI，既有系統歸 SYS」，不是「視情況判斷」。</li>
-<li>AI 有沒有遵守「不從 100 則樣本挑」與「不新增主題」。是否新增主題由組員決定，寫進分析紀錄。</li></ul></div>
+<li>AI 有沒有遵守「不從 100 則樣本挑」與「不新增主題」。是否新增主題由組員決定，決定記下來，寫進報告。</li></ul></div>
   </div>
 </div><div class="round">
   <div class="rhead">第 3 輪：LLM 依編碼簿編碼 100 則</div>
@@ -1004,7 +1004,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 4. 逐則閱讀後判斷，不要寫關鍵字程式自動分類。
 輸出表格：編號、主要代碼、次要代碼、信心、理由（15 字以內），100 列全部列出、不得省略，依編號排序；並提供 Excel 檔讓我下載。如果中途停下，我會說「繼續」，請從下一個編號接著做。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
-    <div class="ans"><p><b>查核重點</b></p><ul>
+    <div class="ans"><p><b>對照重點</b></p><ul>
 <li>100 列、編號 S001–S100 齊全；代碼只有編碼簿的 11 種。</li>
 <li>回覆中沒有依關鍵字分類的程式。若有，要求 AI 刪除程式、逐則判斷後重新輸出。</li>
 <li>主要代碼依編號貼回範本的「LLM」欄。</li></ul>
@@ -1022,7 +1022,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 3. 列出甲、乙一致但 LLM 不同的答案，每則說明可能原因：定義不清、多主題、否定、籠統答案，或其他；沒有這種答案時，請寫 0 則，並改列甲、乙不一致的答案。
 4. 附上完整程式碼。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
-    <div class="ans"><p>κ 依各組編碼而定，沒有標準答案。判斷原則：</p><ol>
+    <div class="ans"><p>κ 依各組編碼而定，沒有標準答案；把自己的三個 κ 填進檢核表。判斷原則：</p><ol>
 <li>用編碼一致性計算器的「三位組員」模式貼上甲、乙、LLM 三欄，兩兩 κ 應與 AI 回報的相同（小數第二位）。不同時，檢查貼上的順序與代碼寫法。</li>
 <li>κ 一定低於一致率；只報一致率會高估一致性。</li>
 <li>甲乙 κ 未達 .61：修編碼簿，兩人各自重新編碼；不要直接討論後改成一致。</li>
@@ -1048,17 +1048,17 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 <!-- ==================== U9 查核與延伸 ==================== -->
 <section class="unit" id="u9">
   <h1>單元九：查核、報告與連結 Topic 08</h1>
-  <div class="subtitle">快速查核清單、分析檢核表、分析紀錄、報告寫法、主題次數與留任意願、方法選擇</div>
+  <div class="subtitle">快速查核清單、一頁檢核表、報告寫法、主題次數與留任意願、方法選擇</div>
   <h2 id="s9-1">9.1 快速查核清單</h2>
   <p>完成分析後逐項勾選。</p>
-  <div class="chk"><label><input type="checkbox" onchange="chkCount()"> <span>則數：OE1 非空白 516 則，樣本 100 則，LLM 輸出 100 列</span></label><label><input type="checkbox" onchange="chkCount()"> <span>斷詞：寫明斷詞工具與停用詞；文字雲只作為探索</span></label><label><input type="checkbox" onchange="chkCount()"> <span>編碼簿：11 個主題都有定義、納入、排除與例句；修訂有紀錄</span></label><label><input type="checkbox" onchange="chkCount()"> <span>獨立編碼：甲乙編碼完成前沒有討論</span></label><label><input type="checkbox" onchange="chkCount()"> <span>κ：甲乙、甲與 LLM、乙與 LLM 三個值都用計算器重算過，並與一致率並列</span></label><label><input type="checkbox" onchange="chkCount()"> <span>不一致案例：至少 5 則寫出原因與定案</span></label><label><input type="checkbox" onchange="chkCount()"> <span>疑似 AI 代答：門檻 61.3 字、標記 16 則；未刪除，主題次數含與不含各一份</span></label><label><input type="checkbox" onchange="chkCount()"> <span>引用原文：刪除可辨識的人名、單位與事件</span></label></div>
+  <div class="chk"><label><input type="checkbox" onchange="chkCount()"> <span>則數：OE1 非空白 516 則，樣本 100 則，LLM 輸出 100 列</span></label><label><input type="checkbox" onchange="chkCount()"> <span>斷詞：寫明斷詞工具與停用詞；文字雲只作為探索</span></label><label><input type="checkbox" onchange="chkCount()"> <span>編碼簿：11 個主題都有定義、納入、排除與例句；修訂的內容有記下來</span></label><label><input type="checkbox" onchange="chkCount()"> <span>獨立編碼：甲乙編碼完成前沒有討論</span></label><label><input type="checkbox" onchange="chkCount()"> <span>κ：甲乙、甲與 LLM、乙與 LLM 三個值都用計算器重算過，並與一致率並列</span></label><label><input type="checkbox" onchange="chkCount()"> <span>不一致案例：至少 5 則寫出原因與定案</span></label><label><input type="checkbox" onchange="chkCount()"> <span>疑似 AI 代答：門檻 61.3 字、標記 16 則；未刪除，主題次數含與不含各一份</span></label><label><input type="checkbox" onchange="chkCount()"> <span>引用原文：刪除可辨識的人名、單位與事件</span></label></div>
   <p id="chkNote" style="color:var(--muted);font-size:14px">已完成 0／8 項。</p>
-  <h2 id="s9-2">9.2 分析檢核表（Excel）</h2>
-  <p><a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 09 分析檢核表（Excel）</a>。三個工作表與 Topic 07 相同：「檢核表」有 19 個項目，依實機練習的輪次排列；分析者先填「我的結果」，檢核者看對話、編碼範本與程式碼逐項確認並簽名。檢核項目如下：</p>
-  <div class="scrollx"><table class="mt"><tr><th>步驟</th><th>檢核項目</th><th>怎麼檢查</th><th>預期結果</th></tr><tr><td style="text-align:left">0 規劃</td><td style="text-align:left">AI 列出的計畫包含六個步驟</td><td style="text-align:left">看第 0 輪回答：讀資料、詞頻、編碼簿、編碼、比對、AI 代答檢查</td><td style="text-align:left">六項都有；並主動提到去識別化</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">OE1 作答則數</td><td style="text-align:left">要求 AI 回報非空白答案的則數與不重複則數</td><td style="text-align:left">516 則；不重複 512 則</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">斷詞工具與停用詞已說明</td><td style="text-align:left">AI 寫出用的斷詞工具（例如 jieba）與刪掉哪些詞</td><td style="text-align:left">有說明；詞頻排名依工具而異，用 jieba 時第一名為「主管」</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">薪資福利相關詞的分散</td><td style="text-align:left">請 AI 計算含「薪資、薪水、加薪、調薪、年終、獎金、津貼、補助、福利、加給」任一詞的答案則數</td><td style="text-align:left">67 則；單一詞最多 11 則</td></tr><tr><td style="text-align:left">1 詞頻</td><td style="text-align:left">指出文字雲的盲點</td><td style="text-align:left">同義詞、否定、斷詞錯誤、多主題四項</td><td style="text-align:left">四項都有實例</td></tr><tr><td style="text-align:left">2 編碼簿</td><td style="text-align:left">11 個主題各有定義、納入、排除、例句</td><td style="text-align:left">對照範本的編碼簿工作表</td><td style="text-align:left">是；例句不取自 100 則樣本</td></tr><tr><td style="text-align:left">2 編碼簿</td><td style="text-align:left">有主要主題的判定規則</td><td style="text-align:left">最先提到的改善事項為主要主題</td><td style="text-align:left">是</td></tr><tr><td style="text-align:left">3 LLM 編碼</td><td style="text-align:left">100 則都有代碼</td><td style="text-align:left">LLM 輸出的列數與編號</td><td style="text-align:left">100 列，編號 S001–S100</td></tr><tr><td style="text-align:left">3 LLM 編碼</td><td style="text-align:left">只用編碼簿的 11 個代碼</td><td style="text-align:left">檢查是否出現新代碼或兩個代碼擠在同一格</td><td style="text-align:left">是；新增的主題列入待確認</td></tr><tr><td style="text-align:left">3 LLM 編碼</td><td style="text-align:left">LLM 沒有寫關鍵字程式代替判斷</td><td style="text-align:left">看回覆中是否出現依關鍵字分類的程式</td><td style="text-align:left">沒有</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">甲乙 Cohen’s κ</td><td style="text-align:left">計算器三位組員模式</td><td style="text-align:left">≥ .61；未達時修編碼簿重編，兩次都記錄</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">甲與 LLM、乙與 LLM 的 κ</td><td style="text-align:left">計算器三位組員模式</td><td style="text-align:left">寫出數值；與甲乙 κ 比較高低</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">一致率與 κ 並列</td><td style="text-align:left">報告同時寫兩個數字</td><td style="text-align:left">是；κ 低於一致率</td></tr><tr><td style="text-align:left">4 比對</td><td style="text-align:left">不一致案例討論</td><td style="text-align:left">挑 5 則以上 LLM 與定案不同的答案，寫原因</td><td style="text-align:left">原因歸類：定義不清、多主題、否定、籠統答案等</td></tr><tr><td style="text-align:left">5 AI 代答</td><td style="text-align:left">長度規則的門檻</td><td style="text-align:left">全部答案長度的平均＋3 個標準差</td><td style="text-align:left">14.4 ＋ 3 × 15.6 ＝ 61.3 字，標記 16 則</td></tr><tr><td style="text-align:left">5 AI 代答</td><td style="text-align:left">模板詞規則</td><td style="text-align:left">同時含「不僅」與「進而」</td><td style="text-align:left">標記 16 則，與長度規則重疊 16 則</td></tr><tr><td style="text-align:left">5 AI 代答</td><td style="text-align:left">疑似 AI 代答只標記、不刪除</td><td style="text-align:left">主題次數含與不含標記答案各算一次</td><td style="text-align:left">兩種結果都列出，排序是否改變</td></tr><tr><td style="text-align:left">5 查核</td><td style="text-align:left">AI 自行決定的事項已列出並確認</td><td style="text-align:left">第 5 輪回答＋分析紀錄</td><td style="text-align:left">每一項都有確認者</td></tr><tr><td style="text-align:left">5 查核</td><td style="text-align:left">自己重算一項</td><td style="text-align:left">在 Excel 用 COUNTIF 算一個主題次數或一致率，與 AI 對照</td><td style="text-align:left">一致</td></tr></table></div>
-  <h2 id="s9-3">9.3 分析紀錄</h2>
-  <p>每一個需要人決定的事項寫一列：編碼簿的修訂、邊界案例的歸類、疑似 AI 代答的處理、是否新增主題。下表是「分析紀錄」工作表的欄位與範例：</p>
-  <div class="scrollx"><table class="mt"><tr><th>日期</th><th>步驟</th><th>決定的事項</th><th>選擇</th><th>理由</th><th>由誰提出（人／AI）</th><th>確認者</th></tr><tr><td style="text-align:left">2026/11/20</td><td style="text-align:left">編碼簿</td><td style="text-align:left">「新系統讓工作量變多」歸哪個主題</td><td style="text-align:left">主要主題 AI，次要 WORKLOAD</td><td style="text-align:left">最先提到的是新系統導入</td><td style="text-align:left">人</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">2026/11/20</td><td style="text-align:left">AI 代答</td><td style="text-align:left">16 則疑似 AI 代答如何處理</td><td style="text-align:left">保留，標記後做含／不含兩種主題次數</td><td style="text-align:left">規則只能標記，無法確認是否為 AI 代答</td><td style="text-align:left">AI 提出，人確認</td><td style="text-align:left"></td></tr></table></div>
+  <h2 id="s9-2">9.2 分析檢核表（一頁）</h2>
+  <p><a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">下載 Topic 09 分析檢核表（Excel，一頁）</a>。檢核表只有一個工作表，列出實機練習各輪要對照的 11 個項目。每做完一輪，把自己的結果寫在正確答案旁邊，相同就在「一致」欄選「✓」。κ 依各組的編碼而定，正確答案欄寫「各組不同」，這三列填自己算出的 κ。則數不同時，先確認有沒有排除空白答案。時間允許時，也可以和其他組交換檢核表互相對照（選做）。</p>
+  <div class="scrollx"><table class="mt"><tr><th>輪次</th><th>項目</th><th>正確答案（課堂練習資料）</th></tr><tr><td style="text-align:left">第 1 輪 詞頻</td><td style="text-align:left">非空白答案的則數</td><td style="text-align:left">516 則</td></tr><tr><td style="text-align:left">第 1 輪 詞頻</td><td style="text-align:left">不重複答案的則數</td><td style="text-align:left">512 則</td></tr><tr><td style="text-align:left">第 1 輪 詞頻</td><td style="text-align:left">詞頻第一名（用 jieba 斷詞）</td><td style="text-align:left">主管（58 則）</td></tr><tr><td style="text-align:left">第 1 輪 詞頻</td><td style="text-align:left">含薪資福利相關字詞的答案則數</td><td style="text-align:left">67 則</td></tr><tr><td style="text-align:left">第 3 輪 LLM 編碼</td><td style="text-align:left">AI 編碼結果的列數</td><td style="text-align:left">100 列（S001–S100）</td></tr><tr><td style="text-align:left">第 4 輪 比對</td><td style="text-align:left">甲與乙的 κ</td><td style="text-align:left">各組不同（目標 .61 以上）</td></tr><tr><td style="text-align:left">第 4 輪 比對</td><td style="text-align:left">甲與 LLM 的 κ</td><td style="text-align:left">各組不同</td></tr><tr><td style="text-align:left">第 4 輪 比對</td><td style="text-align:left">乙與 LLM 的 κ</td><td style="text-align:left">各組不同</td></tr><tr><td style="text-align:left">第 5 輪 AI 代答</td><td style="text-align:left">字數門檻（平均＋3 個標準差）</td><td style="text-align:left">61.3 字</td></tr><tr><td style="text-align:left">第 5 輪 AI 代答</td><td style="text-align:left">超過字數門檻的則數</td><td style="text-align:left">16 則</td></tr><tr><td style="text-align:left">第 5 輪 AI 代答</td><td style="text-align:left">同時含「不僅」與「進而」的則數</td><td style="text-align:left">16 則</td></tr></table></div>
+  <p>檢核表的答案來自課堂練習資料。個人作業使用作業版資料，答案不同，另有一頁的自我檢查表，見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。</p>
+  <h2 id="s9-3">9.3 由人做的決定與紀錄</h2>
+  <p>開放題分析中由人做的決定隨手記下來（分析紀錄，形式不拘）：編碼簿的修訂、邊界案例的歸類、疑似 AI 代答的處理、是否新增主題。例如「新系統讓工作量變多」歸為主要主題 AI、次要 WORKLOAD，理由是最先提到的是新系統導入。個人作業的報告要寫出這些決定。</p>
   <h2 id="s9-4">9.4 主題次數與留任意願</h2>
   <p>開放題的主題次數回答「員工最常提到什麼」。哪些因素和留任意願的關係最大，是另一個問題（Topic 08 的驅動因子分析）。以清理後資料中有填 OE1 的 512 人為例，比較提到某主題的人與沒提到的人，留任意願的差距（d）：</p>
   <div class="scrollx"><table class="mt">
@@ -1086,8 +1086,8 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
   </table></div>
   <h2 id="s9-7">9.7 個人分析作業</h2>
   <p>個人分析作業（25%，<span style="color:#C62828;font-weight:700">延後一週，2026/12/03 23:59 截止</span>）的資料、報告架構、繳交項目與評分方式見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。作業使用另一份作業版資料（個人作業_員工調查模擬資料_作業版.xlsx），分析步驟與課堂相同，結果不同。</p>
-  <p class="terms"><span class="lb2">名詞</span><a href="#g-32">分析紀錄</a>：記錄分析中每一個由人決定的事項、理由與確認者。</p>
-  <div class="key"><span class="lb">本單元要點</span>用檢核表互查，把每個由人做的決定寫進分析紀錄。報告寫出樣本、編碼簿、三個 κ、LLM 的使用方式與疑似 AI 代答的處理。主題次數與留任意願是兩個問題，優先順序同時參考兩者。</div>
+  <p class="terms"><span class="lb2">名詞</span><a href="#g-32">分析紀錄</a>：記下分析中每一個由人決定的事項與理由，供撰寫報告的方法段使用。</p>
+  <div class="key"><span class="lb">本單元要點</span>用一頁的檢核表對照每一輪的答案，並寫下自己的三個 κ；由人做的決定記下來，寫進報告。報告寫出樣本、編碼簿、三個 κ、LLM 的使用方式與疑似 AI 代答的處理。主題次數與留任意願是兩個問題，優先順序同時參考兩者。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 7</div>
     <div class="qbody">
@@ -1110,7 +1110,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
   <div class="refline">Braun, V., &amp; Clarke, V. (2006). Using thematic analysis in psychology. <i>Qualitative Research in Psychology, 3</i>(2), 77–101. <a href="https://doi.org/10.1191/1478088706qp063oa" target="_blank" rel="noopener">https://doi.org/10.1191/1478088706qp063oa</a></div><div class="refline">Cohen, J. (1960). A coefficient of agreement for nominal scales. <i>Educational and Psychological Measurement, 20</i>(1), 37–46. <a href="https://doi.org/10.1177/001316446002000104" target="_blank" rel="noopener">https://doi.org/10.1177/001316446002000104</a></div><div class="refline">Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. <i>Proceedings of the National Academy of Sciences, 120</i>(30), Article e2305016120. <a href="https://doi.org/10.1073/pnas.2305016120" target="_blank" rel="noopener">https://doi.org/10.1073/pnas.2305016120</a></div><div class="refline">Krippendorff, K. (2018). <i>Content analysis: An introduction to its methodology</i> (4th ed.). SAGE.</div><div class="refline">Landis, J. R., &amp; Koch, G. G. (1977). The measurement of observer agreement for categorical data. <i>Biometrics, 33</i>(1), 159–174. <a href="https://doi.org/10.2307/2529310" target="_blank" rel="noopener">https://doi.org/10.2307/2529310</a></div><div class="refline">O’Connor, C., &amp; Joffe, H. (2020). Intercoder reliability in qualitative research: Debates and practical guidelines. <i>International Journal of Qualitative Methods, 19</i>, 1–13. <a href="https://doi.org/10.1177/1609406919899220" target="_blank" rel="noopener">https://doi.org/10.1177/1609406919899220</a></div><div class="refline">Speer, A. B., Chawota, T. A., Rudolph, C., &amp; Qaqish, A. (2026). The impact of impression management on writing tendencies: Investigating faking susceptibility of open-ended personality assessments. <i>Journal of Applied Psychology</i>. Advance online publication. <a href="https://doi.org/10.1037/apl0001397" target="_blank" rel="noopener">https://doi.org/10.1037/apl0001397</a></div>
   <div class="note"><span class="lb">數字來源</span>本網站的數字全部計算自課程的員工調查模擬資料（教學模擬資料，非真實組織調查結果）。詞頻使用 jieba 0.42.1 預設詞典；κ 的通過標準 .61 沿用 Topic 03。</div>
   <h2>專有名詞對照表</h2>
-  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>開放題</td><td>open-ended question</td><td style='text-align:left'>讓填答者用自己的文字回答的題目；本資料 OE1 問最希望公司優先改善的事項</td></tr><tr id='g-2'><td>斷詞</td><td>word segmentation</td><td style='text-align:left'>把中文句子切成一個個詞的步驟；中文詞與詞之間沒有空格，需要斷詞工具</td></tr><tr id='g-3'><td>jieba</td><td>jieba</td><td style='text-align:left'>Python 常用的中文斷詞套件；預設詞典以簡體中文為主，繁體中文的職稱與工廠用語容易斷錯</td></tr><tr id='g-4'><td>停用詞</td><td>stop words</td><td style='text-align:left'>計算詞頻前刪掉的詞，例如「希望」「公司」，這些詞幾乎每則都有，不帶內容</td></tr><tr id='g-5'><td>詞頻</td><td>word frequency</td><td style='text-align:left'>一個詞出現的次數；本主題以「提到該詞的答案則數」計算，一則答案重複出現只算一次</td></tr><tr id='g-6'><td>文字雲</td><td>word cloud</td><td style='text-align:left'>依詞頻決定字級大小的圖；適合初步瀏覽，不適合決定主題排序</td></tr><tr id='g-7'><td>同義詞</td><td>synonym</td><td style='text-align:left'>意思相同或相近的不同詞，例如薪水、薪資、待遇</td></tr><tr id='g-8'><td>主題</td><td>theme</td><td style='text-align:left'>一群答案共同談論的事項，例如薪資福利、主管領導</td></tr><tr id='g-9'><td>編碼</td><td>coding</td><td style='text-align:left'>逐則閱讀答案，依編碼簿給每則一個主題代碼</td></tr><tr id='g-10'><td>編碼簿</td><td>codebook</td><td style='text-align:left'>列出每個主題的代碼、定義、納入、排除與例句的文件</td></tr><tr id='g-11'><td>納入</td><td>inclusion criteria</td><td style='text-align:left'>屬於某主題的具體內容</td></tr><tr id='g-12'><td>排除</td><td>exclusion criteria</td><td style='text-align:left'>容易混淆、但應歸到其他主題的內容，並寫出改歸的代碼</td></tr><tr id='g-13'><td>主要主題</td><td>primary theme</td><td style='text-align:left'>每則答案的唯一代碼；本課程規則為答案中最先提到的改善事項</td></tr><tr id='g-14'><td>次要主題</td><td>secondary theme</td><td style='text-align:left'>同一則答案提到的第二個事項，寫在備註</td></tr><tr id='g-15'><td>編碼者</td><td>coder</td><td style='text-align:left'>負責編碼的人；LLM 也可視為一位編碼者</td></tr><tr id='g-16'><td>獨立編碼</td><td>independent coding</td><td style='text-align:left'>兩位編碼者完成編碼前不討論、不看對方結果</td></tr><tr id='g-17'><td>一致率</td><td>percent agreement</td><td style='text-align:left'>兩位編碼者給出相同代碼的比例</td></tr><tr id='g-18'><td>碰巧一致率</td><td>chance agreement</td><td style='text-align:left'>兩人依各自的代碼比例隨意分類時，也會相同的機率</td></tr><tr id='g-19'><td>Cohen’s κ</td><td>Cohen’s kappa</td><td style='text-align:left'>（一致率 − 碰巧一致率）÷（1 − 碰巧一致率）；本課程以 .61 以上為通過</td></tr><tr id='g-20'><td>交叉表</td><td>contingency table</td><td style='text-align:left'>列為一位編碼者、欄為另一位編碼者的次數表；對角線是兩人相同的則數</td></tr><tr id='g-21'><td>信度</td><td>reliability</td><td style='text-align:left'>編碼的一致程度：不同編碼者、或同一編碼者重跑，是否給出相同代碼</td></tr><tr id='g-22'><td>效度</td><td>validity</td><td style='text-align:left'>代碼是否反映答案的原意，主題是否涵蓋重要的內容</td></tr><tr id='g-23'><td>關鍵字規則</td><td>keyword rule</td><td style='text-align:left'>答案出現特定詞就歸到某主題的自動分類方法；不判斷語意與否定</td></tr><tr id='g-24'><td>LLM</td><td>large language model</td><td style='text-align:left'>大型語言模型，例如 ChatGPT、Claude 背後的模型</td></tr><tr id='g-25'><td>LLM 編碼</td><td>LLM-assisted coding</td><td style='text-align:left'>把編碼簿交給 LLM，由它逐則給代碼；使用前需與人工編碼比對</td></tr><tr id='g-26'><td>信心標記</td><td>confidence rating</td><td style='text-align:left'>LLM 對每則代碼標示高、中、低把握；低信心的答案交由人裁決</td></tr><tr id='g-27'><td>定案</td><td>adjudication</td><td style='text-align:left'>兩位編碼者討論不一致的答案後決定的代碼</td></tr><tr id='g-28'><td>疑似 AI 代答</td><td>suspected AI-generated response</td><td style='text-align:left'>由 AI 工具代寫的開放題答案；規則只能標記疑似，無法證明</td></tr><tr id='g-29'><td>模板詞</td><td>template phrases</td><td style='text-align:left'>在 AI 代寫文字中反覆出現的連接詞組，例如「不僅…進而」</td></tr><tr id='g-30'><td>敏感度分析</td><td>sensitivity analysis</td><td style='text-align:left'>改變一個分析決定（例如含或不含疑似 AI 代答），看結論是否改變</td></tr><tr id='g-31'><td>去識別化</td><td>de-identification</td><td style='text-align:left'>分析或分享前，刪除或遮蔽可辨識個人的資訊，例如人名、單位、具體事件</td></tr><tr id='g-32'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記錄分析中每一個由人決定的事項、理由與確認者</td></tr></table></div>
+  <div class="scrollx"><table class="mt glos"><tr><th>中文</th><th>英文</th><th>說明</th></tr><tr id='g-1'><td>開放題</td><td>open-ended question</td><td style='text-align:left'>讓填答者用自己的文字回答的題目；本資料 OE1 問最希望公司優先改善的事項</td></tr><tr id='g-2'><td>斷詞</td><td>word segmentation</td><td style='text-align:left'>把中文句子切成一個個詞的步驟；中文詞與詞之間沒有空格，需要斷詞工具</td></tr><tr id='g-3'><td>jieba</td><td>jieba</td><td style='text-align:left'>Python 常用的中文斷詞套件；預設詞典以簡體中文為主，繁體中文的職稱與工廠用語容易斷錯</td></tr><tr id='g-4'><td>停用詞</td><td>stop words</td><td style='text-align:left'>計算詞頻前刪掉的詞，例如「希望」「公司」，這些詞幾乎每則都有，不帶內容</td></tr><tr id='g-5'><td>詞頻</td><td>word frequency</td><td style='text-align:left'>一個詞出現的次數；本主題以「提到該詞的答案則數」計算，一則答案重複出現只算一次</td></tr><tr id='g-6'><td>文字雲</td><td>word cloud</td><td style='text-align:left'>依詞頻決定字級大小的圖；適合初步瀏覽，不適合決定主題排序</td></tr><tr id='g-7'><td>同義詞</td><td>synonym</td><td style='text-align:left'>意思相同或相近的不同詞，例如薪水、薪資、待遇</td></tr><tr id='g-8'><td>主題</td><td>theme</td><td style='text-align:left'>一群答案共同談論的事項，例如薪資福利、主管領導</td></tr><tr id='g-9'><td>編碼</td><td>coding</td><td style='text-align:left'>逐則閱讀答案，依編碼簿給每則一個主題代碼</td></tr><tr id='g-10'><td>編碼簿</td><td>codebook</td><td style='text-align:left'>列出每個主題的代碼、定義、納入、排除與例句的文件</td></tr><tr id='g-11'><td>納入</td><td>inclusion criteria</td><td style='text-align:left'>屬於某主題的具體內容</td></tr><tr id='g-12'><td>排除</td><td>exclusion criteria</td><td style='text-align:left'>容易混淆、但應歸到其他主題的內容，並寫出改歸的代碼</td></tr><tr id='g-13'><td>主要主題</td><td>primary theme</td><td style='text-align:left'>每則答案的唯一代碼；本課程規則為答案中最先提到的改善事項</td></tr><tr id='g-14'><td>次要主題</td><td>secondary theme</td><td style='text-align:left'>同一則答案提到的第二個事項，寫在備註</td></tr><tr id='g-15'><td>編碼者</td><td>coder</td><td style='text-align:left'>負責編碼的人；LLM 也可視為一位編碼者</td></tr><tr id='g-16'><td>獨立編碼</td><td>independent coding</td><td style='text-align:left'>兩位編碼者完成編碼前不討論、不看對方結果</td></tr><tr id='g-17'><td>一致率</td><td>percent agreement</td><td style='text-align:left'>兩位編碼者給出相同代碼的比例</td></tr><tr id='g-18'><td>碰巧一致率</td><td>chance agreement</td><td style='text-align:left'>兩人依各自的代碼比例隨意分類時，也會相同的機率</td></tr><tr id='g-19'><td>Cohen’s κ</td><td>Cohen’s kappa</td><td style='text-align:left'>（一致率 − 碰巧一致率）÷（1 − 碰巧一致率）；本課程以 .61 以上為通過</td></tr><tr id='g-20'><td>交叉表</td><td>contingency table</td><td style='text-align:left'>列為一位編碼者、欄為另一位編碼者的次數表；對角線是兩人相同的則數</td></tr><tr id='g-21'><td>信度</td><td>reliability</td><td style='text-align:left'>編碼的一致程度：不同編碼者、或同一編碼者重跑，是否給出相同代碼</td></tr><tr id='g-22'><td>效度</td><td>validity</td><td style='text-align:left'>代碼是否反映答案的原意，主題是否涵蓋重要的內容</td></tr><tr id='g-23'><td>關鍵字規則</td><td>keyword rule</td><td style='text-align:left'>答案出現特定詞就歸到某主題的自動分類方法；不判斷語意與否定</td></tr><tr id='g-24'><td>LLM</td><td>large language model</td><td style='text-align:left'>大型語言模型，例如 ChatGPT、Claude 背後的模型</td></tr><tr id='g-25'><td>LLM 編碼</td><td>LLM-assisted coding</td><td style='text-align:left'>把編碼簿交給 LLM，由它逐則給代碼；使用前需與人工編碼比對</td></tr><tr id='g-26'><td>信心標記</td><td>confidence rating</td><td style='text-align:left'>LLM 對每則代碼標示高、中、低把握；低信心的答案交由人裁決</td></tr><tr id='g-27'><td>定案</td><td>adjudication</td><td style='text-align:left'>兩位編碼者討論不一致的答案後決定的代碼</td></tr><tr id='g-28'><td>疑似 AI 代答</td><td>suspected AI-generated response</td><td style='text-align:left'>由 AI 工具代寫的開放題答案；規則只能標記疑似，無法證明</td></tr><tr id='g-29'><td>模板詞</td><td>template phrases</td><td style='text-align:left'>在 AI 代寫文字中反覆出現的連接詞組，例如「不僅…進而」</td></tr><tr id='g-30'><td>敏感度分析</td><td>sensitivity analysis</td><td style='text-align:left'>改變一個分析決定（例如含或不含疑似 AI 代答），看結論是否改變</td></tr><tr id='g-31'><td>去識別化</td><td>de-identification</td><td style='text-align:left'>分析或分享前，刪除或遮蔽可辨識個人的資訊，例如人名、單位、具體事件</td></tr><tr id='g-32'><td>分析紀錄</td><td>decision log</td><td style='text-align:left'>記下分析中每一個由人決定的事項與理由，供撰寫報告的方法段使用</td></tr></table></div>
   <h2>相關主題</h2>
   <ul>
     <li><a href="../Topic03_測量基礎與題項設計/Topic03_測量基礎_課程網站.html" target="_blank" rel="noopener">Topic 03 測量基礎</a>：關鍵事例分類與 Cohen’s κ</li>
