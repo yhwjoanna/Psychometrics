@@ -816,7 +816,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="kicker">網頁版提示詞｜資料清理</div>
   <h2 style="margin-bottom:22px">清理資料的提示詞</h2>
   <div class="prompt">請依下列規則清理資料，每一步都告訴我剩下幾人：<ol style="margin:10px 0 0 28px"><li>直線作答：29 題全部填同一個數字的人，刪除</li><li>隨機亂填：ENG01–ENG12 的標準差，高於「排除直線作答者後的平均＋3 個標準差」者刪除，並回報門檻值</li><li>反向題：依題目對照表，標示反向的題目以 7 減原始分數</li><li>遺漏值：不整列刪除；構面至少答一半題目就取已答題目的平均</li><li>列出被刪除的員工編號與六個構面的有效人數</li></ol></div>
-  <div class="foot"><span class="lim">可複製的完整提示詞在教材網站各單元的「操作步驟」；作業版資料用同樣的提示詞</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
+  <div class="foot"><span class="lim">可複製的完整提示詞在教材網站各單元的「操作步驟」；作業先看作業說明的「換成作業版資料時要改的地方」，再依同一流程操作</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>30</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">03</div><h1>檢查信度<br><span class=act-en>Reliability Before Comparison</span></h1><ul class="refs"><li>Streiner, D. L. (2003). Starting at the beginning: An introduction to coefficient alpha and internal consistency. Journal of Personality Assessment, 80(1), 99–103. https://doi.org/10.1207/S15327752JPA8001_18</li></ul></div>
@@ -886,7 +886,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="kicker">網頁版提示詞｜檢查信度</div>
   <h2 style="margin-bottom:22px">檢查信度的提示詞</h2>
   <div class="prompt">請計算六個構面的 Cronbach’s α（反向題已轉換）：<ol style="margin:10px 0 0 28px"><li>α 低於 .70 的構面，列出每一題的題目與總分相關（扣除該題）</li><li>回到題目對照表看題目文字，說明可能的原因</li><li>先不要更動資料，等我確認後再處理</li></ol></div>
-  <div class="foot"><span class="lim">可複製的完整提示詞在教材網站各單元的「操作步驟」；作業版資料用同樣的提示詞</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
+  <div class="foot"><span class="lim">可複製的完整提示詞在教材網站各單元的「操作步驟」；作業先看作業說明的「換成作業版資料時要改的地方」，再依同一流程操作</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">04</div><h1>兩組比較<br><span class=act-en>Independent-Samples t Test and Cohen’s d</span></h1><ul class="refs"><li>Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch’s t-test instead of Student’s t-test. International Review of Social Psychology, 30(1), 92–101. https://doi.org/10.5334/irsp.82</li><li>Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. Frontiers in Psychology, 4, Article 863. https://doi.org/10.3389/fpsyg.2013.00863</li><li>Cohen, J. (1988). Statistical power analysis for the behavioral sciences (2nd ed.). Lawrence Erlbaum Associates.</li></ul></div>
@@ -972,7 +972,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="kicker">網頁版提示詞｜兩組比較</div>
   <h2 style="margin-bottom:22px">兩組比較的提示詞</h2>
   <div class="prompt">請比較兩組的構面分數：第一組是高雄廠的生產部與品保部，第二組是其他所有人。<ol style="margin:10px 0 0 28px"><li>用 Welch t 檢定（不假設變異數相等），並計算 Cohen’s d</li><li>用表格列出五個構面的兩組人數、平均、標準差、t、自由度、p、d</li><li>用一句話說明哪個構面的差距最大</li></ol></div>
-  <div class="foot"><span class="lim">作業版資料的問題單位不同，要先自己找出分數偏低的單位，再換掉第一組；可複製的完整提示詞在教材網站各單元的「操作步驟」；作業版資料用同樣的提示詞</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>46</span></div>
+  <div class="foot"><span class="lim">作業版資料的問題單位不同，要先自己找出分數偏低的單位，再換掉第一組；可複製的完整提示詞在教材網站各單元的「操作步驟」；作業先看作業說明的「換成作業版資料時要改的地方」，再依同一流程操作</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>46</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">05</div><h1>多組比較<br><span class=act-en>One-Way ANOVA, η² and Post Hoc Tests</span></h1><ul class="refs"><li>Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. Frontiers in Psychology, 4, Article 863. https://doi.org/10.3389/fpsyg.2013.00863</li><li>Cohen, J. (1988). Statistical power analysis for the behavioral sciences (2nd ed.). Lawrence Erlbaum Associates.</li></ul></div>
@@ -1064,7 +1064,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <div class="kicker">網頁版提示詞｜多組比較</div>
   <h2 style="margin-bottom:22px">多組比較與事後比較的提示詞</h2>
   <div class="prompt">請用單因子變異數分析比較不同年資的留任意願：<ol style="margin:10px 0 0 28px"><li>報告各組人數、平均、標準差、F、自由度、p、η²</li><li>報告 Levene 檢定（以平均數為中心）的結果</li><li>F 顯著時做事後比較：Welch t 兩兩比較加 Holm 校正，列出每一對的平均差與校正後 p</li><li>人數少於 5 人的組別標出來，不單獨解讀</li></ol></div>
-  <div class="foot"><span class="lim">可複製的完整提示詞在教材網站各單元的「操作步驟」；作業版資料用同樣的提示詞</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>55</span></div>
+  <div class="foot"><span class="lim">可複製的完整提示詞在教材網站各單元的「操作步驟」；作業先看作業說明的「換成作業版資料時要改的地方」，再依同一流程操作</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>55</span></div>
 </section>
 
 <section class="slide act-page" data-layout="act" data-density="1"><div class="act"><div class="no">06</div><h1>人機雙重查核<br><span class=act-en>Human-in-the-Loop Verification</span></h1><ul class="refs"><li>Anthropic. (2024, December 19). Building effective agents. https://www.anthropic.com/research/building-effective-agents</li></ul></div>
@@ -1179,7 +1179,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
   <h2 style="margin-bottom:22px">規劃階段的提示詞</h2>
   <div class="prompt">我上傳一份員工意見調查的模擬資料（Excel，三個工作表）。請先讀完「題目對照表」與「構面與計分說明」，再看「原始資料」。<br>這一輪先不要計算，請用條列回答：<ol style="margin:10px 0 0 28px"><li>資料有幾列、幾個題目、哪些是人口變項。</li><li>你打算怎麼清理資料（依序列出步驟）。</li><li>有哪些決定需要我確認後才能執行。</li></ol></div>
   <p class="lead frag" style="font-size:26px;margin-top:22px">AI 的計畫有遺漏時，於下一輪提示詞補充</p>
-  <div class="foot"><span class="lim">上傳 Topic07_員工調查模擬資料.xlsx；免費版若有次數限制，可兩人共用、課堂練習兩人寫一份</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>65</span></div>
+  <div class="foot"><span class="lim">上傳 Topic07_員工調查模擬資料.xlsx；免費版額度用完時，可和同學共用同一個帳號的額度，練習仍各自完成</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>65</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4"><div style="position:absolute;top:56px;right:140px;z-index:5;background:#C62828;color:#fff;font-size:24px;font-weight:700;letter-spacing:.1em;padding:8px 22px;border-radius:999px">2026/11/13 修改</div>
@@ -1217,7 +1217,7 @@ df["ENG"] = eng.mean(axis=1)<b>.where(eng.notna().sum(axis=1) >= 6)</b>   # 12 �
       <p style="font-size:28px;line-height:1.65">使用作業版資料<br>步驟同課堂，結果不同<br><span style="color:#C62828;font-weight:700">延後一週：2026/12/03 23:59 截止</span></p>
     </div>
   </div>
-  <div class="foot"><span class="lim">個人作業須附提示詞、程式碼與人機雙重查核紀錄</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>68</span></div>
+  <div class="foot"><span class="lim">繳交報告 PDF＋編碼範本＋自我檢查表；提示詞與程式碼放對話紀錄</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>68</span></div>
 </section>
 
 <section class="slide" data-layout="next" data-density="3">

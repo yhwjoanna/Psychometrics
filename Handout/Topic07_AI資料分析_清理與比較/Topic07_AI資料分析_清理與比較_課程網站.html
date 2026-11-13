@@ -1370,6 +1370,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <div class="sr"><div class="sk">常見錯誤與注意</div><div class="sv"><ul><li>把 AI 草擬的文字直接貼上，沒有逐句核對數字</li><li>把「顯著」寫成「重要」或「嚴重」</li><li>用因果語言，例如「廠區造成主管支持偏低」</li><li>報告中出現可以推知個人的小群組結果</li></ul></div></div>
 </div>
   <h2 id="s7-11">7.11 個人分析作業</h2>
+  <p>換成作業版時：第 1 輪先不建立課堂指定的單位分組；第 2 輪檢查信度並修正誤植題後，用廠區 × 部門的人數與六構面平均找出問題單位，再進入第 3 輪。第 4 輪只需做年資與留任意願。每個反向題只從原始值轉換一次；完整對照見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html#structure" target="_blank" rel="noopener">作業六章步驟</a>。</p>
   <p>個人分析作業（25%，<span style="color:#C62828;font-weight:700">延後一週，2026/12/03 23:59 截止</span>）的資料、報告架構、繳交項目與評分方式見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。作業使用另一份作業版資料（個人作業_員工調查模擬資料_作業版.xlsx），分析步驟與課堂相同，結果不同。</p>
   <div class="key"><span class="lb">本單元要點</span>查核的對象是 AI 自行做的決定。課堂練習的查核是用一頁的檢核表對照每一輪的答案，再自己抽查兩三個數字；新對話獨立重跑為選做。小數第二位的差異寫明方法即可；人數、正負號、顯著與否不同，必須找出原因。由人做的決定記下來，寫進報告。</div>
   <div class="quiz">
@@ -1406,7 +1407,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <tr><td style="text-align:left">AI 只說明步驟、沒有計算</td><td style="text-align:left">回覆「請實際執行程式，列出結果表」</td></tr>
     <tr><td style="text-align:left">數字和答案不同</td><td style="text-align:left">先比人數（清理後 961 人），再比門檻與反向題，最後才比統計結果</td></tr>
     <tr><td style="text-align:left">對話太長，AI 忘了前面的規則</td><td style="text-align:left">請 AI 寫階段摘要，開新對話、重新上傳資料，貼上摘要再繼續</td></tr>
-    <tr><td style="text-align:left">免費版次數用完</td><td style="text-align:left">換另一個工具，或兩人共用一個帳號操作，課堂練習兩人寫一份；個人分析作業仍須各自完成</td></tr>
+    <tr><td style="text-align:left">免費版次數用完</td><td style="text-align:left">換另一個工具，或和同學共用同一個帳號的免費版額度；練習與個人分析作業仍各自完成</td></tr>
     <tr><td style="text-align:left">回覆變成英文</td><td style="text-align:left">加一句「請用繁體中文回答」</td></tr>
   </table>
   <p>課堂與作業只需要網頁版。單元二介紹的專案功能、Claude Code、SKILL.md 與 CLAUDE.md 是進階做法，不會操作不影響練習與作業。每一輪結束檢查三件事：人數是否正確、AI 自行決定了哪些事、對話與程式碼是否已保存。</p>
@@ -1460,7 +1461,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 </div><div class="round">
   <div class="rhead">第 3 輪：獨立樣本 t 檢定</div>
   <div class="rbody">
-    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我已確認 AIA04 是題目對照表誤植，請以 7 減原始分數轉換，重新計算 AIA 的 α 與構面分數，並更新 CSV。
+    <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>我已確認 AIA04 是題目對照表誤植。若尚未轉換，請以 7 減原始分數轉換，重新計算 AIA 的 α 與構面分數，並更新 CSV；若上一輪已轉換，沿用該結果，不要再次反轉。
 接著請把「高雄廠的生產部與品保部」設為一組，其他所有人為另一組，比較兩組在敬業度、主管支持、認可與回饋、組織承諾、留任意願五個構面分數的差異。
 請用 Welch t 檢定（不假設變異數相等），並計算 Cohen&#x27;s d（以合併標準差計算，方向為第一組減第二組）。用表格列出兩組人數、平均、標準差、t、自由度、p、d。
 接著用同樣方法比較「直接人員」與「間接人員」的敬業度與留任意願。</pre></div>
