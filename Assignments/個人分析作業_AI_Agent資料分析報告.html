@@ -121,6 +121,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 .fact .v{overflow-wrap:anywhere}
 @media (max-width:640px){th,td{padding:10px 10px}h2{font-size:26px}}
 section[id]{scroll-margin-top:110px}
+@media (max-width:640px){.tblwrap table.wide{min-width:720px}}
 </style>
 </head>
 <body>
@@ -148,7 +149,7 @@ section[id]{scroll-margin-top:110px}
   <div class="fact"><div class="k">比重</div><div class="v">25%<small>學期成績，個人獨立完成</small></div></div>
   <div class="fact"><div class="k">啟動</div><div class="v">2026/11/06<small>Week 09　Topic 07</small></div></div>
   <div class="fact"><div class="k">繳交截止</div><div class="v"><span style="color:#C62828;font-weight:700">2026/12/03（四）23:59</span><small><span style="color:#C62828;font-weight:700">延後一週，原訂 2026/11/26</span>　上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 作業區</small></div></div>
-  <div class="fact"><div class="k">繳交檔案</div><div class="v">報告 PDF＋2 個 Excel<small>填好的開放題編碼範本、自我檢查表；對話紀錄用分享連結</small></div></div>
+  <div class="fact"><div class="k">繳交檔案</div><div class="v">報告 PDF＋2 個 Excel<small>填好的開放題編碼範本、自我檢查表；對話紀錄用分享連結。全部由本人一人完成</small></div></div>
 </div>
 
 <section id="schedule">
@@ -160,8 +161,8 @@ section[id]{scroll-margin-top:110px}
     <tr><td>2026/11/06 後<br>Week 09　Topic 07</td><td>資料清理、信度、t 檢定與 ANOVA</td><td>下載<a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">作業版資料</a>；照課堂流程完成<a href="#structure">報告</a>第一至三章</td></tr>
     <tr><td>2026/11/13 後<br>Week 10　Topic 08</td><td>相關、多元迴歸、相對重要性與優先改善矩陣</td><td>報告第四章</td></tr>
     <tr><td>2026/11/20 後<br>Week 11　Topic 09</td><td>開放題編碼簿、κ、LLM 編碼</td><td>下載 <a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">個人作業_開放題編碼範本_作業版.xlsx</a>，依範本「使用說明」工作表完成 100 則樣本的編碼；報告第五章</td></tr>
-    <tr><td>2026/11/27 後<br>Week 12　Topic 10</td><td>資料視覺化</td><td>整理前五章的圖表；補做前面未完成的章節</td></tr>
-    <tr><td><span style="color:#C62828;font-weight:700">2026/12/03（四）23:59 前<br>延後一週</span></td><td>—</td><td>第六章結論與管理建議；用<a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a>（一頁，12 項）自己逐項確認；報告 PDF、填好的開放題編碼範本、自我檢查表上傳 Google Classroom</td></tr>
+    <tr><td>2026/11/27 後<br>Week 12　Topic 10</td><td>資料視覺化</td><td>補做前面未完成的章節。圖為選用：報告沒有必交的圖，只用表格也可以；想放圖時依 <a href="../Handout/Topic10_資料視覺化/Topic10_資料視覺化_課程網站.html" target="_blank" rel="noopener">Topic 10</a> 示範的做法畫</td></tr>
+    <tr><td><span style="color:#C62828;font-weight:700">2026/12/03（四）23:59 前<br>延後一週</span></td><td>—</td><td>第六章結論與管理建議；用<a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a>（一頁，13 項）由本人逐項確認；報告 PDF、填好的開放題編碼範本、自我檢查表上傳 Google Classroom</td></tr>
   </table>
   </div>
   <p>每一週的分析步驟都和當週課堂的實機練習相同，差別只在資料：課堂用練習資料，作業用作業版資料，所以數字會和教材網站上的答案不同</p>
@@ -169,13 +170,13 @@ section[id]{scroll-margin-top:110px}
   <div class="tblwrap">
   <table>
     <tr><th style="width:24%">課堂提示詞裡的內容</th><th>作業要怎麼做</th></tr>
-    <tr><td>上傳的檔案</td><td>改上傳 <a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a>，開一個新對話，不要沿用課堂練習的對話</td></tr>
-    <tr><td>「高雄廠的生產部與品保部」</td><td>這是練習資料的問題單位，作業版不同。先用<a href="#structure">第三章</a>的提示詞列出廠區 × 部門的表，自己找出問題單位，再把提示詞裡的第一組換成那個單位。第 1 輪清理提示詞最後的「單位分組」欄先刪掉，保留年資組欄；第三章選定問題單位後再建立單位分組</td></tr>
-    <tr><td>「AIA04 已確認為對照表誤植」</td><td>作業要自己從信度結果與題目文字判斷哪一題的計分方向有問題。發現後視為已向授課教師確認，可以轉換；發現的過程與決定寫在報告第二章</td></tr>
+    <tr><td>上傳的檔案與對話</td><td>改上傳 <a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a>，開新對話，不要沿用課堂練習的對話。作業共用三個對話，見<a href="#structure">報告架構</a>的「三個對話」表</td></tr>
+    <tr><td>「高雄廠的生產部與品保部」與「單位分組」欄</td><td>這是練習資料的問題單位，作業版不同。第一章清理時先不建立「單位分組」欄（第 1 輪最後一句改用<a href="#structure">第一章</a>提供的句子）；第三章依界定規則找出問題單位後，用第三章第 2 段提示詞建立這一欄</td></tr>
+    <tr><td>「AIA04 已確認為對照表誤植」</td><td>課堂提示詞已寫出 AIA04。作業版要用自己的信度結果確認這一題是否同樣有問題：看 α、題目與總分相關（扣除該題）與題目文字。確認後視為已向授課教師確認，可以轉換。報告第二章寫出證據與處理方式，不必寫成自己獨立發現</td></tr>
     <tr><td>清理後人數、門檻值、各項答案</td><td>教材網站與課堂檢核表「正確答案」欄的數字都是練習資料的結果，作業版會不同；以自己的程式輸出為準</td></tr>
-    <tr><td>Topic 07 至 Topic 09 的課堂檢核表</td><td>課堂檢核表只用於課堂練習，作業不用交。作業繳交前用 <a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a> 自己確認一次</td></tr>
+    <tr><td>Topic 07 至 Topic 09 的課堂檢核表</td><td>課堂檢核表只用於課堂練習，作業不用交。作業繳交前用 <a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a> 由本人確認一次</td></tr>
     <tr><td>課堂的開放題編碼範本、編號 S001–S100</td><td>作業使用 <a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">個人作業_開放題編碼範本_作業版.xlsx</a>：100 則樣本來自作業版資料，編號 A001–A100；人工編碼者只有本人一位，另一位編碼者是 LLM。對應的提示詞已改寫好，放在範本的「使用說明」工作表</td></tr>
-    <tr><td>其餘規則</td><td>清理規則、檢定方法、迴歸設定、報告格式都和課堂相同，提示詞可以直接沿用</td></tr>
+    <tr><td>其餘規則</td><td>清理規則、檢定方法、迴歸設定都和課堂相同；每一章要貼哪一段提示詞、要改哪一句，都列在<a href="#structure">報告架構</a>的表裡</td></tr>
   </table>
   </div>
   <p>用 ChatGPT、Claude 或 Gemini 的網頁版就能完成全部作業。各步驟可複製的提示詞在三個教材網站的「操作步驟」與實機練習單元</p>
@@ -188,7 +189,7 @@ section[id]{scroll-margin-top:110px}
     <p>用課堂教的方法，請 AI 分析一份新的資料（作業版），自己判讀與查核 AI 的結果，寫成一份給人資長看的報告。作業要練習的是：</p>
     <ol class="plain">
       <li>請 AI 清理資料，並確認每一步的人數</li>
-      <li>找出分數偏低的問題單位，用 t 檢定與 ANOVA 說明差距多大</li>
+      <li>依界定規則找出分數偏低的問題單位，用 t 檢定與 ANOVA 說明差距多大</li>
       <li>用多元迴歸找出與留任意願關聯最強的構面，做出優先改善矩陣</li>
       <li>自己與 AI 各自替開放題分類，比較兩者是否一致</li>
       <li>查核 AI 的結果，報告中的每個數字都找得到來源</li>
@@ -221,21 +222,47 @@ section[id]{scroll-margin-top:110px}
 <section id="structure">
   <div class="sec-tag">03　報告架構</div>
   <h2>六章各自要做什麼、要寫什麼</h2>
-  <div class="note"><strong>先下載：<a href="個人作業_分析報告範本.docx" download>個人分析報告 Word 範本</a></strong><br>依六章架構填入自己的分析數字與解讀。每節附教材步驟、空白表格與填寫提示；完成後刪除提示並另存 PDF。Word 範本是撰寫工具，仍依下方規定繳交報告 PDF 與兩份 Excel。</div>
-  <p>每一章都是：貼課堂的提示詞給 AI（資料換成作業版）→ 看 AI 的結果 → 把結果與自己的解讀寫進報告。下表列出每一章用哪一組提示詞、要改哪裡、報告至少要寫什麼</p>
+  <div class="note"><strong>先下載：<a href="個人作業_分析報告範本.docx" download>個人分析報告 Word 範本</a></strong><br>依六章架構填入自己的分析數字與解讀。每節附空白表格與填寫說明；繳交前刪除範本裡所有灰色字與【】提示，再另存 PDF。Word 範本是撰寫工具，仍依下方規定繳交報告 PDF 與兩份 Excel</div>
+  <p>每一章都是：貼提示詞給 AI（資料用作業版）→ 看 AI 的結果 → 把結果與自己的解讀寫進報告。全部由本人一人完成</p>
+  <h3 style="margin-top:22px">三個對話</h3>
+  <p>每個分析階段各用一個對話，共三個。AI 看不到其他對話的內容，所以每個對話都要自己上傳檔案</p>
   <div class="tblwrap">
   <table>
-    <tr><th style="width:15%">章</th><th style="width:43%">怎麼做（提示詞）</th><th>報告至少要寫</th></tr>
-    <tr><td>一、資料與清理</td><td><a href="../Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#u8" target="_blank" rel="noopener">Topic 07 實機練習</a>第 0、1 輪。第 1 輪最後一句的「單位分組」欄先刪掉（這時還不知道問題單位）</td><td>原始人數；直線作答、隨機亂填各刪幾人與門檻值；清理後人數；反向題已轉換；遺漏值沒有整列刪除</td></tr>
-    <tr><td>二、信度</td><td>Topic 07 第 2 輪。AI 指出某一題方向有問題後，回覆：「我已確認這一題是題目對照表誤植，請以 7 減原始分數轉換，重新計算該構面的 α 與構面分數，並更新清理後 CSV。每題只從原始值轉換一次，不要把已轉換的值再反轉。」</td><td>六個構面的 α；α 偏低的構面是哪一題有問題、怎麼發現、怎麼處理</td></tr>
-    <tr><td>三、群組比較</td><td>1. 先找問題單位，貼這一段：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">請列出廠區 × 部門每一個組合的人數與六個構面平均（反向題已轉換），並標出人數少於 5 人的組合。先不要做檢定。</div>只看廠區或只看部門可能看不出來，要看兩者的組合。挑多個構面都偏低、人數足夠（建議 30 人以上）的單位，可以是同一廠區的一到兩個部門<br>2. Topic 07 第 3 輪：把「高雄廠的生產部與品保部」換成自己找到的單位；第二章已完成誤植題轉換時，刪掉第 3 輪開頭再次要求轉換 AIA04 的一句。這次只比較問題單位與其他單位的五個構面，「直接人員與間接人員」比較不用做<br>3. Topic 07 第 4 輪：只做「不同年資的留任意願」一項即可</td><td>問題單位是哪個單位、怎麼找出來的；問題單位與其他單位在五個構面的平均、t、p、d；年資與留任意願的 F、p、η²、Levene 結果；F 顯著時列 Welch t 兩兩比較加 Holm 校正，以及哪個年資組最低；人數少於 5 人的組合不單獨列出</td></tr>
-    <tr><td>四、驅動因子</td><td><a href="../Handout/Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html#u7" target="_blank" rel="noopener">Topic 08 實機練習</a>第 2、3 輪（同一對話接續第二章更新過的清理後資料，直接從第 2 輪開始；另開新對話時，上傳原始作業 Excel，先貼第 1 輪重新清理。不要把已轉換的 CSV 當原始資料再次清理）。第 3 輪第 3 點（薪資福利人數）可以不做</td><td>迴歸的模型人數、R²、五個 β 與排序；優先改善矩陣（哪個構面落在優先改善）；用「關聯」描述，不寫「影響」「造成」</td></tr>
-    <tr><td>五、開放題</td><td>下載<a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">作業版編碼範本</a>，照範本「使用說明」工作表做：自己先編 100 則 → 請 AI 編同樣 100 則 → 算一致率與 κ → 決定不一致答案的代碼 → 標記疑似 AI 代答（以原始資料全部非空白的 OE1 答案計算）。不需要做詞頻與文字雲；κ 用範本與 AI 或計算器中的兩種方法核對</td><td>自己與 AI 的一致率與 κ；不一致的例子與定案理由（不足 5 則時全部列出）；100 則含與不含疑似 AI 代答的兩份主題次數及排序是否改變；疑似 AI 代答的規則、門檻與則數（只標記，不刪除）</td></tr>
-    <tr><td>六、結論與建議</td><td>在同一個對話貼這一段，再自己逐句核對數字並改寫：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">請依前面的分析結果，起草給人資長看的結論與管理建議：結論先寫；每一項建議都註明對應的數字；全公司的驅動因子結果與問題單位的結果分開寫，並列出問題單位在各構面的平均；最後寫分析限制（模擬資料、橫斷面、相關不等於因果）。</div></td><td>結論在最前面；問題單位、主要驅動因子與建議行動；每一項建議對應到前面章節的數字；分析限制</td></tr>
-    <tr><td>附錄</td><td>—</td><td>對話紀錄清單（分享連結或檔名）、AI 使用聲明（用了哪些工具、做什麼、怎麼查核）、編碼簿</td></tr>
+    <tr><th style="width:24%">對話</th><th style="width:20%">對應章節</th><th>開始時上傳</th></tr>
+    <tr><td>1. 清理與比較</td><td>第一、二、三章</td><td>作業版資料 Excel</td></tr>
+    <tr><td>2. 驅動因子</td><td>第四章</td><td>作業版資料 Excel（原始檔，由 Topic 08 第 1 輪重新清理；不上傳第二章的清理後 CSV）</td></tr>
+    <tr><td>3. 開放題</td><td>第五章</td><td>編碼範本的空白副本；做疑似 AI 代答標記時再上傳作業版資料 Excel</td></tr>
+    <tr><td>第六章</td><td>—</td><td>在上面任何一個對話起草都可以，要把第二至五章的主要結果貼進提示詞</td></tr>
   </table>
   </div>
-  <p>格式：A4 直式，中文標楷體、英文與數字 Times New Roman，12 pt；正文 12 頁以內，附錄不計，相關矩陣可以放附錄；統計數字小數兩位，p 小於 .001 寫為 p &lt; .001</p>
+  <p>已經在「清理與比較」的對話接著做完第四章的同學不必重做，結果相同；報告附錄表 A1 的驅動因子一列填同一個連結</p>
+  <h3 style="margin-top:22px">各章的做法與報告內容</h3>
+  <div class="tblwrap">
+  <table class="wide">
+    <tr><th style="width:15%">章</th><th style="width:47%">怎麼做（提示詞）</th><th>報告至少要寫</th></tr>
+    <tr><td>一、資料與清理<br>對話 1</td><td><a href="../Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#u8" target="_blank" rel="noopener">Topic 07 實機練習</a>第 0、1 輪。這時還不知道問題單位，第 1 輪最後一句（清理後的資料請存成 CSV……兩欄。）改成：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">清理後的資料請存成 CSV 讓我下載：保留人口變項與 29 題（反向題已轉換），加上六個構面分數，以及「年資組」（1 未滿1年、2 1-3年、3 3-5年、4 5-10年、5 10年以上）一欄。</div></td><td>原始人數；直線作答、隨機亂填各刪幾人與門檻值；清理後人數；反向題已轉換；遺漏值沒有整列刪除</td></tr>
+    <tr><td>二、信度<br>對話 1</td><td>Topic 07 第 2 輪。看 AI 列出的 α、題目與總分相關（扣除該題）與題目文字，確認哪一題的計分方向有問題後，回覆：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">我已確認這一題是題目對照表誤植，請以 7 減原始分數轉換，重新計算該構面的 α 與構面分數，並更新清理後 CSV。每題只從原始值轉換一次，不要把已轉換的值再反轉。</div></td><td>六個構面的 α；α 偏低的構面是哪一題有問題、證據是什麼（α、題目與總分相關、題目文字）、怎麼處理</td></tr>
+    <tr><td>三、群組比較<br>對話 1</td><td>下面三段是 Topic 07 第 3、4 輪改成作業版的寫法，直接貼這裡的版本。<br>1. 列出各單位：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">請列出廠區 × 部門每一個組合的人數與六個構面平均（反向題已轉換），以及全公司的六個構面平均，並標出人數少於 5 人的組合。先不要做檢定。</div><strong>問題單位的界定規則</strong>：清理後人數 30 人以上的廠區 × 部門組合中，ENG、SUP、REC、COM、RET 五個構面至少四個的平均比全公司平均低 0.30 分以上者，就是問題單位；符合的組合在同一廠區時，合併成一個問題單位。只看廠區或只看部門看不出來，要看兩者的組合。不到 30 人的組合不列入問題單位，分數明顯偏低時可在文字中提一句；少於 5 人的組合只寫名稱與人數，不寫平均<br>2. 建立單位分組並比較兩組（把＿＿換成自己找到的單位）：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">請在清理後的資料新增「單位分組」欄：＿＿廠的＿＿部（與＿＿部）為「問題單位」，其他所有人為「其他單位」，並更新清理後 CSV 讓我下載。
+接著比較兩組：
+1. 列出兩組在六個構面（ENG、SUP、REC、COM、RET、AIA）的人數、平均、標準差。問題單位包含兩個部門時，用員工個人的資料計算合併後的平均，不要把兩個部門的平均相加除以二。
+2. ENG、SUP、REC、COM、RET 五個構面做 Welch t 檢定（不假設變異數相等），並計算 Cohen's d（以合併標準差計算，方向為問題單位減其他單位）。用表格列出 t、自由度、p、d。AIA 只列平均，不做檢定。
+附上完整程式碼。</div>3. 年資與留任意願：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">請用單因子變異數分析比較不同年資（未滿1年、1-3年、3-5年、5-10年、10年以上）的留任意願。報告各組人數、平均與標準差、F、p、η²，以及 Levene 檢定（以平均數為中心）的結果；若 F 顯著，再做事後比較（Welch t 兩兩比較加 Holm 校正），列出每一組比較的平均差與校正後 p。</div>Topic 07 第 3 輪的「直接人員與間接人員」比較，以及第 4 輪的廠區、職級比較，作業不用做</td><td>問題單位是哪個單位、符合界定規則的依據；兩組在六個構面的平均，五個構面（ENG、SUP、REC、COM、RET）的 t、p、d，AIA 只列平均；年資與留任意願的 F、p、η²、Levene 結果、哪個年資組最低；F 顯著時，列最低組與其他四組的 4 個事後比較（Holm 校正 p）；少於 5 人的組合只寫名稱與人數，不寫平均</td></tr>
+    <tr><td>四、驅動因子<br>對話 2</td><td>另開新對話，上傳作業版資料 Excel（原始檔），依序貼 <a href="../Handout/Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html#u7" target="_blank" rel="noopener">Topic 08 實機練習</a>第 1、2、3 輪。第 1 輪會依相同規則重新清理，提示詞已寫入 AIA04 的轉換（第二章已確認），不用修改；清理後人數應與第一章相同，不同時先找出原因。不要上傳第二章的清理後 CSV 再清理一次。第 3 輪第 3 點（薪資福利人數）不用做</td><td>迴歸的模型人數、R²、五個 β 與排序；優先改善矩陣（哪個構面落在優先改善）；用「關聯」描述，不寫「影響」「造成」</td></tr>
+    <tr><td>五、開放題<br>對話 3</td><td>下載<a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">作業版編碼範本</a>，照範本「使用說明」工作表做：先留一份空白副本 → 自己在工作檔編完 100 則 → 另開對話，請 AI 讀空白副本編同樣 100 則 → AI 的代碼貼回工作檔 → 看一致率與 κ → 決定不一致答案的代碼 → 標記疑似 AI 代答（以原始資料全部非空白的 OE1 答案計算）。κ 以範本「彙總」工作表的數值為主，再用另一種方法核對一次（請 AI 計算，或編碼一致性計算器，擇一）。不需要做詞頻與文字雲</td><td>自己與 AI 的一致率與 κ、用哪一種方法核對；不一致的每一則，定案理由都寫在編碼範本的備註欄；報告正文最多列 5 則例子（不到 5 則時全部列出）；樣本 100 則含與不含疑似 AI 代答的兩份主題次數及排序是否改變（寫樣本中的則數，不寫成全公司的比例）；疑似 AI 代答的規則、門檻與則數（只標記，不刪除）</td></tr>
+    <tr><td>六、結論與建議<br>任一對話</td><td>在三個對話的任何一個（或另開對話）貼下面這一段。AI 看不到其他對話，所以要從自己報告的表格複製第二至五章的主要結果，貼在【】的位置；AI 起草後，自己逐句核對數字並改寫：<div style="white-space:pre-wrap;margin:8px 0;padding:10px 14px;background:var(--paper,#fff);border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#7A2033);border-radius:8px">以下是我已經查核過的分析結果。請只根據這些數字起草給人資長看的結論與管理建議，不要重算，也不要補上我沒有提供的數字。
+【清理：原始人數、刪除人數、清理後人數（表 1）】
+【信度與全公司六個構面的平均（表 3）】
+【問題單位：名稱與人數、六個構面的平均、五個構面的 t、p、d（表 6、表 7）】
+【年資與留任意願：各組平均、F、p、η²、事後比較（表 8、表 9）】
+【迴歸：模型人數、R²、五個 β 與排序、各構面所屬象限（表 10、表 11）】
+【開放題：一致率、κ、樣本主題則數、疑似 AI 代答則數（表 12、表 14、表 15）】
+寫法：結論先寫；每一項建議都註明對應的數字與表號；全公司的驅動因子結果與問題單位的結果分開寫；最後寫分析限制（模擬資料、橫斷面、相關不等於因果）。</div></td><td>結論在最前面；問題單位、主要驅動因子與建議行動；問題單位與全公司的六個構面平均（表 16）；每一項建議對應到前面章節的數字；分析限制</td></tr>
+    <tr><td>附錄</td><td>—</td><td>附錄 A：三個對話的紀錄清單（分享連結或檔名）、AI 使用聲明（用了哪些工具、做什麼、怎麼查核）、抽查 5 個數字的紀錄；附錄 B：編碼簿（範本已填入原版，有修訂才改）</td></tr>
+  </table>
+  </div>
+  <p>格式：A4 直式，中文標楷體、英文與數字 Times New Roman，12 pt；正文（第一章至第六章）12 頁以內，封面與附錄不計，相關矩陣可以放附錄。Word 範本的頁碼從第一章起算，附錄 A 前一頁的頁碼不超過 12 即符合</p>
+  <p>小數位：統計數字寫兩位，p 值寫三位，小於 .001 寫 p &lt; .001。門檻、分隔線與排序用未四捨五入的數字計算，所以用表中兩位數字手算（例如 0.70＋3×0.22＝1.36）可能和程式算出的門檻（1.35）差 0.01，以程式輸出為準</p>
+  <p>圖：報告沒有必交的圖，只用表格也可以（優先改善矩陣列象限表即可）。想放圖時，Week 12（<a href="../Handout/Topic10_資料視覺化/Topic10_資料視覺化_課程網站.html" target="_blank" rel="noopener">Topic 10</a>，2026/11/27）會示範畫法</p>
 </section>
 
 <section id="submit">
@@ -244,20 +271,21 @@ section[id]{scroll-margin-top:110px}
   <div class="tblwrap">
   <table>
     <tr><th style="width:26%">檔案</th><th>內容</th><th style="width:30%">檔名</th></tr>
-    <tr><td>1. 報告 PDF</td><td>第一至六章與附錄。附錄放：對話紀錄清單（每個對話的分享連結或檔名）、AI 使用聲明、編碼簿</td><td>學號_姓名_個人分析報告.pdf</td></tr>
-    <tr><td>2. 填好的開放題編碼範本</td><td><a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">個人作業_開放題編碼範本_作業版.xlsx</a>：「本人編碼」「LLM」「討論後定案」三欄 100 格都有代碼；不一致的列在備註寫定案理由；「疑似 AI 代答」100 格皆填「是」或「否」</td><td>學號_姓名_開放題編碼範本.xlsx</td></tr>
-    <tr><td>3. 自我檢查表</td><td><a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a>：一頁、12 項，繳交前自己逐項確認並勾選</td><td>學號_姓名_自我檢查表.xlsx</td></tr>
+    <tr><td>1. 報告 PDF</td><td>第一至六章與附錄；正文（第一章至第六章）12 頁以內，封面與附錄不計。附錄放：對話紀錄清單（每個對話的分享連結或檔名）、AI 使用聲明、抽查數字紀錄、編碼簿</td><td>學號_姓名_個人分析報告.pdf</td></tr>
+    <tr><td>2. 填好的開放題編碼範本</td><td><a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">個人作業_開放題編碼範本_作業版.xlsx</a>：交自己填寫的工作檔（空白副本不用交）。「本人編碼」「LLM」「討論後定案」三欄 100 格都有代碼；不一致的每一則，定案理由都寫在編碼範本的備註欄；報告正文最多列 5 則例子（不到 5 則時全部列出）；「疑似 AI 代答」100 格皆填「是」或「否」</td><td>學號_姓名_開放題編碼範本.xlsx</td></tr>
+    <tr><td>3. 自我檢查表</td><td><a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a>：一頁、13 項，繳交前由本人逐項確認並勾選</td><td>學號_姓名_自我檢查表.xlsx</td></tr>
   </table>
   </div>
-  <p>提示詞與程式碼都已經在對話紀錄裡，不必另外整理成檔案。對話紀錄用分享連結提供，連結寫在報告附錄，並貼在 Google Classroom 繳交時的私人留言；連結無法分享時，把對話列印成 PDF 一起上傳（做法見<a href="#transcript">對話紀錄的提供方式</a>）。每一個分析階段用一個對話即可，例如清理與比較、驅動因子、開放題各一個</p>
+  <p>提示詞與程式碼都已經在對話紀錄裡，不必另外整理成檔案。三個對話（清理與比較、驅動因子、開放題）各提供一個分享連結，寫在報告附錄 A，並貼在 Google Classroom 繳交時的私人留言</p>
+  <p>分享頁面通常看不到上傳的檔案，有些工具也看不到程式執行的過程與輸出。繳交前用無痕視窗打開連結檢查：看得到提示詞、程式碼與輸出，交連結即可；看不到程式碼或輸出，或連結打不開時，把同一個對話列印成 PDF 一併上傳（做法見<a href="#transcript">對話紀錄的提供方式</a>）。教師抽查數字時，以看得到程式輸出的那一份為準</p>
 </section>
 
 <section id="transcript">
   <div class="sec-tag">05　對話紀錄的提供方式</div>
   <h2>分享連結與匯出紀錄</h2>
-  <p>兩種形式擇一即可，同一份作業可以混用（例如一個對話用分享連結，另一個對話列印為 PDF）。各工具的介面名稱會隨版本更新而改變，下列步驟以功能描述為準</p>
+  <p>以分享連結為主；分享頁面看不到程式碼或輸出，或連結打不開的對話，另外列印為 PDF 一併上傳。各工具的介面名稱會隨版本更新而改變，下列步驟以功能描述為準</p>
 
-  <p>最簡單的做法：在 ChatGPT、Claude 或 Gemini 的對話頁面按「分享」，複製連結，貼到報告附錄與 Classroom 的私人留言；再用無痕視窗打開連結，確認看得到完整對話。連結打不開時，改用瀏覽器的「列印 → 另存為 PDF」</p>
+  <p>最簡單的做法：在 ChatGPT、Claude 或 Gemini 的對話頁面按「分享」，複製連結，貼到報告附錄與 Classroom 的私人留言；再用無痕視窗打開連結，確認看得到提示詞、程式碼與輸出。看不到或連結打不開時，用瀏覽器的「列印 → 另存為 PDF」把該對話另存一份一併上傳</p>
   <details><summary>詳細步驟、分享連結的限制與其他工具的匯出方式<span>展開</span></summary>
 <div class="card">
     <h3 style="margin-top:0">形式一：分享連結（ChatGPT、Claude、Gemini 網頁版）</h3>
@@ -272,7 +300,7 @@ section[id]{scroll-margin-top:110px}
     <p style="margin-top:12px"><strong>分享連結的限制</strong></p>
     <ul class="plain">
       <li>連結內容是建立當下的對話內容。建立連結之後才送出的訊息不會出現，須重新建立或更新連結；繳交前最後一次更新連結，並再以無痕視窗確認一次</li>
-      <li>上傳的檔案通常不會出現在分享頁面（Claude 的分享不包含附加檔案；ChatGPT 依方案與功能而定），部分程式執行的過程與輸出也可能無法檢視。看不到時，改用列印成 PDF 的方式提供對話紀錄</li>
+      <li>上傳的檔案通常不會出現在分享頁面（Claude 的分享不包含附加檔案；ChatGPT 依方案與功能而定），部分程式執行的過程與輸出也可能無法檢視。看不到時，另外把該對話列印成 PDF 一併上傳</li>
       <li>連結須維持有效到學期成績公布。期間不刪除該對話、不取消分享；ChatGPT 可在「設定 → 資料控制 → 共用連結」檢視已建立的連結</li>
       <li>學校或企業的組織帳號可能只允許分享給同一組織的成員（例如 Claude 的 Team 與 Enterprise 方案）。無痕視窗打不開時，改用形式二</li>
     </ul>
@@ -314,7 +342,7 @@ section[id]{scroll-margin-top:110px}
   <div class="key"><strong>檔名與清單</strong><br>
     單一檔案：學號_姓名_對話紀錄.pdf（或 .txt）<br>
     多個對話：學號_姓名_對話紀錄_01_清理與比較.pdf、學號_姓名_對話紀錄_02_驅動因子.pdf、學號_姓名_對話紀錄_03_開放題.pdf，依時間順序編號<br>
-    報告附錄的對話紀錄清單每一列包含：編號、分析階段、使用工具、日期、分享連結或檔名</div>
+    報告附錄 A 的對話紀錄清單（表 A1）每一列包含：分析階段、工具與日期、分享連結或檔名</div>
   <div class="warn">分享或匯出前，檢查對話中是否含有個人資料，例如聯絡方式、帳號資訊、任職公司的資料；含有個人資料的訊息刪除或改寫後，再建立連結或匯出</div>
 
   </details>
@@ -323,7 +351,7 @@ section[id]{scroll-margin-top:110px}
 <section id="format">
   <div class="sec-tag">06　繳交方式</div>
   <h2>上傳到 Google Classroom</h2>
-  <p>三個檔案（對話紀錄有匯出檔時一併上傳）在 <span style="color:#C62828;font-weight:700">2026/12/03（四）23:59</span> 前上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 本作業的作業區，不需要壓縮成 ZIP；逾期由系統標示遲交</p>
+  <p>報告 PDF、填好的開放題編碼範本、自我檢查表共三個檔案（對話紀錄有另附 PDF 或匯出檔時一併上傳）在 <span style="color:#C62828;font-weight:700">2026/12/03（四）23:59</span> 前上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 本作業的作業區，直接上傳，不需要壓縮成 ZIP；對話分享連結貼在繳交時的私人留言；逾期由系統標示遲交</p>
 </section>
 
 <section id="ai">
@@ -335,7 +363,7 @@ section[id]{scroll-margin-top:110px}
       <li>報告中每一個數字都須能回溯到程式輸出或對話紀錄中的執行結果。教師會從對話紀錄抽查數字</li>
       <li>依課程大綱學術倫理規範，由 AI 全文代寫且未經人工審核驗證者，該項成績以 0 分計。本作業中，捏造的數字，或無法回溯到程式輸出、未經查證的數字，所在章節以 0 分計</li>
       <li>報告附錄須有 AI 使用聲明：使用的工具、用途（程式撰寫、分析執行、文字起草、開放題編碼）與人工查核方式</li>
-      <li>開放題 100 則樣本的人工編碼由學生本人一人完成；本人編完之後才由 LLM 編同樣 100 則，上傳給 AI 的檔案不含本人編碼</li>
+      <li>開放題 100 則樣本的人工編碼由學生本人一人完成。本人編完之後才請 LLM 編同樣 100 則，這時上傳給 AI 的是空白副本，不含本人編碼；LLM 編完、代碼貼回之後，才可以上傳填好的檔案請 AI 計算一致率與 κ</li>
     </ul>
   </div>
 </section>
@@ -347,7 +375,7 @@ section[id]{scroll-margin-top:110px}
     <div class="tl"><div class="d">2026/11/06<span>WEEK 09　TOPIC 07</span></div><p>AI Agent 資料分析架構、資料清理與群組比較；作業啟動，課後可完成報告第一至三章</p></div>
     <div class="tl"><div class="d">2026/11/13<span>WEEK 10　TOPIC 08</span></div><p>構面相關、關鍵驅動因子迴歸與優先改善矩陣；課後可完成第四章</p></div>
     <div class="tl"><div class="d">2026/11/20<span>WEEK 11　TOPIC 09</span></div><p>開放題編碼簿、Cohen's κ、LLM 輔助編碼與疑似 AI 代答偵測；課後可完成第五章</p></div>
-    <div class="tl soft"><div class="d">2026/11/27<span>WEEK 12　TOPIC 10</span></div><p>資料視覺化；整理前五章的圖表，補做未完成的章節</p></div>
+    <div class="tl soft"><div class="d">2026/11/27<span>WEEK 12　TOPIC 10</span></div><p>資料視覺化；補做未完成的章節。圖為選用，只用表格也可以</p></div>
     <div class="tl"><div class="d">2026/12/03（四）23:59<span>繳交截止</span></div><p>報告 PDF、開放題編碼範本與自我檢查表上傳 <a href="https://classroom.google.com/c/ODg0NDgyNTgyOTAy" target="_blank" rel="noopener">Google Classroom</a> 作業區</p></div>
   </div>
 </section>
@@ -360,13 +388,13 @@ section[id]{scroll-margin-top:110px}
   <table>
     <tr><th style="width:12%">比重</th><th style="width:30%">向度</th><th>評分重點</th></tr>
     <tr><td class="w">20%</td><td>資料清理與代答快篩</td><td>清理每一步的規則與人數正確；反向題與遺漏值處理正確；疑似 AI 代答的標記規則與則數（寫在第五章）</td></tr>
-    <tr><td class="w">20%</td><td>群組差異與核心問題單位</td><td>問題單位找得對、界定依據寫清楚；每一個差異都有 p 值與效果量；年資比較的結果與解讀</td></tr>
+    <tr><td class="w">20%</td><td>群組差異與核心問題單位</td><td>找到的問題單位與界定規則（見<a href="#structure">第三章</a>）相符，並寫出依據；五個構面的差異都有 p 值與效果量；年資比較的結果與解讀</td></tr>
     <tr><td class="w">20%</td><td>關鍵驅動因子迴歸分析</td><td>模型人數、R²、β 與排序正確；優先改善矩陣；用關聯描述，沒有因果用語</td></tr>
-    <tr><td class="w">20%</td><td>開放題質化分析</td><td>自己與 AI 的一致率與 κ；不一致例子的定案理由；主題次數</td></tr>
-    <tr><td class="w">20%</td><td>人機雙重查核紀錄</td><td>對話紀錄可以開啟且完整；報告中的數字在對話紀錄裡找得到；自我檢查表已逐項確認；對 AI 的結果提出過追問或修正時，在報告中寫出</td></tr>
+    <tr><td class="w">20%</td><td>開放題質化分析</td><td>自己與 AI 的一致率與 κ；不一致答案的定案理由（編碼範本備註欄與報告的例子）；樣本主題次數</td></tr>
+    <tr><td class="w">20%</td><td>人機雙重查核紀錄</td><td>對話紀錄（分享連結或另附的 PDF）可以開啟且看得到程式輸出；報告中的數字在對話紀錄裡找得到；附錄表 A2 有抽查 5 個數字的紀錄；自我檢查表已逐項確認；對 AI 的結果提出過追問或修正時，在報告中寫出</td></tr>
   </table>
   </div>
-  <p>結論與管理建議（第六章）與報告的清楚程度，列入各向度一併評定</p>
+  <p>結論與管理建議（第六章）與報告的清楚程度，列入各向度一併評定。圖不列入評分項目</p>
 </section>
 
 <section id="materials">
@@ -378,10 +406,10 @@ section[id]{scroll-margin-top:110px}
     <tr><td>Topic 07 教材網站</td><td><a href="../Handout/Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html" target="_blank" rel="noopener">AI 資料分析：清理與比較</a></td></tr>
     <tr><td>Topic 08 教材網站</td><td><a href="../Handout/Topic08_驅動因子與迴歸/Topic08_驅動因子與迴歸_課程網站.html" target="_blank" rel="noopener">驅動因子與迴歸</a></td></tr>
     <tr><td>Topic 09 教材網站</td><td><a href="../Handout/Topic09_開放題分析/Topic09_開放題分析_課程網站.html" target="_blank" rel="noopener">開放題分析</a></td></tr>
-    <tr><td>個人分析報告 Word 範本</td><td><a href="個人作業_分析報告範本.docx" download>個人作業_分析報告範本.docx</a>（六章架構、填寫說明、結果表格與附錄；請填入自己的分析）</td></tr>
-    <tr><td>自我檢查表</td><td><a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a>（一頁，繳交前自己確認）</td></tr>
+    <tr><td>個人分析報告 Word 範本</td><td><a href="個人作業_分析報告範本.docx" download>個人作業_分析報告範本.docx</a>（六章架構、填寫說明、結果表格與附錄；填入自己的分析，繳交前刪除灰色字與【】提示）</td></tr>
+    <tr><td>自我檢查表</td><td><a href="個人作業_自我檢查表.xlsx" target="_blank" rel="noopener">個人作業_自我檢查表.xlsx</a>（一頁 13 項，繳交前由本人確認）</td></tr>
     <tr><td>作業版開放題編碼範本</td><td><a href="個人作業_開放題編碼範本_作業版.xlsx" target="_blank" rel="noopener">個人作業_開放題編碼範本_作業版.xlsx</a>（編碼簿、100 則樣本、彙總與使用說明）</td></tr>
-    <tr><td>編碼一致性計算器</td><td><a href="../Handout/Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>（作業使用「三位組員」模式，貼法見編碼範本的使用說明）</td></tr>
+    <tr><td>編碼一致性計算器</td><td><a href="../Handout/Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a>（選用：核對 κ 的方法之一；作業使用「三位組員」模式，貼法見編碼範本的使用說明）</td></tr>
     <tr><td>AI 分析設定範本</td><td><a href="Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">Topic07_AI分析設定範本.txt</a>（專案指示與分析規則）</td></tr>
     <tr><td>作業資料</td><td><a href="個人作業_員工調查模擬資料_作業版.xlsx" target="_blank" rel="noopener">個人作業_員工調查模擬資料_作業版.xlsx</a></td></tr>
   </table>
