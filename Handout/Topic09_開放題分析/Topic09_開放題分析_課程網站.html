@@ -525,6 +525,16 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <p>jieba 把「快撐不住」斷成「快撐／不住」，「跟表現無關」斷成「跟表現／無關」。改用 <a href="#g-4">CKIP</a> 後，這兩處斷成「快／撐／不住」與「跟／表現／無關」；「拿甲」則被連成一個詞，繁體中文的斷詞模型也有斷錯的地方。</p>
   <p>斷詞工具不同，進入詞頻的詞就不同，文字雲與排名也會跟著變；報告要寫明用了哪個工具與版本。換工具只解決斷詞；同義詞、否定、多主題的盲點仍在，仍需要編碼。</p>
   <p>CKIP 需另外安裝並下載模型，聊天 AI 的執行環境不一定有，本週練習仍用 jieba。jieba 也可以加入自訂詞典修正，但需逐一檢查斷詞結果；職稱、設備名稱與縮寫特別容易斷錯。</p>
+  <div class="note"><span class="lb">進階示範</span>CKIP 的安裝與執行環境（選做，不列入課堂練習與個人作業）。專案頁：<a href="https://github.com/ckiplab/ckip-transformers" target="_blank" rel="noopener">ckip-transformers</a>；線上執行環境：<a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>。</div>
+  <div class="scrollx"><table class="mt">
+    <tr><th style="width:14%">執行環境</th><th style="width:31%">需要準備什麼</th><th style="width:31%">能否下載模型</th><th>適合誰</th></tr>
+    <tr><td>自己的電腦</td><td style='text-align:left'>Python 3.6 以上；安裝 ckip-transformers，會用到 PyTorch 與 Hugging Face Transformers</td><td style='text-align:left'>可以。第一次執行需要網路，從 Hugging Face 下載模型（模型檔數百 MB），之後可離線</td><td style='text-align:left'>電腦已有 Python、之後會重複使用的人</td></tr><tr><td>聊天 AI 網頁版</td><td style='text-align:left'>不需要另外準備；程式在供應商的沙盒執行，一般不能對外連線</td><td style='text-align:left'>通常無法下載模型；各家規定會變動，以當下實測為準</td><td style='text-align:left'>本週練習維持用 jieba</td></tr><tr><td>Google Colab</td><td style='text-align:left'>瀏覽器與 Google 帳號，有免費額度；已內建 PyTorch 與 Transformers</td><td style='text-align:left'>可對外連線；本課程未實測，未列入課堂練習，選做</td><td style='text-align:left'>沒有安裝 Python、想在瀏覽器試做的人</td></tr>
+  </table></div>
+  <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>!pip install -U ckip-transformers
+from ckip_transformers.nlp import CkipWordSegmenter
+ws = CkipWordSegmenter(model=&quot;bert-base&quot;)
+print(ws([&quot;品保也要輪班，但沒有生產部那種輪班津貼&quot;]))</pre></div>
+  <p>第一行的驚嘆號是 Colab 的用法；在自己電腦的終端機執行時不加驚嘆號，其餘幾行存成 Python 檔或在 Python 中執行。把員工的開放題答案上傳到雲端服務前，先確認公司的資料規範；課堂的資料是模擬資料。</p>
   <h2 id="s2-7">2.7 盲點五：多主題與長答案</h2>
   <ul>
     <li>多主題：人工編碼時，有 43 則答案同時提到兩個主題，例如「廠房太熱又人力不足，夏天真的很辛苦」（設備與人力）、「教育訓練不足，升遷也沒有標準」（訓練與升遷）。文字雲只呈現詞，看不出兩件事在同一則答案中同時出現。</li>
