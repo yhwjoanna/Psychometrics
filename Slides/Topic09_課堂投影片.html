@@ -488,6 +488,9 @@ body.fs.idle #scrub{opacity:0;pointer-events:none}
 .lt td.ok{color:#1C2F52;font-weight:700}
 .seg{font-family:Menlo,"Noto Sans TC",monospace;color:#7A2033;font-weight:700}
 .cb td{text-align:left}
+.lv td{font-size:22px!important;padding:12px 14px!important;line-height:1.4;vertical-align:top;text-align:left;white-space:normal!important}
+.lv th{font-size:23px!important;padding:8px 14px!important;text-align:left}
+.lv td.lvn{font-weight:700;white-space:nowrap!important}
 .segc{font-family:Menlo,"Noto Sans TC",monospace;color:var(--ink-2)}
 .segc .bad{color:#B3261E;font-weight:700;background:#FBE9E7;border-radius:4px;white-space:nowrap}
 .segc .good{color:#1F5FA8;font-weight:700;background:#E4EEF9;border-radius:4px;white-space:nowrap}
@@ -1127,6 +1130,19 @@ print(ws(["品保也要輪班，但沒有生產部那種輪班津貼"]))</pre>
   <div class="foot"><span class="lim">完整名詞對照見教材網站單元十</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>59</span></div>
 </section>
 
+<section class="slide" data-layout="table" data-density="4">
+  <div class="kicker">延伸應用</div>
+  <h2 style="margin-bottom:10px;font-size:50px">組織裡的文字資料：機密等級與處理方式</h2>
+  <table class="tight lv" style="width:100%">
+    <tr><th style="width:9%">機密等級</th><th style="width:22%">文字資料的例子</th><th style="width:26%">主要風險</th><th style="width:20%">處理環境</th><th>去識別方式</th></tr>
+    <tr class="frag"><td class="lvn" style="border-left:14px solid #E3D3D7">公開</td><td>求職網站上的公司評論、公開的社群留言</td><td>內容已公開；留意平台的使用條款</td><td>雲端聊天 AI 可用</td><td>刪除留言者帳號與被點名的人名</td></tr><tr class="frag"><td class="lvn" style="border-left:14px solid #CFA5AF">內部一般</td><td>訓練課後回饋、改善提案、HR 服務台的來信與工單</td><td>內容多與事務有關，仍可能寫到人名</td><td>公司核准的雲端 AI（企業版、資料不用於訓練）</td><td>刪除姓名、工號、信箱、電話</td></tr><tr class="frag"><td class="lvn" style="border-left:14px solid #B57586">內部敏感</td><td>員工調查開放題、新人到職回饋、婉拒錄取的理由、虛驚事件通報</td><td>從部門、職稱、事件細節可以推知是誰</td><td>先在自己電腦上去識別，再送公司核准的雲端 AI</td><td>部門與職稱改為代號或上一層類別；未滿 5 人的群組合併；引述改寫，不逐字</td></tr><tr class="frag"><td class="lvn" style="border-left:14px solid #974A5F">機密</td><td>離職面談紀錄、績效評語與 360 度回饋、焦點團體逐字稿</td><td>評價性內容，直接影響當事人與主管</td><td>以地端為原則；使用雲端需公司書面核准並完成去識別</td><td>人名、主管、專案、日期、金額全部換成代號；代號對照表只留在地端；結果只呈現彙總</td></tr><tr class="frag"><td class="lvn" style="border-left:14px solid #7A2033">極機密</td><td>申訴與調查案件、懲處紀錄、健康與請假事由</td><td>依法有保密義務；健康資料屬於個人資料保護法第 6 條的特種個資</td><td>只在地端處理，或由承辦人人工編碼，不送雲端</td><td>限定經手人；只報告案件類型與件數，不引述原文</td></tr>
+  </table>
+  <p class="lead frag" style="font-size:20px;margin-top:10px;max-width:none">等級的名稱與界線依各公司的資訊分級規範，這張表是對照用的例子；拿不準時用較高的一級</p>
+  <p class="lead frag" style="font-size:20px;margin-top:4px;max-width:none">地端的做法：Excel 人工編碼；在自己電腦上用 Python 斷詞與計數（jieba、CKIP）；在自己電腦上執行的語言模型（進階示範，例如以 Ollama 或 LM Studio 執行開源模型）</p>
+  <p class="lead frag" style="font-size:20px;margin-top:4px;max-width:none">分析方法不變：編碼簿、兩次獨立編碼、一致性、主題次數。課堂與作業的資料是模擬資料，沒有上述限制</p>
+  <div class="foot"><span class="lim">等級劃分為教學用的對照，實際以公司規範與法規為準</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>60</span></div>
+</section>
+
 <section class="slide xl" data-layout="task" data-density="3">
   <div class="kicker">本週工作</div>
   <h2>課後作業</h2>
@@ -1141,7 +1157,7 @@ print(ws(["品保也要輪班，但沒有生產部那種輪班津貼"]))</pre>
       <p style="font-size:28px;line-height:1.65">使用作業版資料<br>使用 A001–A100 作業範本<br>依範本「使用說明」七步完成<br>不做詞頻與文字雲<br><span style="color:#C62828;font-weight:700">延後一週：2026/12/03 23:59 截止</span></p>
     </div>
   </div>
-  <div class="foot"><span class="lim">繳交報告 PDF＋編碼範本＋自我檢查表；提示詞與程式碼放對話紀錄；<a class="lnk" href="../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>60</span></div>
+  <div class="foot"><span class="lim">繳交報告 PDF＋編碼範本＋自我檢查表；提示詞與程式碼放對話紀錄；<a class="lnk" href="../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a></span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>61</span></div>
 </section>
 
 <section class="slide" data-layout="next" data-density="3">
@@ -1153,7 +1169,7 @@ print(ws(["品保也要輪班，但沒有生產部那種輪班津貼"]))</pre>
     <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">小工具</div><div class="dd"><a class="lnk" href="../Handout/Topic03_測量基礎與題項設計/編碼一致性計算器.html" target="_blank" rel="noopener">編碼一致性計算器</a></div></div>
     <div class="row" style="grid-template-columns:200px 1fr"><div class="tt">前一週</div><div class="dd"><a class="lnk" href="Topic08_課堂投影片.html" target="_blank" rel="noopener">Topic 08 課堂投影片</a></div></div>
   </div>
-  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>61</span></div>
+  <div class="foot"><span class="lim">連結皆對應課程入口網與課堂互動教材網站</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>62</span></div>
 </section>
 
 
@@ -1165,7 +1181,7 @@ print(ws(["品保也要輪班，但沒有生產部那種輪班津貼"]))</pre>
 </div></div>
 
 <div id="bar"><i></i></div>
-<div id="pg">1 / 62</div>
+<div id="pg">1 / 63</div>
 <div id="nav">
   <button id="prev" aria-label="上一頁">←</button>
   <button id="next" aria-label="下一頁">→</button>
