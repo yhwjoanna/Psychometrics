@@ -470,6 +470,23 @@ table.cmp th{font-size:28px;padding:12px 20px}
 .defs .stat{padding:18px 24px}.defs .stat p{font-size:23px;line-height:1.5;margin:6px 0 0}
 .defs .k{font-size:27px}
 .heat td{width:120px}
+/*scrub-v1*/
+#scrub{position:fixed;left:0;right:190px;bottom:0;height:34px;z-index:21;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
+#scrub .trk{position:absolute;left:18px;right:0;bottom:9px;height:6px;display:flex;gap:2px;opacity:0;transition:opacity .2s,height .2s,bottom .2s}
+#scrub:hover .trk,#scrub.drag .trk{opacity:1;height:12px;bottom:8px}
+#scrub .trk b{flex:1 1 0;min-width:0;border-radius:2px;background:rgba(120,110,100,.38)}
+#scrub .trk b.sec{background:rgba(122,32,51,.55)}
+#scrub .trk b.past{background:rgba(122,32,51,.30)}
+#scrub .trk b.sec.past{background:rgba(122,32,51,.62)}
+#scrub .trk b.cur{background:#7A2033}
+#scrub .trk b.hov{background:#1C2F52}
+#scrub .tip{position:absolute;bottom:30px;transform:translateX(-50%);white-space:nowrap;max-width:70vw;overflow:hidden;text-overflow:ellipsis;
+  background:rgba(28,24,21,.92);color:#fff;font:500 15px/1.3 "Noto Sans TC",sans-serif;padding:7px 12px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .15s}
+#scrub:hover .tip,#scrub.drag .tip{opacity:1}
+#scrub .tip em{font-style:normal;opacity:.7;margin-right:8px}
+body.fs.idle #scrub{opacity:0;pointer-events:none}
+@media (max-width:900px){#scrub{display:none}}
+@media print{#scrub{display:none}}
 </style>
 </head>
 <body>
@@ -1213,6 +1230,38 @@ table.cmp th{font-size:28px;padding:12px 20px}
   var h=parseInt((location.hash||'#1').slice(1),10);
   show(isNaN(h)?0:h-1,false);
   if(mobile()){slides.forEach(function(s){s.classList.add('on');});}
+/*scrub-v1*/
+  (function(){
+    var sc=document.createElement('div'); sc.id='scrub'; sc.setAttribute('aria-label','快速跳頁');
+    var trk=document.createElement('div'); trk.className='trk'; var tip=document.createElement('div'); tip.className='tip';
+    var titles=slides.map(function(s){
+      var h=s.querySelector('h1,h2'), k=s.querySelector('.kicker');
+      return ((h&&h.textContent)||(k&&k.textContent)||'').replace(/\s+/g,' ').trim();
+    });
+    var segs=slides.map(function(s){
+      var b=document.createElement('b'); if(/act-page|cover|light-scene/.test(s.className)) b.className='sec'; trk.appendChild(b); return b;
+    });
+    sc.appendChild(trk); sc.appendChild(tip); document.body.appendChild(sc);
+    var hov=-1;
+    function at(x){var r=trk.getBoundingClientRect(); return Math.max(0,Math.min(N-1,Math.floor((x-r.left)/r.width*N)));}
+    function paint(){
+      segs.forEach(function(b,k){b.classList.toggle('past',k<cur); b.classList.toggle('cur',k===cur); b.classList.toggle('hov',k===hov&&k!==cur);});
+    }
+    function point(x){
+      hov=at(x); var r=sc.getBoundingClientRect(), t=trk.getBoundingClientRect();
+      var cx=t.left+(hov+.5)/N*t.width-r.left; tip.style.left=Math.max(90,Math.min(r.width-90,cx))+'px';
+      tip.innerHTML='<em>'+(hov+1)+' / '+N+'</em>'; tip.appendChild(document.createTextNode(titles[hov]||'')); paint();
+    }
+    var down=false;
+    sc.addEventListener('pointerdown',function(e){down=true; sc.classList.add('drag'); try{sc.setPointerCapture(e.pointerId);}catch(_){ } point(e.clientX); show(hov,true); paint(); e.preventDefault();});
+    sc.addEventListener('pointermove',function(e){point(e.clientX); if(down&&hov!==cur){show(hov,true); paint();}});
+    function up(){down=false; sc.classList.remove('drag');}
+    sc.addEventListener('pointerup',up); sc.addEventListener('pointercancel',up);
+    sc.addEventListener('pointerleave',function(){if(!down){hov=-1; paint();}});
+    ['touchstart','touchend','wheel','click'].forEach(function(ev){sc.addEventListener(ev,function(e){e.stopPropagation();},{passive:true});});
+    new MutationObserver(paint).observe(document.getElementById('pg'),{childList:true,characterData:true,subtree:true});
+    paint();
+  })();
 })();
 </script>
 </body>
