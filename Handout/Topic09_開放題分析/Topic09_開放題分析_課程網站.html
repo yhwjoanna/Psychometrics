@@ -533,7 +533,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>!pip install -U ckip-transformers
 from ckip_transformers.nlp import CkipWordSegmenter
 ws = CkipWordSegmenter(model=&quot;bert-base&quot;)
-print(ws([&quot;品保也要輪班，但沒有生產部那種輪班津貼&quot;]))</pre></div>
+print(ws([&quot;考績輪流拿甲，跟表現無關&quot;]))</pre></div>
   <p>第一行的驚嘆號是 Colab 的用法；在自己電腦的終端機執行時不加驚嘆號，其餘幾行存成 Python 檔或在 Python 中執行。把員工的開放題答案上傳到雲端服務前，先確認公司的資料規範；課堂的資料是模擬資料。</p>
   <h2 id="s2-7">2.7 盲點五：多主題與長答案</h2>
   <ul>
@@ -909,7 +909,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
   <h1>單元七：疑似 AI 代答與倫理</h1>
   <div class="subtitle">長度、句式、用詞；規則與門檻；標記後的處理．主要依據：Speer et al. (2026)</div>
   <h2 id="s7-1">7.1 AI 代答的現象</h2>
-  <p>填答者把開放題丟給 AI 工具，再把產生的文字貼回問卷，稱為 AI 代答。這類答案通常較長、句式工整、用詞正面而籠統。Topic 04 以人眼辨識；本主題把觀察到的特徵寫成可以重複執行的規則，再討論規則的限制。</p>
+  <p>填答者把開放題丟給 AI 工具，再把產生的文字貼回問卷，稱為 AI 代答。這類答案通常較長、句式工整、用詞正面而籠統。Topic 04 以人眼辨識；本主題把觀察到的特徵寫成可以重複執行的規則，再說明規則的限制。</p>
   <p class="terms"><span class="lb2">名詞</span><a href="#g-29">疑似 AI 代答</a>：由 AI 工具代寫的開放題答案；規則只能標記疑似，無法證明；<a href="#g-30">模板詞</a>：在 AI 代寫文字中反覆出現的連接詞組，例如「不僅…進而」。</p>
   <h2 id="s7-2">7.2 疑似 AI 代答的特徵</h2>
   <div class="scrollx"><table class="mt">
