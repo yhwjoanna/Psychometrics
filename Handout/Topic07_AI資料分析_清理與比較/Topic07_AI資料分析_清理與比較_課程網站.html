@@ -340,6 +340,17 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
   .stepcard .sr{grid-template-columns:1fr}.stepcard .sk{padding:8px 14px 2px;background:#fff}.stepcard .sv{padding:2px 14px 4px}
   .modes{grid-template-columns:1fr}}
 @media print{.ans{display:block !important}}
+
+/* scrollhint-v1 */
+.sxw{position:relative}
+.sxw::before,.sxw::after{content:"";position:absolute;top:0;bottom:0;width:28px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:2}
+.sxw::before{left:0;background:linear-gradient(to right,rgba(31,42,60,.24),rgba(31,42,60,0))}
+.sxw::after{right:0;background:linear-gradient(to left,rgba(31,42,60,.24),rgba(31,42,60,0))}
+.sxw.sx-l::before,.sxw.sx-r::after{opacity:1}
+.sxhint{display:none;font-size:13px;color:#7a8394;text-align:center;margin:4px 0 2px;line-height:1.5}
+.sxw.sx-over+.sxhint{display:block}
+.refline a{overflow-wrap:anywhere}   /* 參考文獻的長網址在窄螢幕換行，避免頁面橫向溢出 */
+@media print{.sxhint{display:none!important}.sxw::before,.sxw::after{display:none}}
 </style>
 </head>
 <body>
@@ -1712,6 +1723,33 @@ function copyCode(btn){
 
 initQuizzes();
 mvShow(0);
+</script>
+<script>
+/* scrollhint-v1 */
+(function(){
+  var all=[].slice.call(document.querySelectorAll('.scrollx'));
+  function upd(sx){
+    if(!sx.clientWidth) return;                       // 所在單元未顯示
+    var w=sx.parentNode, max=sx.scrollWidth-sx.clientWidth, over=max>4;
+    w.classList.toggle('sx-over', over);
+    w.classList.toggle('sx-l', over && sx.scrollLeft>2);
+    w.classList.toggle('sx-r', over && sx.scrollLeft<max-2);
+  }
+  all.forEach(function(sx){
+    var w=document.createElement('div'); w.className='sxw';
+    sx.parentNode.insertBefore(w, sx); w.appendChild(sx);
+    var h=document.createElement('div'); h.className='sxhint'; h.textContent='← 左右滑動看完整內容 →';
+    w.parentNode.insertBefore(h, w.nextSibling);
+    sx.addEventListener('scroll', function(){ upd(sx); }, {passive:true});
+  });
+  function updAll(){ all.forEach(upd); }
+  window.sxUpdate=updAll;
+  if(window.ResizeObserver){ var ro=new ResizeObserver(function(es){ es.forEach(function(e){ upd(e.target); }); }); all.forEach(function(sx){ ro.observe(sx); }); }
+  window.addEventListener('resize', updAll); window.addEventListener('load', updAll);
+  window.addEventListener('hashchange', function(){ setTimeout(updAll, 0); });
+  document.addEventListener('click', function(){ setTimeout(updAll, 0); });
+  updAll();
+})();
 </script>
 </body>
 </html>
