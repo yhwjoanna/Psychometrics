@@ -366,7 +366,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <nav id="nav">
     <a data-u="u0" class="active">本主題首頁</a>
     <div class="grp">資料與探索</div>
-    <a data-u="u1">單元一：開放題資料與三種分析方法</a>
+    <a data-u="u1">單元一：開放題資料與分析方法</a>
     <a data-u="u2">單元二：文字雲與詞頻的盲點</a>
     <div class="grp">人工編碼</div>
     <a data-u="u3">單元三：建立開放題編碼簿</a>
@@ -387,11 +387,11 @@ table.cbk td{text-align:left !important;vertical-align:top}
 <section class="unit active" id="u0">
   <h1>開放題分析方法比較：文字雲與 LLM Agent 主題編碼</h1>
   <div class="subtitle">員工意向調查課程．Topic 09．Week 11（2026/11/20）．適用對象：人管所碩士班</div>
-  <p>員工調查的開放題讓員工用自己的話說明想法，資料量一多，整理就成為問題。常見的做法有三種：用詞頻做文字雲、依編碼簿由人逐則編碼，以及把編碼簿交給 LLM（大型語言模型）編碼。本主題用同一份資料比較這三種做法，說明各自能回答什麼、會在哪裡出錯，以及怎麼用 <a href="#g-19">Cohen’s κ</a> 檢驗編碼的一致程度。本主題不要求程式能力。</p>
-  <p>本主題的順序：資料與方法概覽、文字雲的盲點、建立<a href="#g-10">編碼簿</a>、編碼一致性與 κ、LLM 編碼、人工與 LLM 比對、<a href="#g-28">疑似 AI 代答</a>的偵測與倫理，最後用六輪提示詞實際操作一次。單元九說明對照答案用的一頁檢核表、報告寫法，以及開放題結果與 Topic 08 驅動因子分析的關係。</p>
+  <p>員工調查的開放題讓員工用自己的話說明想法，資料量一多，整理就成為問題。常見的做法有：用詞頻做文字雲、依編碼簿由人逐則編碼，以及把編碼簿交給 LLM（大型語言模型）編碼。本主題用同一份資料比較這些做法，說明各自能回答什麼、會在哪裡出錯，以及怎麼用 <a href="#g-19">Cohen’s κ</a> 檢驗編碼的一致程度。本主題不要求程式能力。</p>
+  <p>本主題的順序：資料與方法概覽、文字雲的盲點、建立<a href="#g-10">編碼簿</a>、編碼一致性與 κ、LLM 編碼、人工與 LLM 比對、<a href="#g-28">疑似 AI 代答</a>的偵測與倫理，最後用各輪提示詞實際操作一次。單元九說明對照答案用的一頁檢核表、報告寫法，以及開放題結果與 Topic 08 驅動因子分析的關係。</p>
   <div class="key"><span class="lb">這週怎麼用</span>
     <ol style="margin:4px 0 6px 22px">
-      <li><b>課前</b>：讀<a href="#u1" onclick="goUnit('u1');return false;">單元一 開放題資料與三種分析方法</a>與<a href="#u2" onclick="goUnit('u2');return false;">單元二 文字雲與詞頻的盲點</a>，約 30 分鐘</li>
+      <li><b>課前</b>：讀<a href="#u1" onclick="goUnit('u1');return false;">單元一 開放題資料與分析方法</a>與<a href="#u2" onclick="goUnit('u2');return false;">單元二 文字雲與詞頻的盲點</a>，約 30 分鐘</li>
       <li><b>課堂</b>：開<a href="../../Slides/Topic09_課堂投影片.html" target="_blank" rel="noopener">課堂投影片</a>，下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料（Topic 07–09 共用）</a>與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>，依<a href="#u8" onclick="goUnit('u8');return false;">單元八 實機練習</a>的提示詞操作。練習由一個人完成：自己先編 100 則，再請 AI 編同樣 100 則，計算本人與 LLM 的一致率與 κ；編碼簿與 κ 的做法在單元三至六</li>
       <li><b>課後</b>：用<a href="../../Assignments/Topic09_分析檢核表.xlsx" target="_blank" rel="noopener">分析檢核表（一頁）</a>對照每一輪的答案，並寫下自己的一致率與 κ（<a href="#u9" onclick="goUnit('u9');return false;">單元九</a>）；<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">個人分析作業</a>完成報告第五章（使用作業版資料），疑似 AI 代答的判定見<a href="#u7" onclick="goUnit('u7');return false;">單元七</a></li>
     </ol>
@@ -400,14 +400,14 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <h2>本主題單元</h2>
   <div class="scrollx"><table>
     <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
-    <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、開放題資料與三種分析方法</a></td><td>說明兩題開放題的內容、三種分析方法的差別，以及開放題的去識別化</td></tr>
+    <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、開放題資料與分析方法</a></td><td>說明兩題開放題的內容、各種分析方法的差別，以及開放題的去識別化</td></tr>
     <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、文字雲與詞頻的盲點</a></td><td>說明<a href="#g-2">斷詞</a>、<a href="#g-4">停用詞</a>與<a href="#g-5">詞頻</a>的算法；以實例說明同義詞、否定、斷詞、多主題與長答案五個盲點</td></tr>
     <tr><td><a href="#u3" onclick="goUnit('u3');return false;">三、建立開放題編碼簿</a></td><td>寫出主題的定義、<a href="#g-11">納入</a>、<a href="#g-12">排除</a>與例句；訂定主要主題規則；處理邊界案例</td></tr>
     <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、編碼一致性與 Cohen’s κ</a></td><td>計算<a href="#g-17">一致率</a>、<a href="#g-18">碰巧一致率</a>與 κ；區分編碼的<a href="#g-21">信度</a>與<a href="#g-22">效度</a>；使用編碼一致性計算器</td></tr>
-    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、LLM Agent 輔助主題編碼</a></td><td>依編碼簿寫 LLM 編碼提示詞；用網頁版、專案、Claude Code 三種方式設定；重跑與<a href="#g-26">信心標記</a>；摘要的查核</td></tr>
+    <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、LLM Agent 輔助主題編碼</a></td><td>依編碼簿寫 LLM 編碼提示詞；用網頁版、專案或 Claude Code 設定；重跑與<a href="#g-26">信心標記</a>；摘要的查核</td></tr>
     <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、人工與 LLM 編碼比對</a></td><td>解讀本人與 LLM 的 κ、交叉表與不一致案例；不一致答案的定案；LLM 編碼的常見差異</td></tr>
     <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、疑似 AI 代答與倫理</a></td><td>以長度、句式、用詞訂定標記規則；標記後的處理與倫理</td></tr>
-    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>六輪提示詞與答案對照</td></tr>
+    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>各輪提示詞與答案對照</td></tr>
     <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、查核、報告與連結 Topic 08</a></td><td>一頁檢核表、報告寫法；主題次數與留任意願</td></tr>
     <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
   </table></div>
@@ -445,7 +445,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
 
 <!-- ==================== U1 資料與方法 ==================== -->
 <section class="unit" id="u1">
-  <h1>單元一：開放題資料與三種分析方法</h1>
+  <h1>單元一：開放題資料與分析方法</h1>
   <div class="subtitle">OE1、OE2 兩題開放題；文字雲、人工編碼、LLM 編碼的比較；去識別化</div>
   <h2 id="s1-1">1.1 兩題開放題</h2>
   <div class="scrollx"><table class="mt">
@@ -454,14 +454,14 @@ table.cbk td{text-align:left !important;vertical-align:top}
     <tr><td>OE2_被肯定的經驗</td><td style="text-align:left">最近一次在工作上被肯定的經驗是什麼？</td><td>310 則</td><td style="text-align:left">投影片中 Agent 示範用（60 則）</td></tr>
   </table></div>
   <p>開放題為選填，1,000 人中約一半填寫 OE1。答案長度的中位數為 13 字，多數是一句話，例如「簽核流程太長」。516 則中有 512 則不重複，少數完全相同的答案是「無」「沒有」這類簡短回覆。</p>
-  <h2 id="s1-2">1.2 三種分析方法</h2>
+  <h2 id="s1-2">1.2 分析方法</h2>
   <div class="scrollx"><table class="mt wide">
     <tr><th style="width:16%">方法</th><th>做法</th><th style="width:26%">能回答</th><th style="width:26%">主要限制</th></tr>
     <tr><td>詞頻與文字雲</td><td style="text-align:left">程式斷詞、刪停用詞、計算每個詞出現在幾則答案，依次數決定字級</td><td style="text-align:left">員工常用哪些詞；有沒有意料之外的用語</td><td style="text-align:left">計算的是詞不是主題；同義詞分散、否定消失、斷詞錯誤（單元二）</td></tr>
     <tr><td>人工編碼</td><td style="text-align:left">依編碼簿逐則給主題代碼；與第二位編碼者（另一個人或 LLM）的結果比對，計算 κ</td><td style="text-align:left">各主題被提到幾次；哪些答案難以歸類</td><td style="text-align:left">費時；編碼簿不清楚時，不同編碼者的結果不一致（單元三、四）</td></tr>
     <tr><td>LLM 編碼</td><td style="text-align:left">把編碼簿交給 LLM，由它逐則給代碼與信心</td><td style="text-align:left">與人工相同，速度快，可處理大量答案</td><td style="text-align:left">需與人工比對才能使用；可能自行新增代碼或用關鍵字代替判斷（單元五、六）</td></tr>
   </table></div>
-  <p>三種方法各有用途：文字雲用於探索，人工編碼建立標準，LLM 在通過比對之後用來處理其餘答案。本主題的實機練習依這個順序進行。</p>
+  <p>各種方法各有用途：文字雲用於探索，人工編碼建立標準，LLM 在通過比對之後用來處理其餘答案。本主題的實機練習依這個順序進行。</p>
   <p class="terms"><span class="lb2">名詞</span><a href="#g-1">開放題</a>：讓填答者用自己的文字回答的題目；本資料 OE1 問最希望公司優先改善的事項；<a href="#g-6">文字雲</a>：依詞頻決定字級大小的圖；適合初步瀏覽，不適合決定主題排序；<a href="#g-9">編碼</a>：逐則閱讀答案，依編碼簿給每則一個主題代碼；<a href="#g-10">編碼簿</a>：列出每個主題的代碼、定義、納入、排除與例句的文件；<a href="#g-24">LLM</a>：大型語言模型，例如 ChatGPT、Claude 背後的模型。</p>
   <h2 id="s1-3">1.3 100 則樣本</h2>
   <p>人工編碼 516 則需要好幾個小時，課堂練習改用 100 則樣本。樣本以固定的隨機種子（20261120）從有內容的答案中分層抽出：每個主題依比例抽取，人數少的主題至少 2 則，因此各主題都會出現在樣本中。每個人下載到的是同一份樣本。樣本在<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>的「100 則樣本」工作表，只有編號與原文。</p>
@@ -558,7 +558,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
   <div class="subtitle">主題定義、納入與排除準則、例句、主要主題規則．主要依據：Braun &amp; Clarke (2006)；Krippendorff (2018)</div>
   <h2 id="s3-1">3.1 編碼簿的用途</h2>
   <p>編碼簿把「這則答案屬於哪個主題」的判斷寫成規則。兩位編碼者看同一份編碼簿，才有可能給出相同的代碼；LLM 編碼時，編碼簿就是提示詞的主體。編碼簿寫得越具體，人與人、人與 LLM 之間的一致程度越高。</p>
-  <h2 id="s3-2">3.2 四個欄位</h2>
+  <h2 id="s3-2">3.2 編碼簿的欄位</h2>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:16%">欄位</th><th>寫什麼</th><th style="width:34%">寫法提醒</th></tr>
     <tr><td>定義</td><td style="text-align:left">這個主題包含什麼，一句話說明</td><td style="text-align:left">用名詞片語，不用「等」帶過</td></tr>
@@ -602,7 +602,7 @@ table.cbk td{text-align:left !important;vertical-align:top}
 1. 從原始資料 OE1 中，找出 10 則用這份編碼簿不容易判斷的答案（不要從「100 則樣本」工作表挑），每則說明猶豫的兩個代碼。
 2. 針對這 10 則，建議要修改哪些主題的「納入」或「排除」文字，寫出修改前與修改後。
 3. 不要新增主題；如果你認為需要新增，列在最後並說明理由，由我決定。</pre></div></div>
-  <div class="key"><span class="lb">本單元要點</span>編碼簿有定義、納入、排除、例句四個欄位；排除欄寫出改歸的代碼，是一致性的關鍵欄位。每則一個主要主題（最先提到的事項），第二個事項寫在備註。邊界案例補進編碼簿並記錄修訂。</div>
+  <div class="key"><span class="lb">本單元要點</span>編碼簿有定義、納入、排除、例句等欄位；排除欄寫出改歸的代碼，是一致性的關鍵欄位。每則一個主要主題（最先提到的事項），第二個事項寫在備註。邊界案例補進編碼簿並記錄修訂。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 2</div>
     <div class="qbody">
@@ -710,11 +710,11 @@ table.cbk td{text-align:left !important;vertical-align:top}
 <!-- ==================== U5 LLM ==================== -->
 <section class="unit" id="u5">
   <h1>單元五：LLM Agent 輔助主題編碼</h1>
-  <div class="subtitle">提示詞、三種使用方式、重跑與信心標記、摘要與效度檢驗．主要依據：Gilardi et al. (2023)；O’Connor &amp; Joffe (2020)</div>
+  <div class="subtitle">提示詞、使用方式、重跑與信心標記、摘要與效度檢驗．主要依據：Gilardi et al. (2023)；O’Connor &amp; Joffe (2020)</div>
   <h2 id="s5-1">5.1 LLM 作為第二位編碼者</h2>
   <p>LLM 可以依編碼簿逐則給代碼，速度遠快於人工。Gilardi 等人（2023）發現，在部分文字標註任務中，ChatGPT 的表現接近或優於群眾標註者；不同任務、不同資料的表現差異很大，所以每次使用都要與人工編碼比對。本主題把 LLM 視為第二位編碼者：與本人用同一份編碼簿，計算本人與 LLM 的 κ，並檢查不一致的答案之後，才把它用在其餘答案。</p>
   <p class="terms"><span class="lb2">名詞</span><a href="#g-15">編碼者</a>：負責編碼的人；LLM 也可視為一位編碼者；<a href="#g-25">LLM 編碼</a>：把編碼簿交給 LLM，由它逐則給代碼；使用前需與人工編碼比對。</p>
-  <h2 id="s5-2">5.2 編碼提示詞的五個要素</h2>
+  <h2 id="s5-2">5.2 編碼提示詞的要素</h2>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:20%">要素</th><th>內容</th><th style="width:38%">例子</th></tr>
     <tr><td>編碼簿</td><td style="text-align:left">完整的代碼、定義、納入、排除</td><td style="text-align:left">上傳編碼範本，或貼上全文</td></tr>
@@ -843,7 +843,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
     <li>再看每一欄：LLM 給 VAGUE 的答案，本人原本給了什麼？</li>
     <li>挑出數字最大的兩三個非對角線格子，逐則回讀原文</li>
   </ol>
-  <h2 id="s6-3">6.3 不一致的五種原因</h2>
+  <h2 id="s6-3">6.3 不一致的原因</h2>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:18%">原因</th><th style="width:40%">例子（樣本以外）</th><th>處理</th></tr>
     <tr><td>定義邊界不清</td><td style="text-align:left">主管只會挑錯，從來不講哪裡做得好</td><td style="text-align:left">補寫排除欄</td></tr>
@@ -895,7 +895,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
   <h2 id="s7-1">7.1 AI 代答的現象</h2>
   <p>填答者把開放題丟給 AI 工具，再把產生的文字貼回問卷，稱為 AI 代答。這類答案通常較長、句式工整、用詞正面而籠統。Topic 04 以人眼辨識；本主題把觀察到的特徵寫成可以重複執行的規則，再討論規則的限制。</p>
   <p class="terms"><span class="lb2">名詞</span><a href="#g-28">疑似 AI 代答</a>：由 AI 工具代寫的開放題答案；規則只能標記疑似，無法證明；<a href="#g-29">模板詞</a>：在 AI 代寫文字中反覆出現的連接詞組，例如「不僅…進而」。</p>
-  <h2 id="s7-2">7.2 三個特徵</h2>
+  <h2 id="s7-2">7.2 疑似 AI 代答的特徵</h2>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:18%">特徵</th><th>被標記的 16 則</th><th>其餘答案</th></tr>
     <tr><td>長度</td><td>92–114 字</td><td>中位數 12 字，最長 25 字</td></tr>
@@ -903,7 +903,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
     <tr><td>用詞</td><td>「不僅」「進而」「有助於」16 則全部出現</td><td>0 則</td></tr>
   </table></div>
   <p>這 16 則的結構相同：開場語（例如「綜合而言」「在職涯發展方面」）、建議公司從幾個層面著手、再以「不僅…也有助於…進而…」收尾。</p>
-  <h2 id="s7-3">7.3 兩項規則與 Excel 做法</h2>
+  <h2 id="s7-3">7.3 標記規則與 Excel 做法</h2>
   <ol class="steps">
     <li>原始資料新增一欄字數：<code>=IF(AJ2="","",LEN(AJ2))</code>（AJ 欄為 OE1），向下複製</li>
     <li>字數欄的平均與標準差：<code>=AVERAGE()</code> 與 <code>=STDEV.S()</code>，得到 14.4 與 15.6（516 則）</li>
@@ -939,7 +939,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 3. 比較被標記與未標記答案的平均字數、最短與最長字數、平均逗號數，並列出被標記答案的開頭五個字，以及其中有幾則在「100 則樣本」工作表裡（列出編號）。
 4. 被標記的答案不要刪除。請說明：這些規則能確定答案是 AI 寫的嗎？標記之後要怎麼處理？
 5. 最後把這次對話用到的完整程式碼整理成一份，並列出你自行決定、我沒有指定的事項。</pre></div></div>
-  <div class="key"><span class="lb">本單元要點</span>疑似 AI 代答較長、逗號多、出現固定的模板詞。用「平均＋3 個標準差」與模板詞兩項規則標記，門檻由資料計算。規則只能標記疑似：保留答案、做含與不含兩個版本、寫進方法說明，不回推身分。</div>
+  <div class="key"><span class="lb">本單元要點</span>疑似 AI 代答較長、逗號多、出現固定的模板詞。用「平均＋3 個標準差」與模板詞的規則標記，門檻由資料計算。規則只能標記疑似：保留答案、做含與不含兩個版本、寫進方法說明，不回推身分。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 6</div>
     <div class="qbody">
@@ -958,7 +958,7 @@ description: 依編碼簿為員工調查開放題做主題編碼。使用者要�
 <!-- ==================== U8 實機練習 ==================== -->
 <section class="unit" id="u8">
   <h1>單元八：實機練習</h1>
-  <div class="subtitle">六輪提示詞與答案對照</div>
+  <div class="subtitle">各輪提示詞與答案對照</div>
   <ol class="steps">
     <li>下載<a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">練習資料</a>與<a href="../../Assignments/Topic09_開放題編碼範本.xlsx" target="_blank" rel="noopener">開放題編碼範本</a>。練習由一個人完成，做法寫在範本的「使用說明」工作表</li>
     <li>開啟 ChatGPT 或 Claude 網頁版的新對話，上傳練習資料與空白的範本，依序貼上第 0、1、2 輪的提示詞（按「複製」），每一輪按「看答案」對照</li>

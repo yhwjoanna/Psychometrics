@@ -391,7 +391,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
     <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、相對重要性與優先改善</a></td><td>β 排序、<a href="#g-19">一般優勢權數</a>；<a href="#g-21">優先改善矩陣</a>的規則與限制</td></tr>
     <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、AI Agent 設定與 JASP 查核</a></td><td>迴歸用的專案記憶與 Skill；JASP 線性迴歸的操作與對照</td></tr>
     <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、人機雙重查核與檢核表</a></td><td>AI 統計幻覺查核清單、常見錯誤；用一頁的檢核表對照每一輪的答案</td></tr>
-    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、實機練習</a></td><td>五輪提示詞與答案對照</td></tr>
+    <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、實機練習</a></td><td>各輪提示詞與答案對照</td></tr>
     <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
   </table></div>
   <div class="flow">
@@ -439,7 +439,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
     <tr><td>效果量</td><td style="text-align:left">d、η²</td><td style="text-align:left">r、β、R²</td></tr>
     <tr><td>管理用途</td><td style="text-align:left">找出優先處理的單位</td><td style="text-align:left">找出優先改善的議題</td></tr>
   </table></div>
-  <p>兩種分析可以接續使用：先用驅動因子分析找出全公司層次的議題順序，再用群組比較找出該議題分數最低的單位。Topic 07 發現高雄廠生產部與品保部的認可與回饋明顯偏低（平均 2.80，其他單位 3.61）；若認可與回饋與敬業度的關聯也強，這兩個部門就是改善的起點。</p>
+  <p>這些分析可以接續使用：先用驅動因子分析找出全公司層次的議題順序，再用群組比較找出該議題分數最低的單位。Topic 07 發現高雄廠生產部與品保部的認可與回饋明顯偏低（平均 2.80，其他單位 3.61）；若認可與回饋與敬業度的關聯也強，這兩個部門就是改善的起點。</p>
 
   <h2 id="s1-2">1.2 統計方法選擇的決策樹</h2>
   <p>決策樹的結構與 <a href="../Topic07_AI資料分析_清理與比較/Topic07_AI資料分析_清理與比較_課程網站.html#s5-1" target="_blank" rel="noopener">Topic 07 網站 5.1</a> 相同。本主題處理第二與第三個分支：兩個構面之間的關聯（相關），以及多個構面預測一個結果（多元迴歸）。</p>
@@ -479,7 +479,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
     <tr><td>代表誰</td><td style="text-align:left">願意寫開放題的人（約一半）</td><td style="text-align:left">所有作答者</td></tr>
     <tr><td>限制</td><td style="text-align:left">容易說出口的議題（薪資、設備）被提到較多；提到不等於與留任或敬業有關</td><td style="text-align:left">只能比較有測量的構面；問卷沒有薪資福利的題目</td></tr>
   </table></div>
-  <p>兩種資訊回答不同的問題，報告中分開呈現。薪資福利是否與留任意願有關，這份問卷無法回答，需要在下一次調查加入薪資福利的題目。關鍵字計數只是初步的整理，開放題的完整編碼在 Topic 09。</p>
+  <p>這些資訊回答不同的問題，報告中分開呈現。薪資福利是否與留任意願有關，這份問卷無法回答，需要在下一次調查加入薪資福利的題目。關鍵字計數只是初步的整理，開放題的完整編碼在 Topic 09。</p>
 
   <h2 id="s1-5">1.5 資料與清理</h2>
   <p>本主題使用 Topic 07 的同一份原始資料，依相同規則重新清理，構面分數與 Topic 07 相同：</p>
@@ -497,7 +497,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
 </div>
   <div class="scrollx"><table class="mt"><tr><th>構面</th><th>編碼</th><th>有效人數</th><th>平均</th><th>標準差</th><th>α</th></tr><tr><td>敬業度</td><td>ENG</td><td>961</td><td>3.90</td><td>0.84</td><td>.95</td></tr><tr><td>主管支持</td><td>SUP</td><td>961</td><td>3.87</td><td>0.98</td><td>.88</td></tr><tr><td>認可與回饋</td><td>REC</td><td>958</td><td>3.46</td><td>1.09</td><td>.87</td></tr><tr><td>組織承諾</td><td>COM</td><td>957</td><td>3.57</td><td>1.07</td><td>.87</td></tr><tr><td>留任意願</td><td>RET</td><td>959</td><td>3.59</td><td>0.98</td><td>.84</td></tr><tr><td>AI 導入態度</td><td>AIA</td><td>961</td><td>3.77</td><td>0.97</td><td>.82</td></tr></table></div>
   <p class="mut" style="font-size:13.5px">清理後資料；六點量表，3.5 為中點</p>
-  <div class="key"><span class="lb">本單元要點</span>驅動因子分析比較構面與結果的關聯強弱，群組比較找出分數不同的單位。開放題被提到最多的議題，與關聯最強的構面是兩種資訊；沒有測量的議題不能放進迴歸。分析從原始資料開始，依 Topic 07 的規則清理。</div>
+  <div class="key"><span class="lb">本單元要點</span>驅動因子分析比較構面與結果的關聯強弱，群組比較找出分數不同的單位。開放題被提到最多的議題，與關聯最強的構面是不同的資訊；沒有測量的議題不能放進迴歸。分析從原始資料開始，依 Topic 07 的規則清理。</div>
   <div class="quiz">
     <div class="qhead">自我檢測 1</div>
     <div class="qbody">
@@ -530,7 +530,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
     <li>r²：兩個變項共同變動的比例。</li>
   </ul>
   <div class="calcbox">主管支持與敬業度：r ＝ <b>.55</b>，r² ＝ .55² ≈ .30<br>主管支持與敬業度約有 30% 的變動是共同的；其餘 70% 與主管支持無關。</div>
-  <p>相關的三個限制：</p>
+  <p>相關的限制：</p>
   <ul>
     <li>相關不說明原因。主管支持與敬業度相關，可能是主管支持讓員工更投入，也可能是投入的員工更容易得到主管支持，或兩者都受部門氣氛影響。</li>
     <li>r 只描述直線關係。兩者呈曲線關係時，r 會低估關聯。</li>
@@ -542,7 +542,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
   <p>相關矩陣列出每兩個構面之間的相關。下表為敬業度與三個預測構面：</p>
   <div class="scrollx"><table class="mt"><tr><th></th><th>ENG</th><th>SUP</th><th>REC</th><th>COM</th></tr><tr><td>敬業度 ENG</td><td>—</td><td class="hi">.55</td><td class="hi">.47</td><td class="hi">.42</td></tr><tr><td>主管支持 SUP</td><td class="hi">.55</td><td>—</td><td class="">.45</td><td class="">.32</td></tr><tr><td>認可與回饋 REC</td><td class="hi">.47</td><td class="">.45</td><td>—</td><td class="">.26</td></tr><tr><td>組織承諾 COM</td><td class="hi">.42</td><td class="">.32</td><td class="">.26</td><td>—</td></tr></table></div>
   <p class="mut" style="font-size:13.5px">清理後資料，成對刪除；綠色為與敬業度的相關；全部 p &lt; .001</p>
-  <p>讀相關矩陣的兩個重點：</p>
+  <p>讀相關矩陣的重點：</p>
   <ol class="steps">
     <li>與結果（敬業度）的相關：主管支持 .55、組織承諾 .42、認可與回饋 .47，三者都屬於中到大的相關。</li>
     <li>預測變項之間的相關：三個預測變項彼此也有相關（.26 到 .45），最高的是主管支持與認可與回饋（r ＝ .45）。預測變項之間有相關時，各自與敬業度的相關包含重疊的部分，需要用多元迴歸區分（單元三）。</li>
@@ -658,7 +658,7 @@ td.hi{background:var(--palegreen) !important;font-weight:700}
   <div class="scrollx"><table class="mt"><tr><th>預測變項</th><th>r（與敬業度）</th><th>β</th><th>一般優勢權數</th><th>占 R² 的比例</th><th>Pratt</th></tr><tr><td>主管支持 SUP</td><td>.55</td><td>.36</td><td>.189</td><td>45.4%</td><td>.48</td></tr><tr><td>認可與回饋 REC</td><td>.47</td><td>.24</td><td>.122</td><td>29.4%</td><td>.27</td></tr><tr><td>組織承諾 COM</td><td>.42</td><td>.24</td><td>.105</td><td>25.2%</td><td>.25</td></tr></table></div>
   <p>三種指標都以主管支持最高。第二與第三名不一致：β 為組織承諾（.245）略高於認可與回饋（.242），一般優勢權數與 Pratt 則是認可與回饋較高（.122 對 .105）。兩者的 β 只差 .003，信賴區間大幅重疊，報告時可寫成兩者重要性相近。排序一致時，結論較穩健；不一致時，兩種指標都報告，並說明差異（Tonidandel &amp; LeBreton, 2011）。</p>
   <h2 id="s4-3">4.3 優先改善矩陣的兩個軸</h2>
-  <p><a href="#g-21">優先改善矩陣</a>（importance–performance analysis；Martilla &amp; James, 1977）同時考慮兩個問題：這個構面與結果的關聯強不強（重要性），員工目前的評價高不高（表現）。</p>
+  <p><a href="#g-21">優先改善矩陣</a>（importance–performance analysis；Martilla &amp; James, 1977）同時考慮：這個構面與結果的關聯強不強（重要性），員工目前的評價高不高（表現）。</p>
   <ul>
     <li>重要性：β（或優勢權數）。</li>
     <li>表現：構面平均。</li>
@@ -809,7 +809,7 @@ description: 員工調查的關鍵驅動因子分析。使用者要找出哪些�
   <div class="scrollx"><table class="mt"><tr><th style="width:18%">輪次</th><th>項目</th><th style="width:40%">正確答案（課堂練習資料）</th></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">直線作答與隨機亂填各刪除的人數</td><td style="text-align:left">20 人、19 人（門檻 1.32）</td></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">清理後人數</td><td style="text-align:left">961 人</td></tr><tr><td style="text-align:left">第 1 輪 清理</td><td style="text-align:left">平均最低的構面</td><td style="text-align:left">認可與回饋 REC（3.46）</td></tr><tr><td style="text-align:left">第 2 輪 相關</td><td style="text-align:left">與留任意願相關最高的兩個構面</td><td style="text-align:left">敬業度 ENG（r ＝ .53）、組織承諾 COM（r ＝ .48）</td></tr><tr><td style="text-align:left">第 3 輪 迴歸</td><td style="text-align:left">模型人數</td><td style="text-align:left">952 人</td></tr><tr><td style="text-align:left">第 3 輪 迴歸</td><td style="text-align:left">R²</td><td style="text-align:left">.39</td></tr><tr><td style="text-align:left">第 3 輪 迴歸</td><td style="text-align:left">β 最高的兩個構面（並列，誰在前都算一致）</td><td style="text-align:left">敬業度 ENG（β ＝ .28）、組織承諾 COM（β ＝ .28）</td></tr><tr><td style="text-align:left">第 3 輪 迴歸</td><td style="text-align:left">AI 導入態度 AIA 的 β</td><td style="text-align:left">.00</td></tr><tr><td style="text-align:left">第 3 輪 矩陣</td><td style="text-align:left">落在「優先改善」的構面</td><td style="text-align:left">組織承諾 COM</td></tr><tr><td style="text-align:left">第 3 輪 開放題</td><td style="text-align:left">提到薪資或福利的人數</td><td style="text-align:left">91 人（有實質內容的回答 508 人，17.9%）</td></tr></table></div>
   <p>檢核表的答案來自課堂練習資料。個人作業使用作業版資料，答案不同，另有一頁的自我檢查表，見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。</p>
   <h2 id="s6-5">6.5 查核的做法與數字允許的差異</h2>
-  <p>課堂練習的查核只有兩件事，都由分析者自己完成；第三項為選做。</p>
+  <p>課堂練習的查核都由分析者自己完成；最後一項為選做。</p>
   <div class="flow">
     <div class="fbox q">1　對照答案：每一輪的結果與檢核表的正確答案比對（<a href="#s6-4">6.4</a>）</div><div class="farrow">↓</div>
     <div class="fbox">2　自行抽查：用 JASP 重算 β 與 R²（單元五），或在 Excel 用 CORREL 重算一個相關</div><div class="farrow">↓</div>
@@ -854,7 +854,7 @@ description: 員工調查的關鍵驅動因子分析。使用者要找出哪些�
 <!-- ==================== U7 實機練習 ==================== -->
 <section class="unit" id="u7">
   <h1>單元七：實機練習</h1>
-  <div class="subtitle">五輪提示詞與答案對照（留任意願模型）</div>
+  <div class="subtitle">各輪提示詞與答案對照（留任意願模型）</div>
   <ol class="steps">
     <li><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料</a>，開啟 ChatGPT 或 Claude 網頁版的新對話，上傳 Excel 檔</li>
     <li>在同一個對話中，依序貼上第 0 輪到第 4 輪的提示詞（按「複製」）</li>

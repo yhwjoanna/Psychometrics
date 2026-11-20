@@ -384,8 +384,8 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
 <section class="unit active" id="u0">
   <h1>AI Agent 資料分析架構與量化實務（一）：清理與比較</h1>
   <div class="subtitle">員工意向調查課程．Topic 07．Week 09（2026/11/06）．適用對象：人管所碩士班</div>
-  <p>問卷回收之後的分析分為兩段：清理資料，以及比較不同群體的分數。本主題以 AI Agent 執行這兩段工作：分析者上傳 Excel 檔，AI 寫程式並執行，分析者負責下指令、做決定與查核結果。本主題不要求程式能力；統計概念在各單元中說明。</p>
-  <p>本主題的順序：資料的結構與編碼簿，AI Agent 的運作方式與三種使用方法，接著是資料清理、信度檢查、兩組比較與多組比較。單元五開頭的決策樹整理統計方法的選擇。每個分析步驟都附有「操作步驟」卡，列出目的、做法、要在 AI 回覆中檢查的項目與常見錯誤。單元七說明如何查核 AI 的結果，單元八用六輪提示詞實際操作一次，每一輪用一頁的檢核表對照答案。下週 Topic 08 接著做驅動因子與迴歸分析。</p>
+  <p>問卷回收之後的分析包括清理資料，以及比較不同群體的分數。本主題以 AI Agent 執行這些工作：分析者上傳 Excel 檔，AI 寫程式並執行，分析者負責下指令、做決定與查核結果。本主題不要求程式能力；統計概念在各單元中說明。</p>
+  <p>本主題的順序：資料的結構與編碼簿，AI Agent 的運作方式與使用方法，接著是資料清理、信度檢查、兩組比較與多組比較。單元五開頭的決策樹整理統計方法的選擇。每個分析步驟都附有「操作步驟」卡，列出目的、做法、要在 AI 回覆中檢查的項目與常見錯誤。單元七說明如何查核 AI 的結果，單元八用各輪提示詞實際操作一次，每一輪用一頁的檢核表對照答案。下週 Topic 08 接著做驅動因子與迴歸分析。</p>
   <div class="key"><span class="lb">這週怎麼用</span>
     <ol style="margin:4px 0 6px 22px">
       <li><b>課前</b>：讀<a href="#u1" onclick="goUnit('u1');return false;">單元一 資料結構</a>與<a href="#u2" onclick="goUnit('u2');return false;">單元二 AI Agent 的使用方法</a>，約 30 分鐘</li>
@@ -398,13 +398,13 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
   <div class="scrollx"><table>
     <tr><th style="width:34%">單元</th><th>學習目標</th></tr>
     <tr><td><a href="#u1" onclick="goUnit('u1');return false;">一、資料結構與編碼簿</a></td><td>說明資料情境、三個工作表、欄位、人口變項、六個構面與計分方式，以及分析前的編碼簿檢查</td></tr>
-    <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、AI Agent 的運作與使用方法</a></td><td>說明任務規劃、工具調用與程式執行；用網頁版、專案、本機 Agent 三種方式分析；管理上下文記憶與資料隱私</td></tr>
+    <tr><td><a href="#u2" onclick="goUnit('u2');return false;">二、AI Agent 的運作與使用方法</a></td><td>說明任務規劃、工具調用與程式執行；用網頁版、專案或本機 Agent 分析；管理上下文記憶與資料隱私</td></tr>
     <tr><td><a href="#u3" onclick="goUnit('u3');return false;">三、資料清理</a></td><td>依規則排除草率作答、轉換反向題、處理遺漏值，並說明整列刪除的問題</td></tr>
     <tr><td><a href="#u4" onclick="goUnit('u4');return false;">四、檢查信度</a></td><td>比較構面分數之前確認每個構面的 <a href="#g-24">Cronbach’s α</a>（題目彼此一致的程度），並以<a href="#g-25">題目與總分相關</a>診斷異常題目</td></tr>
     <tr><td><a href="#u5" onclick="goUnit('u5');return false;">五、兩組比較與 Cohen’s d</a></td><td>統計方法選擇的決策樹；<a href="#g-26">抽樣誤差</a>、<a href="#g-28">p 值</a>、<a href="#g-31">t 值</a>與 <a href="#g-37">Cohen’s d</a> 的意義；判讀 <a href="#g-34">Welch t 檢定</a>結果表並寫成報告句</td></tr>
     <tr><td><a href="#u6" onclick="goUnit('u6');return false;">六、多組比較與 η²</a></td><td>多次 t 檢定的誤判累積（<a href="#g-51">多重比較</a>）；<a href="#g-42">F 值</a>、ANOVA 摘要表、<a href="#g-43">η²</a> 與<a href="#g-47">事後比較</a>的判讀與報告</td></tr>
     <tr><td><a href="#u7" onclick="goUnit('u7');return false;">七、人機雙重查核與檢核表</a></td><td>AI 常見的錯誤；用一頁的檢核表對照每一輪的答案，自己抽查幾個數字</td></tr>
-    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>用六輪提示詞完成一次清理與比較，對照答案</td></tr>
+    <tr><td><a href="#u8" onclick="goUnit('u8');return false;">八、實機練習</a></td><td>用各輪提示詞完成一次清理與比較，對照答案</td></tr>
     <tr><td><a href="#u9" onclick="goUnit('u9');return false;">九、其他學習重點</a></td><td>資料隱私、AI 幻覺、可重現性、分析紀錄、管理語言、因果與匿名門檻</td></tr>
     <tr><td><a href="#u10" onclick="goUnit('u10');return false;">十、參考文獻與名詞對照</a></td><td>本主題引用來源與中英名詞</td></tr>
   </table></div>
@@ -527,7 +527,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
   <h1>單元二：AI Agent 的運作與使用方法</h1>
   <div class="subtitle">planning、tool use 與 code execution、multi-agent；網頁版、專案、本機 Agent；上下文記憶與資料隱私．主要依據：Yao et al. (2023)；Schluntz &amp; Zhang (2024)</div>
   <h2 id="s2-1">2.1 一般聊天與 AI Agent</h2>
-  <p>同樣是 ChatGPT 或 Claude，回答方式有兩種。一般聊天時，語言模型依據文字內容產生回答；問它一份資料的平均數，它可能給出一個看起來合理、但沒有實際計算過的數字。以 AI Agent 的方式工作時，AI 會讀取上傳的檔案、寫出程式、在程式執行環境中實際執行，再根據執行結果回答。</p>
+  <p>同樣是 ChatGPT 或 Claude，回答方式依情況而不同。一般聊天時，語言模型依據文字內容產生回答；問它一份資料的平均數，它可能給出一個看起來合理、但沒有實際計算過的數字。以 AI Agent 的方式工作時，AI 會讀取上傳的檔案、寫出程式、在程式執行環境中實際執行，再根據執行結果回答。</p>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:22%">項目</th><th>一般聊天</th><th>AI Agent</th></tr>
     <tr><td>數字來源</td><td style="text-align:left">語言模型依文字推測，可能與資料不符</td><td style="text-align:left">程式讀取資料後計算出來</td></tr>
@@ -554,7 +554,7 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
     <div class="fbox">回報：數字、表格、程式碼、每一步的人數</div><div class="farrow">↓</div>
     <div class="fbox leaf">分析者查核，決定下一輪指令</div>
   </div>
-  <p>這個循環中，AI 自行完成規劃到回報的四個步驟，人負責第一步與最後一步。提示詞寫得越具體，AI 自行決定的部分越少，查核也越容易。</p>
+  <p>這個循環中，AI 自行完成規劃到回報的各個步驟，人負責第一步與最後一步。提示詞寫得越具體，AI 自行決定的部分越少，查核也越容易。</p>
 
   <h2 id="s2-4">2.4 由人負責的決定</h2>
   <p>下列決定會改變結果，由人決定並記下來，寫進報告。沒有指定時，AI 會自行選擇做法，且不一定在回覆中說明。</p>
@@ -566,14 +566,14 @@ pre.tree{white-space:pre;overflow-x:auto;padding-top:18px}
     <tr><td>檢定方法</td><td style="text-align:left">執行 t 檢定、ANOVA（三組以上的平均比較）、事後比較（找出哪幾組不同）</td><td style="text-align:left">要指定 Welch t 檢定（不假設兩組變異數相等）與事後比較方法，結果才能和別人比對</td></tr>
     <tr><td>解讀與呈現</td><td style="text-align:left">整理表格、草擬文字</td><td style="text-align:left">效果量（差距大小）的管理意義、匿名門檻、是否採取行動，屬於人資的專業判斷</td></tr>
   </table></div>
-  <h2 id="s2-5">2.5 三種使用方式</h2>
-  <p>同樣的分析，可以用三種方式交給 AI Agent。三者的差別在於規則存放的位置，以及規則在多少對話中有效。</p>
+  <h2 id="s2-5">2.5 使用方式</h2>
+  <p>同樣的分析，可以用下列方式交給 AI Agent。各方式的差別在於規則存放的位置，以及規則在多少對話中有效。</p>
   <div class="modes">
     <div class="m"><b>方式一：網頁版對話</b>ChatGPT 或 Claude 網頁版，上傳檔案、貼上提示詞。適合課堂練習與一次性的分析。規則每次貼在提示詞中，只在同一個對話中有效。</div>
     <div class="m"><b>方式二：專案（Projects）</b>ChatGPT 與 Claude 的專案功能。規則寫在專案指示，專案內每個新對話都會套用。適合同一份資料要分幾次對話完成的分析，例如個人作業。</div>
     <div class="m"><b>方式三：本機 Agent</b>Claude Code、Google Antigravity 在自己的電腦上執行。規則寫在資料夾中的 CLAUDE.md 與 Skill 檔，程式與結果存成檔案。適合期末專題與需要重跑的分析。</div>
   </div>
-  <p>三種方式都可以使用 <a href="../../Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">AI 分析設定範本（txt）</a>。範本分成兩段：「一、專案指示」寫資料背景、讀者、匿名門檻與回報規則；「二、分析規則」寫清理、信度、群組比較與輸出要求。</p>
+  <p>各種方式都可以使用 <a href="../../Assignments/Topic07_AI分析設定範本.txt" target="_blank" rel="noopener">AI 分析設定範本（txt）</a>。範本分成兩段：「一、專案指示」寫資料背景、讀者、匿名門檻與回報規則；「二、分析規則」寫清理、信度、群組比較與輸出要求。</p>
   <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看範本內容</button>
   <div class="ans"><div class="codewrap prompt"><button class="copybtn" onclick="copyCode(this)">複製</button><pre>Topic 07　AI 分析設定範本
 把下面兩段貼進 AI 工具，之後每次對話都會套用同樣的背景與規則。
@@ -841,7 +841,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <tr><td>3 遺漏值</td><td style="text-align:left">構面答一半以上取平均</td><td>不刪除</td><td>961（各構面 957–961）</td></tr>
   </table></div>
   <h2 id="s3-7">3.7 操作步驟與注意事項</h2>
-  <p>下面三張卡片整理清理的三個步驟。每張卡片列出目的、怎麼做、要在 AI 回覆中檢查的項目，以及常見錯誤。</p>
+  <p>下面的卡片整理清理的步驟。每張卡片列出目的、怎麼做、要在 AI 回覆中檢查的項目，以及常見錯誤。</p>
   <div class="stepcard"><div class="sh">操作步驟：排除草率作答</div>
   <div class="sr"><div class="sk">目的</div><div class="sv">排除沒有認真讀題的作答，避免雜訊稀釋群組之間的差距。</div></div>
   <div class="sr"><div class="sk">怎麼做</div><div class="sv"><ul><li>在原始作答上計算（反向題轉換之前）</li><li>每人 29 題的標準差為 0，判定為直線作答</li><li>每人 ENG01–ENG12 的標準差高於全體平均＋3 個標準差（排除直線作答者後計算），判定為隨機亂填</li><li>依事前訂好的規則刪除，記下門檻值與被刪除的員工編號</li></ul></div></div>
@@ -943,7 +943,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <h1>單元五：兩組比較與 Cohen’s d</h1>
   <div class="subtitle">統計方法的選擇；抽樣誤差、p 值、獨立樣本 t 檢定（Welch）與效果量．主要依據：Cohen (1988)；Delacre et al. (2017)；Lakens (2013)；Wasserstein &amp; Lazar (2016)</div>
   <h2 id="s5-1">5.1 統計方法選擇的決策樹</h2>
-  <p>統計方法依兩個條件選擇：分析的問題類型，以及變項的類型（構面分數、類別、文字）。單元五、六處理決策樹第一個分支：比較群組平均。其他分支在其他主題處理，或本課不實作。</p>
+  <p>統計方法依下列條件選擇：分析的問題類型，以及變項的類型（構面分數、類別、文字）。單元五、六處理決策樹第一個分支：比較群組平均。其他分支在其他主題處理，或本課不實作。</p>
   <figure class="dtree"><svg viewBox="0 0 360 770" role="img" aria-labelledby="dtT" aria-describedby="dtList"><title id="dtT">統計方法選擇的決策樹</title><g style="font-size:12.5px"><path d="M15 34 V56 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V92 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 106 V136 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V180 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 194 V216 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M91 230 V268 H112" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 70 V320 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M61 334 V356 H82" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V392 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 406 V428 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V472 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 494 V516 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V560 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 582 V604 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V640 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 654 V676 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M15 34 V712 H22" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><path d="M31 726 V748 H52" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><rect x="6" y="6" width="348" height="28" rx="6" style="fill:var(--navy);stroke:var(--navy);stroke-width:1.2"/><text x="15" y="24.5" style="fill:#fff;font-weight:700;stroke:none">分析的問題是什麼</text><rect x="22" y="42" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="60.5" style="fill:var(--navy);font-weight:400;stroke:none">比較群組平均（依變項為構面分數）</text><rect x="52" y="78" width="302" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="61" y="96.5" style="fill:var(--navy);font-weight:400;stroke:none">兩組</text><rect x="82" y="114" width="272" height="44" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="91" y="132.5" style="fill:var(--navy);font-weight:700;stroke:none">獨立樣本 t 檢定（Welch）</text><text x="91" y="148.5" style="fill:var(--navy);font-weight:700;stroke:none">＋ Cohen’s d（單元五）</text><rect x="52" y="166" width="302" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="61" y="184.5" style="fill:var(--navy);font-weight:400;stroke:none">三組以上</text><rect x="82" y="202" width="272" height="28" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="91" y="220.5" style="fill:var(--navy);font-weight:700;stroke:none">單因子 ANOVA ＋ η²（單元六）</text><rect x="112" y="238" width="242" height="60" rx="6" style="fill:var(--palegreen);stroke:var(--green);stroke-width:1.2"/><text x="121" y="256.5" style="fill:var(--navy);font-weight:700;stroke:none">F 顯著再做事後比較：</text><text x="121" y="272.5" style="fill:var(--navy);font-weight:700;stroke:none">變異數相近：Tukey</text><text x="121" y="288.5" style="fill:var(--navy);font-weight:700;stroke:none">不相近：Games-Howell</text><rect x="52" y="306" width="302" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="61" y="324.5" style="fill:var(--navy);font-weight:400;stroke:none">同一群人前後兩次</text><rect x="82" y="342" width="272" height="28" rx="6" style="fill:#f3f3f3;stroke:#9a9a9a;stroke-dasharray:4 3;stroke-width:1.2"/><text x="91" y="360.5" style="fill:var(--navy);font-weight:400;stroke:none">成對樣本 t 檢定（本課不實作）</text><rect x="22" y="378" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="396.5" style="fill:var(--navy);font-weight:400;stroke:none">兩個構面之間的關聯</text><rect x="52" y="414" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="432.5" style="fill:var(--navy);font-weight:400;stroke:none">相關係數 r（Topic 08）</text><rect x="22" y="450" width="332" height="44" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="468.5" style="fill:var(--navy);font-weight:400;stroke:none">多個構面預測一個結果</text><text x="31" y="484.5" style="fill:var(--navy);font-weight:400;stroke:none">（例：留任意願）</text><rect x="52" y="502" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="520.5" style="fill:var(--navy);font-weight:400;stroke:none">多元迴歸（Topic 08）</text><rect x="22" y="538" width="332" height="44" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="556.5" style="fill:var(--navy);font-weight:400;stroke:none">兩個類別變項的關係</text><text x="31" y="572.5" style="fill:var(--navy);font-weight:400;stroke:none">（例：廠區 × 是否填寫開放題）</text><rect x="52" y="590" width="302" height="28" rx="6" style="fill:#f3f3f3;stroke:#9a9a9a;stroke-dasharray:4 3;stroke-width:1.2"/><text x="61" y="608.5" style="fill:var(--navy);font-weight:400;stroke:none">交叉表與卡方檢定（本課不實作）</text><rect x="22" y="626" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="644.5" style="fill:var(--navy);font-weight:400;stroke:none">開放題文字</text><rect x="52" y="662" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="680.5" style="fill:var(--navy);font-weight:400;stroke:none">質性編碼與 κ（Topic 09）</text><rect x="22" y="698" width="332" height="28" rx="6" style="fill:var(--lightblue);stroke:var(--navy);stroke-width:1.2"/><text x="31" y="716.5" style="fill:var(--navy);font-weight:400;stroke:none">構面是否成立</text><rect x="52" y="734" width="302" height="28" rx="6" style="fill:#fff;stroke:var(--line);stroke-width:1.2"/><text x="61" y="752.5" style="fill:var(--navy);font-weight:400;stroke:none">信度 α、EFA（Topic 05）</text></g></svg><figcaption>綠色：本主題實作；白色：後續主題；灰色虛線：本課不實作。文字版見下方。</figcaption></figure>
   <h3>決策樹文字版</h3>
   <ul id="dtList">
@@ -957,7 +957,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <li>開放題文字：質性編碼與 κ（Topic 09）</li>
     <li>構面是否成立：信度 α、EFA（Topic 05）</li>
   </ul>
-  <p class="terms"><span class="lb2">名詞</span>成對樣本 t 檢定：同一群人兩次測量的平均比較；相關係數 r：兩個變項一起升降的程度，介於 −1 到 1；多元迴歸：以多個變項同時預測一個結果；交叉表與卡方檢定：檢查兩個類別變項的人數分布是否有關；κ：兩位編碼者扣除碰巧一致之後的一致程度；EFA（探索性因素分析）：檢查題目可以歸成幾個構面；Tukey、Games-Howell：<a href="#g-47">事後比較</a>的兩種方法（<a href="#s6-8">6.8</a>）；t 檢定與 ANOVA 的說明見 <a href="#s5-4">5.4</a> 至 <a href="#s6-5">6.5</a>。</p>
+  <p class="terms"><span class="lb2">名詞</span>成對樣本 t 檢定：同一群人兩次測量的平均比較；相關係數 r：兩個變項一起升降的程度，介於 −1 到 1；多元迴歸：以多個變項同時預測一個結果；交叉表與卡方檢定：檢查兩個類別變項的人數分布是否有關；κ：兩位編碼者扣除碰巧一致之後的一致程度；EFA（探索性因素分析）：檢查題目可以歸成幾個構面；Tukey、Games-Howell：<a href="#g-47">事後比較</a>的方法（<a href="#s6-8">6.8</a>）；t 檢定與 ANOVA 的說明見 <a href="#s5-4">5.4</a> 至 <a href="#s6-5">6.5</a>。</p>
   <h3>本資料的分析問題與方法</h3>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:46%">人資的問題</th><th>方法</th><th style="width:20%">說明位置</th></tr>
@@ -1084,7 +1084,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <p>不同軟體算出的 d 可能在小數第二位不同，常見原因有兩個。第一是分母：本網站與多數 Python 範例用依人數加權的合併標準差；部分軟體在選擇 Welch t 檢定時，改以兩組變異數的平均開根號 √［（SD₁² ＋ SD₂²）÷ 2］為分母，不依人數加權。兩組人數相近時兩者幾乎相同，人數差距大時會出現差異。本例合併標準差 1.040，d ＝ −0.78；變異數平均開根號 1.036，d ＝ −0.79。第二是四捨五入：以已四捨五入的平均與標準差手算，結果可能與軟體差 .01。這類差異屬於可接受的範圍，報告時寫明軟體與 d 的算法（<a href="#s7-7">7.7</a>）。</p>
 
   <h2 id="s5-10">5.10 報告句與管理語言</h2>
-  <p>同一個結果寫成兩個版本：APA 報告句供方法與結果段落使用，管理語言供主管閱讀（<a href="#s9-5">9.5</a>）。數字取小數兩位；p 小於 .001 寫成 p &lt; .001，其餘寫出確切的 p 值。</p>
+  <p>同一個結果有不同的寫法：APA 報告句供方法與結果段落使用，管理語言供主管閱讀（<a href="#s9-5">9.5</a>）。數字取小數兩位；p 小於 .001 寫成 p &lt; .001，其餘寫出確切的 p 值。</p>
   <div class="scrollx"><table class="mt wide">
     <tr><th style="width:14%">比較</th><th>APA 報告句</th><th style="width:34%">管理語言</th></tr>
     <tr><td>直接 vs 間接的敬業度</td><td style="text-align:left">直接人員（n ＝ 537，M ＝ 3.85，SD ＝ 0.86）與間接人員（n ＝ 424，M ＝ 3.95，SD ＝ 0.80）的敬業度沒有顯著差異，Welch t(932.1) ＝ −1.75，p ＝ .080，d ＝ −0.11。</td><td style="text-align:left">兩類人員的敬業度相近，差距約 0.1 分；提升敬業度的方案不需要依人員類別分開設計。</td></tr>
@@ -1307,7 +1307,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <p>檢核表的答案來自課堂練習資料。個人作業使用作業版資料，答案不同，另有一頁的自我檢查表，見<a href="../../Assignments/個人分析作業_AI_Agent資料分析報告.html" target="_blank" rel="noopener">作業說明頁</a>。</p>
 
   <h2 id="s7-4">7.4 查核的做法</h2>
-  <p>不同人用 AI 做同一份分析，可能得到不同的數字。課堂練習的查核只有兩件事，都由分析者自己完成；第三項為選做。</p>
+  <p>不同人用 AI 做同一份分析，可能得到不同的數字。課堂練習的查核都由分析者自己完成；最後一項為選做。</p>
   <div class="flow">
     <div class="fbox q">1　對照答案：每一輪的結果與檢核表的正確答案比對（<a href="#s7-3">7.3</a>）</div><div class="farrow">↓</div>
     <div class="fbox">2　自行抽查：挑兩三個數字，用 Excel 或計算器自己算一次（<a href="#s7-5">7.5</a>）</div><div class="farrow">↓</div>
@@ -1316,7 +1316,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
   <p>結果有差異時，依 <a href="#s7-7">7.7</a> 判斷是否需要找原因。</p>
 
   <h2 id="s7-5">7.5 自行抽查的數字</h2>
-  <p>抽查的目的是確認 AI 回報的數字來自資料，不依賴 AI 的自我陳述。下列三項都可以在幾分鐘內完成，挑其中兩三項即可。</p>
+  <p>抽查的目的是確認 AI 回報的數字來自資料，不依賴 AI 的自我陳述。下列各項都可以在幾分鐘內完成，挑其中兩三項即可。</p>
   <div class="scrollx"><table class="mt">
     <tr><th style="width:24%">抽查項目</th><th>做法</th><th style="width:26%">應得到的結果</th></tr>
     <tr><td style="text-align:left">空白格數</td><td style="text-align:left">在 Excel 開啟原始資料，對 29 題的範圍（G2:AI1001）使用 COUNTBLANK</td><td style="text-align:left">696 格</td></tr>
@@ -1391,7 +1391,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 <!-- ==================== U8 實機練習 ==================== -->
 <section class="unit" id="u8">
   <h1>單元八：實機練習</h1>
-  <div class="subtitle">六輪提示詞與答案對照</div>
+  <div class="subtitle">各輪提示詞與答案對照</div>
   <ol class="steps">
     <li><a href="../../Assignments/Topic07_員工調查模擬資料.xlsx" target="_blank" rel="noopener">下載練習資料</a>，開啟 ChatGPT 或 Claude 網頁版的新對話，上傳 Excel 檔</li>
     <li>在同一個對話中，依序貼上第 0 輪到第 5 輪的提示詞（按「複製」）</li>
@@ -1410,7 +1410,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
     <tr><td style="text-align:left">免費版次數用完</td><td style="text-align:left">換另一個工具，或和同學共用同一個帳號的免費版額度；練習與個人分析作業仍各自完成</td></tr>
     <tr><td style="text-align:left">回覆變成英文</td><td style="text-align:left">加一句「請用繁體中文回答」</td></tr>
   </table>
-  <p>課堂與作業只需要網頁版。單元二介紹的專案功能、Claude Code、SKILL.md 與 CLAUDE.md 是進階做法，不會操作不影響練習與作業。每一輪結束檢查三件事：人數是否正確、AI 自行決定了哪些事、對話與程式碼是否已保存。</p>
+  <p>課堂與作業只需要網頁版。單元二介紹的專案功能、Claude Code、SKILL.md 與 CLAUDE.md 是進階做法，不會操作不影響練習與作業。每一輪結束檢查：人數是否正確、AI 自行決定了哪些事、對話與程式碼是否已保存。</p>
 
   <div class="note"><span class="lb">提醒</span>答案由課程的分析程式計算。AI 使用的方法不同時，小數第二位可能略有差異；人數、方向與結論應該一致。</div>
   <div class="round">
@@ -1423,7 +1423,7 @@ description: 清理員工意見調查資料並做群組比較。使用者要求�
 3. 有哪些決定需要我確認後才能執行。</pre></div>
     <button class="ansbtn" aria-expanded="false" onclick="toggleAns(this)">看答案</button>
     <div class="ans"><p><b>對照重點</b>（這一輪沒有數字答案）</p><ul>
-<li>AI 有沒有提到反向題 RET03、遺漏值、草率作答三件事。</li>
+<li>AI 有沒有提到反向題 RET03、遺漏值與草率作答。</li>
 <li>AI 是否主動詢問遺漏值要刪除還是保留。</li>
 <li>AI 是否遵守「這一輪先不要計算」。若 AI 已開始計算，要求它停止，計畫確認後再執行。</li></ul>
 <p>資料有 1,000 列、29 個李克特題目（6 點量表）與 2 題開放題；人口變項為廠區、部門、職級、人員類別、年資。</p></div>

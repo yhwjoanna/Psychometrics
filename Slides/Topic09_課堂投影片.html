@@ -492,7 +492,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <div class="scene">
     <div class="who">年度調查的開放題整理好了</div>
     <p>516 則「最希望公司優先改善的事項」<br>人資專員交出一張文字雲，最大的詞是「主管」</p>
-    <p class="q frag">員工最在意的事項，能否從文字雲讀出來<br>本週比較文字雲、人工編碼與 LLM 編碼三種做法</p>
+    <p class="q frag">員工最在意的事項，能否從文字雲讀出來<br>本週比較文字雲、人工編碼與 LLM 編碼</p>
   </div>
   <div class="foot"><span class="lim">Topic 09</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>01</span></div>
 </section>
@@ -507,7 +507,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <div class="row frag" style="padding:12px 40px"><div class="n">四</div><div class="tt">LLM Agent 編碼</div><div class="dd">依編碼簿編碼、重跑與信心標記</div></div>
     <div class="row frag" style="padding:12px 40px"><div class="n">五</div><div class="tt">人工與 LLM 比對</div><div class="dd">本人與 LLM 的 κ、不一致案例</div></div>
     <div class="row frag" style="padding:12px 40px"><div class="n">六</div><div class="tt">疑似 AI 代答</div><div class="dd">長度、句式、用詞與倫理</div></div>
-    <div class="row frag" style="padding:12px 40px"><div class="n">七</div><div class="tt">實機練習</div><div class="dd">六輪提示詞與編碼範本</div></div>
+    <div class="row frag" style="padding:12px 40px"><div class="n">七</div><div class="tt">實機練習</div><div class="dd">各輪提示詞與編碼範本</div></div>
   </div>
   <div class="foot"><span class="lim">Topic 09</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>02</span></div>
 </section>
@@ -628,7 +628,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">編碼簿</div>
-  <h2 style="margin-bottom:22px">編碼簿的四個欄位</h2>
+  <h2 style="margin-bottom:22px">編碼簿的欄位</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
     <div class="stat frag"><div class="k">定義</div><p>這個主題包含什麼，一句話說明</p></div>
     <div class="stat frag"><div class="k">納入</div><p>列舉屬於這個主題的具體內容</p></div>
@@ -698,12 +698,12 @@ table.cmp th{font-size:28px;padding:12px 20px}
 
 <section class="slide" data-layout="figure" data-density="4">
   <div class="kicker">兩位編碼者</div>
-  <h2 style="margin-bottom:22px">編碼一致性的兩種做法</h2>
+  <h2 style="margin-bottom:22px">編碼一致性的做法</h2>
   <div class="kv2">
     <div class="stat frag"><div class="k">兩個人</div><div class="v">兩位人工編碼者</div><p>不討論、各自編碼同一批答案<br>研究中常見的做法，Topic 03 用過<br>本週只說明概念</p></div>
     <div class="stat frag"><div class="k">一個人與 LLM</div><div class="v">本人與 LLM</div><p>本人先編碼，LLM 看不到本人的代碼<br>再編同一批答案<br>課堂練習與個人作業的做法</p></div>
   </div>
-  <p class="lead frag" style="font-size:26px;margin-top:24px">兩種做法的一致率與 κ 算法相同<br>本週的練習一個人完成：第一位編碼者是自己，第二位是 LLM</p>
+  <p class="lead frag" style="font-size:26px;margin-top:24px">這些做法的一致率與 κ 算法相同<br>本週的練習一個人完成：第一位編碼者是自己，第二位是 LLM</p>
   <div class="foot"><span class="lim">獨立編碼：完成之前看不到另一位編碼者的結果</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>22</span></div>
 </section>
 
@@ -786,7 +786,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 </section>
 
 <section class="slide" data-layout="table" data-density="4">
-  <div class="kicker">LLM 的三種用途</div>
+  <div class="kicker">LLM 的用途</div>
   <h2 style="margin-bottom:22px">主題編碼、摘要與情緒極性的查核方式</h2>
   <table class="tight t4 t4s">
     <tr><th style="width:280px">用途</th><th style="width:600px">做法</th><th>查核方式</th></tr>
@@ -815,7 +815,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
     <tr class="frag"><td>3</td><td>請 AI 輸出 Excel 或表格，把代碼貼回範本的 LLM 欄</td></tr>
     <tr class="frag"><td>4</td><td>計算本人與 LLM 的一致率與 κ，低信心與不一致的答案由自己定案</td></tr>
   </table>
-  <p class="lead frag" style="font-size:25px;margin-top:16px">課堂與作業只需要這四步；接下來標「進階示範」的頁面是 Claude Code 的做法，選讀</p>
+  <p class="lead frag" style="font-size:25px;margin-top:16px">課堂與作業只需要這些步驟；接下來標「進階示範」的頁面是 Claude Code 的做法，選讀</p>
   <div class="foot"><span class="lim">AI 一次編 100 則可能中途停止；分兩次各 50 則，或請它從第幾則接著做</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>32</span></div>
 </section>
 
@@ -824,7 +824,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <h2 style="margin-bottom:18px">技能檔 SKILL.md：OE2 編碼簿與規則</h2>
   <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
     <img class="shot" src="img/topic09/a_skill.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
-    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">示範改用 OE2「被肯定的經驗」60 則<span class="why">為什麼：與實機練習的 OE1 不同，答案不重複</span></li><li class="frag">表格寫代碼、定義與納入、排除<span class="why">為什麼：與 Excel 編碼簿相同的四個要素</span></li><li class="frag">規則：逐則判斷，不寫關鍵字程式<span class="why">為什麼：避免 Agent 用程式取代閱讀</span></li><li class="frag">無法判斷時信心標「低」<span class="why">為什麼：低信心的答案交給人裁決</span></li></ol></div>
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">示範改用 OE2「被肯定的經驗」60 則<span class="why">為什麼：與實機練習的 OE1 不同，答案不重複</span></li><li class="frag">表格寫代碼、定義與納入、排除<span class="why">為什麼：與 Excel 編碼簿相同的要素</span></li><li class="frag">規則：逐則判斷，不寫關鍵字程式<span class="why">為什麼：避免 Agent 用程式取代閱讀</span></li><li class="frag">無法判斷時信心標「低」<span class="why">為什麼：低信心的答案交給人裁決</span></li></ol></div>
   </div>
   <div class="foot"><span class="lim multi">技能檔放在 .claude/skills/oe-theme-coding/SKILL.md；網頁版可貼進專案指示</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>33</span></div>
 </section>
@@ -871,9 +871,9 @@ table.cmp th{font-size:28px;padding:12px 20px}
   <h2 style="margin-bottom:18px">低信心答案與疑似 AI 代答的標記</h2>
   <div class="shotrow" style="grid-template-columns:920px 1fr;align-items:center">
     <img class="shot" src="img/topic09/a_review.jpg" style="max-height:700px;width:100%!important" alt="畫面截圖">
-    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">3 則信心為「低」<span class="why">為什麼：Agent 寫出猶豫的兩個代碼，由人裁決</span></li><li class="frag">OE1 長度與模板詞兩項規則<span class="why">為什麼：門檻由資料計算：平均＋3 個標準差</span></li><li class="frag">16 則標記，不刪除<span class="why">為什麼：依專案記憶的規則，處理方式由人決定</span></li></ol></div>
+    <div class="task" style="display:block;margin-top:0"><ol><li class="frag">3 則信心為「低」<span class="why">為什麼：Agent 寫出猶豫的兩個代碼，由人裁決</span></li><li class="frag">OE1 長度與模板詞的規則<span class="why">為什麼：門檻由資料計算：平均＋3 個標準差</span></li><li class="frag">16 則標記，不刪除<span class="why">為什麼：依專案記憶的規則，處理方式由人決定</span></li></ol></div>
   </div>
-  <div class="foot"><span class="lim multi">第六部分說明兩項規則與限制</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
+  <div class="foot"><span class="lim multi">第六部分說明規則與限制</span><span class="mid">國立中山大學人力資源管理研究所　王豫萱</span><span>38</span></div>
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
@@ -905,7 +905,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 
 <section class="slide" data-layout="table" data-density="4">
   <div class="kicker">不一致案例</div>
-  <h2 style="margin-bottom:22px">不一致案例的五種原因</h2>
+  <h2 style="margin-bottom:22px">不一致案例的原因</h2>
   <table class="tight t4 t4s">
     <tr><th style="width:300px">原因</th><th style="width:640px">例子</th><th>處理</th></tr>
     <tr class="frag"><td>定義邊界不清</td><td>主管很少給回饋：SUP 或 REC</td><td>補寫排除欄</td></tr>
@@ -943,7 +943,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 </section>
 
 <section class="slide" data-layout="figure" data-density="4">
-  <div class="kicker">三個特徵</div>
+  <div class="kicker">特徵</div>
   <h2 style="margin-bottom:22px">疑似 AI 代答的長度、句式與用詞</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
     <div class="stat frag"><div class="k">長度</div><div class="v">92–114 字</div><p>其餘答案中位數 12 字<br>最長 25 字</p></div>
@@ -956,7 +956,7 @@ table.cmp th{font-size:28px;padding:12px 20px}
 
 <section class="slide" data-layout="table" data-density="4">
   <div class="kicker">規則與門檻</div>
-  <h2 style="margin-bottom:22px">兩項規則的標記結果</h2>
+  <h2 style="margin-bottom:22px">規則的標記結果</h2>
   <table class="tight t4 t4s">
     <tr><th style="width:480px">規則</th><th>門檻</th><th style="width:220px">標記則數</th></tr>
     <tr class="frag"><td>長度高於平均＋3 個標準差</td><td>14.4 ＋ 3 × 15.6 ＝ 61.3 字</td><td>16</td></tr>
@@ -1019,10 +1019,10 @@ table.cmp th{font-size:28px;padding:12px 20px}
 
 <section class="slide" data-layout="table" data-density="4">
   <div class="kicker">練習流程</div>
-  <h2 style="margin-bottom:22px">六輪提示詞的練習流程</h2>
+  <h2 style="margin-bottom:22px">各輪提示詞的練習流程</h2>
   <table class="tight t4 t4s">
     <tr><th style="width:160px">輪次</th><th style="width:340px">任務</th><th>每輪結束後確認</th></tr>
-    <tr class="frag"><td>第 0 輪</td><td>規劃，不執行</td><td>四段分析、去識別化</td></tr>
+    <tr class="frag"><td>第 0 輪</td><td>規劃，不執行</td><td>分析段落、去識別化</td></tr>
     <tr class="frag"><td>第 1 輪</td><td>讀資料與詞頻</td><td>516 則、512 則；薪資相關詞 67 則</td></tr>
     <tr class="frag"><td>第 2 輪</td><td>建立編碼簿</td><td>修訂建議寫成可判斷的規則</td></tr>
     <tr class="frag"><td>第 3 輪</td><td>LLM 編碼 100 則</td><td>100 列、11 個代碼、沒有關鍵字程式</td></tr>
